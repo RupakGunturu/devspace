@@ -53,6 +53,17 @@
   --radius: 6px;
 }
 
+.dark {
+  --ink: oklch(0.13 0.02 265);
+  --paper: oklch(0.20 0.03 265);
+  --paper-dim: oklch(0.17 0.02 265);
+  --yellow: oklch(0.82 0.15 95);
+  --coral: oklch(0.65 0.18 30);
+  --line: oklch(0.27 0.03 265);
+  --muted: oklch(0.50 0.03 265);
+  --text: oklch(0.92 0.01 85);
+}
+
 @layer base {
   * {
     border-color: var(--color-border);

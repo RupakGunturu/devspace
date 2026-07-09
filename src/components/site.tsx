@@ -1,38 +1,54 @@
-import { Link } from "@tanstack/react-router";
+import { Link, NavLink } from "react-router-dom";
 import type { ReactNode } from "react";
+import { Moon, Sun } from "lucide-react";
+import { useTheme } from "./ThemeProvider";
 
 export function Header() {
+  const { theme, setTheme } = useTheme();
   return (
     <header className="sticky top-0 z-20 flex items-center justify-between border-b-2 border-line bg-ink/90 px-4 py-4 backdrop-blur sm:px-8">
       <Link to="/" className="font-display text-xl font-extrabold text-text no-underline">
         dev<span className="text-yellow">/</span>space
       </Link>
       <nav className="hidden gap-6 sm:flex">
-        <NavLink to="/">Feed</NavLink>
-        <NavLink to="/tools">Tools</NavLink>
-        <NavLink to="/games">Games</NavLink>
-        <NavLink to="/about">About</NavLink>
+        <NavItem to="/">Feed</NavItem>
+        <NavItem to="/tools">Tools</NavItem>
+        <NavItem to="/cheat-sheets">Sheets</NavItem>
+        <NavItem to="/games">Games</NavItem>
+        <NavItem to="/about">About</NavItem>
       </nav>
-      <div
-        className="rounded-sm bg-yellow px-3 py-1.5 font-mono text-[11px] font-bold text-ink"
-        style={{ transform: "rotate(-3deg)", boxShadow: "2px 2px 0 var(--coral)" }}
-      >
-        ISSUE №047
+      <div className="flex items-center gap-3">
+        <button
+          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          className="rounded-sm border border-line p-1.5 text-muted hover:text-yellow transition-colors"
+          aria-label="Toggle theme"
+        >
+          {theme === "dark" ? <Sun size={14} /> : <Moon size={14} />}
+        </button>
+        <div
+          className="rounded-sm bg-yellow px-3 py-1.5 font-mono text-[11px] font-bold text-ink"
+          style={{ transform: "rotate(-3deg)", boxShadow: "2px 2px 0 var(--coral)" }}
+        >
+          ISSUE №047
+        </div>
       </div>
     </header>
   );
 }
 
-function NavLink({ to, children }: { to: string; children: ReactNode }) {
+function NavItem({ to, children }: { to: string; children: ReactNode }) {
   return (
-    <Link
+    <NavLink
       to={to}
-      className="font-mono text-[13px] text-muted no-underline transition-colors hover:text-yellow"
-      activeProps={{ className: "font-mono text-[13px] text-yellow no-underline" }}
-      activeOptions={{ exact: to === "/" }}
+      end={to === "/"}
+      className={({ isActive }) =>
+        `font-mono text-[13px] no-underline transition-colors ${
+          isActive ? "text-yellow" : "text-muted hover:text-yellow"
+        }`
+      }
     >
       {children}
-    </Link>
+    </NavLink>
   );
 }
 
@@ -84,14 +100,12 @@ export function StickerCard({
   children,
   index = 0,
   to,
-  params,
 }: {
   icon: string;
   title: string;
   children: ReactNode;
   index?: number;
   to?: string;
-  params?: Record<string, string>;
 }) {
   const rot = ROTATIONS[index % ROTATIONS.length];
   const inner = (
@@ -105,7 +119,7 @@ export function StickerCard({
   );
   if (to) {
     return (
-      <Link to={to} params={params as never} className="no-underline">
+      <Link to={to} className="no-underline">
         {inner}
       </Link>
     );

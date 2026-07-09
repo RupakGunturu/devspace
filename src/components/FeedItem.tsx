@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import type { Post } from "../data/posts";
 import { seriesBySlug } from "../data/series";
 
@@ -20,8 +20,7 @@ export function FeedItem({ post }: { post: Post }) {
   const series = seriesBySlug(post.series);
   return (
     <Link
-      to="/post/$slug"
-      params={{ slug: post.slug }}
+      to={`/post/${post.slug}`}
       className="group flex gap-4 border-b-2 border-dashed border-line py-5 no-underline transition-transform hover:translate-x-1.5"
     >
       <div
