@@ -58,7 +58,7 @@ export default function CheatSheetPage() {
       </div>
       <div className="space-y-6">
         {sheet.content.map((section, si) => (
-          <div key={si} className="rounded-md border-2 border-line bg-ink">
+          <div key={si} className="rounded-md border-2 border-line bg-paper">
             <div className="border-b-2 border-line bg-paper-dim/50 px-5 py-3">
               <span className="font-mono text-xs font-bold uppercase tracking-wider text-yellow">
                 {section.title}
@@ -67,7 +67,7 @@ export default function CheatSheetPage() {
             <div className="space-y-1 p-4">
               {section.items.map((item, ii) => (
                 <div key={ii} className="flex flex-col gap-1 rounded-sm border-2 border-line/50 bg-paper-dim/30 p-3 sm:flex-row sm:items-start sm:gap-3">
-                  <span className="min-w-[120px] shrink-0 font-mono text-sm font-bold text-text">
+                  <span className="min-w-[120px] shrink-0 font-mono text-sm font-bold text-foreground">
                     {item.label}
                   </span>
                   <div className="min-w-0 flex-1">

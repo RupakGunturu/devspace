@@ -53,7 +53,7 @@ export default function PostPage() {
       </h1>
       <p className="mt-4 text-lg text-muted">{post.excerpt}</p>
       <div
-        className="prose-devspace mt-10 text-text"
+        className="prose-devspace mt-10 text-foreground"
         dangerouslySetInnerHTML={{ __html: html }}
       />
       <style>{`

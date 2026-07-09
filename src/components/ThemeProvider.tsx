@@ -21,6 +21,10 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   });
 
   useEffect(() => {
+    document.documentElement.classList.add("theme-transition");
+  }, []);
+
+  useEffect(() => {
     localStorage.setItem("theme", theme);
     const root = document.documentElement;
     if (theme === "dark") {

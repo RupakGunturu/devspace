@@ -32,8 +32,8 @@ function verdict(guess: string, answer: string): Verdict[] {
 function tileClass(v?: Verdict) {
   if (v === "hit") return "bg-yellow border-yellow text-ink";
   if (v === "near") return "bg-coral border-coral text-ink";
-  if (v === "miss") return "bg-line border-line text-text";
-  return "border-line text-text";
+  if (v === "miss") return "bg-line border-line text-foreground";
+  return "border-line text-foreground";
 }
 
 const KEYS = ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"];
@@ -139,7 +139,7 @@ export function DevWordle() {
               {ri === 2 && (
                 <button
                   onClick={() => press("ENTER")}
-                  className="rounded-sm border-2 border-line bg-line px-2 py-2 font-mono text-[10px] font-bold text-text"
+                  className="rounded-sm border-2 border-line bg-line px-2 py-2 font-mono text-[10px] font-bold text-foreground"
                 >
                   ENTER
                 </button>
@@ -156,7 +156,7 @@ export function DevWordle() {
               {ri === 2 && (
                 <button
                   onClick={() => press("BACK")}
-                  className="rounded-sm border-2 border-line bg-line px-2 py-2 font-mono text-[10px] font-bold text-text"
+                  className="rounded-sm border-2 border-line bg-line px-2 py-2 font-mono text-[10px] font-bold text-foreground"
                 >
                   ⌫
                 </button>

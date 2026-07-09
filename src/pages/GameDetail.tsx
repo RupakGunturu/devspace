@@ -39,7 +39,7 @@ export default function GamePage() {
         <h1 className="mt-3 font-display text-4xl font-extrabold">{game.name}</h1>
         <p className="mt-2 text-muted">{game.description}</p>
       </div>
-      <div className="rounded-md border-2 border-line bg-paper p-6 text-ink">
+      <div className="rounded-md border-2 border-line bg-paper p-6 text-foreground">
         {Component ? <Component /> : <div className="text-muted">Coming soon.</div>}
       </div>
     </section>

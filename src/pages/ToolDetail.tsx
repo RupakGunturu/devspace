@@ -32,7 +32,7 @@ export default function ToolPage() {
         <h1 className="mt-3 font-display text-4xl font-extrabold">{tool.name}</h1>
         <p className="mt-2 text-muted">{tool.description}</p>
       </div>
-      <div className="rounded-md border-2 border-line bg-ink p-1">
+      <div className="rounded-md border-2 border-line bg-paper p-1">
         {Component ? (
           <Suspense fallback={<div className="p-6 text-muted">Loading...</div>}>
             <Component />

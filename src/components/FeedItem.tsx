@@ -37,7 +37,7 @@ export function FeedItem({ post }: { post: Post }) {
           <span className="mx-2 text-muted">•</span>
           <span className="font-normal text-muted">{timeAgo(post.publishedAt)}</span>
         </div>
-        <h4 className="font-display text-lg font-bold text-text">{post.title}</h4>
+        <h4 className="font-display text-lg font-bold text-foreground">{post.title}</h4>
         <p className="mt-1 text-[13px] text-muted">{post.excerpt}</p>
       </div>
     </Link>

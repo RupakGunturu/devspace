@@ -61,7 +61,7 @@ export default function Home() {
             </Link>
             <Link
               to="/games"
-              className="rounded-sm border-2 border-line px-6 py-3 font-mono text-[13px] font-bold text-text no-underline transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 hover:border-text"
+              className="rounded-sm border-2 border-line px-6 py-3 font-mono text-[13px] font-bold text-foreground no-underline transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 hover:border-foreground"
             >
               Play a Game
             </Link>
