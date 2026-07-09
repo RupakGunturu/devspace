@@ -9,38 +9,152 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ToolsRouteImport } from './routes/tools'
+import { Route as GamesRouteImport } from './routes/games'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ToolsSlugRouteImport } from './routes/tools.$slug'
+import { Route as PostSlugRouteImport } from './routes/post.$slug'
+import { Route as GamesSlugRouteImport } from './routes/games.$slug'
+import { Route as FeedSeriesRouteImport } from './routes/feed.$series'
 
+const ToolsRoute = ToolsRouteImport.update({
+  id: '/tools',
+  path: '/tools',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GamesRoute = GamesRouteImport.update({
+  id: '/games',
+  path: '/games',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ToolsSlugRoute = ToolsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ToolsRoute,
+} as any)
+const PostSlugRoute = PostSlugRouteImport.update({
+  id: '/post/$slug',
+  path: '/post/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GamesSlugRoute = GamesSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => GamesRoute,
+} as any)
+const FeedSeriesRoute = FeedSeriesRouteImport.update({
+  id: '/feed/$series',
+  path: '/feed/$series',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/games': typeof GamesRouteWithChildren
+  '/tools': typeof ToolsRouteWithChildren
+  '/feed/$series': typeof FeedSeriesRoute
+  '/games/$slug': typeof GamesSlugRoute
+  '/post/$slug': typeof PostSlugRoute
+  '/tools/$slug': typeof ToolsSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/games': typeof GamesRouteWithChildren
+  '/tools': typeof ToolsRouteWithChildren
+  '/feed/$series': typeof FeedSeriesRoute
+  '/games/$slug': typeof GamesSlugRoute
+  '/post/$slug': typeof PostSlugRoute
+  '/tools/$slug': typeof ToolsSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/games': typeof GamesRouteWithChildren
+  '/tools': typeof ToolsRouteWithChildren
+  '/feed/$series': typeof FeedSeriesRoute
+  '/games/$slug': typeof GamesSlugRoute
+  '/post/$slug': typeof PostSlugRoute
+  '/tools/$slug': typeof ToolsSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/games'
+    | '/tools'
+    | '/feed/$series'
+    | '/games/$slug'
+    | '/post/$slug'
+    | '/tools/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/games'
+    | '/tools'
+    | '/feed/$series'
+    | '/games/$slug'
+    | '/post/$slug'
+    | '/tools/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/games'
+    | '/tools'
+    | '/feed/$series'
+    | '/games/$slug'
+    | '/post/$slug'
+    | '/tools/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  GamesRoute: typeof GamesRouteWithChildren
+  ToolsRoute: typeof ToolsRouteWithChildren
+  FeedSeriesRoute: typeof FeedSeriesRoute
+  PostSlugRoute: typeof PostSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/tools': {
+      id: '/tools'
+      path: '/tools'
+      fullPath: '/tools'
+      preLoaderRoute: typeof ToolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/games': {
+      id: '/games'
+      path: '/games'
+      fullPath: '/games'
+      preLoaderRoute: typeof GamesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +162,64 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tools/$slug': {
+      id: '/tools/$slug'
+      path: '/$slug'
+      fullPath: '/tools/$slug'
+      preLoaderRoute: typeof ToolsSlugRouteImport
+      parentRoute: typeof ToolsRoute
+    }
+    '/post/$slug': {
+      id: '/post/$slug'
+      path: '/post/$slug'
+      fullPath: '/post/$slug'
+      preLoaderRoute: typeof PostSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/games/$slug': {
+      id: '/games/$slug'
+      path: '/$slug'
+      fullPath: '/games/$slug'
+      preLoaderRoute: typeof GamesSlugRouteImport
+      parentRoute: typeof GamesRoute
+    }
+    '/feed/$series': {
+      id: '/feed/$series'
+      path: '/feed/$series'
+      fullPath: '/feed/$series'
+      preLoaderRoute: typeof FeedSeriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
+interface GamesRouteChildren {
+  GamesSlugRoute: typeof GamesSlugRoute
+}
+
+const GamesRouteChildren: GamesRouteChildren = {
+  GamesSlugRoute: GamesSlugRoute,
+}
+
+const GamesRouteWithChildren = GamesRoute._addFileChildren(GamesRouteChildren)
+
+interface ToolsRouteChildren {
+  ToolsSlugRoute: typeof ToolsSlugRoute
+}
+
+const ToolsRouteChildren: ToolsRouteChildren = {
+  ToolsSlugRoute: ToolsSlugRoute,
+}
+
+const ToolsRouteWithChildren = ToolsRoute._addFileChildren(ToolsRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  GamesRoute: GamesRouteWithChildren,
+  ToolsRoute: ToolsRouteWithChildren,
+  FeedSeriesRoute: FeedSeriesRoute,
+  PostSlugRoute: PostSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
