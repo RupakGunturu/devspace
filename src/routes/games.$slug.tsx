@@ -4,7 +4,7 @@ import { BugFinder } from "../components/games/BugFinder";
 import { DevWordle } from "../components/games/DevWordle";
 import { DevTrivia } from "../components/games/DevTrivia";
 
-const REGISTRY: Record<string, () => JSX.Element> = {
+const REGISTRY: Record<string, React.ComponentType> = {
   "bug-finder": BugFinder,
   "devwordle": DevWordle,
   "dev-trivia": DevTrivia,

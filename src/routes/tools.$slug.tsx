@@ -7,7 +7,7 @@ import { MarkdownPreviewer } from "../components/tools/MarkdownPreviewer";
 import { Base64UrlCodec } from "../components/tools/Base64UrlCodec";
 import { UuidHashGenerator } from "../components/tools/UuidHashGenerator";
 
-const REGISTRY: Record<string, () => JSX.Element> = {
+const REGISTRY: Record<string, React.ComponentType> = {
   "json-formatter": JsonFormatter,
   "regex-tester": RegexTester,
   "contrast-checker": ContrastChecker,
