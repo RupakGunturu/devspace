@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SERIES, seriesBySlug } from "../data/series";
-import { postsBySeries } from "../data/posts";
+import { postsBySeries, type Post } from "../data/posts";
 import { FeedItem } from "../components/FeedItem";
 
 export const Route = createFileRoute("/feed/$series")({
@@ -71,7 +71,7 @@ function SeriesPage() {
         {posts.length === 0 ? (
           <p className="py-12 text-center font-mono text-sm text-muted">Nothing in this series yet.</p>
         ) : (
-          posts.map((p) => <FeedItem key={p.id} post={p} />)
+          (posts as Post[]).map((p) => <FeedItem key={p.id} post={p} />)
         )}
       </div>
     </section>
