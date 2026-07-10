@@ -1,0 +1,82 @@
+.line-sidebar {
+  --accent: #f4d922;
+  --line: #2a2a2a;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-left: 28px;
+}
+
+.line-sidebar::before {
+  content: "";
+  position: absolute;
+  left: 9px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: var(--line);
+  border-radius: 1px;
+}
+
+.line-sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+  color: #6a6a6a;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.25s ease, transform 0.25s ease;
+  transform: translateX(calc(var(--effect, 0) * 4px));
+}
+
+.line-sidebar-item::before {
+  content: "";
+  position: absolute;
+  left: -19px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--line);
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.line-sidebar-item:hover,
+.line-sidebar-item.active {
+  color: var(--accent);
+}
+
+.line-sidebar-item:hover::before,
+.line-sidebar-item.active::before {
+  background: var(--accent);
+  transform: scale(1.5);
+  box-shadow: 0 0 6px var(--accent);
+}
+
+.line-sidebar-item.active::before {
+  background: var(--accent);
+}
+
+.line-sidebar-index {
+  font-family: "DM Mono", ui-monospace, monospace;
+  font-size: 11px;
+  color: #4a4a4a;
+  min-width: 22px;
+  letter-spacing: 0.05em;
+  transition: color 0.2s;
+}
+
+.line-sidebar-item.active .line-sidebar-index,
+.line-sidebar-item:hover .line-sidebar-index {
+  color: var(--accent);
+}
+
+.line-sidebar-label {
+  white-space: nowrap;
+}

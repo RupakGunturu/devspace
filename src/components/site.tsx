@@ -1,7 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import { useRef, type ReactNode } from "react";
-import { Moon, Sun } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
+import { AnimatedThemeToggler } from "./ui/animated-theme-toggler";
 import { StaggeredMenu } from "./ui/staggered-menu/StaggeredMenu";
 import type { StaggeredMenuHandle } from "./ui/staggered-menu/StaggeredMenu";
 
@@ -36,13 +36,7 @@ export function Header() {
           <NavItem to="/about">About</NavItem>
         </nav>
         <div className="flex items-center gap-3">
-          <button
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className="rounded-sm border border-line p-1.5 text-muted hover:text-yellow transition-colors"
-            aria-label="Toggle theme"
-          >
-            {theme === "dark" ? <Sun size={14} /> : <Moon size={14} />}
-          </button>
+          <AnimatedThemeToggler theme={theme} onThemeChange={setTheme} />
           <div
             className="rounded-sm bg-yellow px-3 py-1.5 font-mono text-[11px] font-bold text-ink"
             style={{ transform: "rotate(-3deg)", boxShadow: "2px 2px 0 var(--coral)" }}

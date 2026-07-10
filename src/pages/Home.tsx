@@ -6,6 +6,8 @@ import { TOOLS } from "../data/tools";
 import { GAMES } from "../data/games";
 import { SERIES } from "../data/series";
 import { allPostsSorted } from "../data/posts";
+import Shuffle from "../components/ui/shuffle/Shuffle";
+import { LineSidebar } from "../components/ui/line-sidebar/LineSidebar";
 
 export default function Home() {
   useEffect(() => {
@@ -13,9 +15,11 @@ export default function Home() {
   }, []);
 
   const [activeSeries, setActiveSeries] = useState<string | null>(null);
+
   const posts = useMemo(() => {
     const all = allPostsSorted();
-    return activeSeries ? all.filter((p) => p.series === activeSeries) : all;
+    const filtered = activeSeries ? all.filter((p) => p.series === activeSeries) : all;
+    return filtered.slice(0, 5);
   }, [activeSeries]);
 
   const featuredTools = TOOLS.slice(0, 3);
@@ -40,12 +44,22 @@ export default function Home() {
             <br />
             Break stuff.
             <br />
-            <span
+            <Shuffle
+              text="Learn faster."
+              tag="span"
               className="inline-block bg-yellow px-3 text-ink"
               style={{ transform: "rotate(-1deg)" }}
-            >
-              Learn faster.
-            </span>
+              shuffleDirection="right"
+              duration={0.35}
+              animationMode="random"
+              maxDelay={0.3}
+              shuffleTimes={1}
+              ease="power3.out"
+              loop
+              loopDelay={4}
+              threshold={0.1}
+              respectReducedMotion
+            />
           </h1>
           <p className="mt-7 max-w-lg text-base text-muted sm:text-lg">
             Dev tools that don't get in your way, games that teach faster than lectures, and
@@ -125,16 +139,38 @@ export default function Home() {
       </section>
 
       <section className="mx-auto max-w-6xl px-6 py-16 sm:px-8 sm:py-20">
-        <SectionHead idx="03" title="This Week's Feed" />
-        <SeriesFilter active={activeSeries} onChange={setActiveSeries} />
-        <div>
-          {posts.length === 0 ? (
-            <p className="py-12 text-center font-mono text-sm text-muted">
-              Nothing in this series yet. Check back next week.
-            </p>
-          ) : (
-            posts.map((p) => <FeedItem key={p.id} post={p} />)
-          )}
+        <div className="flex items-center justify-between">
+          <SectionHead idx="03" title="This Week's Feed" />
+          <Link to="/feed" className="font-mono text-xs text-muted no-underline hover:text-yellow">
+            view all feed →
+          </Link>
+        </div>
+        <div className="flex flex-col gap-8 lg:flex-row lg:gap-12">
+          <div className="hidden shrink-0 lg:block">
+            <LineSidebar
+              items={SERIES.map((s) => ({ label: s.label, slug: s.slug, icon: s.icon }))}
+              activeIndex={
+                activeSeries != null ? SERIES.findIndex((s) => s.slug === activeSeries) : -1
+              }
+              onItemClick={(_i, slug) =>
+                setActiveSeries(slug === activeSeries ? null : slug)
+              }
+            />
+          </div>
+          <div className="min-w-0 flex-1">
+            <div className="lg:hidden">
+              <SeriesFilter active={activeSeries} onChange={setActiveSeries} />
+            </div>
+            <div>
+              {posts.length === 0 ? (
+                <p className="py-12 text-center font-mono text-sm text-muted">
+                  Nothing in this series yet. Check back next week.
+                </p>
+              ) : (
+                posts.map((p) => <FeedItem key={p.id} post={p} />)
+              )}
+            </div>
+          </div>
         </div>
       </section>
     </>

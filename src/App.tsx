@@ -7,6 +7,7 @@ import Games from "./pages/Games";
 import GameDetail from "./pages/GameDetail";
 import PostDetail from "./pages/PostDetail";
 import SeriesFeed from "./pages/SeriesFeed";
+import FeedArchive from "./pages/FeedArchive";
 import About from "./pages/About";
 import CheatSheets from "./pages/CheatSheets";
 import CheatSheetDetail from "./pages/CheatSheetDetail";
@@ -33,6 +34,7 @@ export default function App() {
         <Route path="/games/:slug" element={<GameDetail />} />
         <Route path="/post/:slug" element={<PostDetail />} />
         <Route path="/feed/:series" element={<SeriesFeed />} />
+        <Route path="/feed" element={<FeedArchive />} />
         <Route path="/about" element={<About />} />
         <Route path="/cheat-sheets" element={<CheatSheets />} />
         <Route path="/cheat-sheets/:id" element={<CheatSheetDetail />} />
