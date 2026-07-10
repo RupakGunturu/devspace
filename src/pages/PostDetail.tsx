@@ -10,6 +10,8 @@ export default function PostPage() {
   const post = postBySlug(slug!);
   const series = post ? seriesBySlug(post.series) : undefined;
 
+  const visitUrl = post?.externalUrl;
+
   useEffect(() => {
     document.title = post ? `${post.title} — DevSpace` : "Post not found — DevSpace";
   }, [post]);
@@ -48,6 +50,17 @@ export default function PostPage() {
         )}
         <span className="font-mono text-[11px] text-muted">{date}</span>
       </div>
+      {visitUrl && (
+        <a
+          href={visitUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-4 inline-flex items-center gap-2 rounded-sm border-2 border-yellow bg-yellow px-4 py-2 font-mono text-[13px] font-bold text-ink no-underline transition-all hover:bg-yellow/90"
+          style={{ boxShadow: "3px 3px 0 var(--coral)" }}
+        >
+          Visit ↗
+        </a>
+      )}
       <h1 className="mt-6 font-display text-4xl font-extrabold leading-tight sm:text-5xl">
         {post.title}
       </h1>
