@@ -136,7 +136,7 @@ export function StickerCard({
   index = 0,
   to,
 }: {
-  icon: string;
+  icon: ReactNode;
   title: string;
   children: ReactNode;
   index?: number;
@@ -147,8 +147,16 @@ export function StickerCard({
     <div
       className={`sticker sticker-hover block rounded-md bg-paper p-6 text-foreground ${rot}`}
     >
-      <div className="text-3xl">{icon}</div>
-      <h3 className="mt-3 font-display text-lg font-bold">{title}</h3>
+      <div className="mb-3">
+        {typeof icon === "string" ? (
+          <div className="text-3xl leading-none">{icon}</div>
+        ) : (
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-800 [&_svg]:h-5 [&_svg]:w-5">
+            {icon}
+          </div>
+        )}
+      </div>
+      <h3 className="font-display text-lg font-bold">{title}</h3>
       <p className="mt-2 text-[13px] text-foreground/70">{children}</p>
     </div>
   );

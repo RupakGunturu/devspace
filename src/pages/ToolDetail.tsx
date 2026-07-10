@@ -1,7 +1,9 @@
 import { Link, useParams } from "react-router-dom";
 import { Suspense, useEffect } from "react";
-import { toolBySlug } from "../data/tools";
+import { toolBySlug, CATEGORY_COLORS } from "../data/tools";
 import { getToolComponent } from "../components/tools/registry";
+import { ToolIcon } from "../components/tools/ToolIcon";
+import { cn } from "@/lib/utils";
 
 export default function ToolPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -28,7 +30,13 @@ export default function ToolPage() {
         ← all tools
       </Link>
       <div className="mt-6 mb-8">
-        <div className="text-4xl">{tool.icon}</div>
+        <div className={cn(
+          "flex h-14 w-14 items-center justify-center rounded-full [&_svg]:h-7 [&_svg]:w-7",
+          CATEGORY_COLORS[tool.category]?.bg ?? "bg-zinc-100",
+          CATEGORY_COLORS[tool.category]?.darkBg ?? "dark:bg-zinc-800",
+        )}>
+          <ToolIcon name={tool.icon} className={CATEGORY_COLORS[tool.category]?.icon} />
+        </div>
         <h1 className="mt-3 font-display text-4xl font-extrabold">{tool.name}</h1>
         <p className="mt-2 text-muted">{tool.description}</p>
       </div>

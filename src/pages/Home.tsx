@@ -8,6 +8,9 @@ import { SERIES } from "../data/series";
 import { allPostsSorted } from "../data/posts";
 import Shuffle from "../components/ui/shuffle/Shuffle";
 import { LineSidebar } from "../components/ui/line-sidebar/LineSidebar";
+import { ToolIcon } from "../components/tools/ToolIcon";
+import { CATEGORY_COLORS } from "../data/tools";
+import { cn } from "@/lib/utils";
 
 export default function Home() {
   useEffect(() => {
@@ -105,7 +108,15 @@ export default function Home() {
           {featuredTools.map((t, i) => (
             <StickerCard
               key={t.slug}
-              icon={t.icon}
+              icon={
+                <div className={cn(
+                  "flex h-10 w-10 items-center justify-center rounded-full",
+                  CATEGORY_COLORS[t.category]?.bg ?? "bg-zinc-100",
+                  CATEGORY_COLORS[t.category]?.darkBg ?? "dark:bg-zinc-800",
+                )}>
+                  <ToolIcon name={t.icon} className={CATEGORY_COLORS[t.category]?.icon} />
+                </div>
+              }
               title={t.name}
               index={i}
               to={`/tools/${t.slug}`}

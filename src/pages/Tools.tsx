@@ -1,23 +1,60 @@
-import { useEffect } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { SectionHead, StickerCard } from "../components/site";
-import { TOOLS } from "../data/tools";
+import { TOOLS, CATEGORY_COLORS } from "../data/tools";
+import { ToolIcon } from "../components/tools/ToolIcon";
+import ToolSearchBar from "../components/ToolSearchBar";
+import { cn } from "@/lib/utils";
 
 export default function ToolsIndex() {
   useEffect(() => {
     document.title = "Tools — DevSpace";
   }, []);
 
+  const [searchQuery, setSearchQuery] = useState("");
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+
+  const filteredTools = useMemo(() => {
+    let result = TOOLS;
+    if (activeCategory) {
+      result = result.filter((t) => t.category === activeCategory);
+    }
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase();
+      result = result.filter(
+        (t) =>
+          t.name.toLowerCase().includes(q) ||
+          t.tagline.toLowerCase().includes(q) ||
+          t.tags.some((tag) => tag.toLowerCase().includes(q)),
+      );
+    }
+    return result;
+  }, [activeCategory, searchQuery]);
+
   return (
     <section className="mx-auto max-w-6xl px-6 py-16 sm:px-8 sm:py-20">
       <SectionHead idx="01" title="All Tools" />
-      <p className="mb-10 max-w-xl text-sm text-muted">
+      <p className="mb-6 max-w-xl text-sm text-muted">
         Everything runs in your browser. No accounts, no uploads, no wait.
       </p>
-      <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
-        {TOOLS.map((t, i) => (
+      <ToolSearchBar
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
+        activeCategory={activeCategory}
+        onCategoryChange={setActiveCategory}
+      />
+      <div className="mt-6 grid gap-6 sm:grid-cols-2 md:grid-cols-3">
+        {filteredTools.map((t, i) => (
           <StickerCard
             key={t.slug}
-            icon={t.icon}
+            icon={
+              <div className={cn(
+                "flex h-10 w-10 items-center justify-center rounded-full",
+                CATEGORY_COLORS[t.category]?.bg ?? "bg-zinc-100",
+                CATEGORY_COLORS[t.category]?.darkBg ?? "dark:bg-zinc-800",
+              )}>
+                <ToolIcon name={t.icon} className={CATEGORY_COLORS[t.category]?.icon} />
+              </div>
+            }
             title={t.name}
             index={i}
             to={`/tools/${t.slug}`}
@@ -25,6 +62,11 @@ export default function ToolsIndex() {
             {t.tagline}
           </StickerCard>
         ))}
+        {filteredTools.length === 0 && (
+          <p className="col-span-full py-12 text-center font-mono text-sm text-muted">
+            No tools match your search.
+          </p>
+        )}
       </div>
     </section>
   );
