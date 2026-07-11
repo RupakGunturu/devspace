@@ -6,6 +6,7 @@ export const cheatSheets: CheatSheet[] = [
     title: "Interactive Git Cheat Sheet",
     description: "All essential git commands with examples",
     category: "version-control",
+    icon: "GitBranch",
     tags: ["Git", "Commands", "Version Control"],
     content: [
       {
@@ -68,6 +69,7 @@ export const cheatSheets: CheatSheet[] = [
     title: "CSS Flexbox Visual Guide",
     description: "Interactive flexbox properties and values",
     category: "css",
+    icon: "AlignHorizontalDistributeCenter",
     tags: ["CSS", "Flexbox", "Layout"],
     content: [
       {
@@ -99,6 +101,7 @@ export const cheatSheets: CheatSheet[] = [
     title: "CSS Grid Visual Guide",
     description: "Complete CSS Grid layout reference",
     category: "css",
+    icon: "Grid3x3",
     tags: ["CSS", "Grid", "Layout"],
     content: [
       {
@@ -128,6 +131,7 @@ export const cheatSheets: CheatSheet[] = [
     title: "Big O Complexity Table",
     description: "Time and space complexity reference",
     category: "computer-science",
+    icon: "Clock",
     tags: ["Algorithms", "Complexity", "CS"],
     content: [
       {
@@ -158,6 +162,7 @@ export const cheatSheets: CheatSheet[] = [
     title: "JavaScript Array Methods",
     description: "Complete array method reference with examples",
     category: "javascript",
+    icon: "Braces",
     tags: ["JavaScript", "Arrays", "Methods"],
     content: [
       {
@@ -191,6 +196,7 @@ export const cheatSheets: CheatSheet[] = [
     title: "React Hooks Reference",
     description: "All React hooks with examples",
     category: "react",
+    icon: "Atom",
     tags: ["React", "Hooks", "Reference"],
     content: [
       {
@@ -229,6 +235,7 @@ export const cheatSheets: CheatSheet[] = [
     title: "Linux Commands Cheat Sheet",
     description: "Essential Linux terminal commands",
     category: "devops",
+    icon: "Terminal",
     tags: ["Linux", "Terminal", "Commands"],
     content: [
       {
@@ -267,6 +274,7 @@ export const cheatSheets: CheatSheet[] = [
     title: "TypeScript Utilities Reference",
     description: "Built-in TypeScript utility types",
     category: "typescript",
+    icon: "FileType",
     tags: ["TypeScript", "Types", "Utilities"],
     content: [
       {
@@ -297,6 +305,7 @@ export const cheatSheets: CheatSheet[] = [
     title: "Docker CLI Cheat Sheet",
     description: "Essential Docker commands",
     category: "devops",
+    icon: "Container",
     tags: ["Docker", "CLI", "Containers"],
     content: [
       {
@@ -335,6 +344,7 @@ export const cheatSheets: CheatSheet[] = [
     title: "NPM Commands Cheat Sheet",
     description: "Essential npm commands and shortcuts",
     category: "javascript",
+    icon: "Package",
     tags: ["NPM", "Node.js", "Packages"],
     content: [
       {
@@ -371,6 +381,7 @@ export const cheatSheets: CheatSheet[] = [
     title: "Keyboard Shortcut Master Guide",
     description: "Essential shortcuts for developers",
     category: "productivity",
+    icon: "Keyboard",
     tags: ["Keyboard", "Shortcuts", "Productivity"],
     content: [
       {
@@ -411,6 +422,7 @@ export const cheatSheets: CheatSheet[] = [
     title: "REST API Best Practices",
     description: "RESTful API design patterns",
     category: "backend",
+    icon: "Globe",
     tags: ["REST", "API", "HTTP"],
     content: [
       {
@@ -453,6 +465,7 @@ export const cheatSheets: CheatSheet[] = [
     title: "CSS Selectors Reference",
     description: "Complete CSS selector patterns",
     category: "css",
+    icon: "MousePointerClick",
     tags: ["CSS", "Selectors", "Reference"],
     content: [
       {
@@ -491,6 +504,7 @@ export const cheatSheets: CheatSheet[] = [
     title: "Python One-Liners",
     description: "Common Python shortcuts and tricks",
     category: "python",
+    icon: "Code",
     tags: ["Python", "Shortcuts", "Tips"],
     content: [
       {
@@ -525,6 +539,7 @@ export const cheatSheets: CheatSheet[] = [
     title: "SQL Cheat Sheet",
     description: "Essential SQL queries reference",
     category: "database",
+    icon: "Database",
     tags: ["SQL", "Database", "Queries"],
     content: [
       {
@@ -561,6 +576,7 @@ export const cheatSheets: CheatSheet[] = [
     title: "OAuth 2.0 Flow Visualizer",
     description: "Understanding OAuth 2.0 authorization flow",
     category: "security",
+    icon: "Shield",
     tags: ["OAuth", "Security", "Auth"],
     content: [
       {
@@ -589,6 +605,7 @@ export const cheatSheets: CheatSheet[] = [
     title: "Design Patterns Reference",
     description: "Gang of Four patterns simplified",
     category: "computer-science",
+    icon: "Blocks",
     tags: ["Design Patterns", "Architecture", "CS"],
     content: [
       {
@@ -622,6 +639,7 @@ export const cheatSheets: CheatSheet[] = [
     title: "SOLID Principles Guide",
     description: "Five OOP design principles explained",
     category: "computer-science",
+    icon: "Box",
     tags: ["SOLID", "OOP", "Architecture"],
     content: [
       {
@@ -641,6 +659,7 @@ export const cheatSheets: CheatSheet[] = [
     title: "Web Performance Cheat Sheet",
     description: "Optimization techniques for fast websites",
     category: "performance",
+    icon: "Gauge",
     tags: ["Performance", "Optimization", "Web"],
     content: [
       {
@@ -668,6 +687,7 @@ export const cheatSheets: CheatSheet[] = [
     title: "Git Branch Naming Conventions",
     description: "Standardized branch naming patterns",
     category: "version-control",
+    icon: "GitCommitHorizontal",
     tags: ["Git", "Branching", "Conventions"],
     content: [
       {
@@ -697,6 +717,7 @@ export const cheatSheets: CheatSheet[] = [
     title: "Environment Variables Guide",
     description: "Managing env vars across environments",
     category: "devops",
+    icon: "Lock",
     tags: ["Environment", "Config", "Security"],
     content: [
       {
@@ -724,6 +745,7 @@ export const cheatSheets: CheatSheet[] = [
     title: "Accessibility Checklist",
     description: "WCAG 2.1 compliance checklist",
     category: "accessibility",
+    icon: "Eye",
     tags: ["A11y", "WCAG", "Accessibility"],
     content: [
       {
@@ -753,6 +775,7 @@ export const cheatSheets: CheatSheet[] = [
     title: "Regular Expressions Patterns",
     description: "Common regex patterns for developers",
     category: "javascript",
+    icon: "Search",
     tags: ["Regex", "Patterns", "Validation"],
     content: [
       {

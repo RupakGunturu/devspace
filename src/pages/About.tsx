@@ -68,11 +68,11 @@ export default function About() {
             </p>
             <nav className="flex flex-col gap-0.5">
               <a
-                href="#colophon"
+                href="#DevSpace"
                 className="group flex items-center gap-2 py-1.5 font-mono text-sm text-muted transition-colors hover:text-foreground"
               >
                 <span className="h-1.5 w-1.5 shrink-0 rounded-full border border-muted" />
-                Colophon
+                DevSpace
               </a>
               <span className="my-2 font-mono text-[10px] uppercase tracking-widest text-muted/50 pl-[18px]">
                 Releases
@@ -110,43 +110,52 @@ export default function About() {
           </div>
         </aside>
 
-        <div className="min-w-0 flex-1 max-w-2xl" id="colophon">
-          <div className="mb-4 font-mono text-xs uppercase tracking-widest text-coral">▸ colophon</div>
+        <div className="min-w-0 flex-1 max-w-2xl" id="DevSpace">
+          <div className="mb-4 font-mono text-xs uppercase tracking-widest text-coral">▸ about DevSpace</div>
           <h1 className="font-display text-5xl font-extrabold leading-tight">
-            A zine, some tools,
+            Tools that work.
             <br />
             <span className="inline-block bg-yellow px-2 text-ink" style={{ transform: "rotate(-1deg)" }}>
-              three tiny games.
+              Games that teach.
             </span>
+            <br />
+            Notes worth keeping.
           </h1>
           <div className="mt-10 space-y-5 text-lg text-muted">
             <p>
-              DevSpace is a weekly, student-built zine for people who are still figuring this
-              whole "software" thing out. That includes us.
+              DevSpace is a free, student-built platform for people learning to code — whether
+              that's your first <code className="font-mono text-sm">console.log</code> or your
+              fiftieth side project. No signups, no paywalls, no "upgrade to unlock." Just things
+              that are actually useful.
             </p>
-            <p>
-              Every issue mixes a few things: a set of{" "}
-              <Link to="/tools" className="text-yellow no-underline">tools</Link>{" "}
-              that run entirely in your browser, a few{" "}
-              <Link to="/games" className="text-yellow no-underline">games</Link>{" "}
-              that pretend to be fun and secretly teach you things, and a feed of short posts
-              across a handful of{" "}
-              <Link to="/feed/bug-of-the-week" className="text-yellow no-underline">
-                recurring series
-              </Link>
-              .
-            </p>
-            <p>
-              It's rookie-learning-out-loud, not corporate. No newsletter popup, no cookie
-              banner drama, no "unlock this article." Just a zine.
-            </p>
-            <p className="font-mono text-sm">
-              If you want to write for it, ship a game, or fix our typos — the whole thing is
-              the point.
+            <div className="mt-8">
+              <h2 className="font-display text-xl font-bold text-foreground mb-4">What's inside:</h2>
+              <div className="space-y-4">
+                <div>
+                  <span className="font-bold text-foreground">Tools</span> — small, browser-based utilities for everyday dev work: formatters, converters, generators, calculators. Nothing installs, nothing tracks you, everything just runs.
+                </div>
+                <div>
+                  <span className="font-bold text-foreground">Games</span> — interactive ways to learn concepts that are usually taught through boring slides: algorithms, SQL, terminal commands, system design. They're built to be fun first, educational second (though don't tell your professor that).
+                </div>
+                <div>
+                  <span className="font-bold text-foreground">Tips & Resource Drops</span> — quick, no-fluff notes on things worth knowing: a library you haven't tried, a shortcut that saves time, a concept explained without the jargon.
+                </div>
+                <div>
+                  <span className="font-bold text-foreground">Feed</span> — short posts from students documenting what they're learning in real time, mistakes included.
+                </div>
+              </div>
+            </div>
+            <p className="mt-8">
+              DevSpace is built by a student, in public, still figuring a lot of this out. If
+              something's broken, missing, or could just be better — that's an invitation, not a
+              complaint box.{" "}
+              <Link to="/tools" className="text-yellow no-underline">Contribute a tool</Link>,{" "}
+              <Link to="/tips" className="text-yellow no-underline">submit a tip</Link>, or just
+              tell us what's confusing.
             </p>
           </div>
-          <div className="mt-12 border-t-2 border-dashed border-line pt-6" id="colophon-details">
-            <div className="font-mono text-xs text-muted">Colophon</div>
+          <div className="mt-12 border-t-2 border-dashed border-line pt-6" id="DevSpace-details">
+            <div className="font-mono text-xs text-muted">DevSpace</div>
             <div className="mt-2 grid grid-cols-2 gap-4 font-mono text-sm">
               <div>
                 <div className="text-muted">Display type</div>

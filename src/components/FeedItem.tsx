@@ -27,9 +27,20 @@ export function FeedItem({ post }: { post: Post }) {
         className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-paper text-xl transition-transform"
         style={{ transform: "rotate(-6deg)" }}
       >
-        <span className="transition-transform group-hover:scale-110 group-hover:rotate-[12deg]">
-          {series?.icon ?? "📰"}
-        </span>
+        {post.externalUrl ? (
+          <img
+            src={`https://www.google.com/s2/favicons?domain=${new URL(post.externalUrl).hostname}&sz=32`}
+            alt=""
+            className="h-6 w-6 rounded transition-transform group-hover:scale-110 group-hover:rotate-[12deg]"
+            onError={(e) => {
+              e.currentTarget.style.display = "none";
+            }}
+          />
+        ) : (
+          <span className="transition-transform group-hover:scale-110 group-hover:rotate-[12deg]">
+            {series?.icon ?? "📰"}
+          </span>
+        )}
       </div>
       <div className="min-w-0">
         <div className="mb-1 font-mono text-[11px] font-bold uppercase tracking-wide text-coral">

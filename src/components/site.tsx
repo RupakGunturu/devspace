@@ -33,6 +33,7 @@ export function Header() {
           <NavItem to="/tools">Tools</NavItem>
           <NavItem to="/cheat-sheets">Sheets</NavItem>
           <NavItem to="/games">Games</NavItem>
+          <NavItem to="/tips">Tips</NavItem>
           <NavItem to="/about">About</NavItem>
         </nav>
         <div className="flex items-center gap-3">
@@ -57,6 +58,7 @@ export function Header() {
             { label: "Tools", link: "/tools" },
             { label: "Sheets", link: "/cheat-sheets" },
             { label: "Games", link: "/games" },
+            { label: "Tips", link: "/tips" },
             { label: "About", link: "/about" },
           ]}
           accentColor="#f4d922"
@@ -116,10 +118,13 @@ export function Marquee({ items }: { items: string[] }) {
   );
 }
 
-export function SectionHead({ idx, title }: { idx: string; title: string }) {
+export function SectionHead({ idx, title, color = "yellow" }: { idx: string; title: string; color?: "yellow" | "coral" }) {
+  const colorClasses = color === "coral"
+    ? "border-coral text-coral"
+    : "border-yellow text-yellow";
   return (
     <div className="mb-8 flex items-baseline gap-4">
-      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 border-yellow font-display text-sm font-extrabold text-yellow">
+      <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 font-display text-sm font-extrabold ${colorClasses}`}>
         {idx}
       </div>
       <h2 className="font-display text-2xl font-bold sm:text-3xl">{title}</h2>

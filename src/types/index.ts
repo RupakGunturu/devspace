@@ -19,6 +19,7 @@ export interface CheatSheet {
   title: string;
   description: string;
   category: string;
+  icon: string;
   tags: string[];
   content: CheatSheetSection[];
 }

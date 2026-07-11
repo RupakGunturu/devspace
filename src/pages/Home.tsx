@@ -4,6 +4,8 @@ import { Marquee, SectionHead, StickerCard } from "../components/site";
 import { FeedItem } from "../components/FeedItem";
 import { TOOLS } from "../data/tools";
 import { GAMES } from "../data/games";
+import { tips } from "../data/tips";
+import { CATEGORY_COLORS as TIP_CATEGORY_COLORS } from "./Tips";
 import { SERIES } from "../data/series";
 import { allPostsSorted } from "../data/posts";
 import Shuffle from "../components/ui/shuffle/Shuffle";
@@ -12,12 +14,16 @@ import { ToolIcon } from "../components/tools/ToolIcon";
 import { CATEGORY_COLORS } from "../data/tools";
 import { cn } from "@/lib/utils";
 
+const HIDDEN_SERIES = ["bug-of-the-week", "framework-wars", "behind-the-error", "changelog"];
+
 export default function Home() {
   useEffect(() => {
     document.title = "DevSpace — a weekly dev zine, tools, and games";
   }, []);
 
   const [activeSeries, setActiveSeries] = useState<string | null>(null);
+
+  const visibleSeries = useMemo(() => SERIES.filter((s) => !HIDDEN_SERIES.includes(s.slug)), []);
 
   const posts = useMemo(() => {
     const all = allPostsSorted();
@@ -27,6 +33,7 @@ export default function Home() {
 
   const featuredTools = TOOLS.slice(0, 3);
   const featuredGames = GAMES;
+  const featuredTips = tips.slice(0, 3);
 
   return (
     <>
@@ -129,7 +136,7 @@ export default function Home() {
 
       <section className="mx-auto max-w-6xl px-6 py-16 sm:px-8 sm:py-20">
         <div className="flex items-center justify-between">
-          <SectionHead idx="02" title="Games" />
+          <SectionHead idx="02" title="Games" color="coral" />
           <Link to="/games" className="font-mono text-xs text-muted no-underline hover:text-yellow">
             all games →
           </Link>
@@ -151,17 +158,50 @@ export default function Home() {
 
       <section className="mx-auto max-w-6xl px-6 py-16 sm:px-8 sm:py-20">
         <div className="flex items-center justify-between">
-          <SectionHead idx="03" title="This Week's Feed" />
-          <Link to="/feed" className="font-mono text-xs text-muted no-underline hover:text-yellow">
+          <SectionHead idx="03" title="Tips" />
+          <Link to="/tips" className="font-mono text-xs text-muted no-underline hover:text-yellow">
+            all tips →
+          </Link>
+        </div>
+        <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
+          {featuredTips.map((tip, i) => {
+            const colors = TIP_CATEGORY_COLORS[tip.category];
+            return (
+              <StickerCard
+                key={tip.id}
+                icon={
+                  <div className={cn(
+                    "flex h-10 w-10 items-center justify-center rounded-full",
+                    colors?.bg ?? "bg-zinc-100",
+                    colors?.darkBg ?? "dark:bg-zinc-800",
+                  )}>
+                    <ToolIcon name={tip.icon} className={cn("h-5 w-5", colors?.icon ?? "text-zinc-600")} />
+                  </div>
+                }
+                title={tip.title}
+                index={i}
+                to="/tips"
+              >
+                {tip.content.slice(0, 100)}…
+              </StickerCard>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-6 py-16 sm:px-8 sm:py-20">
+        <div className="flex items-center justify-between">
+          <SectionHead idx="04" title="This Week's Feed" color="coral" />
+          <Link to="/feed" className="font-mono text-xs text-muted no-underline hover:text-coral">
             view all feed →
           </Link>
         </div>
         <div className="flex flex-col gap-8 lg:flex-row lg:gap-12">
           <div className="hidden shrink-0 lg:block">
             <LineSidebar
-              items={SERIES.map((s) => ({ label: s.label, slug: s.slug, icon: s.icon }))}
-              activeIndex={
-                activeSeries != null ? SERIES.findIndex((s) => s.slug === activeSeries) : -1
+              items={visibleSeries.map((s) => ({ label: s.label, slug: s.slug, icon: s.icon }))}
+               activeIndex={
+                 activeSeries != null ? visibleSeries.findIndex((s) => s.slug === activeSeries) : -1
               }
               onItemClick={(_i, slug) =>
                 setActiveSeries(slug === activeSeries ? null : slug)
@@ -170,7 +210,7 @@ export default function Home() {
           </div>
           <div className="min-w-0 flex-1">
             <div className="lg:hidden">
-              <SeriesFilter active={activeSeries} onChange={setActiveSeries} />
+              <SeriesFilter series={visibleSeries} active={activeSeries} onChange={setActiveSeries} />
             </div>
             <div>
               {posts.length === 0 ? (
@@ -188,7 +228,7 @@ export default function Home() {
   );
 }
 
-function SeriesFilter({ active, onChange }: { active: string | null; onChange: (v: string | null) => void }) {
+function SeriesFilter({ series, active, onChange }: { series: typeof SERIES; active: string | null; onChange: (v: string | null) => void }) {
   return (
     <div className="mb-6 flex flex-wrap gap-2">
       <button
@@ -199,7 +239,7 @@ function SeriesFilter({ active, onChange }: { active: string | null; onChange: (
       >
         all
       </button>
-      {SERIES.map((s) => (
+      {series.map((s) => (
         <button
           key={s.slug}
           onClick={() => onChange(s.slug)}
