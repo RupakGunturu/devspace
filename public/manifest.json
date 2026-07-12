@@ -1,0 +1,16 @@
+{
+  "name": "DevSpace",
+  "short_name": "DevSpace",
+  "description": "Free browser-based dev tools, interactive coding games, and bite-sized tips for developers.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a1a2e",
+  "theme_color": "#1a1a2e",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "any",
+      "type": "image/png"
+    }
+  ]
+}

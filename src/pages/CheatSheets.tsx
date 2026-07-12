@@ -4,6 +4,24 @@ import { SectionHead, StickerCard } from "../components/site";
 import { cheatSheets } from "../data/cheat-sheets";
 import { ToolIcon } from "../components/tools/ToolIcon";
 import { cn } from "@/lib/utils";
+import { CursorHover } from "../components/core/cursor-hover";
+
+const COLOR_HEX: Record<string, string> = {
+  "version-control": "#f97316",
+  "css": "#3b82f6",
+  "computer-science": "#a855f7",
+  "javascript": "#eab308",
+  "react": "#06b6d4",
+  "devops": "#10b981",
+  "typescript": "#6366f1",
+  "backend": "#f43f5e",
+  "python": "#22c55e",
+  "database": "#d97706",
+  "security": "#ef4444",
+  "performance": "#84cc16",
+  "productivity": "#ec4899",
+  "accessibility": "#14b8a6",
+};
 
 const CATEGORY_COLORS: Record<string, { bg: string; darkBg: string; icon: string }> = {
   "version-control": { bg: "bg-orange-100", darkBg: "dark:bg-orange-900/30", icon: "text-orange-600 dark:text-orange-400" },
@@ -35,23 +53,24 @@ export default function CheatSheetsIndex() {
       </p>
       <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
         {cheatSheets.map((s, i) => (
-          <StickerCard
-            key={s.id}
-            icon={
-              <div className={cn(
-                "flex h-10 w-10 items-center justify-center rounded-full",
-                CATEGORY_COLORS[s.category]?.bg ?? "bg-zinc-100",
-                CATEGORY_COLORS[s.category]?.darkBg ?? "dark:bg-zinc-800",
-              )}>
-                <ToolIcon name={s.icon} className={CATEGORY_COLORS[s.category]?.icon} />
-              </div>
-            }
-            title={s.title}
-            index={i}
-            to={`/cheat-sheets/${s.id}`}
-          >
-            {s.description}
-          </StickerCard>
+          <CursorHover label={s.title} color={COLOR_HEX[s.category]} key={s.id}>
+            <StickerCard
+              icon={
+                <div className={cn(
+                  "flex h-10 w-10 items-center justify-center rounded-full",
+                  CATEGORY_COLORS[s.category]?.bg ?? "bg-zinc-100",
+                  CATEGORY_COLORS[s.category]?.darkBg ?? "dark:bg-zinc-800",
+                )}>
+                  <ToolIcon name={s.icon} className={CATEGORY_COLORS[s.category]?.icon} />
+                </div>
+              }
+              title={s.title}
+              index={i}
+              to={`/cheat-sheets/${s.id}`}
+            >
+              {s.description}
+            </StickerCard>
+          </CursorHover>
         ))}
       </div>
     </section>

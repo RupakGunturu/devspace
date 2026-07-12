@@ -9,6 +9,7 @@ import { CATEGORY_COLORS as TIP_CATEGORY_COLORS } from "./Tips";
 import { SERIES } from "../data/series";
 import { allPostsSorted } from "../data/posts";
 import Shuffle from "../components/ui/shuffle/Shuffle";
+import { Accordion05 } from "../components/ui/accordion-05";
 import { LineSidebar } from "../components/ui/line-sidebar/LineSidebar";
 import { ToolIcon } from "../components/tools/ToolIcon";
 import { CATEGORY_COLORS } from "../data/tools";
@@ -18,7 +19,7 @@ const HIDDEN_SERIES = ["bug-of-the-week", "framework-wars", "behind-the-error", 
 
 export default function Home() {
   useEffect(() => {
-    document.title = "DevSpace — a weekly dev zine, tools, and games";
+    document.title = "DevSpace — From First Line of Code to Production";
   }, []);
 
   const [activeSeries, setActiveSeries] = useState<string | null>(null);
@@ -72,8 +73,9 @@ export default function Home() {
             />
           </h1>
           <p className="mt-7 max-w-lg text-base text-muted sm:text-lg">
-            Dev tools that don't get in your way, games that teach faster than lectures, and
-            a weekly zine of dev culture — bugs, hot takes, and repos worth stealing from.
+            Built by a developer who was tired of bloated tools, boring tutorials, and content that never gets to the point. 
+            DevSpace gives you tools that just work, games that teach by doing, and real talk about the code we actually write.
+
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
@@ -81,7 +83,7 @@ export default function Home() {
               className="rounded-sm border-2 border-yellow bg-yellow px-6 py-3 font-mono text-[13px] font-bold text-ink no-underline transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5"
               style={{ boxShadow: "4px 4px 0 var(--coral)" }}
             >
-              Read Issue №047 →
+              Level Up →
             </Link>
             <Link
               to="/games"
@@ -95,7 +97,15 @@ export default function Home() {
 
       <Marquee
         items={[
-          "Bug of the Week",
+          "Resource Drop",
+          "Stack Breakdown",
+          "Dev Vocabulary",
+          "Concept in 60 Seconds",
+          "Challenge of the Week",
+          "Collab Corner",
+          "The Rabbit Hole",
+          "Tech Debt Diaries",
+          "The Interview They Don't Show You",
           "Hot Take",
           "GitHub Gems",
           "Killed By Google",
@@ -223,6 +233,11 @@ export default function Home() {
             </div>
           </div>
         </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-6 py-16 sm:px-8 sm:py-20">
+        <SectionHead idx="05" title="Q&A" />
+        <Accordion05 />
       </section>
     </>
   );

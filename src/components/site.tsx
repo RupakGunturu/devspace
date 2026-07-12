@@ -30,6 +30,7 @@ export function Header() {
         </div>
         <nav className="hidden gap-6 sm:flex">
           <NavItem to="/">Feed</NavItem>
+          <NavItem to="/stack-breakdown">Stacks</NavItem>
           <NavItem to="/tools">Tools</NavItem>
           <NavItem to="/cheat-sheets">Sheets</NavItem>
           <NavItem to="/games">Games</NavItem>
@@ -42,7 +43,7 @@ export function Header() {
             className="rounded-sm bg-yellow px-3 py-1.5 font-mono text-[11px] font-bold text-ink"
             style={{ transform: "rotate(-3deg)", boxShadow: "2px 2px 0 var(--coral)" }}
           >
-            ISSUE №047
+            Level Up
           </div>
         </div>
       </header>
@@ -55,6 +56,7 @@ export function Header() {
           colors={["#1a1a2e", "#2a2a4a"]}
           items={[
             { label: "Feed", link: "/" },
+            { label: "Stack Breakdown", link: "/stack-breakdown" },
             { label: "Tools", link: "/tools" },
             { label: "Sheets", link: "/cheat-sheets" },
             { label: "Games", link: "/games" },
@@ -92,7 +94,7 @@ function NavItem({ to, children }: { to: string; children: ReactNode }) {
 export function Footer() {
   return (
     <footer className="border-t-2 border-line px-8 py-10 text-center font-mono text-xs text-muted">
-      dev<span className="text-yellow">/</span>space — issue №047, built by a student, for students
+      Dev<span className="text-yellow">/</span>Space — From First Line of Code to Production , Built by a Student, For Students & Developers
     </footer>
   );
 }

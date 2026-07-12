@@ -3,25 +3,69 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="/favicon.png" type="image/png" />
-    <meta name="description" content="Dev tools that don't get in your way, games that teach faster than lectures, and a weekly zine of dev culture — bugs, hot takes, and repos worth stealing from." />
+    <title>DevSpace — From First Line of Code to Production</title>
+    <meta name="description" content="DevSpace is a free platform for students and developers — interactive coding games to learn the fundamentals, browser-based dev tools for real work, and bite-sized content to stay sharp. No signups, no paywalls." />
+    <meta name="keywords" content="learn to code, developer tools, coding games, dev tools online, free developer tools, programming tips, web development resources, coding for beginners" />
     <meta name="author" content="DevSpace" />
-    <meta property="og:title" content="DevSpace — a weekly dev zine, tools, and games" />
-    <meta property="og:description" content="Dev tools that don't get in your way, games that teach faster than lectures, and a weekly zine of dev culture." />
-    <meta property="og:image" content="/favicon.png" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#1a1a2e" />
+    <link rel="canonical" href="https://devspace.app" />
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="DevSpace — From First Line of Code to Production" />
+    <meta property="og:description" content="A free platform for students and developers — coding games to learn, dev tools for real work, and bite-sized content to stay sharp. No signups, no paywalls." />
+    <meta property="og:image" content="https://devspace.app/favicon.png" />
     <meta property="og:url" content="https://devspace.app" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="DevSpace" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="DevSpace — a weekly dev zine, tools, and games" />
-    <meta name="twitter:description" content="Dev tools that don't get in your way, games that teach faster than lectures, and a weekly zine of dev culture." />
-    <meta name="twitter:image" content="/favicon.png" />
+    <meta name="twitter:title" content="DevSpace — From First Line of Code to Production" />
+    <meta name="twitter:description" content="Coding games to learn, dev tools for real work, and bite-sized content to stay sharp — free for students and developers." />
+    <meta name="twitter:image" content="https://devspace.app/favicon.png" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "DevSpace",
+      "alternateName": "DevSpace — From First Line of Code to Production",
+      "url": "https://devspace.app",
+      "description": "A free platform for students and developers: interactive coding games to learn the fundamentals, browser-based dev tools for real work, and bite-sized content to stay sharp.",
+      "keywords": "learn to code, developer tools, coding games, learn programming, dev tools online",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://devspace.app/tools?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "DevSpace",
+      "url": "https://devspace.app",
+      "logo": "https://devspace.app/favicon.png",
+      "description": "DevSpace helps students learn to code through interactive games and gives developers free browser-based tools and content to keep building."
+    }
+    </script>
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Theme init -->
     <script>
       (function () {
         try {
@@ -30,7 +74,6 @@
         } catch (e) {}
       })();
     </script>
-    <title>DevSpace — a weekly dev zine, tools, and games</title>
   </head>
   <body>
     <div id="root"></div>

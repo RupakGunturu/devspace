@@ -129,7 +129,8 @@ export default function FeedSearchBar({
           e.preventDefault();
           if (activeIndex >= 0 && displayPosts[activeIndex]) {
             setSelectedId(displayPosts[activeIndex].id);
-            navigate(`/post/${displayPosts[activeIndex].slug}`);
+            const p = displayPosts[activeIndex];
+            navigate(p.series === "stack-breakdown" ? `/stack-breakdown/${p.slug}` : `/post/${p.slug}`);
             setIsFocused(false);
           }
           break;
@@ -145,7 +146,7 @@ export default function FeedSearchBar({
   const handleResultClick = useCallback(
     (post: Post) => {
       setSelectedId(post.id);
-      navigate(`/post/${post.slug}`);
+      navigate(post.series === "stack-breakdown" ? `/stack-breakdown/${post.slug}` : `/post/${post.slug}`);
       setIsFocused(false);
     },
     [navigate],

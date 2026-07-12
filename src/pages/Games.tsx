@@ -1,6 +1,13 @@
 import { useEffect } from "react";
 import { SectionHead, StickerCard } from "../components/site";
 import { GAMES } from "../data/games";
+import { CursorHover } from "../components/core/cursor-hover";
+
+const GAME_COLORS: Record<string, string> = {
+  "bug-finder": "#ef4444",
+  "devwordle": "#3b82f6",
+  "dev-trivia": "#8b5cf6",
+};
 
 export default function GamesIndex() {
   useEffect(() => {
@@ -15,15 +22,16 @@ export default function GamesIndex() {
       </p>
       <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
         {GAMES.map((g, i) => (
-          <StickerCard
-            key={g.slug}
-            icon={g.icon}
-            title={g.name}
-            index={i}
-            to={`/games/${g.slug}`}
-          >
-            {g.tagline}
-          </StickerCard>
+          <CursorHover label={g.name} color={GAME_COLORS[g.slug]} key={g.slug}>
+            <StickerCard
+              icon={g.icon}
+              title={g.name}
+              index={i}
+              to={`/games/${g.slug}`}
+            >
+              {g.tagline}
+            </StickerCard>
+          </CursorHover>
         ))}
       </div>
     </section>

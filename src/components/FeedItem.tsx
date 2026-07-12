@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import type { Post } from "../data/posts";
 import { seriesBySlug } from "../data/series";
+import { stackBreakdownBySlug } from "../data/stack-breakdowns";
 
 function timeAgo(iso: string) {
   const then = new Date(iso).getTime();
@@ -18,13 +19,15 @@ function timeAgo(iso: string) {
 
 export function FeedItem({ post }: { post: Post }) {
   const series = seriesBySlug(post.series);
+  const to = post.series === "stack-breakdown" ? `/stack-breakdown/${post.slug}` : `/post/${post.slug}`;
+  const stackItem = post.series === "stack-breakdown" ? stackBreakdownBySlug(post.slug) : null;
   return (
     <Link
-      to={`/post/${post.slug}`}
+      to={to}
       className="group flex gap-4 border-b-2 border-dashed border-line py-5 no-underline transition-transform hover:translate-x-1.5"
     >
       <div
-        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-paper text-xl transition-transform"
+        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-paper text-xl transition-transform overflow-hidden"
         style={{ transform: "rotate(-6deg)" }}
       >
         {post.externalUrl ? (
@@ -34,6 +37,16 @@ export function FeedItem({ post }: { post: Post }) {
             className="h-6 w-6 rounded transition-transform group-hover:scale-110 group-hover:rotate-[12deg]"
             onError={(e) => {
               e.currentTarget.style.display = "none";
+            }}
+          />
+        ) : stackItem ? (
+          <img
+            src={`https://www.google.com/s2/favicons?domain=${stackItem.faviconDomain}&sz=32`}
+            alt=""
+            className="h-6 w-6 rounded transition-transform group-hover:scale-110 group-hover:rotate-[12deg]"
+            onError={(e) => {
+              e.currentTarget.style.display = "none";
+              e.currentTarget.parentElement!.textContent = stackItem.icon;
             }}
           />
         ) : (

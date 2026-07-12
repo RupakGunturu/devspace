@@ -4,6 +4,29 @@ import { tips, TIP_CATEGORIES } from "../data/tips";
 import { ToolIcon } from "../components/tools/ToolIcon";
 import TipSearchBar from "../components/TipSearchBar";
 import { cn } from "@/lib/utils";
+import { CursorHover } from "../components/core/cursor-hover";
+
+const COLOR_HEX: Record<string, string> = {
+  "Coding Tips": "#3b82f6",
+  "🚀 Productivity": "#eab308",
+  "📚 Student Tips": "#22c55e",
+  "💼 Career Tips": "#6366f1",
+  "🧠 Learning Hacks": "#a855f7",
+  "🔥 Git & GitHub": "#f97316",
+  "🌐 Web Development": "#06b6d4",
+  "🔒 Cybersecurity": "#ef4444",
+  "🤖 AI Tips": "#8b5cf6",
+  "⚡ VS Code Tips": "#0ea5e9",
+  "🖥️ Windows/Mac/Linux": "#71717a",
+  "🎯 DSA Tips": "#10b981",
+  "🏗️ System Design": "#d97706",
+  "📱 Mobile Development": "#14b8a6",
+  "🎨 UI/UX": "#ec4899",
+  "🛠️ Developer Toolbox": "#78716c",
+  "💰 Freelancing": "#84cc16",
+  "🌱 Personal Growth": "#d946ef",
+  "🧩 Micro Life Hacks": "#f43f5e",
+};
 
 export const CATEGORY_COLORS: Record<string, { bg: string; darkBg: string; icon: string }> = {
   "Coding Tips": { bg: "bg-blue-100", darkBg: "dark:bg-blue-900/30", icon: "text-blue-600 dark:text-blue-400" },
@@ -78,14 +101,14 @@ export default function TipsIndex() {
           const isExpanded = expandedId === tip.id;
 
           return (
-            <button
-              key={tip.id}
-              onClick={() => toggle(tip.id)}
-              className={cn(
-                "sticker block w-full rounded-md bg-paper p-5 text-left transition-shadow hover:shadow-md",
-                isExpanded && "ring-2 ring-yellow",
-              )}
-            >
+            <CursorHover label={tip.title} color={COLOR_HEX[tip.category]} key={tip.id}>
+              <button
+                onClick={() => toggle(tip.id)}
+                className={cn(
+                  "sticker block w-full rounded-md bg-paper p-5 text-left transition-shadow hover:shadow-md",
+                  isExpanded && "ring-2 ring-yellow",
+                )}
+              >
               <div className="mb-3 flex items-start gap-3">
                 <div
                   className={cn(
@@ -119,6 +142,7 @@ export default function TipsIndex() {
                 </p>
               )}
             </button>
+            </CursorHover>
           );
         })}
 
