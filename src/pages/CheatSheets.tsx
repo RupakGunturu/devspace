@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { SectionHead, StickerCard } from "../components/site";
 import { cheatSheets } from "../data/cheat-sheets";
 import { ToolIcon } from "../components/tools/ToolIcon";
 import { cn } from "@/lib/utils";
 import { CursorHover } from "../components/core/cursor-hover";
+import { usePagination } from "../hooks/use-pagination";
+import { PaginationBar } from "../components/PaginationBar";
 
 const COLOR_HEX: Record<string, string> = {
   "version-control": "#f97316",
@@ -45,14 +46,39 @@ export default function CheatSheetsIndex() {
     document.title = "Cheat Sheets — DevSpace";
   }, []);
 
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const filteredSheets = cheatSheets.filter((s) => {
+    if (!searchQuery.trim()) return true;
+    const q = searchQuery.toLowerCase();
+    return (
+      s.title.toLowerCase().includes(q) ||
+      s.description.toLowerCase().includes(q) ||
+      s.tags.some((tag) => tag.toLowerCase().includes(q))
+    );
+  });
+
+  const { page, totalPages, paginatedItems, goTo } = usePagination(filteredSheets);
+
   return (
     <section className="mx-auto max-w-6xl px-6 py-16 sm:px-8 sm:py-20">
       <SectionHead idx="03" title="Cheat Sheets" />
-      <p className="mb-10 max-w-xl text-sm text-muted">
+      <p className="mb-6 max-w-xl text-sm text-muted">
         Quick references for every developer. Search, learn, copy.
       </p>
+
+      <div className="mb-8">
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder="Search cheat sheets..."
+          className="w-full max-w-md rounded-sm border-2 border-line bg-transparent px-4 py-2.5 font-mono text-sm text-foreground placeholder:text-muted focus:border-yellow focus:outline-none"
+        />
+      </div>
+
       <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
-        {cheatSheets.map((s, i) => (
+        {paginatedItems.map((s, i) => (
           <CursorHover label={s.title} color={COLOR_HEX[s.category]} key={s.id}>
             <StickerCard
               icon={
@@ -72,7 +98,14 @@ export default function CheatSheetsIndex() {
             </StickerCard>
           </CursorHover>
         ))}
+
+        {filteredSheets.length === 0 && (
+          <p className="col-span-full py-12 text-center font-mono text-sm text-muted">
+            No cheat sheets match your search.
+          </p>
+        )}
       </div>
+      <PaginationBar page={page} totalPages={totalPages} onPageChange={goTo} />
     </section>
   );
 }

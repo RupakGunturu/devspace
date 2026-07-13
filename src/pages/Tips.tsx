@@ -1,10 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import { SectionHead } from "../components/site";
 import { tips, TIP_CATEGORIES } from "../data/tips";
 import { ToolIcon } from "../components/tools/ToolIcon";
 import TipSearchBar from "../components/TipSearchBar";
 import { cn } from "@/lib/utils";
 import { CursorHover } from "../components/core/cursor-hover";
+import { usePagination } from "../hooks/use-pagination";
+import { PaginationBar } from "../components/PaginationBar";
 
 const COLOR_HEX: Record<string, string> = {
   "Coding Tips": "#3b82f6",
@@ -39,7 +42,7 @@ export const CATEGORY_COLORS: Record<string, { bg: string; darkBg: string; icon:
   "🔒 Cybersecurity": { bg: "bg-red-100", darkBg: "dark:bg-red-900/30", icon: "text-red-600 dark:text-red-400" },
   "🤖 AI Tips": { bg: "bg-violet-100", darkBg: "dark:bg-violet-900/30", icon: "text-violet-600 dark:text-violet-400" },
   "⚡ VS Code Tips": { bg: "bg-sky-100", darkBg: "dark:bg-sky-900/30", icon: "text-sky-600 dark:text-sky-400" },
-  "🖥️ Windows/Mac/Linux": { bg: "bg-zinc-100", darkBg: "dark:bg-zinc-800/50", icon: "text-zinc-600 dark:text-zinc-400" },
+  "🖥️ Windows/Mac/Linux": { bg: "bg-zinc-100", darkBg: "dark:bg-zinc-800/50", icon: "text-zinc-600 dark:text-zinc-600 dark:text-zinc-400" },
   "🎯 DSA Tips": { bg: "bg-emerald-100", darkBg: "dark:bg-emerald-900/30", icon: "text-emerald-600 dark:text-emerald-400" },
   "🏗️ System Design": { bg: "bg-amber-100", darkBg: "dark:bg-amber-900/30", icon: "text-amber-600 dark:text-amber-400" },
   "📱 Mobile Development": { bg: "bg-teal-100", darkBg: "dark:bg-teal-900/30", icon: "text-teal-600 dark:text-teal-400" },
@@ -50,6 +53,75 @@ export const CATEGORY_COLORS: Record<string, { bg: string; darkBg: string; icon:
   "🧩 Micro Life Hacks": { bg: "bg-rose-100", darkBg: "dark:bg-rose-900/30", icon: "text-rose-600 dark:text-rose-400" },
 };
 
+function TipCard({ tip }: { tip: typeof tips[0] }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const colors = CATEGORY_COLORS[tip.category];
+
+  return (
+    <CursorHover label={tip.title} color={COLOR_HEX[tip.category]}>
+      <motion.button
+        layout
+        onClick={() => setIsExpanded((prev) => !prev)}
+        className={cn(
+          "sticker block w-full rounded-md bg-paper p-5 text-left transition-shadow hover:shadow-md",
+          isExpanded && "ring-2 ring-yellow",
+        )}
+        animate={{ height: isExpanded ? "auto" : 160 }}
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+      >
+        <div className="mb-3 flex items-start gap-3">
+          <div
+            className={cn(
+              "flex h-9 w-9 shrink-0 items-center justify-center rounded-full",
+              colors?.bg ?? "bg-zinc-100",
+              colors?.darkBg ?? "dark:bg-zinc-800",
+            )}
+          >
+            <ToolIcon
+              name={tip.icon}
+              className={cn("h-4 w-4", colors?.icon ?? "text-zinc-600")}
+            />
+          </div>
+          <div className="min-w-0">
+            <h3 className="font-display text-sm font-bold leading-snug">
+              {tip.title}
+            </h3>
+            <span className="font-mono text-[10px] text-muted">
+              {tip.category}
+            </span>
+          </div>
+        </div>
+
+        <AnimatePresence mode="wait">
+          {isExpanded ? (
+            <motion.p
+              key="full"
+              initial={{ opacity: 0, filter: "blur(4px)" }}
+              animate={{ opacity: 1, filter: "blur(0px)" }}
+              exit={{ opacity: 0, filter: "blur(4px)" }}
+              transition={{ type: "spring", stiffness: 300, damping: 25 }}
+              className="text-[13px] leading-relaxed text-foreground/80"
+            >
+              {tip.content}
+            </motion.p>
+          ) : (
+            <motion.p
+              key="clamped"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.15 }}
+              className="line-clamp-2 text-[13px] leading-relaxed text-foreground/60"
+            >
+              {tip.content}
+            </motion.p>
+          )}
+        </AnimatePresence>
+      </motion.button>
+    </CursorHover>
+  );
+}
+
 export default function TipsIndex() {
   useEffect(() => {
     document.title = "Tips — DevSpace";
@@ -57,7 +129,6 @@ export default function TipsIndex() {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
-  const [expandedId, setExpandedId] = useState<string | null>(null);
 
   const filteredTips = useMemo(() => {
     let result = tips;
@@ -75,9 +146,7 @@ export default function TipsIndex() {
     return result;
   }, [activeCategory, searchQuery]);
 
-  const toggle = (id: string) => {
-    setExpandedId((prev) => (prev === id ? null : id));
-  };
+  const { page, totalPages, paginatedItems, goTo } = usePagination(filteredTips);
 
   return (
     <section className="mx-auto max-w-6xl px-6 py-16 sm:px-8 sm:py-20">
@@ -96,55 +165,9 @@ export default function TipsIndex() {
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-        {filteredTips.map((tip) => {
-          const colors = CATEGORY_COLORS[tip.category];
-          const isExpanded = expandedId === tip.id;
-
-          return (
-            <CursorHover label={tip.title} color={COLOR_HEX[tip.category]} key={tip.id}>
-              <button
-                onClick={() => toggle(tip.id)}
-                className={cn(
-                  "sticker block w-full rounded-md bg-paper p-5 text-left transition-shadow hover:shadow-md",
-                  isExpanded && "ring-2 ring-yellow",
-                )}
-              >
-              <div className="mb-3 flex items-start gap-3">
-                <div
-                  className={cn(
-                    "flex h-9 w-9 shrink-0 items-center justify-center rounded-full",
-                    colors?.bg ?? "bg-zinc-100",
-                    colors?.darkBg ?? "dark:bg-zinc-800",
-                  )}
-                >
-                  <ToolIcon
-                    name={tip.icon}
-                    className={cn("h-4 w-4", colors?.icon ?? "text-zinc-600")}
-                  />
-                </div>
-                <div className="min-w-0">
-                  <h3 className="font-display text-sm font-bold leading-snug">
-                    {tip.title}
-                  </h3>
-                  <span className="font-mono text-[10px] text-muted">
-                    {tip.category}
-                  </span>
-                </div>
-              </div>
-
-              {isExpanded ? (
-                <p className="text-[13px] leading-relaxed text-foreground/80">
-                  {tip.content}
-                </p>
-              ) : (
-                <p className="line-clamp-2 text-[13px] leading-relaxed text-foreground/60">
-                  {tip.content}
-                </p>
-              )}
-            </button>
-            </CursorHover>
-          );
-        })}
+        {paginatedItems.map((tip) => (
+          <TipCard key={tip.id} tip={tip} />
+        ))}
 
         {filteredTips.length === 0 && (
           <p className="col-span-full py-12 text-center font-mono text-sm text-muted">
@@ -152,6 +175,7 @@ export default function TipsIndex() {
           </p>
         )}
       </div>
+      <PaginationBar page={page} totalPages={totalPages} onPageChange={goTo} />
     </section>
   );
 }

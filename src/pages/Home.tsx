@@ -10,6 +10,7 @@ import { SERIES } from "../data/series";
 import { allPostsSorted } from "../data/posts";
 import Shuffle from "../components/ui/shuffle/Shuffle";
 import { Accordion05 } from "../components/ui/accordion-05";
+import { NeuFollowButton } from "../components/ui/neu-follow-button";
 import { LineSidebar } from "../components/ui/line-sidebar/LineSidebar";
 import { ToolIcon } from "../components/tools/ToolIcon";
 import { CATEGORY_COLORS } from "../data/tools";
@@ -78,16 +79,14 @@ export default function Home() {
 
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link
+            <NeuFollowButton
+              label="Level Up"
+              hoverLabel="Let's go"
               to="/feed/hot-take"
-              className="rounded-sm border-2 border-yellow bg-yellow px-6 py-3 font-mono text-[13px] font-bold text-ink no-underline transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5"
-              style={{ boxShadow: "4px 4px 0 var(--coral)" }}
-            >
-              Level Up →
-            </Link>
+            />
             <Link
               to="/games"
-              className="rounded-sm border-2 border-line px-6 py-3 font-mono text-[13px] font-bold text-foreground no-underline transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 hover:border-foreground"
+              className="flex h-12 items-center rounded-sm border-2 border-line px-6 font-mono text-sm font-bold text-foreground no-underline transition-all hover:border-foreground"
             >
               Play a Game
             </Link>

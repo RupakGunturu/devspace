@@ -39,12 +39,13 @@ export function Header() {
         </nav>
         <div className="flex items-center gap-3">
           <AnimatedThemeToggler theme={theme} onThemeChange={setTheme} />
-          <div
-            className="rounded-sm bg-yellow px-3 py-1.5 font-mono text-[11px] font-bold text-ink"
-            style={{ transform: "rotate(-3deg)", boxShadow: "2px 2px 0 var(--coral)" }}
+          <Link
+            to="/feed/hot-take"
+            className="group relative rounded-sm bg-yellow px-3 py-1.5 font-mono text-[11px] font-bold text-ink no-underline transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_6px_16px_rgba(244,217,34,0.4)]"
+            style={{ transform: "rotate(-3deg)" }}
           >
-            Level Up
-          </div>
+            <span className="relative z-[1]">Level Up</span>
+          </Link>
         </div>
       </header>
       <div className="block sm:hidden">

@@ -2,13 +2,6 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { allStackBreakdowns } from "../data/stack-breakdowns";
 import { CursorHover } from "../components/core/cursor-hover";
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from "../components/ui/select";
 
 const PRODUCT_COLORS: Record<string, string> = {
   instagram: "#E1306C",
@@ -35,6 +28,8 @@ const ROTATIONS = [
 export default function StackBreakdownPage() {
   const breakdowns = allStackBreakdowns();
   const [activeTag, setActiveTag] = useState<string | null>(null);
+  const [showAll, setShowAll] = useState(false);
+  const VISIBLE_COUNT = 5;
 
   useEffect(() => {
     document.title = "Stack Breakdown — DevSpace";
@@ -43,6 +38,8 @@ export default function StackBreakdownPage() {
   const allTags = Array.from(
     new Set(breakdowns.flatMap((b) => b.tags))
   ).sort();
+  const visibleTags = showAll ? allTags : allTags.slice(0, VISIBLE_COUNT);
+  const hiddenCount = allTags.length - VISIBLE_COUNT;
 
   const filtered = activeTag
     ? breakdowns.filter((b) => b.tags.includes(activeTag))
@@ -87,17 +84,47 @@ export default function StackBreakdownPage() {
         <div className="mb-3 font-mono text-[11px] font-bold uppercase tracking-wide text-muted">
           Filter by tech
         </div>
-        <Select value={activeTag ?? "all"} onValueChange={(v) => setActiveTag(v === "all" ? null : v)}>
-          <SelectTrigger className="w-[200px]">
-            <SelectValue placeholder="All tech" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All tech</SelectItem>
-            {allTags.map((tag) => (
-              <SelectItem key={tag} value={tag}>{tag}</SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        <div className="flex flex-wrap gap-2">
+          <button
+            onClick={() => setActiveTag(null)}
+            className={`rounded-full border px-2.5 py-0.5 font-mono text-[11px] transition-colors ${
+              activeTag === null
+                ? "border-yellow bg-yellow text-ink"
+                : "border-line text-muted hover:border-yellow hover:text-yellow"
+            }`}
+          >
+            all
+          </button>
+          {visibleTags.map((tag) => (
+            <button
+              key={tag}
+              onClick={() => setActiveTag(activeTag === tag ? null : tag)}
+              className={`rounded-full border px-2.5 py-0.5 font-mono text-[11px] transition-colors ${
+                activeTag === tag
+                  ? "border-yellow bg-yellow text-ink"
+                  : "border-line text-muted hover:border-yellow hover:text-yellow"
+              }`}
+            >
+              {tag}
+            </button>
+          ))}
+          {!showAll && hiddenCount > 0 && (
+            <button
+              onClick={() => setShowAll(true)}
+              className="rounded-full border border-dashed border-line px-2.5 py-0.5 font-mono text-[11px] text-muted transition-colors hover:border-yellow hover:text-yellow"
+            >
+              +{hiddenCount} more
+            </button>
+          )}
+          {showAll && (
+            <button
+              onClick={() => setShowAll(false)}
+              className="rounded-full border border-dashed border-line px-2.5 py-0.5 font-mono text-[11px] text-muted transition-colors hover:border-yellow hover:text-yellow"
+            >
+              show less
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Product grid */}

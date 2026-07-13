@@ -5,6 +5,8 @@ import { ToolIcon } from "../components/tools/ToolIcon";
 import ToolSearchBar from "../components/ToolSearchBar";
 import { cn } from "@/lib/utils";
 import { CursorHover } from "../components/core/cursor-hover";
+import { usePagination } from "../hooks/use-pagination";
+import { PaginationBar } from "../components/PaginationBar";
 
 const COLOR_HEX: Record<string, string> = {
   css: "#3b82f6",
@@ -48,6 +50,8 @@ export default function ToolsIndex() {
     return result;
   }, [activeCategory, searchQuery]);
 
+  const { page, totalPages, paginatedItems, goTo } = usePagination(filteredTools);
+
   return (
     <section className="mx-auto max-w-6xl px-6 py-16 sm:px-8 sm:py-20">
       <SectionHead idx="01" title="All Tools" />
@@ -61,7 +65,7 @@ export default function ToolsIndex() {
         onCategoryChange={setActiveCategory}
       />
       <div className="mt-6 grid gap-6 sm:grid-cols-2 md:grid-cols-3">
-        {filteredTools.map((t, i) => (
+        {paginatedItems.map((t, i) => (
           <CursorHover label={t.name} color={COLOR_HEX[t.category]} key={t.slug}>
             <StickerCard
               icon={
@@ -87,6 +91,7 @@ export default function ToolsIndex() {
           </p>
         )}
       </div>
+      <PaginationBar page={page} totalPages={totalPages} onPageChange={goTo} />
     </section>
   );
 }

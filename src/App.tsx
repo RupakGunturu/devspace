@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { Header, Footer } from "./components/site";
 import ScrollToTop from "./components/ScrollToTop";
+import { CommandMenu } from "./components/CommandMenu";
 import Home from "./pages/Home";
 import Tools from "./pages/Tools";
 import ToolDetail from "./pages/ToolDetail";
@@ -21,6 +22,7 @@ function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex min-h-screen flex-col">
       <ScrollToTop />
+      <CommandMenu />
       <Header />
       <main className="flex-1">{children}</main>
       <Footer />
