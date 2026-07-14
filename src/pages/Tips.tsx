@@ -8,6 +8,9 @@ import { cn } from "@/lib/utils";
 import { CursorHover } from "../components/core/cursor-hover";
 import { usePagination } from "../hooks/use-pagination";
 import { PaginationBar } from "../components/PaginationBar";
+import { userActivity } from "../lib/userActivity";
+import { toast } from "@/components/ui/toaster";
+import { Bookmark } from "lucide-react";
 
 const COLOR_HEX: Record<string, string> = {
   "Coding Tips": "#3b82f6",
@@ -55,7 +58,19 @@ export const CATEGORY_COLORS: Record<string, { bg: string; darkBg: string; icon:
 
 function TipCard({ tip }: { tip: typeof tips[0] }) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isSaved, setIsSaved] = useState(() => userActivity.isTipSaved(tip.id));
   const colors = CATEGORY_COLORS[tip.category];
+
+  const toggleSave = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    try {
+      const result = await userActivity.toggleSavedTip(tip.id);
+      setIsSaved(result.isSaved);
+      toast.success(result.isSaved ? "Tip saved" : "Tip removed");
+    } catch {
+      toast.danger("Failed to save tip");
+    }
+  };
 
   return (
     <CursorHover label={tip.title} color={COLOR_HEX[tip.category]}>
@@ -82,7 +97,7 @@ function TipCard({ tip }: { tip: typeof tips[0] }) {
               className={cn("h-4 w-4", colors?.icon ?? "text-zinc-600")}
             />
           </div>
-          <div className="min-w-0">
+          <div className="min-w-0 flex-1">
             <h3 className="font-display text-sm font-bold leading-snug">
               {tip.title}
             </h3>
@@ -90,6 +105,20 @@ function TipCard({ tip }: { tip: typeof tips[0] }) {
               {tip.category}
             </span>
           </div>
+          <button
+            onClick={toggleSave}
+            className="shrink-0 rounded p-1 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800"
+            type="button"
+          >
+            <Bookmark
+              className={cn(
+                "h-4 w-4 transition-colors",
+                isSaved
+                  ? "fill-yellow text-yellow"
+                  : "text-muted hover:text-yellow",
+              )}
+            />
+          </button>
         </div>
 
         <AnimatePresence mode="wait">

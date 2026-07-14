@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from "react";
 import { authApi, type AuthUser } from "@/lib/api";
+import { mergeLocalActivityToBackend } from "@/lib/mergeActivity";
 
 interface AuthContextType {
   user: AuthUser | null;
@@ -42,12 +43,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const { token, user } = await authApi.login(email, password);
     localStorage.setItem("ds_token", token);
     setUser(user);
+    mergeLocalActivityToBackend().catch(() => {});
   }, []);
 
   const signup = useCallback(async (name: string, email: string, password: string) => {
     const { token, user } = await authApi.signup(name, email, password);
     localStorage.setItem("ds_token", token);
     setUser(user);
+    mergeLocalActivityToBackend().catch(() => {});
   }, []);
 
   const logout = useCallback(() => {

@@ -3,6 +3,7 @@ import { Suspense, useEffect } from "react";
 import { toolBySlug, CATEGORY_COLORS } from "../data/tools";
 import { getToolComponent } from "../components/tools/registry";
 import { ToolIcon } from "../components/tools/ToolIcon";
+import { userActivity } from "../lib/userActivity";
 import { cn } from "@/lib/utils";
 
 export default function ToolPage() {
@@ -12,6 +13,12 @@ export default function ToolPage() {
 
   useEffect(() => {
     document.title = tool ? `${tool.name} — DevSpace` : "Tool not found — DevSpace";
+  }, [tool]);
+
+  useEffect(() => {
+    if (tool) {
+      userActivity.logToolUse(tool.slug).catch(() => {});
+    }
   }, [tool]);
 
   if (!tool) {

@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { useAuth } from "@/components/AuthProvider";
 import { toast } from "@/components/ui/toaster";
+import { mergeLocalActivityToBackend } from "@/lib/mergeActivity";
 
 export default function AuthCallback() {
   const [searchParams] = useSearchParams();
@@ -16,6 +17,7 @@ export default function AuthCallback() {
       handled.current = true;
       localStorage.setItem("ds_token", token);
       refreshUser().then(() => {
+        mergeLocalActivityToBackend().catch(() => {});
         toast.success("Signed in with Google!");
         navigate("/");
       });

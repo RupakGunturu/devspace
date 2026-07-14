@@ -1,8 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { gameBySlug } from "../data/games";
-import { useAuth } from "../components/AuthProvider";
-import { activityApi } from "../lib/api";
+import { userActivity } from "../lib/userActivity";
 import { BugFinder } from "../components/games/BugFinder";
 import { DevWordle } from "../components/games/DevWordle";
 import { DevTrivia } from "../components/games/DevTrivia";
@@ -26,7 +25,6 @@ export default function GamePage() {
   const { slug } = useParams<{ slug: string }>();
   const game = gameBySlug(slug!);
   const Component = game ? REGISTRY[game.slug] : undefined;
-  const { user } = useAuth();
   const [isFav, setIsFav] = useState(false);
 
   useEffect(() => {
@@ -34,21 +32,21 @@ export default function GamePage() {
   }, [game]);
 
   useEffect(() => {
-    if (!user || !game) return;
-    activityApi
+    if (!game) return;
+    userActivity
       .get()
       .then((data) => {
         setIsFav(data.favorites.some((f) => f.type === "game" && f.slug === game.slug));
       })
       .catch(() => {});
-  }, [user, game]);
+  }, [game]);
 
   const toggleFav = async () => {
-    if (!user || !game) return;
+    if (!game) return;
     try {
-      await activityApi.toggleFavorite("game", game.slug);
-      setIsFav((f) => !f);
-      toast.success(isFav ? "Removed from favorites" : "Added to favorites");
+      const result = await userActivity.toggleFavorite("game", game.slug);
+      setIsFav(result.isFavorited);
+      toast.success(result.isFavorited ? "Added to favorites" : "Removed from favorites");
     } catch {
       toast.danger("Failed to update favorite");
     }
@@ -76,18 +74,16 @@ export default function GamePage() {
           <h1 className="mt-3 font-display text-4xl font-extrabold">{game.name}</h1>
           <p className="mt-2 text-muted">{game.description}</p>
         </div>
-        {user && (
-          <button
-            onClick={toggleFav}
-            className={`mt-2 shrink-0 rounded-md border-[1.5px] px-3 py-1.5 text-xs font-semibold transition-all ${
-              isFav
-                ? "border-coral bg-coral/10 text-coral"
-                : "border-line bg-paper-dim text-muted hover:border-yellow hover:text-yellow"
-            }`}
-          >
-            {isFav ? "★ Saved" : "☆ Save"}
-          </button>
-        )}
+        <button
+          onClick={toggleFav}
+          className={`mt-2 shrink-0 rounded-md border-[1.5px] px-3 py-1.5 text-xs font-semibold transition-all ${
+            isFav
+              ? "border-coral bg-coral/10 text-coral"
+              : "border-line bg-paper-dim text-muted hover:border-yellow hover:text-yellow"
+          }`}
+        >
+          {isFav ? "★ Saved" : "☆ Save"}
+        </button>
       </div>
       <div className="rounded-md border-2 border-line bg-paper p-6 text-foreground">
         {Component ? <Component /> : <div className="text-muted">Coming soon.</div>}
