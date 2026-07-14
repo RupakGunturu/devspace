@@ -18,7 +18,15 @@ export function Header() {
             aria-label="Open menu"
             type="button"
           >
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 18 18"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            >
               <line x1="2" y1="4" x2="16" y2="4" />
               <line x1="2" y1="9" x2="16" y2="9" />
               <line x1="2" y1="14" x2="16" y2="14" />
@@ -38,7 +46,7 @@ export function Header() {
           <NavItem to="/about">About</NavItem>
         </nav>
         <div className="flex items-center gap-3">
-          <AnimatedThemeToggler theme={theme} onThemeChange={setTheme} />
+          <AnimatedThemeToggler className="text-text" theme={theme} onThemeChange={setTheme} />
           <Link
             to="/feed/hot-take"
             className="group relative rounded-sm bg-yellow px-3 py-1.5 font-mono text-[11px] font-bold text-ink no-underline transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_6px_16px_rgba(244,217,34,0.4)]"
@@ -54,7 +62,7 @@ export function Header() {
           hamburger
           isFixed
           position="right"
-          colors={["#1a1a2e", "#2a2a4a"]}
+          colors={["var(--paper-dim)", "var(--paper)"]}
           items={[
             { label: "Feed", link: "/" },
             { label: "Stack Breakdown", link: "/stack-breakdown" },
@@ -95,7 +103,8 @@ function NavItem({ to, children }: { to: string; children: ReactNode }) {
 export function Footer() {
   return (
     <footer className="border-t-2 border-line px-8 py-10 text-center font-mono text-xs text-muted">
-      Dev<span className="text-yellow">/</span>Space — From First Line of Code to Production , Built by a Student, For Students & Developers
+      Dev<span className="text-yellow">/</span>Space — From First Line of Code to Production , Built
+      by a Student, For Students & Developers
     </footer>
   );
 }
@@ -109,10 +118,7 @@ export function Marquee({ items }: { items: string[] }) {
     >
       <div className="inline-flex whitespace-nowrap animate-marquee">
         {doubled.map((s, i) => (
-          <span
-            key={i}
-            className="px-6 font-display text-lg font-extrabold uppercase text-ink"
-          >
+          <span key={i} className="px-6 font-display text-lg font-extrabold uppercase text-ink">
             ★ {s}
           </span>
         ))}
@@ -121,13 +127,21 @@ export function Marquee({ items }: { items: string[] }) {
   );
 }
 
-export function SectionHead({ idx, title, color = "yellow" }: { idx: string; title: string; color?: "yellow" | "coral" }) {
-  const colorClasses = color === "coral"
-    ? "border-coral text-coral"
-    : "border-yellow text-yellow";
+export function SectionHead({
+  idx,
+  title,
+  color = "yellow",
+}: {
+  idx: string;
+  title: string;
+  color?: "yellow" | "coral";
+}) {
+  const colorClasses = color === "coral" ? "border-coral text-coral" : "border-yellow text-yellow";
   return (
     <div className="mb-8 flex items-baseline gap-4">
-      <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 font-display text-sm font-extrabold ${colorClasses}`}>
+      <div
+        className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 font-display text-sm font-extrabold ${colorClasses}`}
+      >
         {idx}
       </div>
       <h2 className="font-display text-2xl font-bold sm:text-3xl">{title}</h2>
@@ -135,7 +149,14 @@ export function SectionHead({ idx, title, color = "yellow" }: { idx: string; tit
   );
 }
 
-const ROTATIONS = ["-rotate-[1.5deg]", "rotate-[1deg]", "-rotate-[0.5deg]", "rotate-[1.5deg]", "-rotate-[1deg]", "rotate-[0.5deg]"];
+const ROTATIONS = [
+  "-rotate-[1.5deg]",
+  "rotate-[1deg]",
+  "-rotate-[0.5deg]",
+  "rotate-[1.5deg]",
+  "-rotate-[1deg]",
+  "rotate-[0.5deg]",
+];
 
 export function StickerCard({
   icon,
@@ -152,9 +173,7 @@ export function StickerCard({
 }) {
   const rot = ROTATIONS[index % ROTATIONS.length];
   const inner = (
-    <div
-      className={`sticker sticker-hover block rounded-md bg-paper p-6 text-foreground ${rot}`}
-    >
+    <div className={`sticker sticker-hover block rounded-md bg-paper p-6 text-foreground ${rot}`}>
       <div className="mb-3">
         {typeof icon === "string" ? (
           <div className="text-3xl leading-none">{icon}</div>

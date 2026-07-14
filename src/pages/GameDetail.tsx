@@ -4,11 +4,19 @@ import { gameBySlug } from "../data/games";
 import { BugFinder } from "../components/games/BugFinder";
 import { DevWordle } from "../components/games/DevWordle";
 import { DevTrivia } from "../components/games/DevTrivia";
+import { TechMemory } from "../components/games/TechMemory";
+import { StackMatcher } from "../components/games/StackMatcher";
+import { HttpRoulette } from "../components/games/HttpRoulette";
+import { BinaryRace } from "../components/games/BinaryRace";
 
 const REGISTRY: Record<string, React.ComponentType> = {
   "bug-finder": BugFinder,
-  "devwordle": DevWordle,
+  devwordle: DevWordle,
   "dev-trivia": DevTrivia,
+  "tech-memory": TechMemory,
+  "stack-matcher": StackMatcher,
+  "http-roulette": HttpRoulette,
+  "binary-race": BinaryRace,
 };
 
 export default function GamePage() {
@@ -24,7 +32,9 @@ export default function GamePage() {
     return (
       <div className="mx-auto max-w-2xl px-6 py-24 text-center">
         <h1 className="font-display text-3xl font-bold">Game not found</h1>
-        <Link to="/games" className="mt-6 inline-block font-mono text-sm text-yellow">← back to games</Link>
+        <Link to="/games" className="mt-6 inline-block font-mono text-sm text-yellow">
+          ← back to games
+        </Link>
       </div>
     );
   }

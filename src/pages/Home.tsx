@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useMemo, useState, useEffect } from "react";
+import { Bug, LetterText, Brain, Layers, Building2, Globe, Binary } from "lucide-react";
 import { Marquee, SectionHead, StickerCard } from "../components/site";
 import { FeedItem } from "../components/FeedItem";
 import { TOOLS } from "../data/tools";
@@ -16,7 +17,26 @@ import { ToolIcon } from "../components/tools/ToolIcon";
 import { CATEGORY_COLORS } from "../data/tools";
 import { cn } from "@/lib/utils";
 
+const GAME_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
+  "bug-finder": Bug,
+  devwordle: LetterText,
+  "dev-trivia": Brain,
+  "tech-memory": Layers,
+  "stack-matcher": Building2,
+  "http-roulette": Globe,
+  "binary-race": Binary,
+};
+
 const HIDDEN_SERIES = ["bug-of-the-week", "framework-wars", "behind-the-error", "changelog"];
+
+function shufflePick<T>(arr: T[], n: number): T[] {
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy.slice(0, n);
+}
 
 export default function Home() {
   useEffect(() => {
@@ -34,7 +54,7 @@ export default function Home() {
   }, [activeSeries]);
 
   const featuredTools = TOOLS.slice(0, 3);
-  const featuredGames = GAMES;
+  const featuredGames = useMemo(() => shufflePick(GAMES, 3), []);
   const featuredTips = tips.slice(0, 3);
 
   return (
@@ -74,16 +94,12 @@ export default function Home() {
             />
           </h1>
           <p className="mt-7 max-w-lg text-base text-muted sm:text-lg">
-            Built by a developer who was tired of bloated tools, boring tutorials, and content that never gets to the point. 
-            DevSpace gives you tools that just work, games that teach by doing, and real talk about the code we actually write.
-
+            Built by a developer who was tired of bloated tools, boring tutorials, and content that
+            never gets to the point. DevSpace gives you tools that just work, games that teach by
+            doing, and real talk about the code we actually write.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <NeuFollowButton
-              label="Level Up"
-              hoverLabel="Let's go"
-              to="/feed/hot-take"
-            />
+            <NeuFollowButton label="Level Up" hoverLabel="Let's go" to="/feed/hot-take" />
             <Link
               to="/games"
               className="flex h-12 items-center rounded-sm border-2 border-line px-6 font-mono text-sm font-bold text-foreground no-underline transition-all hover:border-foreground"
@@ -125,11 +141,13 @@ export default function Home() {
             <StickerCard
               key={t.slug}
               icon={
-                <div className={cn(
-                  "flex h-10 w-10 items-center justify-center rounded-full",
-                  CATEGORY_COLORS[t.category]?.bg ?? "bg-zinc-100",
-                  CATEGORY_COLORS[t.category]?.darkBg ?? "dark:bg-zinc-800",
-                )}>
+                <div
+                  className={cn(
+                    "flex h-10 w-10 items-center justify-center rounded-full",
+                    CATEGORY_COLORS[t.category]?.bg ?? "bg-zinc-100",
+                    CATEGORY_COLORS[t.category]?.darkBg ?? "dark:bg-zinc-800",
+                  )}
+                >
                   <ToolIcon name={t.icon} className={CATEGORY_COLORS[t.category]?.icon} />
                 </div>
               }
@@ -151,17 +169,28 @@ export default function Home() {
           </Link>
         </div>
         <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
-          {featuredGames.map((g, i) => (
-            <StickerCard
-              key={g.slug}
-              icon={g.icon}
-              title={g.name}
-              index={i + 1}
-              to={`/games/${g.slug}`}
-            >
-              {g.tagline}
-            </StickerCard>
-          ))}
+          {featuredGames.map((g, i) => {
+            const Icon = GAME_ICONS[g.slug];
+            return (
+              <StickerCard
+                key={g.slug}
+                icon={
+                  Icon ? (
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-coral/10">
+                      <Icon className="h-5 w-5 text-coral" />
+                    </div>
+                  ) : (
+                    g.icon
+                  )
+                }
+                title={g.name}
+                index={i + 1}
+                to={`/games/${g.slug}`}
+              >
+                {g.tagline}
+              </StickerCard>
+            );
+          })}
         </div>
       </section>
 
@@ -179,12 +208,17 @@ export default function Home() {
               <StickerCard
                 key={tip.id}
                 icon={
-                  <div className={cn(
-                    "flex h-10 w-10 items-center justify-center rounded-full",
-                    colors?.bg ?? "bg-zinc-100",
-                    colors?.darkBg ?? "dark:bg-zinc-800",
-                  )}>
-                    <ToolIcon name={tip.icon} className={cn("h-5 w-5", colors?.icon ?? "text-zinc-600")} />
+                  <div
+                    className={cn(
+                      "flex h-10 w-10 items-center justify-center rounded-full",
+                      colors?.bg ?? "bg-zinc-100",
+                      colors?.darkBg ?? "dark:bg-zinc-800",
+                    )}
+                  >
+                    <ToolIcon
+                      name={tip.icon}
+                      className={cn("h-5 w-5", colors?.icon ?? "text-zinc-600")}
+                    />
                   </div>
                 }
                 title={tip.title}
@@ -209,17 +243,19 @@ export default function Home() {
           <div className="hidden shrink-0 lg:block">
             <LineSidebar
               items={visibleSeries.map((s) => ({ label: s.label, slug: s.slug, icon: s.icon }))}
-               activeIndex={
-                 activeSeries != null ? visibleSeries.findIndex((s) => s.slug === activeSeries) : -1
+              activeIndex={
+                activeSeries != null ? visibleSeries.findIndex((s) => s.slug === activeSeries) : -1
               }
-              onItemClick={(_i, slug) =>
-                setActiveSeries(slug === activeSeries ? null : slug)
-              }
+              onItemClick={(_i, slug) => setActiveSeries(slug === activeSeries ? null : slug)}
             />
           </div>
           <div className="min-w-0 flex-1">
             <div className="lg:hidden">
-              <SeriesFilter series={visibleSeries} active={activeSeries} onChange={setActiveSeries} />
+              <SeriesFilter
+                series={visibleSeries}
+                active={activeSeries}
+                onChange={setActiveSeries}
+              />
             </div>
             <div>
               {posts.length === 0 ? (
@@ -242,13 +278,23 @@ export default function Home() {
   );
 }
 
-function SeriesFilter({ series, active, onChange }: { series: typeof SERIES; active: string | null; onChange: (v: string | null) => void }) {
+function SeriesFilter({
+  series,
+  active,
+  onChange,
+}: {
+  series: typeof SERIES;
+  active: string | null;
+  onChange: (v: string | null) => void;
+}) {
   return (
     <div className="mb-6 flex flex-wrap gap-2">
       <button
         onClick={() => onChange(null)}
         className={`rounded-full border-2 px-3 py-1 font-mono text-[11px] ${
-          active === null ? "border-yellow bg-yellow text-ink" : "border-line text-muted hover:border-yellow"
+          active === null
+            ? "border-yellow bg-yellow text-ink"
+            : "border-line text-muted hover:border-yellow"
         }`}
       >
         all
@@ -258,7 +304,9 @@ function SeriesFilter({ series, active, onChange }: { series: typeof SERIES; act
           key={s.slug}
           onClick={() => onChange(s.slug)}
           className={`rounded-full border-2 px-3 py-1 font-mono text-[11px] ${
-            active === s.slug ? "border-yellow bg-yellow text-ink" : "border-line text-muted hover:border-yellow"
+            active === s.slug
+              ? "border-yellow bg-yellow text-ink"
+              : "border-line text-muted hover:border-yellow"
           }`}
         >
           {s.icon} {s.label}
