@@ -32,7 +32,7 @@ export function FeedItem({ post }: { post: Post }) {
       >
         {post.externalUrl ? (
           <img
-            src={`https://www.google.com/s2/favicons?domain=${new URL(post.externalUrl).hostname}&sz=32`}
+            src={`https://icon.horse/icon/${new URL(post.externalUrl).hostname}`}
             alt=""
             className="h-6 w-6 rounded transition-transform group-hover:scale-110 group-hover:rotate-[12deg]"
             onError={(e) => {

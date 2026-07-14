@@ -1,13 +1,39 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useRef, type ReactNode } from "react";
 import { useTheme } from "./ThemeProvider";
+import { useAuth } from "./AuthProvider";
 import { AnimatedThemeToggler } from "./ui/animated-theme-toggler";
 import { StaggeredMenu } from "./ui/staggered-menu/StaggeredMenu";
 import type { StaggeredMenuHandle } from "./ui/staggered-menu/StaggeredMenu";
+import ProfileDropdown from "./ui/profile-dropdown";
 
 export function Header() {
   const { theme, setTheme } = useTheme();
+  const { user, logout } = useAuth();
   const menuRef = useRef<StaggeredMenuHandle>(null);
+
+  const mobileItems = user
+    ? [
+        { label: "Feed", link: "/" },
+        { label: "Stack Breakdown", link: "/stack-breakdown" },
+        { label: "Tools", link: "/tools" },
+        { label: "Sheets", link: "/cheat-sheets" },
+        { label: "Games", link: "/games" },
+        { label: "Tips", link: "/tips" },
+        { label: "Profile", link: "/profile" },
+        { label: "About", link: "/about" },
+      ]
+    : [
+        { label: "Feed", link: "/" },
+        { label: "Stack Breakdown", link: "/stack-breakdown" },
+        { label: "Tools", link: "/tools" },
+        { label: "Sheets", link: "/cheat-sheets" },
+        { label: "Games", link: "/games" },
+        { label: "Tips", link: "/tips" },
+        { label: "Sign In", link: "/login" },
+        { label: "About", link: "/about" },
+      ];
+
   return (
     <>
       <header className="sticky top-0 z-20 flex items-center justify-between border-b-2 border-line bg-ink/90 px-4 py-4 backdrop-blur sm:px-8">
@@ -47,13 +73,16 @@ export function Header() {
         </nav>
         <div className="flex items-center gap-3">
           <AnimatedThemeToggler className="text-text" theme={theme} onThemeChange={setTheme} />
-          <Link
-            to="/feed/hot-take"
-            className="group relative rounded-sm bg-yellow px-3 py-1.5 font-mono text-[11px] font-bold text-ink no-underline transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_6px_16px_rgba(244,217,34,0.4)]"
-            style={{ transform: "rotate(-3deg)" }}
-          >
-            <span className="relative z-[1]">Level Up</span>
-          </Link>
+          {user ? (
+            <ProfileDropdown user={user} onLogout={logout} />
+          ) : (
+            <Link
+              to="/login"
+              className="rounded-sm bg-yellow px-3 py-1.5 font-mono text-[11px] font-bold text-ink no-underline transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_6px_16px_rgba(244,217,34,0.4)]"
+            >
+              Sign In
+            </Link>
+          )}
         </div>
       </header>
       <div className="block sm:hidden">
@@ -63,15 +92,7 @@ export function Header() {
           isFixed
           position="right"
           colors={["var(--paper-dim)", "var(--paper)"]}
-          items={[
-            { label: "Feed", link: "/" },
-            { label: "Stack Breakdown", link: "/stack-breakdown" },
-            { label: "Tools", link: "/tools" },
-            { label: "Sheets", link: "/cheat-sheets" },
-            { label: "Games", link: "/games" },
-            { label: "Tips", link: "/tips" },
-            { label: "About", link: "/about" },
-          ]}
+          items={mobileItems}
           accentColor="#f4d922"
           menuButtonColor="#f4d922"
           openMenuButtonColor="#f4d922"

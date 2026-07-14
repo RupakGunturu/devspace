@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { cn } from "@/lib/utils";
+import SpotlightCards from "@/components/ui/spotlight-cards";
 
 export default function About() {
   useEffect(() => {
@@ -154,6 +155,11 @@ export default function About() {
               tell us what's confusing.
             </p>
           </div>
+
+          <div className="mt-12">
+            <SpotlightCards />
+          </div>
+
           <div className="mt-12 border-t-2 border-dashed border-line pt-6" id="DevSpace-details">
             <div className="font-mono text-xs text-muted">DevSpace</div>
             <div className="mt-2 grid grid-cols-2 gap-4 font-mono text-sm">

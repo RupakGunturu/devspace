@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import { cn } from "@/lib/utils";
+import { useSaveGameScore } from "@/hooks/useSaveGameScore";
 
 interface Option {
   title: string;
@@ -352,6 +353,7 @@ function shuffle<T>(a: T[]): T[] {
 const SPIN_CODES = [200, 301, 404, 500, 201, 403, 302, 204, 429, 503, 400, 401, 304, 410, 422, 502];
 
 export function HttpRoulette() {
+  const { save } = useSaveGameScore();
   const [phase, setPhase] = useState<"intro" | "game" | "end">("intro");
   const [score, setScore] = useState(0);
   const [round, setRound] = useState(0);
@@ -491,10 +493,11 @@ export function HttpRoulette() {
     if (round + 1 >= TOTAL) {
       clearTimer();
       setPhase("end");
+      save("http-roulette", score, bestStreak);
     } else {
       setRound((r) => r + 1);
     }
-  }, [round, clearTimer]);
+  }, [round, clearTimer, score, bestStreak, save]);
 
   const timeStr = `${timeLeft}`;
   const timerPct = (timeLeft / SEC) * 100;

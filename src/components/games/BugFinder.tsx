@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useSaveGameScore } from "@/hooks/useSaveGameScore";
 
 type Snippet = {
   lines: string[];
@@ -94,6 +95,7 @@ const SNIPPETS: Snippet[] = [
 ];
 
 export function BugFinder() {
+  const { save } = useSaveGameScore();
   const [round, setRound] = useState(0);
   const [snippetIdx, setSnippetIdx] = useState(() => Math.floor(Math.random() * SNIPPETS.length));
   const [timeLeft, setTimeLeft] = useState(30);
@@ -124,6 +126,7 @@ export function BugFinder() {
     if (lineIdx === snippet.bug) {
       setScore((s) => s + Math.max(10, timeLeft * 5));
       setStatus("won");
+      save("bug-finder", Math.max(10, timeLeft * 5), 0);
     } else {
       setStatus("lost");
     }

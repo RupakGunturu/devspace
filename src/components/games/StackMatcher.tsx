@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import { cn } from "@/lib/utils";
+import { useSaveGameScore } from "@/hooks/useSaveGameScore";
 
 interface Option {
   label: string;
@@ -330,6 +331,7 @@ function TechBadge({ tech }: { tech: string }) {
 }
 
 export function StackMatcher() {
+  const { save } = useSaveGameScore();
   const [phase, setPhase] = useState<"intro" | "game" | "end">("intro");
   const [score, setScore] = useState(0);
   const [round, setRound] = useState(0);
@@ -432,10 +434,11 @@ export function StackMatcher() {
     if (round + 1 >= TOTAL) {
       clearTimer();
       setPhase("end");
+      save("stack-matcher", score, bestStreak);
     } else {
       setRound((r) => r + 1);
     }
-  }, [round, clearTimer]);
+  }, [round, clearTimer, score, bestStreak, save]);
 
   const timeStr = `${timeLeft}`;
   const timerPct = (timeLeft / SEC) * 100;

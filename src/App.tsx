@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import { Header, Footer } from "./components/site";
 import ScrollToTop from "./components/ScrollToTop";
 import { CommandMenu } from "./components/CommandMenu";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 import Home from "./pages/Home";
 import Tools from "./pages/Tools";
 import ToolDetail from "./pages/ToolDetail";
@@ -17,6 +18,12 @@ import CheatSheets from "./pages/CheatSheets";
 import CheatSheetDetail from "./pages/CheatSheetDetail";
 import Tips from "./pages/Tips";
 import NotFound from "./pages/NotFound";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
+import AuthCallback from "./pages/AuthCallback";
+import Profile from "./pages/Profile";
 
 function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -48,6 +55,19 @@ export default function App() {
         <Route path="/cheat-sheets" element={<CheatSheets />} />
         <Route path="/cheat-sheets/:id" element={<CheatSheetDetail />} />
         <Route path="/tips" element={<Tips />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/auth/callback" element={<AuthCallback />} />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Layout>

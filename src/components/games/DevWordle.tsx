@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { useSaveGameScore } from "@/hooks/useSaveGameScore";
 
 const WORDS = [
   "REACT", "ASYNC", "MERGE", "BUILD", "CACHE", "STACK", "QUEUE", "MODEL",
@@ -39,12 +40,20 @@ function tileClass(v?: Verdict) {
 const KEYS = ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"];
 
 export function DevWordle() {
+  const { save } = useSaveGameScore();
   const [answer, setAnswer] = useState(() => WORDS[Math.floor(Math.random() * WORDS.length)]);
   const [guesses, setGuesses] = useState<string[]>([]);
   const [current, setCurrent] = useState("");
   const [message, setMessage] = useState("");
 
   const done = guesses.includes(answer) || guesses.length >= 6;
+
+  useEffect(() => {
+    if (done) {
+      const won = guesses.includes(answer);
+      save("devwordle", won ? 100 + (6 - guesses.length) * 50 : 0, 0);
+    }
+  }, [done]);
 
   const keyState = useMemo(() => {
     const state: Record<string, Verdict> = {};

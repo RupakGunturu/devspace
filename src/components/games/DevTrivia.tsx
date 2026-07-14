@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import { cn } from "@/lib/utils";
+import { useSaveGameScore } from "@/hooks/useSaveGameScore";
 
 type Difficulty = "mixed" | "easy" | "hard";
 
@@ -65,6 +66,7 @@ const SEC = 18;
 const TOTAL = 10;
 
 export function DevTrivia() {
+  const { save } = useSaveGameScore();
   const [phase, setPhase] = useState<"intro" | "game" | "end">("intro");
   const [selectedDiff, setSelectedDiff] = useState<Difficulty>("mixed");
   const [order, setOrder] = useState<Question[]>([]);
@@ -186,10 +188,11 @@ export function DevTrivia() {
   const nextRound = useCallback(() => {
     if (round + 1 >= TOTAL) {
       setPhase("end");
+      save("dev-trivia", score, bestStreak);
     } else {
       setRound((r) => r + 1);
     }
-  }, [round]);
+  }, [round, score, bestStreak, save]);
 
   const restartGame = useCallback(() => {
     startGame();

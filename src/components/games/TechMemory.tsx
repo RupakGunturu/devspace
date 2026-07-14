@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import { cn } from "@/lib/utils";
+import { useSaveGameScore } from "@/hooks/useSaveGameScore";
 
 type Difficulty = "easy" | "medium" | "hard";
 
@@ -136,6 +137,7 @@ function getStars(pairs: number, moves: number) {
 }
 
 export function TechMemory() {
+  const { save } = useSaveGameScore();
   const [phase, setPhase] = useState<"intro" | "game" | "win">("intro");
   const [diff, setDiff] = useState<Difficulty>("easy");
   const [cards, setCards] = useState<CardData[]>([]);
@@ -283,6 +285,10 @@ export function TechMemory() {
 
   const score = useMemo(() => calcScore(totalPairs, moves, elapsed), [totalPairs, moves, elapsed]);
   const stars = useMemo(() => getStars(totalPairs, moves), [totalPairs, moves]);
+
+  useEffect(() => {
+    if (phase === "win") save("tech-memory", score, 0);
+  }, [phase, score, save]);
 
   const winMessages = useMemo(() => {
     const msgs = {

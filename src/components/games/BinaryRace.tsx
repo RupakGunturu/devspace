@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { cn } from "@/lib/utils";
+import { useSaveGameScore } from "@/hooks/useSaveGameScore";
 
 const TOTAL = 10;
 const SEC = 20;
@@ -38,6 +39,7 @@ function generateNumbers(): number[] {
 }
 
 export function BinaryRace() {
+  const { save } = useSaveGameScore();
   const [phase, setPhase] = useState<"intro" | "game" | "end">("intro");
   const [score, setScore] = useState(0);
   const [round, setRound] = useState(0);
@@ -179,10 +181,11 @@ export function BinaryRace() {
   const nextRound = useCallback(() => {
     if (round + 1 >= TOTAL) {
       setPhase("end");
+      save("binary-race", score, bestStreak);
     } else {
       setRound((r) => r + 1);
     }
-  }, [round]);
+  }, [round, score, bestStreak, save]);
 
   const handleInput = useCallback((val: string) => {
     const cleaned = val.replace(/[^01]/g, "").slice(0, 16);

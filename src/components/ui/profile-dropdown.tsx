@@ -1,5 +1,5 @@
-import { CreditCard, FileText, LogOut, Settings, User } from "lucide-react";
-import { Link } from "react-router-dom";
+import { LogOut, Settings, User } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
 import * as React from "react";
 import {
   DropdownMenu,
@@ -9,101 +9,86 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import Gemini from "@/components/ui/icons/gemini";
-
-interface Profile {
-  name: string;
-  email: string;
-  avatar: string;
-  subscription?: string;
-  model?: string;
-}
+import { toast } from "@/components/ui/toaster";
+import type { AuthUser } from "@/lib/api";
 
 interface MenuItem {
   label: string;
   value?: string;
   href: string;
   icon: React.ReactNode;
-  external?: boolean;
 }
 
-const SAMPLE_PROFILE_DATA: Profile = {
-  name: "Eugene An",
-  email: "eugene@kokonutui.com",
-  avatar:
-    "https://ferf1mheo22r9ira.public.blob.vercel-storage.com/profile-mjss82WnWBRO86MHHGxvJ2TVZuyrDv.jpeg",
-  subscription: "PRO",
-  model: "Gemini 2.0 Flash",
-};
-
-interface ProfileDropdownProps extends React.HTMLAttributes<HTMLDivElement> {
-  data?: Profile;
+interface ProfileDropdownProps {
+  user: AuthUser;
+  onLogout?: () => void;
+  className?: string;
 }
 
 export default function ProfileDropdown({
-  data = SAMPLE_PROFILE_DATA,
+  user,
+  onLogout,
   className,
-  ...props
 }: ProfileDropdownProps) {
   const [isOpen, setIsOpen] = React.useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    onLogout?.();
+    toast.danger("Logged out");
+    navigate("/");
+  };
+
+  const initials = user.name
+    .split(" ")
+    .map((n) => n[0])
+    .join("")
+    .toUpperCase()
+    .slice(0, 2);
+
   const menuItems: MenuItem[] = [
     {
       label: "Profile",
-      href: "#",
+      href: "/profile",
       icon: <User className="h-4 w-4" />,
     },
     {
-      label: "Model",
-      value: data.model,
-      href: "#",
-      icon: <Gemini className="h-4 w-4" />,
-    },
-    {
-      label: "Subscription",
-      value: data.subscription,
-      href: "#",
-      icon: <CreditCard className="h-4 w-4" />,
-    },
-    {
       label: "Settings",
-      href: "#",
+      href: "/settings",
       icon: <Settings className="h-4 w-4" />,
-    },
-    {
-      label: "Terms & Policies",
-      href: "#",
-      icon: <FileText className="h-4 w-4" />,
-      external: true,
     },
   ];
 
   return (
-    <div className={cn("relative", className)} {...props}>
+    <div className={cn("relative", className)} {...(!className ? {} : {})}>
       <DropdownMenu onOpenChange={setIsOpen}>
         <div className="group relative">
           <DropdownMenuTrigger asChild>
             <button
-              className="flex items-center gap-16 rounded-2xl border border-zinc-200/60 bg-white p-3 transition-all duration-200 hover:border-zinc-300 hover:bg-zinc-50/80 hover:shadow-sm focus:outline-none dark:border-zinc-800/60 dark:bg-zinc-900 dark:hover:border-zinc-700 dark:hover:bg-zinc-800/40"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-zinc-200/60 bg-white transition-all duration-200 hover:border-zinc-300 hover:shadow-sm focus:outline-none dark:border-zinc-800/60 dark:bg-zinc-900 dark:hover:border-zinc-700"
               type="button"
             >
-              <div className="flex-1 text-left">
-                <div className="font-medium text-sm text-zinc-900 leading-tight tracking-tight dark:text-zinc-100">
-                  {data.name}
-                </div>
-                <div className="text-xs text-zinc-500 leading-tight tracking-tight dark:text-zinc-400">
-                  {data.email}
-                </div>
-              </div>
               <div className="relative">
-                <div className="h-10 w-10 rounded-full bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400 p-0.5">
+                <div className="h-8 w-8 rounded-full bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400 p-[2px]">
                   <div className="h-full w-full overflow-hidden rounded-full bg-white dark:bg-zinc-900">
-                    <img
-                      alt={data.name}
-                      className="h-full w-full rounded-full object-cover"
-                      height={36}
-                      src={data.avatar}
-                      width={36}
-                    />
+                    {user.avatar ? (
+                      <img
+                        alt={user.name}
+                        className="h-full w-full rounded-full object-cover"
+                        height={30}
+                        src={user.avatar}
+                        width={30}
+                        onError={(e) => {
+                          e.currentTarget.style.display = "none";
+                          e.currentTarget.nextElementSibling?.classList.remove("hidden");
+                        }}
+                      />
+                    ) : null}
+                    <div
+                      className={`flex h-full w-full items-center justify-center rounded-full bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400 text-[11px] font-bold text-white ${user.avatar ? "hidden" : ""}`}
+                    >
+                      {initials}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -141,7 +126,7 @@ export default function ProfileDropdown({
 
           <DropdownMenuContent
             align="end"
-            className="data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 w-64 origin-top-right rounded-2xl border border-zinc-200/60 bg-white/95 p-2 shadow-xl shadow-zinc-900/5 backdrop-blur-sm data-[state=closed]:animate-out data-[state=open]:animate-in dark:border-zinc-800/60 dark:bg-zinc-900/95 dark:shadow-zinc-950/20"
+            className="data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 w-56 max-sm:w-48 origin-top-right rounded-2xl border border-zinc-200/60 bg-white/95 p-2 shadow-xl shadow-zinc-900/5 backdrop-blur-sm data-[state=closed]:animate-out data-[state=open]:animate-in dark:border-zinc-800/60 dark:bg-zinc-900/95 dark:shadow-zinc-950/20"
             sideOffset={4}
           >
             <div className="space-y-1">
@@ -181,6 +166,7 @@ export default function ProfileDropdown({
             <DropdownMenuItem asChild>
               <button
                 className="group flex w-full cursor-pointer items-center gap-3 rounded-xl border border-transparent bg-red-500/10 p-3 transition-all duration-200 hover:border-red-500/30 hover:bg-red-500/20 hover:shadow-sm"
+                onClick={handleLogout}
                 type="button"
               >
                 <LogOut className="h-4 w-4 text-red-500 group-hover:text-red-600" />

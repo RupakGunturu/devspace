@@ -71,7 +71,7 @@ export default function Home() {
           <div className="mb-5 font-mono text-xs uppercase tracking-widest text-coral">
             ▸ weekly dev zine — student built
           </div>
-          <h1 className="font-display text-5xl font-extrabold leading-[0.98] tracking-tight sm:text-6xl md:text-7xl">
+          <h1 className="font-display text-4xl font-extrabold leading-[0.98] tracking-tight sm:text-5xl md:text-6xl">
             Build stuff.
             <br />
             Break stuff.
@@ -79,7 +79,7 @@ export default function Home() {
             <Shuffle
               text="Learn faster."
               tag="span"
-              className="inline-block bg-yellow px-3 text-ink"
+              className="inline-block bg-yellow px-2 text-ink sm:px-3"
               style={{ transform: "rotate(-1deg)" }}
               shuffleDirection="right"
               duration={0.35}
