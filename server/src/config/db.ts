@@ -8,9 +8,7 @@ export async function connectDB() {
   try {
     await mongoose.connect(config.mongoUri);
     connected = true;
-    console.log("MongoDB connected");
-  } catch (err) {
-    console.error("MongoDB connection error:", err);
+  } catch {
     process.exit(1);
   }
 }

@@ -145,8 +145,8 @@ export async function signup(req: Request, res: Response) {
       token,
       user: { id: user._id, name: user.name, email: user.email, avatar: user.avatar, provider: user.provider },
     });
-  } catch (err: any) {
-    res.status(500).json({ error: err.message || "Signup failed" });
+  } catch {
+    res.status(500).json({ error: "Signup failed" });
   }
 }
 
@@ -212,8 +212,8 @@ export async function forgotPassword(req: Request, res: Response) {
 
     await sendResetEmail(user.email, token);
     res.json({ message: "If an account exists, a reset email was sent" });
-  } catch (err: any) {
-    res.status(500).json({ error: err.message || "Failed to send reset email" });
+  } catch {
+    res.status(500).json({ error: "Failed to send reset email" });
   }
 }
 
@@ -250,8 +250,8 @@ export async function resetPassword(req: Request, res: Response) {
       token: jwtToken,
       user: { id: user._id, name: user.name, email: user.email, avatar: user.avatar, provider: user.provider },
     });
-  } catch (err: any) {
-    res.status(500).json({ error: err.message || "Password reset failed" });
+  } catch {
+    res.status(500).json({ error: "Password reset failed" });
   }
 }
 

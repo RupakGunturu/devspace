@@ -83,7 +83,6 @@ const activitySchema = new Schema<IActivity>(
   { timestamps: true },
 );
 
-activitySchema.index({ userId: 1 });
 activitySchema.index({ "gameScores.playedAt": -1 });
 activitySchema.index({ "favorites.slug": 1, "favorites.type": 1 });
 

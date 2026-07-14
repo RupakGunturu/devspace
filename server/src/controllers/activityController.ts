@@ -14,8 +14,8 @@ export async function getActivityData(req: AuthRequest, res: Response) {
   try {
     const activity = await getActivity(req.user!._id.toString());
     res.json(activity);
-  } catch (err: any) {
-    res.status(500).json({ error: err.message || "Failed to get activity" });
+  } catch {
+    res.status(500).json({ error: "Failed to get activity" });
   }
 }
 
@@ -46,8 +46,8 @@ export async function saveGameScore(req: AuthRequest, res: Response) {
 
     await activity.save();
     res.json({ message: "Score saved", activity });
-  } catch (err: any) {
-    res.status(500).json({ error: err.message || "Failed to save score" });
+  } catch {
+    res.status(500).json({ error: "Failed to save score" });
   }
 }
 
@@ -78,8 +78,8 @@ export async function logToolUsage(req: AuthRequest, res: Response) {
 
     await activity.save();
     res.json({ message: "Usage logged" });
-  } catch (err: any) {
-    res.status(500).json({ error: err.message || "Failed to log usage" });
+  } catch {
+    res.status(500).json({ error: "Failed to log usage" });
   }
 }
 
@@ -105,8 +105,8 @@ export async function toggleFavorite(req: AuthRequest, res: Response) {
 
     await activity.save();
     res.json({ isFavorited, favorites: activity.favorites });
-  } catch (err: any) {
-    res.status(500).json({ error: err.message || "Failed to toggle favorite" });
+  } catch {
+    res.status(500).json({ error: "Failed to toggle favorite" });
   }
 }
 
@@ -132,8 +132,8 @@ export async function toggleSavedTip(req: AuthRequest, res: Response) {
 
     await activity.save();
     res.json({ isSaved, savedTips: activity.savedTips });
-  } catch (err: any) {
-    res.status(500).json({ error: err.message || "Failed to toggle saved tip" });
+  } catch {
+    res.status(500).json({ error: "Failed to toggle saved tip" });
   }
 }
 
@@ -150,7 +150,7 @@ export async function removeFavorite(req: AuthRequest, res: Response) {
     await activity.save();
 
     res.json({ favorites: activity.favorites });
-  } catch (err: any) {
-    res.status(500).json({ error: err.message || "Failed to remove favorite" });
+  } catch {
+    res.status(500).json({ error: "Failed to remove favorite" });
   }
 }
