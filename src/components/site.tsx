@@ -6,6 +6,7 @@ import { AnimatedThemeToggler } from "./ui/animated-theme-toggler";
 import { StaggeredMenu } from "./ui/staggered-menu/StaggeredMenu";
 import type { StaggeredMenuHandle } from "./ui/staggered-menu/StaggeredMenu";
 import ProfileDropdown from "./ui/profile-dropdown";
+import { Footer as LargeFooter } from "./ui/large-name-footer";
 
 export function Header() {
   const { theme, setTheme } = useTheme();
@@ -122,12 +123,7 @@ function NavItem({ to, children }: { to: string; children: ReactNode }) {
 }
 
 export function Footer() {
-  return (
-    <footer className="border-t-2 border-line px-8 py-10 text-center font-mono text-xs text-muted">
-      Dev<span className="text-yellow">/</span>Space — From First Line of Code to Production , Built
-      by a Student, For Students & Developers
-    </footer>
-  );
+  return <LargeFooter />;
 }
 
 export function Marquee({ items }: { items: string[] }) {
