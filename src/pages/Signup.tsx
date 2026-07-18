@@ -4,6 +4,7 @@ import { useAuth } from "@/components/AuthProvider";
 import { authApi } from "@/lib/api";
 import { toast } from "@/components/ui/toaster";
 import GoogleIcon from "@/components/GoogleIcon";
+import GoogleLoginPopup from "@/components/GoogleLoginPopup";
 
 export default function Signup() {
   const { signup } = useAuth();
@@ -33,12 +34,17 @@ export default function Signup() {
         <h1 className="mb-2 font-display text-2xl font-bold">Create account</h1>
         <p className="mb-6 text-sm text-muted">Save your game scores, favorites, and progress.</p>
 
+        <GoogleLoginPopup
+          className="mb-2 w-full"
+          onSuccess={() => navigate("/")}
+        />
+
         <a
           href={authApi.getGoogleUrl()}
-          className="mb-4 flex w-full items-center justify-center gap-3 rounded-md border-[1.5px] border-line bg-paper-dim px-4 py-3 text-sm font-semibold text-foreground transition-all hover:border-foreground"
+          className="mb-4 flex w-full items-center justify-center gap-3 rounded-md border-[1.5px] border-line bg-paper-dim px-4 py-3 text-sm font-semibold text-muted transition-all hover:border-foreground hover:text-foreground"
         >
           <GoogleIcon className="shrink-0" />
-          Continue with Google
+          Continue with Google (Full page)
         </a>
 
         <div className="relative my-4">

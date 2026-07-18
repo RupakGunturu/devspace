@@ -4,10 +4,13 @@ import jwt from "jsonwebtoken";
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import { Strategy as LocalStrategy } from "passport-local";
+import { OAuth2Client } from "google-auth-library";
 import { config } from "../config/env";
 import { User } from "../models/User";
 import { Activity } from "../models/Activity";
 import { sendResetEmail, sendWelcomeEmail } from "../utils/email";
+
+const googleClient = new OAuth2Client(config.googleClientId);
 
 function generateToken(userId: string): string {
   return jwt.sign({ userId }, config.jwtSecret, { expiresIn: config.jwtExpiresIn });
@@ -173,7 +176,11 @@ export function googleAuth(req: Request, res: Response, next: any) {
     res.status(503).json({ error: "Google auth not configured" });
     return;
   }
-  passport.authenticate("google", { scope: ["profile", "email"] })(req, res, next);
+  const isPopup = req.query.popup === "true";
+  passport.authenticate("google", {
+    scope: ["profile", "email"],
+    state: isPopup ? "popup" : undefined,
+  })(req, res, next);
 }
 
 export function googleCallback(req: Request, res: Response, next: any) {
@@ -183,9 +190,76 @@ export function googleCallback(req: Request, res: Response, next: any) {
     () => {
       const user = req.user as any;
       const token = generateToken(user._id.toString());
-      res.redirect(`${config.clientUrl}/auth/callback?token=${token}`);
+      const isPopup = (req.query.state === "popup") || (req as any).authInfo?.state === "popup";
+      const callbackUrl = isPopup
+        ? `${config.clientUrl}/auth/callback?token=${token}&popup=true`
+        : `${config.clientUrl}/auth/callback?token=${token}`;
+      res.redirect(callbackUrl);
     },
   );
+}
+
+export async function googleOneTap(req: Request, res: Response) {
+  try {
+    const { credential } = req.body;
+    if (!credential) {
+      res.status(400).json({ error: "Credential is required" });
+      return;
+    }
+
+    const ticket = await googleClient.verifyIdToken({
+      idToken: credential,
+      audience: config.googleClientId,
+    });
+
+    const payload = ticket.getPayload();
+    if (!payload) {
+      res.status(401).json({ error: "Invalid Google credential" });
+      return;
+    }
+
+    const googleId = payload.sub;
+    const email = payload.email;
+    const name = payload.name || "";
+    const avatar = payload.picture || "";
+
+    if (!email) {
+      res.status(400).json({ error: "No email from Google" });
+      return;
+    }
+
+    let user = await User.findOne({ googleId });
+    if (!user) {
+      user = await User.findOne({ email: email.toLowerCase() });
+      if (user) {
+        user.googleId = googleId;
+        user.provider = "google";
+        if (!user.avatar && avatar) user.avatar = avatar;
+        await user.save();
+      } else {
+        user = await User.create({
+          name,
+          email: email.toLowerCase(),
+          provider: "google",
+          googleId,
+          avatar,
+        });
+        await Activity.create({ userId: user._id });
+        sendWelcomeEmail(email, name).catch(() => {});
+      }
+    } else if (!user.avatar?.startsWith("data:") && avatar) {
+      user.avatar = avatar;
+      await user.save();
+    }
+
+    const token = generateToken(user._id.toString());
+    res.json({
+      token,
+      user: { id: user._id, name: user.name, email: user.email, avatar: user.avatar, provider: user.provider },
+    });
+  } catch {
+    res.status(500).json({ error: "Google authentication failed" });
+  }
 }
 
 export async function forgotPassword(req: Request, res: Response) {

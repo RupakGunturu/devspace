@@ -13,8 +13,17 @@ export default function AuthCallback() {
   useEffect(() => {
     if (handled.current) return;
     const token = searchParams.get("token");
+    const isPopup = searchParams.get("popup") === "true";
+
     if (token) {
       handled.current = true;
+
+      if (isPopup && window.opener) {
+        window.opener.postMessage({ type: "google-auth-success", token }, window.location.origin);
+        window.close();
+        return;
+      }
+
       localStorage.setItem("ds_token", token);
       refreshUser().then(() => {
         mergeLocalActivityToBackend().catch(() => {});
@@ -23,6 +32,13 @@ export default function AuthCallback() {
       });
     } else {
       handled.current = true;
+
+      if (isPopup && window.opener) {
+        window.opener.postMessage({ type: "google-auth-error", error: "No token received" }, window.location.origin);
+        window.close();
+        return;
+      }
+
       toast.danger("Authentication failed");
       navigate("/login");
     }

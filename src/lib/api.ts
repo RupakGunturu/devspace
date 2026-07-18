@@ -89,6 +89,12 @@ export const authApi = {
     }),
 
   getGoogleUrl: () => `${API_URL}/api/auth/google`,
+
+  verifyGoogleToken: (credential: string) =>
+    request<AuthResponse>("/api/auth/google/onetap", {
+      method: "POST",
+      body: JSON.stringify({ credential }),
+    }),
 };
 
 // ─── Activity API ───
