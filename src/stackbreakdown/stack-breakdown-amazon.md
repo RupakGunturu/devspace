@@ -4,7 +4,7 @@
 
 ---
 
-## 📖 Product Overview
+## Product Overview
 
 Amazon.com is the world's largest e-commerce platform — a catalog of hundreds of millions of products, serving hundreds of millions of customers, with orders needing to go from "click" to "delivered" reliably every time. Amazon is also famous for something else: it was one of the earliest large companies to break its website apart into independent services — what we now call microservices — years before that term was common, and its internal cloud infrastructure eventually became AWS (Amazon Web Services), the company's other massive business.
 
@@ -12,7 +12,7 @@ The core engineering challenge: a single product page load can trigger requests 
 
 ---
 
-## 🖥️ Frontend Stack
+## Frontend Stack
 
 Amazon hasn't published a full breakdown of its exact frontend framework choices, but based on its scale and hiring patterns, it's reasonable to infer:
 
@@ -24,7 +24,7 @@ Amazon hasn't published a full breakdown of its exact frontend framework choices
 
 ---
 
-## ⚙️ Backend Stack
+## Backend Stack
 
 Amazon's backend is a huge, deeply **service-oriented architecture (SOA)** — the direct ancestor of what we now call microservices.
 
@@ -36,7 +36,7 @@ Amazon's backend is a huge, deeply **service-oriented architecture (SOA)** — t
 
 ---
 
-## 🗄️ Database
+## Database
 
 **Dynamo → DynamoDB** is Amazon's most famous database story.
 
@@ -54,7 +54,7 @@ Beyond DynamoDB, Amazon.com almost certainly also uses relational databases (lik
 
 ---
 
-## ☁️ Infrastructure
+## Infrastructure
 
 - **AWS (Amazon Web Services)** — Amazon.com itself runs on the same cloud infrastructure that Amazon sells to the rest of the world, including EC2 (virtual servers), S3 (storage), Lambda (serverless functions), and many more.
 - **Service-Oriented / Microservices architecture** — hundreds of independently deployable services, each with its own database when possible, so no single team's changes can break someone else's service.
@@ -64,7 +64,7 @@ Beyond DynamoDB, Amazon.com almost certainly also uses relational databases (lik
 
 ---
 
-## 🔌 APIs & Services
+## APIs & Services
 
 - **AWS IAM (Identity and Access Management)** — handles authentication and authorization checks for internal service calls, as seen directly in DynamoDB's own request-routing flow.
 - **Payments** — Amazon Pay and internal payment processing systems, built for extremely high reliability given the direct revenue impact of any failure.
@@ -74,7 +74,7 @@ Beyond DynamoDB, Amazon.com almost certainly also uses relational databases (lik
 
 ---
 
-## 📈 Scaling Techniques
+## Scaling Techniques
 
 - **Service-oriented architecture from very early on** — <cite index="58-1">Amazon decoupled its services well before "microservices" was a common industry term,</cite> directly motivated by how painful it had become to ship a single, giant, tightly-coupled application.
 - **Independent SLAs per service** — <cite index="57-1">each of the 150+ services behind a typical page load is individually responsible for its own response-time and availability targets,</cite> so the system doesn't rely on one giant, shared performance budget.
@@ -84,7 +84,7 @@ Beyond DynamoDB, Amazon.com almost certainly also uses relational databases (lik
 
 ---
 
-## 🔒 Security & Reliability
+## Security & Reliability
 
 - **AWS IAM-based authentication** for internal service-to-service calls.
 - **Quorum-based writes across Availability Zones** — a write isn't considered successful until enough independent replicas confirm it, protecting against data loss from a single failure.
@@ -94,7 +94,7 @@ Beyond DynamoDB, Amazon.com almost certainly also uses relational databases (lik
 
 ---
 
-## ⚡ Performance Optimizations
+## Performance Optimizations
 
 - **Single-digit-millisecond database responses** at Amazon's DynamoDB scale, even during massive traffic events like Prime Day.
 - **Caching layers (ElastiCache)** to avoid hitting primary databases for frequently requested data.
@@ -104,7 +104,7 @@ Beyond DynamoDB, Amazon.com almost certainly also uses relational databases (lik
 
 ---
 
-## 📊 Engineering Challenges
+## Engineering Challenges
 
 - **A single page load touching 150+ services.** <cite index="57-1">Coordinating that many dependent service calls, each with its own performance target, while still returning a fast, correct page to the customer, is a constant and central engineering challenge.</cite>
 - **Extreme, predictable traffic spikes** — events like Prime Day push infrastructure to handle over 100 million database requests per second without breaking a sweat.
@@ -113,7 +113,7 @@ Beyond DynamoDB, Amazon.com almost certainly also uses relational databases (lik
 
 ---
 
-## 💰 Infrastructure Cost Considerations
+## Infrastructure Cost Considerations
 
 - **Compute** — hundreds of services running continuously, at global scale, is an enormous and constantly-optimized cost center (which is part of why Amazon is so deeply invested in AWS's own cost-efficiency tooling).
 - **Storage** — a catalog of hundreds of millions of products, plus customer data, images, and order history, at a truly massive scale.
@@ -124,7 +124,7 @@ Beyond DynamoDB, Amazon.com almost certainly also uses relational databases (lik
 
 ---
 
-## 🎯 Student Version
+## Student Version
 
 - **Frontend:** React or Next.js for a product catalog with server-side rendering for fast page loads.
 - **Backend:** Node.js/Express or Java/Spring Boot for a small set of services (catalog, cart, orders).
@@ -137,7 +137,7 @@ A great mini-project: split your app into at least three independent services (c
 
 ---
 
-## 📚 Technologies Used (Summary Table)
+## Technologies Used (Summary Table)
 
 | Layer | Technology | Purpose |
 |---|---|---|
@@ -152,7 +152,7 @@ A great mini-project: split your app into at least three independent services (c
 
 ---
 
-## 💡 Engineering Lessons
+## Engineering Lessons
 
 1. Decouple services before a slow, conflict-heavy release process forces your hand.
 2. Give each service its own clear performance target (SLA) instead of one shared budget.
@@ -165,7 +165,7 @@ A great mini-project: split your app into at least three independent services (c
 
 ---
 
-## 🔗 References
+## References
 
 - AWS Architecture Blog (Official) — [aws.amazon.com/blogs/architecture](https://aws.amazon.com/blogs/architecture/)
 - ByteByteGo — [A Deep Dive into Amazon DynamoDB Architecture](https://blog.bytebytego.com/p/a-deep-dive-into-amazon-dynamodb)

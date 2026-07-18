@@ -4,7 +4,7 @@
 
 ---
 
-## 📖 Product Overview
+## Product Overview
 
 Instagram started in 2010 as a simple photo-sharing app built by a tiny team and grew into a platform with billions of users sharing photos, Stories, and Reels. Its engineering story is famous for a specific reason: <cite index="80-1">Instagram scaled to 14 million users with just three engineers, by keeping things simple, not reinventing the wheel, and using proven, solid technologies wherever possible.</cite>
 
@@ -12,7 +12,7 @@ Today it handles <cite index="83-1">billions of interactions daily across 500+ m
 
 ---
 
-## 🖥️ Frontend Stack
+## Frontend Stack
 
 - **React** — <cite index="86-1">used for Instagram's web interface.</cite>
 - **Native iOS and Android apps** — <cite index="86-1">Instagram originally started as an iOS app written in Objective-C,</cite> and has since built out native Android alongside it.
@@ -20,7 +20,7 @@ Today it handles <cite index="83-1">billions of interactions daily across 500+ m
 
 ---
 
-## ⚙️ Backend Stack
+## Backend Stack
 
 **Django (Python) is Instagram's foundation.** <cite index="79-1">Django, a high-level Python web framework, provides the core structure for handling HTTP requests, user authentication, database interactions, and API endpoints.</cite> <cite index="80-1">The application server ran Gunicorn as its WSGI server (which forwards requests from the web server to the actual application), and Instagram used a tool called Fabric to run deployment commands in parallel across many servers at once — letting them deploy new code in just seconds.</cite>
 
@@ -36,7 +36,7 @@ Today it handles <cite index="83-1">billions of interactions daily across 500+ m
 
 ---
 
-## 🗄️ Database
+## Database
 
 | Database | Why it's used |
 |---|---|
@@ -49,7 +49,7 @@ Today it handles <cite index="83-1">billions of interactions daily across 500+ m
 
 ---
 
-## ☁️ Infrastructure
+## Infrastructure
 
 - **AWS, then Facebook's own data centers.** <cite index="87-1">Instagram's backend was initially hosted on AWS but was later migrated to Facebook's own data centers after the acquisition — a move that eased integration with other Facebook services, cut down latency, and let Instagram take advantage of large-scale deployment tools Facebook's engineering team had already built.</cite>
 - **Load balancers + connection pooling.** <cite index="80-1">Connections between Postgres and Django were pooled using Pgbouncer,</cite> avoiding the overhead of opening a fresh database connection for every single request.
@@ -58,7 +58,7 @@ Today it handles <cite index="83-1">billions of interactions daily across 500+ m
 
 ---
 
-## 🔌 APIs & Services
+## APIs & Services
 
 - **Media storage** — <cite index="84-1">Amazon S3 is used for storing media (photos and videos).</cite>
 - **Search** — <cite index="87-1">Instagram originally used Elasticsearch for search, then migrated to Unicorn, a social-graph-aware search engine built in-house at Facebook, which has scaled to indexes containing trillions of documents</cite> and understands relationships between entities like users, locations, and hashtags.
@@ -67,7 +67,7 @@ Today it handles <cite index="83-1">billions of interactions daily across 500+ m
 
 ---
 
-## 📈 Scaling Techniques
+## Scaling Techniques
 
 - **Separating compute and storage** so each can scale independently and databases aren't overloaded by application-layer traffic spikes.
 - **Sharding** — Redis's photo-to-user-ID mapping exists specifically so the app knows which database shard to query, rather than searching everywhere.
@@ -78,7 +78,7 @@ Today it handles <cite index="83-1">billions of interactions daily across 500+ m
 
 ---
 
-## 🔒 Security & Reliability
+## Security & Reliability
 
 - **PostgreSQL for anything needing strong consistency** — user authentication, content moderation, and other cases where "eventually correct" isn't good enough.
 - **Cache invalidation tied directly to database writes**, so stale or incorrect data doesn't linger for users.
@@ -87,7 +87,7 @@ Today it handles <cite index="83-1">billions of interactions daily across 500+ m
 
 ---
 
-## ⚡ Performance Optimizations
+## Performance Optimizations
 
 - **Replacing CPU-intensive Python functions with C++** where profiling shows they're genuinely the bottleneck.
 - **Disabling parts of Python's garbage collector** for a measurable capacity improvement — a very specific, hard-won optimization that only makes sense once you're operating at massive scale.
@@ -97,7 +97,7 @@ Today it handles <cite index="83-1">billions of interactions daily across 500+ m
 
 ---
 
-## 📊 Engineering Challenges
+## Engineering Challenges
 
 - **Scaling with a tiny team.** Instagram's early story — 14 million users, 3 engineers — is a masterclass in choosing boring, proven technology instead of chasing the newest framework.
 - **The thundering herd problem** — when cached data expires all at once under massive load, a flood of simultaneous database queries can overwhelm the system if not carefully managed.
@@ -107,7 +107,7 @@ Today it handles <cite index="83-1">billions of interactions daily across 500+ m
 
 ---
 
-## 💰 Infrastructure Cost Considerations
+## Infrastructure Cost Considerations
 
 - **Compute** — thousands of Django application servers running behind load balancers is a large and continuous cost at this scale.
 - **Storage** — media storage (photos and video) across billions of users is enormous and constantly growing, especially as Reels has pushed the platform toward much heavier video content.
@@ -118,7 +118,7 @@ Today it handles <cite index="83-1">billions of interactions daily across 500+ m
 
 ---
 
-## 🎯 Student Version
+## Student Version
 
 - **Frontend:** React (web) or React Native (mobile) for a shared photo-sharing UI.
 - **Backend:** Django (Python) — genuinely the same framework Instagram itself started with, and still one of the fastest ways for a small team or solo developer to build a real, working backend.
@@ -132,7 +132,7 @@ A great mini-project: build a simple "like" feature using an async task queue (C
 
 ---
 
-## 📚 Technologies Used (Summary Table)
+## Technologies Used (Summary Table)
 
 | Layer | Technology | Purpose |
 |---|---|---|
@@ -150,7 +150,7 @@ A great mini-project: build a simple "like" feature using an async task queue (C
 
 ---
 
-## 💡 Engineering Lessons
+## Engineering Lessons
 
 1. Keep things simple and use proven technology — Instagram scaled to 14 million users with 3 engineers by not reinventing the wheel.
 2. Framework choice matters less than how well you use it — Django "can't scale" myths didn't stop Instagram from reaching billions of users.
@@ -164,7 +164,7 @@ A great mini-project: build a simple "like" feature using an async task queue (C
 
 ---
 
-## 🔗 References
+## References
 
 - ByteByteGo — [How Instagram Scaled Its Infrastructure to Support a Billion Users](https://blog.bytebytego.com/p/how-instagram-scaled-its-infrastructure)
 - Engineer's Codex — [How Instagram Scaled to 14 Million Users with Only 3 Engineers](https://read.engineerscodex.com/p/how-instagram-scaled-to-14-million)

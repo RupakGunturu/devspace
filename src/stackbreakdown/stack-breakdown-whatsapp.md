@@ -4,7 +4,7 @@
 
 ---
 
-## 📖 Product Overview
+## Product Overview
 
 WhatsApp is a messaging app used by over 2 billion people to send texts, photos, voice notes, and make calls — all end-to-end encrypted. What makes WhatsApp famous in engineering circles isn't just its size, it's *how few engineers it took to build it*: at the time Facebook acquired it for $19 billion in 2014, <cite index="23-1">WhatsApp was handling 42 billion messages a day with just 50 engineers.</cite>
 
@@ -12,7 +12,7 @@ The core challenge: keep hundreds of millions of devices connected at once, deli
 
 ---
 
-## 🖥️ Frontend Stack
+## Frontend Stack
 
 WhatsApp's client apps (Android, iOS, Web, Desktop) are native or near-native apps built per platform, optimized for low battery and data usage rather than flashy UI. Key ideas:
 
@@ -23,7 +23,7 @@ WhatsApp's client apps (Android, iOS, Web, Desktop) are native or near-native ap
 
 ---
 
-## ⚙️ Backend Stack
+## Backend Stack
 
 This is where WhatsApp's story gets interesting — it deliberately avoided the "typical" stack.
 
@@ -37,7 +37,7 @@ This is where WhatsApp's story gets interesting — it deliberately avoided the 
 
 ---
 
-## 🗄️ Database
+## Database
 
 | System | Why it's used | What it stores |
 |---|---|---|
@@ -48,7 +48,7 @@ This is where WhatsApp's story gets interesting — it deliberately avoided the 
 
 ---
 
-## ☁️ Infrastructure
+## Infrastructure
 
 - **FreeBSD** instead of Linux — <cite index="22-1">the founders chose FreeBSD partly because of their history working with it at Yahoo!, and partly because they found its networking stack handled their workload better after benchmarking both.</cite>
 - **YAWS (Yet Another Web Server)** — <cite index="22-1">an Erlang-based web server used by WhatsApp for storing multimedia (photos, videos), also using WebSockets for fast two-way communication.</cite>
@@ -57,7 +57,7 @@ This is where WhatsApp's story gets interesting — it deliberately avoided the 
 
 ---
 
-## 🔌 APIs & Services
+## APIs & Services
 
 - **Push notifications** — third-party push services (like Google's push infrastructure on Android) to wake the app when a message arrives while it's in the background.
 - **Signal Protocol** — the encryption library underneath end-to-end encryption, also used by Signal and other secure messengers.
@@ -65,7 +65,7 @@ This is where WhatsApp's story gets interesting — it deliberately avoided the 
 
 ---
 
-## 📈 Scaling Techniques
+## Scaling Techniques
 
 - **One process per user connection** — Erlang's lightweight processes mean millions of simultaneous users don't need millions of expensive OS threads.
 - **Vertical scaling before horizontal** — squeezing more out of each server first, since <cite index="21-1">vertical scaling is often simpler than adding more machines.</cite>
@@ -76,7 +76,7 @@ This is where WhatsApp's story gets interesting — it deliberately avoided the 
 
 ---
 
-## 🔒 Security & Reliability
+## Security & Reliability
 
 - **End-to-end encryption (Signal Protocol)** for all chats, calls, and media by default since 2016.
 - **"Let it crash" philosophy** — <cite index="29-1">instead of trying to prevent every possible error, Erlang's supervisors detect failing components and automatically restart them, so one error doesn't bring down the whole system.</cite>
@@ -85,7 +85,7 @@ This is where WhatsApp's story gets interesting — it deliberately avoided the 
 
 ---
 
-## ⚡ Performance Optimizations
+## Performance Optimizations
 
 - Custom, lightweight protocol (instead of full XMPP) to cut down on data usage and battery drain.
 - One persistent connection per device instead of frequent reconnects.
@@ -95,7 +95,7 @@ This is where WhatsApp's story gets interesting — it deliberately avoided the 
 
 ---
 
-## 📊 Engineering Challenges
+## Engineering Challenges
 
 - **Keeping hundreds of millions of devices connected simultaneously**, each with a live, persistent connection.
 - **Sudden traffic spikes** — <cite index="25-1">world events like earthquakes and soccer matches create massive, sudden spikes in message volume that the system has to absorb without falling over.</cite>
@@ -104,7 +104,7 @@ This is where WhatsApp's story gets interesting — it deliberately avoided the 
 
 ---
 
-## 💰 Infrastructure Cost Considerations
+## Infrastructure Cost Considerations
 
 - **Compute** — thousands of cores running Erlang processes non-stop is the core, unavoidable cost.
 - **Network bandwidth** — moving tens of billions of messages, photos, and calls daily.
@@ -115,7 +115,7 @@ This is where WhatsApp's story gets interesting — it deliberately avoided the 
 
 ---
 
-## 🎯 Student Version
+## Student Version
 
 You won't build Erlang-at-2-billion-users, but you can absolutely build a real-time chat app that teaches the same core ideas:
 
@@ -130,7 +130,7 @@ A great mini-project: build one-process-per-connection chat using WebSockets, an
 
 ---
 
-## 📚 Technologies Used (Summary Table)
+## Technologies Used (Summary Table)
 
 | Layer | Technology | Purpose |
 |---|---|---|
@@ -146,7 +146,7 @@ A great mini-project: build one-process-per-connection chat using WebSockets, an
 
 ---
 
-## 💡 Engineering Lessons
+## Engineering Lessons
 
 1. Pick the tool that matches your problem, even if it's unconventional (Erlang + FreeBSD over the "default" Java + Linux).
 2. Lightweight, isolated processes (one per user) beat heavyweight shared infrastructure for massive concurrency.
@@ -159,7 +159,7 @@ A great mini-project: build one-process-per-connection chat using WebSockets, an
 
 ---
 
-## 🔗 References
+## References
 
 - High Scalability — [How WhatsApp Grew to Nearly 500 Million Users, 11,000 Cores, and 70 Million Messages a Second](https://highscalability.com/how-whatsapp-grew-to-nearly-500-million-users-11000-cores-an/)
 - ByteByteGo — [How WhatsApp Handles 40 Billion Messages Per Day](https://blog.bytebytego.com/p/how-whatsapp-handles-40-billion-messages)

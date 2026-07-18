@@ -4,7 +4,7 @@
 
 ---
 
-## 📖 Product Overview
+## Product Overview
 
 Spotify is the world's largest music streaming service, <cite index="48-1">with more than 365 million active users per month.</cite> It streams songs, podcasts, and audiobooks instantly to phones, desktops, smart speakers, and cars, while also powering deeply personalized features like Discover Weekly playlists and the yearly viral hit, Spotify Wrapped.
 
@@ -12,7 +12,7 @@ Spotify's core engineering challenge is twofold: streaming audio smoothly and in
 
 ---
 
-## 🖥️ Frontend Stack
+## Frontend Stack
 
 - **React** – <cite index="41-1">Spotify's web application is built using React.</cite>
 - **Redux** – <cite index="49-1">a predictable state container used to manage application state in Spotify's web app.</cite>
@@ -23,7 +23,7 @@ Spotify's core engineering challenge is twofold: streaming audio smoothly and in
 
 ---
 
-## ⚙️ Backend Stack
+## Backend Stack
 
 Spotify runs a large **microservices architecture** — <cite index="47-1">hundreds of small, independent services, each handling one job: song retrieval, recommendations, search, or user verification.</cite>
 
@@ -37,7 +37,7 @@ Spotify runs a large **microservices architecture** — <cite index="47-1">hundr
 
 ---
 
-## 🗄️ Database
+## Database
 
 | Database | Why it's used |
 |---|---|
@@ -48,7 +48,7 @@ Spotify runs a large **microservices architecture** — <cite index="47-1">hundr
 
 ---
 
-## ☁️ Infrastructure
+## Infrastructure
 
 - **Google Cloud Platform (GCP)** — <cite index="44-1">Spotify completed a migration from its own on-premises data centers to Google Cloud in 2016–2017,</cite> after originally being hosted on AWS.
 - **Docker** — <cite index="49-1">used to package Spotify's microservices into lightweight, portable containers.</cite>
@@ -60,7 +60,7 @@ Spotify runs a large **microservices architecture** — <cite index="47-1">hundr
 
 ---
 
-## 🔌 APIs & Services
+## APIs & Services
 
 - **Apache Kafka** — <cite index="41-1">the backbone of Spotify's real-time data processing, letting the system react to events instantly.</cite> Every play, skip, like, and playlist edit is an event flowing through Kafka.
 - **gRPC/Protobuf** — for fast, low-latency internal service-to-service communication.
@@ -69,7 +69,7 @@ Spotify runs a large **microservices architecture** — <cite index="47-1">hundr
 
 ---
 
-## 📈 Scaling Techniques
+## Scaling Techniques
 
 - **Microservices** so each part of the system — song retrieval, recommendations, playlist generation — scales independently based on its own load.
 - **Event-driven architecture (Kafka)** — <cite index="41-1">letting the system respond in real time to millions of listening events (plays, skips, likes) as they happen,</cite> rather than processing everything in slow batches.
@@ -79,7 +79,7 @@ Spotify runs a large **microservices architecture** — <cite index="47-1">hundr
 
 ---
 
-## 🔒 Security & Reliability
+## Security & Reliability
 
 - **Fault isolation via microservices** — <cite index="42-1">if one small service (like the mood-category generator) has a temporary issue, the rest of the system — including the rest of Wrapped — still works fine.</cite>
 - **Zero-downtime migrations** — Spotify's dark-loading technique for database and infrastructure migrations minimizes risk to live users.
@@ -88,7 +88,7 @@ Spotify runs a large **microservices architecture** — <cite index="47-1">hundr
 
 ---
 
-## ⚡ Performance Optimizations
+## Performance Optimizations
 
 - **gRPC + Protobuf** for fast, low-overhead internal service calls.
 - **Kafka-based real-time event processing** instead of slower batch jobs, so features like recommendations and Wrapped can react to fresh data quickly.
@@ -97,7 +97,7 @@ Spotify runs a large **microservices architecture** — <cite index="47-1">hundr
 
 ---
 
-## 📊 Engineering Challenges
+## Engineering Challenges
 
 - **Personalization at massive scale** — Discover Weekly, Wrapped, and the AI DJ all require processing enormous volumes of listening history per user, for hundreds of millions of users.
 - **Seasonal spikes** — <cite index="42-1">Wrapped creates a massive, concentrated spike in demand as hundreds of millions of users all check their results within the same few hours each December.</cite>
@@ -106,7 +106,7 @@ Spotify runs a large **microservices architecture** — <cite index="47-1">hundr
 
 ---
 
-## 💰 Infrastructure Cost Considerations
+## Infrastructure Cost Considerations
 
 - **Compute (GCP + Kubernetes)** — running 1,600+ production services continuously is likely Spotify's largest and fastest-growing cost.
 - **Data & event pipelines (Kafka)** — processing every play, skip, and like across hundreds of millions of users in real time.
@@ -118,7 +118,7 @@ Spotify runs a large **microservices architecture** — <cite index="47-1">hundr
 
 ---
 
-## 🎯 Student Version
+## Student Version
 
 - **Frontend:** React + Redux for a music-player-style UI.
 - **Backend:** Node.js or Java/Spring Boot for a small set of services (song catalog, playlists, play-tracking).
@@ -132,7 +132,7 @@ A great mini-project: build a simple "Your Year in Review" feature from mock lis
 
 ---
 
-## 📚 Technologies Used (Summary Table)
+## Technologies Used (Summary Table)
 
 | Layer | Technology | Purpose |
 |---|---|---|
@@ -150,7 +150,7 @@ A great mini-project: build a simple "Your Year in Review" feature from mock lis
 
 ---
 
-## 💡 Engineering Lessons
+## Engineering Lessons
 
 1. Match your database to your actual scale — Spotify moved off PostgreSQL only once it genuinely needed Cassandra's distributed design.
 2. Test infrastructure migrations against live traffic in the background ("dark loading") before fully cutting over.
@@ -163,7 +163,7 @@ A great mini-project: build a simple "Your Year in Review" feature from mock lis
 
 ---
 
-## 🔗 References
+## References
 
 - Kubernetes.io — [Spotify Case Study](https://kubernetes.io/case-studies/spotify/)
 - Altoros — [Spotify Runs 1,600+ Production Services on Kubernetes](https://www.altoros.com/blog/spotify-runs-1600-production-services-on-kubernetes/)

@@ -73,7 +73,7 @@ export default function CheatSheetsIndex() {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Search cheat sheets..."
-          className="w-full max-w-md rounded-sm border-2 border-line bg-transparent px-4 py-2.5 font-mono text-sm text-foreground placeholder:text-muted focus:border-yellow focus:outline-none"
+          className="w-full max-w-md rounded-sm border-2 border-line bg-transparent px-4 py-2.5 font-mono text-sm text-foreground placeholder:text-muted focus:border-foreground focus:outline-none"
         />
       </div>
 

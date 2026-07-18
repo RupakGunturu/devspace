@@ -4,7 +4,7 @@
 
 ---
 
-## 📖 Product Overview
+## Product Overview
 
 Swiggy is India's largest hyperlocal delivery platform, launched in 2014 in Bangalore as a food-delivery service and since expanded into grocery delivery (Instamart), quick-commerce, and courier-style pickup/drop (Genie). It connects three distinct user groups in real time: customers ordering food or goods, restaurants/stores fulfilling orders, and delivery partners moving through the city.
 
@@ -12,7 +12,7 @@ Swiggy is India's largest hyperlocal delivery platform, launched in 2014 in Bang
 
 ---
 
-## 🖥️ Frontend Stack
+## Frontend Stack
 
 | Technology | Why it's used | Benefits |
 |---|---|---|
@@ -25,7 +25,7 @@ Swiggy is India's largest hyperlocal delivery platform, launched in 2014 in Bang
 
 ---
 
-## ⚙️ Backend Stack
+## Backend Stack
 
 Swiggy's backend is a large, Java-centric microservices architecture. <cite index="41-1">Swiggy is largely a Java shop, using Java 8 with Spring Boot as an abstraction layer providing tools for caching, auditing, and pipeline building across its microservice architecture.</cite> Public job postings and engineering blog posts also reference Go, Python, and Node.js for specific newer services, consistent with a large organization that's added languages over time rather than mandating a single stack.
 
@@ -37,7 +37,7 @@ Swiggy's backend is a large, Java-centric microservices architecture. <cite inde
 
 ---
 
-## 🗄️ Database
+## Database
 
 | Database | Why it's used | What it stores |
 |---|---|---|
@@ -52,7 +52,7 @@ Swiggy's backend is a large, Java-centric microservices architecture. <cite inde
 
 ---
 
-## ☁️ Infrastructure
+## Infrastructure
 
 - **Cloud provider — AWS**, consistently reported as Swiggy's primary cloud provider across engineering write-ups and job postings.
 - **Containers & orchestration** — Docker and Kubernetes are commonly cited for Swiggy's microservices deployment, consistent with a 400+ microservice estate that needs automated scaling and deployment.
@@ -62,7 +62,7 @@ Swiggy's backend is a large, Java-centric microservices architecture. <cite inde
 
 ---
 
-## 🔌 APIs & Services
+## APIs & Services
 
 - **Maps & routing** — Google Maps Platform (or an equivalent mapping provider) for address geocoding, delivery-partner routing, and live tracking; standard for any hyperlocal delivery platform.
 - **Payments** — UPI, Razorpay, Paytm, and Swiggy's internal wallet, commonly cited across write-ups of Swiggy's payment integrations, reflecting India's UPI-first payments landscape.
@@ -72,7 +72,7 @@ Swiggy's backend is a large, Java-centric microservices architecture. <cite inde
 
 ---
 
-## 📈 Scaling Techniques
+## Scaling Techniques
 
 - **Microservices decomposition** — <cite index="38-1">400+ services in production allow small, independent teams to own, develop, test, and release functionality without blocking each other.</cite>
 - **Adaptive latency budgeting** instead of fixed per-dependency timeout splits, so that a service's SLA holds up even as its downstream dependencies' performance shifts over time.
@@ -83,7 +83,7 @@ Swiggy's backend is a large, Java-centric microservices architecture. <cite inde
 
 ---
 
-## 🔒 Security & Reliability
+## Security & Reliability
 
 - **API Gateway-level authentication and authorization** for all client requests before they reach internal microservices.
 - **Resilience patterns (circuit breakers, adaptive timeouts, fallback responses)** are a first-class engineering concern at Swiggy, given how many services sit on the critical path of a single order.
@@ -93,7 +93,7 @@ Swiggy's backend is a large, Java-centric microservices architecture. <cite inde
 
 ---
 
-## ⚡ Performance Optimizations
+## Performance Optimizations
 
 - **Search performance work** — Swiggy's engineering blog has published specifically on making restaurant/dish search "blazing fast," indicating dedicated investment in search-latency optimization (indexing strategy, query optimization) on top of Elasticsearch.
 - **Caching hot-path data** (catalog, pricing, cart state) in Redis/Aerospike to avoid repeated expensive computation or database round-trips on every home-screen load.
@@ -102,7 +102,7 @@ Swiggy's backend is a large, Java-centric microservices architecture. <cite inde
 
 ---
 
-## 📊 Engineering Challenges
+## Engineering Challenges
 
 **Home-page computation complexity.** <cite index="38-1">Rendering Swiggy's home page for a single user involves a chain of computations across many backend services to produce a personalized, orderable set of options — restaurants and items filtered by serviceability, availability, and relevance.</cite> Coordinating that many service calls within an acceptable latency budget, without any single slow dependency degrading the whole page load, is a recurring and explicitly documented engineering problem.
 
@@ -114,7 +114,7 @@ Swiggy's backend is a large, Java-centric microservices architecture. <cite inde
 
 ---
 
-## 💰 Infrastructure Cost Considerations
+## Infrastructure Cost Considerations
 
 - **Compute** — 400+ microservices running continuously across AWS is likely Swiggy's largest and most variable cost center, scaling up sharply during meal-time demand spikes.
 - **Database & caching infrastructure** — MySQL/PostgreSQL for transactional data plus Redis/Aerospike caching layers represent a significant, always-on cost given order volume.
@@ -126,7 +126,7 @@ Swiggy's backend is a large, Java-centric microservices architecture. <cite inde
 
 ---
 
-## 🎯 Student Version
+## Student Version
 
 ### Frontend
 React for web, React Native for a shared mobile codebase (cheaper to build and maintain solo than separate native apps for a learning project).
@@ -148,7 +148,7 @@ Frontend on Vercel/Netlify; backend on Render or Railway free/hobby tiers. For a
 
 ---
 
-## 📚 Technologies Used (Summary Table)
+## Technologies Used (Summary Table)
 
 | Layer | Technology | Purpose |
 |---|---|---|
@@ -165,7 +165,7 @@ Frontend on Vercel/Netlify; backend on Render or Railway free/hobby tiers. For a
 
 ---
 
-## 💡 Engineering Lessons
+## Engineering Lessons
 
 1. **Microservices scale team autonomy, not just traffic** — 400+ services exist primarily to let small teams ship independently.
 2. **Fixed latency budgets don't survive contact with production** — adaptive, measured approaches beat static formulas in a federated-ownership environment.
@@ -180,7 +180,7 @@ Frontend on Vercel/Netlify; backend on Render or Railway free/hobby tiers. For a
 
 ---
 
-## 🔗 References
+## References
 
 - Swiggy Bytes (Official Engineering Blog) — [Designing Resilient Microservices — Part 1](https://bytes.swiggy.com/designing-resilient-microservices-part-1-6a72fe964759)
 - Swiggy Bytes — [Architecture and Design Principles Behind Swiggy's Delivery Partners App](https://bytes.swiggy.com/architecture-and-design-principles-behind-the-swiggys-delivery-partners-app-4db1d87a048a)

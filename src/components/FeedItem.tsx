@@ -43,7 +43,7 @@ export function FeedItem({ post }: { post: Post }) {
           <img
             src={`https://www.google.com/s2/favicons?domain=${stackItem.faviconDomain}&sz=32`}
             alt=""
-            className="h-6 w-6 rounded transition-transform group-hover:scale-110 group-hover:rotate-[12deg]"
+            className="h-6 w-6 transition-transform group-hover:scale-110 group-hover:rotate-[12deg]"
             onError={(e) => {
               e.currentTarget.style.display = "none";
               e.currentTarget.parentElement!.textContent = stackItem.icon;

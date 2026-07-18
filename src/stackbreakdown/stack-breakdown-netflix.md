@@ -4,7 +4,7 @@
 
 ---
 
-## 📖 Product Overview
+## Product Overview
 
 Netflix is the world's largest streaming service, with <cite index="38-1">over 180 million subscribers across 200+ countries.</cite> Members watch billions of hours of shows and movies every month, on everything from phones to smart TVs to game consoles.
 
@@ -12,7 +12,7 @@ Netflix's engineering story is one of the most famous in tech: it started as a s
 
 ---
 
-## 🖥️ Frontend Stack
+## Frontend Stack
 
 - **React** — <cite index="30-1">used for Netflix's web client, with server-side rendering optimizations for fast load times.</cite>
 - **Node.js** — <cite index="31-1">Netflix engineers use modern UI technologies like Node.js, React, and RxJS to build rich client apps that run across thousands of different device types</cite> (TVs, game consoles, streaming boxes, phones).
@@ -23,7 +23,7 @@ Netflix's engineering story is one of the most famous in tech: it started as a s
 
 ---
 
-## ⚙️ Backend Stack
+## Backend Stack
 
 Netflix runs **thousands of microservices**, each owning one small piece of functionality (recommendations, billing, playback, search, etc.), largely built with **Java and Spring Boot**.
 
@@ -41,7 +41,7 @@ Netflix runs **thousands of microservices**, each owning one small piece of func
 
 ---
 
-## 🗄️ Database
+## Database
 
 | Database | Why it's used |
 |---|---|
@@ -53,7 +53,7 @@ Netflix runs **thousands of microservices**, each owning one small piece of func
 
 ---
 
-## ☁️ Infrastructure
+## Infrastructure
 
 - **AWS** — <cite index="30-1">Netflix completed its full migration to AWS in 2016</cite>, running its entire streaming backend in the cloud rather than its own datacenters (though its actual video delivery uses its own network — see below).
 - **Titus** — <cite index="30-1">Netflix's internal container platform, open-sourced in 2018, used to run containers at scale.</cite>
@@ -65,7 +65,7 @@ Netflix runs **thousands of microservices**, each owning one small piece of func
 
 ---
 
-## 🔌 APIs & Services
+## APIs & Services
 
 - **Video encoding & packaging** — Netflix encodes each title into multiple quality levels and formats, using per-title and per-scene encoding optimization measured with a video-quality metric called VMAF, to balance quality against file size.
 - **DRM (Digital Rights Management)** — uses HTML5 EME (Encrypted Media Extensions) in browsers to protect licensed content from being copied.
@@ -74,7 +74,7 @@ Netflix runs **thousands of microservices**, each owning one small piece of func
 
 ---
 
-## 📈 Scaling Techniques
+## Scaling Techniques
 
 - **Microservices** — <cite index="38-1">Netflix now runs over 1,000 microservices, each managing a separate part of the business,</cite> so teams can build, test, and deploy independently instead of touching one giant shared codebase.
 - **Stateless servers** — <cite index="38-1">by keeping servers stateless, Netflix can operate at very large scale across a huge number of clients</cite> without one server needing to "remember" a specific user's session.
@@ -85,7 +85,7 @@ Netflix runs **thousands of microservices**, each owning one small piece of func
 
 ---
 
-## 🔒 Security & Reliability
+## Security & Reliability
 
 - **Fault isolation per service call (Hystrix)** — one failing dependency doesn't cascade into a full outage.
 - **Chaos Engineering as a discipline** — proactively testing failure instead of just hoping it doesn't happen.
@@ -95,7 +95,7 @@ Netflix runs **thousands of microservices**, each owning one small piece of func
 
 ---
 
-## ⚡ Performance Optimizations
+## Performance Optimizations
 
 - **Per-title and per-scene video encoding** to get the best visual quality at the smallest file size for each specific piece of content.
 - **Own CDN (Open Connect)** placing content physically close to viewers.
@@ -105,7 +105,7 @@ Netflix runs **thousands of microservices**, each owning one small piece of func
 
 ---
 
-## 📊 Engineering Challenges
+## Engineering Challenges
 
 - **Scaling past a single monolith** — <cite index="37-1">the original monolith bundled authentication, catalog management, recommendations, streaming, billing, and support all together, so a single bug anywhere could threaten the whole app.</cite>
 - **Personalization at massive scale** — powering recommendations for hundreds of millions of different viewers, each with unique taste.
@@ -115,7 +115,7 @@ Netflix runs **thousands of microservices**, each owning one small piece of func
 
 ---
 
-## 💰 Infrastructure Cost Considerations
+## Infrastructure Cost Considerations
 
 - **Compute (AWS)** — thousands of microservices running continuously is Netflix's largest and most variable cost.
 - **CDN infrastructure (Open Connect)** — building and maintaining physical caching servers inside ISPs worldwide is a major, ongoing capital investment.
@@ -127,7 +127,7 @@ Netflix runs **thousands of microservices**, each owning one small piece of func
 
 ---
 
-## 🎯 Student Version
+## Student Version
 
 - **Frontend:** React, with a simple video player component (e.g., using the free, open-source Video.js library).
 - **Backend:** Node.js or Java/Spring Boot for a small set of services (catalog, user accounts, "watch history").
@@ -140,7 +140,7 @@ A great mini-project: build a simple recommendation feature based on what a user
 
 ---
 
-## 📚 Technologies Used (Summary Table)
+## Technologies Used (Summary Table)
 
 | Layer | Technology | Purpose |
 |---|---|---|
@@ -162,7 +162,7 @@ A great mini-project: build a simple recommendation feature based on what a user
 
 ---
 
-## 💡 Engineering Lessons
+## Engineering Lessons
 
 1. Monoliths are fine until they aren't — plan your architecture around your actual scale, not the scale you started at.
 2. A single outage can justify a multi-year architectural investment if the root cause is systemic.
@@ -177,7 +177,7 @@ A great mini-project: build a simple recommendation feature based on what a user
 
 ---
 
-## 🔗 References
+## References
 
 - Netflix Tech Blog (Official) — [netflixtechblog.com](https://netflixtechblog.com/)
 - Netflix Open Source Software Center — [netflix.github.io](https://netflix.github.io/)

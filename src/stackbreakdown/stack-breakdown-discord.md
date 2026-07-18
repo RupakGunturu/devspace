@@ -4,7 +4,7 @@
 
 ---
 
-## 📖 Product Overview
+## Product Overview
 
 Discord is a real-time communication platform built around text channels, voice/video calls, and community servers ("guilds"). It started in 2015 as a chat tool for gamers and has since grown into a general-purpose platform used by study groups, open-source projects, creators, and large brand communities alike.
 
@@ -20,7 +20,7 @@ Everything below is grounded in Discord's own public engineering blog, engineeri
 
 ---
 
-## 🖥️ Frontend Stack
+## Frontend Stack
 
 | Technology | Why it's used | Benefits |
 |---|---|---|
@@ -35,7 +35,7 @@ This is a fairly typical "web technologies + native shell" strategy: one core we
 
 ---
 
-## ⚙️ Backend Stack
+## Backend Stack
 
 Discord's backend is unusually well documented and unusually polyglot — a deliberate "use the right tool per problem" philosophy rather than a single company-wide stack.
 
@@ -53,7 +53,7 @@ Each Discord server ("guild") maps to a single lightweight Elixir process. <cite
 
 ---
 
-## 🗄️ Database
+## Database
 
 Discord's database story is one of its most-cited public engineering narratives — a company that outgrew three different databases as it scaled.
 
@@ -73,7 +73,7 @@ The actual migration was executed with zero downtime. <cite index="17-1">The tea
 
 ---
 
-## ☁️ Infrastructure
+## Infrastructure
 
 - **Cloud provider — Google Cloud Platform (GCP).** Discord's own engineering talks (including ScyllaDB Summit presentations) describe designing storage topologies specifically tuned for low latency on GCP, using local SSDs mirrored via RAID to persistent disks for a balance of speed and durability.
 - **Containers & orchestration** — Discord's services, particularly the Python API layer and various Rust/Go microservices, are widely understood to run in containerized, horizontally-scalable deployments (Docker + a Kubernetes-style orchestration layer), consistent with GCP-native deployment patterns. *This is standard industry practice for a company at Discord's scale; Discord has not published exhaustive detail on its container orchestration layer specifically.*
@@ -84,7 +84,7 @@ The actual migration was executed with zero downtime. <cite index="17-1">The tea
 
 ---
 
-## 🔌 APIs & Services
+## APIs & Services
 
 - **Voice/Video — WebRTC + custom SFU (Selective Forwarding Unit) infrastructure**, using the Opus audio codec, for real-time calls and screen sharing.
 - **Payments** — Discord Nitro subscriptions and server boosts require a payment processing integration (commonly understood to be a provider like Stripe for this class of consumer subscription business; not something Discord has detailed publicly).
@@ -97,7 +97,7 @@ The actual migration was executed with zero downtime. <cite index="17-1">The tea
 
 ---
 
-## 📈 Scaling Techniques
+## Scaling Techniques
 
 - **Actor-model process isolation.** <cite index="7-1">Instead of one massive web server handling all operations globally, Discord treats every chat community as an isolated, lightweight process in memory, so a spike or bug in one large community stays contained to that single process instead of crashing the system.</cite>
 - **Vertical scaling, pushed hard, before going horizontal.** <cite index="6-1">Discord has intentionally pushed the limits of vertical scaling to minimize complexity and cost, scaling individual backend servers from handling tens of thousands of concurrent users up to nearly two million concurrent users on a single server.</cite>
@@ -109,7 +109,7 @@ The actual migration was executed with zero downtime. <cite index="17-1">The tea
 
 ---
 
-## 🔒 Security & Reliability
+## Security & Reliability
 
 - **OAuth2** for third-party application authorization with granular, scoped permissions.
 - **Encrypted transport (TLS/HTTPS and encrypted WebSocket connections)** for all client-server communication — standard practice for any platform handling private messages at this scale.
@@ -121,7 +121,7 @@ The actual migration was executed with zero downtime. <cite index="17-1">The tea
 
 ---
 
-## ⚡ Performance Optimizations
+## Performance Optimizations
 
 - **Native/Rust NIFs for hot-path data structures** — instead of rewriting whole services, Discord selectively drops down into Rust only for the specific data structure or computation that's the actual bottleneck (e.g., the sorted-set Member List structure), keeping the surrounding system in the faster-to-develop Elixir.
 - **Garbage-collection avoidance for latency-sensitive services** — both the Read States rewrite (Go → Rust) and the messages database migration (Cassandra → ScyllaDB) were driven substantially by wanting to eliminate GC-induced latency spikes, not just raw throughput.
@@ -132,7 +132,7 @@ The actual migration was executed with zero downtime. <cite index="17-1">The tea
 
 ---
 
-## 📊 Engineering Challenges
+## Engineering Challenges
 
 **Fan-out at extreme scale.** <cite index="10-1">As guilds grow larger, distributing messages and events to more users creates exponentially more work for the single guild process coordinating that fan-out.</cite> <cite index="10-1">This came to a head in 2022 when the MidJourney community — which requires a Discord account to use — grew so quickly that its main server hit Discord's then-existing limit of around one million users on a single server.</cite> Discord's response involved a mix of passive sessions, distributing fan-out work via relays, and Rust-backed data structures for the Member List, ultimately unlocking multi-million-member guilds.
 
@@ -146,7 +146,7 @@ The actual migration was executed with zero downtime. <cite index="17-1">The tea
 
 ---
 
-## 💰 Infrastructure Cost Considerations
+## Infrastructure Cost Considerations
 
 Discord has not published exact infrastructure spend, but its own public engineering narratives strongly imply where the bulk of cost pressure comes from:
 
@@ -161,7 +161,7 @@ Discord has not published exact infrastructure spend, but its own public enginee
 
 ---
 
-## 🎯 Student Version
+## Student Version
 
 You obviously won't be operating at Discord's scale — but you can build a genuinely useful mini-Discord clone using the same core ideas at a fraction of the complexity.
 
@@ -187,7 +187,7 @@ This gives you a project that demonstrates real understanding of the same fundam
 
 ---
 
-## 📚 Technologies Used (Summary Table)
+## Technologies Used (Summary Table)
 
 | Layer | Technology | Purpose |
 |---|---|---|
@@ -207,7 +207,7 @@ This gives you a project that demonstrates real understanding of the same fundam
 
 ---
 
-## 💡 Engineering Lessons
+## Engineering Lessons
 
 1. **Pick the runtime for the problem, not the company's "default stack."** Discord runs Elixir, Rust, Python, and C++ side by side — each chosen for what it's uniquely good at.
 2. **Isolate failure domains aggressively.** One guild's crash shouldn't be able to take down another guild's experience — process-per-tenant isolation is a powerful, generalizable pattern.
@@ -224,7 +224,7 @@ This gives you a project that demonstrates real understanding of the same fundam
 
 ---
 
-## 🔗 References
+## References
 
 - Discord Engineering Blog — [Using Rust to Scale Elixir for 11 Million Concurrent Users](https://discord.com/blog/using-rust-to-scale-elixir-for-11-million-concurrent-users)
 - Discord Engineering Blog — [Why Discord is Switching from Go to Rust](https://discord.com/blog/why-discord-is-switching-from-go-to-rust)

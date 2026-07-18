@@ -74,11 +74,14 @@ function TipCard({ tip }: { tip: typeof tips[0] }) {
 
   return (
     <CursorHover label={tip.title} color={COLOR_HEX[tip.category]}>
-      <motion.button
+      <motion.div
         layout
         onClick={() => setIsExpanded((prev) => !prev)}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") setIsExpanded((prev) => !prev); }}
         className={cn(
-          "sticker block w-full rounded-md bg-paper p-5 text-left transition-shadow hover:shadow-md",
+          "sticker block w-full rounded-md bg-paper p-5 text-left transition-shadow hover:shadow-md cursor-pointer",
           isExpanded && "ring-2 ring-yellow",
         )}
         animate={{ height: isExpanded ? "auto" : 160 }}
@@ -146,7 +149,7 @@ function TipCard({ tip }: { tip: typeof tips[0] }) {
             </motion.p>
           )}
         </AnimatePresence>
-      </motion.button>
+      </motion.div>
     </CursorHover>
   );
 }

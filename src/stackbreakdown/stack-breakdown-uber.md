@@ -4,7 +4,7 @@
 
 ---
 
-## 📖 Product Overview
+## Product Overview
 
 Uber connects riders with drivers (and, through Uber Eats, diners with couriers and restaurants) in real time. It's fundamentally a "physical world, real-time" problem: matching supply and demand, tracking live location, calculating dynamic pricing, and processing payments — all within seconds, across hundreds of cities worldwide.
 
@@ -12,7 +12,7 @@ Uber connects riders with drivers (and, through Uber Eats, diners with couriers 
 
 ---
 
-## 🖥️ Frontend Stack
+## Frontend Stack
 
 - **Native mobile apps** — <cite index="65-1">Android apps are written in Java, and iOS apps in Swift,</cite> chosen for maximum performance and full access to phone features like GPS.
 - **RxJava** — <cite index="68-1">used to simplify asynchronous and event-based programming on Android.</cite>
@@ -23,7 +23,7 @@ Uber connects riders with drivers (and, through Uber Eats, diners with couriers 
 
 ---
 
-## ⚙️ Backend Stack
+## Backend Stack
 
 Uber's backend evolved dramatically over time — a great real-world lesson in how architecture has to change as a company scales.
 
@@ -41,7 +41,7 @@ Uber's backend evolved dramatically over time — a great real-world lesson in h
 
 ---
 
-## 🗄️ Database
+## Database
 
 Uber deliberately uses different databases for different jobs rather than one-size-fits-all:
 
@@ -58,7 +58,7 @@ Uber deliberately uses different databases for different jobs rather than one-si
 
 ---
 
-## ☁️ Infrastructure
+## Infrastructure
 
 - **Docker + Mesos + Aurora** — <cite index="60-1">Uber runs its microservices in Docker containers on Mesos for scalable, consistent deployment, with Aurora handling long-running services and scheduled (cron) jobs.</cite>
 - **Internal build tooling** — <cite index="60-1">an internal "Application Platform" team built a template library that packages services into shippable Docker images automatically.</cite>
@@ -68,7 +68,7 @@ Uber deliberately uses different databases for different jobs rather than one-si
 
 ---
 
-## 🔌 APIs & Services
+## APIs & Services
 
 - **Maps & routing** — core to virtually everything Uber does: matching, ETAs, live tracking, and pricing all depend on accurate mapping data.
 - **Payments** — real-time, high-reliability payment processing for both riders/eaters and drivers/couriers (who need to get paid quickly and accurately).
@@ -77,7 +77,7 @@ Uber deliberately uses different databases for different jobs rather than one-si
 
 ---
 
-## 📈 Scaling Techniques
+## Scaling Techniques
 
 - **Microservices, then DOMA** — <cite index="66-1">grouping related microservices into clearly bounded "domains" with their own gateways, so growth in service count doesn't turn into unmanageable chaos.</cite>
 - **Purpose-built databases per workload** — using Schemaless for durability, Cassandra for speed, and Hadoop for analytics, instead of one database trying to do everything.
@@ -87,7 +87,7 @@ Uber deliberately uses different databases for different jobs rather than one-si
 
 ---
 
-## 🔒 Security & Reliability
+## Security & Reliability
 
 - **SSL termination and authentication at the edge (NGINX)** before requests even reach internal services.
 - **Rate limiting and load shedding** built directly into the API gateway to protect backend services from being overwhelmed.
@@ -96,7 +96,7 @@ Uber deliberately uses different databases for different jobs rather than one-si
 
 ---
 
-## ⚡ Performance Optimizations
+## Performance Optimizations
 
 - **Go for performance-critical services** — chosen specifically for efficiency and native concurrency support.
 - **Asynchronous processing everywhere** — from the original Node.js-based trip engine to Celery workers handling async workflows.
@@ -105,7 +105,7 @@ Uber deliberately uses different databases for different jobs rather than one-si
 
 ---
 
-## 📊 Engineering Challenges
+## Engineering Challenges
 
 - **Real-time matching in the physical world.** Uber's problems aren't just software problems — they involve real GPS data, real traffic, and real drivers moving through real cities, all needing near-instant coordination.
 - **Explosive microservice growth.** <cite index="65-1">Building thousands of independent services brings real challenges: discovering the right service becomes hard, interdependencies must be tightly monitored, and failures can cascade if not handled carefully</cite> — this is exactly what pushed Uber toward DOMA.
@@ -114,7 +114,7 @@ Uber deliberately uses different databases for different jobs rather than one-si
 
 ---
 
-## 💰 Infrastructure Cost Considerations
+## Infrastructure Cost Considerations
 
 - **Compute** — running thousands of always-on microservices across a global footprint is Uber's largest ongoing infrastructure cost.
 - **Database infrastructure** — running multiple specialized databases (Schemaless, Cassandra, Hadoop) in parallel, each optimized for a different job, adds cost but avoids forcing one system to do everything poorly.
@@ -125,7 +125,7 @@ Uber deliberately uses different databases for different jobs rather than one-si
 
 ---
 
-## 🎯 Student Version
+## Student Version
 
 - **Frontend:** React Native or Flutter for a shared rider/driver app codebase (cheaper for a solo/student project than fully native apps).
 - **Backend:** Node.js or Go (if you want to mirror Uber's real performance-focused choice) with Express or Gin.
@@ -138,7 +138,7 @@ A great mini-project: build a simple "rider requests a ride, nearest driver gets
 
 ---
 
-## 📚 Technologies Used (Summary Table)
+## Technologies Used (Summary Table)
 
 | Layer | Technology | Purpose |
 |---|---|---|
@@ -157,7 +157,7 @@ A great mini-project: build a simple "rider requests a ride, nearest driver gets
 
 ---
 
-## 💡 Engineering Lessons
+## Engineering Lessons
 
 1. Expect your stack to change dramatically as you scale — Uber went from PHP to Node.js/Python to Go/Java over about a decade.
 2. Use different databases for different jobs rather than forcing one system to handle everything.
@@ -170,7 +170,7 @@ A great mini-project: build a simple "rider requests a ride, nearest driver gets
 
 ---
 
-## 🔗 References
+## References
 
 - Uber Engineering Blog — [The Uber Engineering Tech Stack, Part I: The Foundation](https://www.uber.com/en-FI/blog/tech-stack-part-one-foundation/)
 - Uber Engineering Blog — [The Uber Engineering Tech Stack, Part II: The Edge and Beyond](https://www.uber.com/us/en/blog/uber-tech-stack-part-two/)

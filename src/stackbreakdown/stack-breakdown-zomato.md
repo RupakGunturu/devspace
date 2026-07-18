@@ -4,7 +4,7 @@
 
 ---
 
-## 📖 Product Overview
+## Product Overview
 
 Zomato is a food delivery and restaurant discovery app. Users browse restaurants, read reviews, order food, and track delivery live on a map. It's really three products in one: a search/discovery engine (finding restaurants), a transactional system (ordering + payment + delivery), and a recommendation engine (suggesting what to eat next).
 
@@ -12,7 +12,7 @@ It runs at huge scale — millions of orders a day, across thousands of cities �
 
 ---
 
-## 🖥️ Frontend Stack
+## Frontend Stack
 
 - **React** – used for Zomato.com and parts of the app UI. Zomato rebuilt its old PHP + jQuery website into a modern React-based frontend in recent years, moving to a "microfrontend" setup where different teams own different pieces of the page.
 - **TypeScript** – added along with the React rewrite for type safety on a large, multi-team codebase.
@@ -23,7 +23,7 @@ It runs at huge scale — millions of orders a day, across thousands of cities �
 
 ---
 
-## ⚙️ Backend Stack
+## Backend Stack
 
 Zomato runs on a **microservices architecture** — lots of small, independent services instead of one giant program. Each service owns one job: user accounts, restaurant listings, order processing, payments, and so on.
 
@@ -35,7 +35,7 @@ Zomato runs on a **microservices architecture** — lots of small, independent s
 
 ---
 
-## 🗄️ Database
+## Database
 
 | Database | Why it's used |
 |---|---|
@@ -48,7 +48,7 @@ Zomato runs on a **microservices architecture** — lots of small, independent s
 
 ---
 
-## ☁️ Infrastructure
+## Infrastructure
 
 - **Cloud provider:** AWS — for servers, storage, and scaling up/down based on demand.
 - **Docker + Kubernetes:** Package each microservice into a container and let Kubernetes automatically start more copies when traffic spikes (like dinner time).
@@ -57,7 +57,7 @@ Zomato runs on a **microservices architecture** — lots of small, independent s
 
 ---
 
-## 🔌 APIs & Services
+## APIs & Services
 
 - **Maps** – Google Maps (or similar) for restaurant locations, delivery routing, and live tracking.
 - **Payments** – integrated payment gateways plus Zomato's internal systems, built to be PCI-DSS compliant (an industry security standard for handling card data safely).
@@ -67,7 +67,7 @@ Zomato runs on a **microservices architecture** — lots of small, independent s
 
 ---
 
-## 📈 Scaling Techniques
+## Scaling Techniques
 
 - **Microservices** so different parts of the system scale independently — restaurant search might get 10x the traffic of the payments service, and each can scale on its own.
 - **Event-driven architecture with Kafka** to decouple services — one part of the system doesn't need to wait on another to finish its job.
@@ -77,7 +77,7 @@ Zomato runs on a **microservices architecture** — lots of small, independent s
 
 ---
 
-## 🔒 Security & Reliability
+## Security & Reliability
 
 - **OAuth 2.0** for login and authorization.
 - **HTTPS/TLS encryption** for all traffic.
@@ -87,7 +87,7 @@ Zomato runs on a **microservices architecture** — lots of small, independent s
 
 ---
 
-## ⚡ Performance Optimizations
+## Performance Optimizations
 
 - Caching hot data (popular restaurants, menus) in Redis.
 - CDN for images (restaurant photos, dish photos) so they load fast worldwide.
@@ -96,7 +96,7 @@ Zomato runs on a **microservices architecture** — lots of small, independent s
 
 ---
 
-## 📊 Engineering Challenges
+## Engineering Challenges
 
 - **Real-time logistics** — the moment you place an order, the system has to find the restaurant, assign a nearby delivery partner, process payment, and estimate delivery time — all within seconds.
 - **Never losing money** — payment flows must handle network failures gracefully without double-charging or losing an order.
@@ -105,7 +105,7 @@ Zomato runs on a **microservices architecture** — lots of small, independent s
 
 ---
 
-## 💰 Infrastructure Cost Considerations
+## Infrastructure Cost Considerations
 
 - **Compute** — running hundreds of microservices around the clock is the biggest ongoing cost.
 - **Database & caching** — storing and quickly retrieving huge amounts of order and restaurant data.
@@ -116,7 +116,7 @@ Zomato runs on a **microservices architecture** — lots of small, independent s
 
 ---
 
-## 🎯 Student Version
+## Student Version
 
 - **Frontend:** React (free, well-documented, huge community).
 - **Backend:** Node.js + Express, or Python + Django if you want to mirror Zomato's real stack.
@@ -129,7 +129,7 @@ A great simplified feature to build: a live order-tracking page using WebSockets
 
 ---
 
-## 📚 Technologies Used (Summary Table)
+## Technologies Used (Summary Table)
 
 | Layer | Technology | Purpose |
 |---|---|---|
@@ -145,7 +145,7 @@ A great simplified feature to build: a live order-tracking page using WebSockets
 
 ---
 
-## 💡 Engineering Lessons
+## Engineering Lessons
 
 1. Break big systems into small, focused microservices.
 2. Use event queues (like Kafka) so services don't block each other.
@@ -158,7 +158,7 @@ A great simplified feature to build: a live order-tracking page using WebSockets
 
 ---
 
-## 🔗 References
+## References
 
 - Zomato Engineering Blog — [blog.zomato.com/category/technology](https://blog.zomato.com/category/technology)
 - "Building Zomato's Thriving Pirate Community" — engineering leadership retrospective on rebuilding Zomato's frontend team

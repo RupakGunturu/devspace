@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/components/AuthProvider";
-import { authApi } from "@/lib/api";
 import { toast } from "@/components/ui/toaster";
-import GoogleIcon from "@/components/GoogleIcon";
 import GoogleLoginPopup from "@/components/GoogleLoginPopup";
 
 export default function Signup() {
@@ -38,14 +36,6 @@ export default function Signup() {
           className="mb-2 w-full"
           onSuccess={() => navigate("/")}
         />
-
-        <a
-          href={authApi.getGoogleUrl()}
-          className="mb-4 flex w-full items-center justify-center gap-3 rounded-md border-[1.5px] border-line bg-paper-dim px-4 py-3 text-sm font-semibold text-muted transition-all hover:border-foreground hover:text-foreground"
-        >
-          <GoogleIcon className="shrink-0" />
-          Continue with Google (Full page)
-        </a>
 
         <div className="relative my-4">
           <div className="absolute inset-0 flex items-center">
