@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { ToolLayout } from "../ToolLayout";
 import { ToolButton } from "../ToolButton";
+import { ToolFileInput } from "../ToolFileInput";
 
 export default function ImageColorPicker() {
   const [color, setColor] = useState("");
@@ -29,7 +30,7 @@ export default function ImageColorPicker() {
 
   return (
     <ToolLayout id="image-color-picker">
-      <input ref={fileRef} type="file" accept="image/*" onChange={handle} className="block w-full text-sm text-muted-foreground file:mr-4 file:py-2 file:px-4 file:rounded-sm file:border-0 file:text-sm file:font-medium file:bg-yellow file:text-white hover:file:opacity-90" />
+      <ToolFileInput accept="image/*" onChange={handle} label="Choose image" />
       <canvas ref={canvasRef} onClick={pick} className="max-w-full border border-border rounded cursor-crosshair" />
       {color && <div className="flex items-center gap-3 p-3 bg-paper-dim/50 border border-border rounded-sm"><div className="w-10 h-10 rounded border border-border" style={{ backgroundColor: color }} /><span className="font-mono text-sm text-foreground">{color}</span></div>}
     </ToolLayout>

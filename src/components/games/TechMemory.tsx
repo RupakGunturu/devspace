@@ -516,7 +516,7 @@ export function TechMemory() {
               {"⭐".repeat(stars)}
               {"☆".repeat(3 - stars)}
             </div>
-            <div className="grid w-full grid-cols-3 gap-2.5">
+            <div className="grid w-full grid-cols-3 max-sm:grid-cols-2 gap-2.5">
               {[
                 { val: String(moves), lbl: "Moves" },
                 { val: timeStr, lbl: "Time" },

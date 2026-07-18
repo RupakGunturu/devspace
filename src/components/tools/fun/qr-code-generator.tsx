@@ -3,11 +3,13 @@ import { ToolLayout } from "../ToolLayout";
 import { ToolInput } from "../ToolInput";
 import { ToolOutput } from "../ToolOutput";
 import { ToolButton } from "../ToolButton";
+import { useToolAccent } from "@/components/ToolAccentContext";
 
 export default function QrCodeGenerator() {
   const [text, setText] = useState("https://example.com");
   const [size, setSize] = useState(200);
   const [qrUrl, setQrUrl] = useState("");
+  const { color } = useToolAccent();
 
   const generate = () => {
     setQrUrl(`https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(text)}`);
@@ -32,7 +34,7 @@ export default function QrCodeGenerator() {
       {qrUrl && (
         <div className="flex flex-col items-center gap-4 p-6 bg-paper-dim/50 border border-border rounded-sm">
           <img src={qrUrl} alt="QR Code" width={size} height={size} className="rounded-sm" />
-          <a href={qrUrl} download className="text-sm text-yellow hover:underline">Download QR Code</a>
+          <a href={qrUrl} download className="text-sm hover:underline" style={{ color }}>Download QR Code</a>
         </div>
       )}
     </ToolLayout>

@@ -34,7 +34,7 @@ export default function PasswordGenerator() {
 
   return (
     <ToolLayout id="password-generator">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
         <div>
           <label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">Length</label>
           <input type="number" value={length} onChange={(e) => setLength(Number(e.target.value))} min={4} max={128} className="w-full p-2.5 bg-paper-dim/50 border border-border rounded-sm text-sm font-mono text-foreground" />
@@ -44,7 +44,7 @@ export default function PasswordGenerator() {
           <input type="number" value={count} onChange={(e) => setCount(Math.min(20, Math.max(1, Number(e.target.value))))} min={1} max={20} className="w-full p-2.5 bg-paper-dim/50 border border-border rounded-sm text-sm font-mono text-foreground" />
         </div>
       </div>
-      <div className="flex gap-4 flex-wrap">
+      <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2 sm:gap-4">
         {[
           { label: "Uppercase", value: uppercase, set: setUppercase },
           { label: "Lowercase", value: lowercase, set: setLowercase },

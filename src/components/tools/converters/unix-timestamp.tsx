@@ -22,7 +22,7 @@ export default function UnixTimestamp() {
   return (
     <ToolLayout id="unix-timestamp">
       <ToolInput value={input} onChange={setInput} placeholder="Enter date string or unix timestamp..." label="Input" rows={2} />
-      <div className="flex gap-2">
+      <div className="flex flex-col sm:flex-row gap-2">
         <ToolButton onClick={toUnix}>Date → Unix</ToolButton>
         <ToolButton onClick={toDate} variant="secondary">Unix → Date</ToolButton>
       </div>

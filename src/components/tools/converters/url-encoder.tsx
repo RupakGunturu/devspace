@@ -14,7 +14,7 @@ export default function UrlEncoder() {
   return (
     <ToolLayout id="url-encoder">
       <ToolInput value={input} onChange={setInput} placeholder="Enter URL or text..." label="Input" rows={4} />
-      <div className="flex gap-2">
+      <div className="flex flex-col sm:flex-row gap-2">
         <ToolButton onClick={encode}>Encode</ToolButton>
         <ToolButton onClick={decode} variant="secondary">Decode</ToolButton>
       </div>

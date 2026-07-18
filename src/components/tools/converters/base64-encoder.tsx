@@ -26,7 +26,7 @@ export default function Base64Encoder() {
   return (
     <ToolLayout id="base64-encoder">
       <ToolInput value={input} onChange={setInput} placeholder="Enter text to encode/decode..." label="Input" rows={6} />
-      <div className="flex gap-2">
+      <div className="flex flex-col sm:flex-row gap-2">
         <ToolButton onClick={encode}>Encode</ToolButton>
         <ToolButton onClick={decode} variant="secondary">Decode</ToolButton>
       </div>

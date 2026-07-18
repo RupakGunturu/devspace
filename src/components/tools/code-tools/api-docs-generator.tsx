@@ -3,6 +3,7 @@ import { ToolLayout } from "../ToolLayout";
 import { ToolInput } from "../ToolInput";
 import { ToolOutput } from "../ToolOutput";
 import { ToolButton } from "../ToolButton";
+import { ToolToggleGroup } from "../ToolToggleGroup";
 
 export default function ApiDocsGenerator() {
   const [endpoint, setEndpoint] = useState("/api/users");
@@ -17,9 +18,16 @@ export default function ApiDocsGenerator() {
   return (
     <ToolLayout id="api-docs-generator">
       <ToolInput value={endpoint} onChange={setEndpoint} placeholder="/api/users" label="Endpoint" rows={1} />
-      <div className="flex gap-2">
-        {(["GET", "POST", "PUT", "DELETE"]).map((m) => <button key={m} onClick={() => setMethod(m)} className={`px-3 py-1.5 text-xs rounded-full border transition-all ${method === m ? "bg-yellow text-white border-yellow" : "border-border text-muted-foreground"}`}>{m}</button>)}
-      </div>
+      <ToolToggleGroup
+        options={[
+          { value: "GET", label: "GET" },
+          { value: "POST", label: "POST" },
+          { value: "PUT", label: "PUT" },
+          { value: "DELETE", label: "DELETE" },
+        ]}
+        value={method}
+        onChange={setMethod}
+      />
       <ToolInput value={desc} onChange={setDesc} placeholder="Get all users" label="Description" rows={1} />
       <ToolButton onClick={generate}>Generate Docs</ToolButton>
       <ToolOutput value={output} />

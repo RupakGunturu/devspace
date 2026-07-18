@@ -22,7 +22,7 @@ export default function CurrencyFormatter() {
   return (
     <ToolLayout id="currency-formatter">
       <ToolInput value={amount} onChange={setAmount} placeholder="1234.56" label="Amount" rows={1} />
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">Currency</label>
           <select value={currency} onChange={(e) => setCurrency(e.target.value)} className="w-full p-3 bg-paper-dim/50 border border-border rounded-sm text-sm text-foreground">

@@ -19,12 +19,14 @@ export default function ZIndexManager() {
 
   return (
     <ToolLayout id="z-index-manager">
-      <div className="space-y-2">
+      <div className="space-y-3">
         {items.map((item, i) => (
-          <div key={i} className="flex gap-2 items-center">
-            <input value={item.name} onChange={(e) => update(i, "name", e.target.value)} placeholder="name" className="flex-1 p-1.5 bg-paper-dim/50 border border-border rounded text-xs font-mono text-foreground" />
-            <input type="number" value={item.zIndex} onChange={(e) => update(i, "zIndex", Number(e.target.value))} className="w-20 p-1.5 bg-paper-dim/50 border border-border rounded text-xs font-mono text-foreground" />
-            <button onClick={() => remove(i)} className="text-xs text-coral">✕</button>
+          <div key={i} className="flex flex-col sm:flex-row sm:items-center gap-2">
+            <input value={item.name} onChange={(e) => update(i, "name", e.target.value)} placeholder="name" className="flex-1 p-2 bg-paper-dim/50 border border-border rounded text-xs font-mono text-foreground" />
+            <div className="flex items-center gap-2">
+              <input type="number" value={item.zIndex} onChange={(e) => update(i, "zIndex", Number(e.target.value))} className="w-24 p-2 bg-paper-dim/50 border border-border rounded text-xs font-mono text-foreground" placeholder="z-index" />
+              <button onClick={() => remove(i)} className="text-sm text-coral">✕</button>
+            </div>
           </div>
         ))}
       </div>

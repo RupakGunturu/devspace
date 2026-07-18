@@ -26,10 +26,12 @@ export default function CssFilterBuilder() {
     <ToolLayout id="css-filter-builder">
       <div className="space-y-2">
         {Object.entries({ brightness: [0, 2], contrast: [0, 2], grayscale: [0, 1], blur: [0, 10], saturate: [0, 3], sepia: [0, 1], hueRotate: [-180, 180], invert: [0, 1] }).map(([key, [min, max]]) => (
-          <div key={key} className="flex items-center gap-3">
-            <span className="text-xs font-mono w-20 text-muted-foreground">{key}</span>
-            <input type="range" min={min} max={max} step={key === "blur" ? 0.5 : 0.1} value={filters[key as keyof typeof filters]} onChange={(e) => update(key, parseFloat(e.target.value))} className="flex-1 accent-yellow" />
-            <span className="text-xs font-mono w-12 text-right">{filters[key as keyof typeof filters]}</span>
+          <div key={key} className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
+            <span className="text-xs font-mono w-full sm:w-20 text-muted-foreground">{key}</span>
+            <div className="flex items-center gap-2 flex-1">
+              <input type="range" min={min} max={max} step={key === "blur" ? 0.5 : 0.1} value={filters[key as keyof typeof filters]} onChange={(e) => update(key, parseFloat(e.target.value))} className="flex-1 accent-yellow" />
+              <span className="text-xs font-mono w-12 text-right">{filters[key as keyof typeof filters]}</span>
+            </div>
           </div>
         ))}
       </div>

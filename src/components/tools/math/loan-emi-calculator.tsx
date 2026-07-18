@@ -23,7 +23,7 @@ export default function LoanEmiCalculator() {
 
   return (
     <ToolLayout id="loan-emi-calculator">
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <ToolInput value={principal} onChange={setPrincipal} placeholder="100000" label="Loan Amount ($)" rows={1} />
         <ToolInput value={rate} onChange={setRate} placeholder="8.5" label="Interest Rate (%)" rows={1} />
         <ToolInput value={years} onChange={setYears} placeholder="20" label="Years" rows={1} />

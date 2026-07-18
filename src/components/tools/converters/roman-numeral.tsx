@@ -29,7 +29,7 @@ export default function RomanNumeral() {
   return (
     <ToolLayout id="roman-numeral">
       <ToolInput value={input} onChange={setInput} placeholder="Enter number or Roman numeral..." label="Input" rows={1} />
-      <div className="flex gap-2">
+      <div className="flex flex-col sm:flex-row gap-2">
         <ToolButton onClick={toRomanBtn}>Number → Roman</ToolButton>
         <ToolButton onClick={fromRomanBtn} variant="secondary">Roman → Number</ToolButton>
       </div>

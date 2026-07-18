@@ -37,7 +37,7 @@ export default function TipCalculator() {
           <input type="number" value={people} onChange={(e) => setPeople(e.target.value)} min="1" className="w-full p-3 bg-paper-dim/50 border border-border rounded-sm text-sm font-mono text-foreground" />
         </div>
       </div>
-      <div className="flex gap-2">
+      <div className="flex flex-wrap gap-2">
         {[10, 15, 18, 20, 25].map((t) => <ToolButton key={t} onClick={() => setTipPercent(String(t))} variant="secondary">{t}%</ToolButton>)}
       </div>
       <ToolButton onClick={calculate}>Calculate</ToolButton>

@@ -2,12 +2,14 @@ import { useState } from "react";
 import { ToolLayout } from "../ToolLayout";
 import { ToolOutput } from "../ToolOutput";
 import { ToolButton } from "../ToolButton";
+import { useToolAccent } from "@/components/ToolAccentContext";
 
 const rules = ["AV:N", "AV:A", "AV:L", "AC:L", "AC:H", "PR:L", "PR:H", "UI:N", "UI:R", "S:C", "S:U", "C:N", "C:L", "C:H", "I:N", "I:L", "I:H", "A:N", "A:L", "A:H"];
 
 export default function CvssCalculator() {
   const [vector, setVector] = useState<string[]>(["AV:N", "AC:L", "PR:L", "UI:N", "S:U", "C:L", "I:L", "A:L"]);
   const [output, setOutput] = useState("");
+  const { color, fg } = useToolAccent();
 
   const toggle = (rule: string) => {
     const group = rule.split(":")[0];
@@ -29,7 +31,14 @@ export default function CvssCalculator() {
           <div key={g} className="flex gap-1.5 flex-wrap">
             <span className="text-xs font-mono text-muted-foreground w-8">{g}:</span>
             {rules.filter((r) => r.startsWith(g + ":")).map((r) => (
-              <button key={r} onClick={() => toggle(r)} className={`px-2 py-1 text-[10px] font-mono rounded border transition-all ${vector.includes(r) ? "bg-yellow text-white border-yellow" : "border-border text-muted-foreground"}`}>{r.split(":")[1]}</button>
+              <button
+                key={r}
+                onClick={() => toggle(r)}
+                className="px-2 py-1 text-[10px] font-mono rounded border transition-all"
+                style={vector.includes(r) ? { borderColor: color, backgroundColor: color, color: fg } : { borderColor: "var(--border)", color: "var(--muted-foreground)" }}
+              >
+                {r.split(":")[1]}
+              </button>
             ))}
           </div>
         ))}

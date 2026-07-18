@@ -16,7 +16,7 @@ export default function ScrollbarStyler() {
 
   return (
     <ToolLayout id="scrollbar-styler">
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div><label className="text-[10px] text-muted-foreground">Width: {width}px</label><input type="range" min="4" max="20" value={width} onChange={(e) => setWidth(Number(e.target.value))} className="w-full accent-yellow" /></div>
         <div><label className="text-[10px] text-muted-foreground">Radius: {radius}px</label><input type="range" min="0" max="10" value={radius} onChange={(e) => setRadius(Number(e.target.value))} className="w-full accent-yellow" /></div>
         <div><label className="text-[10px] text-muted-foreground">Thumb Color</label><input type="color" value={thumbColor} onChange={(e) => setThumbColor(e.target.value)} className="w-full h-8 bg-background border border-border rounded cursor-pointer" /></div>

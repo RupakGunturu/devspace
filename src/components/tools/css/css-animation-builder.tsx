@@ -33,7 +33,7 @@ export default function CssAnimationBuilder() {
 
   return (
     <ToolLayout id="css-animation-builder">
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div><label className="text-[10px] text-muted-foreground">Animation</label>
           <select value={name} onChange={(e) => setName(e.target.value)} className="w-full p-2 bg-background border border-border rounded text-xs font-mono">
             {keyframes.map((k) => <option key={k.name} value={k.name}>{k.name}</option>)}

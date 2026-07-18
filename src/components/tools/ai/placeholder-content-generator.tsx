@@ -3,6 +3,7 @@ import { ToolLayout } from "../ToolLayout";
 import { ToolInput } from "../ToolInput";
 import { ToolOutput } from "../ToolOutput";
 import { ToolButton } from "../ToolButton";
+import { ToolToggleGroup } from "../ToolToggleGroup";
 
 export default function PlaceholderContentGenerator() {
   const [type, setType] = useState("name");
@@ -21,9 +22,12 @@ export default function PlaceholderContentGenerator() {
 
   return (
     <ToolLayout id="placeholder-content-generator">
-      <div className="flex gap-2 mb-2">
-        {Object.keys(data).map((t) => <button key={t} onClick={() => setType(t)} className={`px-3 py-1.5 text-xs rounded-full border transition-all ${type === t ? "bg-yellow text-white border-yellow" : "border-border text-muted-foreground"}`}>{t}</button>)}
-      </div>
+      <ToolToggleGroup
+        options={Object.keys(data).map((t) => ({ value: t, label: t }))}
+        value={type}
+        onChange={setType}
+        className="mb-2"
+      />
       <div className="flex items-center gap-4">
         <div><label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">Count</label><input type="number" value={count} onChange={(e) => setCount(Math.min(10, Math.max(1, Number(e.target.value))))} className="w-20 p-2.5 bg-paper-dim/50 border border-border rounded-sm text-sm font-mono text-foreground" /></div>
         <ToolButton onClick={generate}>Generate</ToolButton>

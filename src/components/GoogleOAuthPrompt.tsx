@@ -113,14 +113,14 @@ export default function GoogleOAuthPrompt() {
 
   if (!oneTapFailed) {
     return (
-      <div className="pointer-events-none fixed right-6 top-20 z-30">
+      <div className="pointer-events-none fixed bottom-4 left-3 right-3 sm:bottom-auto sm:right-6 sm:left-auto sm:top-20 z-30">
         <div id="google-one-tap-container" className="pointer-events-auto" />
       </div>
     );
   }
 
   return (
-    <div className="fixed right-6 top-20 z-30 w-[300px] rounded-md border-2 border-line bg-paper p-5 shadow-lg">
+    <div className="fixed bottom-4 left-3 right-3 sm:bottom-auto sm:right-6 sm:left-auto sm:top-20 z-30 w-auto sm:w-[300px] rounded-md border-2 border-line bg-paper p-5 shadow-lg">
       <button
         type="button"
         onClick={handleDismiss}

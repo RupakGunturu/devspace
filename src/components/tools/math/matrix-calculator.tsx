@@ -3,6 +3,7 @@ import { ToolLayout } from "../ToolLayout";
 import { ToolInput } from "../ToolInput";
 import { ToolOutput } from "../ToolOutput";
 import { ToolButton } from "../ToolButton";
+import { ToolToggleGroup } from "../ToolToggleGroup";
 
 export default function MatrixCalculator() {
   const [a, setA] = useState("1,2\n3,4");
@@ -28,10 +29,16 @@ export default function MatrixCalculator() {
 
   return (
     <ToolLayout id="matrix-calculator">
-      <div className="flex gap-2 mb-2">
-        {(["add", "multiply"] as const).map((o) => <button key={o} onClick={() => setOp(o)} className={`px-3 py-1.5 text-xs rounded-full border transition-all ${op === o ? "bg-yellow text-white border-yellow" : "border-border text-muted-foreground"}`}>{o === "add" ? "A + B" : "A × B"}</button>)}
-      </div>
-      <div className="grid grid-cols-2 gap-4">
+      <ToolToggleGroup
+        options={[
+          { value: "add", label: "A + B" },
+          { value: "multiply", label: "A × B" },
+        ]}
+        value={op}
+        onChange={(v) => setOp(v as any)}
+        className="mb-2"
+      />
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <ToolInput value={a} onChange={setA} placeholder="1,2\n3,4" label="Matrix A" rows={3} />
         <ToolInput value={b} onChange={setB} placeholder="5,6\n7,8" label="Matrix B" rows={3} />
       </div>

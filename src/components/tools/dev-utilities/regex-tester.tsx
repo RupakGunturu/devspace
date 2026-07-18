@@ -3,6 +3,7 @@ import { ToolLayout } from "../ToolLayout";
 import { ToolInput } from "../ToolInput";
 import { ToolOutput } from "../ToolOutput";
 import { ToolButton } from "../ToolButton";
+import { useToolAccent } from "@/components/ToolAccentContext";
 
 export default function RegexTester() {
   const [pattern, setPattern] = useState("");
@@ -10,6 +11,7 @@ export default function RegexTester() {
   const [testString, setTestString] = useState("");
   const [matches, setMatches] = useState<string[]>([]);
   const [error, setError] = useState("");
+  const { color } = useToolAccent();
 
   const test = () => {
     try {
@@ -37,7 +39,7 @@ export default function RegexTester() {
     if (!pattern || error) return testString;
     try {
       const regex = new RegExp(pattern, flags.replace("g", ""));
-      return testString.replace(regex, (m) => `<mark class="bg-yellow-300 text-black px-0.5 rounded">${m}</mark>`);
+      return testString.replace(regex, (m) => `<mark style="background-color:${color};color:#fff;padding:0 2px;border-radius:4px">${m}</mark>`);
     } catch { return testString; }
   })();
 
@@ -46,11 +48,11 @@ export default function RegexTester() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2">Pattern</label>
-          <input value={pattern} onChange={(e) => setPattern(e.target.value)} placeholder="e.g. \d+|[a-z]+" className="w-full p-3 bg-paper-dim/50 border border-border rounded-sm text-sm font-mono text-foreground focus:outline-none focus:border-yellow/50" />
+          <input value={pattern} onChange={(e) => setPattern(e.target.value)} placeholder="e.g. \d+|[a-z]+" className="w-full p-3 bg-input-bg border border-border rounded-md text-sm font-mono text-input-text focus:outline-none" style={{ ["--tw-ring-color" as string]: color }} onFocus={(e) => { e.currentTarget.style.borderColor = color; }} onBlur={(e) => { e.currentTarget.style.borderColor = ""; }} />
         </div>
         <div>
           <label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2">Flags</label>
-          <input value={flags} onChange={(e) => setFlags(e.target.value)} placeholder="g, i, m" className="w-full p-3 bg-paper-dim/50 border border-border rounded-sm text-sm font-mono text-foreground focus:outline-none focus:border-yellow/50" />
+          <input value={flags} onChange={(e) => setFlags(e.target.value)} placeholder="g, i, m" className="w-full p-3 bg-input-bg border border-border rounded-md text-sm font-mono text-input-text focus:outline-none" style={{ ["--tw-ring-color" as string]: color }} onFocus={(e) => { e.currentTarget.style.borderColor = color; }} onBlur={(e) => { e.currentTarget.style.borderColor = ""; }} />
         </div>
       </div>
       <ToolInput value={testString} onChange={setTestString} placeholder="Enter test string..." label="Test String" rows={5} />
@@ -58,7 +60,7 @@ export default function RegexTester() {
       {error && <p className="text-sm text-coral font-mono">Error: {error}</p>}
       <div className="w-full">
         <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2 block">Highlighted Matches</span>
-        <div className="w-full min-h-[60px] p-4 bg-paper-dim/50 border border-border rounded-sm text-sm font-mono text-foreground whitespace-pre-wrap" dangerouslySetInnerHTML={{ __html: highlighted }} />
+        <div className="w-full min-h-[60px] p-4 bg-input-bg border border-border rounded-md text-sm font-mono text-input-text whitespace-pre-wrap" dangerouslySetInnerHTML={{ __html: highlighted }} />
       </div>
       <div className="w-full">
         <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2 block">Matches ({matches.length})</span>

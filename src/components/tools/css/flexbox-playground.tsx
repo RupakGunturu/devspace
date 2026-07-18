@@ -15,7 +15,7 @@ export default function FlexboxPlayground() {
 
   return (
     <ToolLayout id="flexbox-playground">
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div><label className="text-[10px] text-muted-foreground">Direction</label><select value={direction} onChange={(e) => setDirection(e.target.value)} className="w-full p-2 bg-paper-dim/50 border border-border rounded text-xs text-foreground"><option>row</option><option>row-reverse</option><option>column</option><option>column-reverse</option></select></div>
         <div><label className="text-[10px] text-muted-foreground">Justify</label><select value={justify} onChange={(e) => setJustify(e.target.value)} className="w-full p-2 bg-paper-dim/50 border border-border rounded text-xs text-foreground"><option>flex-start</option><option>flex-end</option><option>center</option><option>space-between</option><option>space-around</option><option>space-evenly</option></select></div>
         <div><label className="text-[10px] text-muted-foreground">Align</label><select value={align} onChange={(e) => setAlign(e.target.value)} className="w-full p-2 bg-paper-dim/50 border border-border rounded text-xs text-foreground"><option>stretch</option><option>flex-start</option><option>flex-end</option><option>center</option></select></div>

@@ -23,7 +23,7 @@ export default function DateDifferenceCalculator() {
 
   return (
     <ToolLayout id="date-difference-calculator">
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div><label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">Start Date</label><input type="date" value={date1} onChange={(e) => setDate1(e.target.value)} className="w-full p-3 bg-paper-dim/50 border border-border rounded-sm text-sm font-mono text-foreground" /></div>
         <div><label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">End Date</label><input type="date" value={date2} onChange={(e) => setDate2(e.target.value)} className="w-full p-3 bg-paper-dim/50 border border-border rounded-sm text-sm font-mono text-foreground" /></div>
       </div>

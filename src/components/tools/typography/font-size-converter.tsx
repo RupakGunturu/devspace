@@ -3,6 +3,7 @@ import { ToolLayout } from "../ToolLayout";
 import { ToolInput } from "../ToolInput";
 import { ToolOutput } from "../ToolOutput";
 import { ToolButton } from "../ToolButton";
+import { ToolToggleGroup } from "../ToolToggleGroup";
 
 export default function FontSizeConverter() {
   const [input, setInput] = useState("");
@@ -23,9 +24,18 @@ export default function FontSizeConverter() {
 
   return (
     <ToolLayout id="font-size-converter">
-      <div className="flex gap-2 mb-2">
-        {(["px", "pt", "em", "rem", "percent"] as const).map((u) => <button key={u} onClick={() => setUnit(u)} className={`px-3 py-1.5 text-xs rounded-full border transition-all ${unit === u ? "bg-yellow text-white border-yellow" : "border-border text-muted-foreground"}`}>{u}</button>)}
-      </div>
+      <ToolToggleGroup
+        options={[
+          { value: "px", label: "px" },
+          { value: "pt", label: "pt" },
+          { value: "em", label: "em" },
+          { value: "rem", label: "rem" },
+          { value: "percent", label: "%" },
+        ]}
+        value={unit}
+        onChange={(v) => setUnit(v as any)}
+        className="mb-2"
+      />
       <ToolInput value={input} onChange={setInput} placeholder={`Enter value in ${unit}...`} label="Value" rows={1} />
       <ToolButton onClick={convert}>Convert</ToolButton>
       <ToolOutput value={output} />

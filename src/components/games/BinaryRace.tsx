@@ -330,7 +330,7 @@ export function BinaryRace() {
   return (
     <div className="mx-auto flex w-full max-w-[640px] flex-col gap-4">
       {/* Stats */}
-      <div className="grid grid-cols-4 gap-2.5 max-sm:grid-cols-2">
+      <div className="grid grid-cols-1 sm:grid-cols-4 gap-2.5 max-sm:grid-cols-2">
         {[
           { lbl: "Score", val: String(score), cls: "text-green" },
           {
@@ -455,7 +455,7 @@ export function BinaryRace() {
       />
 
       {/* Tap pad */}
-      <div className="grid grid-cols-3 gap-2">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
         <button
           type="button"
           onClick={() => tapBit("0")}
@@ -483,7 +483,7 @@ export function BinaryRace() {
       </div>
 
       {/* Bit reference */}
-      <div className="grid grid-cols-8 gap-1 rounded-lg border border-line bg-paper-dim p-2.5 text-center">
+      <div className="grid grid-cols-4 sm:grid-cols-8 gap-1 rounded-lg border border-line bg-paper-dim p-2.5 text-center">
         {[7, 6, 5, 4, 3, 2, 1, 0].map((p) => (
           <div key={p}>
             <div className="font-mono text-[10px] text-muted">
@@ -513,7 +513,7 @@ export function BinaryRace() {
       )}
 
       {/* Actions */}
-      <div className="grid grid-cols-3 gap-2 max-sm:grid-cols-2">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 max-sm:grid-cols-2">
         <button
           type="button"
           onClick={showHintFn}

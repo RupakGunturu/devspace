@@ -152,7 +152,7 @@ export function BugFinder() {
           <span className={`font-bold ${timeLeft <= 5 ? "text-coral" : ""}`}>{timeLeft}s</span>
         </div>
       </div>
-      <div className="overflow-hidden rounded-md border-2 border-ink bg-ink">
+      <div className="overflow-hidden rounded-md border-2 border-ink bg-ink overflow-x-auto">
         {snippet.lines.map((line, i) => {
           const highlight =
             status !== "playing" && i === snippet.bug ? "bg-coral text-ink" : "";

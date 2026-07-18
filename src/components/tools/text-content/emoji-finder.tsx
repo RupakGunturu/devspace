@@ -16,7 +16,7 @@ export default function EmojiFinder() {
   return (
     <ToolLayout id="emoji-finder">
       <ToolInput value={search} onChange={setSearch} placeholder="Search emojis (e.g. heart, fire, code)..." label="Search" rows={1} />
-      <div className="grid grid-cols-5 md:grid-cols-10 gap-2">
+      <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-10 gap-2">
         {filtered.map(([name, emoji]) => (
           <button key={name} onClick={() => navigator.clipboard.writeText(emoji)} className="p-2 text-2xl hover:bg-paper-dim rounded-sm transition-colors" title={name}>{emoji}</button>
         ))}

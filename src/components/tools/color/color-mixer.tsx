@@ -20,7 +20,7 @@ export default function ColorMixer() {
 
   return (
     <ToolLayout id="color-mixer">
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div><label className="text-[10px] text-muted-foreground">Color 1</label><input type="color" value={c1} onChange={(e) => setC1(e.target.value)} className="w-full h-10 bg-background border border-border rounded cursor-pointer" /></div>
         <div><label className="text-[10px] text-muted-foreground">Color 2</label><input type="color" value={c2} onChange={(e) => setC2(e.target.value)} className="w-full h-10 bg-background border border-border rounded cursor-pointer" /></div>
       </div>

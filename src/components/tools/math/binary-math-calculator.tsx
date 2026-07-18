@@ -3,6 +3,7 @@ import { ToolLayout } from "../ToolLayout";
 import { ToolInput } from "../ToolInput";
 import { ToolOutput } from "../ToolOutput";
 import { ToolButton } from "../ToolButton";
+import { ToolToggleGroup } from "../ToolToggleGroup";
 
 export default function BinaryMathCalculator() {
   const [a, setA] = useState("");
@@ -21,9 +22,14 @@ export default function BinaryMathCalculator() {
   return (
     <ToolLayout id="binary-math-calculator">
       <ToolInput value={a} onChange={setA} placeholder="1010" label="Binary A" rows={1} />
-      <div className="flex gap-2">
-        {(["add", "subtract"] as const).map((o) => <button key={o} onClick={() => setOp(o)} className={`px-3 py-1.5 text-xs rounded-full border transition-all ${op === o ? "bg-yellow text-white border-yellow" : "border-border text-muted-foreground"}`}>{o === "add" ? "+" : "-"}</button>)}
-      </div>
+      <ToolToggleGroup
+        options={[
+          { value: "add", label: "+" },
+          { value: "subtract", label: "-" },
+        ]}
+        value={op}
+        onChange={(v) => setOp(v as any)}
+      />
       <ToolInput value={b} onChange={setB} placeholder="1100" label="Binary B" rows={1} />
       <ToolButton onClick={calculate}>Calculate</ToolButton>
       <ToolOutput value={output} />

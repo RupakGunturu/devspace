@@ -14,7 +14,7 @@ export default function BinaryText() {
   return (
     <ToolLayout id="binary-text">
       <ToolInput value={input} onChange={setInput} placeholder="Enter text or binary (space-separated 8-bit)..." label="Input" rows={4} />
-      <div className="flex gap-2">
+      <div className="flex flex-col sm:flex-row gap-2">
         <ToolButton onClick={toBinary}>Text → Binary</ToolButton>
         <ToolButton onClick={toText} variant="secondary">Binary → Text</ToolButton>
       </div>

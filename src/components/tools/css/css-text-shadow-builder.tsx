@@ -16,14 +16,18 @@ export default function CssTextShadowBuilder() {
 
   return (
     <ToolLayout id="css-text-shadow-builder">
-      <div className="space-y-2">
+      <div className="space-y-3">
         {shadows.map((s, i) => (
-          <div key={i} className="flex gap-2 items-center">
-            <input type="number" value={s.x} onChange={(e) => update(i, "x", Number(e.target.value))} className="w-14 p-1.5 bg-paper-dim/50 border border-border rounded text-xs font-mono text-foreground" placeholder="X" />
-            <input type="number" value={s.y} onChange={(e) => update(i, "y", Number(e.target.value))} className="w-14 p-1.5 bg-paper-dim/50 border border-border rounded text-xs font-mono text-foreground" placeholder="Y" />
-            <input type="number" value={s.blur} onChange={(e) => update(i, "blur", Number(e.target.value))} className="w-14 p-1.5 bg-paper-dim/50 border border-border rounded text-xs font-mono text-foreground" placeholder="Blur" />
-            <input type="color" value={s.color} onChange={(e) => update(i, "color", e.target.value)} className="w-8 h-8 rounded border border-border cursor-pointer" />
-            <button onClick={() => remove(i)} className="text-xs text-coral">✕</button>
+          <div key={i} className="flex flex-col sm:flex-row sm:items-center gap-2">
+            <div className="flex gap-2">
+              <input type="number" value={s.x} onChange={(e) => update(i, "x", Number(e.target.value))} className="flex-1 sm:w-14 p-2 bg-paper-dim/50 border border-border rounded text-xs font-mono text-foreground" placeholder="X" />
+              <input type="number" value={s.y} onChange={(e) => update(i, "y", Number(e.target.value))} className="flex-1 sm:w-14 p-2 bg-paper-dim/50 border border-border rounded text-xs font-mono text-foreground" placeholder="Y" />
+              <input type="number" value={s.blur} onChange={(e) => update(i, "blur", Number(e.target.value))} className="flex-1 sm:w-14 p-2 bg-paper-dim/50 border border-border rounded text-xs font-mono text-foreground" placeholder="Blur" />
+            </div>
+            <div className="flex items-center gap-2">
+              <input type="color" value={s.color} onChange={(e) => update(i, "color", e.target.value)} className="w-9 h-9 rounded border border-border cursor-pointer" />
+              <button onClick={() => remove(i)} className="text-sm text-coral">✕</button>
+            </div>
           </div>
         ))}
       </div>

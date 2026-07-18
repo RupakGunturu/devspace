@@ -3,6 +3,7 @@ import { ToolLayout } from "../ToolLayout";
 import { ToolInput } from "../ToolInput";
 import { ToolOutput } from "../ToolOutput";
 import { ToolButton } from "../ToolButton";
+import { ToolToggleGroup } from "../ToolToggleGroup";
 
 export default function HexDecimalBinary() {
   const [input, setInput] = useState("");
@@ -20,9 +21,16 @@ export default function HexDecimalBinary() {
 
   return (
     <ToolLayout id="hex-decimal-binary">
-      <div className="flex gap-2 mb-2">
-        {(["hex", "dec", "bin"] as const).map((b) => <button key={b} onClick={() => setBase(b)} className={`px-3 py-1.5 text-xs rounded-full border transition-all ${base === b ? "bg-yellow text-white border-yellow" : "border-border text-muted-foreground"}`}>{b.toUpperCase()}</button>)}
-      </div>
+      <ToolToggleGroup
+        options={[
+          { value: "hex", label: "HEX" },
+          { value: "dec", label: "DEC" },
+          { value: "bin", label: "BIN" },
+        ]}
+        value={base}
+        onChange={(v) => setBase(v as any)}
+        className="mb-2"
+      />
       <ToolInput value={input} onChange={setInput} placeholder={`Enter ${base.toUpperCase()} number...`} label="Input" rows={1} />
       <ToolButton onClick={convert}>Convert</ToolButton>
       <ToolOutput value={output} />

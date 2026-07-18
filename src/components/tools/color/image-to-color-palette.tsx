@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { ToolLayout } from "../ToolLayout";
 import { ToolButton } from "../ToolButton";
+import { ToolFileInput } from "../ToolFileInput";
 
 export default function ImageToColorPalette() {
   const [colors, setColors] = useState<string[]>([]);
@@ -35,7 +36,7 @@ export default function ImageToColorPalette() {
   return (
     <ToolLayout id="image-to-color-palette">
       <canvas ref={canvasRef} className="hidden" />
-      <input ref={fileRef} type="file" accept="image/*" onChange={handle} className="block w-full text-sm text-muted-foreground file:mr-4 file:py-2 file:px-4 file:rounded-sm file:border-0 file:text-sm file:font-medium file:bg-yellow file:text-white hover:file:opacity-90" />
+      <ToolFileInput accept="image/*" onChange={handle} label="Choose image" />
       {colors.length > 0 && (
         <div className="space-y-2">
           <div className="flex gap-1 h-12 rounded-sm overflow-hidden">{colors.map((c) => <div key={c} className="flex-1" style={{ backgroundColor: c }} />)}</div>

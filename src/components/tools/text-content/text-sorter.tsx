@@ -3,6 +3,7 @@ import { ToolLayout } from "../ToolLayout";
 import { ToolInput } from "../ToolInput";
 import { ToolOutput } from "../ToolOutput";
 import { ToolButton } from "../ToolButton";
+import { ToolToggleGroup } from "../ToolToggleGroup";
 
 export default function TextSorter() {
   const [input, setInput] = useState("");
@@ -19,8 +20,16 @@ export default function TextSorter() {
   return (
     <ToolLayout id="text-sorter">
       <ToolInput value={input} onChange={setInput} placeholder="Enter one item per line..." label="Input" rows={10} />
-      <div className="flex gap-2">
-        {(["alpha", "reverse", "numeric"] as const).map((m) => <button key={m} onClick={() => setMode(m)} className={`px-3 py-1.5 text-xs rounded-full border transition-all ${mode === m ? "bg-yellow text-white border-yellow" : "border-border text-muted-foreground"}`}>{m}</button>)}
+      <div className="flex flex-col sm:flex-row gap-2">
+        <ToolToggleGroup
+          options={[
+            { value: "alpha", label: "Alpha" },
+            { value: "reverse", label: "Reverse" },
+            { value: "numeric", label: "Numeric" },
+          ]}
+          value={mode}
+          onChange={(v) => setMode(v as any)}
+        />
         <ToolButton onClick={sort}>Sort</ToolButton>
       </div>
       <ToolOutput value={output} />

@@ -16,7 +16,7 @@ export default function CronBuilder() {
 
   return (
     <ToolLayout id="cron-builder">
-      <div className="grid grid-cols-5 gap-3">
+      <div className="grid grid-cols-3 sm:grid-cols-5 gap-3">
         {[{ l: "Min", v: minute, s: setMinute }, { l: "Hour", v: hour, s: setHour }, { l: "Day", v: dom, s: setDom }, { l: "Month", v: month, s: setMonth }, { l: "Week", v: dow, s: setDow }].map((f) => (
           <div key={f.l}><label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">{f.l}</label><input value={f.v} onChange={(e) => f.s(e.target.value)} className="w-full p-2.5 bg-paper-dim/50 border border-border rounded-sm text-sm font-mono text-foreground text-center" /></div>
         ))}

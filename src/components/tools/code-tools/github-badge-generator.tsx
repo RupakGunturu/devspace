@@ -15,7 +15,7 @@ export default function GithubBadgeGenerator() {
 
   return (
     <ToolLayout id="github-badge-generator">
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <ToolInput value={label} onChange={setLabel} placeholder="build" label="Label" rows={1} />
         <ToolInput value={message} onChange={setMessage} placeholder="passing" label="Message" rows={1} />
         <div><label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">Color</label><select value={color} onChange={(e) => setColor(e.target.value)} className="w-full p-3 bg-paper-dim/50 border border-border rounded-sm text-sm text-foreground">{colors.map((c) => <option key={c} value={c}>{c}</option>)}</select></div>

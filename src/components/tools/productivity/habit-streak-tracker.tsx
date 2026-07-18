@@ -19,7 +19,7 @@ export default function HabitStreakTracker() {
 
   return (
     <ToolLayout id="habit-streak-tracker">
-      <div className="flex gap-2">
+      <div className="flex flex-col sm:flex-row gap-2">
         <input value={newHabit} onChange={(e) => setNewHabit(e.target.value)} onKeyDown={(e) => e.key === "Enter" && add()} placeholder="New habit..." className="flex-1 p-3 bg-paper-dim/50 border border-border rounded-sm text-sm text-foreground" />
         <ToolButton onClick={add}>Add</ToolButton>
       </div>
@@ -30,7 +30,7 @@ export default function HabitStreakTracker() {
           return (
             <div key={i} className="flex items-center justify-between p-3 bg-paper-dim/50 border border-border rounded-sm">
               <div><span className="text-sm font-medium text-foreground">{h.name}</span><span className="text-xs text-muted-foreground ml-2">{h.streak} day streak 🔥</span></div>
-              <div className="flex gap-2">
+              <div className="flex flex-col sm:flex-row gap-2">
                 <button onClick={() => complete(i)} className={`px-2 py-1 text-xs rounded ${done ? "bg-coral/10 text-coral" : "bg-paper-dim text-muted-foreground hover:text-foreground"}`}>{done ? "Done ✓" : "Complete"}</button>
                 <button onClick={() => remove(i)} className="text-xs text-coral hover:text-coral px-1">✕</button>
               </div>

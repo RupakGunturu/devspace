@@ -40,7 +40,7 @@ export default function AES() {
     <ToolLayout id="aes-encrypt-decrypt">
       <ToolInput value={input} onChange={setInput} placeholder="Text to encrypt/decrypt" label="Text" rows={3} />
       <ToolInput value={key} onChange={setKey} placeholder="16-char key" label="Key (16 chars)" rows={1} />
-      <div className="flex gap-2">
+      <div className="flex flex-col sm:flex-row gap-2">
         <ToolButton onClick={encrypt}>Encrypt</ToolButton>
         <ToolButton onClick={decrypt} variant="secondary">Decrypt</ToolButton>
       </div>

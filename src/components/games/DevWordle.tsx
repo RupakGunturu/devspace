@@ -129,7 +129,7 @@ export function DevWordle() {
                 return (
                   <div
                     key={ci}
-                    className={`flex h-11 w-11 items-center justify-center border-2 font-display text-xl font-bold ${tileClass(v?.[ci])}`}
+                    className={`flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center border-2 font-display text-lg sm:text-xl font-bold ${tileClass(v?.[ci])}`}
                   >
                     {c}
                   </div>
@@ -157,7 +157,7 @@ export function DevWordle() {
                 <button
                   key={k}
                   onClick={() => press(k)}
-                  className={`min-w-[26px] rounded-sm border-2 px-1.5 py-2 font-mono text-xs font-bold ${tileClass(keyState[k])}`}
+                  className={`min-w-[22px] sm:min-w-[26px] rounded-sm border-2 px-1 sm:px-1.5 py-2 font-mono text-[10px] sm:text-xs font-bold ${tileClass(keyState[k])}`}
                 >
                   {k}
                 </button>

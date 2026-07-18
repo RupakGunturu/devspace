@@ -3,6 +3,7 @@ import { ToolLayout } from "../ToolLayout";
 import { ToolInput } from "../ToolInput";
 import { ToolOutput } from "../ToolOutput";
 import { ToolButton } from "../ToolButton";
+import { ToolToggleGroup } from "../ToolToggleGroup";
 
 export default function GstTaxCalculator() {
   const [amount, setAmount] = useState("");
@@ -26,10 +27,16 @@ export default function GstTaxCalculator() {
 
   return (
     <ToolLayout id="gst-tax-calculator">
-      <div className="flex gap-2 mb-2">
-        {(["exclusive", "inclusive"] as const).map((m) => <button key={m} onClick={() => setMode(m)} className={`px-3 py-1.5 text-xs rounded-full border transition-all ${mode === m ? "bg-yellow text-white border-yellow" : "border-border text-muted-foreground"}`}>{m === "exclusive" ? "Add Tax" : "Extract Tax"}</button>)}
-      </div>
-      <div className="grid grid-cols-2 gap-4">
+      <ToolToggleGroup
+        options={[
+          { value: "exclusive", label: "Add Tax" },
+          { value: "inclusive", label: "Extract Tax" },
+        ]}
+        value={mode}
+        onChange={(v) => setMode(v as any)}
+        className="mb-2"
+      />
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <ToolInput value={amount} onChange={setAmount} placeholder="100" label="Amount ($)" rows={1} />
         <ToolInput value={rate} onChange={setRate} placeholder="18" label="GST Rate (%)" rows={1} />
       </div>

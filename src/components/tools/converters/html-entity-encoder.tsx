@@ -14,7 +14,7 @@ export default function HtmlEntityEncoder() {
   return (
     <ToolLayout id="html-entity-encoder">
       <ToolInput value={input} onChange={setInput} placeholder="Enter text..." label="Input" rows={4} />
-      <div className="flex gap-2">
+      <div className="flex flex-col sm:flex-row gap-2">
         <ToolButton onClick={encode}>Encode</ToolButton>
         <ToolButton onClick={decode} variant="secondary">Decode</ToolButton>
       </div>

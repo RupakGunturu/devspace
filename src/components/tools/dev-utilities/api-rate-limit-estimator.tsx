@@ -37,7 +37,7 @@ export default function ApiRateLimitEstimator() {
 
   return (
     <ToolLayout id="api-rate-limit-estimator">
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <ToolInput value={requests} onChange={setRequests} placeholder="1000" label="Max Requests" rows={1} />
         <ToolInput value={window} onChange={setWindow} placeholder="60" label="Time Window (seconds)" rows={1} />
       </div>

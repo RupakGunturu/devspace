@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ToolLayout } from "../ToolLayout";
 import { ToolOutput } from "../ToolOutput";
 import { ToolButton } from "../ToolButton";
+import { ToolToggleGroup } from "../ToolToggleGroup";
 
 const shortcuts: Record<string, Record<string, string>> = {
   "VS Code": { "Ctrl+P": "Quick Open", "Ctrl+Shift+P": "Command Palette", "Ctrl+`": "Toggle Terminal", "Ctrl+D": "Select Next Occurrence", "Ctrl+Shift+K": "Delete Line", "Alt+↑/↓": "Move Line", "Ctrl+/": "Toggle Comment", "Ctrl+Shift+L": "Select All Occurrences" },
@@ -14,9 +15,11 @@ export default function KeyboardShortcutCheatsheet() {
 
   return (
     <ToolLayout id="keyboard-shortcut-cheatsheet">
-      <div className="flex gap-2">
-        {Object.keys(shortcuts).map((app) => <button key={app} onClick={() => setActive(app)} className={`px-3 py-1.5 text-xs rounded-full border transition-all ${active === app ? "bg-yellow text-white border-yellow" : "border-border text-muted-foreground"}`}>{app}</button>)}
-      </div>
+      <ToolToggleGroup
+        options={Object.keys(shortcuts).map((app) => ({ value: app, label: app }))}
+        value={active}
+        onChange={setActive}
+      />
       <div className="space-y-1.5">
         {Object.entries(shortcuts[active]).map(([key, desc]) => (
           <div key={key} className="flex items-center justify-between p-2.5 bg-paper-dim/50 border border-border rounded-sm">

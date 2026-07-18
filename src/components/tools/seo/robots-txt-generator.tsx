@@ -34,7 +34,7 @@ export default function RobotsTxtGenerator() {
           </div>
         ))}
       </div>
-      <div className="flex gap-2">
+      <div className="flex flex-col sm:flex-row gap-2">
         <ToolButton onClick={addRule} variant="secondary">Add Rule</ToolButton>
         <ToolButton onClick={generate}>Generate</ToolButton>
       </div>

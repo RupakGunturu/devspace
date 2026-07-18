@@ -14,7 +14,7 @@ export default function CubicBezierEditor() {
 
   return (
     <ToolLayout id="cubic-bezier-editor">
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {[{ l: "P1 X", v: p1x, s: setP1x }, { l: "P1 Y", v: p1y, s: setP1y }, { l: "P2 X", v: p2x, s: setP2x }, { l: "P2 Y", v: p2y, s: setP2y }].map((f) => (
           <div key={f.l}><label className="text-[10px] text-muted-foreground">{f.l}: {f.v}</label><input type="range" min="0" max="1" step="0.01" value={f.v} onChange={(e) => f.s(parseFloat(e.target.value))} className="w-full accent-yellow" /></div>
         ))}

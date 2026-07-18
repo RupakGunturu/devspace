@@ -644,7 +644,7 @@ export function HttpRoulette() {
   return (
     <div className="mx-auto flex w-full max-w-[680px] flex-col gap-5">
       {/* Stats */}
-      <div className="grid grid-cols-4 gap-2.5 max-sm:grid-cols-2">
+      <div className="grid grid-cols-1 sm:grid-cols-4 gap-2.5 max-sm:grid-cols-2">
         {[
           { lbl: "Score", val: String(score), cls: "text-green" },
           { lbl: "🔥 Streak", val: `×${getMult(streak).toFixed(1)}`, cls: "text-[var(--yellow)]" },
@@ -704,7 +704,7 @@ export function HttpRoulette() {
       </div>
 
       {/* Options */}
-      <div className="grid grid-cols-2 gap-2.5 max-sm:grid-cols-1">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-sm:grid-cols-1">
         {shuffledOptions.map(({ opt, origIdx }, i) => {
           const isPicked = selectedIdx === origIdx;
           const isCorrectOpt = answered && origIdx === ch?.correct;

@@ -26,7 +26,7 @@ export default function NoiseTextureGenerator() {
 
   return (
     <ToolLayout id="noise-texture-generator">
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div><label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">Size: {size}px</label><input type="range" min="50" max="400" value={size} onChange={(e) => setSize(Number(e.target.value))} className="w-full accent-yellow" /></div>
         <div><label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">Opacity: {Math.round(opacity * 100)}%</label><input type="range" min="0.01" max="0.3" step="0.01" value={opacity} onChange={(e) => setOpacity(parseFloat(e.target.value))} className="w-full accent-yellow" /></div>
       </div>

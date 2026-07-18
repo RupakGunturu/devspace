@@ -19,13 +19,15 @@ export default function ColorGradientGenerator() {
 
   return (
     <ToolLayout id="color-gradient-generator">
-      <div className="space-y-2">
+      <div className="space-y-3">
         {stops.map((s, i) => (
-          <div key={i} className="flex gap-2 items-center">
-            <input type="color" value={s.color} onChange={(e) => update(i, "color", e.target.value)} className="w-10 h-8 rounded border border-border cursor-pointer" />
+          <div key={i} className="flex flex-col sm:flex-row sm:items-center gap-2">
+            <div className="flex items-center gap-2">
+              <input type="color" value={s.color} onChange={(e) => update(i, "color", e.target.value)} className="w-10 h-9 rounded border border-border cursor-pointer" />
+              <span className="text-xs font-mono w-10 text-muted-foreground">{s.position}%</span>
+              <button onClick={() => remove(i)} className="text-sm text-coral">✕</button>
+            </div>
             <input type="range" min="0" max="100" value={s.position} onChange={(e) => update(i, "position", Number(e.target.value))} className="flex-1 accent-yellow" />
-            <span className="text-xs font-mono w-10">{s.position}%</span>
-            <button onClick={() => remove(i)} className="text-xs text-coral">✕</button>
           </div>
         ))}
       </div>

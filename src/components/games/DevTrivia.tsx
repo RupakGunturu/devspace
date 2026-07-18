@@ -314,7 +314,7 @@ export function DevTrivia() {
   return (
     <div className="mx-auto flex w-full max-w-[660px] flex-col gap-3.5">
       {/* Stats */}
-      <div className="grid grid-cols-4 gap-2.5 max-sm:grid-cols-2">
+      <div className="grid grid-cols-1 sm:grid-cols-4 gap-2.5 max-sm:grid-cols-2">
         {[
           { lbl: "Score", val: String(score), cls: "" },
           { lbl: "🔥 Streak", val: `×${getMult(streak).toFixed(1)}`, cls: "" },
@@ -358,7 +358,7 @@ export function DevTrivia() {
       </div>
 
       {/* Options */}
-      <div className="grid grid-cols-2 gap-2.5 max-sm:grid-cols-1">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-sm:grid-cols-1">
         {shuffledOpts.map((opt, i) => {
           const wasPicked = pickedIdx !== null && i === pickedIdx;
           const isCorrectOpt = answered && opt.isCorrect;

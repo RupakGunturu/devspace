@@ -21,12 +21,14 @@ export default function CssKeyframeBuilder() {
   return (
     <ToolLayout id="css-keyframe-builder">
       <div><label className="text-[10px] text-muted-foreground">Animation Name</label><input value={name} onChange={(e) => setName(e.target.value)} className="w-full p-2 bg-paper-dim/50 border border-border rounded text-sm font-mono text-foreground" /></div>
-      <div className="space-y-2">
+      <div className="space-y-3">
         {stops.map((s, i) => (
-          <div key={i} className="flex gap-2 items-start">
-            <input type="number" value={s.percent} onChange={(e) => update(i, "percent", Number(e.target.value))} className="w-16 p-2 bg-paper-dim/50 border border-border rounded text-sm font-mono text-foreground" />
+          <div key={i} className="flex flex-col sm:flex-row sm:items-center gap-2">
+            <div className="flex items-center gap-2">
+              <input type="number" value={s.percent} onChange={(e) => update(i, "percent", Number(e.target.value))} className="w-20 p-2 bg-paper-dim/50 border border-border rounded text-sm font-mono text-foreground" placeholder="%" />
+              <button onClick={() => removeStop(i)} className="text-sm text-coral">✕</button>
+            </div>
             <input value={s.props} onChange={(e) => update(i, "props", e.target.value)} placeholder="opacity: 1;" className="flex-1 p-2 bg-paper-dim/50 border border-border rounded text-sm font-mono text-foreground" />
-            <button onClick={() => removeStop(i)} className="text-xs text-coral mt-2">✕</button>
           </div>
         ))}
       </div>

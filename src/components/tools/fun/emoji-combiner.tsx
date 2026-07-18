@@ -13,7 +13,7 @@ export default function EmojiCombiner() {
 
   return (
     <ToolLayout id="emoji-combiner">
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <ToolInput value={emoji1} onChange={setEmoji1} placeholder="😀" label="Emoji 1" rows={1} />
         <ToolInput value={emoji2} onChange={setEmoji2} placeholder="🔥" label="Emoji 2" rows={1} />
       </div>

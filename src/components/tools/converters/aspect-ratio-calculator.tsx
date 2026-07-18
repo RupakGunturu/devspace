@@ -21,7 +21,7 @@ export default function AspectRatioCalculator() {
 
   return (
     <ToolLayout id="aspect-ratio-calculator">
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <ToolInput value={width} onChange={setWidth} placeholder="1920" label="Width" rows={1} />
         <ToolInput value={height} onChange={setHeight} placeholder="1080" label="Height" rows={1} />
       </div>

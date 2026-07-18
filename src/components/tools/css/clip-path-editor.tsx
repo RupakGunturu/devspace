@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ToolLayout } from "../ToolLayout";
 import { ToolOutput } from "../ToolOutput";
 import { ToolButton } from "../ToolButton";
+import { ToolToggleGroup } from "../ToolToggleGroup";
 
 export default function ClipPathEditor() {
   const [shape, setShape] = useState<"circle" | "ellipse" | "polygon" | "inset">("circle");
@@ -19,9 +20,17 @@ export default function ClipPathEditor() {
 
   return (
     <ToolLayout id="clip-path-editor">
-      <div className="flex gap-2 mb-2">
-        {(["circle", "ellipse", "polygon", "inset"] as const).map((s) => <button key={s} onClick={() => { setShape(s); setValues(presets[s][0]); }} className={`px-3 py-1.5 text-xs rounded-full border ${shape === s ? "bg-yellow text-white border-yellow" : "border-border text-muted-foreground"}`}>{s}</button>)}
-      </div>
+      <ToolToggleGroup
+        options={[
+          { value: "circle", label: "Circle" },
+          { value: "ellipse", label: "Ellipse" },
+          { value: "polygon", label: "Polygon" },
+          { value: "inset", label: "Inset" },
+        ]}
+        value={shape}
+        onChange={(v) => { setShape(v as any); setValues(presets[v as any][0]); }}
+        className="mb-2"
+      />
       <div className="flex gap-2 flex-wrap">
         {presets[shape].map((p) => <button key={p} onClick={() => setValues(p)} className="px-2 py-1 text-[10px] font-mono bg-paper-dim border border-border rounded hover:bg-paper-dim/80">{p}</button>)}
       </div>

@@ -1,4 +1,10 @@
 import { useState } from "react";
+import { ToolLayout } from "./ToolLayout";
+import { ToolInput } from "./ToolInput";
+import { ToolOutput } from "./ToolOutput";
+import { ToolButton } from "./ToolButton";
+import { ToolToggleGroup } from "./ToolToggleGroup";
+import { CopyButton } from "./CopyButton";
 
 type Algo = "SHA-1" | "SHA-256" | "SHA-512";
 
@@ -27,70 +33,42 @@ export function UuidHashGenerator() {
   const runHash = async () => setDigest(await hash(algo, text));
 
   return (
-    <div className="space-y-6 p-4">
+    <ToolLayout id="uuid-hash-generator">
       <div>
         <div className="mb-2 flex items-center justify-between">
-          <div className="font-display text-lg font-bold text-text">UUIDs (v4)</div>
-          <button
-            onClick={addUuid}
-            className="rounded-sm border-2 border-yellow bg-yellow px-3 py-1 font-mono text-xs font-bold text-ink"
-            style={{ boxShadow: "3px 3px 0 var(--coral)" }}
-          >
-            generate
-          </button>
+          <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">UUIDs (v4)</span>
+          <ToolButton onClick={addUuid} variant="secondary">Generate</ToolButton>
         </div>
         <ul className="space-y-1">
           {uuids.map((u, i) => (
             <li
               key={i}
-              className="flex items-center justify-between gap-3 rounded-sm border-2 border-line bg-ink p-2 font-mono text-xs text-text"
+              className="flex items-center justify-between gap-3 rounded-md border-2 border-line bg-input-bg p-2 font-mono text-xs text-input-text"
             >
               <span className="truncate">{u}</span>
-              <button
-                onClick={() => navigator.clipboard?.writeText(u)}
-                className="shrink-0 rounded-sm border-2 border-line px-2 py-0.5 text-[10px] text-muted hover:border-yellow hover:text-yellow"
-              >
-                copy
-              </button>
+              <CopyButton text={u} />
             </li>
           ))}
         </ul>
       </div>
 
       <div className="space-y-2">
-        <div className="font-display text-lg font-bold text-text">Hash</div>
-        <textarea
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          spellCheck={false}
-          className="h-24 w-full resize-none rounded-sm border-2 border-line bg-ink p-3 font-mono text-sm text-text outline-none focus:border-yellow"
-        />
+        <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">Hash</span>
+        <ToolInput value={text} onChange={setText} placeholder="Enter text..." label="" rows={3} />
         <div className="flex flex-wrap gap-2">
-          {(["SHA-1", "SHA-256", "SHA-512"] as Algo[]).map((a) => (
-            <button
-              key={a}
-              onClick={() => setAlgo(a)}
-              className={`rounded-full border-2 px-3 py-1 font-mono text-xs font-bold ${
-                algo === a ? "border-yellow bg-yellow text-ink" : "border-line text-muted hover:border-yellow hover:text-yellow"
-              }`}
-            >
-              {a}
-            </button>
-          ))}
-          <button
-            onClick={runHash}
-            className="ml-auto rounded-sm border-2 border-yellow bg-yellow px-3 py-1 font-mono text-xs font-bold text-ink"
-            style={{ boxShadow: "3px 3px 0 var(--coral)" }}
-          >
-            hash it
-          </button>
+          <ToolToggleGroup
+            options={[
+              { value: "SHA-1", label: "SHA-1" },
+              { value: "SHA-256", label: "SHA-256" },
+              { value: "SHA-512", label: "SHA-512" },
+            ]}
+            value={algo}
+            onChange={(v) => setAlgo(v as Algo)}
+          />
+          <ToolButton onClick={runHash}>Hash it</ToolButton>
         </div>
-        {digest && (
-          <pre className="overflow-auto whitespace-pre-wrap break-all rounded-sm border-2 border-line bg-ink p-3 font-mono text-xs text-text">
-            {digest}
-          </pre>
-        )}
       </div>
-    </div>
+      {digest && <ToolOutput value={digest} label="Digest" />}
+    </ToolLayout>
   );
 }

@@ -1,11 +1,14 @@
 import { useState, useRef } from "react";
 import { ToolLayout } from "../ToolLayout";
 import { ToolButton } from "../ToolButton";
+import { ToolFileInput } from "../ToolFileInput";
+import { useToolAccent } from "@/components/ToolAccentContext";
 
 export default function WatermarkAdder() {
   const [text, setText] = useState("WATERMARK");
   const [url, setUrl] = useState("");
   const fileRef = useRef<HTMLInputElement>(null);
+  const { color } = useToolAccent();
 
   const handle = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -28,9 +31,9 @@ export default function WatermarkAdder() {
 
   return (
     <ToolLayout id="watermark-adder">
-      <input ref={fileRef} type="file" accept="image/*" onChange={handle} className="block w-full text-sm text-muted-foreground file:mr-4 file:py-2 file:px-4 file:rounded-sm file:border-0 file:text-sm file:font-medium file:bg-yellow file:text-white hover:file:opacity-90" />
+      <ToolFileInput accept="image/*" onChange={handle} label="Choose image" />
       <div><label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">Watermark Text</label><input value={text} onChange={(e) => setText(e.target.value)} className="w-full p-2.5 bg-paper-dim/50 border border-border rounded-sm text-sm text-foreground" /></div>
-      {url && <div className="flex flex-col items-center gap-4"><img src={url} alt="Watermarked" className="max-h-48 border border-border rounded" /><a href={url} download="watermarked.png" className="text-sm text-yellow hover:underline">Download</a></div>}
+      {url && <div className="flex flex-col items-center gap-4"><img src={url} alt="Watermarked" className="max-h-48 border border-border rounded" /><a href={url} download="watermarked.png" className="text-sm hover:underline" style={{ color }}>Download</a></div>}
     </ToolLayout>
   );
 }

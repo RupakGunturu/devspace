@@ -3,6 +3,7 @@ import { ToolLayout } from "../ToolLayout";
 import { ToolInput } from "../ToolInput";
 import { ToolOutput } from "../ToolOutput";
 import { ToolButton } from "../ToolButton";
+import { ToolToggleGroup } from "../ToolToggleGroup";
 
 export default function CssUnitsConverter() {
   const [value, setValue] = useState("");
@@ -24,9 +25,18 @@ export default function CssUnitsConverter() {
 
   return (
     <ToolLayout id="css-units-converter">
-      <div className="flex gap-2 mb-2">
-        {["px", "rem", "pt", "em", "vw"].map((u) => <button key={u} onClick={() => setUnit(u)} className={`px-3 py-1.5 text-xs rounded-full border ${unit === u ? "bg-yellow text-white border-yellow" : "border-border text-muted-foreground"}`}>{u}</button>)}
-      </div>
+      <ToolToggleGroup
+        options={[
+          { value: "px", label: "px" },
+          { value: "rem", label: "rem" },
+          { value: "pt", label: "pt" },
+          { value: "em", label: "em" },
+          { value: "vw", label: "vw" },
+        ]}
+        value={unit}
+        onChange={setUnit}
+        className="mb-2"
+      />
       <ToolInput value={value} onChange={setValue} placeholder="16" label={`Value in ${unit}`} rows={1} />
       <ToolButton onClick={convert}>Convert</ToolButton>
       <ToolOutput value={output} />

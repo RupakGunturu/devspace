@@ -45,12 +45,12 @@ export default function RegexTesterExplainer() {
 
   return (
     <ToolLayout id="regex-tester-explainer">
-      <div className="grid grid-cols-[1fr_80px] gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-[1fr_80px] gap-3">
         <ToolInput value={pattern} onChange={setPattern} placeholder="e.g. ^[a-z]+$" label="Regex Pattern" rows={1} />
         <div><label className="text-[10px] text-muted-foreground">Flags</label><input value={flags} onChange={(e) => setFlags(e.target.value)} className="w-full p-2 bg-background border border-border rounded text-xs font-mono" /></div>
       </div>
       <ToolInput value={testString} onChange={setTestString} placeholder="Test string here..." label="Test String" rows={3} />
-      <div className="flex gap-2">
+      <div className="flex flex-col sm:flex-row gap-2">
         <ToolButton onClick={test}>Test Pattern</ToolButton>
         <ToolButton onClick={explain} variant="secondary">Show Common Patterns</ToolButton>
       </div>

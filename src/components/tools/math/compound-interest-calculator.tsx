@@ -24,7 +24,7 @@ export default function CompoundInterestCalculator() {
 
   return (
     <ToolLayout id="compound-interest-calculator">
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <ToolInput value={principal} onChange={setPrincipal} placeholder="10000" label="Principal ($)" rows={1} />
         <ToolInput value={rate} onChange={setRate} placeholder="5" label="Annual Rate (%)" rows={1} />
         <ToolInput value={years} onChange={setYears} placeholder="10" label="Years" rows={1} />

@@ -3,6 +3,7 @@ import { ToolLayout } from "../ToolLayout";
 import { ToolInput } from "../ToolInput";
 import { ToolOutput } from "../ToolOutput";
 import { ToolButton } from "../ToolButton";
+import { ToolToggleGroup } from "../ToolToggleGroup";
 
 export default function BmiCalculator() {
   const [weight, setWeight] = useState("");
@@ -30,10 +31,16 @@ export default function BmiCalculator() {
 
   return (
     <ToolLayout id="bmi-calculator">
-      <div className="flex gap-2 mb-2">
-        {(["metric", "imperial"] as const).map((u) => <button key={u} onClick={() => setUnit(u)} className={`px-3 py-1.5 text-xs rounded-full border transition-all ${unit === u ? "bg-yellow text-white border-yellow" : "border-border text-muted-foreground"}`}>{u}</button>)}
-      </div>
-      <div className="grid grid-cols-2 gap-4">
+      <ToolToggleGroup
+        options={[
+          { value: "metric", label: "Metric" },
+          { value: "imperial", label: "Imperial" },
+        ]}
+        value={unit}
+        onChange={(v) => setUnit(v as any)}
+        className="mb-2"
+      />
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">Weight ({unit === "metric" ? "kg" : "lbs"})</label>
           <input type="number" value={weight} onChange={(e) => setWeight(e.target.value)} className="w-full p-3 bg-paper-dim/50 border border-border rounded-sm text-sm font-mono text-foreground" />

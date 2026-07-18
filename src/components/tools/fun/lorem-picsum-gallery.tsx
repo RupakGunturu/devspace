@@ -10,7 +10,7 @@ export default function LoremPicsumGallery() {
   return (
     <ToolLayout id="lorem-picsum-gallery">
       <ToolButton onClick={generate}>Load Images</ToolButton>
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
         {images.map((id) => (
           <img key={id} src={`https://picsum.photos/seed/${id}/400/300`} alt={`Placeholder ${id}`} className="w-full h-40 object-cover rounded-sm border border-border" loading="lazy" />
         ))}

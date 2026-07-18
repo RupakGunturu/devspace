@@ -19,7 +19,7 @@ export default function GlassmorphismGenerator() {
 
   return (
     <ToolLayout id="glassmorphism-generator">
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div><label className="text-[10px] text-muted-foreground">Background Color</label><input type="color" value={bgColor} onChange={(e) => setBgColor(e.target.value)} className="w-full h-8 bg-background border border-border rounded cursor-pointer" /></div>
         <div><label className="text-[10px] text-muted-foreground">Border Color</label><input type="color" value={borderColor} onChange={(e) => setBorderColor(e.target.value)} className="w-full h-8 bg-background border border-border rounded cursor-pointer" /></div>
         <div><label className="text-[10px] text-muted-foreground">Blur: {blur}px</label><input type="range" min="0" max="20" value={blur} onChange={(e) => setBlur(Number(e.target.value))} className="w-full accent-yellow" /></div>

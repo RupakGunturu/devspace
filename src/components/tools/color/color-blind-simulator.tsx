@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { ToolLayout } from "../ToolLayout";
 import { ToolButton } from "../ToolButton";
+import { ToolFileInput } from "../ToolFileInput";
 
 export default function ColorBlindSimulator() {
   const [original, setOriginal] = useState("");
@@ -25,9 +26,9 @@ export default function ColorBlindSimulator() {
 
   return (
     <ToolLayout id="color-blind-simulator">
-      <input ref={fileRef} type="file" accept="image/*" onChange={handle} className="block w-full text-sm text-muted-foreground file:mr-4 file:py-2 file:px-4 file:rounded-sm file:border-0 file:text-sm file:font-medium file:bg-yellow file:text-white hover:file:opacity-90" />
+      <ToolFileInput accept="image/*" onChange={handle} label="Choose image" />
       {original && (
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div className="p-2 bg-paper-dim/50 border border-border rounded-sm text-center"><img src={original} alt="Original" className="max-h-32 mx-auto" /><span className="text-[10px] text-muted-foreground">Original</span></div>
           {Object.entries(filters).map(([name]) => (
             <div key={name} className="p-2 bg-paper-dim/50 border border-border rounded-sm text-center">

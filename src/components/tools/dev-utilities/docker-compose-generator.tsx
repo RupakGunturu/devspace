@@ -26,7 +26,7 @@ export default function DockerComposeGenerator() {
     <ToolLayout id="docker-compose-generator">
       <div className="space-y-3">
         {services.map((s, i) => (
-          <div key={i} className="grid grid-cols-4 gap-2 items-center">
+          <div key={i} className="grid grid-cols-1 sm:grid-cols-4 gap-2 items-center">
             <input value={s.name} onChange={(e) => updateService(i, "name", e.target.value)} placeholder="service" className="p-2 bg-paper-dim/50 border border-border rounded text-sm font-mono text-foreground" />
             <input value={s.image} onChange={(e) => updateService(i, "image", e.target.value)} placeholder="image" className="p-2 bg-paper-dim/50 border border-border rounded text-sm font-mono text-foreground" />
             <input value={s.ports} onChange={(e) => updateService(i, "ports", e.target.value)} placeholder="3000:3000" className="p-2 bg-paper-dim/50 border border-border rounded text-sm font-mono text-foreground" />
@@ -34,7 +34,7 @@ export default function DockerComposeGenerator() {
           </div>
         ))}
       </div>
-      <div className="flex gap-2">
+      <div className="flex flex-col sm:flex-row gap-2">
         <ToolButton onClick={addService} variant="secondary">Add Service</ToolButton>
         <ToolButton onClick={generate}>Generate</ToolButton>
       </div>

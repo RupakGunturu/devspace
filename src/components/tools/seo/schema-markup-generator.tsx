@@ -3,6 +3,7 @@ import { ToolLayout } from "../ToolLayout";
 import { ToolInput } from "../ToolInput";
 import { ToolOutput } from "../ToolOutput";
 import { ToolButton } from "../ToolButton";
+import { ToolToggleGroup } from "../ToolToggleGroup";
 
 export default function SchemaMarkupGenerator() {
   const [type, setType] = useState<"faq" | "article" | "breadcrumb">("faq");
@@ -21,9 +22,16 @@ export default function SchemaMarkupGenerator() {
 
   return (
     <ToolLayout id="schema-markup-generator">
-      <div className="flex gap-2 mb-2">
-        {(["faq", "article", "breadcrumb"] as const).map((t) => <button key={t} onClick={() => setType(t)} className={`px-3 py-1.5 text-xs rounded-full border transition-all ${type === t ? "bg-yellow text-white border-yellow" : "border-border text-muted-foreground"}`}>{t.toUpperCase()}</button>)}
-      </div>
+      <ToolToggleGroup
+        options={[
+          { value: "faq", label: "FAQ" },
+          { value: "article", label: "Article" },
+          { value: "breadcrumb", label: "Breadcrumb" },
+        ]}
+        value={type}
+        onChange={(v) => setType(v as any)}
+        className="mb-2"
+      />
       <div className="space-y-3">
         {type === "faq" && (<><ToolInput value={data.q1 || ""} onChange={(v) => setData({ ...data, q1: v })} placeholder="Question?" label="Question" rows={1} /><ToolInput value={data.a1 || ""} onChange={(v) => setData({ ...data, a1: v })} placeholder="Answer" label="Answer" rows={2} /></>)}
         {type === "article" && (<><ToolInput value={data.headline || ""} onChange={(v) => setData({ ...data, headline: v })} placeholder="Article title" label="Headline" rows={1} /><ToolInput value={data.author || ""} onChange={(v) => setData({ ...data, author: v })} placeholder="Author name" label="Author" rows={1} /><ToolInput value={data.date || ""} onChange={(v) => setData({ ...data, date: v })} placeholder="2024-01-15" label="Date" rows={1} /></>)}

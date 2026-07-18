@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ToolLayout } from "../ToolLayout";
 import { ToolOutput } from "../ToolOutput";
 import { ToolButton } from "../ToolButton";
+import { ToolToggleGroup } from "../ToolToggleGroup";
 
 export default function CssGradientBuilder() {
   const [type, setType] = useState<"linear" | "radial">("linear");
@@ -21,18 +22,25 @@ export default function CssGradientBuilder() {
 
   return (
     <ToolLayout id="css-gradient-builder">
-      <div className="flex gap-2 mb-2">
-        <button onClick={() => setType("linear")} className={`px-3 py-1.5 text-xs rounded-full border ${type === "linear" ? "bg-yellow text-white border-yellow" : "border-border text-muted-foreground"}`}>Linear</button>
-        <button onClick={() => setType("radial")} className={`px-3 py-1.5 text-xs rounded-full border ${type === "radial" ? "bg-yellow text-white border-yellow" : "border-border text-muted-foreground"}`}>Radial</button>
-      </div>
+      <ToolToggleGroup
+        options={[
+          { value: "linear", label: "Linear" },
+          { value: "radial", label: "Radial" },
+        ]}
+        value={type}
+        onChange={(v) => setType(v as any)}
+        className="mb-2"
+      />
       {type === "linear" && <div><label className="text-[10px] text-muted-foreground">Angle: {angle}°</label><input type="range" min="0" max="360" value={angle} onChange={(e) => setAngle(Number(e.target.value))} className="w-full accent-yellow" /></div>}
-      <div className="space-y-2">
+      <div className="space-y-3">
         {stops.map((s, i) => (
-          <div key={i} className="flex gap-2 items-center">
-            <input type="color" value={s.color} onChange={(e) => update(i, "color", e.target.value)} className="w-10 h-8 rounded border border-border cursor-pointer" />
+          <div key={i} className="flex flex-col sm:flex-row sm:items-center gap-2">
+            <div className="flex items-center gap-2">
+              <input type="color" value={s.color} onChange={(e) => update(i, "color", e.target.value)} className="w-10 h-9 rounded border border-border cursor-pointer" />
+              <span className="text-xs font-mono w-10 text-muted-foreground">{s.position}%</span>
+              <button onClick={() => removeStop(i)} className="text-sm text-coral">✕</button>
+            </div>
             <input type="range" min="0" max="100" value={s.position} onChange={(e) => update(i, "position", Number(e.target.value))} className="flex-1 accent-yellow" />
-            <span className="text-xs font-mono w-10">{s.position}%</span>
-            <button onClick={() => removeStop(i)} className="text-xs text-coral">✕</button>
           </div>
         ))}
       </div>

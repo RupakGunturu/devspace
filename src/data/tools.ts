@@ -511,19 +511,19 @@ export const TOOLS: Tool[] = shuffleArray([
 
 export const toolBySlug = (slug: string) => TOOLS.find((t) => t.slug === slug);
 
-export const CATEGORY_COLORS: Record<string, { bg: string; icon: string; darkBg: string }> = {
-  css: { bg: "bg-blue-100", icon: "text-blue-600", darkBg: "dark:bg-blue-900/30" },
-  color: { bg: "bg-pink-100", icon: "text-pink-600", darkBg: "dark:bg-pink-900/30" },
-  "dev-utilities": { bg: "bg-slate-100", icon: "text-slate-700", darkBg: "dark:bg-slate-800/50" },
-  "text-content": { bg: "bg-amber-100", icon: "text-amber-700", darkBg: "dark:bg-amber-900/30" },
-  converters: { bg: "bg-teal-100", icon: "text-teal-600", darkBg: "dark:bg-teal-900/30" },
-  ai: { bg: "bg-violet-100", icon: "text-violet-600", darkBg: "dark:bg-violet-900/30" },
-  seo: { bg: "bg-green-100", icon: "text-green-600", darkBg: "dark:bg-green-900/30" },
-  security: { bg: "bg-red-100", icon: "text-red-600", darkBg: "dark:bg-red-900/30" },
-  image: { bg: "bg-fuchsia-100", icon: "text-fuchsia-600", darkBg: "dark:bg-fuchsia-900/30" },
-  "code-tools": { bg: "bg-indigo-100", icon: "text-indigo-600", darkBg: "dark:bg-indigo-900/30" },
-  typography: { bg: "bg-stone-100", icon: "text-stone-600", darkBg: "dark:bg-stone-800/50" },
-  math: { bg: "bg-emerald-100", icon: "text-emerald-600", darkBg: "dark:bg-emerald-900/30" },
-  productivity: { bg: "bg-yellow-100", icon: "text-yellow-700", darkBg: "dark:bg-yellow-900/30" },
-  fun: { bg: "bg-orange-100", icon: "text-orange-600", darkBg: "dark:bg-orange-900/30" },
+export const CATEGORY_COLORS: Record<string, { bg: string; icon: string; darkBg: string; accent: string; accentFg: string }> = {
+  css: { bg: "bg-blue-100", icon: "text-blue-600", darkBg: "dark:bg-blue-900/30", accent: "#2563eb", accentFg: "#ffffff" },
+  color: { bg: "bg-pink-100", icon: "text-pink-600", darkBg: "dark:bg-pink-900/30", accent: "#db2777", accentFg: "#ffffff" },
+  "dev-utilities": { bg: "bg-slate-100", icon: "text-slate-700", darkBg: "dark:bg-slate-800/50", accent: "#475569", accentFg: "#ffffff" },
+  "text-content": { bg: "bg-amber-100", icon: "text-amber-700", darkBg: "dark:bg-amber-900/30", accent: "#b45309", accentFg: "#ffffff" },
+  converters: { bg: "bg-teal-100", icon: "text-teal-600", darkBg: "dark:bg-teal-900/30", accent: "#0d9488", accentFg: "#ffffff" },
+  ai: { bg: "bg-violet-100", icon: "text-violet-600", darkBg: "dark:bg-violet-900/30", accent: "#7c3aed", accentFg: "#ffffff" },
+  seo: { bg: "bg-green-100", icon: "text-green-600", darkBg: "dark:bg-green-900/30", accent: "#16a34a", accentFg: "#ffffff" },
+  security: { bg: "bg-red-100", icon: "text-red-600", darkBg: "dark:bg-red-900/30", accent: "#dc2626", accentFg: "#ffffff" },
+  image: { bg: "bg-fuchsia-100", icon: "text-fuchsia-600", darkBg: "dark:bg-fuchsia-900/30", accent: "#c026d3", accentFg: "#ffffff" },
+  "code-tools": { bg: "bg-indigo-100", icon: "text-indigo-600", darkBg: "dark:bg-indigo-900/30", accent: "#4f46e5", accentFg: "#ffffff" },
+  typography: { bg: "bg-stone-100", icon: "text-stone-600", darkBg: "dark:bg-stone-800/50", accent: "#57534e", accentFg: "#ffffff" },
+  math: { bg: "bg-emerald-100", icon: "text-emerald-600", darkBg: "dark:bg-emerald-900/30", accent: "#059669", accentFg: "#ffffff" },
+  productivity: { bg: "bg-yellow-100", icon: "text-yellow-700", darkBg: "dark:bg-yellow-900/30", accent: "#a16207", accentFg: "#ffffff" },
+  fun: { bg: "bg-orange-100", icon: "text-orange-600", darkBg: "dark:bg-orange-900/30", accent: "#ea580c", accentFg: "#ffffff" },
 };

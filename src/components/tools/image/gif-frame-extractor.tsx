@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { ToolLayout } from "../ToolLayout";
 import { ToolButton } from "../ToolButton";
+import { ToolFileInput } from "../ToolFileInput";
 
 export default function GifFrameExtractor() {
   const [info, setInfo] = useState<{ name: string; size: string; type: string; lastModified: string } | null>(null);
@@ -19,7 +20,7 @@ export default function GifFrameExtractor() {
 
   return (
     <ToolLayout id="gif-frame-extractor">
-      <input ref={fileRef} type="file" accept="image/gif" onChange={handle} className="block w-full text-sm text-muted-foreground file:mr-4 file:py-2 file:px-4 file:rounded-sm file:border-0 file:text-sm file:font-medium file:bg-yellow file:text-white hover:file:opacity-90" />
+      <ToolFileInput accept="image/gif" onChange={handle} label="Choose GIF" />
       {info && (
         <div className="space-y-1.5">
           {Object.entries(info).map(([key, val]) => (

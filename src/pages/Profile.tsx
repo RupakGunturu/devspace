@@ -89,7 +89,7 @@ export default function Profile() {
       ) : (
         <>
           {/* Overview Stats */}
-          <div className="mb-10 grid grid-cols-3 gap-3">
+          <div className="mb-10 grid grid-cols-1 sm:grid-cols-3 gap-3">
             {[
               { val: String(totalGames), lbl: "Games Played" },
               { val: String(totalScore), lbl: "Total Score" },

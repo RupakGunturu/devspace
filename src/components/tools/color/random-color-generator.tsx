@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ToolLayout } from "../ToolLayout";
 import { ToolOutput } from "../ToolOutput";
 import { ToolButton } from "../ToolButton";
+import { useToolAccent } from "@/components/ToolAccentContext";
 
 export default function RandomColorGenerator() {
   const [locked, setLocked] = useState({ hue: false, sat: false, light: false });
@@ -9,6 +10,7 @@ export default function RandomColorGenerator() {
   const [sat, setSat] = useState(70);
   const [light, setLight] = useState(50);
   const [output, setOutput] = useState("");
+  const { color, fg } = useToolAccent();
 
   const generate = () => {
     if (!locked.hue) setHue(Math.floor(Math.random() * 360));
@@ -27,10 +29,18 @@ export default function RandomColorGenerator() {
     <ToolLayout id="random-color-generator">
       <div className="space-y-2">
         {[{ label: "Hue", val: hue, set: setHue, max: 360, key: "hue" as const }, { label: "Saturation", val: sat, set: setSat, max: 100, key: "sat" as const }, { label: "Lightness", val: light, set: setLight, max: 100, key: "light" as const }].map((f) => (
-          <div key={f.key} className="flex items-center gap-2">
-            <span className="text-xs w-16">{f.label}</span>
-            <input type="range" min="0" max={f.max} value={f.val} onChange={(e) => f.set(Number(e.target.value))} className="flex-1 accent-yellow" />
-            <button onClick={() => setLocked({ ...locked, [f.key]: !locked[f.key] })} className={`text-xs px-2 py-0.5 rounded ${locked[f.key] ? "bg-yellow text-white" : "bg-paper-dim text-muted-foreground"}`}>{locked[f.key] ? "🔒" : "🔓"}</button>
+          <div key={f.key} className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+            <span className="text-xs w-full sm:w-16">{f.label}</span>
+            <div className="flex items-center gap-2 flex-1">
+              <input type="range" min="0" max={f.max} value={f.val} onChange={(e) => f.set(Number(e.target.value))} className="flex-1 accent-yellow" />
+              <button
+                onClick={() => setLocked({ ...locked, [f.key]: !locked[f.key] })}
+                className="text-xs px-2 py-0.5 rounded"
+                style={locked[f.key] ? { backgroundColor: color, color: fg } : { backgroundColor: "var(--paper-dim)", color: "var(--muted-foreground)" }}
+              >
+                {locked[f.key] ? "🔒" : "🔓"}
+              </button>
+            </div>
           </div>
         ))}
       </div>

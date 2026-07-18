@@ -15,7 +15,7 @@ export default function TextRepeater() {
   return (
     <ToolLayout id="text-repeater">
       <ToolInput value={text} onChange={setText} placeholder="Enter text to repeat..." label="Text" rows={2} />
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">Count</label>
           <input type="number" value={count} onChange={(e) => setCount(Math.min(1000, Math.max(1, Number(e.target.value))))} className="w-full p-3 bg-paper-dim/50 border border-border rounded-sm text-sm font-mono text-foreground" />

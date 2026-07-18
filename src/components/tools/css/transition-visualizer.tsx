@@ -15,7 +15,7 @@ export default function TransitionVisualizer() {
 
   return (
     <ToolLayout id="transition-visualizer">
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div><label className="text-[10px] text-muted-foreground">Property</label><select value={property} onChange={(e) => setProperty(e.target.value)} className="w-full p-2 bg-paper-dim/50 border border-border rounded text-xs text-foreground"><option>all</option><option>opacity</option><option>transform</option><option>background-color</option><option>width</option></select></div>
         <div><label className="text-[10px] text-muted-foreground">Timing</label><select value={timing} onChange={(e) => setTiming(e.target.value)} className="w-full p-2 bg-paper-dim/50 border border-border rounded text-xs text-foreground">{easings.map((e) => <option key={e}>{e}</option>)}</select></div>
       </div>

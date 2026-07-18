@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { useToolAccent } from "@/components/ToolAccentContext";
+
 interface ToolInputProps {
   value: string;
   onChange: (val: string) => void;
@@ -7,6 +10,9 @@ interface ToolInputProps {
 }
 
 export function ToolInput({ value, onChange, placeholder = "Enter input...", label = "Input", rows = 8 }: ToolInputProps) {
+  const { color } = useToolAccent();
+  const [focused, setFocused] = useState(false);
+
   return (
     <div className="w-full">
       <label className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">{label}</label>
@@ -15,7 +21,10 @@ export function ToolInput({ value, onChange, placeholder = "Enter input...", lab
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         rows={rows}
-        className="w-full resize-y rounded-sm border-2 border-line bg-ink p-4 font-mono text-sm text-text outline-none placeholder:text-muted focus:border-yellow/50"
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
+        className="w-full resize-y rounded-md border-2 bg-input-bg p-4 font-mono text-sm text-input-text outline-none transition-colors placeholder:text-muted"
+        style={{ borderColor: focused ? color : undefined }}
       />
     </div>
   );

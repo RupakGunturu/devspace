@@ -3,6 +3,7 @@ import { ToolLayout } from "../ToolLayout";
 import { ToolInput } from "../ToolInput";
 import { ToolOutput } from "../ToolOutput";
 import { ToolButton } from "../ToolButton";
+import { ToolToggleGroup } from "../ToolToggleGroup";
 
 export default function CssPxPt() {
   const [input, setInput] = useState("");
@@ -18,10 +19,15 @@ export default function CssPxPt() {
 
   return (
     <ToolLayout id="css-px-pt">
-      <div className="flex gap-2 mb-2">
-        <button onClick={() => setMode("pxToPt")} className={`px-3 py-1.5 text-xs rounded-full border transition-all ${mode === "pxToPt" ? "bg-yellow text-white border-yellow" : "border-border text-muted-foreground"}`}>px → pt</button>
-        <button onClick={() => setMode("ptToPx")} className={`px-3 py-1.5 text-xs rounded-full border transition-all ${mode === "ptToPx" ? "bg-yellow text-white border-yellow" : "border-border text-muted-foreground"}`}>pt → px</button>
-      </div>
+      <ToolToggleGroup
+        options={[
+          { value: "pxToPt", label: "px → pt" },
+          { value: "ptToPx", label: "pt → px" },
+        ]}
+        value={mode}
+        onChange={(v) => setMode(v as any)}
+        className="mb-2"
+      />
       <ToolInput value={input} onChange={setInput} placeholder="Enter value..." label="Value" rows={1} />
       <ToolButton onClick={convert}>Convert</ToolButton>
       <ToolOutput value={output} />

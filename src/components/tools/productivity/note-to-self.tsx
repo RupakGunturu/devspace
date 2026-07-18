@@ -13,7 +13,7 @@ export default function NoteToSelf() {
 
   return (
     <ToolLayout id="note-to-self">
-      <div className="flex gap-2">
+      <div className="flex flex-col sm:flex-row gap-2">
         <input value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={(e) => e.key === "Enter" && add()} placeholder="Write a private note..." className="flex-1 p-3 bg-paper-dim/50 border border-border rounded-sm text-sm text-foreground" />
         <ToolButton onClick={add}>Add</ToolButton>
       </div>

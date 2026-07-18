@@ -3,6 +3,7 @@ import { ToolLayout } from "../ToolLayout";
 import { ToolInput } from "../ToolInput";
 import { ToolOutput } from "../ToolOutput";
 import { ToolButton } from "../ToolButton";
+import { ToolToggleGroup } from "../ToolToggleGroup";
 
 export default function YamlJsonConverter() {
   const [input, setInput] = useState("name: John\nage: 30\ncity: NYC");
@@ -27,10 +28,15 @@ export default function YamlJsonConverter() {
 
   return (
     <ToolLayout id="yaml-json-converter">
-      <div className="flex gap-2 mb-2">
-        <button onClick={() => setMode("yamlToJson")} className={`px-3 py-1.5 text-xs rounded-full border transition-all ${mode === "yamlToJson" ? "bg-yellow text-white border-yellow" : "border-border text-muted-foreground"}`}>YAML → JSON</button>
-        <button onClick={() => setMode("jsonToYaml")} className={`px-3 py-1.5 text-xs rounded-full border transition-all ${mode === "jsonToYaml" ? "bg-yellow text-white border-yellow" : "border-border text-muted-foreground"}`}>JSON → YAML</button>
-      </div>
+      <ToolToggleGroup
+        options={[
+          { value: "yamlToJson", label: "YAML → JSON" },
+          { value: "jsonToYaml", label: "JSON → YAML" },
+        ]}
+        value={mode}
+        onChange={(v) => setMode(v as any)}
+        className="mb-2"
+      />
       <ToolInput value={input} onChange={setInput} placeholder="Enter YAML or JSON..." label="Input" rows={8} />
       <ToolButton onClick={mode === "yamlToJson" ? yamlToJson : jsonToYaml}>Convert</ToolButton>
       <ToolOutput value={output} />

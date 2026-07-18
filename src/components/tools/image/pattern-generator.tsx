@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ToolLayout } from "../ToolLayout";
 import { ToolOutput } from "../ToolOutput";
 import { ToolButton } from "../ToolButton";
+import { ToolToggleGroup } from "../ToolToggleGroup";
 
 export default function PatternGenerator() {
   const [type, setType] = useState<"dots" | "stripes" | "checker" | "grid">("dots");
@@ -21,10 +22,18 @@ export default function PatternGenerator() {
 
   return (
     <ToolLayout id="pattern-generator">
-      <div className="flex gap-2 mb-2">
-        {(["dots", "stripes", "checker", "grid"] as const).map((t) => <button key={t} onClick={() => setType(t)} className={`px-3 py-1.5 text-xs rounded-full border transition-all ${type === t ? "bg-yellow text-white border-yellow" : "border-border text-muted-foreground"}`}>{t}</button>)}
-      </div>
-      <div className="grid grid-cols-2 gap-4">
+      <ToolToggleGroup
+        options={[
+          { value: "dots", label: "Dots" },
+          { value: "stripes", label: "Stripes" },
+          { value: "checker", label: "Checker" },
+          { value: "grid", label: "Grid" },
+        ]}
+        value={type}
+        onChange={(v) => setType(v as any)}
+        className="mb-2"
+      />
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div><label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">Size: {size}px</label><input type="range" min="10" max="50" value={size} onChange={(e) => setSize(Number(e.target.value))} className="w-full accent-yellow" /></div>
         <div><label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">Color</label><input type="color" value={color} onChange={(e) => setColor(e.target.value)} className="w-full h-10 bg-paper-dim/50 border border-border rounded-sm cursor-pointer" /></div>
       </div>

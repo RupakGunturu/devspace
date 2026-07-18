@@ -17,7 +17,7 @@ export default function MorseCodeConverter() {
   return (
     <ToolLayout id="morse-code-converter">
       <ToolInput value={input} onChange={setInput} placeholder="Enter text or morse code..." label="Input" rows={3} />
-      <div className="flex gap-2">
+      <div className="flex flex-col sm:flex-row gap-2">
         <ToolButton onClick={toMorse}>Text → Morse</ToolButton>
         <ToolButton onClick={fromMorse} variant="secondary">Morse → Text</ToolButton>
       </div>

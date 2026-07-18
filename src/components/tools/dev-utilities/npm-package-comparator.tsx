@@ -42,7 +42,7 @@ export default function NpmPackageComparator() {
 
   return (
     <ToolLayout id="npm-package-comparator">
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <ToolInput value={pkg1} onChange={setPkg1} placeholder="e.g. lodash" label="Package 1" rows={1} />
         <ToolInput value={pkg2} onChange={setPkg2} placeholder="e.g. ramda" label="Package 2" rows={1} />
       </div>

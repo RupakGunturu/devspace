@@ -23,7 +23,7 @@ export default function MeetingCostCalculator() {
 
   return (
     <ToolLayout id="meeting-cost-calculator">
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <ToolInput value={rate} onChange={setRate} placeholder="50" label="Hourly Rate ($)" rows={1} />
         <ToolInput value={people} onChange={setPeople} placeholder="5" label="People" rows={1} />
         <ToolInput value={minutes} onChange={setMinutes} placeholder="30" label="Minutes" rows={1} />

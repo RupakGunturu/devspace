@@ -17,6 +17,8 @@
   --color-line: var(--line);
   --color-muted: var(--muted);
   --color-text: var(--text);
+  --color-input-bg: var(--input-bg);
+  --color-input-text: var(--input-text);
 
   --color-background: var(--bg);
   --color-foreground: var(--fg);
@@ -52,6 +54,8 @@
   --muted: oklch(0.50 0.02 265);
   --text: oklch(0.92 0.01 85);
   --fg: oklch(0.15 0.02 265);
+  --input-bg: oklch(0.96 0.005 85);
+  --input-text: oklch(0.15 0.02 265);
   --radius: 6px;
 }
 
@@ -66,6 +70,8 @@
   --muted: oklch(0.55 0.02 265);
   --text: oklch(0.92 0.01 85);
   --fg: oklch(0.92 0.01 85);
+  --input-bg: oklch(0.15 0.02 265);
+  --input-text: oklch(0.92 0.01 85);
 }
 
 html.theme-transition:not([data-magicui-theme-vt]),

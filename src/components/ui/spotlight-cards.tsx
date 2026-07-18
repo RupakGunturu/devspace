@@ -220,7 +220,7 @@ export default function SpotlightCards({
         </h2>
       </div>
 
-      <div className="relative grid grid-cols-2 gap-3 sm:grid-cols-3">
+      <div className="relative grid grid-cols-1 sm:grid-cols-2 gap-3 sm:grid-cols-3">
         {items.map((item) => (
           <Card
             dimmed={hoveredTitle !== null && hoveredTitle !== item.title}

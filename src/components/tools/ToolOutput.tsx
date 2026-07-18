@@ -12,7 +12,7 @@ export function ToolOutput({ value, label = "Output" }: ToolOutputProps) {
         <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">{label}</span>
         {value && <CopyButton text={value} />}
       </div>
-      <pre className="min-h-[120px] max-h-[400px] w-full overflow-auto whitespace-pre-wrap break-all rounded-sm border-2 border-line bg-ink p-4 font-mono text-sm text-text">
+      <pre className={`min-h-[120px] max-h-[400px] w-full overflow-auto whitespace-pre-wrap break-all rounded-md border-2 border-line bg-input-bg p-4 font-mono text-sm ${value ? "text-input-text" : "text-muted italic"}`}>
         {value || "Output will appear here..."}
       </pre>
     </div>

@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { ToolLayout } from "../ToolLayout";
 import { ToolOutput } from "../ToolOutput";
+import { useToolAccent } from "@/components/ToolAccentContext";
 
 export default function PantoneToHex() {
   const [selected, setSelected] = useState("PMS 186 C");
+  const { color } = useToolAccent();
 
   const pantone: Record<string, string> = {
     "PMS 186 C": "#C8102E", "PMS 286 C": "#0032A0", "PMS 349 C": "#046A38",
@@ -17,9 +19,9 @@ export default function PantoneToHex() {
 
   return (
     <ToolLayout id="pantone-to-hex">
-      <div className="grid grid-cols-5 gap-1.5">
+      <div className="grid grid-cols-3 sm:grid-cols-5 gap-1.5">
         {Object.entries(pantone).map(([name, hex]) => (
-          <button key={name} onClick={() => setSelected(name)} className={`p-2 rounded border text-center transition-all ${selected === name ? "border-yellow" : "border-border"}`} style={{ backgroundColor: hex }}>
+          <button key={name} onClick={() => setSelected(name)} className={`p-2 rounded border text-center transition-all`} style={{ backgroundColor: hex, borderColor: selected === name ? color : "var(--border)" }}>
             <span className="text-[8px] text-white font-mono">{name}</span>
           </button>
         ))}

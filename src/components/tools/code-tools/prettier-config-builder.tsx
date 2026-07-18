@@ -18,7 +18,7 @@ export default function PrettierConfigBuilder() {
 
   return (
     <ToolLayout id="prettier-config-builder">
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <label className="flex items-center gap-2 text-sm text-foreground cursor-pointer"><input type="checkbox" checked={semi} onChange={(e) => setSemi(e.target.checked)} className="accent-yellow" /> Semicolons</label>
         <label className="flex items-center gap-2 text-sm text-foreground cursor-pointer"><input type="checkbox" checked={singleQuote} onChange={(e) => setSingleQuote(e.target.checked)} className="accent-yellow" /> Single Quotes</label>
         <div><label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">Tab Width</label><input type="number" value={tabWidth} onChange={(e) => setTabWidth(Number(e.target.value))} className="w-full p-2.5 bg-paper-dim/50 border border-border rounded-sm text-sm font-mono text-foreground" /></div>

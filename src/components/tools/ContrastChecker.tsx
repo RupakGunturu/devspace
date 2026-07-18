@@ -1,4 +1,6 @@
 import { useMemo, useState } from "react";
+import { ToolLayout } from "./ToolLayout";
+import { useToolAccent } from "@/components/ToolAccentContext";
 
 function hexToRgb(hex: string): [number, number, number] | null {
   const m = hex.trim().replace(/^#/, "");
@@ -18,6 +20,7 @@ function relLum([r, g, b]: [number, number, number]) {
 export function ContrastChecker() {
   const [fg, setFg] = useState("#0b0e1a");
   const [bg, setBg] = useState("#f4d922");
+  const { color } = useToolAccent();
   const result = useMemo(() => {
     const rgbFg = hexToRgb(fg);
     const rgbBg = hexToRgb(bg);
@@ -35,12 +38,11 @@ export function ContrastChecker() {
   }, [fg, bg]);
 
   const Row = ({ label, pass }: { label: string; pass: boolean }) => (
-    <div className="flex items-center justify-between rounded-sm border-2 border-line bg-ink p-3">
-      <span className="font-mono text-sm text-text">{label}</span>
+    <div className="flex items-center justify-between rounded-md border-2 border-line bg-input-bg p-3">
+      <span className="font-mono text-sm text-input-text">{label}</span>
       <span
-        className={`rounded-sm px-2 py-1 font-mono text-xs font-bold ${
-          pass ? "bg-yellow text-ink" : "bg-coral text-ink"
-        }`}
+        className="rounded-md px-2 py-1 font-mono text-xs font-bold"
+        style={pass ? { backgroundColor: color, color: "#fff" } : { backgroundColor: "var(--coral)", color: "#fff" }}
       >
         {pass ? "PASS" : "FAIL"}
       </span>
@@ -48,10 +50,10 @@ export function ContrastChecker() {
   );
 
   return (
-    <div className="space-y-4 p-4">
-      <div className="grid grid-cols-2 gap-3">
-        <ColorInput label="foreground" value={fg} onChange={setFg} />
-        <ColorInput label="background" value={bg} onChange={setBg} />
+    <ToolLayout id="contrast-checker">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <ColorInput label="Foreground" value={fg} onChange={setFg} />
+        <ColorInput label="Background" value={bg} onChange={setBg} />
       </div>
       <div
         className="rounded-md border-2 border-line p-8 text-center"
@@ -63,8 +65,8 @@ export function ContrastChecker() {
       {result ? (
         <>
           <div className="text-center">
-            <div className="font-mono text-xs text-muted">contrast ratio</div>
-            <div className="font-display text-5xl font-extrabold text-yellow">
+            <div className="font-mono text-xs text-muted">Contrast Ratio</div>
+            <div className="font-display text-5xl font-extrabold" style={{ color }}>
               {result.ratio.toFixed(2)}:1
             </div>
           </div>
@@ -78,7 +80,7 @@ export function ContrastChecker() {
       ) : (
         <div className="font-mono text-sm text-coral">Enter valid hex colors (e.g. #f4d922).</div>
       )}
-    </div>
+    </ToolLayout>
   );
 }
 
@@ -86,8 +88,8 @@ function ColorInput({ label, value, onChange }: { label: string; value: string; 
   const safe = /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(value) ? value : "#000000";
   return (
     <div>
-      <label className="font-mono text-xs text-muted">{label}</label>
-      <div className="mt-1 flex items-center gap-2 rounded-sm border-2 border-line bg-ink p-2">
+      <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">{label}</span>
+      <div className="mt-1 flex items-center gap-2 rounded-md border-2 border-line bg-input-bg p-2">
         <input
           type="color"
           value={safe}
@@ -97,7 +99,7 @@ function ColorInput({ label, value, onChange }: { label: string; value: string; 
         <input
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="w-full min-w-0 bg-transparent font-mono text-sm text-text outline-none"
+          className="w-full min-w-0 bg-transparent font-mono text-sm text-input-text outline-none"
         />
       </div>
     </div>

@@ -162,7 +162,7 @@ export default function About() {
 
           <div className="mt-12 border-t-2 border-dashed border-line pt-6" id="DevSpace-details">
             <div className="font-mono text-xs text-muted">DevSpace</div>
-            <div className="mt-2 grid grid-cols-2 gap-4 font-mono text-sm">
+            <div className="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono text-sm">
               <div>
                 <div className="text-muted">Display type</div>
                 <div className="font-display font-bold">Bricolage Grotesque</div>

@@ -3,6 +3,7 @@ import { ToolLayout } from "../ToolLayout";
 import { ToolInput } from "../ToolInput";
 import { ToolOutput } from "../ToolOutput";
 import { ToolButton } from "../ToolButton";
+import { ToolToggleGroup } from "../ToolToggleGroup";
 
 export default function CodeMinifier() {
   const [input, setInput] = useState("");
@@ -22,9 +23,17 @@ export default function CodeMinifier() {
 
   return (
     <ToolLayout id="code-minifier">
-      <div className="flex gap-2 mb-2">
-        {["js", "css", "html", "json"].map((l) => <button key={l} onClick={() => setLanguage(l)} className={`px-3 py-1.5 text-xs rounded-full border transition-all ${language === l ? "bg-yellow text-white border-yellow" : "border-border text-muted-foreground"}`}>{l.toUpperCase()}</button>)}
-      </div>
+      <ToolToggleGroup
+        options={[
+          { value: "js", label: "JS" },
+          { value: "css", label: "CSS" },
+          { value: "html", label: "HTML" },
+          { value: "json", label: "JSON" },
+        ]}
+        value={language}
+        onChange={setLanguage}
+        className="mb-2"
+      />
       <ToolInput value={input} onChange={setInput} placeholder="Paste code..." label="Input" rows={10} />
       <ToolButton onClick={minify}>Minify</ToolButton>
       <ToolOutput value={output} />

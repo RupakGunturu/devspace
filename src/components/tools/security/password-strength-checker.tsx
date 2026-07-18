@@ -40,7 +40,7 @@ export default function PasswordStrengthChecker() {
             <span className={`text-2xl font-bold font-sans ${result.color}`}>{result.label}</span>
             <div className="flex gap-1">{Array.from({ length: 7 }).map((_, i) => <div key={i} className={`w-8 h-2 rounded-full ${i < result.score ? "bg-current " + result.color : "bg-paper-dim"}`} />)}</div>
           </div>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div className="p-3 bg-paper-dim/50 border border-border rounded-sm"><span className="text-[10px] uppercase tracking-wider text-muted-foreground">Entropy</span><p className="font-mono text-lg font-bold text-foreground">{result.entropy} bits</p></div>
             <div className="p-3 bg-paper-dim/50 border border-border rounded-sm"><span className="text-[10px] uppercase tracking-wider text-muted-foreground">Crack Time</span><p className="font-mono text-lg font-bold text-foreground">{result.crackTime}</p></div>
           </div>

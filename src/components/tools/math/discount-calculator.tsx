@@ -20,7 +20,7 @@ export default function DiscountCalculator() {
 
   return (
     <ToolLayout id="discount-calculator">
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">Original Price ($)</label>
           <input type="number" value={original} onChange={(e) => setOriginal(e.target.value)} className="w-full p-3 bg-paper-dim/50 border border-border rounded-sm text-sm font-mono text-foreground" />

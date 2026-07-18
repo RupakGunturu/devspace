@@ -30,9 +30,29 @@ export default function HexRgbHslConverter() {
   return (
     <ToolLayout id="hex-rgb-hsl-converter">
       <div className="space-y-3">
-        <div className="grid grid-cols-[60px_1fr_40px] gap-2 items-center"><span className="text-xs font-mono text-muted-foreground">HEX</span><input value={hex} onChange={(e) => { setHex(e.target.value); hexToRgb(e.target.value); }} className="p-2 bg-paper-dim/50 border border-border rounded text-sm font-mono text-foreground" /><div className="w-8 h-8 rounded border border-border" style={{ backgroundColor: hex }} /></div>
-        <div className="grid grid-cols-[60px_1fr_1fr_1fr] gap-2 items-center"><span className="text-xs font-mono text-muted-foreground">RGB</span><input type="number" value={rgb.r} onChange={(e) => setRgb({ ...rgb, r: Number(e.target.value) })} className="p-2 bg-paper-dim/50 border border-border rounded text-sm font-mono text-foreground" /><input type="number" value={rgb.g} onChange={(e) => setRgb({ ...rgb, g: Number(e.target.value) })} className="p-2 bg-paper-dim/50 border border-border rounded text-sm font-mono text-foreground" /><input type="number" value={rgb.b} onChange={(e) => setRgb({ ...rgb, b: Number(e.target.value) })} className="p-2 bg-paper-dim/50 border border-border rounded text-sm font-mono text-foreground" /></div>
-        <div className="grid grid-cols-[60px_1fr_1fr_1fr] gap-2 items-center"><span className="text-xs font-mono text-muted-foreground">HSL</span><input type="number" value={hsl.h} onChange={(e) => setHsl({ ...hsl, h: Number(e.target.value) })} className="p-2 bg-paper-dim/50 border border-border rounded text-sm font-mono text-foreground" /><input type="number" value={hsl.s} onChange={(e) => setHsl({ ...hsl, s: Number(e.target.value) })} className="p-2 bg-paper-dim/50 border border-border rounded text-sm font-mono text-foreground" /><input type="number" value={hsl.l} onChange={(e) => setHsl({ ...hsl, l: Number(e.target.value) })} className="p-2 bg-paper-dim/50 border border-border rounded text-sm font-mono text-foreground" /></div>
+        <div className="space-y-2">
+          <span className="text-xs font-mono text-muted-foreground">HEX</span>
+          <div className="flex items-center gap-2">
+            <input value={hex} onChange={(e) => { setHex(e.target.value); hexToRgb(e.target.value); }} className="flex-1 p-2 bg-paper-dim/50 border border-border rounded text-sm font-mono text-foreground" placeholder="#000000" />
+            <div className="w-9 h-9 rounded border border-border shrink-0" style={{ backgroundColor: hex }} />
+          </div>
+        </div>
+        <div className="space-y-2">
+          <span className="text-xs font-mono text-muted-foreground">RGB</span>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            <input type="number" value={rgb.r} onChange={(e) => setRgb({ ...rgb, r: Number(e.target.value) })} placeholder="R" className="p-2 bg-paper-dim/50 border border-border rounded text-sm font-mono text-foreground" />
+            <input type="number" value={rgb.g} onChange={(e) => setRgb({ ...rgb, g: Number(e.target.value) })} placeholder="G" className="p-2 bg-paper-dim/50 border border-border rounded text-sm font-mono text-foreground" />
+            <input type="number" value={rgb.b} onChange={(e) => setRgb({ ...rgb, b: Number(e.target.value) })} placeholder="B" className="p-2 bg-paper-dim/50 border border-border rounded text-sm font-mono text-foreground" />
+          </div>
+        </div>
+        <div className="space-y-2">
+          <span className="text-xs font-mono text-muted-foreground">HSL</span>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            <input type="number" value={hsl.h} onChange={(e) => setHsl({ ...hsl, h: Number(e.target.value) })} placeholder="H" className="p-2 bg-paper-dim/50 border border-border rounded text-sm font-mono text-foreground" />
+            <input type="number" value={hsl.s} onChange={(e) => setHsl({ ...hsl, s: Number(e.target.value) })} placeholder="S" className="p-2 bg-paper-dim/50 border border-border rounded text-sm font-mono text-foreground" />
+            <input type="number" value={hsl.l} onChange={(e) => setHsl({ ...hsl, l: Number(e.target.value) })} placeholder="L" className="p-2 bg-paper-dim/50 border border-border rounded text-sm font-mono text-foreground" />
+          </div>
+        </div>
       </div>
       <ToolButton onClick={fromRgb}>Update from RGB</ToolButton>
     </ToolLayout>

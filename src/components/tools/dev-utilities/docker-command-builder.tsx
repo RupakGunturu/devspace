@@ -24,7 +24,7 @@ export default function DockerCommandBuilder() {
 
   return (
     <ToolLayout id="docker-command-builder">
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div><label className="text-[10px] text-muted-foreground">Image</label><input value={image} onChange={(e) => setImage(e.target.value)} className="w-full p-2 bg-background border border-border rounded text-xs font-mono" /></div>
         <div><label className="text-[10px] text-muted-foreground">Tag</label><input value={tag} onChange={(e) => setTag(e.target.value)} className="w-full p-2 bg-background border border-border rounded text-xs font-mono" /></div>
         <div><label className="text-[10px] text-muted-foreground">Port</label><input value={port} onChange={(e) => setPort(e.target.value)} className="w-full p-2 bg-background border border-border rounded text-xs font-mono" /></div>

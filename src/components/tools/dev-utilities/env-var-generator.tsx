@@ -41,7 +41,7 @@ export default function EnvVarGenerator() {
 
   return (
     <ToolLayout id="env-var-generator">
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div><label className="text-[10px] text-muted-foreground">App Name</label><input value={appName} onChange={(e) => setAppName(e.target.value)} className="w-full p-2 bg-background border border-border rounded text-xs font-mono" /></div>
         <div><label className="text-[10px] text-muted-foreground">DB Host</label><input value={dbHost} onChange={(e) => setDbHost(e.target.value)} className="w-full p-2 bg-background border border-border rounded text-xs font-mono" /></div>
         <div><label className="text-[10px] text-muted-foreground">DB Port</label><input value={dbPort} onChange={(e) => setDbPort(e.target.value)} className="w-full p-2 bg-background border border-border rounded text-xs font-mono" /></div>

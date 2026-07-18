@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ToolLayout } from "../ToolLayout";
 import { ToolOutput } from "../ToolOutput";
 import { ToolButton } from "../ToolButton";
+import { ToolToggleGroup } from "../ToolToggleGroup";
 
 export default function PercentageCalculator() {
   const [mode, setMode] = useState<"of" | "is" | "change">("of");
@@ -22,16 +23,16 @@ export default function PercentageCalculator() {
 
   return (
     <ToolLayout id="percentage-calculator">
-      <div className="flex gap-2">
-        {[
-          { val: "of", label: "X% of Y" },
-          { val: "is", label: "X is what % of Y" },
-          { val: "change", label: "% change" },
-        ].map((m) => (
-          <button key={m.val} onClick={() => setMode(m.val as any)} className={`px-3 py-1.5 text-xs rounded-full border transition-all ${mode === m.val ? "bg-yellow text-white border-yellow" : "border-border text-muted-foreground"}`}>{m.label}</button>
-        ))}
-      </div>
-      <div className="grid grid-cols-2 gap-4">
+      <ToolToggleGroup
+        options={[
+          { value: "of", label: "X% of Y" },
+          { value: "is", label: "X is what % of Y" },
+          { value: "change", label: "% change" },
+        ]}
+        value={mode}
+        onChange={(v) => setMode(v as any)}
+      />
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">{mode === "of" ? "Percentage" : mode === "is" ? "Value" : "From"}</label>
           <input type="number" value={a} onChange={(e) => setA(e.target.value)} className="w-full p-3 bg-paper-dim/50 border border-border rounded-sm text-sm font-mono text-foreground" />

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ToolLayout } from "../ToolLayout";
 import { ToolOutput } from "../ToolOutput";
 import { ToolButton } from "../ToolButton";
+import { ToolToggleGroup } from "../ToolToggleGroup";
 
 export default function LicensePicker() {
   const [selected, setSelected] = useState("MIT");
@@ -15,9 +16,11 @@ export default function LicensePicker() {
 
   return (
     <ToolLayout id="license-picker">
-      <div className="flex gap-2">
-        {Object.keys(licenses).map((l) => <button key={l} onClick={() => setSelected(l)} className={`px-3 py-1.5 text-xs rounded-full border transition-all ${selected === l ? "bg-yellow text-white border-yellow" : "border-border text-muted-foreground"}`}>{l}</button>)}
-      </div>
+      <ToolToggleGroup
+        options={Object.keys(licenses).map((l) => ({ value: l, label: l }))}
+        value={selected}
+        onChange={setSelected}
+      />
       <div className="space-y-3">
         <div><span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Permissions</span><div className="flex flex-wrap gap-1 mt-1">{licenses[selected].permissions.map((p) => <span key={p} className="px-2 py-0.5 text-xs bg-coral/10 text-coral rounded">{p}</span>)}</div></div>
         <div><span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Conditions</span><div className="flex flex-wrap gap-1 mt-1">{licenses[selected].conditions.map((c) => <span key={c} className="px-2 py-0.5 text-xs bg-yellow-500/10 text-yellow-500 rounded">{c}</span>)}</div></div>

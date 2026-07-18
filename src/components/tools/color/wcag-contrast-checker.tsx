@@ -26,7 +26,7 @@ export default function WcagContrastChecker() {
 
   return (
     <ToolLayout id="wcag-contrast-checker">
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div><label className="text-[10px] text-muted-foreground">Foreground</label><div className="flex gap-2 items-center"><input type="color" value={fg} onChange={(e) => setFg(e.target.value)} className="w-10 h-8 bg-background border border-border rounded cursor-pointer" /><span className="font-mono text-xs">{fg}</span></div></div>
         <div><label className="text-[10px] text-muted-foreground">Background</label><div className="flex gap-2 items-center"><input type="color" value={bg} onChange={(e) => setBg(e.target.value)} className="w-10 h-8 bg-background border border-border rounded cursor-pointer" /><span className="font-mono text-xs">{bg}</span></div></div>
       </div>

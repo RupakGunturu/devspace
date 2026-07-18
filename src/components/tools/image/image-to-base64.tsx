@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { ToolLayout } from "../ToolLayout";
 import { ToolButton } from "../ToolButton";
+import { ToolFileInput } from "../ToolFileInput";
 
 export default function ImageToBase64() {
   const [base64, setBase64] = useState("");
@@ -21,7 +22,7 @@ export default function ImageToBase64() {
 
   return (
     <ToolLayout id="image-to-base64">
-      <input ref={fileRef} type="file" accept="image/*" onChange={handle} className="block w-full text-sm text-muted-foreground file:mr-4 file:py-2 file:px-4 file:rounded-sm file:border-0 file:text-sm file:font-medium file:bg-yellow file:text-white hover:file:opacity-90" />
+      <ToolFileInput accept="image/*" onChange={handle} label="Choose image" />
       {preview && <div className="flex justify-center p-4 bg-paper-dim/50 border border-border rounded-sm"><img src={preview} alt="Preview" className="max-h-48 rounded" /></div>}
       {base64 && (
         <div className="flex items-center justify-between p-3 bg-paper-dim/50 border border-border rounded-sm">

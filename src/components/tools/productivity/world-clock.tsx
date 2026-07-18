@@ -24,7 +24,7 @@ export default function WorldClock() {
 
   return (
     <ToolLayout id="world-clock">
-      <div className="flex gap-2">
+      <div className="flex flex-col sm:flex-row gap-2">
         <input value={newZone} onChange={(e) => setNewZone(e.target.value)} placeholder="e.g. Europe/Berlin" className="flex-1 p-2.5 bg-paper-dim/50 border border-border rounded-sm text-sm font-mono text-foreground" />
         <ToolButton onClick={addZone}>Add Zone</ToolButton>
       </div>

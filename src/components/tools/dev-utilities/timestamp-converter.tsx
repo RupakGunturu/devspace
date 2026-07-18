@@ -35,7 +35,7 @@ export default function TimestampConverter() {
   return (
     <ToolLayout id="timestamp-converter">
       <ToolInput value={input} onChange={setInput} placeholder="Unix timestamp or date string" label="Input" rows={2} />
-      <div className="flex gap-2">
+      <div className="flex flex-col sm:flex-row gap-2">
         <ToolButton onClick={convertToDate}>To Date</ToolButton>
         <ToolButton onClick={fromDateToTs} variant="secondary">To Timestamp</ToolButton>
         <ToolButton onClick={() => setInput(String(Math.floor(Date.now() / 1000)))} variant="secondary">Now</ToolButton>

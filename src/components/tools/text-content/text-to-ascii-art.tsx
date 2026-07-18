@@ -32,7 +32,7 @@ export default function TextToAsciiArt() {
   return (
     <ToolLayout id="text-to-ascii-art">
       <ToolInput value={input} onChange={setInput} placeholder="Enter text..." label="Input" rows={2} />
-      <div className="flex gap-2">
+      <div className="flex flex-col sm:flex-row gap-2">
         {Object.keys(fonts).map((f) => (
           <ToolButton key={f} onClick={() => generate(f)} variant="secondary">{f}</ToolButton>
         ))}

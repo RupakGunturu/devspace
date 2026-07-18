@@ -3,6 +3,7 @@ import { ToolLayout } from "../ToolLayout";
 import { ToolInput } from "../ToolInput";
 import { ToolOutput } from "../ToolOutput";
 import { ToolButton } from "../ToolButton";
+import { ToolToggleGroup } from "../ToolToggleGroup";
 
 export default function CodeBeautifier() {
   const [input, setInput] = useState("");
@@ -31,11 +32,18 @@ export default function CodeBeautifier() {
 
   return (
     <ToolLayout id="code-beautifier">
-      <div className="flex gap-2">
-        {["json", "css", "html", "js"].map((l) => <button key={l} onClick={() => setLanguage(l)} className={`px-3 py-1.5 text-xs rounded-full border transition-all ${language === l ? "bg-yellow text-white border-yellow" : "border-border text-muted-foreground"}`}>{l.toUpperCase()}</button>)}
-      </div>
+      <ToolToggleGroup
+        options={[
+          { value: "json", label: "JSON" },
+          { value: "css", label: "CSS" },
+          { value: "html", label: "HTML" },
+          { value: "js", label: "JS" },
+        ]}
+        value={language}
+        onChange={setLanguage}
+      />
       <ToolInput value={input} onChange={setInput} placeholder="Paste code..." label="Input" rows={10} />
-      <div className="flex gap-2">
+      <div className="flex flex-col sm:flex-row gap-2">
         <ToolButton onClick={format}>Beautify</ToolButton>
         <ToolButton onClick={minify} variant="secondary">Minify</ToolButton>
       </div>

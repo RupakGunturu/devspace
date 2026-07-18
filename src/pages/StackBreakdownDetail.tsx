@@ -191,7 +191,7 @@ export default function StackBreakdownDetailPage() {
       </div>
 
       {/* Main content area */}
-      <div className="flex gap-10">
+      <div className="flex gap-6 sm:gap-8 lg:gap-10">
         {/* Desktop TOC sidebar */}
         <aside className="hidden w-56 shrink-0 lg:block">
           <div className="sticky top-24">

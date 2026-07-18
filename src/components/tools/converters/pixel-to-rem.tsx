@@ -19,7 +19,7 @@ export default function PixelToRem() {
 
   return (
     <ToolLayout id="pixel-to-rem">
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <ToolInput value={px} onChange={setPx} placeholder="16" label="Pixels (px)" rows={1} />
         <div>
           <label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">Root Font Size (px)</label>

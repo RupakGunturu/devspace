@@ -32,7 +32,7 @@ function Footer() {
               &copy; {new Date().getFullYear()} dev<span className="text-yellow">/</span>space. All rights reserved.
             </p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
             <div>
               <h3 className="font-semibold mb-4 text-foreground">Pages</h3>
               <ul className="space-y-2">
@@ -100,11 +100,11 @@ function Footer() {
             </div>
           </div>
         </div>
-        <div className="w-full overflow-hidden h-[4em] md:h-[5em] lg:h-[7em] flex items-start justify-center">
-          <h1 className="text-center text-5xl md:text-7xl lg:text-[12rem] font-display font-extrabold select-none tracking-[0.12em] leading-[0.85]">
-            <span className="text-foreground">dev</span>
-            <span className="text-yellow mx-2 md:mx-4">/</span>
-            <span className="text-foreground">space</span>
+        <div className="mt-8 w-full overflow-hidden h-[5em] md:h-[5em] lg:h-[7em] flex items-start justify-center">
+          <h1 className="text-center text-5xl md:text-7xl lg:text-[12rem] font-display font-extrabold select-none tracking-[0.12em] leading-[0.85] text-muted/40">
+            <span>dev</span>
+            <span className="text-yellow/40 mx-2 md:mx-4">/</span>
+            <span>space</span>
           </h1>
         </div>
       </div>

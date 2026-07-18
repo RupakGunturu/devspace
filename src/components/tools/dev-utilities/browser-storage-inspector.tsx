@@ -43,7 +43,7 @@ export default function BrowserStorageInspector() {
 
   return (
     <ToolLayout id="browser-storage-inspector">
-      <div className="flex gap-2">
+      <div className="flex flex-col sm:flex-row gap-2">
         <ToolButton onClick={inspect}>Inspect Storage</ToolButton>
         <ToolButton onClick={clearAll} variant="secondary">Clear All</ToolButton>
       </div>

@@ -3,6 +3,7 @@ import { ToolLayout } from "../ToolLayout";
 import { ToolInput } from "../ToolInput";
 import { ToolOutput } from "../ToolOutput";
 import { ToolButton } from "../ToolButton";
+import { ToolToggleGroup } from "../ToolToggleGroup";
 
 export default function UnitConverter() {
   const [input, setInput] = useState("");
@@ -26,9 +27,16 @@ export default function UnitConverter() {
 
   return (
     <ToolLayout id="unit-converter">
-      <div className="flex gap-2 mb-2">
-        {(["length", "weight", "volume"] as const).map((c) => <button key={c} onClick={() => setCategory(c)} className={`px-3 py-1.5 text-xs rounded-full border transition-all ${category === c ? "bg-yellow text-white border-yellow" : "border-border text-muted-foreground"}`}>{c}</button>)}
-      </div>
+      <ToolToggleGroup
+        options={[
+          { value: "length", label: "Length" },
+          { value: "weight", label: "Weight" },
+          { value: "volume", label: "Volume" },
+        ]}
+        value={category}
+        onChange={(v) => setCategory(v as any)}
+        className="mb-2"
+      />
       <ToolInput value={input} onChange={setInput} placeholder={`Enter value in base ${category === "length" ? "meters" : category === "weight" ? "kilograms" : "liters"}...`} label="Value" rows={1} />
       <ToolButton onClick={convert}>Convert</ToolButton>
       <ToolOutput value={output} />
