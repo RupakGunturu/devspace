@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { allStackBreakdowns } from "../data/stack-breakdowns";
 import { CursorHover } from "../components/core/cursor-hover";
+import BookmarkButton from "../components/BookmarkButton";
 
 const PRODUCT_COLORS: Record<string, string> = {
   instagram: "#E1306C",
@@ -133,7 +134,9 @@ export default function StackBreakdownPage() {
           const rot = ROTATIONS[i % ROTATIONS.length];
           return (
             <CursorHover label={b.productName} color={PRODUCT_COLORS[b.slug]} key={b.slug}>
-              <Link
+              <div className="relative">
+                <BookmarkButton type="stack-breakdown" slug={b.slug} className="absolute right-3 top-3 z-10" />
+                <Link
                 to={`/stack-breakdown/${b.slug}`}
                 className="group no-underline"
               >
@@ -173,6 +176,7 @@ export default function StackBreakdownPage() {
                   </div>
                 </div>
               </Link>
+              </div>
             </CursorHover>
           );
         })}

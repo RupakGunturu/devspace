@@ -152,6 +152,10 @@ export default function GoogleOAuthPrompt() {
         {popupLoading ? "Signing in..." : "Continue with Google"}
       </button>
 
+      <p className="mt-2 text-center text-[10px] leading-relaxed text-muted">
+        Your name, email, and avatar will be imported from your Google account.
+      </p>
+
       <div className="mt-3 text-center">
         <Link to="/login" className="text-[11px] font-medium text-foreground no-underline hover:underline">
           or sign in with email

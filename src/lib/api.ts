@@ -109,7 +109,7 @@ export interface GameScore {
 }
 
 export interface Favorite {
-  type: "tool" | "tip" | "cheatsheet" | "game";
+  type: "tool" | "tip" | "cheatsheet" | "game" | "stack-breakdown";
   slug: string;
   addedAt: string;
 }

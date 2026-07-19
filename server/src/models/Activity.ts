@@ -20,7 +20,7 @@ export interface ISavedTip {
 }
 
 export interface IFavorite {
-  type: "tool" | "tip" | "cheatsheet" | "game";
+  type: "tool" | "tip" | "cheatsheet" | "game" | "stack-breakdown";
   slug: string;
   addedAt: Date;
 }
@@ -67,7 +67,7 @@ const activitySchema = new Schema<IActivity>(
     ],
     favorites: [
       {
-        type: { type: String, enum: ["tool", "tip", "cheatsheet", "game"], required: true },
+        type: { type: String, enum: ["tool", "tip", "cheatsheet", "game", "stack-breakdown"], required: true },
         slug: { type: String, required: true },
         addedAt: { type: Date, default: Date.now },
       },

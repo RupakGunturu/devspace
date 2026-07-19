@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { CursorHover } from "../components/core/cursor-hover";
 import { usePagination } from "../hooks/use-pagination";
 import { PaginationBar } from "../components/PaginationBar";
+import BookmarkButton from "../components/BookmarkButton";
 
 const COLOR_HEX: Record<string, string> = {
   css: "#3b82f6",
@@ -67,7 +68,7 @@ export default function ToolsIndex() {
       <div className="mt-6 grid gap-6 sm:grid-cols-2 md:grid-cols-3">
         {paginatedItems.map((t, i) => (
           <CursorHover label={t.name} color={COLOR_HEX[t.category]} key={t.slug}>
-            <StickerCard
+              <StickerCard
               icon={
                 <div className={cn(
                   "flex h-10 w-10 items-center justify-center rounded-full",
@@ -80,6 +81,7 @@ export default function ToolsIndex() {
               title={t.name}
               index={i}
               to={`/tools/${t.slug}`}
+              actions={<BookmarkButton type="tool" slug={t.slug} />}
             >
               {t.tagline}
             </StickerCard>

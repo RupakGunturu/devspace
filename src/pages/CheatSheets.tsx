@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { CursorHover } from "../components/core/cursor-hover";
 import { usePagination } from "../hooks/use-pagination";
 import { PaginationBar } from "../components/PaginationBar";
+import BookmarkButton from "../components/BookmarkButton";
 
 const COLOR_HEX: Record<string, string> = {
   "version-control": "#f97316",
@@ -80,7 +81,7 @@ export default function CheatSheetsIndex() {
       <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
         {paginatedItems.map((s, i) => (
           <CursorHover label={s.title} color={COLOR_HEX[s.category]} key={s.id}>
-            <StickerCard
+              <StickerCard
               icon={
                 <div className={cn(
                   "flex h-10 w-10 items-center justify-center rounded-full",
@@ -93,6 +94,7 @@ export default function CheatSheetsIndex() {
               title={s.title}
               index={i}
               to={`/cheat-sheets/${s.id}`}
+              actions={<BookmarkButton type="cheatsheet" slug={s.id} />}
             >
               {s.description}
             </StickerCard>

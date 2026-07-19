@@ -1,9 +1,42 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/components/AuthProvider";
-import { activityApi, type ActivityData } from "@/lib/api";
+import { activityApi, type ActivityData, type Favorite } from "@/lib/api";
 import { gameBySlug } from "@/data/games";
 import { toast } from "@/components/ui/toaster";
+
+function getFavoriteHref(f: Favorite): string {
+  switch (f.type) {
+    case "tool": return `/tools/${f.slug}`;
+    case "tip": return "/tips";
+    case "cheatsheet": return `/cheat-sheets/${f.slug}`;
+    case "game": return `/games/${f.slug}`;
+    case "stack-breakdown": return `/stack-breakdown/${f.slug}`;
+    default: return "#";
+  }
+}
+
+function getFavoriteLabel(f: Favorite): string {
+  switch (f.type) {
+    case "tool": return f.slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+    case "tip": return f.slug.toUpperCase();
+    case "cheatsheet": return f.slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+    case "game": return gameBySlug(f.slug)?.name ?? f.slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+    case "stack-breakdown": return f.slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+    default: return f.slug;
+  }
+}
+
+function getFavoriteIcon(type: string): string {
+  switch (type) {
+    case "tool": return "🛠️";
+    case "tip": return "💡";
+    case "cheatsheet": return "📋";
+    case "game": return "🎮";
+    case "stack-breakdown": return "🧱";
+    default: return "🔖";
+  }
+}
 
 export default function Profile() {
   const { user, logout } = useAuth();
@@ -93,7 +126,7 @@ export default function Profile() {
             {[
               { val: String(totalGames), lbl: "Games Played" },
               { val: String(totalScore), lbl: "Total Score" },
-              { val: String(activity?.favorites.length ?? 0), lbl: "Favorites" },
+              { val: String(activity?.favorites.length ?? 0), lbl: "Bookmarks" },
             ].map((s) => (
               <div
                 key={s.lbl}
@@ -147,23 +180,26 @@ export default function Profile() {
           {/* Favorites */}
           {activity && activity.favorites.length > 0 && (
             <section className="mb-10">
-              <h2 className="mb-4 font-display text-lg font-bold">Favorites</h2>
-              <div className="flex flex-wrap gap-2">
-                {activity.favorites.map((f, i) => (
-                  <Link
-                    key={`${f.type}-${f.slug}`}
-                    to={
-                      f.type === "tool"
-                        ? `/tools/${f.slug}`
-                        : f.type === "game"
-                          ? `/games/${f.slug}`
-                          : "#"
-                    }
-                    className="rounded-full border border-line bg-paper-dim px-3 py-1 text-xs font-semibold text-foreground no-underline transition-all hover:border-yellow"
-                  >
-                    {f.type}: {f.slug}
-                  </Link>
-                ))}
+              <h2 className="mb-4 font-display text-lg font-bold">Bookmarks</h2>
+              <div className="grid gap-2 sm:grid-cols-2">
+                {activity.favorites.map((f) => {
+                  const href = getFavoriteHref(f);
+                  const label = getFavoriteLabel(f);
+                  const icon = getFavoriteIcon(f.type);
+                  return (
+                    <Link
+                      key={`${f.type}-${f.slug}`}
+                      to={href}
+                      className="flex items-center gap-3 rounded-md border border-line bg-paper px-4 py-3 no-underline transition-all hover:border-yellow"
+                    >
+                      <span className="text-base">{icon}</span>
+                      <div className="min-w-0 flex-1">
+                        <div className="truncate text-sm font-semibold text-foreground">{label}</div>
+                        <div className="text-[10px] uppercase tracking-wider text-muted">{f.type}</div>
+                      </div>
+                    </Link>
+                  );
+                })}
               </div>
             </section>
           )}

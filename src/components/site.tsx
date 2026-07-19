@@ -21,6 +21,7 @@ export function Header() {
         { label: "Sheets", link: "/cheat-sheets" },
         { label: "Games", link: "/games" },
         { label: "Tips", link: "/tips" },
+        { label: "Bookmarks", link: "/bookmarks" },
         { label: "Profile", link: "/profile" },
         { label: "About", link: "/about" },
       ]
@@ -70,6 +71,7 @@ export function Header() {
           <NavItem to="/cheat-sheets">Sheets</NavItem>
           <NavItem to="/games">Games</NavItem>
           <NavItem to="/tips">Tips</NavItem>
+          {user && <NavItem to="/bookmarks">Bookmarks</NavItem>}
           <NavItem to="/about">About</NavItem>
         </nav>
         <div className="flex items-center gap-3">
@@ -181,12 +183,14 @@ export function StickerCard({
   children,
   index = 0,
   to,
+  actions,
 }: {
   icon: ReactNode;
   title: string;
   children: ReactNode;
   index?: number;
   to?: string;
+  actions?: ReactNode;
 }) {
   const rot = ROTATIONS[index % ROTATIONS.length];
   const inner = (
@@ -200,7 +204,10 @@ export function StickerCard({
           </div>
         )}
       </div>
-      <h3 className="font-display text-lg font-bold">{title}</h3>
+      <div className="flex items-start justify-between gap-2">
+        <h3 className="font-display text-lg font-bold">{title}</h3>
+        {actions}
+      </div>
       <p className="mt-2 text-[13px] text-foreground/70">{children}</p>
     </div>
   );

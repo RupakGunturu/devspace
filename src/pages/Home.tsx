@@ -15,7 +15,26 @@ import { NeuFollowButton } from "../components/ui/neu-follow-button";
 import { LineSidebar } from "../components/ui/line-sidebar/LineSidebar";
 import { ToolIcon } from "../components/tools/ToolIcon";
 import { CATEGORY_COLORS } from "../data/tools";
+import { cheatSheets } from "../data/cheat-sheets";
 import { cn } from "@/lib/utils";
+import BookmarkButton from "../components/BookmarkButton";
+
+const SHEET_COLORS: Record<string, { bg: string; darkBg: string; icon: string; hex: string }> = {
+  "version-control": { bg: "bg-orange-100", darkBg: "dark:bg-orange-900/30", icon: "text-orange-600 dark:text-orange-400", hex: "#f97316" },
+  "css": { bg: "bg-blue-100", darkBg: "dark:bg-blue-900/30", icon: "text-blue-600 dark:text-blue-400", hex: "#3b82f6" },
+  "computer-science": { bg: "bg-purple-100", darkBg: "dark:bg-purple-900/30", icon: "text-purple-600 dark:text-purple-400", hex: "#a855f7" },
+  "javascript": { bg: "bg-yellow-100", darkBg: "dark:bg-yellow-900/30", icon: "text-yellow-600 dark:text-yellow-400", hex: "#eab308" },
+  "react": { bg: "bg-cyan-100", darkBg: "dark:bg-cyan-900/30", icon: "text-cyan-600 dark:text-cyan-400", hex: "#06b6d4" },
+  "devops": { bg: "bg-emerald-100", darkBg: "dark:bg-emerald-900/30", icon: "text-emerald-600 dark:text-emerald-400", hex: "#10b981" },
+  "typescript": { bg: "bg-indigo-100", darkBg: "dark:bg-indigo-900/30", icon: "text-indigo-600 dark:text-indigo-400", hex: "#6366f1" },
+  "backend": { bg: "bg-rose-100", darkBg: "dark:bg-rose-900/30", icon: "text-rose-600 dark:text-rose-400", hex: "#f43f5e" },
+  "python": { bg: "bg-green-100", darkBg: "dark:bg-green-900/30", icon: "text-green-600 dark:text-green-400", hex: "#22c55e" },
+  "database": { bg: "bg-amber-100", darkBg: "dark:bg-amber-900/30", icon: "text-amber-600 dark:text-amber-400", hex: "#d97706" },
+  "security": { bg: "bg-red-100", darkBg: "dark:bg-red-900/30", icon: "text-red-600 dark:text-red-400", hex: "#ef4444" },
+  "performance": { bg: "bg-lime-100", darkBg: "dark:bg-lime-900/30", icon: "text-lime-600 dark:text-lime-400", hex: "#84cc16" },
+  "productivity": { bg: "bg-pink-100", darkBg: "dark:bg-pink-900/30", icon: "text-pink-600 dark:text-pink-400", hex: "#ec4899" },
+  "accessibility": { bg: "bg-teal-100", darkBg: "dark:bg-teal-900/30", icon: "text-teal-600 dark:text-teal-400", hex: "#14b8a6" },
+};
 
 const GAME_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
   "bug-finder": Bug,
@@ -56,6 +75,7 @@ export default function Home() {
   const featuredTools = TOOLS.slice(0, 3);
   const featuredGames = useMemo(() => shufflePick(GAMES, 3), []);
   const featuredTips = tips.slice(0, 3);
+  const featuredSheets = cheatSheets.slice(0, 3);
 
   return (
     <>
@@ -154,6 +174,7 @@ export default function Home() {
               title={t.name}
               index={i}
               to={`/tools/${t.slug}`}
+              actions={<BookmarkButton type="tool" slug={t.slug} />}
             >
               {t.tagline}
             </StickerCard>
@@ -234,7 +255,46 @@ export default function Home() {
 
       <section className="mx-auto max-w-6xl px-6 py-16 sm:px-8 sm:py-20">
         <div className="flex items-center justify-between">
-          <SectionHead idx="04" title="This Week's Feed" color="coral" />
+          <SectionHead idx="04" title="Cheat Sheets" />
+          <Link to="/cheat-sheets" className="font-mono text-xs text-muted no-underline hover:text-yellow">
+            all sheets →
+          </Link>
+        </div>
+        <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
+          {featuredSheets.map((s, i) => {
+            const colors = SHEET_COLORS[s.category];
+            return (
+              <StickerCard
+                key={s.id}
+                icon={
+                  <div
+                    className={cn(
+                      "flex h-10 w-10 items-center justify-center rounded-full",
+                      colors?.bg ?? "bg-zinc-100",
+                      colors?.darkBg ?? "dark:bg-zinc-800",
+                    )}
+                  >
+                    <ToolIcon
+                      name={s.icon}
+                      className={cn("h-5 w-5", colors?.icon ?? "text-zinc-600")}
+                    />
+                  </div>
+                }
+                title={s.title}
+                index={i}
+                to={`/cheat-sheets/${s.id}`}
+                actions={<BookmarkButton type="cheatsheet" slug={s.id} />}
+              >
+                {s.description}
+              </StickerCard>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-6 py-16 sm:px-8 sm:py-20">
+        <div className="flex items-center justify-between">
+          <SectionHead idx="05" title="This Week's Feed" color="coral" />
           <Link to="/feed" className="font-mono text-xs text-muted no-underline hover:text-coral">
             view all feed →
           </Link>
@@ -271,7 +331,7 @@ export default function Home() {
       </section>
 
       <section className="mx-auto max-w-6xl px-6 py-16 sm:px-8 sm:py-20">
-        <SectionHead idx="05" title="Q&A" />
+        <SectionHead idx="06" title="Q&A" />
         <Accordion05 />
       </section>
     </>

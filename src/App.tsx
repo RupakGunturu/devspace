@@ -25,6 +25,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import AuthCallback from "./pages/AuthCallback";
 import Profile from "./pages/Profile";
+import Bookmarks from "./pages/Bookmarks";
 
 function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -57,6 +58,14 @@ export default function App() {
         <Route path="/cheat-sheets" element={<CheatSheets />} />
         <Route path="/cheat-sheets/:id" element={<CheatSheetDetail />} />
         <Route path="/tips" element={<Tips />} />
+        <Route
+          path="/bookmarks"
+          element={
+            <ProtectedRoute>
+              <Bookmarks />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
