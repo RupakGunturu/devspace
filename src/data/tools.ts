@@ -474,6 +474,26 @@ function iconForTool(tool: { id: string; category: string }): string {
     math: "Calculator",
     productivity: "Timer",
     fun: "Gamepad2",
+    branding: "User",
+    design: "Palette",
+    content: "PenTool",
+    career: "Briefcase",
+    learning: "BookOpen",
+    marketing: "Megaphone",
+    ecommerce: "ShoppingCart",
+    finance: "DollarSign",
+    hr: "Users",
+    legal: "Scale",
+    "real-estate": "Home",
+    photography: "Camera",
+    health: "Heart",
+    fitness: "Dumbbell",
+    writing: "BookOpen",
+    media: "Music",
+    education: "GraduationCap",
+    sales: "TrendingUp",
+    events: "Calendar",
+    "no-code": "Blocks",
   };
 
   return CATEGORY_DEFAULTS[tool.category] || "Package";
@@ -507,6 +527,174 @@ export const TOOLS: Tool[] = shuffleArray([
     tags: t.tags,
     popular: t.popular,
   })),
+
+  // ── Personal Branding / Profile Tools (requires auth) ──────────────
+  { slug: "linkedin-banner-generator", name: "LinkedIn Banner Generator", icon: "Image", tagline: "Role/industry → styled cover image.", description: "Generate a professional LinkedIn banner based on your role and industry.", category: "branding", tags: ["LinkedIn", "Banner"], requiresAuth: true },
+  { slug: "linkedin-post-formatter", name: "LinkedIn Post Formatter", icon: "PenTool", tagline: "Markdown → LinkedIn plain-text unicode formatting.", description: "Convert markdown to LinkedIn-compatible unicode formatting.", category: "branding", tags: ["LinkedIn", "Formatter"], requiresAuth: true },
+  { slug: "resume-ats-checker", name: "Resume ATS Score Checker", icon: "FileCheck", tagline: "Resume vs job description keyword match.", description: "Check how well your resume matches a job description for ATS systems.", category: "career", tags: ["Resume", "ATS"], requiresAuth: true },
+  { slug: "resume-bullet-rewriter", name: "Resume Bullet Point Rewriter", icon: "RefreshCw", tagline: "Weak bullet → impact-driven bullet.", description: "Rewrite weak resume bullet points into impact-driven statements.", category: "career", tags: ["Resume", "Writing"], requiresAuth: true },
+  { slug: "github-profile-builder", name: "GitHub Profile README Builder", icon: "Github", tagline: "Drag-drop badges, stats widgets.", description: "Build a stunning GitHub profile README with drag-and-drop widgets.", category: "branding", tags: ["GitHub", "Profile"], requiresAuth: true },
+  { slug: "portfolio-bio-generator", name: "Portfolio Bio Generator", icon: "User", tagline: "Skills/role → 3 tone variants.", description: "Generate portfolio bio text in professional, casual, and creative tones.", category: "branding", tags: ["Portfolio", "Bio"], requiresAuth: true },
+  { slug: "headshot-bg-remover", name: "Headshot Background Remover", icon: "Scissors", tagline: "Remove or replace headshot backgrounds.", description: "Remove backgrounds from headshots and replace with professional options.", category: "photography", tags: ["Headshot", "Background"], requiresAuth: true },
+  { slug: "tech-stack-badge-generator", name: "Tech Stack Badge Generator", icon: "Award", tagline: "Shields.io style tech badges.", description: "Generate shields.io-style badges for your tech stack.", category: "branding", tags: ["Badge", "Tech"], requiresAuth: true },
+  { slug: "linkedin-about-generator", name: "LinkedIn About Section Generator", icon: "FileText", tagline: "Generate compelling LinkedIn About sections.", description: "Create a professional LinkedIn About section from your skills and experience.", category: "branding", tags: ["LinkedIn", "About"], requiresAuth: true },
+  { slug: "elevator-pitch-generator", name: "Personal Elevator Pitch Generator", icon: "Mic", tagline: "30/60 second pitch versions.", description: "Generate 30-second and 60-second elevator pitches for your career.", category: "career", tags: ["Pitch", "Career"], requiresAuth: true },
+  { slug: "github-contribution-customizer", name: "GitHub Contribution Graph Customizer", icon: "GitBranch", tagline: "Preview and customize your contribution graph.", description: "Preview and customize your GitHub contribution graph layout.", category: "branding", tags: ["GitHub", "Graph"], requiresAuth: true },
+  { slug: "case-study-outline-generator", name: "Portfolio Case Study Outline Generator", icon: "Layers", tagline: "Problem → process → result structure.", description: "Generate structured portfolio case study outlines.", category: "branding", tags: ["Portfolio", "Case Study"], requiresAuth: true },
+
+  // ── Designer Daily-Use Tools (requires auth) ──────────────────────
+  { slug: "color-palette-extractor", name: "Color Palette Extractor", icon: "SwatchBook", tagline: "Image → dominant colors + hex.", description: "Extract dominant colors from any image with hex values.", category: "design", tags: ["Color", "Image"], requiresAuth: true },
+  { slug: "mood-palette-generator", name: "Mood/Keyword Palette Generator", icon: "Palette", tagline: "Mood/keyword → color palette.", description: "Generate color palettes from mood keywords like 'sunset' or 'cyberpunk'.", category: "design", tags: ["Color", "Mood"], requiresAuth: true },
+  { slug: "typography-pairer", name: "Typography Pairer", icon: "Type", tagline: "Mood/style → font pairs.", description: "Get perfect font pairings based on mood and style preferences.", category: "design", tags: ["Typography", "Fonts"], requiresAuth: true },
+  { slug: "svg-to-png-converter", name: "SVG to PNG/JPG Converter", icon: "Image", tagline: "Convert SVGs to raster images.", description: "Convert SVG files to PNG or JPG with custom dimensions.", category: "design", tags: ["SVG", "Converter"], requiresAuth: true },
+  { slug: "mockup-frame-generator", name: "Mockup Frame Generator", icon: "Monitor", tagline: "Screenshot → device frames.", description: "Wrap screenshots in realistic device mockup frames.", category: "design", tags: ["Mockup", "Frame"], requiresAuth: true },
+  { slug: "favicon-generator-all", name: "Favicon Generator (All Sizes)", icon: "Globe", tagline: "All favicon sizes and formats.", description: "Generate all required favicon sizes and formats from one image.", category: "design", tags: ["Favicon", "Generator"], requiresAuth: true },
+  { slug: "aspect-ratio-cropper", name: "Aspect Ratio Calculator/Cropper", icon: "Crop", tagline: "Calculate and crop to any aspect ratio.", description: "Calculate aspect ratios and crop images precisely.", category: "design", tags: ["Aspect Ratio", "Crop"], requiresAuth: true },
+  { slug: "spacing-grid-generator", name: "Spacing/Grid System Generator", icon: "Grid3x3", tagline: "8px grid, rem scale generator.", description: "Generate spacing and grid systems based on 8px or rem scales.", category: "design", tags: ["Grid", "Spacing"], requiresAuth: true },
+  { slug: "icon-pack-browser", name: "Icon Pack Browser", icon: "Package", tagline: "Searchable icon packs, copy SVG code.", description: "Browse and search icon packs, copy SVG code directly.", category: "design", tags: ["Icons", "Browser"], requiresAuth: true },
+  { slug: "design-token-exporter", name: "Design Token Exporter", icon: "FileJson", tagline: "Colors/spacing → CSS variables/JSON.", description: "Export design tokens as CSS variables, JSON, or other formats.", category: "design", tags: ["Tokens", "Export"], requiresAuth: true },
+
+  // ── Developer Daily-Use Tools (requires auth) ──────────────────────
+  { slug: "diff-checker", name: "Diff Checker", icon: "GitCompare", tagline: "Code/text side-by-side diff.", description: "Compare two code or text snippets side by side.", category: "dev-utilities", tags: ["Diff", "Compare"], requiresAuth: true },
+  { slug: "git-command-builder", name: "Git Command Builder", icon: "GitBranch", tagline: "Visual git command builder.", description: "Build complex git commands visually with explanations.", category: "dev-utilities", tags: ["Git", "Command"], requiresAuth: true },
+  { slug: "package-json-checker", name: "Package.json Dependency Checker", icon: "Package", tagline: "Paste → flag outdated/vulnerable deps.", description: "Check package.json for outdated and vulnerable dependencies.", category: "dev-utilities", tags: ["npm", "Security"], requiresAuth: true },
+
+  // ── Content Creator / Social Tools (requires auth) ──────────────
+  { slug: "twitter-thread-formatter", name: "Twitter/X Thread Formatter", icon: "MessageSquare", tagline: "Long text → numbered tweet splits.", description: "Split long text into numbered tweets for threads.", category: "content", tags: ["Twitter", "Thread"], requiresAuth: true },
+  { slug: "og-image-previewer", name: "Meta Tag / OG Image Previewer", icon: "Eye", tagline: "URL/text → social share preview.", description: "Preview how your page looks when shared on social media.", category: "content", tags: ["OG", "Preview"], requiresAuth: true },
+  { slug: "hashtag-generator", name: "Hashtag Generator", icon: "Hash", tagline: "Topic → relevant tags by platform.", description: "Generate relevant hashtags for Instagram, Twitter, and TikTok.", category: "content", tags: ["Hashtag", "Social"], requiresAuth: true },
+  { slug: "instagram-caption-formatter", name: "Instagram Caption Formatter", icon: "AlignLeft", tagline: "Line breaks that actually render.", description: "Format Instagram captions with line breaks that render properly.", category: "content", tags: ["Instagram", "Caption"], requiresAuth: true },
+  { slug: "content-calendar-generator", name: "Content Calendar Template Generator", icon: "Calendar", tagline: "Generate content calendar templates.", description: "Create monthly content calendar templates for social media.", category: "content", tags: ["Calendar", "Content"], requiresAuth: true },
+  { slug: "youtube-ab-text-tester", name: "YouTube Title/Thumbnail A-B Text Tester", icon: "Tv", tagline: "Compare title/thumbnail text variants.", description: "A/B test YouTube titles and thumbnail text to find the best performer.", category: "content", tags: ["YouTube", "A/B"], requiresAuth: true },
+
+  // ── Productivity / Career Tools (requires auth) ──────────────
+  { slug: "salary-negotiation-script", name: "Salary Negotiation Script Generator", icon: "DollarSign", tagline: "Region + role based scripts.", description: "Generate salary negotiation scripts based on your region and role.", category: "career", tags: ["Salary", "Negotiation"], requiresAuth: true },
+  { slug: "cover-letter-tailor", name: "Cover Letter Tailor", icon: "Mail", tagline: "JD + resume → talking points.", description: "Tailor cover letters to specific job descriptions.", category: "career", tags: ["Cover Letter", "Resume"], requiresAuth: true },
+  { slug: "interview-question-bank", name: "Interview Question Bank", icon: "MessageCircle", tagline: "Filterable by stack: React, Node, SQL, etc.", description: "Filterable interview questions by technology and difficulty.", category: "career", tags: ["Interview", "Questions"], requiresAuth: true },
+  { slug: "mock-interview-timer", name: "Mock Interview Timer/Prompter", icon: "Clock", tagline: "Behavioral + technical rotation.", description: "Timer with rotating behavioral and technical interview prompts.", category: "career", tags: ["Interview", "Timer"], requiresAuth: true },
+  { slug: "freelance-rate-calculator", name: "Freelance Rate Calculator", icon: "Calculator", tagline: "Hourly/project, region-adjusted.", description: "Calculate freelance rates adjusted for your region and experience.", category: "career", tags: ["Freelance", "Rate"], requiresAuth: true },
+  { slug: "invoice-generator", name: "Invoice Generator", icon: "FileText", tagline: "Freelancer-friendly, PDF export.", description: "Generate professional invoices with PDF export.", category: "career", tags: ["Invoice", "PDF"], requiresAuth: true },
+  { slug: "standup-note-formatter", name: "Daily Standup Note Formatter", icon: "ListTodo", tagline: "Structured standup notes.", description: "Format daily standup notes in a consistent structure.", category: "productivity", tags: ["Standup", "Notes"], requiresAuth: true },
+
+  // ── Student / Learning Tools (requires auth) ──────────────
+  { slug: "big-o-cheatsheet", name: "Big-O Complexity Cheatsheet + Visualizer", icon: "BarChart3", tagline: "Visual complexity reference.", description: "Interactive Big-O complexity reference with visual comparisons.", category: "learning", tags: ["Big-O", "Algorithm"], requiresAuth: true },
+  { slug: "algorithm-pattern-matcher", name: "Algorithm Pattern Matcher", icon: "Puzzle", tagline: "Problem → likely pattern: two-pointer, DP, BFS/DFS.", description: "Match coding problems to algorithmic patterns.", category: "learning", tags: ["Algorithm", "Pattern"], requiresAuth: true },
+  { slug: "flashcard-generator", name: "Flashcard Generator", icon: "Layers", tagline: "Paste notes → Q&A cards.", description: "Generate flashcards from notes for spaced repetition study.", category: "learning", tags: ["Flashcard", "Study"], requiresAuth: true },
+  { slug: "system-design-cheatsheet", name: "System Design Cheatsheet", icon: "Network", tagline: "Load balancer, cache, DB choices — quick reference.", description: "Quick reference cards for system design concepts.", category: "learning", tags: ["System Design", "Reference"], requiresAuth: true },
+  { slug: "leetcode-streak-visualizer", name: "LeetCode Streak Visualizer", icon: "Flame", tagline: "Visualize your LeetCode solving streak.", description: "Track and visualize your LeetCode problem-solving streaks over time.", category: "learning", tags: ["LeetCode", "Streak"], requiresAuth: true },
+  { slug: "spaced-repetition-timer", name: "Study Timer with Spaced Repetition", icon: "Brain", tagline: "Pomodoro + spaced repetition reminders.", description: "Study timer with built-in spaced repetition reminders for efficient learning.", category: "learning", tags: ["Study", "Timer"], requiresAuth: true },
+
+  // ── Marketing / SEO Tools (requires auth) ──────────────
+  { slug: "meta-title-length-checker", name: "Meta Title & Description Length Checker", icon: "Ruler", tagline: "Live SERP preview.", description: "Check meta title and description lengths with live SERP preview.", category: "marketing", tags: ["SEO", "Meta"], requiresAuth: true },
+  { slug: "keyword-density-analyzer", name: "Keyword Density Analyzer", icon: "BarChart", tagline: "Paste content → keyword %.", description: "Analyze keyword density in your content.", category: "marketing", tags: ["SEO", "Keyword"], requiresAuth: true },
+  { slug: "utm-link-builder", name: "UTM Link Builder", icon: "Link", tagline: "Campaign tracking URL generator.", description: "Generate UTM-tagged URLs for campaign tracking.", category: "marketing", tags: ["UTM", "Tracking"], requiresAuth: true },
+  { slug: "ad-copy-generator", name: "Ad Copy Variant Generator", icon: "Megaphone", tagline: "Headline + description combos.", description: "Generate ad copy variants for Google and Facebook ads.", category: "marketing", tags: ["Ads", "Copy"], requiresAuth: true },
+  { slug: "email-subject-tester", name: "Email Subject Line A/B Tester", icon: "Mail", tagline: "Spam-trigger word flagger.", description: "Test email subject lines for spam triggers and engagement.", category: "marketing", tags: ["Email", "Subject"], requiresAuth: true },
+  { slug: "seo-slug-generator", name: "Slug/URL Generator", icon: "Link2", tagline: "Title → SEO-friendly slug.", description: "Generate SEO-friendly URL slugs from titles.", category: "marketing", tags: ["SEO", "Slug"], requiresAuth: true },
+  { slug: "content-brief-generator", name: "Content Brief Generator", icon: "FileText", tagline: "Topic → outline + target keywords.", description: "Generate content briefs with outlines and target keywords.", category: "marketing", tags: ["Content", "Brief"], requiresAuth: true },
+  { slug: "backlink-anchor-checker", name: "Backlink Anchor Text Diversity Checker", icon: "Link2", tagline: "Audit anchor text distribution.", description: "Analyze backlink anchor text diversity and flag over-optimization.", category: "marketing", tags: ["Backlink", "SEO"], requiresAuth: true },
+
+  // ── E-commerce / Sellers Tools (requires auth) ──────────────
+  { slug: "product-description-generator", name: "Product Description Generator", icon: "ShoppingBag", tagline: "Features → persuasive copy.", description: "Generate compelling product descriptions from feature lists.", category: "ecommerce", tags: ["Product", "Description"], requiresAuth: true },
+  { slug: "profit-margin-calculator", name: "Profit Margin & Pricing Calculator", icon: "Percent", tagline: "Calculate margins and pricing.", description: "Calculate profit margins, markup, and optimal pricing.", category: "ecommerce", tags: ["Profit", "Calculator"], requiresAuth: true },
+  { slug: "sku-barcode-generator", name: "SKU/Barcode Generator", icon: "Barcode", tagline: "Generate SKUs and barcodes.", description: "Generate SKU codes and barcode labels for products.", category: "ecommerce", tags: ["SKU", "Barcode"], requiresAuth: true },
+  { slug: "shipping-cost-estimator", name: "Shipping Cost Estimator", icon: "Truck", tagline: "Weight/dimensions → rate by carrier zone.", description: "Estimate shipping costs across carriers and zones.", category: "ecommerce", tags: ["Shipping", "Estimate"], requiresAuth: true },
+  { slug: "return-policy-generator", name: "Return/Refund Policy Generator", icon: "RotateCcw", tagline: "Generate return policy templates.", description: "Generate professional return and refund policy templates.", category: "ecommerce", tags: ["Return", "Policy"], requiresAuth: true },
+  { slug: "coupon-code-generator", name: "Discount/Coupon Code Generator", icon: "Tag", tagline: "Generate unique coupon codes.", description: "Generate unique discount and coupon codes in bulk.", category: "ecommerce", tags: ["Coupon", "Discount"], requiresAuth: true },
+  { slug: "inventory-reorder-calculator", name: "Inventory Reorder Point Calculator", icon: "Package", tagline: "When to reorder stock.", description: "Calculate optimal reorder points for inventory management.", category: "ecommerce", tags: ["Inventory", "Stock"], requiresAuth: true },
+  { slug: "product-photo-bg-remover", name: "Product Photo Background Remover", icon: "Scissors", tagline: "Remove product photo backgrounds.", description: "Remove backgrounds from product photos for clean e-commerce listings.", category: "ecommerce", tags: ["Photo", "Background"], requiresAuth: true },
+
+  // ── Finance / Personal Finance Tools (requires auth) ──────────────
+  { slug: "emi-loan-calculator", name: "EMI/Loan Calculator", icon: "Landmark", tagline: "Calculate EMI for any loan.", description: "Calculate equated monthly installments for home, car, or personal loans.", category: "finance", tags: ["EMI", "Loan"], requiresAuth: true },
+  { slug: "budget-split-planner", name: "Budget Split Planner", icon: "PieChart", tagline: "50/30/20 rule visualizer.", description: "Plan your budget using the 50/30/20 rule with visual breakdowns.", category: "finance", tags: ["Budget", "Planning"], requiresAuth: true },
+  { slug: "currency-converter", name: "Currency Converter", icon: "ArrowLeftRight", tagline: "Offline rate table option.", description: "Convert between currencies with offline rate tables.", category: "finance", tags: ["Currency", "Converter"], requiresAuth: true },
+  { slug: "freelance-tax-estimator", name: "Freelance Tax Estimator", icon: "Calculator", tagline: "Region-based tax estimates.", description: "Estimate quarterly taxes for freelancers based on region.", category: "finance", tags: ["Tax", "Freelance"], requiresAuth: true },
+  { slug: "expense-splitter", name: "Expense Splitter", icon: "Users", tagline: "Group trips/shared bills.", description: "Split expenses fairly among groups for trips and shared bills.", category: "finance", tags: ["Expense", "Split"], requiresAuth: true },
+
+  // ── HR / Recruiting Tools (requires auth) ──────────────
+  { slug: "jd-generator", name: "Job Description Generator", icon: "FileText", tagline: "Role + seniority → JD.", description: "Generate professional job descriptions from role and seniority level.", category: "hr", tags: ["Job", "Description"], requiresAuth: true },
+  { slug: "offer-letter-generator", name: "Offer Letter Template Generator", icon: "FileCheck", tagline: "Generate offer letter templates.", description: "Create professional offer letter templates.", category: "hr", tags: ["Offer", "Letter"], requiresAuth: true },
+  { slug: "interview-scorecard", name: "Interview Scorecard Builder", icon: "ClipboardList", tagline: "Structured interview scoring.", description: "Build structured interview scorecards with criteria and scoring.", category: "hr", tags: ["Interview", "Scorecard"], requiresAuth: true },
+  { slug: "onboarding-checklist", name: "Onboarding Checklist Generator", icon: "CheckSquare", tagline: "Role-based onboarding tasks.", description: "Generate role-based onboarding checklists for new hires.", category: "hr", tags: ["Onboarding", "Checklist"], requiresAuth: true },
+  { slug: "salary-band-calculator", name: "Salary Band Calculator", icon: "DollarSign", tagline: "Role + region + experience.", description: "Calculate salary bands based on role, region, and experience.", category: "hr", tags: ["Salary", "Band"], requiresAuth: true },
+  { slug: "employee-handbook-generator", name: "Employee Handbook Section Generator", icon: "Book", tagline: "Generate handbook sections.", description: "Generate professional employee handbook sections for policies and procedures.", category: "hr", tags: ["Handbook", "Policy"], requiresAuth: true },
+
+  // ── Legal / Compliance Tools (requires auth) ──────────────
+  { slug: "nda-template-generator", name: "NDA Template Generator", icon: "FileSignature", tagline: "Fill-in-the-blank NDA templates.", description: "Generate non-disclosure agreement templates.", category: "legal", tags: ["NDA", "Template"], requiresAuth: true },
+  { slug: "contract-clause-explainer", name: "Contract Clause Explainer", icon: "BookOpen", tagline: "Paste clause → plain-English summary.", description: "Explain contract clauses in plain English.", category: "legal", tags: ["Contract", "Explainer"], requiresAuth: true },
+  { slug: "trademark-checker", name: "Business Name/Trademark Availability Checker", icon: "ShieldCheck", tagline: "Check name availability.", description: "Check business name and trademark availability across domains and databases.", category: "legal", tags: ["Trademark", "Name"], requiresAuth: true },
+
+  // ── Real Estate Tools (requires auth) ──────────────
+  { slug: "rent-vs-buy-calculator", name: "Rent vs Buy Calculator", icon: "Home", tagline: "Should you rent or buy?", description: "Compare renting vs buying a home with financial projections.", category: "real-estate", tags: ["Rent", "Buy"], requiresAuth: true },
+  { slug: "mortgage-affordability", name: "Mortgage Affordability Calculator", icon: "Building", tagline: "How much house can you afford?", description: "Calculate mortgage affordability based on income and expenses.", category: "real-estate", tags: ["Mortgage", "Affordability"], requiresAuth: true },
+  { slug: "property-listing-generator", name: "Property Listing Description Generator", icon: "Home", tagline: "Generate property listing descriptions.", description: "Create compelling property listing descriptions.", category: "real-estate", tags: ["Property", "Listing"], requiresAuth: true },
+  { slug: "area-unit-converter", name: "Square Footage / Area Unit Converter", icon: "ArrowLeftRight", tagline: "Convert area units.", description: "Convert between square feet, meters, yards, and other area units.", category: "real-estate", tags: ["Area", "Converter"], requiresAuth: true },
+  { slug: "rental-yield-calculator", name: "Rental Yield Calculator", icon: "Percent", tagline: "Calculate rental yield.", description: "Calculate gross and net rental yield for investment properties.", category: "real-estate", tags: ["Rental", "Yield"], requiresAuth: true },
+
+  // ── Photography / Events Tools (requires auth) ──────────────
+  { slug: "event-timeline-generator", name: "Event Timeline/Shot List Generator", icon: "Camera", tagline: "Plan event photography.", description: "Generate event photography timelines and shot lists.", category: "photography", tags: ["Event", "Timeline"], requiresAuth: true },
+  { slug: "photography-pricing-builder", name: "Photography Pricing Package Builder", icon: "DollarSign", tagline: "Build pricing packages.", description: "Create photography pricing packages with deliverables.", category: "photography", tags: ["Pricing", "Package"], requiresAuth: true },
+  { slug: "photo-watermark-tool", name: "Photo Gallery Watermark Tool", icon: "Droplets", tagline: "Add watermarks to photos.", description: "Add text or image watermarks to photos in bulk.", category: "photography", tags: ["Watermark", "Photo"], requiresAuth: true },
+  { slug: "exif-data-viewer", name: "EXIF Data Viewer/Stripper", icon: "Info", tagline: "View or strip EXIF data.", description: "View EXIF metadata or strip it for privacy-safe sharing.", category: "photography", tags: ["EXIF", "Metadata"], requiresAuth: true },
+  { slug: "client-contract-checklist", name: "Client Contract & Deliverable Checklist Generator", icon: "ClipboardCheck", tagline: "Generate client contract checklists.", description: "Generate comprehensive client contract and deliverable checklists for photographers.", category: "photography", tags: ["Contract", "Checklist"], requiresAuth: true },
+  { slug: "event-budget-planner", name: "Event Budget Planner", icon: "Wallet", tagline: "Plan event budgets.", description: "Plan and track event budgets with category breakdowns.", category: "events", tags: ["Budget", "Event"], requiresAuth: true },
+
+  // ── Healthcare / Wellness Tools (requires auth) ──────────────
+  { slug: "bmi-body-metrics", name: "BMI/Body Metrics Calculator", icon: "Heart", tagline: "Calculate BMI and body metrics.", description: "Calculate BMI, BMR, and other body metrics.", category: "health", tags: ["BMI", "Health"], requiresAuth: true },
+  { slug: "water-intake-calculator", name: "Water Intake Calculator", icon: "Droplet", tagline: "Daily water intake recommendation.", description: "Calculate recommended daily water intake.", category: "health", tags: ["Water", "Intake"], requiresAuth: true },
+  { slug: "sleep-cycle-calculator", name: "Sleep Cycle Calculator", icon: "Moon", tagline: "Bedtime → wake time by 90-min cycles.", description: "Calculate optimal sleep and wake times based on sleep cycles.", category: "health", tags: ["Sleep", "Cycle"], requiresAuth: true },
+  { slug: "medication-reminder-builder", name: "Medication Reminder Schedule Builder", icon: "Bell", tagline: "Build medication schedules.", description: "Create medication reminder schedules.", category: "health", tags: ["Medication", "Reminder"], requiresAuth: true },
+  { slug: "step-activity-tracker", name: "Step/Activity Goal Tracker", icon: "Footprints", tagline: "Track daily step and activity goals.", description: "Set and track daily step count and activity goals with progress visualization.", category: "health", tags: ["Steps", "Activity"], requiresAuth: true },
+
+  // ── Fitness / Coaching Tools (requires auth) ──────────────
+  { slug: "workout-plan-generator", name: "Workout Plan Generator", icon: "Dumbbell", tagline: "Goal + equipment → weekly split.", description: "Generate workout plans based on goals and available equipment.", category: "fitness", tags: ["Workout", "Plan"], requiresAuth: true },
+  { slug: "macro-calorie-calculator", name: "Macro/Calorie Calculator", icon: "Utensils", tagline: "Calculate macros and calories.", description: "Calculate daily macro and calorie targets.", category: "fitness", tags: ["Macro", "Calorie"], requiresAuth: true },
+  { slug: "progressive-overload-tracker", name: "Progressive Overload Tracker", icon: "TrendingUp", tagline: "Track progressive overload.", description: "Track and visualize progressive overload in your workouts.", category: "fitness", tags: ["Overload", "Tracker"], requiresAuth: true },
+  { slug: "rest-timer", name: "Rest Timer with Interval Presets", icon: "Timer", tagline: "Customizable rest timer.", description: "Rest timer with presets for different exercise types.", category: "fitness", tags: ["Timer", "Rest"], requiresAuth: true },
+
+  // ── Writers / Authors / Bloggers Tools (requires auth) ──────────────
+  { slug: "word-count-tracker", name: "Word Count Goal Tracker", icon: "Target", tagline: "Daily writing streak tracker.", description: "Track daily word count goals and writing streaks.", category: "writing", tags: ["Word Count", "Streak"], requiresAuth: true },
+  { slug: "plot-outline-generator", name: "Plot/Outline Generator", icon: "BookOpen", tagline: "Genre → structure beats.", description: "Generate plot outlines based on genre and structure.", category: "writing", tags: ["Plot", "Outline"], requiresAuth: true },
+  { slug: "character-name-generator", name: "Character Name Generator", icon: "User", tagline: "Culture/genre based names.", description: "Generate character names based on culture and genre.", category: "writing", tags: ["Character", "Name"], requiresAuth: true },
+  { slug: "readability-score-checker", name: "Readability Score Checker", icon: "BarChart2", tagline: "Flesch-Kincaid style scoring.", description: "Check readability scores with Flesch-Kincaid and other metrics.", category: "writing", tags: ["Readability", "Score"], requiresAuth: true },
+  { slug: "citation-formatter", name: "Citation/Bibliography Formatter", icon: "Quote", tagline: "APA/MLA/Chicago formatting.", description: "Format citations and bibliographies in APA, MLA, or Chicago style.", category: "writing", tags: ["Citation", "Format"], requiresAuth: true },
+
+  // ── Music / Audio / Video Tools (requires auth) ──────────────
+  { slug: "bpm-tap-tempo", name: "BPM Tap Tempo Finder", icon: "Music", tagline: "Tap to find BPM.", description: "Tap along to find the BPM of any song.", category: "media", tags: ["BPM", "Tempo"], requiresAuth: true },
+  { slug: "video-aspect-ratio-calculator", name: "Video Aspect Ratio Calculator", icon: "Film", tagline: "Per platform: Reels, Shorts, YouTube.", description: "Calculate video dimensions for different platforms.", category: "media", tags: ["Video", "Ratio"], requiresAuth: true },
+  { slug: "thumbnail-ab-previewer", name: "Thumbnail A/B Preview Tool", icon: "Image", tagline: "Preview thumbnail variants.", description: "Compare thumbnail variants side by side.", category: "media", tags: ["Thumbnail", "Preview"], requiresAuth: true },
+  { slug: "podcast-show-notes-generator", name: "Podcast Episode Show Notes Generator", icon: "Mic", tagline: "Generate show notes.", description: "Generate structured show notes for podcast episodes.", category: "media", tags: ["Podcast", "Notes"], requiresAuth: true },
+  { slug: "audio-format-converter", name: "Audio File Format Converter", icon: "Music", tagline: "Convert between audio formats.", description: "Convert between audio file formats (WAV, MP3, OGG, FLAC) with metadata.", category: "media", tags: ["Audio", "Converter"], requiresAuth: true },
+  { slug: "loudness-normalizer-guide", name: "Silence/Loudness Normalizer Reference Guide", icon: "Volume2", tagline: "LUFS targets & normalization guide.", description: "Reference guide for LUFS loudness targets and normalization standards.", category: "media", tags: ["Loudness", "Audio"], requiresAuth: true },
+
+  // ── Teachers / Education Tools (requires auth) ──────────────
+  { slug: "lesson-plan-generator", name: "Lesson Plan Generator", icon: "GraduationCap", tagline: "Topic + grade → structured plan.", description: "Generate lesson plans based on topic and grade level.", category: "education", tags: ["Lesson", "Plan"], requiresAuth: true },
+  { slug: "rubric-builder", name: "Rubric Builder", icon: "ClipboardList", tagline: "Criteria → scoring grid.", description: "Build assessment rubrics with criteria and scoring grids.", category: "education", tags: ["Rubric", "Assessment"], requiresAuth: true },
+  { slug: "quiz-generator", name: "Quiz/Worksheet Generator", icon: "FileQuestion", tagline: "Topic → auto-generated questions.", description: "Generate quizzes and worksheets from topics.", category: "education", tags: ["Quiz", "Worksheet"], requiresAuth: true },
+  { slug: "grade-curve-calculator", name: "Grade Curve Calculator", icon: "BarChart", tagline: "Calculate grade curves.", description: "Calculate grade curves based on class performance.", category: "education", tags: ["Grade", "Curve"], requiresAuth: true },
+  { slug: "certificate-generator", name: "Certificate Generator", icon: "Award", tagline: "Name + course → printable certificate.", description: "Generate printable certificates for courses and achievements.", category: "education", tags: ["Certificate", "Award"], requiresAuth: true },
+  { slug: "attendance-tracker", name: "Attendance Tracker Template", icon: "ListChecks", tagline: "Track student attendance.", description: "Generate and manage student attendance tracking templates.", category: "education", tags: ["Attendance", "Tracker"], requiresAuth: true },
+
+  // ── Sales / CRM Tools (requires auth) ──────────────
+  { slug: "cold-email-sequence-generator", name: "Cold Email Sequence Generator", icon: "Mail", tagline: "Generate cold email sequences.", description: "Generate multi-step cold email sequences.", category: "sales", tags: ["Email", "Cold"], requiresAuth: true },
+  { slug: "sales-pitch-deck-outline", name: "Sales Pitch Deck Outline Generator", icon: "Presentation", tagline: "Generate pitch deck outlines.", description: "Generate structured sales pitch deck outlines.", category: "sales", tags: ["Pitch", "Deck"], requiresAuth: true },
+  { slug: "lead-scoring-calculator", name: "Lead Scoring Calculator", icon: "Target", tagline: "Calculate lead scores.", description: "Score and prioritize leads based on criteria.", category: "sales", tags: ["Lead", "Score"], requiresAuth: true },
+  { slug: "commission-calculator", name: "Commission Calculator", icon: "DollarSign", tagline: "Calculate sales commissions.", description: "Calculate sales commissions with tiered structures.", category: "sales", tags: ["Commission", "Sales"], requiresAuth: true },
+
+  // ── Event Planning / Community Tools (requires auth) ──────────────
+  { slug: "event-budget-splitter", name: "Event Budget Splitter", icon: "Split", tagline: "Split event budgets fairly.", description: "Split event budgets among organizers or sponsors.", category: "events", tags: ["Budget", "Split"], requiresAuth: true },
+  { slug: "raffle-winner-picker", name: "Raffle/Giveaway Winner Picker", icon: "Gift", tagline: "Random winner selection.", description: "Pick random winners for raffles and giveaways.", category: "events", tags: ["Raffle", "Winner"], requiresAuth: true },
+  { slug: "poll-survey-builder", name: "Poll/Survey Builder", icon: "BarChart3", tagline: "Build polls with live results.", description: "Create polls and surveys with real-time result visualization.", category: "events", tags: ["Poll", "Survey"], requiresAuth: true },
+  { slug: "rsvp-tracker", name: "RSVP Tracker/Form Builder", icon: "ClipboardList", tagline: "Build RSVP forms and track responses.", description: "Create RSVP forms and track event responses in real-time.", category: "events", tags: ["RSVP", "Form"], requiresAuth: true },
+  { slug: "seating-chart-generator", name: "Seating Chart Generator", icon: "LayoutGrid", tagline: "Plan seating arrangements.", description: "Generate seating charts for events, weddings, and conferences.", category: "events", tags: ["Seating", "Event"], requiresAuth: true },
+
+  // ── No-Code / Automation Tools (requires auth) ──────────────
+  { slug: "zapier-workflow-generator", name: "Zapier/Make Workflow Template Generator", icon: "Workflow", tagline: "Describe automation → step list.", description: "Generate workflow templates for Zapier and Make.", category: "no-code", tags: ["Zapier", "Workflow"], requiresAuth: true },
+  { slug: "webhook-payload-tester", name: "Webhook Payload Tester", icon: "Webhook", tagline: "Test webhook payloads.", description: "Generate and test webhook payloads for integrations.", category: "no-code", tags: ["Webhook", "Test"], requiresAuth: true },
+  { slug: "airtable-formula-helper", name: "Airtable/Notion Formula Helper", icon: "Database", tagline: "Plain English → formula.", description: "Convert plain English descriptions to Airtable and Notion formulas.", category: "no-code", tags: ["Airtable", "Formula"], requiresAuth: true },
+  { slug: "form-sheet-mapper", name: "Form-to-Sheet Mapper", icon: "TableProperties", tagline: "Visual form field mapping.", description: "Visually map form fields to spreadsheet columns for data import.", category: "no-code", tags: ["Form", "Spreadsheet"], requiresAuth: true },
+
+  { slug: "followup-reminder-scheduler", name: "Follow-up Reminder Scheduler", icon: "AlarmClock", tagline: "Schedule follow-up reminders.", description: "Create follow-up reminder schedules for leads and clients.", category: "sales", tags: ["Follow-up", "Reminder"], requiresAuth: true },
 ]);
 
 export const toolBySlug = (slug: string) => TOOLS.find((t) => t.slug === slug);
@@ -526,4 +714,24 @@ export const CATEGORY_COLORS: Record<string, { bg: string; icon: string; darkBg:
   math: { bg: "bg-emerald-100", icon: "text-emerald-600", darkBg: "dark:bg-emerald-900/30", accent: "#059669", accentFg: "#ffffff" },
   productivity: { bg: "bg-yellow-100", icon: "text-yellow-700", darkBg: "dark:bg-yellow-900/30", accent: "#a16207", accentFg: "#ffffff" },
   fun: { bg: "bg-orange-100", icon: "text-orange-600", darkBg: "dark:bg-orange-900/30", accent: "#ea580c", accentFg: "#ffffff" },
+  branding: { bg: "bg-sky-100", icon: "text-sky-600", darkBg: "dark:bg-sky-900/30", accent: "#0284c7", accentFg: "#ffffff" },
+  design: { bg: "bg-rose-100", icon: "text-rose-600", darkBg: "dark:bg-rose-900/30", accent: "#e11d48", accentFg: "#ffffff" },
+  content: { bg: "bg-purple-100", icon: "text-purple-600", darkBg: "dark:bg-purple-900/30", accent: "#9333ea", accentFg: "#ffffff" },
+  career: { bg: "bg-cyan-100", icon: "text-cyan-600", darkBg: "dark:bg-cyan-900/30", accent: "#0891b2", accentFg: "#ffffff" },
+  learning: { bg: "bg-lime-100", icon: "text-lime-600", darkBg: "dark:bg-lime-900/30", accent: "#65a30d", accentFg: "#ffffff" },
+  marketing: { bg: "bg-emerald-100", icon: "text-emerald-500", darkBg: "dark:bg-emerald-900/30", accent: "#10b981", accentFg: "#ffffff" },
+  ecommerce: { bg: "bg-amber-100", icon: "text-amber-600", darkBg: "dark:bg-amber-900/30", accent: "#d97706", accentFg: "#ffffff" },
+  finance: { bg: "bg-green-100", icon: "text-green-600", darkBg: "dark:bg-green-900/30", accent: "#16a34a", accentFg: "#ffffff" },
+  hr: { bg: "bg-blue-100", icon: "text-blue-500", darkBg: "dark:bg-blue-900/30", accent: "#3b82f6", accentFg: "#ffffff" },
+  legal: { bg: "bg-zinc-100", icon: "text-zinc-600", darkBg: "dark:bg-zinc-800/50", accent: "#52525b", accentFg: "#ffffff" },
+  "real-estate": { bg: "bg-teal-100", icon: "text-teal-500", darkBg: "dark:bg-teal-900/30", accent: "#14b8a6", accentFg: "#ffffff" },
+  photography: { bg: "bg-violet-100", icon: "text-violet-500", darkBg: "dark:bg-violet-900/30", accent: "#8b5cf6", accentFg: "#ffffff" },
+  health: { bg: "bg-red-100", icon: "text-red-500", darkBg: "dark:bg-red-900/30", accent: "#ef4444", accentFg: "#ffffff" },
+  fitness: { bg: "bg-orange-100", icon: "text-orange-500", darkBg: "dark:bg-orange-900/30", accent: "#f97316", accentFg: "#ffffff" },
+  writing: { bg: "bg-indigo-100", icon: "text-indigo-500", darkBg: "dark:bg-indigo-900/30", accent: "#6366f1", accentFg: "#ffffff" },
+  media: { bg: "bg-fuchsia-100", icon: "text-fuchsia-500", darkBg: "dark:bg-fuchsia-900/30", accent: "#d946ef", accentFg: "#ffffff" },
+  education: { bg: "bg-sky-100", icon: "text-sky-500", darkBg: "dark:bg-sky-900/30", accent: "#0ea5e9", accentFg: "#ffffff" },
+  sales: { bg: "bg-lime-100", icon: "text-lime-500", darkBg: "dark:bg-lime-900/30", accent: "#84cc16", accentFg: "#ffffff" },
+  events: { bg: "bg-pink-100", icon: "text-pink-500", darkBg: "dark:bg-pink-900/30", accent: "#ec4899", accentFg: "#ffffff" },
+  "no-code": { bg: "bg-stone-100", icon: "text-stone-500", darkBg: "dark:bg-stone-800/50", accent: "#78716c", accentFg: "#ffffff" },
 };

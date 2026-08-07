@@ -1,0 +1,1526 @@
+[
+  {
+    "slug": "json-formatter",
+    "requiresAuth": true
+  },
+  {
+    "slug": "regex-tester",
+    "requiresAuth": false
+  },
+  {
+    "slug": "contrast-checker",
+    "requiresAuth": false
+  },
+  {
+    "slug": "markdown-previewer",
+    "requiresAuth": false
+  },
+  {
+    "slug": "base64-url-codec",
+    "requiresAuth": false
+  },
+  {
+    "slug": "uuid-hash",
+    "requiresAuth": false
+  },
+  {
+    "slug": "linkedin-banner-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "linkedin-post-formatter",
+    "requiresAuth": true
+  },
+  {
+    "slug": "resume-ats-checker",
+    "requiresAuth": true
+  },
+  {
+    "slug": "resume-bullet-rewriter",
+    "requiresAuth": true
+  },
+  {
+    "slug": "github-profile-builder",
+    "requiresAuth": true
+  },
+  {
+    "slug": "portfolio-bio-generator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "headshot-bg-remover",
+    "requiresAuth": true
+  },
+  {
+    "slug": "tech-stack-badge-generator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "linkedin-about-generator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "elevator-pitch-generator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "github-contribution-customizer",
+    "requiresAuth": true
+  },
+  {
+    "slug": "case-study-outline-generator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "color-palette-extractor",
+    "requiresAuth": true
+  },
+  {
+    "slug": "mood-palette-generator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "typography-pairer",
+    "requiresAuth": true
+  },
+  {
+    "slug": "svg-to-png-converter",
+    "requiresAuth": true
+  },
+  {
+    "slug": "mockup-frame-generator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "favicon-generator-all",
+    "requiresAuth": true
+  },
+  {
+    "slug": "aspect-ratio-cropper",
+    "requiresAuth": true
+  },
+  {
+    "slug": "spacing-grid-generator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "icon-pack-browser",
+    "requiresAuth": true
+  },
+  {
+    "slug": "design-token-exporter",
+    "requiresAuth": true
+  },
+  {
+    "slug": "diff-checker",
+    "requiresAuth": true
+  },
+  {
+    "slug": "git-command-builder",
+    "requiresAuth": true
+  },
+  {
+    "slug": "package-json-checker",
+    "requiresAuth": true
+  },
+  {
+    "slug": "twitter-thread-formatter",
+    "requiresAuth": true
+  },
+  {
+    "slug": "og-image-previewer",
+    "requiresAuth": true
+  },
+  {
+    "slug": "hashtag-generator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "instagram-caption-formatter",
+    "requiresAuth": true
+  },
+  {
+    "slug": "content-calendar-generator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "youtube-ab-text-tester",
+    "requiresAuth": true
+  },
+  {
+    "slug": "salary-negotiation-script",
+    "requiresAuth": true
+  },
+  {
+    "slug": "cover-letter-tailor",
+    "requiresAuth": true
+  },
+  {
+    "slug": "interview-question-bank",
+    "requiresAuth": true
+  },
+  {
+    "slug": "mock-interview-timer",
+    "requiresAuth": true
+  },
+  {
+    "slug": "freelance-rate-calculator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "invoice-generator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "standup-note-formatter",
+    "requiresAuth": true
+  },
+  {
+    "slug": "big-o-cheatsheet",
+    "requiresAuth": true
+  },
+  {
+    "slug": "algorithm-pattern-matcher",
+    "requiresAuth": true
+  },
+  {
+    "slug": "flashcard-generator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "system-design-cheatsheet",
+    "requiresAuth": true
+  },
+  {
+    "slug": "leetcode-streak-visualizer",
+    "requiresAuth": true
+  },
+  {
+    "slug": "spaced-repetition-timer",
+    "requiresAuth": true
+  },
+  {
+    "slug": "meta-title-length-checker",
+    "requiresAuth": true
+  },
+  {
+    "slug": "keyword-density-analyzer",
+    "requiresAuth": true
+  },
+  {
+    "slug": "utm-link-builder",
+    "requiresAuth": true
+  },
+  {
+    "slug": "ad-copy-generator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "email-subject-tester",
+    "requiresAuth": true
+  },
+  {
+    "slug": "seo-slug-generator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "content-brief-generator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "backlink-anchor-checker",
+    "requiresAuth": true
+  },
+  {
+    "slug": "product-description-generator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "profit-margin-calculator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "sku-barcode-generator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "shipping-cost-estimator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "return-policy-generator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "coupon-code-generator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "inventory-reorder-calculator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "product-photo-bg-remover",
+    "requiresAuth": true
+  },
+  {
+    "slug": "emi-loan-calculator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "budget-split-planner",
+    "requiresAuth": true
+  },
+  {
+    "slug": "currency-converter",
+    "requiresAuth": true
+  },
+  {
+    "slug": "freelance-tax-estimator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "expense-splitter",
+    "requiresAuth": true
+  },
+  {
+    "slug": "jd-generator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "offer-letter-generator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "interview-scorecard",
+    "requiresAuth": true
+  },
+  {
+    "slug": "onboarding-checklist",
+    "requiresAuth": true
+  },
+  {
+    "slug": "salary-band-calculator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "employee-handbook-generator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "nda-template-generator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "contract-clause-explainer",
+    "requiresAuth": true
+  },
+  {
+    "slug": "trademark-checker",
+    "requiresAuth": true
+  },
+  {
+    "slug": "rent-vs-buy-calculator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "mortgage-affordability",
+    "requiresAuth": true
+  },
+  {
+    "slug": "property-listing-generator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "area-unit-converter",
+    "requiresAuth": true
+  },
+  {
+    "slug": "rental-yield-calculator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "event-timeline-generator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "photography-pricing-builder",
+    "requiresAuth": true
+  },
+  {
+    "slug": "photo-watermark-tool",
+    "requiresAuth": true
+  },
+  {
+    "slug": "exif-data-viewer",
+    "requiresAuth": true
+  },
+  {
+    "slug": "client-contract-checklist",
+    "requiresAuth": true
+  },
+  {
+    "slug": "event-budget-planner",
+    "requiresAuth": true
+  },
+  {
+    "slug": "bmi-body-metrics",
+    "requiresAuth": true
+  },
+  {
+    "slug": "water-intake-calculator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "sleep-cycle-calculator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "medication-reminder-builder",
+    "requiresAuth": true
+  },
+  {
+    "slug": "step-activity-tracker",
+    "requiresAuth": true
+  },
+  {
+    "slug": "workout-plan-generator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "macro-calorie-calculator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "progressive-overload-tracker",
+    "requiresAuth": true
+  },
+  {
+    "slug": "rest-timer",
+    "requiresAuth": true
+  },
+  {
+    "slug": "word-count-tracker",
+    "requiresAuth": true
+  },
+  {
+    "slug": "plot-outline-generator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "character-name-generator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "readability-score-checker",
+    "requiresAuth": true
+  },
+  {
+    "slug": "citation-formatter",
+    "requiresAuth": true
+  },
+  {
+    "slug": "bpm-tap-tempo",
+    "requiresAuth": true
+  },
+  {
+    "slug": "video-aspect-ratio-calculator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "thumbnail-ab-previewer",
+    "requiresAuth": true
+  },
+  {
+    "slug": "podcast-show-notes-generator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "audio-format-converter",
+    "requiresAuth": true
+  },
+  {
+    "slug": "loudness-normalizer-guide",
+    "requiresAuth": true
+  },
+  {
+    "slug": "lesson-plan-generator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "rubric-builder",
+    "requiresAuth": true
+  },
+  {
+    "slug": "quiz-generator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "grade-curve-calculator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "certificate-generator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "attendance-tracker",
+    "requiresAuth": true
+  },
+  {
+    "slug": "cold-email-sequence-generator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "sales-pitch-deck-outline",
+    "requiresAuth": true
+  },
+  {
+    "slug": "lead-scoring-calculator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "commission-calculator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "event-budget-splitter",
+    "requiresAuth": true
+  },
+  {
+    "slug": "raffle-winner-picker",
+    "requiresAuth": true
+  },
+  {
+    "slug": "poll-survey-builder",
+    "requiresAuth": true
+  },
+  {
+    "slug": "rsvp-tracker",
+    "requiresAuth": true
+  },
+  {
+    "slug": "seating-chart-generator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "zapier-workflow-generator",
+    "requiresAuth": true
+  },
+  {
+    "slug": "webhook-payload-tester",
+    "requiresAuth": true
+  },
+  {
+    "slug": "airtable-formula-helper",
+    "requiresAuth": true
+  },
+  {
+    "slug": "form-sheet-mapper",
+    "requiresAuth": true
+  },
+  {
+    "slug": "followup-reminder-scheduler",
+    "requiresAuth": true
+  },
+  {
+    "slug": "box-shadow-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "glassmorphism-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "neumorphism-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "css-gradient-builder",
+    "requiresAuth": false
+  },
+  {
+    "slug": "mesh-gradient-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "css-filter-builder",
+    "requiresAuth": false
+  },
+  {
+    "slug": "clip-path-editor",
+    "requiresAuth": false
+  },
+  {
+    "slug": "cubic-bezier-editor",
+    "requiresAuth": false
+  },
+  {
+    "slug": "css-keyframe-builder",
+    "requiresAuth": false
+  },
+  {
+    "slug": "svg-path-animator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "border-radius-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "css-specificity-calculator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "flexbox-playground",
+    "requiresAuth": false
+  },
+  {
+    "slug": "css-grid-builder",
+    "requiresAuth": false
+  },
+  {
+    "slug": "scrollbar-styler",
+    "requiresAuth": false
+  },
+  {
+    "slug": "css-variables-theme-builder",
+    "requiresAuth": false
+  },
+  {
+    "slug": "tailwind-to-css",
+    "requiresAuth": false
+  },
+  {
+    "slug": "css-to-tailwind",
+    "requiresAuth": false
+  },
+  {
+    "slug": "css-units-converter",
+    "requiresAuth": false
+  },
+  {
+    "slug": "css-text-shadow-builder",
+    "requiresAuth": false
+  },
+  {
+    "slug": "z-index-manager",
+    "requiresAuth": false
+  },
+  {
+    "slug": "print-css-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "transition-visualizer",
+    "requiresAuth": false
+  },
+  {
+    "slug": "css-counter-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "css-outline-border-explorer",
+    "requiresAuth": false
+  },
+  {
+    "slug": "css-animation-builder",
+    "requiresAuth": false
+  },
+  {
+    "slug": "svg-path-visualizer",
+    "requiresAuth": false
+  },
+  {
+    "slug": "live-css-playground",
+    "requiresAuth": false
+  },
+  {
+    "slug": "tailwind-class-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "hex-rgb-hsl-converter",
+    "requiresAuth": false
+  },
+  {
+    "slug": "color-palette-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "color-blind-simulator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "wcag-contrast-checker",
+    "requiresAuth": false
+  },
+  {
+    "slug": "image-to-color-palette",
+    "requiresAuth": false
+  },
+  {
+    "slug": "color-gradient-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "color-mixer",
+    "requiresAuth": false
+  },
+  {
+    "slug": "color-temperature-converter",
+    "requiresAuth": false
+  },
+  {
+    "slug": "color-name-finder",
+    "requiresAuth": false
+  },
+  {
+    "slug": "random-color-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "color-shades-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "pantone-to-hex",
+    "requiresAuth": false
+  },
+  {
+    "slug": "color-harmony-explorer",
+    "requiresAuth": false
+  },
+  {
+    "slug": "dark-mode-palette-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "css-color-variables-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "color-story-from-emotion",
+    "requiresAuth": false
+  },
+  {
+    "slug": "brand-color-extractor",
+    "requiresAuth": false
+  },
+  {
+    "slug": "jwt-decoder",
+    "requiresAuth": false
+  },
+  {
+    "slug": "jwt-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "regex-visualizer",
+    "requiresAuth": false
+  },
+  {
+    "slug": "json-to-typescript",
+    "requiresAuth": false
+  },
+  {
+    "slug": "json-to-zod",
+    "requiresAuth": false
+  },
+  {
+    "slug": "json-to-python-dataclass",
+    "requiresAuth": false
+  },
+  {
+    "slug": "json-diff",
+    "requiresAuth": false
+  },
+  {
+    "slug": "json-path-tester",
+    "requiresAuth": false
+  },
+  {
+    "slug": "yaml-json-converter",
+    "requiresAuth": false
+  },
+  {
+    "slug": "toml-json-converter",
+    "requiresAuth": false
+  },
+  {
+    "slug": "cron-builder",
+    "requiresAuth": false
+  },
+  {
+    "slug": "cron-explainer",
+    "requiresAuth": false
+  },
+  {
+    "slug": "uuid-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "hash-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "hmac-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "api-response-mocker",
+    "requiresAuth": false
+  },
+  {
+    "slug": "http-status-codes",
+    "requiresAuth": false
+  },
+  {
+    "slug": "http-header-analyzer",
+    "requiresAuth": false
+  },
+  {
+    "slug": "env-validator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "docker-compose-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "gitignore-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "license-picker",
+    "requiresAuth": false
+  },
+  {
+    "slug": "semver-explainer",
+    "requiresAuth": false
+  },
+  {
+    "slug": "npm-package-comparator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "eslint-rule-explorer",
+    "requiresAuth": false
+  },
+  {
+    "slug": "sql-formatter",
+    "requiresAuth": false
+  },
+  {
+    "slug": "sql-to-mongodb",
+    "requiresAuth": false
+  },
+  {
+    "slug": "graphql-to-rest",
+    "requiresAuth": false
+  },
+  {
+    "slug": "git-command-explainer",
+    "requiresAuth": false
+  },
+  {
+    "slug": "json-visualizer",
+    "requiresAuth": false
+  },
+  {
+    "slug": "sql-formatter-explainer",
+    "requiresAuth": false
+  },
+  {
+    "slug": "docker-command-builder",
+    "requiresAuth": false
+  },
+  {
+    "slug": "unicode-symbol-finder",
+    "requiresAuth": false
+  },
+  {
+    "slug": "env-var-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "browser-storage-inspector",
+    "requiresAuth": false
+  },
+  {
+    "slug": "api-rate-limit-estimator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "regex-tester-explainer",
+    "requiresAuth": false
+  },
+  {
+    "slug": "markdown-preview",
+    "requiresAuth": false
+  },
+  {
+    "slug": "markdown-table-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "word-counter",
+    "requiresAuth": false
+  },
+  {
+    "slug": "text-diff",
+    "requiresAuth": false
+  },
+  {
+    "slug": "lorem-ipsum-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "slug-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "case-converter",
+    "requiresAuth": false
+  },
+  {
+    "slug": "text-to-ascii-art",
+    "requiresAuth": false
+  },
+  {
+    "slug": "emoji-finder",
+    "requiresAuth": false
+  },
+  {
+    "slug": "string-escaper",
+    "requiresAuth": false
+  },
+  {
+    "slug": "duplicate-line-remover",
+    "requiresAuth": false
+  },
+  {
+    "slug": "text-sorter",
+    "requiresAuth": false
+  },
+  {
+    "slug": "csv-to-json",
+    "requiresAuth": false
+  },
+  {
+    "slug": "json-to-csv",
+    "requiresAuth": false
+  },
+  {
+    "slug": "csv-to-markdown-table",
+    "requiresAuth": false
+  },
+  {
+    "slug": "whitespace-cleaner",
+    "requiresAuth": false
+  },
+  {
+    "slug": "text-repeater",
+    "requiresAuth": false
+  },
+  {
+    "slug": "find-replace",
+    "requiresAuth": false
+  },
+  {
+    "slug": "letter-frequency",
+    "requiresAuth": false
+  },
+  {
+    "slug": "headline-analyzer",
+    "requiresAuth": false
+  },
+  {
+    "slug": "tweet-length-checker",
+    "requiresAuth": false
+  },
+  {
+    "slug": "paragraph-shuffler",
+    "requiresAuth": false
+  },
+  {
+    "slug": "palindrome-checker",
+    "requiresAuth": false
+  },
+  {
+    "slug": "base64-encoder",
+    "requiresAuth": false
+  },
+  {
+    "slug": "url-encoder",
+    "requiresAuth": false
+  },
+  {
+    "slug": "html-entity-encoder",
+    "requiresAuth": false
+  },
+  {
+    "slug": "binary-text",
+    "requiresAuth": false
+  },
+  {
+    "slug": "hex-decimal-binary",
+    "requiresAuth": false
+  },
+  {
+    "slug": "unix-timestamp",
+    "requiresAuth": false
+  },
+  {
+    "slug": "timezone-overlap",
+    "requiresAuth": false
+  },
+  {
+    "slug": "aspect-ratio-calculator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "pixel-to-rem",
+    "requiresAuth": false
+  },
+  {
+    "slug": "svg-to-jsx",
+    "requiresAuth": false
+  },
+  {
+    "slug": "jsx-to-html",
+    "requiresAuth": false
+  },
+  {
+    "slug": "markdown-to-html",
+    "requiresAuth": false
+  },
+  {
+    "slug": "html-to-markdown",
+    "requiresAuth": false
+  },
+  {
+    "slug": "number-to-words",
+    "requiresAuth": false
+  },
+  {
+    "slug": "roman-numeral",
+    "requiresAuth": false
+  },
+  {
+    "slug": "temperature-converter",
+    "requiresAuth": false
+  },
+  {
+    "slug": "unit-converter",
+    "requiresAuth": false
+  },
+  {
+    "slug": "currency-formatter",
+    "requiresAuth": false
+  },
+  {
+    "slug": "image-format-converter",
+    "requiresAuth": false
+  },
+  {
+    "slug": "favicon-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "css-px-pt",
+    "requiresAuth": false
+  },
+  {
+    "slug": "color-format-converter",
+    "requiresAuth": false
+  },
+  {
+    "slug": "base64-image-converter",
+    "requiresAuth": false
+  },
+  {
+    "slug": "timestamp-converter",
+    "requiresAuth": false
+  },
+  {
+    "slug": "variable-namer",
+    "requiresAuth": false
+  },
+  {
+    "slug": "commit-message-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "readme-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "code-explainer",
+    "requiresAuth": false
+  },
+  {
+    "slug": "code-review-assistant",
+    "requiresAuth": false
+  },
+  {
+    "slug": "docstring-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "test-case-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "api-endpoint-namer",
+    "requiresAuth": false
+  },
+  {
+    "slug": "pr-description-writer",
+    "requiresAuth": false
+  },
+  {
+    "slug": "component-props-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "error-message-explainer",
+    "requiresAuth": false
+  },
+  {
+    "slug": "blog-intro-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "meta-description-writer",
+    "requiresAuth": false
+  },
+  {
+    "slug": "alt-text-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "sql-query-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "regex-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "tech-stack-suggester",
+    "requiresAuth": false
+  },
+  {
+    "slug": "color-story-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "placeholder-content-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "changelog-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "i18n-json-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "og-meta-previewer",
+    "requiresAuth": false
+  },
+  {
+    "slug": "meta-tag-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "open-graph-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "twitter-card-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "robots-txt-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "sitemap-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "keyword-density-checker",
+    "requiresAuth": false
+  },
+  {
+    "slug": "schema-markup-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "page-title-analyzer",
+    "requiresAuth": false
+  },
+  {
+    "slug": "utm-builder",
+    "requiresAuth": false
+  },
+  {
+    "slug": "slug-seo-scorer",
+    "requiresAuth": false
+  },
+  {
+    "slug": "canonical-url-checker",
+    "requiresAuth": false
+  },
+  {
+    "slug": "password-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "password-strength-checker",
+    "requiresAuth": false
+  },
+  {
+    "slug": "password-hasher",
+    "requiresAuth": false
+  },
+  {
+    "slug": "rsa-key-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "aes-encrypt-decrypt",
+    "requiresAuth": false
+  },
+  {
+    "slug": "cors-header-builder",
+    "requiresAuth": false
+  },
+  {
+    "slug": "csp-builder",
+    "requiresAuth": false
+  },
+  {
+    "slug": "ip-lookup",
+    "requiresAuth": false
+  },
+  {
+    "slug": "whois-lookup",
+    "requiresAuth": false
+  },
+  {
+    "slug": "ssl-decoder",
+    "requiresAuth": false
+  },
+  {
+    "slug": "cvss-calculator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "privacy-policy-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "image-compressor",
+    "requiresAuth": false
+  },
+  {
+    "slug": "image-resizer",
+    "requiresAuth": false
+  },
+  {
+    "slug": "image-cropper",
+    "requiresAuth": false
+  },
+  {
+    "slug": "image-to-base64",
+    "requiresAuth": false
+  },
+  {
+    "slug": "svg-optimizer",
+    "requiresAuth": false
+  },
+  {
+    "slug": "svg-to-png",
+    "requiresAuth": false
+  },
+  {
+    "slug": "social-media-image-sizer",
+    "requiresAuth": false
+  },
+  {
+    "slug": "photo-exif-viewer",
+    "requiresAuth": false
+  },
+  {
+    "slug": "watermark-adder",
+    "requiresAuth": false
+  },
+  {
+    "slug": "image-color-picker",
+    "requiresAuth": false
+  },
+  {
+    "slug": "noise-texture-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "pattern-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "placeholder-image-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "gif-frame-extractor",
+    "requiresAuth": false
+  },
+  {
+    "slug": "code-beautifier",
+    "requiresAuth": false
+  },
+  {
+    "slug": "code-minifier",
+    "requiresAuth": false
+  },
+  {
+    "slug": "code-to-image",
+    "requiresAuth": false
+  },
+  {
+    "slug": "html-preview",
+    "requiresAuth": false
+  },
+  {
+    "slug": "typescript-playground",
+    "requiresAuth": false
+  },
+  {
+    "slug": "github-badge-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "github-readme-stats",
+    "requiresAuth": false
+  },
+  {
+    "slug": "dependency-size-checker",
+    "requiresAuth": false
+  },
+  {
+    "slug": "mock-data-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "api-docs-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "prettier-config-builder",
+    "requiresAuth": false
+  },
+  {
+    "slug": "eslint-config-builder",
+    "requiresAuth": false
+  },
+  {
+    "slug": "webpack-bundle-analyzer",
+    "requiresAuth": false
+  },
+  {
+    "slug": "font-pair-finder",
+    "requiresAuth": false
+  },
+  {
+    "slug": "font-weight-gallery",
+    "requiresAuth": false
+  },
+  {
+    "slug": "type-scale-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "line-height-calculator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "google-fonts-picker",
+    "requiresAuth": false
+  },
+  {
+    "slug": "variable-font-playground",
+    "requiresAuth": false
+  },
+  {
+    "slug": "letter-spacing-visualizer",
+    "requiresAuth": false
+  },
+  {
+    "slug": "web-safe-fonts-preview",
+    "requiresAuth": false
+  },
+  {
+    "slug": "font-size-converter",
+    "requiresAuth": false
+  },
+  {
+    "slug": "ligature-explorer",
+    "requiresAuth": false
+  },
+  {
+    "slug": "percentage-calculator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "compound-interest-calculator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "loan-emi-calculator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "gst-tax-calculator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "discount-calculator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "tip-calculator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "bmi-calculator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "age-calculator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "date-difference-calculator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "prime-number-checker",
+    "requiresAuth": false
+  },
+  {
+    "slug": "fibonacci-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "scientific-calculator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "matrix-calculator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "binary-math-calculator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "pomodoro-timer",
+    "requiresAuth": false
+  },
+  {
+    "slug": "meeting-cost-calculator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "world-clock",
+    "requiresAuth": false
+  },
+  {
+    "slug": "countdown-timer",
+    "requiresAuth": false
+  },
+  {
+    "slug": "random-team-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "decision-wheel-spinner",
+    "requiresAuth": false
+  },
+  {
+    "slug": "daily-standup-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "week-number-calculator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "working-days-calculator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "reading-time-estimator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "habit-streak-tracker",
+    "requiresAuth": false
+  },
+  {
+    "slug": "note-to-self",
+    "requiresAuth": false
+  },
+  {
+    "slug": "qr-code-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "barcode-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "random-quote-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "dev-excuse-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "ascii-art-generator",
+    "requiresAuth": false
+  },
+  {
+    "slug": "morse-code-converter",
+    "requiresAuth": false
+  },
+  {
+    "slug": "brainfuck-interpreter",
+    "requiresAuth": false
+  },
+  {
+    "slug": "emoji-combiner",
+    "requiresAuth": false
+  },
+  {
+    "slug": "keyboard-shortcut-cheatsheet",
+    "requiresAuth": false
+  },
+  {
+    "slug": "http-cat-reference",
+    "requiresAuth": false
+  },
+  {
+    "slug": "naming-convention-guide",
+    "requiresAuth": false
+  },
+  {
+    "slug": "lorem-picsum-gallery",
+    "requiresAuth": false
+  }
+]

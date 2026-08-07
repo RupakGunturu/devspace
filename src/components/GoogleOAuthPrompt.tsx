@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { useAuth } from "@/components/AuthProvider";
 import { useTheme } from "@/components/ThemeProvider";
 import { authApi } from "@/lib/api";
-import { openGoogleAuthPopup } from "@/lib/popupAuth";
 import { toast } from "@/components/ui/toaster";
 import { mergeLocalActivityToBackend } from "@/lib/mergeActivity";
 import GoogleIcon from "@/components/GoogleIcon";
@@ -15,6 +14,7 @@ declare global {
         id: {
           initialize: (config: Record<string, unknown>) => void;
           prompt: (callback?: (notification: { isNotDisplayed: () => boolean; isSkippedMoment: () => boolean; isDismissedMoment: () => boolean }) => void) => void;
+          renderButton: (parent: HTMLElement, options: Record<string, unknown>) => void;
           disableAutoSelect: () => void;
         };
       };
@@ -29,8 +29,9 @@ export default function GoogleOAuthPrompt() {
   const { theme } = useTheme();
   const [dismissed, setDismissed] = useState(() => sessionStorage.getItem(DISMISS_KEY) === "true");
   const [oneTapFailed, setOneTapFailed] = useState(false);
-  const [popupLoading, setPopupLoading] = useState(false);
   const initialized = useRef(false);
+  const buttonContainerRef = useRef<HTMLDivElement>(null);
+  const buttonRendered = useRef(false);
 
   const handleCredential = useCallback(async (credential: string) => {
     try {
@@ -87,26 +88,22 @@ export default function GoogleOAuthPrompt() {
     }
   }, [user, dismissed, handleCredential]);
 
+  useEffect(() => {
+    if (!oneTapFailed || !buttonContainerRef.current || buttonRendered.current) return;
+    if (!window.google?.accounts?.id) return;
+    buttonRendered.current = true;
+    window.google.accounts.id.renderButton(buttonContainerRef.current, {
+      theme: theme === "dark" ? "filled_black" : "outline",
+      size: "large",
+      width: buttonContainerRef.current.offsetWidth || 280,
+      text: "continue_with",
+      shape: "rectangular",
+    });
+  }, [oneTapFailed, theme]);
+
   const handleDismiss = () => {
     sessionStorage.setItem(DISMISS_KEY, "true");
     setDismissed(true);
-  };
-
-  const handlePopupGoogle = async () => {
-    setPopupLoading(true);
-    try {
-      const { token } = await openGoogleAuthPopup();
-      localStorage.setItem("ds_token", token);
-      await refreshUser();
-      mergeLocalActivityToBackend().catch(() => {});
-      toast.success("Signed in with Google!");
-    } catch (err: unknown) {
-      if (err instanceof Error && err.message !== "Authentication cancelled") {
-        toast.danger(err.message || "Google sign-in failed");
-      }
-    } finally {
-      setPopupLoading(false);
-    }
   };
 
   if (user || dismissed) return null;
@@ -142,15 +139,7 @@ export default function GoogleOAuthPrompt() {
         Save your game scores, favorites, and progress across devices.
       </p>
 
-      <button
-        type="button"
-        onClick={handlePopupGoogle}
-        disabled={popupLoading}
-        className="flex w-full items-center justify-center gap-3 rounded-md border-[1.5px] border-line bg-paper-dim px-4 py-3 text-xs font-semibold text-foreground transition-all hover:border-foreground disabled:opacity-50"
-      >
-        <GoogleIcon className="shrink-0" />
-        {popupLoading ? "Signing in..." : "Continue with Google"}
-      </button>
+      <div ref={buttonContainerRef} className="w-full" />
 
       <p className="mt-2 text-center text-[10px] leading-relaxed text-muted">
         Your name, email, and avatar will be imported from your Google account.

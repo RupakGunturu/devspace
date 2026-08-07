@@ -38,15 +38,10 @@ export const userActivity = {
   },
 
   isFavorited(type: string, slug: string): boolean {
-    if (isLoggedIn()) {
-      return false;
-    }
     return local.isLocalFavorited(type, slug);
   },
 
-  async toggleSavedTip(
-    tipId: string,
-  ): Promise<{ isSaved: boolean; savedTips: SavedTip[] }> {
+  async toggleSavedTip(tipId: string): Promise<{ isSaved: boolean; savedTips: SavedTip[] }> {
     if (isLoggedIn()) {
       return activityApi.toggleSavedTip(tipId);
     }
@@ -54,9 +49,6 @@ export const userActivity = {
   },
 
   isTipSaved(tipId: string): boolean {
-    if (isLoggedIn()) {
-      return false;
-    }
     return local.isLocalTipSaved(tipId);
   },
 

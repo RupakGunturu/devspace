@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { ToolLayout } from "../ToolLayout";
-import { ToolOutput } from "../ToolOutput";
 
 const cats: Record<string, string> = {
   "200": "OK", "201": "Created", "204": "No Content", "301": "Moved Permanently", "302": "Found", "304": "Not Modified",
@@ -10,13 +9,34 @@ const cats: Record<string, string> = {
 };
 
 export default function HttpCatReference() {
+  const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
+
+  const handleImageError = (code: string) => {
+    setFailedImages(prev => new Set(prev).add(code));
+  };
+
   return (
     <ToolLayout id="http-cat-reference">
       <div className="space-y-1.5">
         {Object.entries(cats).map(([code, desc]) => (
           <div key={code} className="flex items-center gap-3 p-2.5 bg-paper-dim/50 border border-border rounded-sm">
-            <img src={`https://http.cat/${code}`} alt={code} className="w-16 h-12 object-cover rounded" loading="lazy" />
-            <div><span className="font-mono text-sm font-bold text-foreground">{code}</span><span className="text-sm text-muted-foreground ml-2">{desc}</span></div>
+            {failedImages.has(code) ? (
+              <div className="w-16 h-12 bg-slate-200 dark:bg-slate-700 rounded flex items-center justify-center text-lg">
+                🐱
+              </div>
+            ) : (
+              <img 
+                src={`https://http.cat/${code}`} 
+                alt={`HTTP ${code}`} 
+                className="w-16 h-12 object-cover rounded" 
+                loading="lazy"
+                onError={() => handleImageError(code)}
+              />
+            )}
+            <div>
+              <span className="font-mono text-sm font-bold text-foreground">{code}</span>
+              <span className="text-sm text-muted-foreground ml-2">{desc}</span>
+            </div>
           </div>
         ))}
       </div>

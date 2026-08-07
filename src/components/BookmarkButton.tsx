@@ -60,9 +60,7 @@ export default function BookmarkButton({
       <Bookmark
         className={cn(
           "h-4 w-4 transition-colors",
-          isBookmarked
-            ? "fill-yellow text-yellow"
-            : "text-muted hover:text-yellow",
+          isBookmarked ? "fill-yellow text-yellow" : "text-muted hover:text-yellow",
         )}
       />
     </button>

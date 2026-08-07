@@ -7,6 +7,7 @@ export interface Tool {
   category: string;
   tags: string[];
   popular?: boolean;
+  requiresAuth?: boolean;
 }
 
 export interface CheatSheetSection {

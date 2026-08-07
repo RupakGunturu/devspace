@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import { CursorHover } from "../components/core/cursor-hover";
 import { usePagination } from "../hooks/use-pagination";
 import { PaginationBar } from "../components/PaginationBar";
-import BookmarkButton from "../components/BookmarkButton";
+import TipBookmarkButton from "../components/TipBookmarkButton";
 
 const COLOR_HEX: Record<string, string> = {
   "Coding Tips": "#3b82f6",
@@ -33,28 +33,104 @@ const COLOR_HEX: Record<string, string> = {
 };
 
 export const CATEGORY_COLORS: Record<string, { bg: string; darkBg: string; icon: string }> = {
-  "Coding Tips": { bg: "bg-blue-100", darkBg: "dark:bg-blue-900/30", icon: "text-blue-600 dark:text-blue-400" },
-  "🚀 Productivity": { bg: "bg-yellow-100", darkBg: "dark:bg-yellow-900/30", icon: "text-yellow-600 dark:text-yellow-400" },
-  "📚 Student Tips": { bg: "bg-green-100", darkBg: "dark:bg-green-900/30", icon: "text-green-600 dark:text-green-400" },
-  "💼 Career Tips": { bg: "bg-indigo-100", darkBg: "dark:bg-indigo-900/30", icon: "text-indigo-600 dark:text-indigo-400" },
-  "🧠 Learning Hacks": { bg: "bg-purple-100", darkBg: "dark:bg-purple-900/30", icon: "text-purple-600 dark:text-purple-400" },
-  "🔥 Git & GitHub": { bg: "bg-orange-100", darkBg: "dark:bg-orange-900/30", icon: "text-orange-600 dark:text-orange-400" },
-  "🌐 Web Development": { bg: "bg-cyan-100", darkBg: "dark:bg-cyan-900/30", icon: "text-cyan-600 dark:text-cyan-400" },
-  "🔒 Cybersecurity": { bg: "bg-red-100", darkBg: "dark:bg-red-900/30", icon: "text-red-600 dark:text-red-400" },
-  "🤖 AI Tips": { bg: "bg-violet-100", darkBg: "dark:bg-violet-900/30", icon: "text-violet-600 dark:text-violet-400" },
-  "⚡ VS Code Tips": { bg: "bg-sky-100", darkBg: "dark:bg-sky-900/30", icon: "text-sky-600 dark:text-sky-400" },
-  "🖥️ Windows/Mac/Linux": { bg: "bg-zinc-100", darkBg: "dark:bg-zinc-800/50", icon: "text-zinc-600 dark:text-zinc-400" },
-  "🎯 DSA Tips": { bg: "bg-emerald-100", darkBg: "dark:bg-emerald-900/30", icon: "text-emerald-600 dark:text-emerald-400" },
-  "🏗️ System Design": { bg: "bg-amber-100", darkBg: "dark:bg-amber-900/30", icon: "text-amber-600 dark:text-amber-400" },
-  "📱 Mobile Development": { bg: "bg-teal-100", darkBg: "dark:bg-teal-900/30", icon: "text-teal-600 dark:text-teal-400" },
-  "🎨 UI/UX": { bg: "bg-pink-100", darkBg: "dark:bg-pink-900/30", icon: "text-pink-600 dark:text-pink-400" },
-  "🛠️ Developer Toolbox": { bg: "bg-stone-100", darkBg: "dark:bg-stone-800/50", icon: "text-stone-600 dark:text-stone-400" },
-  "💰 Freelancing": { bg: "bg-lime-100", darkBg: "dark:bg-lime-900/30", icon: "text-lime-600 dark:text-lime-400" },
-  "🌱 Personal Growth": { bg: "bg-fuchsia-100", darkBg: "dark:bg-fuchsia-900/30", icon: "text-fuchsia-600 dark:text-fuchsia-400" },
-  "🧩 Micro Life Hacks": { bg: "bg-rose-100", darkBg: "dark:bg-rose-900/30", icon: "text-rose-600 dark:text-rose-400" },
+  "Coding Tips": {
+    bg: "bg-blue-100",
+    darkBg: "dark:bg-blue-900/30",
+    icon: "text-blue-600 dark:text-blue-400",
+  },
+  "🚀 Productivity": {
+    bg: "bg-yellow-100",
+    darkBg: "dark:bg-yellow-900/30",
+    icon: "text-yellow-600 dark:text-yellow-400",
+  },
+  "📚 Student Tips": {
+    bg: "bg-green-100",
+    darkBg: "dark:bg-green-900/30",
+    icon: "text-green-600 dark:text-green-400",
+  },
+  "💼 Career Tips": {
+    bg: "bg-indigo-100",
+    darkBg: "dark:bg-indigo-900/30",
+    icon: "text-indigo-600 dark:text-indigo-400",
+  },
+  "🧠 Learning Hacks": {
+    bg: "bg-purple-100",
+    darkBg: "dark:bg-purple-900/30",
+    icon: "text-purple-600 dark:text-purple-400",
+  },
+  "🔥 Git & GitHub": {
+    bg: "bg-orange-100",
+    darkBg: "dark:bg-orange-900/30",
+    icon: "text-orange-600 dark:text-orange-400",
+  },
+  "🌐 Web Development": {
+    bg: "bg-cyan-100",
+    darkBg: "dark:bg-cyan-900/30",
+    icon: "text-cyan-600 dark:text-cyan-400",
+  },
+  "🔒 Cybersecurity": {
+    bg: "bg-red-100",
+    darkBg: "dark:bg-red-900/30",
+    icon: "text-red-600 dark:text-red-400",
+  },
+  "🤖 AI Tips": {
+    bg: "bg-violet-100",
+    darkBg: "dark:bg-violet-900/30",
+    icon: "text-violet-600 dark:text-violet-400",
+  },
+  "⚡ VS Code Tips": {
+    bg: "bg-sky-100",
+    darkBg: "dark:bg-sky-900/30",
+    icon: "text-sky-600 dark:text-sky-400",
+  },
+  "🖥️ Windows/Mac/Linux": {
+    bg: "bg-zinc-100",
+    darkBg: "dark:bg-zinc-800/50",
+    icon: "text-zinc-600 dark:text-zinc-400",
+  },
+  "🎯 DSA Tips": {
+    bg: "bg-emerald-100",
+    darkBg: "dark:bg-emerald-900/30",
+    icon: "text-emerald-600 dark:text-emerald-400",
+  },
+  "🏗️ System Design": {
+    bg: "bg-amber-100",
+    darkBg: "dark:bg-amber-900/30",
+    icon: "text-amber-600 dark:text-amber-400",
+  },
+  "📱 Mobile Development": {
+    bg: "bg-teal-100",
+    darkBg: "dark:bg-teal-900/30",
+    icon: "text-teal-600 dark:text-teal-400",
+  },
+  "🎨 UI/UX": {
+    bg: "bg-pink-100",
+    darkBg: "dark:bg-pink-900/30",
+    icon: "text-pink-600 dark:text-pink-400",
+  },
+  "🛠️ Developer Toolbox": {
+    bg: "bg-stone-100",
+    darkBg: "dark:bg-stone-800/50",
+    icon: "text-stone-600 dark:text-stone-400",
+  },
+  "💰 Freelancing": {
+    bg: "bg-lime-100",
+    darkBg: "dark:bg-lime-900/30",
+    icon: "text-lime-600 dark:text-lime-400",
+  },
+  "🌱 Personal Growth": {
+    bg: "bg-fuchsia-100",
+    darkBg: "dark:bg-fuchsia-900/30",
+    icon: "text-fuchsia-600 dark:text-fuchsia-400",
+  },
+  "🧩 Micro Life Hacks": {
+    bg: "bg-rose-100",
+    darkBg: "dark:bg-rose-900/30",
+    icon: "text-rose-600 dark:text-rose-400",
+  },
 };
 
-function TipCard({ tip }: { tip: typeof tips[0] }) {
+function TipCard({ tip }: { tip: (typeof tips)[0] }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const colors = CATEGORY_COLORS[tip.category];
 
@@ -65,7 +141,9 @@ function TipCard({ tip }: { tip: typeof tips[0] }) {
         onClick={() => setIsExpanded((prev) => !prev)}
         role="button"
         tabIndex={0}
-        onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") setIsExpanded((prev) => !prev); }}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") setIsExpanded((prev) => !prev);
+        }}
         className={cn(
           "sticker block w-full rounded-md bg-paper p-5 text-left transition-shadow hover:shadow-md cursor-pointer",
           isExpanded && "ring-2 ring-yellow",
@@ -81,20 +159,13 @@ function TipCard({ tip }: { tip: typeof tips[0] }) {
               colors?.darkBg ?? "dark:bg-zinc-800",
             )}
           >
-            <ToolIcon
-              name={tip.icon}
-              className={cn("h-4 w-4", colors?.icon ?? "text-zinc-600")}
-            />
+            <ToolIcon name={tip.icon} className={cn("h-4 w-4", colors?.icon ?? "text-zinc-600")} />
           </div>
           <div className="min-w-0 flex-1">
-            <h3 className="font-display text-sm font-bold leading-snug">
-              {tip.title}
-            </h3>
-            <span className="font-mono text-[10px] text-muted">
-              {tip.category}
-            </span>
+            <h3 className="font-display text-sm font-bold leading-snug">{tip.title}</h3>
+            <span className="font-mono text-[10px] text-muted">{tip.category}</span>
           </div>
-          <BookmarkButton type="tip" slug={tip.id} />
+          <TipBookmarkButton tipId={tip.id} />
         </div>
 
         <AnimatePresence mode="wait">
@@ -143,9 +214,7 @@ export default function TipsIndex() {
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
       result = result.filter(
-        (t) =>
-          t.title.toLowerCase().includes(q) ||
-          t.content.toLowerCase().includes(q),
+        (t) => t.title.toLowerCase().includes(q) || t.content.toLowerCase().includes(q),
       );
     }
     return result;

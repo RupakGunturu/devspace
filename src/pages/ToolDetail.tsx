@@ -1,10 +1,11 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { Suspense, useEffect } from "react";
 import { toolBySlug, CATEGORY_COLORS } from "../data/tools";
 import { getToolComponent } from "../components/tools/registry";
 import { ToolIcon } from "../components/tools/ToolIcon";
 import { userActivity } from "../lib/userActivity";
 import { ToolAccentProvider } from "@/components/ToolAccentContext";
+import { useAuth } from "@/components/AuthProvider";
 import { cn } from "@/lib/utils";
 
 function ToolSkeleton() {
@@ -27,6 +28,8 @@ function ToolSkeleton() {
 
 export default function ToolPage() {
   const { slug } = useParams<{ slug: string }>();
+  const navigate = useNavigate();
+  const { user } = useAuth();
   const tool = toolBySlug(slug!);
   const Component = tool ? getToolComponent(tool.slug) : null;
   const colors = tool ? CATEGORY_COLORS[tool.category] : undefined;
@@ -40,6 +43,12 @@ export default function ToolPage() {
       userActivity.logToolUse(tool.slug).catch(() => {});
     }
   }, [tool]);
+
+  useEffect(() => {
+    if (tool?.requiresAuth && !user) {
+      navigate(`/login?redirect=/tools/${tool.slug}`, { replace: true });
+    }
+  }, [tool, user, navigate]);
 
   if (!tool) {
     return (

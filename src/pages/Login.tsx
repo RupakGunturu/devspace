@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "@/components/AuthProvider";
 import { toast } from "@/components/ui/toaster";
 import GoogleLoginPopup from "@/components/GoogleLoginPopup";
@@ -7,6 +7,8 @@ import GoogleLoginPopup from "@/components/GoogleLoginPopup";
 export default function Login() {
   const { login } = useAuth();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const redirectTo = searchParams.get("redirect") || "/";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -17,7 +19,7 @@ export default function Login() {
     try {
       await login(email, password);
       toast.success("Welcome back!");
-      navigate("/");
+      navigate(redirectTo);
     } catch (err: any) {
       toast.danger(err.message || "Login failed");
     } finally {
@@ -33,7 +35,7 @@ export default function Login() {
 
         <GoogleLoginPopup
           className="mb-2 w-full"
-          onSuccess={() => navigate("/")}
+          onSuccess={() => navigate(redirectTo)}
         />
         <p className="mb-4 text-center text-[11px] leading-relaxed text-muted">
           Your name, email, and avatar will be imported from your Google account.

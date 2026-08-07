@@ -245,6 +245,7 @@ export default function Home() {
                 title={tip.title}
                 index={i}
                 to="/tips"
+                actions={<BookmarkButton type="tip" slug={tip.id} />}
               >
                 {tip.content.slice(0, 100)}…
               </StickerCard>

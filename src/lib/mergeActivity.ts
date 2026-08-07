@@ -7,26 +7,24 @@ export async function mergeLocalActivityToBackend(): Promise<void> {
   const local = getLocalActivity();
 
   try {
-    for (const score of local.gameScores) {
-      await activityApi.saveGameScore({
-        gameSlug: score.gameSlug,
-        score: score.score,
-        streak: score.streak,
-        accuracy: score.accuracy,
-        rank: score.rank,
-      });
-    }
+    const results = await Promise.allSettled([
+      ...local.gameScores.map((score) =>
+        activityApi.saveGameScore({
+          gameSlug: score.gameSlug,
+          score: score.score,
+          streak: score.streak,
+          accuracy: score.accuracy,
+          rank: score.rank,
+        }),
+      ),
+      ...local.favorites.map((fav) => activityApi.toggleFavorite(fav.type, fav.slug)),
+      ...local.savedTips.map((tip) => activityApi.toggleSavedTip(tip.tipId)),
+      ...local.toolUsage.map((tool) => activityApi.logToolUse(tool.toolSlug)),
+    ]);
 
-    for (const fav of local.favorites) {
-      await activityApi.toggleFavorite(fav.type, fav.slug);
-    }
-
-    for (const tip of local.savedTips) {
-      await activityApi.toggleSavedTip(tip.tipId);
-    }
-
-    for (const tool of local.toolUsage) {
-      await activityApi.logToolUse(tool.toolSlug);
+    const failures = results.filter((r) => r.status === "rejected");
+    if (failures.length > 0) {
+      console.warn(`Activity merge: ${failures.length}/${results.length} items failed to sync`);
     }
 
     clearLocalActivity();

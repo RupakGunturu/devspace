@@ -10,12 +10,12 @@ function slugify(text: string): string {
   return text
     .toLowerCase()
     .replace(/[^\w\s-]/g, "")
-    .replace(/\s+/g, "-")
+    .replace(/\s+/g, "-") 
     .replace(/-+/g, "-")
     .trim();
 }
 
-function extractHeadings(md: string): TocItem[] {
+function extractHeadings(md: string): TocItem[] { 
   const headings: TocItem[] = [];
   const lines = md.split("\n");
   for (const line of lines) {

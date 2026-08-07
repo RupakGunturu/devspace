@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "motion/react";
-import { ChevronDown, Search, Send, Wrench } from "lucide-react";
+import { ChevronDown, Lock, Search, Send, Wrench } from "lucide-react";
 import * as React from "react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -15,6 +15,7 @@ import { TOOLS, CATEGORY_COLORS } from "@/data/tools";
 import type { Tool } from "@/types";
 import { ToolIcon, ToolIconDisplay } from "@/components/tools/ToolIcon";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/components/AuthProvider";
 
 const ANIMATION_VARIANTS = {
   container: {
@@ -66,6 +67,26 @@ const CATEGORIES: { slug: string; label: string; icon: string }[] = [
   { slug: "math", label: "Math", icon: "Calculator" },
   { slug: "productivity", label: "Productivity", icon: "Timer" },
   { slug: "fun", label: "Fun", icon: "Gamepad2" },
+  { slug: "branding", label: "Branding", icon: "User" },
+  { slug: "design", label: "Design", icon: "Palette" },
+  { slug: "content", label: "Content", icon: "PenTool" },
+  { slug: "career", label: "Career", icon: "Briefcase" },
+  { slug: "learning", label: "Learning", icon: "BookOpen" },
+  { slug: "marketing", label: "Marketing", icon: "Megaphone" },
+  { slug: "ecommerce", label: "E-commerce", icon: "ShoppingCart" },
+  { slug: "finance", label: "Finance", icon: "DollarSign" },
+  { slug: "hr", label: "HR", icon: "Users" },
+  { slug: "legal", label: "Legal", icon: "Scale" },
+  { slug: "real-estate", label: "Real Estate", icon: "Home" },
+  { slug: "photography", label: "Photography", icon: "Camera" },
+  { slug: "health", label: "Health", icon: "Heart" },
+  { slug: "fitness", label: "Fitness", icon: "Dumbbell" },
+  { slug: "writing", label: "Writing", icon: "BookOpen" },
+  { slug: "media", label: "Media", icon: "Music" },
+  { slug: "education", label: "Education", icon: "GraduationCap" },
+  { slug: "sales", label: "Sales", icon: "TrendingUp" },
+  { slug: "events", label: "Events", icon: "Calendar" },
+  { slug: "no-code", label: "No-Code", icon: "Blocks" },
 ];
 
 interface ToolSearchBarProps {
@@ -82,6 +103,7 @@ export default function ToolSearchBar({
   onCategoryChange,
 }: ToolSearchBarProps) {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [isFocused, setIsFocused] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -157,10 +179,14 @@ export default function ToolSearchBar({
   const handleResultClick = useCallback(
     (tool: Tool) => {
       setSelectedId(tool.slug);
-      navigate(`/tools/${tool.slug}`);
+      if (tool.requiresAuth && !user) {
+        navigate(`/login?redirect=/tools/${tool.slug}`);
+      } else {
+        navigate(`/tools/${tool.slug}`);
+      }
       setIsFocused(false);
     },
-    [navigate],
+    [navigate, user],
   );
 
   const activeCategoryData = activeCategory
@@ -314,8 +340,13 @@ export default function ToolSearchBar({
                   >
                     <ToolIconDisplay name={tool.icon} size="sm" category={tool.category} />
                     <div className="min-w-0 flex-1">
-                      <div className="truncate text-sm font-medium text-zinc-900 dark:text-zinc-100">
-                        {tool.name}
+                      <div className="flex items-center gap-1.5">
+                        <span className="truncate text-sm font-medium text-zinc-900 dark:text-zinc-100">
+                          {tool.name}
+                        </span>
+                        {tool.requiresAuth && !user && (
+                          <Lock className="h-3 w-3 shrink-0 text-yellow" />
+                        )}
                       </div>
                       <div className="truncate text-xs text-zinc-400 dark:text-zinc-500">
                         {tool.tagline}
