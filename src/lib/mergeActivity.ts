@@ -4,9 +4,9 @@ import { hasLocalActivity, getLocalActivity, clearLocalActivity } from "./localA
 export async function mergeLocalActivityToBackend(): Promise<void> {
   if (!hasLocalActivity()) return;
 
-  const local = getLocalActivity();
-
   try {
+    const local = getLocalActivity();
+
     const results = await Promise.allSettled([
       ...local.gameScores.map((score) =>
         activityApi.saveGameScore({

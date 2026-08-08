@@ -37,12 +37,22 @@ export async function saveGameScore(req: AuthRequest, res: Response) {
       playedAt: new Date(),
     });
 
-    // Keep only last 50 scores per game
-    const gameCounts: Record<string, number> = {};
-    activity.gameScores = activity.gameScores.filter((s) => {
-      gameCounts[s.gameSlug] = (gameCounts[s.gameSlug] || 0) + 1;
-      return gameCounts[s.gameSlug] <= 50;
-    });
+    // Keep only the newest 50 scores per game
+    const gameSlugCount = activity.gameScores.reduce(
+      (count, s) => (s.gameSlug === gameSlug ? count + 1 : count),
+      0,
+    );
+    if (gameSlugCount > 50) {
+      const excess = gameSlugCount - 50;
+      let removed = 0;
+      activity.gameScores = activity.gameScores.filter((s) => {
+        if (s.gameSlug === gameSlug && removed < excess) {
+          removed++;
+          return false;
+        }
+        return true;
+      });
+    }
 
     await activity.save();
     res.json({ message: "Score saved", activity });

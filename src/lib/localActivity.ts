@@ -58,17 +58,31 @@ export function saveLocalGameScore(
     playedAt: new Date().toISOString(),
   });
 
-  const gameCounts: Record<string, number> = {};
-  data.gameScores = data.gameScores.filter((s) => {
-    gameCounts[s.gameSlug] = (gameCounts[s.gameSlug] || 0) + 1;
-    return gameCounts[s.gameSlug] <= 50;
-  });
+  // Keep only the newest 50 scores per game
+  const gameSlugCount = data.gameScores.reduce(
+    (count, s) => (s.gameSlug === gameSlug ? count + 1 : count),
+    0,
+  );
+  if (gameSlugCount > 50) {
+    const excess = gameSlugCount - 50;
+    let removed = 0;
+    data.gameScores = data.gameScores.filter((s) => {
+      if (s.gameSlug === gameSlug && removed < excess) {
+        removed++;
+        return false;
+      }
+      return true;
+    });
+  }
 
   save(data);
   return data;
 }
 
-export function toggleLocalFavorite(type: string, slug: string): { isFavorited: boolean; favorites: Favorite[] } {
+export function toggleLocalFavorite(
+  type: string,
+  slug: string,
+): { isFavorited: boolean; favorites: Favorite[] } {
   const data = load();
   const idx = data.favorites.findIndex((f) => f.type === type && f.slug === slug);
 
@@ -77,7 +91,11 @@ export function toggleLocalFavorite(type: string, slug: string): { isFavorited: 
     data.favorites.splice(idx, 1);
     isFavorited = false;
   } else {
-    data.favorites.push({ type: type as Favorite["type"], slug, addedAt: new Date().toISOString() });
+    data.favorites.push({
+      type: type as Favorite["type"],
+      slug,
+      addedAt: new Date().toISOString(),
+    });
     isFavorited = true;
   }
 
@@ -118,9 +136,7 @@ export function logLocalToolUse(toolSlug: string): ActivityData {
     data.toolUsage = data.toolUsage.slice(0, 100);
   }
 
-  data.recentlyUsed = data.recentlyUsed.filter(
-    (r) => !(r.type === "tool" && r.slug === toolSlug),
-  );
+  data.recentlyUsed = data.recentlyUsed.filter((r) => !(r.type === "tool" && r.slug === toolSlug));
   data.recentlyUsed.unshift({ type: "tool", slug: toolSlug, usedAt: new Date().toISOString() });
   if (data.recentlyUsed.length > 20) {
     data.recentlyUsed = data.recentlyUsed.slice(0, 20);

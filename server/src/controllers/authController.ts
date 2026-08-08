@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import crypto from "crypto";
 import jwt from "jsonwebtoken";
 import passport from "passport";
@@ -13,7 +13,9 @@ import { sendResetEmail, sendWelcomeEmail } from "../utils/email";
 const googleClient = new OAuth2Client(config.googleClientId);
 
 function generateToken(userId: string): string {
-  return jwt.sign({ userId }, config.jwtSecret, { expiresIn: config.jwtExpiresIn });
+  return jwt.sign({ userId }, config.jwtSecret, {
+    expiresIn: config.jwtExpiresIn as jwt.SignOptions["expiresIn"],
+  });
 }
 
 async function fetchAndEncodeAvatar(url: string): Promise<string | undefined> {
@@ -100,7 +102,7 @@ if (config.googleClientId && config.googleClientSecret) {
   );
 }
 
-passport.serializeUser((user: any, done) => {
+passport.serializeUser((user, done) => {
   done(null, user._id);
 });
 
@@ -146,7 +148,13 @@ export async function signup(req: Request, res: Response) {
     const token = generateToken(user._id.toString());
     res.status(201).json({
       token,
-      user: { id: user._id, name: user.name, email: user.email, avatar: user.avatar, provider: user.provider },
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        avatar: user.avatar,
+        provider: user.provider,
+      },
     });
   } catch {
     res.status(500).json({ error: "Signup failed" });
@@ -154,24 +162,40 @@ export async function signup(req: Request, res: Response) {
 }
 
 export async function login(req: Request, res: Response) {
-  passport.authenticate("local", { session: false }, (err: any, user: any, info: any) => {
-    if (err) {
-      res.status(500).json({ error: "Login failed" });
-      return;
-    }
-    if (!user) {
-      res.status(401).json({ error: info?.message || "Invalid credentials" });
-      return;
-    }
-    const token = generateToken(user._id.toString());
-    res.json({
-      token,
-      user: { id: user._id, name: user.name, email: user.email, avatar: user.avatar, provider: user.provider },
-    });
-  })(req, res);
+  passport.authenticate(
+    "local",
+    { session: false },
+    (
+      err: unknown,
+      user: Express.User | false | null,
+      info: object | string | Array<string | undefined>,
+    ) => {
+      if (err) {
+        res.status(500).json({ error: "Login failed" });
+        return;
+      }
+      if (!user) {
+        res
+          .status(401)
+          .json({ error: (info as { message?: string }).message || "Invalid credentials" });
+        return;
+      }
+      const token = generateToken(user._id.toString());
+      res.json({
+        token,
+        user: {
+          id: user._id,
+          name: user.name,
+          email: user.email,
+          avatar: user.avatar,
+          provider: user.provider,
+        },
+      });
+    },
+  )(req, res);
 }
 
-export function googleAuth(req: Request, res: Response, next: any) {
+export function googleAuth(req: Request, res: Response, next: NextFunction) {
   if (!config.googleClientId) {
     res.status(503).json({ error: "Google auth not configured" });
     return;
@@ -183,14 +207,16 @@ export function googleAuth(req: Request, res: Response, next: any) {
   })(req, res, next);
 }
 
-export function googleCallback(req: Request, res: Response, next: any) {
+export function googleCallback(req: Request, res: Response, next: NextFunction) {
   passport.authenticate("google", { session: false, failureRedirect: `${config.clientUrl}/login` })(
     req,
     res,
     () => {
-      const user = req.user as any;
+      const user = req.user!;
       const token = generateToken(user._id.toString());
-      const isPopup = (req.query.state === "popup") || (req as any).authInfo?.state === "popup";
+      const isPopup =
+        req.query.state === "popup" ||
+        (req as Request & { authInfo?: { state?: string } }).authInfo?.state === "popup";
       const callbackUrl = isPopup
         ? `${config.clientUrl}/auth/callback?token=${token}&popup=true`
         : `${config.clientUrl}/auth/callback?token=${token}`;
@@ -255,7 +281,13 @@ export async function googleOneTap(req: Request, res: Response) {
     const token = generateToken(user._id.toString());
     res.json({
       token,
-      user: { id: user._id, name: user.name, email: user.email, avatar: user.avatar, provider: user.provider },
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        avatar: user.avatar,
+        provider: user.provider,
+      },
     });
   } catch {
     res.status(500).json({ error: "Google authentication failed" });
@@ -322,7 +354,13 @@ export async function resetPassword(req: Request, res: Response) {
     const jwtToken = generateToken(user._id.toString());
     res.json({
       token: jwtToken,
-      user: { id: user._id, name: user.name, email: user.email, avatar: user.avatar, provider: user.provider },
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        avatar: user.avatar,
+        provider: user.provider,
+      },
     });
   } catch {
     res.status(500).json({ error: "Password reset failed" });
@@ -330,18 +368,24 @@ export async function resetPassword(req: Request, res: Response) {
 }
 
 export async function getMe(req: Request, res: Response) {
-  const user = (req as any).user;
+  const user = req.user;
   if (!user) {
     res.status(401).json({ error: "Not authenticated" });
     return;
   }
   res.json({
-    user: { id: user._id, name: user.name, email: user.email, avatar: user.avatar, provider: user.provider },
+    user: {
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      avatar: user.avatar,
+      provider: user.provider,
+    },
   });
 }
 
 export async function updateProfile(req: Request, res: Response) {
-  const authUser = (req as any).user;
+  const authUser = req.user;
   if (!authUser) {
     res.status(401).json({ error: "Not authenticated" });
     return;
@@ -359,6 +403,12 @@ export async function updateProfile(req: Request, res: Response) {
   await user.save();
 
   res.json({
-    user: { id: user._id, name: user.name, email: user.email, avatar: user.avatar, provider: user.provider },
+    user: {
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      avatar: user.avatar,
+      provider: user.provider,
+    },
   });
 }
