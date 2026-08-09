@@ -9,6 +9,10 @@ import activityRoutes from "./routes/activity";
 
 const app = express();
 
+// Behind Render's reverse proxy — honor X-Forwarded-Proto so passport builds
+// HTTPS OAuth callback URLs (Google rejects http:// redirect URIs).
+app.set("trust proxy", 1);
+
 // Security headers
 app.use(helmet());
 
