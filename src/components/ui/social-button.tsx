@@ -22,8 +22,7 @@ interface ShareItem {
   label: string;
 }
 
-interface SocialButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface SocialButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label?: string;
   items?: ShareItem[];
   onShare?: (index: number, item: ShareItem) => void;
@@ -76,7 +75,7 @@ export default function SocialButton({
             "text-black dark:text-white",
             "border border-black/10 dark:border-white/10",
             "transition-colors duration-200",
-            className
+            className,
           )}
           {...props}
         >
@@ -116,7 +115,7 @@ export default function SocialButton({
               "hover:bg-gray-900 dark:hover:bg-gray-100",
               "outline-none",
               "relative overflow-hidden",
-              "transition-colors duration-200"
+              "transition-colors duration-200",
             )}
             key={`share-${button.label}`}
             onClick={() => handleShare(i)}

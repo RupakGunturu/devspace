@@ -15,6 +15,8 @@ import FeedArchive from "./pages/FeedArchive";
 import StackBreakdown from "./pages/StackBreakdown";
 import StackBreakdownDetail from "./pages/StackBreakdownDetail";
 import About from "./pages/About";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
 import CheatSheets from "./pages/CheatSheets";
 import CheatSheetDetail from "./pages/CheatSheetDetail";
 import Tips from "./pages/Tips";
@@ -55,6 +57,8 @@ export default function App() {
         <Route path="/feed/:series" element={<SeriesFeed />} />
         <Route path="/feed" element={<FeedArchive />} />
         <Route path="/about" element={<About />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/tos" element={<TermsOfService />} />
         <Route path="/cheat-sheets" element={<CheatSheets />} />
         <Route path="/cheat-sheets/:id" element={<CheatSheetDetail />} />
         <Route path="/tips" element={<Tips />} />

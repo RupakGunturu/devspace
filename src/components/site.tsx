@@ -60,8 +60,14 @@ export function Header() {
               <line x1="2" y1="14" x2="16" y2="14" />
             </svg>
           </button>
-          <Link to="/" className="font-display text-xl font-extrabold text-text no-underline">
-            dev<span className="text-yellow">/</span>space
+          <Link
+            to="/"
+            className="flex items-center gap-2 font-display text-xl font-extrabold text-text no-underline"
+          >
+            <img src="/favicon.png" alt="" aria-hidden="true" className="h-5 w-5 object-contain" />
+            <span>
+              dev<span className="text-yellow">/</span>space
+            </span>
           </Link>
         </div>
         <nav className="hidden gap-6 sm:flex">

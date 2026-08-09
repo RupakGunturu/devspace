@@ -59,7 +59,7 @@ function shufflePick<T>(arr: T[], n: number): T[] {
 
 export default function Home() {
   useEffect(() => {
-    document.title = "DevSpace — From First Line of Code to Production";
+    document.title = "DevSpace — From rookie commit to production hit.";
   }, []);
 
   const [activeSeries, setActiveSeries] = useState<string | null>(null);

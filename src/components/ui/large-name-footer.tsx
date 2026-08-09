@@ -1,8 +1,7 @@
 "use client";
 import { Link } from "react-router-dom";
 
-import { Icons } from "@/components/ui/icons";
-import { Button } from "@/components/ui/button";
+import SocialButton from "@/components/ui/social-button";
 
 function Footer() {
   return (
@@ -10,29 +9,53 @@ function Footer() {
       <div className="container mx-auto">
         <div className="flex flex-col md:flex-row justify-between">
           <div className="mb-8 md:mb-0">
-            <Link to="/" className="flex items-center gap-2">
-              <Icons.logo className="icon-class w-8 text-foreground" />
-              <h2 className="text-lg font-bold font-display text-foreground">
+            <Link
+              to="/"
+              className="flex items-center gap-2 font-display text-xl font-extrabold text-foreground no-underline"
+            >
+              <img
+                src="/favicon.png"
+                alt=""
+                aria-hidden="true"
+                className="h-5 w-5 object-contain"
+              />
+              <span>
                 dev<span className="text-yellow">/</span>space
-              </h2>
+              </span>
             </Link>
 
             <h1 className="text-muted mt-4 text-sm">
               Built by a Student, For Students & Developers
             </h1>
-            <div className="mt-2">
-              <Link to="https://x.com/compose/tweet?text=I%27ve%20been%20using%20%23DevSpace%20%E2%80%94%20free%20dev%20tools%2C%20games%20%26%20tips%20for%20coders!">
-                <Button variant="secondary">
-                  Share DevSpace
-                  <Icons.twitter className="icon-class ml-1 w-3.5" />
-                </Button>
-              </Link>
+            <div className="mt-4">
+              <SocialButton
+                label="Share DevSpace"
+                onShare={(_, item) => {
+                  const url = window.location.href;
+                  if (item.label === "Share on Twitter") {
+                    window.open(
+                      `https://x.com/intent/tweet?text=${encodeURIComponent("I've been using #DevSpace — free dev tools, games & tips for coders!")}&url=${encodeURIComponent(url)}`,
+                      "_blank",
+                      "noopener,noreferrer",
+                    );
+                  } else if (item.label === "Share on LinkedIn") {
+                    window.open(
+                      `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
+                      "_blank",
+                      "noopener,noreferrer",
+                    );
+                  } else {
+                    navigator.clipboard.writeText(url).catch(() => {});
+                  }
+                }}
+              />
             </div>
             <p className="text-sm text-muted mt-5">
-              &copy; {new Date().getFullYear()} dev<span className="text-yellow">/</span>space. All rights reserved.
+              &copy; {new Date().getFullYear()} dev<span className="text-yellow">/</span>space. All
+              rights reserved.
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             <div>
               <h3 className="font-semibold mb-4 text-foreground">Pages</h3>
               <ul className="space-y-2">
@@ -47,7 +70,10 @@ function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/cheat-sheets" className="text-muted hover:text-foreground transition-colors">
+                  <Link
+                    to="/cheat-sheets"
+                    className="text-muted hover:text-foreground transition-colors"
+                  >
                     Cheat Sheets
                   </Link>
                 </li>
@@ -64,30 +90,13 @@ function Footer() {
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold mb-4 text-foreground">Socials</h3>
-              <ul className="space-y-2">
-                <li>
-                  <a href="https://github.com/arihantcodes/spectrum-ui" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-foreground transition-colors">
-                    Github
-                  </a>
-                </li>
-                <li>
-                  <a href="https://www.linkedin.com/in/arihantcodes" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-foreground transition-colors">
-                    LinkedIn
-                  </a>
-                </li>
-                <li>
-                  <a href="https://x.com/arihantcodes" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-foreground transition-colors">
-                    X
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
               <h3 className="font-semibold mb-4 text-foreground">Legal</h3>
               <ul className="space-y-2">
                 <li>
-                  <Link to="/privacy-policy" className="text-muted hover:text-foreground transition-colors">
+                  <Link
+                    to="/privacy-policy"
+                    className="text-muted hover:text-foreground transition-colors"
+                  >
                     Privacy Policy
                   </Link>
                 </li>
@@ -100,8 +109,8 @@ function Footer() {
             </div>
           </div>
         </div>
-        <div className="mt-8 w-full overflow-hidden h-[5em] md:h-[5em] lg:h-[7em] flex items-start justify-center">
-          <h1 className="text-center text-5xl md:text-7xl lg:text-[12rem] font-display font-extrabold select-none tracking-[0.12em] leading-[0.85] text-muted/40">
+        <div className="mt-6 w-full overflow-hidden h-[5.5em] md:h-[6em] lg:h-[8em] flex items-start justify-center">
+          <h1 className="text-center text-6xl md:text-8xl lg:text-[13rem] font-display font-extrabold select-none tracking-[0.12em] leading-[0.85] text-muted/40">
             <span>dev</span>
             <span className="text-yellow/40 mx-2 md:mx-4">/</span>
             <span>space</span>
