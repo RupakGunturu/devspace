@@ -46,7 +46,7 @@ function Layout({ children }: { children: React.ReactNode }) {
     <div className="flex min-h-screen flex-col">
       <ScrollToTop />
       <CommandMenu />
-      <GoogleOAuthPrompt />
+      {!isAuth && <GoogleOAuthPrompt />}
       {!isAuth && <Header />}
       {isAuth && (
         <Link
