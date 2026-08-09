@@ -27,7 +27,9 @@ export default function AuthCallback() {
       refreshUser().then(() => {
         mergeLocalActivityToBackend().catch(() => {});
         toast.success("Signed in with Google!");
-        navigate("/");
+        const redirectTo = sessionStorage.getItem("ds_redirect") || "/";
+        sessionStorage.removeItem("ds_redirect");
+        navigate(redirectTo);
       });
     } else {
       handled.current = true;

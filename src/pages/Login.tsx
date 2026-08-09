@@ -209,7 +209,7 @@ export default function Login() {
         <h1 className="mb-2 font-display text-2xl font-bold">Welcome back</h1>
         <p className="mb-6 text-sm text-muted">Sign in to sync your progress across devices.</p>
 
-        <GoogleLoginPopup className="mb-2 w-full" onSuccess={() => navigate(redirectTo)} />
+        <GoogleLoginPopup className="mb-2 w-full" redirectTo={redirectTo} />
         <p className="mb-4 text-center text-[11px] leading-relaxed text-muted">
           Your name, email, and avatar will be imported from your Google account.
         </p>

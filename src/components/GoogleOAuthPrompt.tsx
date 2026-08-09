@@ -1,17 +1,15 @@
 import { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/components/AuthProvider";
 import { useGoogleIdentity } from "@/components/GoogleIdentityProvider";
 import { authApi } from "@/lib/api";
 import { toast } from "@/components/ui/toaster";
 import { mergeLocalActivityToBackend } from "@/lib/mergeActivity";
 import { clearLastAccount, getLastAccount } from "@/lib/rememberAccount";
-import { openGoogleAuthPopup } from "@/lib/popupAuth";
 import GoogleIcon from "@/components/GoogleIcon";
 import GoogleLoginPopup from "@/components/GoogleLoginPopup";
 
 const DISMISS_KEY = "ds_prompt_dismissed";
-const CARD_DISMISS_KEY = "ds_continue_dismissed";
 
 function AccountAvatar({
   name,
@@ -63,21 +61,12 @@ export default function GoogleOAuthPrompt() {
   const { user, refreshUser } = useAuth();
   const { detected, clearDetected } = useGoogleIdentity();
   const navigate = useNavigate();
-  const { pathname } = useLocation();
   const [dismissed, setDismissed] = useState(() => sessionStorage.getItem(DISMISS_KEY) === "true");
-  const [cardDismissed, setCardDismissed] = useState(
-    () => sessionStorage.getItem(CARD_DISMISS_KEY) === "true",
-  );
   const [continuing, setContinuing] = useState(false);
 
   const handleDismiss = () => {
     sessionStorage.setItem(DISMISS_KEY, "true");
     setDismissed(true);
-  };
-
-  const handleCardDismiss = () => {
-    sessionStorage.setItem(CARD_DISMISS_KEY, "true");
-    setCardDismissed(true);
   };
 
   const handleContinueAs = async () => {
@@ -113,20 +102,10 @@ export default function GoogleOAuthPrompt() {
     }
   };
 
-  const handleDetectedUseAnotherAccount = async () => {
+  const handleDetectedUseAnotherAccount = () => {
     clearDetected();
     clearLastAccount();
-    try {
-      const { token } = await openGoogleAuthPopup();
-      localStorage.setItem("ds_token", token);
-      await refreshUser();
-      mergeLocalActivityToBackend().catch(() => {});
-    } catch (err) {
-      const message = err instanceof Error ? err.message : "Google sign-in failed";
-      if (message !== "Authentication cancelled") {
-        toast.danger(message);
-      }
-    }
+    window.location.assign(authApi.getGoogleUrl());
   };
 
   const handleUseAnotherAccount = () => {
@@ -135,28 +114,7 @@ export default function GoogleOAuthPrompt() {
     navigate("/login");
   };
 
-  if (user) {
-    if (pathname !== "/" || cardDismissed) return null;
-    return (
-      <div className="fixed bottom-4 left-3 right-3 z-30 w-auto rounded-md border-2 border-line bg-paper p-5 shadow-lg sm:bottom-auto sm:left-auto sm:right-6 sm:top-20 sm:w-[320px]">
-        <DismissButton onClick={handleCardDismiss} />
-        <div className="flex items-center gap-3">
-          <AccountAvatar name={user.name} avatar={user.avatar} />
-          <div className="min-w-0">
-            <p className="font-display text-sm font-bold">Continue as {user.name}</p>
-            <p className="truncate text-xs text-muted">{user.email}</p>
-          </div>
-        </div>
-        <button
-          type="button"
-          onClick={() => navigate("/")}
-          className="mt-4 w-full rounded-md border-0 bg-green px-4 py-2.5 text-sm font-bold text-ink transition-all hover:opacity-85"
-        >
-          Continue to DevSpace
-        </button>
-      </div>
-    );
-  }
+  if (user) return null;
 
   if (dismissed) return null;
 
