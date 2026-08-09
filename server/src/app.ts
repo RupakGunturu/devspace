@@ -12,17 +12,24 @@ const app = express();
 // Security headers
 app.use(helmet());
 
-// Rate limiting — 100 req/min for general, 20 req/min for auth (disabled in tests)
+// Rate limiting — 100 req/min for general, 60 req/min for auth (disabled in tests)
 if (process.env.NODE_ENV !== "test") {
   app.use(
     "/api/",
     rateLimit({ windowMs: 60_000, max: 100, standardHeaders: true, legacyHeaders: false }),
   );
 }
+// /me (session restore on page load) is exempt — it is token-authenticated and must not be rate-limited out
 const authLimiter =
   process.env.NODE_ENV === "test"
     ? (req: Request, _res: Response, next: NextFunction) => next()
-    : rateLimit({ windowMs: 60_000, max: 20, standardHeaders: true, legacyHeaders: false });
+    : rateLimit({
+        windowMs: 60_000,
+        max: 60,
+        standardHeaders: true,
+        legacyHeaders: false,
+        skip: (req) => req.path === "/me",
+      });
 
 // CORS — whitelist local + production origins
 const allowedOrigins = [

@@ -181,6 +181,9 @@ export default function GoogleOAuthPrompt() {
       if (!localStorage.getItem("ds_token")) {
         navigate("/login");
       }
+    } catch {
+      toast.danger("Couldn't verify your session — sign in again");
+      navigate("/login");
     } finally {
       setContinuing(false);
     }
