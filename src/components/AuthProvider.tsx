@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from "react";
 import { authApi, type AuthUser } from "@/lib/api";
 import { mergeLocalActivityToBackend } from "@/lib/mergeActivity";
+import { saveLastAccount } from "@/lib/rememberAccount";
 
 interface AuthContextType {
   user: AuthUser | null;
@@ -27,7 +28,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       const { user } = await authApi.getMe();
       setUser(user);
-    } catch {
+      saveLastAccount(user);
+    } catch (err) {
+      if ((err as { status?: number }).status !== 401) return;
       localStorage.removeItem("ds_token");
       setUser(null);
     } finally {
@@ -43,6 +46,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const { token, user } = await authApi.login(email, password);
     localStorage.setItem("ds_token", token);
     setUser(user);
+    saveLastAccount(user);
     mergeLocalActivityToBackend().catch(() => {});
   }, []);
 
@@ -50,6 +54,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const { token, user } = await authApi.signup(name, email, password);
     localStorage.setItem("ds_token", token);
     setUser(user);
+    saveLastAccount(user);
     mergeLocalActivityToBackend().catch(() => {});
   }, []);
 

@@ -10,7 +10,8 @@ export const userActivity = {
     if (isLoggedIn()) {
       return activityApi.get();
     }
-    return local.getLocalActivity();
+    const data = local.getLocalActivity();
+    return { ...data, favorites: [], savedTips: [] };
   },
 
   async saveGameScore(
@@ -31,25 +32,17 @@ export const userActivity = {
     type: string,
     slug: string,
   ): Promise<{ isFavorited: boolean; favorites: Favorite[] }> {
-    if (isLoggedIn()) {
-      return activityApi.toggleFavorite(type, slug);
+    if (!isLoggedIn()) {
+      throw new Error("Please sign in to bookmark items");
     }
-    return local.toggleLocalFavorite(type, slug);
-  },
-
-  isFavorited(type: string, slug: string): boolean {
-    return local.isLocalFavorited(type, slug);
+    return activityApi.toggleFavorite(type, slug);
   },
 
   async toggleSavedTip(tipId: string): Promise<{ isSaved: boolean; savedTips: SavedTip[] }> {
-    if (isLoggedIn()) {
-      return activityApi.toggleSavedTip(tipId);
+    if (!isLoggedIn()) {
+      throw new Error("Please sign in to save tips");
     }
-    return local.toggleLocalSavedTip(tipId);
-  },
-
-  isTipSaved(tipId: string): boolean {
-    return local.isLocalTipSaved(tipId);
+    return activityApi.toggleSavedTip(tipId);
   },
 
   async logToolUse(toolSlug: string): Promise<void> {

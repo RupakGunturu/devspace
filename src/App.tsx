@@ -1,5 +1,6 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation, Link } from "react-router-dom";
 import { Header, Footer } from "./components/site";
+import { Home as HomeIcon } from "lucide-react";
 import ScrollToTop from "./components/ScrollToTop";
 import { CommandMenu } from "./components/CommandMenu";
 import GoogleOAuthPrompt from "./components/GoogleOAuthPrompt";
@@ -29,15 +30,35 @@ import AuthCallback from "./pages/AuthCallback";
 import Profile from "./pages/Profile";
 import Bookmarks from "./pages/Bookmarks";
 
+const AUTH_ROUTES = new Set([
+  "/login",
+  "/signup",
+  "/forgot-password",
+  "/reset-password",
+  "/auth/callback",
+]);
+
 function Layout({ children }: { children: React.ReactNode }) {
+  const { pathname } = useLocation();
+  const isAuth = AUTH_ROUTES.has(pathname);
+
   return (
     <div className="flex min-h-screen flex-col">
       <ScrollToTop />
       <CommandMenu />
       <GoogleOAuthPrompt />
-      <Header />
+      {!isAuth && <Header />}
+      {isAuth && (
+        <Link
+          to="/"
+          aria-label="Back to home"
+          className="fixed left-4 top-4 z-30 rounded-sm p-2 text-muted transition-colors hover:text-yellow"
+        >
+          <HomeIcon className="h-5 w-5" />
+        </Link>
+      )}
       <main className="flex-1">{children}</main>
-      <Footer />
+      {!isAuth && <Footer />}
     </div>
   );
 }

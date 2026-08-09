@@ -110,7 +110,7 @@ function Footer() {
           </div>
         </div>
         <div className="mt-6 w-full overflow-hidden h-[5.5em] md:h-[6em] lg:h-[8em] flex items-start justify-center">
-          <h1 className="text-center text-6xl md:text-8xl lg:text-[13rem] font-display font-extrabold select-none tracking-[0.12em] leading-[0.85] text-muted/40">
+          <h1 className="text-center text-[13vw] sm:text-6xl md:text-8xl lg:text-[13rem] font-display font-extrabold select-none tracking-[0.12em] leading-[0.85] text-muted/40">
             <span>dev</span>
             <span className="text-yellow/40 mx-2 md:mx-4">/</span>
             <span>space</span>

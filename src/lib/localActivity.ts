@@ -1,4 +1,4 @@
-import type { ActivityData, GameScore, Favorite, SavedTip } from "./api";
+import type { ActivityData } from "./api";
 
 const STORAGE_KEY = "ds_activity";
 
@@ -33,12 +33,7 @@ export function getLocalActivity(): ActivityData {
 
 export function hasLocalActivity(): boolean {
   const data = load();
-  return (
-    data.gameScores.length > 0 ||
-    data.favorites.length > 0 ||
-    data.savedTips.length > 0 ||
-    data.toolUsage.length > 0
-  );
+  return data.gameScores.length > 0 || data.toolUsage.length > 0;
 }
 
 export function saveLocalGameScore(
@@ -77,55 +72,6 @@ export function saveLocalGameScore(
 
   save(data);
   return data;
-}
-
-export function toggleLocalFavorite(
-  type: string,
-  slug: string,
-): { isFavorited: boolean; favorites: Favorite[] } {
-  const data = load();
-  const idx = data.favorites.findIndex((f) => f.type === type && f.slug === slug);
-
-  let isFavorited: boolean;
-  if (idx >= 0) {
-    data.favorites.splice(idx, 1);
-    isFavorited = false;
-  } else {
-    data.favorites.push({
-      type: type as Favorite["type"],
-      slug,
-      addedAt: new Date().toISOString(),
-    });
-    isFavorited = true;
-  }
-
-  save(data);
-  return { isFavorited, favorites: data.favorites };
-}
-
-export function isLocalFavorited(type: string, slug: string): boolean {
-  return load().favorites.some((f) => f.type === type && f.slug === slug);
-}
-
-export function toggleLocalSavedTip(tipId: string): { isSaved: boolean; savedTips: SavedTip[] } {
-  const data = load();
-  const idx = data.savedTips.findIndex((s) => s.tipId === tipId);
-
-  let isSaved: boolean;
-  if (idx >= 0) {
-    data.savedTips.splice(idx, 1);
-    isSaved = false;
-  } else {
-    data.savedTips.push({ tipId, savedAt: new Date().toISOString() });
-    isSaved = true;
-  }
-
-  save(data);
-  return { isSaved, savedTips: data.savedTips };
-}
-
-export function isLocalTipSaved(tipId: string): boolean {
-  return load().savedTips.some((s) => s.tipId === tipId);
 }
 
 export function logLocalToolUse(toolSlug: string): ActivityData {

@@ -1,7 +1,8 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { gameBySlug } from "../data/games";
 import { userActivity } from "../lib/userActivity";
+import { useAuth } from "../components/AuthProvider";
 import { BugFinder } from "../components/games/BugFinder";
 import { DevWordle } from "../components/games/DevWordle";
 import { DevTrivia } from "../components/games/DevTrivia";
@@ -25,6 +26,8 @@ export default function GamePage() {
   const { slug } = useParams<{ slug: string }>();
   const game = gameBySlug(slug!);
   const Component = game ? REGISTRY[game.slug] : undefined;
+  const { user } = useAuth();
+  const navigate = useNavigate();
   const [isFav, setIsFav] = useState(false);
 
   useEffect(() => {
@@ -32,17 +35,22 @@ export default function GamePage() {
   }, [game]);
 
   useEffect(() => {
-    if (!game) return;
+    if (!game || !user) return;
     userActivity
       .get()
       .then((data) => {
         setIsFav(data.favorites.some((f) => f.type === "game" && f.slug === game.slug));
       })
       .catch(() => {});
-  }, [game]);
+  }, [game, user]);
 
   const toggleFav = async () => {
     if (!game) return;
+    if (!user) {
+      toast.danger("Please sign in to bookmark games");
+      navigate("/login");
+      return;
+    }
     try {
       const result = await userActivity.toggleFavorite("game", game.slug);
       setIsFav(result.isFavorited);

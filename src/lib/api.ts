@@ -34,7 +34,9 @@ async function request<T>(endpoint: string, options: ApiOptions = {}): Promise<T
   const data = await res.json();
 
   if (!res.ok) {
-    throw new Error(data.error || "Request failed");
+    const err = new Error(data.error || "Request failed") as Error & { status?: number };
+    err.status = res.status;
+    throw err;
   }
 
   return data as T;
@@ -130,7 +132,13 @@ export interface ActivityData {
 export const activityApi = {
   get: () => request<ActivityData>("/api/activity"),
 
-  saveGameScore: (data: { gameSlug: string; score: number; streak: number; accuracy: number; rank: string }) =>
+  saveGameScore: (data: {
+    gameSlug: string;
+    score: number;
+    streak: number;
+    accuracy: number;
+    rank: string;
+  }) =>
     request<{ activity: ActivityData }>("/api/activity/game-score", {
       method: "POST",
       body: JSON.stringify(data),

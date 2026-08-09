@@ -67,11 +67,7 @@ export function Accordion05() {
             <AccordionTrigger className="text-left pl-6 md:pl-14 overflow-hidden text-foreground/20 duration-200 hover:no-underline cursor-pointer -space-y-6 data-[state=open]:space-y-0 data-[state=open]:text-primary [&>svg]:hidden">
               <div className="flex flex-1 items-start gap-4">
                 <p className="text-xs">{item.id}</p>
-                <h1
-                  className={`uppercase relative text-center text-lg md:text-xl`}
-                >
-                  {item.title}
-                </h1>
+                <h1 className="uppercase relative text-center text-sm md:text-xl">{item.title}</h1>
               </div>
             </AccordionTrigger>
 

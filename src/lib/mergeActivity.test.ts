@@ -42,9 +42,9 @@ const localActivity = {
       playedAt: "2024-01-01T00:00:00.000Z",
     },
   ],
-  favorites: [{ type: "tool" as const, slug: "json", addedAt: "2024-01-01T00:00:00.000Z" }],
-  savedTips: [{ tipId: "tip-1", savedAt: "2024-01-01T00:00:00.000Z" }],
   toolUsage: [{ toolSlug: "yaml", usedAt: "2024-01-01T00:00:00.000Z" }],
+  favorites: [],
+  savedTips: [],
   recentlyUsed: [],
 };
 
@@ -67,8 +67,6 @@ describe("mergeLocalActivityToBackend", () => {
     mockedHas.mockReturnValue(true);
     mockedGet.mockReturnValue(localActivity);
     mockedApi.saveGameScore.mockResolvedValue({ activity: localActivity });
-    mockedApi.toggleFavorite.mockResolvedValue({ isFavorited: true, favorites: [] });
-    mockedApi.toggleSavedTip.mockResolvedValue({ isSaved: true, savedTips: [] });
     mockedApi.logToolUse.mockResolvedValue({ message: "Usage logged" });
 
     await mergeLocalActivityToBackend();
@@ -81,9 +79,9 @@ describe("mergeLocalActivityToBackend", () => {
       accuracy: 50,
       rank: "A",
     });
-    expect(mockedApi.toggleFavorite).toHaveBeenCalledWith("tool", "json");
-    expect(mockedApi.toggleSavedTip).toHaveBeenCalledWith("tip-1");
     expect(mockedApi.logToolUse).toHaveBeenCalledWith("yaml");
+    expect(mockedApi.toggleFavorite).not.toHaveBeenCalled();
+    expect(mockedApi.toggleSavedTip).not.toHaveBeenCalled();
     expect(mockedClear).toHaveBeenCalledTimes(1);
   });
 
@@ -91,8 +89,6 @@ describe("mergeLocalActivityToBackend", () => {
     mockedHas.mockReturnValue(true);
     mockedGet.mockReturnValue(localActivity);
     mockedApi.saveGameScore.mockRejectedValue(new Error("network"));
-    mockedApi.toggleFavorite.mockResolvedValue({ isFavorited: true, favorites: [] });
-    mockedApi.toggleSavedTip.mockResolvedValue({ isSaved: true, savedTips: [] });
     mockedApi.logToolUse.mockRejectedValue(new Error("network"));
     const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
 

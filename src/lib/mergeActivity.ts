@@ -17,8 +17,6 @@ export async function mergeLocalActivityToBackend(): Promise<void> {
           rank: score.rank,
         }),
       ),
-      ...local.favorites.map((fav) => activityApi.toggleFavorite(fav.type, fav.slug)),
-      ...local.savedTips.map((tip) => activityApi.toggleSavedTip(tip.tipId)),
       ...local.toolUsage.map((tool) => activityApi.logToolUse(tool.toolSlug)),
     ]);
 

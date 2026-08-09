@@ -25,7 +25,7 @@ export default function BookmarkButton({
         setIsBookmarked(data.favorites.some((f) => f.type === type && f.slug === slug));
       });
     } else {
-      setIsBookmarked(userActivity.isFavorited(type, slug));
+      setIsBookmarked(false);
     }
   }, [user, type, slug]);
 

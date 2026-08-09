@@ -3,10 +3,6 @@ import {
   getLocalActivity,
   hasLocalActivity,
   saveLocalGameScore,
-  toggleLocalFavorite,
-  isLocalFavorited,
-  toggleLocalSavedTip,
-  isLocalTipSaved,
   logLocalToolUse,
   clearLocalActivity,
 } from "./localActivity";
@@ -81,19 +77,22 @@ describe("hasLocalActivity", () => {
     expect(hasLocalActivity()).toBe(true);
   });
 
-  it("is true when favorites exist", () => {
-    toggleLocalFavorite("tool", "slug");
-    expect(hasLocalActivity()).toBe(true);
-  });
-
-  it("is true when saved tips exist", () => {
-    toggleLocalSavedTip("tip-1");
-    expect(hasLocalActivity()).toBe(true);
-  });
-
   it("is true when tool usage exists", () => {
     logLocalToolUse("slug");
     expect(hasLocalActivity()).toBe(true);
+  });
+
+  it("is false when only favorites exist", () => {
+    localStorage.setItem(
+      "ds_activity",
+      JSON.stringify({ favorites: [{ type: "tool", slug: "x" }] }),
+    );
+    expect(hasLocalActivity()).toBe(false);
+  });
+
+  it("is false when only saved tips exist", () => {
+    localStorage.setItem("ds_activity", JSON.stringify({ savedTips: [{ tipId: "tip-1" }] }));
+    expect(hasLocalActivity()).toBe(false);
   });
 });
 
@@ -136,58 +135,6 @@ describe("saveLocalGameScore", () => {
   it("persists across calls", () => {
     saveLocalGameScore("g", 1, 0, 0, "");
     expect(getLocalActivity().gameScores).toHaveLength(1);
-  });
-});
-
-describe("toggleLocalFavorite", () => {
-  it("adds a favorite when not present", () => {
-    const { isFavorited, favorites } = toggleLocalFavorite("tool", "slug");
-    expect(isFavorited).toBe(true);
-    expect(favorites).toHaveLength(1);
-    expect(favorites[0]).toMatchObject({ type: "tool", slug: "slug" });
-  });
-
-  it("removes a favorite when toggled again", () => {
-    toggleLocalFavorite("tool", "slug");
-    const { isFavorited, favorites } = toggleLocalFavorite("tool", "slug");
-    expect(isFavorited).toBe(false);
-    expect(favorites).toHaveLength(0);
-  });
-
-  it("distinguishes favorites by type and slug", () => {
-    toggleLocalFavorite("tool", "slug");
-    toggleLocalFavorite("game", "slug");
-    expect(getLocalActivity().favorites).toHaveLength(2);
-  });
-
-  it("isLocalFavorited reflects state", () => {
-    expect(isLocalFavorited("tool", "slug")).toBe(false);
-    toggleLocalFavorite("tool", "slug");
-    expect(isLocalFavorited("tool", "slug")).toBe(true);
-    toggleLocalFavorite("tool", "slug");
-    expect(isLocalFavorited("tool", "slug")).toBe(false);
-  });
-});
-
-describe("toggleLocalSavedTip", () => {
-  it("adds a saved tip when not present", () => {
-    const { isSaved, savedTips } = toggleLocalSavedTip("tip-1");
-    expect(isSaved).toBe(true);
-    expect(savedTips).toHaveLength(1);
-    expect(savedTips[0].tipId).toBe("tip-1");
-  });
-
-  it("removes a saved tip when toggled again", () => {
-    toggleLocalSavedTip("tip-1");
-    const { isSaved, savedTips } = toggleLocalSavedTip("tip-1");
-    expect(isSaved).toBe(false);
-    expect(savedTips).toHaveLength(0);
-  });
-
-  it("isLocalTipSaved reflects state", () => {
-    expect(isLocalTipSaved("tip-1")).toBe(false);
-    toggleLocalSavedTip("tip-1");
-    expect(isLocalTipSaved("tip-1")).toBe(true);
   });
 });
 

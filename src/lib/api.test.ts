@@ -68,6 +68,17 @@ describe("api request layer", () => {
     await expect(authApi.signup("A", "a@b.c", "secret123")).rejects.toThrow("Email already in use");
   });
 
+  it("attaches the HTTP status to thrown errors", async () => {
+    fetchMock.mockResolvedValueOnce(jsonResponse({ error: "Invalid token" }, false, 401));
+
+    try {
+      await authApi.getMe();
+      throw new Error("expected request to reject");
+    } catch (err) {
+      expect((err as Error & { status?: number }).status).toBe(401);
+    }
+  });
+
   it("throws a generic message when the server sends no error body", async () => {
     fetchMock.mockResolvedValueOnce(jsonResponse({}, false, 500));
 

@@ -16,10 +16,6 @@ vi.mock("./api", () => ({
 vi.mock("./localActivity", () => ({
   getLocalActivity: vi.fn(),
   saveLocalGameScore: vi.fn(),
-  toggleLocalFavorite: vi.fn(),
-  isLocalFavorited: vi.fn(),
-  toggleLocalSavedTip: vi.fn(),
-  isLocalTipSaved: vi.fn(),
   logLocalToolUse: vi.fn(),
 }));
 
@@ -55,13 +51,20 @@ describe("userActivity.get", () => {
     expect(mockedLocal.getLocalActivity).not.toHaveBeenCalled();
   });
 
-  it("reads from local storage when logged out", async () => {
-    mockedLocal.getLocalActivity.mockReturnValueOnce(emptyActivity);
+  it("reads local activity with empty bookmarks when logged out", async () => {
+    const localData = {
+      ...emptyActivity,
+      favorites: [{ type: "tool" as const, slug: "json", addedAt: "2024-01-01T00:00:00.000Z" }],
+      savedTips: [{ tipId: "tip-1", savedAt: "2024-01-01T00:00:00.000Z" }],
+    };
+    mockedLocal.getLocalActivity.mockReturnValueOnce(localData);
 
-    await userActivity.get();
+    const result = await userActivity.get();
 
     expect(mockedLocal.getLocalActivity).toHaveBeenCalledTimes(1);
     expect(mockedApi.get).not.toHaveBeenCalled();
+    expect(result.favorites).toEqual([]);
+    expect(result.savedTips).toEqual([]);
   });
 });
 
@@ -98,23 +101,13 @@ describe("userActivity.toggleFavorite", () => {
     await userActivity.toggleFavorite("tool", "slug");
 
     expect(mockedApi.toggleFavorite).toHaveBeenCalledWith("tool", "slug");
-    expect(mockedLocal.toggleLocalFavorite).not.toHaveBeenCalled();
   });
 
-  it("toggles locally when logged out", async () => {
-    mockedLocal.toggleLocalFavorite.mockReturnValueOnce({ isFavorited: true, favorites: [] });
-
-    await userActivity.toggleFavorite("tool", "slug");
-
-    expect(mockedLocal.toggleLocalFavorite).toHaveBeenCalledWith("tool", "slug");
+  it("throws when logged out", async () => {
+    await expect(userActivity.toggleFavorite("tool", "slug")).rejects.toThrow(
+      "Please sign in to bookmark items",
+    );
     expect(mockedApi.toggleFavorite).not.toHaveBeenCalled();
-  });
-});
-
-describe("userActivity.isFavorited", () => {
-  it("always reads locally", () => {
-    mockedLocal.isLocalFavorited.mockReturnValueOnce(true);
-    expect(userActivity.isFavorited("tool", "slug")).toBe(true);
   });
 });
 
@@ -126,23 +119,13 @@ describe("userActivity.toggleSavedTip", () => {
     await userActivity.toggleSavedTip("tip-1");
 
     expect(mockedApi.toggleSavedTip).toHaveBeenCalledWith("tip-1");
-    expect(mockedLocal.toggleLocalSavedTip).not.toHaveBeenCalled();
   });
 
-  it("toggles locally when logged out", async () => {
-    mockedLocal.toggleLocalSavedTip.mockReturnValueOnce({ isSaved: true, savedTips: [] });
-
-    await userActivity.toggleSavedTip("tip-1");
-
-    expect(mockedLocal.toggleLocalSavedTip).toHaveBeenCalledWith("tip-1");
+  it("throws when logged out", async () => {
+    await expect(userActivity.toggleSavedTip("tip-1")).rejects.toThrow(
+      "Please sign in to save tips",
+    );
     expect(mockedApi.toggleSavedTip).not.toHaveBeenCalled();
-  });
-});
-
-describe("userActivity.isTipSaved", () => {
-  it("always reads locally", () => {
-    mockedLocal.isLocalTipSaved.mockReturnValueOnce(true);
-    expect(userActivity.isTipSaved("tip-1")).toBe(true);
   });
 });
 

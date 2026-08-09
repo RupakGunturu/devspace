@@ -32,8 +32,8 @@ export function Header() {
         { label: "Sheets", link: "/cheat-sheets" },
         { label: "Games", link: "/games" },
         { label: "Tips", link: "/tips" },
-        { label: "Sign In", link: "/login" },
         { label: "About", link: "/about" },
+        { label: "Sign In", link: "/login" },
       ];
 
   return (

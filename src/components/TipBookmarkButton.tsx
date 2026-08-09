@@ -23,7 +23,7 @@ export default function TipBookmarkButton({
         setIsSaved(data.savedTips.some((s) => s.tipId === tipId));
       });
     } else {
-      setIsSaved(userActivity.isTipSaved(tipId));
+      setIsSaved(false);
     }
   }, [user, tipId]);
 
