@@ -5,6 +5,7 @@ import App from "./App";
 import { ThemeProvider } from "./components/ThemeProvider";
 import { AntdThemeProvider } from "./components/AntdThemeProvider";
 import { AuthProvider } from "./components/AuthProvider";
+import { GoogleIdentityProvider } from "./components/GoogleIdentityProvider";
 import { Toaster } from "./components/ui/toaster";
 import "./fonts.css";
 import "./styles.css";
@@ -15,8 +16,10 @@ createRoot(document.getElementById("root")!).render(
       <ThemeProvider>
         <AntdThemeProvider>
           <AuthProvider>
-            <App />
-            <Toaster />
+            <GoogleIdentityProvider>
+              <App />
+              <Toaster />
+            </GoogleIdentityProvider>
           </AuthProvider>
         </AntdThemeProvider>
       </ThemeProvider>

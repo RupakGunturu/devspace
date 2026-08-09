@@ -1,12 +1,16 @@
 import { useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "@/components/AuthProvider";
+import { useGoogleIdentity } from "@/components/GoogleIdentityProvider";
+import { authApi } from "@/lib/api";
 import { toast } from "@/components/ui/toaster";
 import GoogleLoginPopup from "@/components/GoogleLoginPopup";
 import { getLastAccount } from "@/lib/rememberAccount";
+import { mergeLocalActivityToBackend } from "@/lib/mergeActivity";
 
 export default function Login() {
   const { user, login, logout, refreshUser } = useAuth();
+  const { detected, clearDetected } = useGoogleIdentity();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const redirectTo = searchParams.get("redirect") || "/";
@@ -16,7 +20,26 @@ export default function Login() {
   const [showForm, setShowForm] = useState(false);
 
   const lastUser = getLastAccount();
-  const showChooser = !user && !!lastUser && !showForm;
+  const showChooser = !user && !detected && !!lastUser && !showForm;
+
+  const handleDetectedContinue = async () => {
+    const account = detected;
+    if (!account) return;
+    setLoading(true);
+    try {
+      const { token } = await authApi.verifyGoogleToken(account.credential);
+      localStorage.setItem("ds_token", token);
+      await refreshUser();
+      mergeLocalActivityToBackend().catch(() => {});
+      toast.success(`Welcome${account.name ? `, ${account.name}` : ""}!`);
+      navigate(redirectTo);
+    } catch {
+      toast.danger("Google sign-in failed");
+      clearDetected();
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -77,6 +100,50 @@ export default function Login() {
               className="cursor-pointer border-0 bg-transparent p-0 font-inherit text-yellow no-underline hover:underline"
             >
               Sign out
+            </button>
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  if (detected) {
+    return (
+      <div className="mx-auto flex min-h-[60vh] max-w-[420px] flex-col items-center justify-center px-6 py-16">
+        <div className="w-full rounded-md border-2 border-line bg-paper p-8 text-center">
+          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center overflow-hidden rounded-full bg-green/10 font-display text-2xl font-bold text-green">
+            {detected.avatar ? (
+              <img
+                src={detected.avatar}
+                alt=""
+                className="h-full w-full rounded-full object-cover"
+              />
+            ) : (
+              detected.name.charAt(0).toUpperCase()
+            )}
+          </div>
+          <h1 className="mb-1 font-display text-2xl font-bold">Welcome back</h1>
+          <p className="mb-1 text-sm text-muted">Continue as</p>
+          <p className="font-display text-lg font-bold text-foreground">{detected.name}</p>
+          <p className="mb-6 text-sm text-muted">{detected.email}</p>
+          <button
+            type="button"
+            onClick={handleDetectedContinue}
+            disabled={loading}
+            className="w-full rounded-md border-0 bg-green px-4 py-3 text-sm font-bold text-ink transition-all hover:opacity-85 disabled:opacity-50"
+          >
+            {loading ? "Signing in..." : `Continue as ${detected.name}`}
+          </button>
+          <p className="mt-4 text-xs text-muted">
+            <button
+              type="button"
+              onClick={() => {
+                clearDetected();
+                setShowForm(true);
+              }}
+              className="cursor-pointer border-0 bg-transparent p-0 font-inherit text-yellow no-underline hover:underline"
+            >
+              Use another account
             </button>
           </p>
         </div>
