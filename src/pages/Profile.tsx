@@ -39,12 +39,13 @@ function getFavoriteIcon(type: string): string {
 }
 
 export default function Profile() {
-  const { user, logout } = useAuth();
+  const { user, logout, loading: authLoading } = useAuth();
   const navigate = useNavigate();
   const [activity, setActivity] = useState<ActivityData | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (authLoading) return;
     if (!user) {
       navigate("/login");
       return;
@@ -54,9 +55,9 @@ export default function Profile() {
       .then(setActivity)
       .catch(() => toast.danger("Failed to load activity"))
       .finally(() => setLoading(false));
-  }, [user, navigate]);
+  }, [user, navigate, authLoading]);
 
-  if (!user) return null;
+  if (authLoading || !user) return null;
 
   const handleLogout = () => {
     logout();

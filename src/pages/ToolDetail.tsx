@@ -29,7 +29,7 @@ function ToolSkeleton() {
 export default function ToolPage() {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const tool = toolBySlug(slug!);
   const Component = tool ? getToolComponent(tool.slug) : null;
   const colors = tool ? CATEGORY_COLORS[tool.category] : undefined;
@@ -45,10 +45,10 @@ export default function ToolPage() {
   }, [tool]);
 
   useEffect(() => {
-    if (tool?.requiresAuth && !user) {
+    if (tool?.requiresAuth && !authLoading && !user) {
       navigate(`/login?redirect=/tools/${tool.slug}`, { replace: true });
     }
-  }, [tool, user, navigate]);
+  }, [tool, user, navigate, authLoading]);
 
   if (!tool) {
     return (
