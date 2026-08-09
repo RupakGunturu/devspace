@@ -13,12 +13,11 @@ export default function AuthCallback() {
   useEffect(() => {
     if (handled.current) return;
     const token = searchParams.get("token");
-    const isPopup = searchParams.get("popup") === "true";
 
     if (token) {
       handled.current = true;
 
-      if (isPopup && window.opener) {
+      if (window.opener) {
         window.opener.postMessage({ type: "google-auth-success", token }, window.location.origin);
         window.close();
         return;
@@ -33,8 +32,11 @@ export default function AuthCallback() {
     } else {
       handled.current = true;
 
-      if (isPopup && window.opener) {
-        window.opener.postMessage({ type: "google-auth-error", error: "No token received" }, window.location.origin);
+      if (window.opener) {
+        window.opener.postMessage(
+          { type: "google-auth-error", error: "No token received" },
+          window.location.origin,
+        );
         window.close();
         return;
       }
