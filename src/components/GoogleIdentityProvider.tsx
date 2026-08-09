@@ -34,7 +34,7 @@ export function GoogleIdentityProvider({ children }: { children: ReactNode }) {
       container.id = "ds-gsi-silent";
       container.setAttribute("aria-hidden", "true");
       container.style.cssText =
-        "position:fixed;width:0;height:0;overflow:hidden;border:0;top:0;left:0;visibility:hidden;";
+        "position:fixed;top:0;left:-10000px;width:400px;height:300px;overflow:hidden;border:0;visibility:hidden;";
       document.body.appendChild(container);
 
       window.google.accounts.id.initialize({
