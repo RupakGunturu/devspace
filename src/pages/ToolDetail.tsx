@@ -6,25 +6,8 @@ import { ToolIcon } from "../components/tools/ToolIcon";
 import { userActivity } from "../lib/userActivity";
 import { ToolAccentProvider } from "@/components/ToolAccentContext";
 import { useAuth } from "@/components/AuthProvider";
+import { ToolSkeleton } from "@/components/skeletons/ToolSkeleton";
 import { cn } from "@/lib/utils";
-
-function ToolSkeleton() {
-  return (
-    <div className="animate-pulse space-y-4 p-4 sm:p-6">
-      <div className="h-4 w-32 rounded bg-line" />
-      <div className="h-4 w-48 rounded bg-line" />
-      <div className="space-y-3">
-        <div className="h-3 w-full rounded bg-line" />
-        <div className="h-3 w-5/6 rounded bg-line" />
-        <div className="h-3 w-4/6 rounded bg-line" />
-      </div>
-      <div className="flex gap-3">
-        <div className="h-10 w-28 rounded-md bg-line" />
-        <div className="h-10 w-28 rounded-md bg-line" />
-      </div>
-    </div>
-  );
-}
 
 export default function ToolPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -87,7 +70,7 @@ export default function ToolPage() {
       <div className="rounded-lg border border-line bg-paper p-4 shadow-sm sm:p-6">
         {Component ? (
           <ToolAccentProvider color={colors?.accent ?? "#e8c81c"} fg={colors?.accentFg ?? "#1a1a2e"}>
-            <Suspense fallback={<ToolSkeleton />}>
+            <Suspense fallback={<ToolSkeleton accent={colors?.accent ?? "#e8c81c"} />}>
               <Component />
             </Suspense>
           </ToolAccentProvider>

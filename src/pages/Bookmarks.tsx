@@ -11,6 +11,7 @@ import { StickerCard, SectionHead } from "@/components/site";
 import { CursorHover } from "@/components/core/cursor-hover";
 import BookmarkButton from "@/components/BookmarkButton";
 import TipBookmarkButton from "@/components/TipBookmarkButton";
+import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import type { Favorite, SavedTip } from "@/lib/api";
 
@@ -74,6 +75,7 @@ export default function Bookmarks() {
   const [favorites, setFavorites] = useState<Favorite[]>([]);
   const [savedTips, setSavedTips] = useState<SavedTip[]>([]);
   const [activeTab, setActiveTab] = useState<string>("all");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     document.title = "Bookmarks — DevSpace";
@@ -81,10 +83,13 @@ export default function Bookmarks() {
 
   useEffect(() => {
     if (user) {
-      userActivity.get().then((data) => {
-        setFavorites(data.favorites);
-        setSavedTips(data.savedTips);
-      });
+      userActivity
+        .get()
+        .then((data) => {
+          setFavorites(data.favorites);
+          setSavedTips(data.savedTips);
+        })
+        .finally(() => setLoading(false));
     }
   }, [user]);
 
@@ -101,6 +106,28 @@ export default function Bookmarks() {
           >
             Sign In
           </Link>
+        </div>
+      </section>
+    );
+  }
+
+  if (loading) {
+    return (
+      <section data-skeleton="bookmarks" className="mx-auto max-w-6xl px-6 py-16 sm:px-8 sm:py-20">
+        <SectionHead idx="★" title="Bookmarks" />
+        <div className="mt-8 space-y-4">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <div
+              key={i}
+              className="flex items-center gap-4 rounded-md border border-line bg-paper p-4"
+            >
+              <Skeleton className="h-10 w-10 shrink-0 rounded-md bg-line" />
+              <div className="flex-1 space-y-2">
+                <Skeleton className="h-4 w-2/3 bg-line" />
+                <Skeleton className="h-3 w-1/3 bg-line" />
+              </div>
+            </div>
+          ))}
         </div>
       </section>
     );

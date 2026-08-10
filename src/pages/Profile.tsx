@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/components/AuthProvider";
 import { activityApi, type ActivityData, type Favorite } from "@/lib/api";
 import { gameBySlug } from "@/data/games";
+import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "@/components/ui/toaster";
 
 function getFavoriteHref(f: Favorite): string {
@@ -119,7 +120,24 @@ export default function Profile() {
       </div>
 
       {loading ? (
-        <div className="py-20 text-center text-sm text-muted">Loading your activity...</div>
+        <div data-skeleton="profile" className="space-y-10">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+            {Array.from({ length: 3 }).map((_, i) => (
+              <div key={i} className="rounded-md border border-line bg-paper p-4 text-center">
+                <Skeleton className="mx-auto h-3 w-20 bg-line" />
+                <Skeleton className="mx-auto mt-2 h-6 w-14 bg-line" />
+              </div>
+            ))}
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <div key={i} className="rounded-md border border-line bg-paper p-4">
+                <Skeleton className="h-4 w-1/2 bg-line" />
+                <Skeleton className="mt-3 h-3 w-2/3 bg-line" />
+              </div>
+            ))}
+          </div>
+        </div>
       ) : (
         <>
           {/* Overview Stats */}

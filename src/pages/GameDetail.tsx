@@ -29,19 +29,24 @@ export default function GamePage() {
   const { user } = useAuth();
   const navigate = useNavigate();
   const [isFav, setIsFav] = useState(false);
+  const [favLoading, setFavLoading] = useState(true);
 
   useEffect(() => {
     document.title = game ? `${game.name} — DevSpace` : "Game not found — DevSpace";
   }, [game]);
 
   useEffect(() => {
-    if (!game || !user) return;
+    if (!game || !user) {
+      setFavLoading(false);
+      return;
+    }
     userActivity
       .get()
       .then((data) => {
         setIsFav(data.favorites.some((f) => f.type === "game" && f.slug === game.slug));
       })
-      .catch(() => {});
+      .catch(() => {})
+      .finally(() => setFavLoading(false));
   }, [game, user]);
 
   const toggleFav = async () => {
@@ -82,16 +87,20 @@ export default function GamePage() {
           <h1 className="mt-3 font-display text-4xl font-extrabold">{game.name}</h1>
           <p className="mt-2 text-muted">{game.description}</p>
         </div>
-        <button
-          onClick={toggleFav}
-          className={`mt-2 shrink-0 rounded-md border-[1.5px] px-3 py-1.5 text-xs font-semibold transition-all ${
-            isFav
-              ? "border-coral bg-coral/10 text-coral"
-              : "border-line bg-paper-dim text-muted hover:border-yellow hover:text-yellow"
-          }`}
-        >
-          {isFav ? "★ Saved" : "☆ Save"}
-        </button>
+        {favLoading ? (
+          <div className="mt-2 h-8 w-20 shrink-0 animate-pulse rounded-md bg-line" data-skeleton="favorite" />
+        ) : (
+          <button
+            onClick={toggleFav}
+            className={`mt-2 shrink-0 rounded-md border-[1.5px] px-3 py-1.5 text-xs font-semibold transition-all ${
+              isFav
+                ? "border-coral bg-coral/10 text-coral"
+                : "border-line bg-paper-dim text-muted hover:border-yellow hover:text-yellow"
+            }`}
+          >
+            {isFav ? "★ Saved" : "☆ Save"}
+          </button>
+        )}
       </div>
       <div className="rounded-md border-2 border-line bg-paper p-6 text-foreground">
         {Component ? <Component /> : <div className="text-muted">Coming soon.</div>}

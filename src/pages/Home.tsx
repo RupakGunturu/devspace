@@ -72,7 +72,7 @@ export default function Home() {
     return filtered.slice(0, 5);
   }, [activeSeries]);
 
-  const featuredTools = TOOLS.slice(0, 3);
+  const featuredTools = TOOLS.filter((t) => t.popular).slice(0, 3);
   const featuredGames = useMemo(() => shufflePick(GAMES, 3), []);
   const featuredTips = tips.slice(0, 3);
   const featuredSheets = cheatSheets.slice(0, 3);
