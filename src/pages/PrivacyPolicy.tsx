@@ -28,7 +28,8 @@ const SECTIONS = [
   {
     title: "4. External links",
     body: [
-      "Tools and content may link to external websites. We're not responsible for the privacy practices of those sites.",
+      "Tools and content may link to external websites, including the 'Learn by Playing' section on the Cheat Sheets page, which lists community-curated learning resources that we don't control or own.",
+      "Those links open in a new tab and are not tracked by us. We're not responsible for the privacy practices, content, or availability of those external sites.",
     ],
   },
   {

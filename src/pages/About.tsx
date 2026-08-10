@@ -10,8 +10,25 @@ export default function About() {
 
   const releases = [
     {
+      id: "v140",
+      version: "v1.4.0", date: "August 2026", latest: true,
+      groups: [
+        { type: "New", accent: "text-green-600 dark:text-green-400", items: [
+          "\"Learn by Playing\" section on Cheat Sheets — 24 community-curated external learning links across 9 topics (Git, CSS, SQL, regex, Vim, algorithms, security, coding games, curated lists)",
+          "Each learning link carries a Free / Freemium / Paid badge and a clear \"not built by DevSpace\" attribution",
+          "Lazy-loaded pages with skeleton loading states for faster initial loads",
+          "Privacy Policy & Terms of Service updated to cover external resources",
+        ]},
+        { type: "Improved", accent: "text-sky-600 dark:text-sky-400", items: [
+          "Home featured tools now prefer popular tools instead of the first three",
+          "Bookmarks and Profile show skeleton placeholders while loading",
+          "Game save button shows a loading state before the saved state is known",
+        ]},
+      ],
+    },
+    {
       id: "v130",
-      version: "v1.3.0", date: "July 2026", latest: true,
+      version: "v1.3.0", date: "July 2026",
       groups: [
         { type: "New", accent: "text-green-600 dark:text-green-400", items: [
           "Changelog on this page",
@@ -98,7 +115,7 @@ export default function About() {
 
             <div className="space-y-3">
               {[
-                { n: "3", label: "releases" },
+                { n: "4", label: "releases" },
                 { n: releases.reduce((s, r) => s + r.groups.reduce((c, g) => c + g.items.length, 0), 0) + "+", label: "changes" },
                 { n: releases.reduce((s, r) => s + r.groups.filter((g) => g.type === "Fixed").reduce((c, g) => c + g.items.length, 0), 0).toString(), label: "bugs fixed" },
               ].map((stat) => (

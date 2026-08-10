@@ -34,6 +34,17 @@ export interface Game {
   difficulty: "easy" | "medium" | "hard";
 }
 
+export type ResourceCost = "free" | "freemium" | "paid";
+
+export interface LearningResource {
+  id: string;
+  title: string;
+  description: string;
+  url: string;
+  category: string;
+  cost?: ResourceCost;
+}
+
 export interface FavoriteItem {
   id: string;
   type: "tool" | "cheat-sheet" | "game";

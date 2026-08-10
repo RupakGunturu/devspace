@@ -1,12 +1,61 @@
 import { useEffect, useState } from "react";
+import {
+  GitBranch,
+  Palette,
+  Database,
+  Regex,
+  Terminal,
+  Network,
+  ShieldCheck,
+  Gamepad2,
+  List,
+  ExternalLink,
+} from "lucide-react";
 import { SectionHead, StickerCard } from "../components/site";
 import { cheatSheets } from "../data/cheat-sheets";
+import { learningResources, LEARNING_CATEGORIES } from "../data/learning-resources";
 import { ToolIcon } from "../components/tools/ToolIcon";
 import { cn } from "@/lib/utils";
 import { CursorHover } from "../components/core/cursor-hover";
 import { usePagination } from "../hooks/use-pagination";
 import { PaginationBar } from "../components/PaginationBar";
+import { Switch } from "@/components/ui/switch";
 import BookmarkButton from "../components/BookmarkButton";
+import type { ResourceCost } from "../types";
+
+const RESOURCE_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
+  git: GitBranch,
+  css: Palette,
+  sql: Database,
+  regex: Regex,
+  vim: Terminal,
+  algorithms: Network,
+  security: ShieldCheck,
+  programming: Gamepad2,
+  lists: List,
+};
+
+function CostBadge({ cost }: { cost?: ResourceCost }) {
+  if (cost === "freemium") {
+    return (
+      <span className="rounded-full border border-amber-500/30 bg-amber-500/10 px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-widest text-amber-600 dark:text-amber-400">
+        Freemium
+      </span>
+    );
+  }
+  if (cost === "paid") {
+    return (
+      <span className="rounded-full border border-coral/30 bg-coral/10 px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-widest text-coral">
+        Paid
+      </span>
+    );
+  }
+  return (
+    <span className="rounded-full border border-line px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-widest text-muted">
+      Free
+    </span>
+  );
+}
 
 const COLOR_HEX: Record<string, string> = {
   "version-control": "#f97316",
@@ -48,6 +97,7 @@ export default function CheatSheetsIndex() {
   }, []);
 
   const [searchQuery, setSearchQuery] = useState("");
+  const [showExternal, setShowExternal] = useState(false);
 
   const filteredSheets = cheatSheets.filter((s) => {
     if (!searchQuery.trim()) return true;
@@ -63,10 +113,73 @@ export default function CheatSheetsIndex() {
 
   return (
     <section className="mx-auto max-w-6xl px-6 py-16 sm:px-8 sm:py-20">
-      <SectionHead idx="03" title="Cheat Sheets" />
-      <p className="mb-6 max-w-xl text-sm text-muted">
-        Quick references for every developer. Search, learn, copy.
-      </p>
+      <div className="mb-8 flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <SectionHead idx="03" title="Cheat Sheets" />
+          <p className="-mt-4 max-w-xl text-sm text-muted">
+            Quick references for every developer. Search, learn, copy.
+          </p>
+        </div>
+
+        <div className="flex shrink-0 items-center gap-2.5 sm:pt-1">
+          <Gamepad2 className="h-5 w-5 text-coral" />
+          <span className="font-mono text-xs font-medium text-foreground">Learn by Playing</span>
+          <Switch checked={showExternal} onCheckedChange={setShowExternal} aria-label="Toggle Learn by Playing section" />
+          <span className="rounded-full border border-coral/30 bg-coral/10 px-2 py-0.5 font-mono text-[10px] font-bold text-coral">
+            {learningResources.length}
+          </span>
+        </div>
+      </div>
+
+      {showExternal && (
+        <div className="mb-10">
+          <p className="mb-8 max-w-xl text-sm text-muted">
+            Community-curated learning links to help you prepare — not built by DevSpace. Each opens
+            in a new tab, and we're not affiliated with any of these projects.
+          </p>
+
+          {LEARNING_CATEGORIES.map((cat) => {
+            const items = learningResources.filter((r) => r.category === cat.id);
+            if (items.length === 0) return null;
+            const CatIcon = RESOURCE_ICONS[cat.id];
+            return (
+              <div key={cat.id} className="mb-10 last:mb-0">
+                <h3 className="mb-4 flex items-center gap-2 font-mono text-sm font-bold uppercase tracking-widest text-muted">
+                  {CatIcon && <CatIcon className="h-4 w-4" style={{ color: cat.accent }} />}
+                  {cat.label}
+                </h3>
+                <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
+                  {items.map((r, i) => (
+                    <CursorHover label={r.title} color={cat.accent} key={r.id}>
+                      <a href={r.url} target="_blank" rel="noopener noreferrer" className="block no-underline">
+                        <StickerCard
+                          icon={
+                            <div
+                              className="flex h-10 w-10 items-center justify-center rounded-full"
+                              style={{ background: `${cat.accent}18` }}
+                            >
+                              {CatIcon && <CatIcon className="h-5 w-5" style={{ color: cat.accent }} />}
+                            </div>
+                          }
+                          title={r.title}
+                          index={i}
+                          actions={<CostBadge cost={r.cost} />}
+                        >
+                          {r.description}
+                          <span className="mt-2 flex items-center gap-1 font-mono text-[11px] text-muted">
+                            <ExternalLink className="h-3 w-3" />
+                            External resource · not built by DevSpace
+                          </span>
+                        </StickerCard>
+                      </a>
+                    </CursorHover>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
 
       <div className="mb-8">
         <input

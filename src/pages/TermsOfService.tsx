@@ -40,13 +40,20 @@ const SECTIONS = [
     ],
   },
   {
-    title: "7. Changes to these terms",
+    title: "7. External resources",
+    body: [
+      "The 'Learn by Playing' section on the Cheat Sheets page lists learning resources created and owned by third parties. DevSpace simply gathers and links to them for students — they're not built by us.",
+      "We're not affiliated with, and don't endorse, these projects. Their content, terms, and availability are their own responsibility. Links open in a new tab so it's always clear you're leaving DevSpace.",
+    ],
+  },
+  {
+    title: "8. Changes to these terms",
     body: [
       "We may update these terms as the project evolves. Continued use of the site after changes means you accept the updated terms.",
     ],
   },
   {
-    title: "8. Contact",
+    title: "9. Contact",
     body: ["Questions about these terms? Reach out through the GitHub repo linked on this site."],
   },
 ];
