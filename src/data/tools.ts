@@ -510,6 +510,10 @@ function shuffleArray<T>(arr: T[]): T[] {
 
 const oldSlugs = new Set(oldTools.map((t) => t.id));
 
+// SMOKE-TEST FLAG: set to false to open the login-gated domain tools so every
+// tool can be verified without an account; keep true to restore gating.
+const GATE_DOMAIN_TOOLS = true;
+
 export const TOOLS: Tool[] = shuffleArray([
   { slug: "json-formatter", name: "JSON Formatter", icon: "FileJson", tagline: "Validate & prettify instantly, no server round-trip.", description: "Paste JSON, get it formatted or catch the exact error location — everything runs in your browser.", category: "dev-utilities", tags: ["JSON", "Formatter"], popular: true },
   { slug: "regex-tester", name: "Regex Tester", icon: "SearchCode", tagline: "Test patterns and see every match.", description: "Try patterns with flags, see live matches highlighted, and inspect capture groups.", category: "dev-utilities", tags: ["Regex", "Testing"], popular: true },
@@ -695,7 +699,7 @@ export const TOOLS: Tool[] = shuffleArray([
   { slug: "form-sheet-mapper", name: "Form-to-Sheet Mapper", icon: "TableProperties", tagline: "Visual form field mapping.", description: "Visually map form fields to spreadsheet columns for data import.", category: "no-code", tags: ["Form", "Spreadsheet"], requiresAuth: true },
 
   { slug: "followup-reminder-scheduler", name: "Follow-up Reminder Scheduler", icon: "AlarmClock", tagline: "Schedule follow-up reminders.", description: "Create follow-up reminder schedules for leads and clients.", category: "sales", tags: ["Follow-up", "Reminder"], requiresAuth: true },
-]);
+]).map((t) => (GATE_DOMAIN_TOOLS ? t : { ...t, requiresAuth: false }));
 
 export const toolBySlug = (slug: string) => TOOLS.find((t) => t.slug === slug);
 
