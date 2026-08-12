@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { SERIES, seriesBySlug } from "../data/series";
 import { postsBySeries, type Post } from "../data/posts";
 import { FeedItem } from "../components/FeedItem";
+import { ToolIcon } from "../components/tools/ToolIcon";
 
 export default function SeriesPage() {
   const { series: seriesSlug } = useParams<{ series: string }>();
@@ -32,7 +33,7 @@ export default function SeriesPage() {
           className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-paper text-2xl"
           style={{ transform: "rotate(-6deg)" }}
         >
-          {series.icon}
+          <ToolIcon name={series.icon} className="h-6 w-6" />
         </div>
         <div className="min-w-0">
           <div className="font-mono text-[11px] font-bold uppercase tracking-wide text-coral">
@@ -48,9 +49,10 @@ export default function SeriesPage() {
           <Link
             key={s.slug}
             to={`/feed/${s.slug}`}
-            className="rounded-full border-2 border-line px-3 py-1 font-mono text-[11px] text-muted no-underline hover:border-yellow hover:text-yellow"
+            className="inline-flex items-center gap-1.5 rounded-full border-2 border-line px-3 py-1 font-mono text-[11px] text-muted no-underline hover:border-yellow hover:text-yellow"
           >
-            {s.icon} {s.label}
+            <ToolIcon name={s.icon} className="h-3 w-3" />
+            {s.label}
           </Link>
         ))}
       </div>

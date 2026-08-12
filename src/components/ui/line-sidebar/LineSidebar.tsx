@@ -1,4 +1,5 @@
 import { useRef, useEffect } from "react";
+import { ToolIcon } from "../../tools/ToolIcon";
 import "./LineSidebar.css";
 
 type LineSidebarItem = {
@@ -57,8 +58,9 @@ export function LineSidebar({ items, activeIndex, onItemClick, className = "" }:
           <span className="line-sidebar-index">
             {String(i + 1).padStart(2, "0")}
           </span>
-          <span className="line-sidebar-label">
-            {item.icon} {item.label}
+          <span className="line-sidebar-label inline-flex items-center gap-1.5">
+            <ToolIcon name={item.icon} className="h-3.5 w-3.5" />
+            {item.label}
           </span>
         </button>
       ))}

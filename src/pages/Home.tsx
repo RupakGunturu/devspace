@@ -1,7 +1,15 @@
 import { Link } from "react-router-dom";
 import { useMemo, useState, useEffect } from "react";
-import { Bug, LetterText, Brain, Layers, Building2, Globe, Binary } from "lucide-react";
+import { Bug, LetterText, Brain, Layers, Building2, Globe, Binary, ChevronDown } from "lucide-react";
 import { Marquee, SectionHead, StickerCard } from "../components/site";
+import {
+  Drawer,
+  DrawerTrigger,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerDescription,
+} from "@/components/ui/drawer";
 import { FeedItem } from "../components/FeedItem";
 import { TOOLS } from "../data/tools";
 import { GAMES } from "../data/games";
@@ -89,7 +97,7 @@ export default function Home() {
         </div>
         <div className="relative z-[1]">
           <div className="mb-5 font-mono text-xs uppercase tracking-widest text-coral">
-            ▸ weekly dev zine — student built
+            ▸ for devs who actually ship
           </div>
           <h1 className="font-display text-4xl font-extrabold leading-[0.98] tracking-tight sm:text-5xl md:text-6xl">
             Build stuff.
@@ -150,9 +158,9 @@ export default function Home() {
       />
 
       <section className="mx-auto max-w-6xl px-6 py-16 sm:px-8 sm:py-20">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
           <SectionHead idx="01" title="Tools" />
-          <Link to="/tools" className="font-mono text-xs text-muted no-underline hover:text-yellow">
+          <Link to="/tools" className="ml-auto whitespace-nowrap font-mono text-xs text-muted no-underline hover:text-yellow">
             all tools →
           </Link>
         </div>
@@ -183,9 +191,9 @@ export default function Home() {
       </section>
 
       <section className="mx-auto max-w-6xl px-6 py-16 sm:px-8 sm:py-20">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
           <SectionHead idx="02" title="Games" color="coral" />
-          <Link to="/games" className="font-mono text-xs text-muted no-underline hover:text-yellow">
+          <Link to="/games" className="ml-auto whitespace-nowrap font-mono text-xs text-muted no-underline hover:text-yellow">
             all games →
           </Link>
         </div>
@@ -216,9 +224,9 @@ export default function Home() {
       </section>
 
       <section className="mx-auto max-w-6xl px-6 py-16 sm:px-8 sm:py-20">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
           <SectionHead idx="03" title="Tips" />
-          <Link to="/tips" className="font-mono text-xs text-muted no-underline hover:text-yellow">
+          <Link to="/tips" className="ml-auto whitespace-nowrap font-mono text-xs text-muted no-underline hover:text-yellow">
             all tips →
           </Link>
         </div>
@@ -255,9 +263,9 @@ export default function Home() {
       </section>
 
       <section className="mx-auto max-w-6xl px-6 py-16 sm:px-8 sm:py-20">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
           <SectionHead idx="04" title="Cheat Sheets" />
-          <Link to="/cheat-sheets" className="font-mono text-xs text-muted no-underline hover:text-yellow">
+          <Link to="/cheat-sheets" className="ml-auto whitespace-nowrap font-mono text-xs text-muted no-underline hover:text-yellow">
             all sheets →
           </Link>
         </div>
@@ -294,10 +302,10 @@ export default function Home() {
       </section>
 
       <section className="mx-auto max-w-6xl px-6 py-16 sm:px-8 sm:py-20">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
           <SectionHead idx="05" title="This Week's Feed" color="coral" />
-          <Link to="/feed" className="font-mono text-xs text-muted no-underline hover:text-coral">
-            view all feed →
+          <Link to="/feed" className="ml-auto whitespace-nowrap font-mono text-xs text-muted no-underline hover:text-coral">
+            view feed →
           </Link>
         </div>
         <div className="flex flex-col gap-8 lg:flex-row lg:gap-12">
@@ -312,7 +320,7 @@ export default function Home() {
           </div>
           <div className="min-w-0 flex-1">
             <div className="lg:hidden">
-              <SeriesFilter
+              <SeriesFilterDropdown
                 series={visibleSeries}
                 active={activeSeries}
                 onChange={setActiveSeries}
@@ -339,7 +347,7 @@ export default function Home() {
   );
 }
 
-function SeriesFilter({
+function SeriesFilterDropdown({
   series,
   active,
   onChange,
@@ -348,31 +356,57 @@ function SeriesFilter({
   active: string | null;
   onChange: (v: string | null) => void;
 }) {
+  const [open, setOpen] = useState(false);
+  const activeData = active ? SERIES.find((s) => s.slug === active) : null;
+  const select = (v: string | null) => {
+    onChange(v);
+    setOpen(false);
+  };
   return (
-    <div className="mb-6 flex flex-wrap gap-2">
-      <button
-        onClick={() => onChange(null)}
-        className={`rounded-full border-2 px-3 py-1 font-mono text-[11px] ${
-          active === null
-            ? "border-yellow bg-yellow text-ink"
-            : "border-line text-muted hover:border-yellow"
-        }`}
-      >
-        all
-      </button>
-      {series.map((s) => (
+    <Drawer open={open} onOpenChange={setOpen} shouldScaleBackground={false}>
+      <DrawerTrigger asChild>
         <button
-          key={s.slug}
-          onClick={() => onChange(s.slug)}
-          className={`rounded-full border-2 px-3 py-1 font-mono text-[11px] ${
-            active === s.slug
-              ? "border-yellow bg-yellow text-ink"
-              : "border-line text-muted hover:border-yellow"
-          }`}
+          type="button"
+          className="mb-6 inline-flex items-center gap-1.5 rounded-full border-2 border-line px-3 py-1 font-mono text-[11px] text-muted transition-colors hover:border-yellow hover:text-yellow"
         >
-          {s.icon} {s.label}
+          <ToolIcon name={activeData?.icon ?? "Newspaper"} className="h-3.5 w-3.5" />
+          <span>{activeData?.label ?? "all series"}</span>
+          <ChevronDown className="h-3 w-3" />
         </button>
-      ))}
-    </div>
+      </DrawerTrigger>
+      <DrawerContent className="max-h-[85dvh]">
+        <DrawerHeader className="border-b-2 border-dashed border-line pb-4 text-left">
+          <DrawerTitle className="font-display text-xl font-extrabold">Filter the feed</DrawerTitle>
+          <DrawerDescription>Pick a series to narrow down this week's posts.</DrawerDescription>
+        </DrawerHeader>
+        <div className="hide-scrollbar max-h-[65dvh] overflow-y-auto px-3 py-3">
+          <button
+            type="button"
+            onClick={() => select(null)}
+            className={`flex w-full cursor-pointer items-center gap-2.5 rounded-lg px-3 py-2.5 text-left font-mono text-[13px] transition-colors ${
+              active === null ? "bg-yellow text-ink" : "hover:bg-zinc-100 dark:hover:bg-zinc-800/60"
+            }`}
+          >
+            <ToolIcon name="Newspaper" className="h-4 w-4 shrink-0" />
+            <span>all series</span>
+          </button>
+          {series.map((s) => (
+            <button
+              type="button"
+              key={s.slug}
+              onClick={() => select(s.slug)}
+              className={`flex w-full cursor-pointer items-center gap-2.5 rounded-lg px-3 py-2.5 text-left font-mono text-[13px] transition-colors ${
+                active === s.slug
+                  ? "bg-yellow text-ink"
+                  : "hover:bg-zinc-100 dark:hover:bg-zinc-800/60"
+              }`}
+            >
+              <ToolIcon name={s.icon} className="h-4 w-4 shrink-0" />
+              <span>{s.label}</span>
+            </button>
+          ))}
+        </div>
+      </DrawerContent>
+    </Drawer>
   );
 }

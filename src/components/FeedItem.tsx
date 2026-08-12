@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import type { Post } from "../data/posts";
 import { seriesBySlug } from "../data/series";
 import { stackBreakdownBySlug } from "../data/stack-breakdowns";
+import { ToolIcon } from "./tools/ToolIcon";
 
 function timeAgo(iso: string) {
   const then = new Date(iso).getTime();
@@ -50,8 +51,8 @@ export function FeedItem({ post }: { post: Post }) {
             }}
           />
         ) : (
-          <span className="transition-transform group-hover:scale-110 group-hover:rotate-[12deg]">
-            {series?.icon ?? "📰"}
+          <span className="flex items-center justify-center transition-transform group-hover:scale-110 group-hover:rotate-[12deg]">
+            <ToolIcon name={series?.icon ?? "Newspaper"} className="h-5 w-5" />
           </span>
         )}
       </div>

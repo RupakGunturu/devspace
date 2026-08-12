@@ -4,6 +4,7 @@ import { marked } from "marked";
 import DOMPurify from "dompurify";
 import { postBySlug } from "../data/posts";
 import { seriesBySlug } from "../data/series";
+import { ToolIcon } from "../components/tools/ToolIcon";
 
 export default function PostPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -44,7 +45,9 @@ export default function PostPage() {
             to={`/feed/${series.slug}`}
             className="inline-flex items-center gap-2 rounded-full border-2 border-line px-3 py-1 font-mono text-[11px] font-bold uppercase tracking-wide text-coral no-underline hover:border-yellow"
           >
-            <span>{series.icon}</span>
+            <span>
+              <ToolIcon name={series.icon} className="h-3.5 w-3.5" />
+            </span>
             <span>{series.label}</span>
           </Link>
         )}

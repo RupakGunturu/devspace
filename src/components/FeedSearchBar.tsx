@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input";
 import useDebounce from "@/hooks/use-debounce";
 import { allPostsSorted, type Post } from "@/data/posts";
 import { SERIES, seriesBySlug } from "@/data/series";
+import { ToolIcon } from "@/components/tools/ToolIcon";
 import { cn } from "@/lib/utils";
 
 const ANIMATION_VARIANTS = {
@@ -216,7 +217,9 @@ export default function FeedSearchBar({
               )}
               type="button"
             >
-              <span>{activeSeriesData?.icon ?? "📰"}</span>
+              <span className="flex h-5 w-5 items-center justify-center">
+                <ToolIcon name={activeSeriesData?.icon ?? "Newspaper"} className="h-3.5 w-3.5" />
+              </span>
               <span>{activeSeriesData?.label ?? "All series"}</span>
               <ChevronDown className={cn(
                 "h-3.5 w-3.5 text-zinc-400 transition-transform duration-200 dark:text-zinc-500",
@@ -237,7 +240,9 @@ export default function FeedSearchBar({
                   activeSeries === null && "bg-zinc-100 dark:bg-zinc-800/60",
                 )}
               >
-                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-zinc-100 text-xs dark:bg-zinc-800">📰</span>
+                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-zinc-100 text-xs dark:bg-zinc-800">
+                  <ToolIcon name="Newspaper" className="h-3.5 w-3.5" />
+                </span>
                 <span className="font-medium text-zinc-900 dark:text-zinc-100">All series</span>
               </button>
             </DropdownMenuItem>
@@ -250,7 +255,9 @@ export default function FeedSearchBar({
                     activeSeries === s.slug && "bg-zinc-100 dark:bg-zinc-800/60",
                   )}
                 >
-                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-zinc-100 text-xs dark:bg-zinc-800">{s.icon}</span>
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-zinc-100 text-xs dark:bg-zinc-800">
+                    <ToolIcon name={s.icon} className="h-3.5 w-3.5" />
+                  </span>
                   <span className="font-medium text-zinc-900 dark:text-zinc-100">{s.label}</span>
                 </button>
               </DropdownMenuItem>
@@ -293,7 +300,7 @@ export default function FeedSearchBar({
                       variants={ANIMATION_VARIANTS.item}
                     >
                       <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-zinc-100 text-sm dark:bg-zinc-800">
-                        {series?.icon ?? "📰"}
+                        <ToolIcon name={series?.icon ?? "Newspaper"} className="h-4 w-4" />
                       </span>
                       <div className="min-w-0 flex-1">
                         <div className="truncate text-sm font-medium text-zinc-900 dark:text-zinc-100">

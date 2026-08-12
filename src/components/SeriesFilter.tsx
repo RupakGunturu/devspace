@@ -29,7 +29,7 @@ export function SeriesFilter({
       {list.map((s) => (
         <Pill
           key={s.slug}
-          label={`${s.icon} ${s.label}`}
+          label={s.label}
           isActive={active === s.slug}
           onClick={() => onChange(s.slug)}
         />
