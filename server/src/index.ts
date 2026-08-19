@@ -6,7 +6,7 @@ import app from "./app";
 async function start() {
   await connectDB();
   app.listen(config.port, () => {
-    // No sensitive data logged
+    console.log(`API server listening on http://localhost:${config.port}`);
   });
 }
 

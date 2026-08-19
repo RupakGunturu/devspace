@@ -120,7 +120,7 @@ export default function GoogleOAuthPrompt() {
 
   if (detected) {
     return (
-      <div className="fixed bottom-4 left-3 right-3 z-30 w-auto rounded-md border-2 border-line bg-paper p-5 shadow-lg sm:bottom-auto sm:left-auto sm:right-6 sm:top-20 sm:w-[320px]">
+      <div className="fixed bottom-4 left-0 right-0 z-30 w-auto rounded-md border-2 border-line bg-paper p-3 sm:p-4 shadow-lg sm:bottom-auto sm:left-auto sm:right-6 sm:top-20 sm:w-[320px]">
         <DismissButton onClick={handleDismiss} />
         <div className="flex flex-col items-center text-center">
           <AccountAvatar name={detected.name} avatar={detected.avatar} size="h-14 w-14 text-2xl" />
@@ -150,7 +150,7 @@ export default function GoogleOAuthPrompt() {
 
   if (lastUser) {
     return (
-      <div className="fixed bottom-4 left-3 right-3 z-30 w-auto rounded-md border-2 border-line bg-paper p-5 shadow-lg sm:bottom-auto sm:left-auto sm:right-6 sm:top-20 sm:w-[320px]">
+      <div className="fixed bottom-4 left-0 right-0 z-30 w-auto rounded-md border-2 border-line bg-paper p-3 sm:p-4 shadow-lg sm:bottom-auto sm:left-auto sm:right-6 sm:top-20 sm:w-[320px]">
         <DismissButton onClick={handleDismiss} />
         <div className="flex flex-col items-center text-center">
           <AccountAvatar name={lastUser.name} avatar={lastUser.avatar} size="h-14 w-14 text-2xl" />
@@ -177,7 +177,7 @@ export default function GoogleOAuthPrompt() {
   }
 
   return (
-    <div className="fixed bottom-4 left-3 right-3 sm:bottom-auto sm:right-6 sm:left-auto sm:top-20 z-30 w-auto sm:w-[300px] rounded-md border-2 border-line bg-paper p-5 shadow-lg">
+    <div className="fixed bottom-4 left-0 right-0 sm:bottom-auto sm:right-6 sm:left-auto sm:top-20 z-30 w-auto sm:w-[300px] rounded-md border-2 border-line bg-paper p-3 sm:p-4 shadow-lg">
       <DismissButton onClick={handleDismiss} />
 
       <div className="mb-3 flex items-center gap-2">
