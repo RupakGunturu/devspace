@@ -90,7 +90,6 @@ html.theme-transition:not([data-magicui-theme-vt]) * {
   }
   body {
     line-height: 1.5;
-    overflow-x: hidden;
     position: relative;
   }
   body::after {

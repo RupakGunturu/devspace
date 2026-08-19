@@ -177,25 +177,25 @@ export default function GoogleOAuthPrompt() {
   }
 
   return (
-    <div className="fixed bottom-4 left-0 right-0 sm:bottom-auto sm:right-6 sm:left-auto sm:top-20 z-30 w-auto sm:w-[300px] rounded-md border-2 border-line bg-paper p-3 sm:p-4 shadow-lg">
+    <div className="fixed bottom-4 left-4 right-4 sm:bottom-auto sm:right-6 sm:left-auto sm:top-20 z-30 w-auto sm:w-[300px] rounded-md border-2 border-line bg-paper p-2.5 sm:p-4 shadow-lg">
       <DismissButton onClick={handleDismiss} />
 
-      <div className="mb-3 flex items-center gap-2">
+      <div className="mb-2 flex items-center gap-2">
         <GoogleIcon className="shrink-0" />
         <span className="font-display text-sm font-bold">Sign in to DevSpace</span>
       </div>
 
-      <p className="mb-4 text-xs leading-relaxed text-muted">
+      <p className="mb-3 text-xs leading-relaxed text-muted">
         Save your game scores, favorites, and progress across devices.
       </p>
 
       <GoogleLoginPopup className="w-full" />
 
-      <p className="mt-2 text-center text-[10px] leading-relaxed text-muted">
+      <p className="mt-1.5 text-center text-[10px] leading-relaxed text-muted">
         Your name, email, and avatar will be imported from your Google account.
       </p>
 
-      <div className="mt-3 text-center">
+      <div className="mt-2 text-center">
         <Link
           to="/login"
           className="text-[11px] font-medium text-foreground no-underline hover:underline"

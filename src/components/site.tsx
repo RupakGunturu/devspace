@@ -70,7 +70,7 @@ export function Header() {
             </span>
           </Link>
         </div>
-        <nav className="hidden gap-6 sm:flex">
+        <nav className="hidden min-w-0 gap-6 overflow-x-auto sm:flex">
           <NavItem to="/">Feed</NavItem>
           <NavItem to="/stack-breakdown">Stacks</NavItem>
           <NavItem to="/tools">Tools</NavItem>

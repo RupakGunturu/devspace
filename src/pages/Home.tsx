@@ -138,24 +138,26 @@ export default function Home() {
         </div>
       </section>
 
-      <Marquee
-        items={[
-          "Resource Drop",
-          "Stack Breakdown",
-          "Dev Vocabulary",
-          "Concept in 60 Seconds",
-          "Challenge of the Week",
-          "Collab Corner",
-          "The Rabbit Hole",
-          "Tech Debt Diaries",
-          "The Interview They Don't Show You",
-          "Hot Take",
-          "GitHub Gems",
-          "Killed By Google",
-          "Code Roast",
-          "Ship It or Skip It",
-        ]}
-      />
+      <div className="overflow-hidden">
+        <Marquee
+          items={[
+            "Resource Drop",
+            "Stack Breakdown",
+            "Dev Vocabulary",
+            "Concept in 60 Seconds",
+            "Challenge of the Week",
+            "Collab Corner",
+            "The Rabbit Hole",
+            "Tech Debt Diaries",
+            "The Interview They Don't Show You",
+            "Hot Take",
+            "GitHub Gems",
+            "Killed By Google",
+            "Code Roast",
+            "Ship It or Skip It",
+          ]}
+        />
+      </div>
 
       <section className="mx-auto max-w-6xl px-6 py-16 sm:px-8 sm:py-20">
         <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
