@@ -23,6 +23,7 @@ export type Post = {
   body: string;
   publishedAt: string;
   externalUrl?: string;
+  image?: string;
 };
 
 const b = (s: string) => s.trim();
@@ -863,6 +864,7 @@ export const POSTS: Post[] = [
     excerpt: "Why the best products don't need a bigger marketing budget — they need a closed loop.",
     body: growthLoopsMd,
     publishedAt: "2026-07-20",
+    image: "/growth-loops.png",
   },
   {
     id: "p101",

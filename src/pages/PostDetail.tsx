@@ -70,12 +70,29 @@ export default function PostPage() {
         {post.title}
       </h1>
       <p className="mt-4 text-lg text-muted">{post.excerpt}</p>
+      {post.image && (
+        <div className="my-8 flex justify-center">
+          <img
+            src={post.image}
+            alt={post.title}
+            className="max-h-[420px] w-full max-w-2xl rounded-md border-2 border-line object-cover"
+          />
+        </div>
+      )}
       <div
         className="prose-devspace mt-10 text-foreground"
         dangerouslySetInnerHTML={{ __html: html }}
       />
       <style>{`
         .prose-devspace p { margin: 0 0 1.1rem; line-height: 1.7; }
+        .prose-devspace img {
+          display: block;
+          max-width: 100%;
+          height: auto;
+          margin: 1.5rem auto;
+          border: 2px solid var(--line);
+          border-radius: 6px;
+        }
         .prose-devspace strong { color: var(--yellow); }
         .prose-devspace em { font-style: italic; color: var(--muted); }
         .prose-devspace code { font-family: var(--font-mono); background: var(--line); padding: 2px 6px; border-radius: 3px; font-size: 0.9em; }

@@ -82,6 +82,8 @@ Examples: YouTube, Medium, TikTok, Quora, TripAdvisor
 
 ---
 
+![Types of Growth Loops](/loop-types.png)
+
 ## The 6 Types of Growth Loops
 
 These are self-sustaining mechanisms where the inputs of a product generate outputs that naturally feed back into more inputs.
