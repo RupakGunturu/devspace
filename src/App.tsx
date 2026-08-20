@@ -32,6 +32,9 @@ const ResetPassword = lazy(() => import("./pages/ResetPassword"));
 const AuthCallback = lazy(() => import("./pages/AuthCallback"));
 const Profile = lazy(() => import("./pages/Profile"));
 const Bookmarks = lazy(() => import("./pages/Bookmarks"));
+const Hiring = lazy(() => import("./pages/Hiring"));
+const McpSkills = lazy(() => import("./pages/McpSkills"));
+const HiddenGems = lazy(() => import("./pages/HiddenGems"));
 
 const AUTH_ROUTES = new Set([
   "/login",
@@ -77,6 +80,7 @@ export default function App() {
           <Route path="/games" element={<Games />} />
           <Route path="/games/:slug" element={<GameDetail />} />
           <Route path="/post/:slug" element={<PostDetail />} />
+          <Route path="/hot-take/:slug" element={<PostDetail />} />
           <Route path="/stack-breakdown" element={<StackBreakdown />} />
           <Route path="/stack-breakdown/:slug" element={<StackBreakdownDetail />} />
           <Route path="/feed/:series" element={<SeriesFeed />} />
@@ -108,6 +112,9 @@ export default function App() {
               </ProtectedRoute>
             }
           />
+          <Route path="/hiring" element={<Hiring />} />
+          <Route path="/mcp-skills" element={<McpSkills />} />
+          <Route path="/hidden-gems" element={<HiddenGems />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

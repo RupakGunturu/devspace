@@ -21,6 +21,9 @@ export function Header() {
         { label: "Sheets", link: "/cheat-sheets" },
         { label: "Games", link: "/games" },
         { label: "Tips", link: "/tips" },
+        { label: "Hiring", link: "/hiring" },
+        { label: "MCP Skills", link: "/mcp-skills" },
+        { label: "Hidden Gems", link: "/hidden-gems" },
         { label: "Bookmarks", link: "/bookmarks" },
         { label: "Profile", link: "/profile" },
         { label: "About", link: "/about" },
@@ -32,6 +35,9 @@ export function Header() {
         { label: "Sheets", link: "/cheat-sheets" },
         { label: "Games", link: "/games" },
         { label: "Tips", link: "/tips" },
+        { label: "Hiring", link: "/hiring" },
+        { label: "MCP Skills", link: "/mcp-skills" },
+        { label: "Hidden Gems", link: "/hidden-gems" },
         { label: "About", link: "/about" },
         { label: "Sign In", link: "/login" },
       ];
@@ -77,6 +83,9 @@ export function Header() {
           <NavItem to="/cheat-sheets">Sheets</NavItem>
           <NavItem to="/games">Games</NavItem>
           <NavItem to="/tips">Tips</NavItem>
+          <NavItem to="/hiring">Hiring</NavItem>
+          <NavItem to="/mcp-skills">MCP</NavItem>
+          <NavItem to="/hidden-gems">Gems</NavItem>
           {user && <NavItem to="/bookmarks">Bookmarks</NavItem>}
           <NavItem to="/about">About</NavItem>
         </nav>

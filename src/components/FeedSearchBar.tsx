@@ -131,7 +131,7 @@ export default function FeedSearchBar({
           if (activeIndex >= 0 && displayPosts[activeIndex]) {
             setSelectedId(displayPosts[activeIndex].id);
             const p = displayPosts[activeIndex];
-            navigate(p.series === "stack-breakdown" ? `/stack-breakdown/${p.slug}` : `/post/${p.slug}`);
+            navigate(p.series === "stack-breakdown" ? `/stack-breakdown/${p.slug}` : p.series === "hot-take" ? `/hot-take/${p.slug}` : `/post/${p.slug}`);
             setIsFocused(false);
           }
           break;
@@ -147,7 +147,7 @@ export default function FeedSearchBar({
   const handleResultClick = useCallback(
     (post: Post) => {
       setSelectedId(post.id);
-      navigate(post.series === "stack-breakdown" ? `/stack-breakdown/${post.slug}` : `/post/${post.slug}`);
+      navigate(post.series === "stack-breakdown" ? `/stack-breakdown/${post.slug}` : post.series === "hot-take" ? `/hot-take/${post.slug}` : `/post/${post.slug}`);
       setIsFocused(false);
     },
     [navigate],

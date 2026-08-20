@@ -1,0 +1,136 @@
+import { HiddenGem } from "../types";
+
+export const GEM_CATEGORIES: Record<string, { label: string; color: string }> = {
+  learning: { label: "Learning", color: "#22c55e" },
+  tools: { label: "Tools", color: "#6366f1" },
+  reference: { label: "Reference", color: "#06b6d4" },
+  inspiration: { label: "Inspiration", color: "#ec4899" },
+  productivity: { label: "Productivity", color: "#eab308" },
+  fun: { label: "Fun", color: "#f97316" },
+};
+
+export const GEM_CATEGORY_COLORS: Record<string, { bg: string; darkBg: string; icon: string }> = {
+  learning: {
+    bg: "bg-green-100",
+    darkBg: "dark:bg-green-900/30",
+    icon: "text-green-600 dark:text-green-400",
+  },
+  tools: {
+    bg: "bg-indigo-100",
+    darkBg: "dark:bg-indigo-900/30",
+    icon: "text-indigo-600 dark:text-indigo-400",
+  },
+  reference: {
+    bg: "bg-cyan-100",
+    darkBg: "dark:bg-cyan-900/30",
+    icon: "text-cyan-600 dark:text-cyan-400",
+  },
+  inspiration: {
+    bg: "bg-pink-100",
+    darkBg: "dark:bg-pink-900/30",
+    icon: "text-pink-600 dark:text-pink-400",
+  },
+  productivity: {
+    bg: "bg-yellow-100",
+    darkBg: "dark:bg-yellow-900/30",
+    icon: "text-yellow-600 dark:text-yellow-400",
+  },
+  fun: {
+    bg: "bg-orange-100",
+    darkBg: "dark:bg-orange-900/30",
+    icon: "text-orange-600 dark:text-orange-400",
+  },
+};
+
+export const HIDDEN_GEMS: HiddenGem[] = [
+  {
+    id: "excalidraw",
+    name: "Excalidraw",
+    url: "https://excalidraw.com",
+    description: "Whiteboard-style sketching tool with a hand-drawn feel — perfect for diagrams and architecture.",
+    icon: "PenTool",
+    category: "tools",
+    tags: ["whiteboard", "diagrams", "sketch", "open-source"],
+  },
+  {
+    id: "regex101",
+    name: "regex101",
+    url: "https://regex101.com",
+    description: "Live regex debugger with explanation, match info, and a cheatsheet — never guess regex again.",
+    icon: "Code",
+    category: "reference",
+    tags: ["regex", "debugger", "explain", "live"],
+  },
+  {
+    id: "roadmap-sh",
+    name: "roadmap.sh",
+    url: "https://roadmap.sh",
+    description: "Community-driven learning paths for every dev role — frontend, backend, DevOps, and more.",
+    icon: "Map",
+    category: "learning",
+    tags: ["roadmap", "career", "learning-paths", "community"],
+  },
+  {
+    id: "devhints",
+    name: "DevHints",
+    url: "https://devhints.io",
+    description: "Rico Sta. Cruz's collection of concise cheat sheets — clean, no-BS formatting.",
+    icon: "FileText",
+    category: "reference",
+    tags: ["cheat-sheet", "concise", "clean"],
+  },
+  {
+    id: "carbon-now",
+    name: "Carbon",
+    url: "https://carbon.now.sh",
+    description: "Turn code into beautiful shareable images — great for social media and presentations.",
+    icon: "Camera",
+    category: "tools",
+    tags: ["code-image", "share", "social", "presentation"],
+  },
+  {
+    id: "abort-on-paste",
+    name: "Can I Use",
+    url: "https://caniuse.com",
+    description: "Browser support tables for front-end tech — instantly check compatibility.",
+    icon: "CheckCircle",
+    category: "reference",
+    tags: ["browser", "compatibility", "front-end", "support"],
+  },
+  {
+    id: "ohshitgit",
+    name: "Oh Shit, Git",
+    url: "https://ohshitgit.com",
+    description: "Plain-English git commands for when you've already messed up — recovery made simple.",
+    icon: "AlertTriangle",
+    category: "learning",
+    tags: ["git", "recovery", "beginner", "lifesaver"],
+  },
+  {
+    id: "quickref",
+    name: "QuickRef",
+    url: "https://quickref.me",
+    description: "One-page cheat sheets for programming languages, tools, and terminal commands.",
+    icon: "Zap",
+    category: "reference",
+    tags: ["cheat-sheet", "terminal", "languages", "quick"],
+  },
+  {
+    id: "_ui-avatars",
+    name: "UI Avatars",
+    url: "https://ui-avatars.com",
+    description: "Generate avatar initials from any string — API-based, customizable, no upload needed.",
+    icon: "User",
+    category: "tools",
+    tags: ["avatar", "generator", "api", "placeholder"],
+  },
+  {
+    id: "temp-mail",
+    name: "Temp Mail",
+    url: "https://temp-mail.org",
+    description: "Disposable temporary email addresses — protect your real inbox from spam.",
+    icon: "Mail",
+    category: "productivity",
+    tags: ["email", "temp", "privacy", "disposable"],
+  },
+];

@@ -58,3 +58,34 @@ export interface RecentlyUsedItem {
 }
 
 export type Theme = "light" | "dark" | "system";
+
+export interface HiringItem {
+  id: string;
+  name: string;
+  url: string;
+  icon: string;
+  tagline: string;
+  category: string;
+  tags: string[];
+  isListing?: boolean;
+}
+
+export interface McpSkill {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  category: string;
+  tags: string[];
+  url?: string;
+}
+
+export interface HiddenGem {
+  id: string;
+  name: string;
+  url: string;
+  description: string;
+  icon: string;
+  category: string;
+  tags: string[];
+}

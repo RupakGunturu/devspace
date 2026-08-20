@@ -1,3 +1,19 @@
+import growthLoopsMd from "../startup-terms/growth-loops.md?raw";
+import pmfMd from "../startup-terms/product-market-fit.md?raw";
+import mvpMd from "../startup-terms/mvp.md?raw";
+import cacLtvMd from "../startup-terms/cac-ltv.md?raw";
+import flywheelMd from "../startup-terms/flywheel.md?raw";
+import pivotMd from "../startup-terms/pivot.md?raw";
+import bootstrappingMd from "../startup-terms/bootstrapping.md?raw";
+import runwayBurnRateMd from "../startup-terms/runway-burn-rate.md?raw";
+import networkEffectsMd from "../startup-terms/network-effects.md?raw";
+import churnMd from "../startup-terms/churn.md?raw";
+import tamSamSomMd from "../startup-terms/tam-sam-som.md?raw";
+import unitEconomicsMd from "../startup-terms/unit-economics.md?raw";
+import abTestingMd from "../startup-terms/ab-testing.md?raw";
+import retentionMd from "../startup-terms/retention.md?raw";
+import viralityMd from "../startup-terms/virality.md?raw";
+
 export type Post = {
   id: string;
   slug: string;
@@ -838,6 +854,141 @@ export const POSTS: Post[] = [
     excerpt: "300 days of easy problems teaches pattern matching, not building.",
     body: b(`A long LeetCode streak proves consistency, which matters — but a single deployed project with real users, real bugs, and real deployment headaches teaches things algorithm grinding never will: how systems fail, how requirements change, how to finish something. Both have value; only one gets talked about like it's the whole job.`),
     publishedAt: "2026-05-17",
+  },
+  {
+    id: "p100",
+    slug: "growth-loops",
+    title: "Growth Loops — the engine behind products that grow themselves",
+    series: "hot-take",
+    excerpt: "Why the best products don't need a bigger marketing budget — they need a closed loop.",
+    body: growthLoopsMd,
+    publishedAt: "2026-07-20",
+  },
+  {
+    id: "p101",
+    slug: "product-market-fit",
+    title: "Product-Market Fit — the moment your product clicks with the market",
+    series: "hot-take",
+    excerpt: "When your product satisfies a strong market demand — people aren't just trying it, they're sticking with it.",
+    body: pmfMd,
+    publishedAt: "2026-07-15",
+  },
+  {
+    id: "p102",
+    slug: "mvp",
+    title: "MVP — Minimum Viable Product",
+    series: "hot-take",
+    excerpt: "The smallest version of your product that lets you test your core hypothesis with real users.",
+    body: mvpMd,
+    publishedAt: "2026-07-10",
+  },
+  {
+    id: "p103",
+    slug: "cac-ltv",
+    title: "CAC & LTV — the economics of acquiring and retaining customers",
+    series: "hot-take",
+    excerpt: "Customer Acquisition Cost vs Lifetime Value — the ratio that determines if your business model works.",
+    body: cacLtvMd,
+    publishedAt: "2026-07-05",
+  },
+  {
+    id: "p104",
+    slug: "flywheel",
+    title: "Flywheel — the self-reinforcing business model",
+    series: "hot-take",
+    excerpt: "Unlike a funnel that loses energy, a flywheel stores energy and spins faster the more it runs.",
+    body: flywheelMd,
+    publishedAt: "2026-06-30",
+  },
+  {
+    id: "p105",
+    slug: "pivot",
+    title: "Pivot — knowing when to change direction",
+    series: "hot-take",
+    excerpt: "A fundamental change in business direction — not tweaking a feature, but shifting the core strategy.",
+    body: pivotMd,
+    publishedAt: "2026-06-25",
+  },
+  {
+    id: "p106",
+    slug: "bootstrapping",
+    title: "Bootstrapping — building without outside money",
+    series: "hot-take",
+    excerpt: "Funding growth purely from revenue and personal savings — forced to build something people actually pay for.",
+    body: bootstrappingMd,
+    publishedAt: "2026-06-20",
+  },
+  {
+    id: "p107",
+    slug: "runway-burn-rate",
+    title: "Runway & Burn Rate — how long your cash lasts",
+    series: "hot-take",
+    excerpt: "Runway is how many months you can survive. Burn rate is how fast you're spending.",
+    body: runwayBurnRateMd,
+    publishedAt: "2026-06-15",
+  },
+  {
+    id: "p108",
+    slug: "network-effects",
+    title: "Network Effects — when more users means a better product",
+    series: "hot-take",
+    excerpt: "The most powerful growth mechanism in tech — and the hardest to build.",
+    body: networkEffectsMd,
+    publishedAt: "2026-06-10",
+  },
+  {
+    id: "p109",
+    slug: "churn",
+    title: "Churn — the silent killer of growth",
+    series: "hot-take",
+    excerpt: "The rate at which customers stop using your product. You can acquire all the users you want, but if they leave faster than they arrive, you're filling a leaky bucket.",
+    body: churnMd,
+    publishedAt: "2026-06-05",
+  },
+  {
+    id: "p110",
+    slug: "tam-sam-som",
+    title: "TAM / SAM / SOM — understanding your market size",
+    series: "hot-take",
+    excerpt: "The three layers of market sizing that help you understand how big your opportunity really is.",
+    body: tamSamSomMd,
+    publishedAt: "2026-05-30",
+  },
+  {
+    id: "p111",
+    slug: "unit-economics",
+    title: "Unit Economics — does each customer make you money?",
+    series: "hot-take",
+    excerpt: "Measures the revenue and cost associated with a single unit of your business. If your unit economics don't work, your business doesn't work.",
+    body: unitEconomicsMd,
+    publishedAt: "2026-05-25",
+  },
+  {
+    id: "p112",
+    slug: "ab-testing",
+    title: "A/B Testing — replacing opinions with evidence",
+    series: "hot-take",
+    excerpt: "Comparing two versions of something to see which one performs better — with real users, real data, and no guessing.",
+    body: abTestingMd,
+    publishedAt: "2026-05-20",
+  },
+  {
+    id: "p113",
+    slug: "retention",
+    title: "Retention — the most important metric in any business",
+    series: "hot-take",
+    excerpt: "The ability to keep users engaged over time. Without retention, nothing else matters.",
+    body: retentionMd,
+    publishedAt: "2026-05-15",
+  },
+  {
+    id: "p114",
+    slug: "virality",
+    title: "Virality — engineering the conditions for organic sharing",
+    series: "hot-take",
+    excerpt: "When your product spreads through users — each user brings in more users, creating exponential growth.",
+    body: viralityMd,
+    publishedAt: "2026-05-10",
   },
 
   // ── Ship It or Skip It ─────────────────────────────────────
