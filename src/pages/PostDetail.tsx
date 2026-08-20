@@ -175,9 +175,14 @@ export default function PostPage() {
           transform: rotate(90deg);
         }
         .prose-devspace summary::-webkit-details-marker { display: none; }
-        .prose-devspace details > div:last-child,
-        .prose-devspace details > :not(summary):last-child {
-          padding: 1rem;
+        .prose-devspace details > *:not(summary) {
+          padding: 0 1.25rem;
+        }
+        .prose-devspace details > *:not(summary):first-of-type {
+          padding-top: 1rem;
+        }
+        .prose-devspace details > *:not(summary):last-child {
+          padding-bottom: 1rem;
         }
 
         .prose-devspace pre {
@@ -211,7 +216,7 @@ export default function PostPage() {
           className="inline-block rounded-sm border-2 border-yellow bg-yellow px-6 py-3 font-mono text-[13px] font-bold text-ink no-underline"
           style={{ boxShadow: "4px 4px 0 var(--coral)" }}
         >
-          more from the zine →
+          more from the space →
         </Link>
       </div>
     </article>
