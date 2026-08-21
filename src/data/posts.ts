@@ -14,6 +14,7 @@ import abTestingMd from "../startup-terms/ab-testing.md?raw";
 import retentionMd from "../startup-terms/retention.md?raw";
 import viralityMd from "../startup-terms/virality.md?raw";
 import pirateMetricsMd from "../startup-terms/pirate-metrics.md?raw";
+import ruleOf40Md from "../startup-terms/rule-of-40.md?raw";
 
 export type Post = {
   id: string;
@@ -1002,6 +1003,16 @@ export const POSTS: Post[] = [
     body: pirateMetricsMd,
     publishedAt: "2026-08-21",
     image: "/pirate-metrics.png",
+  },
+  {
+    id: "p116",
+    slug: "rule-of-40",
+    title: "The Rule of 40 — the one-number health check for software companies",
+    series: "hot-take",
+    excerpt: "Revenue growth rate plus profit margin should be at least 40% — how you get there changes at every stage of the lifecycle.",
+    body: ruleOf40Md,
+    publishedAt: "2026-08-21",
+    image: "/rule-of-40.png",
   },
 
   // ── Ship It or Skip It ─────────────────────────────────────
