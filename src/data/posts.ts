@@ -13,6 +13,7 @@ import unitEconomicsMd from "../startup-terms/unit-economics.md?raw";
 import abTestingMd from "../startup-terms/ab-testing.md?raw";
 import retentionMd from "../startup-terms/retention.md?raw";
 import viralityMd from "../startup-terms/virality.md?raw";
+import pirateMetricsMd from "../startup-terms/pirate-metrics.md?raw";
 
 export type Post = {
   id: string;
@@ -991,6 +992,16 @@ export const POSTS: Post[] = [
     excerpt: "When your product spreads through users — each user brings in more users, creating exponential growth.",
     body: viralityMd,
     publishedAt: "2026-05-10",
+  },
+  {
+    id: "p115",
+    slug: "pirate-metrics",
+    title: "Pirate Metrics (AAARRR) — the six-stage growth funnel",
+    series: "hot-take",
+    excerpt: "Awareness, Acquisition, Activation, Revenue, Retention, Referral — the full journey from stranger to promoter.",
+    body: pirateMetricsMd,
+    publishedAt: "2026-08-21",
+    image: "/pirate-metrics.png",
   },
 
   // ── Ship It or Skip It ─────────────────────────────────────
