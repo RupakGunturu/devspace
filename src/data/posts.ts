@@ -918,18 +918,22 @@ export const POSTS: Post[] = [
     slug: "bootstrapping",
     title: "Bootstrapping — building without outside money",
     series: "hot-take",
-    excerpt: "Funding growth purely from revenue and personal savings — forced to build something people actually pay for.",
+    excerpt:
+      "Funding a business purely from personal savings, early revenue, and friends & family — 100% ownership in exchange for slower, disciplined growth.",
     body: bootstrappingMd,
-    publishedAt: "2026-06-20",
+    publishedAt: "2026-08-22",
+    image: "/Bootstrapping.webp",
   },
   {
     id: "p107",
     slug: "runway-burn-rate",
     title: "Runway & Burn Rate — how long your cash lasts",
     series: "hot-take",
-    excerpt: "Runway is how many months you can survive. Burn rate is how fast you're spending.",
+    excerpt:
+      "Burn rate is how fast you spend; runway is how many months you survive. $600K in the bank at $50K/month burn buys exactly 12 months.",
     body: runwayBurnRateMd,
-    publishedAt: "2026-06-15",
+    publishedAt: "2026-08-22",
+    image: "/Burn%20Rate.webp",
   },
   {
     id: "p108",

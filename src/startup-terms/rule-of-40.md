@@ -56,8 +56,6 @@ The rule rewards *either* extreme, which can mask unhealthy combinations — 40%
 
 ---
 
-![Rule of 40 across the company lifecycle](/rule-of-40.png)
-
 ## 📊 Metric Benchmarking Quartiles
 
 Where software firms globally stack up against the benchmark:

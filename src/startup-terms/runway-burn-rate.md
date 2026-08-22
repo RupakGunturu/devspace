@@ -1,17 +1,35 @@
-**Runway** is how many months your company can survive at its current spending rate before running out of money. **Burn Rate** is how much money you spend each month.
+**Burn Rate** is the pace at which a new company not yet generating profits consumes its cash reserves. It serves as a vital survival metric for startups, illustrating how quickly they are spending their venture funding or seed capital before achieving positive cash flow. **Runway** is what that burn rate buys you: exactly how many months the business can survive before running out of money.
 
-> Runway = Cash in bank ÷ Monthly burn rate. If you have $600K and spend $50K/month, you have 12 months of runway.
+> Burn rate is speed, runway is time left. If you have $600K in the bank and a net burn rate of $50K/month, your financial runway is 12 months — that's not an accounting detail, it's a countdown clock.
 
 ---
 
-## The Numbers That Matter
+## 🔍 Types of Burn Rate
 
-| Metric | Formula | Target |
+Financial teams categorize cash consumption into two main types:
+
+| Type | Definition | What It Tells You |
 |---|---|---|
-| **Gross Burn** | Total monthly expenses (before revenue) | Know it, but don't optimize it alone |
-| **Net Burn** | Monthly expenses minus monthly revenue | This is your real cost of survival |
-| **Runway** | Cash balance ÷ Net burn rate | 18-24 months is comfortable |
-| **Cash runway** | (Cash + receivables) ÷ Net burn | More accurate than simple runway |
+| **Gross Burn Rate** | The total amount of operating cash a company spends each month (salaries, rent, software subscriptions). It completely ignores incoming revenue. | Your raw cost of operating |
+| **Net Burn Rate** | The true speed at which a company loses money. It subtracts incoming revenue from gross monthly expenses. | Your real cost of survival |
+
+**Formula:** `Gross Expenses − Revenue = Net Burn Rate`
+
+---
+
+## 📈 Core Calculations
+
+To manage a startup effectively, you need to calculate two numbers.
+
+### 1. Monthly Net Burn Rate
+
+`Net Burn Rate = (Starting Cash Balance − Ending Cash Balance) ÷ Number of Months`
+
+### 2. Financial Runway
+
+`Financial Runway (Months) = Total Cash Reserves ÷ Monthly Net Burn Rate`
+
+> **Example:** If your startup has **$600,000** in the bank and a net burn rate of **$50,000** per month, your financial runway is **12 months**.
 
 <details>
 <summary>The runway survival playbook</summary>
@@ -28,13 +46,6 @@
 - **Start fundraising:** If you need external capital, start the process now. It takes 3-6 months.
 - **Optimize burn:** Review every expense. Do you need that tool? That contractor? That office?
 
-### When You Have 6 Months
-
-- **Survival mode:** Every decision is about extending runway.
-- **Cut aggressively:** Lay off non-essential team members if needed. It's painful but better than dying.
-- **Consider bridge rounds:** Ask existing investors for a small bridge round to buy time.
-- **Explore acquisition:** If the business has value but you can't sustain it, selling is better than shutting down.
-
 ### When You Have 3 Months
 
 - **Emergency measures:** This is crisis territory.
@@ -45,23 +56,18 @@
 
 ---
 
-## How to Extend Runway
+![Runway benchmarks by stage](/burnrate01.png)
 
-| Strategy | Impact | Speed |
-|---|---|---|
-| **Increase revenue** | High | Medium |
-| **Reduce headcount** | High | Fast |
-| **Cut tools/subscriptions** | Medium | Fast |
-| **Negotiate payment terms** | Medium | Medium |
-| **Switch to cheaper infrastructure** | Medium | Slow |
-| **Raise prices** | Medium | Fast |
-| **Offer annual plans** | High (cash upfront) | Fast |
+## ⚠️ Consequences of a High Burn Rate
 
----
+Maintaining a disproportionately high burn rate without matching growth poses significant risks:
 
-## The Burn Rate Trap
+- **Funding Dependency:** Forces companies to rely on continuous venture capital rounds, leaving them vulnerable if funding markets dry up.
+- **Premature Scaling:** Spending aggressively on marketing or massive hiring before achieving product-market fit can quickly lead to bankruptcy.
+- **Loss of Equity:** Forcing emergency capital rounds under financial duress heavily dilutes owner shares.
 
-Many startups fall into the "raise more, spend more" trap:
+<details>
+<summary>The "raise more, spend more" trap</summary>
 
 1. Raise $5M → hire 20 people → burn $300K/month → 16 months runway
 2. Runway gets short → raise $15M → hire 60 more → burn $800K/month → 18 months runway
@@ -69,4 +75,20 @@ Many startups fall into the "raise more, spend more" trap:
 
 **The alternative:** Keep burn low, grow revenue, and raise money from a position of strength — not desperation.
 
-> "Raising money is not a milestone. Staying in business is." — Jason Fried, Basecamp
+</details>
+
+---
+
+## 💡 Strategies to Optimize Runway
+
+If your financial runway drops below **6 to 9 months**, management must implement adjustments to lower the burn rate:
+
+| Strategy | What To Do |
+|---|---|
+| **Audit Non-Core Expenses** | Eliminate underutilized software licenses, downsize unused office spaces, and cut auxiliary perks. |
+| **Freeze Hiring** | Shift immediate focus from team expansion to maximizing the productivity of current staff. |
+| **Pivot to Monetization** | Shift your product roadmap from pure user acquisition to immediate revenue-generating features. |
+
+---
+
+> **The takeaway:** Runway isn't a measure of how much money you raised — it's a measure of how much time you bought. Spend it like the countdown it is.
