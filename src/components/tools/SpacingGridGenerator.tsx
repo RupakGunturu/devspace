@@ -53,10 +53,7 @@ export function SpacingGridGenerator() {
   const [scaleType, setScaleType] = useState<ScaleType>("linear");
   const { color } = useToolAccent();
 
-  const scale = useMemo(
-    () => generateScale(parseInt(base) || 4, scaleType),
-    [base, scaleType]
-  );
+  const scale = useMemo(() => generateScale(parseInt(base) || 4, scaleType), [base, scaleType]);
 
   const cssVars = scale.map((s) => `  --space-${s.name}: ${s.value}px;`).join("\n");
   const cssOutput = `:root {\n${cssVars}\n}`;

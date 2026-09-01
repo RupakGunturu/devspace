@@ -14,9 +14,14 @@ export default function BinaryMathCalculator() {
   const calculate = () => {
     const numA = parseInt(a, 2);
     const numB = parseInt(b, 2);
-    if (isNaN(numA) || isNaN(numB)) { setOutput("Enter valid binary numbers"); return; }
+    if (isNaN(numA) || isNaN(numB)) {
+      setOutput("Enter valid binary numbers");
+      return;
+    }
     const result = op === "add" ? numA + numB : numA - numB;
-    setOutput(`A:     ${a} (${numA})\nB:     ${b} (${numB})\nResult: ${result >= 0 ? result.toString(2) : "-" + Math.abs(result).toString(2)} (${result})`);
+    setOutput(
+      `A:     ${a} (${numA})\nB:     ${b} (${numB})\nResult: ${result >= 0 ? result.toString(2) : "-" + Math.abs(result).toString(2)} (${result})`,
+    );
   };
 
   return (

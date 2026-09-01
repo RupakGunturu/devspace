@@ -81,8 +81,12 @@ export function MetaTitleLengthChecker() {
             placeholder="Enter page title..."
             maxLength={100}
             className={inputCls}
-            onFocus={(e) => { e.currentTarget.style.borderColor = color; }}
-            onBlur={(e) => { e.currentTarget.style.borderColor = ""; }}
+            onFocus={(e) => {
+              e.currentTarget.style.borderColor = color;
+            }}
+            onBlur={(e) => {
+              e.currentTarget.style.borderColor = "";
+            }}
           />
         </div>
         <div>
@@ -95,8 +99,12 @@ export function MetaTitleLengthChecker() {
             onChange={(e) => setKeyword(e.target.value)}
             placeholder="e.g. react hooks"
             className={inputCls}
-            onFocus={(e) => { e.currentTarget.style.borderColor = color; }}
-            onBlur={(e) => { e.currentTarget.style.borderColor = ""; }}
+            onFocus={(e) => {
+              e.currentTarget.style.borderColor = color;
+            }}
+            onBlur={(e) => {
+              e.currentTarget.style.borderColor = "";
+            }}
           />
         </div>
       </div>
@@ -112,8 +120,12 @@ export function MetaTitleLengthChecker() {
           rows={3}
           maxLength={300}
           className={inputCls + " resize-y"}
-          onFocus={(e) => { e.currentTarget.style.borderColor = color; }}
-          onBlur={(e) => { e.currentTarget.style.borderColor = ""; }}
+          onFocus={(e) => {
+            e.currentTarget.style.borderColor = color;
+          }}
+          onBlur={(e) => {
+            e.currentTarget.style.borderColor = "";
+          }}
         />
       </div>
 
@@ -123,7 +135,10 @@ export function MetaTitleLengthChecker() {
             <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">
               Title Length
             </span>
-            <span className="font-mono text-sm font-bold" style={{ color: statusColor(titleStatus) }}>
+            <span
+              className="font-mono text-sm font-bold"
+              style={{ color: statusColor(titleStatus) }}
+            >
               {titleLen}/60 — {statusLabel(titleStatus)}
             </span>
           </div>
@@ -149,7 +164,10 @@ export function MetaTitleLengthChecker() {
             <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">
               Description Length
             </span>
-            <span className="font-mono text-sm font-bold" style={{ color: statusColor(descStatus) }}>
+            <span
+              className="font-mono text-sm font-bold"
+              style={{ color: statusColor(descStatus) }}
+            >
               {descLen}/160 — {statusLabel(descStatus)}
             </span>
           </div>
@@ -184,22 +202,32 @@ export function MetaTitleLengthChecker() {
                   style={{ backgroundColor: keywordProminence.inTitle ? "#22c55e" : "#ef4444" }}
                 />
                 <span className="font-mono text-xs text-foreground">
-                  In Title: {keywordProminence.inTitle ? `Yes (pos ${keywordProminence.titlePosition})` : "No"}
+                  In Title:{" "}
+                  {keywordProminence.inTitle
+                    ? `Yes (pos ${keywordProminence.titlePosition})`
+                    : "No"}
                 </span>
               </div>
               <div className="flex items-center gap-2">
                 <span
                   className="inline-block h-3 w-3 rounded-full"
-                  style={{ backgroundColor: keywordProminence.inDescription ? "#22c55e" : "#ef4444" }}
+                  style={{
+                    backgroundColor: keywordProminence.inDescription ? "#22c55e" : "#ef4444",
+                  }}
                 />
                 <span className="font-mono text-xs text-foreground">
-                  In Desc: {keywordProminence.inDescription ? `Yes (pos ${keywordProminence.descPosition})` : "No"}
+                  In Desc:{" "}
+                  {keywordProminence.inDescription
+                    ? `Yes (pos ${keywordProminence.descPosition})`
+                    : "No"}
                 </span>
               </div>
               <div className="flex items-center gap-2">
                 <span
                   className="inline-block h-3 w-3 rounded-full"
-                  style={{ backgroundColor: keywordProminence.inFrontThird ? "#22c55e" : "#f59e0b" }}
+                  style={{
+                    backgroundColor: keywordProminence.inFrontThird ? "#22c55e" : "#f59e0b",
+                  }}
                 />
                 <span className="font-mono text-xs text-foreground">
                   Front 30%: {keywordProminence.inFrontThird ? "Yes" : "No"}
@@ -210,7 +238,11 @@ export function MetaTitleLengthChecker() {
           {keywordProminence && (
             <div className="mt-3 font-mono text-xs text-muted">
               Score: {keywordProminence.score}/3 —{" "}
-              {keywordProminence.score === 3 ? "Excellent" : keywordProminence.score >= 2 ? "Good" : "Needs improvement"}
+              {keywordProminence.score === 3
+                ? "Excellent"
+                : keywordProminence.score >= 2
+                  ? "Good"
+                  : "Needs improvement"}
             </div>
           )}
         </div>
@@ -224,11 +256,10 @@ export function MetaTitleLengthChecker() {
           <div className="truncate font-mono text-lg text-[#8ab4f8] underline">
             {title || "Page Title — Your Site"}
           </div>
-          <div className="font-mono text-xs text-[#70757a]">
-            https://yoursite.com › page
-          </div>
+          <div className="font-mono text-xs text-[#70757a]">https://yoursite.com › page</div>
           <div className="line-clamp-2 font-mono text-sm text-[#4d5156]">
-            {description || "Add a meta description to see how it will appear in Google search results..."}
+            {description ||
+              "Add a meta description to see how it will appear in Google search results..."}
           </div>
         </div>
       </div>

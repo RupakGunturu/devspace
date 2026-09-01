@@ -22,13 +22,21 @@ export default function CodeToImage() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = theme === "dark" ? "#cdd6f4" : "#333333";
     ctx.font = "14px monospace";
-    lines.forEach((line, i) => { ctx.fillText(line, 20, 50 + i * 24); });
+    lines.forEach((line, i) => {
+      ctx.fillText(line, 20, 50 + i * 24);
+    });
     setUrl(canvas.toDataURL());
   };
 
   return (
     <ToolLayout id="code-to-image">
-      <ToolInput value={code} onChange={setCode} placeholder="Paste code..." label="Code" rows={8} />
+      <ToolInput
+        value={code}
+        onChange={setCode}
+        placeholder="Paste code..."
+        label="Code"
+        rows={8}
+      />
       <div className="flex gap-2">
         <ToolToggleGroup
           options={[
@@ -40,7 +48,14 @@ export default function CodeToImage() {
         />
         <ToolButton onClick={generate}>Generate Image</ToolButton>
       </div>
-      {url && <div className="flex flex-col items-center gap-4"><img src={url} alt="Code" className="border border-border rounded-sm" /><a href={url} download="code.png" className="text-sm hover:underline" style={{ color }}>Download</a></div>}
+      {url && (
+        <div className="flex flex-col items-center gap-4">
+          <img src={url} alt="Code" className="border border-border rounded-sm" />
+          <a href={url} download="code.png" className="text-sm hover:underline" style={{ color }}>
+            Download
+          </a>
+        </div>
+      )}
     </ToolLayout>
   );
 }

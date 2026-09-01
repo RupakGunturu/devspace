@@ -50,7 +50,7 @@ function shuffleArray<T>(arr: T[]): T[] {
 export function FlashcardGenerator() {
   const { color } = useToolAccent();
   const [raw, setRaw] = useState(
-    "Q: What is a hash map? | A: A data structure mapping keys to values with O(1) average lookup\nQ: What is Big-O notation? | A: Describes the upper bound of an algorithm's growth rate\nQ: What is a stack? | A: LIFO data structure — push adds to top, pop removes from top\nQ: What is recursion? | A: A function that calls itself with a base case to terminate"
+    "Q: What is a hash map? | A: A data structure mapping keys to values with O(1) average lookup\nQ: What is Big-O notation? | A: Describes the upper bound of an algorithm's growth rate\nQ: What is a stack? | A: LIFO data structure — push adds to top, pop removes from top\nQ: What is recursion? | A: A function that calls itself with a base case to terminate",
   );
   const [currentIndex, setCurrentIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
@@ -102,18 +102,33 @@ export function FlashcardGenerator() {
         </label>
         <textarea
           value={raw}
-          onChange={(e) => { setRaw(e.target.value); setCurrentIndex(0); setFlipped(false); setOrder([]); }}
+          onChange={(e) => {
+            setRaw(e.target.value);
+            setCurrentIndex(0);
+            setFlipped(false);
+            setOrder([]);
+          }}
           rows={6}
-          placeholder={"Q: question | A: answer\n(one per line, or separate Q and A by blank lines)"}
+          placeholder={
+            "Q: question | A: answer\n(one per line, or separate Q and A by blank lines)"
+          }
           className="w-full resize-y rounded-md border-2 border-line bg-input-bg p-4 font-mono text-sm text-input-text outline-none placeholder:text-muted"
-          onFocus={(e) => { e.currentTarget.style.borderColor = color; }}
-          onBlur={(e) => { e.currentTarget.style.borderColor = ""; }}
+          onFocus={(e) => {
+            e.currentTarget.style.borderColor = color;
+          }}
+          onBlur={(e) => {
+            e.currentTarget.style.borderColor = "";
+          }}
         />
       </div>
 
       <div className="flex flex-wrap gap-2">
-        <ToolButton onClick={shuffle} disabled={total < 2}>Shuffle</ToolButton>
-        <ToolButton variant="secondary" onClick={reset}>Reset Order</ToolButton>
+        <ToolButton onClick={shuffle} disabled={total < 2}>
+          Shuffle
+        </ToolButton>
+        <ToolButton variant="secondary" onClick={reset}>
+          Reset Order
+        </ToolButton>
         <span className="self-center font-mono text-xs text-muted">
           {total} card{total !== 1 ? "s" : ""} parsed
         </span>
@@ -151,18 +166,25 @@ export function FlashcardGenerator() {
           </div>
 
           <div className="flex items-center justify-center gap-3">
-            <ToolButton variant="secondary" onClick={prev}>Previous</ToolButton>
+            <ToolButton variant="secondary" onClick={prev}>
+              Previous
+            </ToolButton>
             <ToolButton onClick={() => setFlipped(!flipped)}>
               {flipped ? "Show Question" : "Show Answer"}
             </ToolButton>
-            <ToolButton variant="secondary" onClick={next}>Next</ToolButton>
+            <ToolButton variant="secondary" onClick={next}>
+              Next
+            </ToolButton>
           </div>
 
           <div className="flex flex-wrap justify-center gap-1.5">
             {displayCards.map((_, i) => (
               <button
                 key={i}
-                onClick={() => { setCurrentIndex(i); setFlipped(false); }}
+                onClick={() => {
+                  setCurrentIndex(i);
+                  setFlipped(false);
+                }}
                 className="h-6 w-6 rounded-md border-2 text-[10px] font-mono font-bold transition-all"
                 style={{
                   borderColor: i === currentIndex ? color : "var(--border)",
@@ -180,7 +202,8 @@ export function FlashcardGenerator() {
       {total === 0 && (
         <div className="rounded-lg border-2 border-dashed border-line bg-input-bg p-8 text-center">
           <p className="text-sm text-muted">
-            Paste notes above using the format: <code className="font-mono text-foreground">Q: question | A: answer</code>
+            Paste notes above using the format:{" "}
+            <code className="font-mono text-foreground">Q: question | A: answer</code>
           </p>
         </div>
       )}

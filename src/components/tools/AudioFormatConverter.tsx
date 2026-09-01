@@ -9,11 +9,41 @@ interface Format {
 }
 
 const FORMATS: Format[] = [
-  { name: "WAV", quality: "Lossless (uncompressed)", size: "Very Large (~10MB/min)", useCase: "Audio editing, archiving, CD mastering", lossless: true },
-  { name: "MP3", quality: "Lossy (high quality at 320kbps)", size: "Small (~1MB/min)", useCase: "General playback, sharing, legacy compatibility", lossless: false },
-  { name: "OGG", quality: "Lossy (better quality than MP3 at same bitrate)", size: "Small (~0.8MB/min)", useCase: "Game audio, web, open-source projects", lossless: false },
-  { name: "FLAC", quality: "Lossless (compressed, ~50-70% of WAV)", size: "Medium (~5MB/min)", useCase: "Music streaming, archiving, audiophile playback", lossless: true },
-  { name: "AAC", quality: "Lossy (better than MP3 at same bitrate)", size: "Small (~0.9MB/min)", useCase: "Streaming (Apple Music, YouTube), podcasts", lossless: false },
+  {
+    name: "WAV",
+    quality: "Lossless (uncompressed)",
+    size: "Very Large (~10MB/min)",
+    useCase: "Audio editing, archiving, CD mastering",
+    lossless: true,
+  },
+  {
+    name: "MP3",
+    quality: "Lossy (high quality at 320kbps)",
+    size: "Small (~1MB/min)",
+    useCase: "General playback, sharing, legacy compatibility",
+    lossless: false,
+  },
+  {
+    name: "OGG",
+    quality: "Lossy (better quality than MP3 at same bitrate)",
+    size: "Small (~0.8MB/min)",
+    useCase: "Game audio, web, open-source projects",
+    lossless: false,
+  },
+  {
+    name: "FLAC",
+    quality: "Lossless (compressed, ~50-70% of WAV)",
+    size: "Medium (~5MB/min)",
+    useCase: "Music streaming, archiving, audiophile playback",
+    lossless: true,
+  },
+  {
+    name: "AAC",
+    quality: "Lossy (better than MP3 at same bitrate)",
+    size: "Small (~0.9MB/min)",
+    useCase: "Streaming (Apple Music, YouTube), podcasts",
+    lossless: false,
+  },
 ];
 
 export function AudioFormatConverter() {
@@ -80,8 +110,8 @@ export function AudioFormatConverter() {
           ))}
         </div>
         <p className="mt-3 font-mono text-xs text-muted">
-          For streaming and sharing, use MP3 or AAC. For editing and archiving, use WAV or FLAC.
-          OGG is ideal for web and game projects where open-source compatibility is important.
+          For streaming and sharing, use MP3 or AAC. For editing and archiving, use WAV or FLAC. OGG
+          is ideal for web and game projects where open-source compatibility is important.
         </p>
       </div>
     </ToolLayout>

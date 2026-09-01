@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { motion } from "motion/react"
+import { motion } from "motion/react";
 
-import { ShiftCard } from "@/components/ui/shift-card"
-import { TextureButton } from "@/components/ui/texture-button"
+import { ShiftCard } from "@/components/ui/shift-card";
+import { TextureButton } from "@/components/ui/texture-button";
 
 export default function ShiftCardDemo() {
   const topContent = (
@@ -48,7 +48,7 @@ export default function ShiftCardDemo() {
         Screen Capture
       </h3>
     </div>
-  )
+  );
 
   const topAnimateContent = (
     <>
@@ -80,7 +80,7 @@ export default function ShiftCardDemo() {
         }}
       />
     </>
-  )
+  );
 
   const middleContent = (
     <motion.img
@@ -91,7 +91,7 @@ export default function ShiftCardDemo() {
       alt="Animated Middle"
       className="rounded-lg border-2 border-white dark:border-black"
     />
-  )
+  );
 
   const bottomContent = (
     <div className="flex w-full flex-col gap-1 bg-primary/90 border-t border-t-black/10 rounded-t-xs px-4 pb-6">
@@ -110,11 +110,7 @@ export default function ShiftCardDemo() {
       </div>
       <div className="w-full text-pretty font-sans text-[13px] leading-4 text-neutral-200 dark:text-[#171717] pb-2">
         Share your image to build that audience. Inspired by{" "}
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://x.com/mrncst"
-        >
+        <a target="_blank" rel="noopener noreferrer" href="https://x.com/mrncst">
           @mrncst
         </a>
       </div>
@@ -155,7 +151,7 @@ export default function ShiftCardDemo() {
         </TextureButton>
       </div>
     </div>
-  )
+  );
 
   return (
     <div className="flex justify-center items-center">
@@ -167,5 +163,5 @@ export default function ShiftCardDemo() {
         bottomContent={bottomContent}
       />
     </div>
-  )
+  );
 }

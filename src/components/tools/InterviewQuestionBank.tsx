@@ -9,59 +9,128 @@ interface Question {
   difficulty: "Easy" | "Medium" | "Hard";
 }
 
-const QUESTIONS_BY_STACK: Record<string, { behavioral: Question[]; technical: Question[]; systemDesign: Question[] }> = {
+const QUESTIONS_BY_STACK: Record<
+  string,
+  { behavioral: Question[]; technical: Question[]; systemDesign: Question[] }
+> = {
   React: {
     behavioral: [
-      { text: "Tell me about a time you disagreed with a teammate on a technical approach. How did you resolve it?", difficulty: "Medium" },
-      { text: "Describe a situation where you had to learn a new technology quickly for a project.", difficulty: "Easy" },
-      { text: "Give an example of when you received tough feedback. How did you handle it?", difficulty: "Medium" },
-      { text: "Tell me about a time you mentored someone or helped a junior developer grow.", difficulty: "Easy" },
-      { text: "Describe a situation where you had to push back on a product requirement you disagreed with.", difficulty: "Hard" },
-      { text: "Tell me about a project where you had to balance speed vs. code quality.", difficulty: "Medium" },
-      { text: "Give an example of when you led a technical initiative without formal authority.", difficulty: "Hard" },
+      {
+        text: "Tell me about a time you disagreed with a teammate on a technical approach. How did you resolve it?",
+        difficulty: "Medium",
+      },
+      {
+        text: "Describe a situation where you had to learn a new technology quickly for a project.",
+        difficulty: "Easy",
+      },
+      {
+        text: "Give an example of when you received tough feedback. How did you handle it?",
+        difficulty: "Medium",
+      },
+      {
+        text: "Tell me about a time you mentored someone or helped a junior developer grow.",
+        difficulty: "Easy",
+      },
+      {
+        text: "Describe a situation where you had to push back on a product requirement you disagreed with.",
+        difficulty: "Hard",
+      },
+      {
+        text: "Tell me about a project where you had to balance speed vs. code quality.",
+        difficulty: "Medium",
+      },
+      {
+        text: "Give an example of when you led a technical initiative without formal authority.",
+        difficulty: "Hard",
+      },
     ],
     technical: [
-      { text: "Explain the React component lifecycle and how useEffect relates to it.", difficulty: "Medium" },
-      { text: "What are React Server Components, and how do they differ from client components?", difficulty: "Hard" },
+      {
+        text: "Explain the React component lifecycle and how useEffect relates to it.",
+        difficulty: "Medium",
+      },
+      {
+        text: "What are React Server Components, and how do they differ from client components?",
+        difficulty: "Hard",
+      },
       { text: "How does React's reconciliation algorithm (diffing) work?", difficulty: "Hard" },
-      { text: "Explain the difference between useMemo and useCallback with practical examples.", difficulty: "Medium" },
+      {
+        text: "Explain the difference between useMemo and useCallback with practical examples.",
+        difficulty: "Medium",
+      },
       { text: "What is the virtual DOM and why does React use it?", difficulty: "Easy" },
-      { text: "How do you handle state management in a large React application?", difficulty: "Medium" },
+      {
+        text: "How do you handle state management in a large React application?",
+        difficulty: "Medium",
+      },
       { text: "Explain React's Concurrent Mode and Suspense.", difficulty: "Hard" },
       { text: "How do you optimize performance in a React application?", difficulty: "Medium" },
       { text: "What are custom hooks and when would you create one?", difficulty: "Medium" },
       { text: "Explain the Context API vs. Redux — when would you use each?", difficulty: "Easy" },
-      { text: "How does React handle forms? Compare controlled vs. uncontrolled components.", difficulty: "Easy" },
+      {
+        text: "How does React handle forms? Compare controlled vs. uncontrolled components.",
+        difficulty: "Easy",
+      },
       { text: "What is React Fiber, and what problem does it solve?", difficulty: "Hard" },
     ],
     systemDesign: [
-      { text: "Design a real-time collaborative document editor like Google Docs.", difficulty: "Hard" },
+      {
+        text: "Design a real-time collaborative document editor like Google Docs.",
+        difficulty: "Hard",
+      },
       { text: "How would you architect a large-scale e-commerce frontend?", difficulty: "Hard" },
-      { text: "Design a notification system that supports email, push, and in-app notifications.", difficulty: "Hard" },
+      {
+        text: "Design a notification system that supports email, push, and in-app notifications.",
+        difficulty: "Hard",
+      },
       { text: "How would you structure a micro-frontend architecture?", difficulty: "Hard" },
-      { text: "Design an analytics dashboard that handles millions of data points.", difficulty: "Hard" },
+      {
+        text: "Design an analytics dashboard that handles millions of data points.",
+        difficulty: "Hard",
+      },
     ],
   },
   Node: {
     behavioral: [
-      { text: "Tell me about a production outage you handled. What was your process?", difficulty: "Hard" },
+      {
+        text: "Tell me about a production outage you handled. What was your process?",
+        difficulty: "Hard",
+      },
       { text: "Describe a time you improved a system's reliability.", difficulty: "Medium" },
-      { text: "How do you prioritize when multiple critical bugs are reported at once?", difficulty: "Medium" },
+      {
+        text: "How do you prioritize when multiple critical bugs are reported at once?",
+        difficulty: "Medium",
+      },
       { text: "Give an example of when you automated a manual process.", difficulty: "Easy" },
-      { text: "Tell me about a time you had to collaborate across teams to deliver a feature.", difficulty: "Easy" },
+      {
+        text: "Tell me about a time you had to collaborate across teams to deliver a feature.",
+        difficulty: "Easy",
+      },
     ],
     technical: [
       { text: "Explain the Node.js event loop and its phases.", difficulty: "Hard" },
-      { text: "What is the difference between process.nextTick and setImmediate?", difficulty: "Hard" },
-      { text: "How do you handle database connections and connection pooling in Node.js?", difficulty: "Medium" },
-      { text: "Explain middleware in Express.js and how you would implement authentication.", difficulty: "Medium" },
+      {
+        text: "What is the difference between process.nextTick and setImmediate?",
+        difficulty: "Hard",
+      },
+      {
+        text: "How do you handle database connections and connection pooling in Node.js?",
+        difficulty: "Medium",
+      },
+      {
+        text: "Explain middleware in Express.js and how you would implement authentication.",
+        difficulty: "Medium",
+      },
       { text: "What are streams in Node.js and when would you use them?", difficulty: "Medium" },
       { text: "How do you handle errors in async/await code?", difficulty: "Easy" },
       { text: "Explain clustering in Node.js and why it's useful.", difficulty: "Medium" },
       { text: "What is the purpose of package-lock.json?", difficulty: "Easy" },
       { text: "How do you handle file uploads efficiently in Node.js?", difficulty: "Medium" },
       { text: "What is the difference between spawn, exec, and fork?", difficulty: "Hard" },
-      { text: "How do you implement rate limiting in an Express application?", difficulty: "Medium" },
+      {
+        text: "How do you implement rate limiting in an Express application?",
+        difficulty: "Medium",
+      },
       { text: "Explain JWT authentication and how you implement it.", difficulty: "Easy" },
     ],
     systemDesign: [
@@ -74,48 +143,102 @@ const QUESTIONS_BY_STACK: Record<string, { behavioral: Question[]; technical: Qu
   },
   Python: {
     behavioral: [
-      { text: "Tell me about a Python project you're most proud of. What made it successful?", difficulty: "Easy" },
-      { text: "Describe a time you had to debug a complex issue in production.", difficulty: "Medium" },
+      {
+        text: "Tell me about a Python project you're most proud of. What made it successful?",
+        difficulty: "Easy",
+      },
+      {
+        text: "Describe a time you had to debug a complex issue in production.",
+        difficulty: "Medium",
+      },
       { text: "How do you ensure code quality in your Python projects?", difficulty: "Easy" },
-      { text: "Tell me about a time you optimized a Python application for performance.", difficulty: "Hard" },
-      { text: "Describe a situation where you had to choose between multiple libraries for the same task.", difficulty: "Medium" },
+      {
+        text: "Tell me about a time you optimized a Python application for performance.",
+        difficulty: "Hard",
+      },
+      {
+        text: "Describe a situation where you had to choose between multiple libraries for the same task.",
+        difficulty: "Medium",
+      },
     ],
     technical: [
-      { text: "Explain the difference between a generator and an iterator in Python.", difficulty: "Medium" },
+      {
+        text: "Explain the difference between a generator and an iterator in Python.",
+        difficulty: "Medium",
+      },
       { text: "What are Python decorators and how do you implement one?", difficulty: "Medium" },
-      { text: "Explain the GIL (Global Interpreter Lock) and its impact on concurrency.", difficulty: "Hard" },
-      { text: "What is the difference between a list and a generator comprehension?", difficulty: "Easy" },
+      {
+        text: "Explain the GIL (Global Interpreter Lock) and its impact on concurrency.",
+        difficulty: "Hard",
+      },
+      {
+        text: "What is the difference between a list and a generator comprehension?",
+        difficulty: "Easy",
+      },
       { text: "How do you handle memory management in Python?", difficulty: "Medium" },
       { text: "Explain metaclasses in Python and when you might use one.", difficulty: "Hard" },
       { text: "What are context managers and how do you create one?", difficulty: "Medium" },
       { text: "How does Python's type hinting work, and why is it useful?", difficulty: "Easy" },
-      { text: "Explain async/await in Python and when to use asyncio vs. threading.", difficulty: "Hard" },
+      {
+        text: "Explain async/await in Python and when to use asyncio vs. threading.",
+        difficulty: "Hard",
+      },
       { text: "What is the difference between __str__ and __repr__?", difficulty: "Easy" },
       { text: "How do you profile and optimize a slow Python script?", difficulty: "Medium" },
       { text: "Explain dependency injection in Python frameworks.", difficulty: "Medium" },
     ],
     systemDesign: [
-      { text: "Design a data pipeline that processes millions of records daily.", difficulty: "Hard" },
+      {
+        text: "Design a data pipeline that processes millions of records daily.",
+        difficulty: "Hard",
+      },
       { text: "How would you architect a machine learning serving platform?", difficulty: "Hard" },
-      { text: "Design a REST API with proper caching, pagination, and rate limiting.", difficulty: "Hard" },
+      {
+        text: "Design a REST API with proper caching, pagination, and rate limiting.",
+        difficulty: "Hard",
+      },
       { text: "How would you build a real-time data streaming platform?", difficulty: "Hard" },
       { text: "Design an ETL system for migrating data between databases.", difficulty: "Hard" },
     ],
   },
   Java: {
     behavioral: [
-      { text: "Tell me about a time you refactored legacy Java code. What was your strategy?", difficulty: "Medium" },
-      { text: "Describe a situation where you had to optimize a Java application for memory usage.", difficulty: "Hard" },
-      { text: "How do you approach code reviews? Give an example of meaningful feedback you gave.", difficulty: "Easy" },
-      { text: "Tell me about a production incident involving a Java application.", difficulty: "Hard" },
-      { text: "Describe a time you introduced a new practice or tool to your team.", difficulty: "Easy" },
+      {
+        text: "Tell me about a time you refactored legacy Java code. What was your strategy?",
+        difficulty: "Medium",
+      },
+      {
+        text: "Describe a situation where you had to optimize a Java application for memory usage.",
+        difficulty: "Hard",
+      },
+      {
+        text: "How do you approach code reviews? Give an example of meaningful feedback you gave.",
+        difficulty: "Easy",
+      },
+      {
+        text: "Tell me about a production incident involving a Java application.",
+        difficulty: "Hard",
+      },
+      {
+        text: "Describe a time you introduced a new practice or tool to your team.",
+        difficulty: "Easy",
+      },
     ],
     technical: [
       { text: "Explain the JVM memory model and garbage collection.", difficulty: "Hard" },
-      { text: "What is the difference between an interface and an abstract class in Java?", difficulty: "Easy" },
+      {
+        text: "What is the difference between an interface and an abstract class in Java?",
+        difficulty: "Easy",
+      },
       { text: "Explain the Java Stream API with examples.", difficulty: "Medium" },
-      { text: "What are the SOLID principles? Give a Java example for each.", difficulty: "Medium" },
-      { text: "How does Java's HashMap work internally? What happens during a collision?", difficulty: "Hard" },
+      {
+        text: "What are the SOLID principles? Give a Java example for each.",
+        difficulty: "Medium",
+      },
+      {
+        text: "How does Java's HashMap work internally? What happens during a collision?",
+        difficulty: "Hard",
+      },
       { text: "Explain synchronized vs. volatile in Java concurrency.", difficulty: "Hard" },
       { text: "What is the difference between == and .equals() in Java?", difficulty: "Easy" },
       { text: "Explain Java's Exception hierarchy and best practices.", difficulty: "Medium" },
@@ -125,10 +248,19 @@ const QUESTIONS_BY_STACK: Record<string, { behavioral: Question[]; technical: Qu
       { text: "How do you test Java applications? Explain JUnit and Mockito.", difficulty: "Easy" },
     ],
     systemDesign: [
-      { text: "Design a distributed caching system for a Java microservices architecture.", difficulty: "Hard" },
-      { text: "How would you design a high-throughput order processing system?", difficulty: "Hard" },
+      {
+        text: "Design a distributed caching system for a Java microservices architecture.",
+        difficulty: "Hard",
+      },
+      {
+        text: "How would you design a high-throughput order processing system?",
+        difficulty: "Hard",
+      },
       { text: "Design a message queue system from scratch.", difficulty: "Hard" },
-      { text: "How would you architect a multi-tenant SaaS application in Java?", difficulty: "Hard" },
+      {
+        text: "How would you architect a multi-tenant SaaS application in Java?",
+        difficulty: "Hard",
+      },
       { text: "Design a real-time bidding platform.", difficulty: "Hard" },
     ],
   },
@@ -137,20 +269,38 @@ const QUESTIONS_BY_STACK: Record<string, { behavioral: Question[]; technical: Qu
 const ALL_QUESTIONS: { behavioral: Question[]; technical: Question[]; systemDesign: Question[] } = {
   behavioral: [
     { text: "Tell me about yourself and your journey as a software engineer.", difficulty: "Easy" },
-    { text: "Describe your most challenging project and how you overcame obstacles.", difficulty: "Medium" },
-    { text: "How do you handle disagreements with your manager or team members?", difficulty: "Medium" },
+    {
+      text: "Describe your most challenging project and how you overcame obstacles.",
+      difficulty: "Medium",
+    },
+    {
+      text: "How do you handle disagreements with your manager or team members?",
+      difficulty: "Medium",
+    },
     { text: "Tell me about a time you failed. What did you learn?", difficulty: "Medium" },
     { text: "How do you stay current with new technologies?", difficulty: "Easy" },
-    { text: "Describe a time you had to make a decision with incomplete information.", difficulty: "Hard" },
+    {
+      text: "Describe a time you had to make a decision with incomplete information.",
+      difficulty: "Hard",
+    },
   ],
   technical: [
     { text: "Explain the difference between TCP and UDP.", difficulty: "Easy" },
     { text: "What are microservices? What are the tradeoffs vs. monoliths?", difficulty: "Medium" },
-    { text: "Explain REST vs. GraphQL. When would you choose one over the other?", difficulty: "Medium" },
-    { text: "How does a hash table work? What is the time complexity for operations?", difficulty: "Medium" },
+    {
+      text: "Explain REST vs. GraphQL. When would you choose one over the other?",
+      difficulty: "Medium",
+    },
+    {
+      text: "How does a hash table work? What is the time complexity for operations?",
+      difficulty: "Medium",
+    },
     { text: "Explain the CAP theorem.", difficulty: "Hard" },
     { text: "What is a database index? How does a B-tree index work?", difficulty: "Medium" },
-    { text: "How do you handle authentication and authorization in web applications?", difficulty: "Medium" },
+    {
+      text: "How do you handle authentication and authorization in web applications?",
+      difficulty: "Medium",
+    },
     { text: "What is the difference between horizontal and vertical scaling?", difficulty: "Easy" },
   ],
   systemDesign: [
@@ -184,7 +334,7 @@ export function InterviewQuestionBank() {
 
   const toggleCategory = (cat: string) => {
     setActiveCategories((prev) =>
-      prev.includes(cat) ? prev.filter((c) => c !== cat) : [...prev, cat]
+      prev.includes(cat) ? prev.filter((c) => c !== cat) : [...prev, cat],
     );
   };
 
@@ -267,7 +417,8 @@ export function InterviewQuestionBank() {
       <div className="flex items-center gap-3">
         <CopyButton text={allQuestionsText} />
         <span className="font-mono text-xs text-muted">
-          {questions.behavioral.length + questions.technical.length + questions.systemDesign.length} questions total
+          {questions.behavioral.length + questions.technical.length + questions.systemDesign.length}{" "}
+          questions total
         </span>
       </div>
 

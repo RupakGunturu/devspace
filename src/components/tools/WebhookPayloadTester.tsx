@@ -24,11 +24,13 @@ const TEMPLATES: Record<string, { headers: string; body: string }> = {
     body: '{\n  "content": "Hello from DevSpace!"\n}',
   },
   Stripe: {
-    headers: '{\n  "Content-Type": "application/json",\n  "Authorization": "Bearer sk_test_..." \n}',
+    headers:
+      '{\n  "Content-Type": "application/json",\n  "Authorization": "Bearer sk_test_..." \n}',
     body: '{\n  "amount": 2000,\n  "currency": "usd",\n  "source": "tok_visa"\n}',
   },
   GitHub: {
-    headers: '{\n  "Content-Type": "application/json",\n  "Accept": "application/vnd.github.v3+json"\n}',
+    headers:
+      '{\n  "Content-Type": "application/json",\n  "Accept": "application/vnd.github.v3+json"\n}',
     body: '{\n  "title": "Bug report",\n  "body": "Something went wrong",\n  "labels": ["bug"]\n}',
   },
   Custom: {
@@ -121,21 +123,44 @@ export function WebhookPayloadTester() {
   };
 
   const responseText = response
-    ? `Status: ${response.status} ${response.statusText}\n\nHeaders:\n${Object.entries(response.headers).map(([k, v]) => `${k}: ${v}`).join("\n")}\n\nBody:\n${response.body}\n\nTime: ${response.time}ms`
+    ? `Status: ${response.status} ${response.statusText}\n\nHeaders:\n${Object.entries(
+        response.headers,
+      )
+        .map(([k, v]) => `${k}: ${v}`)
+        .join("\n")}\n\nBody:\n${response.body}\n\nTime: ${response.time}ms`
     : "";
 
   return (
     <ToolLayout id="webhook-payload-tester">
       <div>
-        <label className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Webhook URL</label>
-        <input value={url} onChange={(e) => setUrl(e.target.value)} placeholder="https://hooks.example.com/webhook" className="w-full rounded-md border-2 border-line bg-input-bg p-3 font-mono text-sm text-input-text outline-none placeholder:text-muted" style={{ borderColor: url ? color : undefined }} />
+        <label className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+          Webhook URL
+        </label>
+        <input
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
+          placeholder="https://hooks.example.com/webhook"
+          className="w-full rounded-md border-2 border-line bg-input-bg p-3 font-mono text-sm text-input-text outline-none placeholder:text-muted"
+          style={{ borderColor: url ? color : undefined }}
+        />
       </div>
 
       <div>
-        <label className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Method</label>
+        <label className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+          Method
+        </label>
         <div className="flex gap-1">
           {(["POST", "PUT", "PATCH"] as HttpMethod[]).map((m) => (
-            <button key={m} onClick={() => setMethod(m)} className="rounded-md border-2 px-4 py-1.5 font-mono text-xs transition-all" style={method === m ? { borderColor: color, backgroundColor: color, color: "#fff" } : { borderColor: "var(--border)" }}>
+            <button
+              key={m}
+              onClick={() => setMethod(m)}
+              className="rounded-md border-2 px-4 py-1.5 font-mono text-xs transition-all"
+              style={
+                method === m
+                  ? { borderColor: color, backgroundColor: color, color: "#fff" }
+                  : { borderColor: "var(--border)" }
+              }
+            >
               {m}
             </button>
           ))}
@@ -145,7 +170,12 @@ export function WebhookPayloadTester() {
       <div className="flex items-center gap-2">
         <span className="font-mono text-xs text-muted">Templates:</span>
         {Object.keys(TEMPLATES).map((name) => (
-          <button key={name} onClick={() => loadTemplate(name)} className="rounded-md border-2 border-line px-2 py-0.5 font-mono text-[10px] text-muted transition-colors hover:border-current" style={{ ["--hover-color" as string]: color }}>
+          <button
+            key={name}
+            onClick={() => loadTemplate(name)}
+            className="rounded-md border-2 border-line px-2 py-0.5 font-mono text-[10px] text-muted transition-colors hover:border-current"
+            style={{ ["--hover-color" as string]: color }}
+          >
             {name}
           </button>
         ))}
@@ -153,18 +183,36 @@ export function WebhookPayloadTester() {
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
-          <label className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Headers (JSON)</label>
-          <textarea value={headers} onChange={(e) => setHeaders(e.target.value)} rows={6} className="w-full resize-y rounded-md border-2 border-line bg-input-bg p-3 font-mono text-xs text-input-text outline-none" />
+          <label className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+            Headers (JSON)
+          </label>
+          <textarea
+            value={headers}
+            onChange={(e) => setHeaders(e.target.value)}
+            rows={6}
+            className="w-full resize-y rounded-md border-2 border-line bg-input-bg p-3 font-mono text-xs text-input-text outline-none"
+          />
         </div>
         <div>
-          <label className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Body (JSON)</label>
-          <textarea value={body} onChange={(e) => setBody(e.target.value)} rows={6} className="w-full resize-y rounded-md border-2 border-line bg-input-bg p-3 font-mono text-xs text-input-text outline-none" />
+          <label className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+            Body (JSON)
+          </label>
+          <textarea
+            value={body}
+            onChange={(e) => setBody(e.target.value)}
+            rows={6}
+            className="w-full resize-y rounded-md border-2 border-line bg-input-bg p-3 font-mono text-xs text-input-text outline-none"
+          />
         </div>
       </div>
 
       <div className="flex flex-wrap gap-2">
-        <ToolButton onClick={sendRequest} disabled={!url.trim()} loading={loading}>Send Request</ToolButton>
-        <ToolButton variant="secondary" onClick={reset}>Reset</ToolButton>
+        <ToolButton onClick={sendRequest} disabled={!url.trim()} loading={loading}>
+          Send Request
+        </ToolButton>
+        <ToolButton variant="secondary" onClick={reset}>
+          Reset
+        </ToolButton>
       </div>
 
       {error && (
@@ -177,8 +225,21 @@ export function WebhookPayloadTester() {
         <div className="space-y-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">Response</span>
-              <span className="rounded px-1.5 py-0.5 font-mono text-[10px] font-bold" style={{ backgroundColor: response.status < 300 ? "#10b981" : response.status < 400 ? "#f59e0b" : "#ef4444", color: "#fff" }}>
+              <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">
+                Response
+              </span>
+              <span
+                className="rounded px-1.5 py-0.5 font-mono text-[10px] font-bold"
+                style={{
+                  backgroundColor:
+                    response.status < 300
+                      ? "#10b981"
+                      : response.status < 400
+                        ? "#f59e0b"
+                        : "#ef4444",
+                  color: "#fff",
+                }}
+              >
                 {response.status} {response.statusText}
               </span>
               <span className="font-mono text-[10px] text-muted">{response.time}ms</span>
@@ -187,7 +248,9 @@ export function WebhookPayloadTester() {
           </div>
 
           <div className="rounded-lg border-2 border-line bg-input-bg p-4">
-            <span className="mb-2 block font-mono text-[10px] uppercase tracking-wider text-muted">Response Headers</span>
+            <span className="mb-2 block font-mono text-[10px] uppercase tracking-wider text-muted">
+              Response Headers
+            </span>
             <div className="space-y-0.5">
               {Object.entries(response.headers).map(([k, v]) => (
                 <div key={k} className="flex gap-2 font-mono text-[10px]">
@@ -200,7 +263,9 @@ export function WebhookPayloadTester() {
 
           <div>
             <div className="mb-1 flex items-center justify-between">
-              <span className="font-mono text-[10px] uppercase tracking-wider text-muted">Response Body</span>
+              <span className="font-mono text-[10px] uppercase tracking-wider text-muted">
+                Response Body
+              </span>
               <CopyButton text={response.body} />
             </div>
             <pre className="max-h-[300px] overflow-auto whitespace-pre-wrap break-all rounded-lg border-2 border-line bg-input-bg p-4 font-mono text-xs text-input-text">

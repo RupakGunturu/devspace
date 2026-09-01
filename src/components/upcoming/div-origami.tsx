@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { SiAmazon, SiGithub, SiGoogle, SiMeta, SiTwitch } from "react-icons/si";
+import { SiGithub, SiGoogle, SiMeta, SiSpotify, SiTwitch } from "react-icons/si";
 import { twMerge } from "tailwind-merge";
 
 export const DivOrigami = () => {
@@ -9,7 +9,7 @@ export const DivOrigami = () => {
       <LogoRolodex
         items={[
           <LogoItem key={1} className="bg-orange-300 text-neutral-900">
-            <SiAmazon />
+            <SiSpotify />
           </LogoItem>,
           <LogoItem key={2} className="bg-green-300 text-neutral-900">
             <SiGoogle />
@@ -32,8 +32,8 @@ export const DivOrigami = () => {
 const DELAY_IN_MS = 2500;
 const TRANSITION_DURATION_IN_SECS = 1.5;
 
-const LogoRolodex = ({ items }) => {
-  const intervalRef = useRef(null);
+const LogoRolodex = ({ items }: { items: React.ReactNode[] }) => {
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -107,12 +107,12 @@ const LogoRolodex = ({ items }) => {
   );
 };
 
-const LogoItem = ({ children, className }) => {
+const LogoItem = ({ children, className }: { children: React.ReactNode; className?: string }) => {
   return (
     <div
       className={twMerge(
         "grid h-36 w-52 place-content-center rounded-lg bg-neutral-700 text-6xl text-neutral-50",
-        className
+        className,
       )}
     >
       {children}

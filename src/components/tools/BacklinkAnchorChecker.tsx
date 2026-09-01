@@ -38,9 +38,26 @@ export function BacklinkAnchorChecker() {
     };
 
     const genericWords = [
-      "click here", "here", "this", "website", "read more", "learn more",
-      "visit", "link", "page", "post", "article", "source", "info",
-      "more", "homepage", "site", "web", "go", "check", "see more",
+      "click here",
+      "here",
+      "this",
+      "website",
+      "read more",
+      "learn more",
+      "visit",
+      "link",
+      "page",
+      "post",
+      "article",
+      "source",
+      "info",
+      "more",
+      "homepage",
+      "site",
+      "web",
+      "go",
+      "check",
+      "see more",
     ];
 
     for (const line of lines) {
@@ -54,27 +71,60 @@ export function BacklinkAnchorChecker() {
         if (categorized["URL"].examples.length < 3) categorized["URL"].examples.push(line);
       } else if (genericWords.includes(lower)) {
         categorized["Generic"].count++;
-        if (categories_examples_length(categorized, "Generic") < 3) categorized["Generic"].examples.push(line);
+        if (categories_examples_length(categorized, "Generic") < 3)
+          categorized["Generic"].examples.push(line);
       } else if (lower === "devspace" || lower.includes("brand") || lower.includes("company")) {
         categorized["Branded"].count++;
         if (categorized["Branded"].examples.length < 3) categorized["Branded"].examples.push(line);
       } else if (lower.split(/\s+/).length <= 2) {
         categorized["Exact Match"].count++;
-        if (categorized["Exact Match"].examples.length < 3) categorized["Exact Match"].examples.push(line);
+        if (categorized["Exact Match"].examples.length < 3)
+          categorized["Exact Match"].examples.push(line);
       } else {
         categorized["Partial Match"].count++;
-        if (categorized["Partial Match"].examples.length < 3) categorized["Partial Match"].examples.push(line);
+        if (categorized["Partial Match"].examples.length < 3)
+          categorized["Partial Match"].examples.push(line);
       }
     }
 
     const total = lines.length;
     const categories: AnchorCategory[] = [
-      { name: "Branded", count: categorized["Branded"].count, color: "#22c55e", examples: categorized["Branded"].examples },
-      { name: "Exact Match", count: categorized["Exact Match"].count, color: "#f59e0b", examples: categorized["Exact Match"].examples },
-      { name: "Partial Match", count: categorized["Partial Match"].count, color: "#3b82f6", examples: categorized["Partial Match"].examples },
-      { name: "Generic", count: categorized["Generic"].count, color: "#a855f7", examples: categorized["Generic"].examples },
-      { name: "URL", count: categorized["URL"].count, color: "#6b7280", examples: categorized["URL"].examples },
-      { name: "Image", count: categorized["Image"].count, color: "#ec4899", examples: categorized["Image"].examples },
+      {
+        name: "Branded",
+        count: categorized["Branded"].count,
+        color: "#22c55e",
+        examples: categorized["Branded"].examples,
+      },
+      {
+        name: "Exact Match",
+        count: categorized["Exact Match"].count,
+        color: "#f59e0b",
+        examples: categorized["Exact Match"].examples,
+      },
+      {
+        name: "Partial Match",
+        count: categorized["Partial Match"].count,
+        color: "#3b82f6",
+        examples: categorized["Partial Match"].examples,
+      },
+      {
+        name: "Generic",
+        count: categorized["Generic"].count,
+        color: "#a855f7",
+        examples: categorized["Generic"].examples,
+      },
+      {
+        name: "URL",
+        count: categorized["URL"].count,
+        color: "#6b7280",
+        examples: categorized["URL"].examples,
+      },
+      {
+        name: "Image",
+        count: categorized["Image"].count,
+        color: "#ec4899",
+        examples: categorized["Image"].examples,
+      },
     ].filter((c) => c.count > 0);
 
     let risk: string | null = null;
@@ -94,7 +144,7 @@ export function BacklinkAnchorChecker() {
 
   const maxCount = useMemo(
     () => Math.max(...analysis.categories.map((c) => c.count), 1),
-    [analysis.categories]
+    [analysis.categories],
   );
 
   const buildPieStyle = () => {
@@ -121,7 +171,9 @@ export function BacklinkAnchorChecker() {
       <ToolInput
         value={anchorText}
         onChange={setAnchorText}
-        placeholder={"Paste anchor texts, one per line:\nhttps://example.com\nclick here\nbest react hooks\nDevSpace\nlearn more\nreact hooks tutorial"}
+        placeholder={
+          "Paste anchor texts, one per line:\nhttps://example.com\nclick here\nbest react hooks\nDevSpace\nlearn more\nreact hooks tutorial"
+        }
         label="Anchor Text List (one per line)"
         rows={8}
       />
@@ -146,20 +198,21 @@ export function BacklinkAnchorChecker() {
       {analysis.total > 0 && analysis.categories.length > 0 && (
         <div className="grid gap-4 sm:grid-cols-[200px_1fr]">
           <div className="flex items-center justify-center">
-            <div
-              className="relative h-40 w-40 rounded-full"
-              style={buildPieStyle()}
-            >
+            <div className="relative h-40 w-40 rounded-full" style={buildPieStyle()}>
               <div className="absolute inset-[25%] rounded-full bg-input-bg" />
             </div>
           </div>
 
           <div className="space-y-2">
             {analysis.categories.map((cat) => {
-              const pct = analysis.total > 0 ? ((cat.count / analysis.total) * 100).toFixed(1) : "0";
+              const pct =
+                analysis.total > 0 ? ((cat.count / analysis.total) * 100).toFixed(1) : "0";
               return (
                 <div key={cat.name} className="flex items-center gap-3">
-                  <span className="inline-block h-3 w-3 shrink-0 rounded-sm" style={{ backgroundColor: cat.color }} />
+                  <span
+                    className="inline-block h-3 w-3 shrink-0 rounded-sm"
+                    style={{ backgroundColor: cat.color }}
+                  />
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center justify-between">
                       <span className="font-mono text-sm text-foreground">{cat.name}</span>
@@ -188,14 +241,26 @@ export function BacklinkAnchorChecker() {
         <div
           className="rounded-md border-2 p-4"
           style={{
-            borderColor: analysis.risk.startsWith("HIGH") ? "#ef4444" : analysis.risk.startsWith("MEDIUM") ? "#f59e0b" : "#22c55e",
-            backgroundColor: analysis.risk.startsWith("HIGH") ? "#ef444410" : analysis.risk.startsWith("MEDIUM") ? "#f59e0b10" : "#22c55e10",
+            borderColor: analysis.risk.startsWith("HIGH")
+              ? "#ef4444"
+              : analysis.risk.startsWith("MEDIUM")
+                ? "#f59e0b"
+                : "#22c55e",
+            backgroundColor: analysis.risk.startsWith("HIGH")
+              ? "#ef444410"
+              : analysis.risk.startsWith("MEDIUM")
+                ? "#f59e0b10"
+                : "#22c55e10",
           }}
         >
           <span
             className="mb-1 block font-mono text-xs font-bold uppercase tracking-wider"
             style={{
-              color: analysis.risk.startsWith("HIGH") ? "#ef4444" : analysis.risk.startsWith("MEDIUM") ? "#f59e0b" : "#22c55e",
+              color: analysis.risk.startsWith("HIGH")
+                ? "#ef4444"
+                : analysis.risk.startsWith("MEDIUM")
+                  ? "#f59e0b"
+                  : "#22c55e",
             }}
           >
             Risk Assessment
@@ -211,31 +276,41 @@ export function BacklinkAnchorChecker() {
           </span>
           <div className="space-y-2">
             <div className="flex items-start gap-2">
-              <span className="inline-block mt-0.5 font-mono text-xs font-bold" style={{ color }}>1</span>
+              <span className="inline-block mt-0.5 font-mono text-xs font-bold" style={{ color }}>
+                1
+              </span>
               <span className="font-mono text-sm text-foreground">
                 Aim for 20-40% branded anchors for natural diversity.
               </span>
             </div>
             <div className="flex items-start gap-2">
-              <span className="inline-block mt-0.5 font-mono text-xs font-bold" style={{ color }}>2</span>
+              <span className="inline-block mt-0.5 font-mono text-xs font-bold" style={{ color }}>
+                2
+              </span>
               <span className="font-mono text-sm text-foreground">
                 Keep exact match anchors under 10-15% to avoid penalties.
               </span>
             </div>
             <div className="flex items-start gap-2">
-              <span className="inline-block mt-0.5 font-mono text-xs font-bold" style={{ color }}>3</span>
+              <span className="inline-block mt-0.5 font-mono text-xs font-bold" style={{ color }}>
+                3
+              </span>
               <span className="font-mono text-sm text-foreground">
                 Use generic anchors (click here, learn more) for 10-20% of your backlinks.
               </span>
             </div>
             <div className="flex items-start gap-2">
-              <span className="inline-block mt-0.5 font-mono text-xs font-bold" style={{ color }}>4</span>
+              <span className="inline-block mt-0.5 font-mono text-xs font-bold" style={{ color }}>
+                4
+              </span>
               <span className="font-mono text-sm text-foreground">
                 Mix in URL anchors and partial match for a natural-looking profile.
               </span>
             </div>
             <div className="flex items-start gap-2">
-              <span className="inline-block mt-0.5 font-mono text-xs font-bold" style={{ color }}>5</span>
+              <span className="inline-block mt-0.5 font-mono text-xs font-bold" style={{ color }}>
+                5
+              </span>
               <span className="font-mono text-sm text-foreground">
                 Target a natural distribution: Branded &gt; Generic &gt; Partial &gt; Exact.
               </span>
@@ -263,6 +338,9 @@ export function BacklinkAnchorChecker() {
   );
 }
 
-function categories_examples_length(categorized: Record<string, { count: number; examples: string[] }>, key: string): number {
+function categories_examples_length(
+  categorized: Record<string, { count: number; examples: string[] }>,
+  key: string,
+): number {
   return categorized[key].examples.length;
 }

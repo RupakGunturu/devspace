@@ -76,7 +76,7 @@ const CSS_TO_REACT_MAP: Record<string, string> = {
   "column-gap": "columnGap",
   "row-gap": "rowGap",
   "z-index": "zIndex",
-  "opacity": "opacity",
+  opacity: "opacity",
   "transform-origin": "transformOrigin",
   "animation-name": "animationName",
   "animation-duration": "animationDuration",
@@ -106,36 +106,48 @@ function kebabToCamel(prop: string): string {
 function parseCssToStyle(cssText: string): React.CSSProperties {
   const style: Record<string, string> = {};
 
-  cssText.split("\n").filter(Boolean).forEach((line) => {
-    const colonIndex = line.indexOf(":");
-    if (colonIndex === -1) return;
+  cssText
+    .split("\n")
+    .filter(Boolean)
+    .forEach((line) => {
+      const colonIndex = line.indexOf(":");
+      if (colonIndex === -1) return;
 
-    const rawProp = line.slice(0, colonIndex).trim();
-    const value = line.slice(colonIndex + 1).trim().replace(/;$/, "");
+      const rawProp = line.slice(0, colonIndex).trim();
+      const value = line
+        .slice(colonIndex + 1)
+        .trim()
+        .replace(/;$/, "");
 
-    if (!rawProp || !value) return;
+      if (!rawProp || !value) return;
 
-    const camelProp = CSS_TO_REACT_MAP[rawProp] || kebabToCamel(rawProp);
-    style[camelProp] = value;
-  });
+      const camelProp = CSS_TO_REACT_MAP[rawProp] || kebabToCamel(rawProp);
+      style[camelProp] = value;
+    });
 
   return style as React.CSSProperties;
 }
 
 export default function LiveCssPlayground() {
-  const [css, setCss] = useState("background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);\ncolor: white;\npadding: 2rem;\nborder-radius: 12px;\ntext-align: center;\nfont-size: 1.5rem;\nfont-weight: bold;\nbox-shadow: 0 10px 30px rgba(0,0,0,0.2);");
+  const [css, setCss] = useState(
+    "background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);\ncolor: white;\npadding: 2rem;\nborder-radius: 12px;\ntext-align: center;\nfont-size: 1.5rem;\nfont-weight: bold;\nbox-shadow: 0 10px 30px rgba(0,0,0,0.2);",
+  );
 
   return (
     <ToolLayout id="live-css-playground">
-      <ToolInput value={css} onChange={setCss} placeholder="Write CSS here..." label="CSS" rows={10} />
+      <ToolInput
+        value={css}
+        onChange={setCss}
+        placeholder="Write CSS here..."
+        label="CSS"
+        rows={10}
+      />
       <div>
-        <label className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2 block">Live Preview</label>
-        <div
-          className="w-full min-h-[200px] border border-border rounded-sm overflow-hidden"
-        >
-          <div style={parseCssToStyle(css)}>
-            Hello World! This is a preview element.
-          </div>
+        <label className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2 block">
+          Live Preview
+        </label>
+        <div className="w-full min-h-[200px] border border-border rounded-sm overflow-hidden">
+          <div style={parseCssToStyle(css)}>Hello World! This is a preview element.</div>
         </div>
       </div>
     </ToolLayout>

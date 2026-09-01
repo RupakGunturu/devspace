@@ -21,10 +21,15 @@ export default function GitignoreGenerator() {
     macos: ".DS_Store\n._*\n.Spotlight-V100\n.Trashes",
   };
 
-  const toggle = (s: string) => setStacks((prev) => prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s]);
+  const toggle = (s: string) =>
+    setStacks((prev) => (prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s]));
   const generate = () => {
     const lines = ["# Generated .gitignore", ""];
-    for (const s of stacks) { lines.push(`# ${s}`); lines.push(templates[s] || ""); lines.push(""); }
+    for (const s of stacks) {
+      lines.push(`# ${s}`);
+      lines.push(templates[s] || "");
+      lines.push("");
+    }
     setOutput(lines.join("\n").trim());
   };
 
@@ -36,7 +41,11 @@ export default function GitignoreGenerator() {
             key={s}
             onClick={() => toggle(s)}
             className="px-3 py-1.5 text-xs rounded-full border transition-all"
-            style={stacks.includes(s) ? { borderColor: color, backgroundColor: color, color: fg } : { borderColor: "var(--border)", color: "var(--muted-foreground)" }}
+            style={
+              stacks.includes(s)
+                ? { borderColor: color, backgroundColor: color, color: fg }
+                : { borderColor: "var(--border)", color: "var(--muted-foreground)" }
+            }
           >
             {s}
           </button>

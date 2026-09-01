@@ -61,15 +61,16 @@ export function BpmTapTempo() {
     setLastTap(0);
   };
 
-  const recentIntervals = taps.length >= 2
-    ? taps.slice(-5).reduce<{ interval: number; bpm: number }[]>((acc, t, i, arr) => {
-        if (i > 0) {
-          const interval = t - arr[i - 1];
-          acc.push({ interval: Math.round(interval), bpm: Math.round(60000 / interval) });
-        }
-        return acc;
-      }, [])
-    : [];
+  const recentIntervals =
+    taps.length >= 2
+      ? taps.slice(-5).reduce<{ interval: number; bpm: number }[]>((acc, t, i, arr) => {
+          if (i > 0) {
+            const interval = t - arr[i - 1];
+            acc.push({ interval: Math.round(interval), bpm: Math.round(60000 / interval) });
+          }
+          return acc;
+        }, [])
+      : [];
 
   return (
     <ToolLayout id="bpm-tap-tempo">
@@ -106,7 +107,7 @@ export function BpmTapTempo() {
               }}
             />
             <span className="font-mono text-xs text-muted">
-              {Math.round(60 / bpm * 1000)}ms interval
+              {Math.round((60 / bpm) * 1000)}ms interval
             </span>
           </div>
         )}
@@ -122,7 +123,9 @@ export function BpmTapTempo() {
                   key={i}
                   className="shrink-0 rounded-md border-2 border-line bg-input-bg px-3 py-2 text-center"
                 >
-                  <p className="font-mono text-sm font-bold" style={{ color }}>{r.bpm}</p>
+                  <p className="font-mono text-sm font-bold" style={{ color }}>
+                    {r.bpm}
+                  </p>
                   <p className="font-mono text-[10px] text-muted">{r.interval}ms</p>
                 </div>
               ))}
@@ -144,9 +147,7 @@ export function BpmTapTempo() {
           )}
         </div>
 
-        <p className="font-mono text-[10px] text-muted">
-          Press Space or click the button to tap
-        </p>
+        <p className="font-mono text-[10px] text-muted">Press Space or click the button to tap</p>
       </div>
     </ToolLayout>
   );

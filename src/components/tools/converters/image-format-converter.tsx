@@ -21,8 +21,16 @@ export default function ImageFormatConverter() {
   return (
     <ToolLayout id="image-format-converter">
       <ToolFileInput accept="image/*" onChange={handle} label="Choose image" />
-      {url && <div className="flex justify-center"><img src={url} alt="Preview" className="max-h-32 border border-border rounded" /></div>}
-      <div className="p-3 bg-paper-dim/50 border border-border rounded-sm"><span className="text-xs text-muted-foreground">Supported formats for conversion: PNG, JPEG, WebP, AVIF</span></div>
+      {url && (
+        <div className="flex justify-center">
+          <img src={url} alt="Preview" className="max-h-32 border border-border rounded" />
+        </div>
+      )}
+      <div className="p-3 bg-paper-dim/50 border border-border rounded-sm">
+        <span className="text-xs text-muted-foreground">
+          Supported formats for conversion: PNG, JPEG, WebP, AVIF
+        </span>
+      </div>
     </ToolLayout>
   );
 }

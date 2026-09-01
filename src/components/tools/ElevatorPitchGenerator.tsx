@@ -22,12 +22,36 @@ export function ElevatorPitchGenerator() {
   return (
     <ToolLayout id="elevator-pitch-generator">
       <div className="grid gap-4 sm:grid-cols-2">
-        <ToolInput value={name} onChange={setName} label="Your Name" placeholder="e.g. Alex Chen" rows={2} />
-        <ToolInput value={role} onChange={setRole} label="Your Role" placeholder="e.g. Product Designer & Engineer" rows={2} />
+        <ToolInput
+          value={name}
+          onChange={setName}
+          label="Your Name"
+          placeholder="e.g. Alex Chen"
+          rows={2}
+        />
+        <ToolInput
+          value={role}
+          onChange={setRole}
+          label="Your Role"
+          placeholder="e.g. Product Designer & Engineer"
+          rows={2}
+        />
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
-        <ToolInput value={value} onChange={setValue} label="Unique Value" placeholder="e.g. bridge the gap between design and engineering" rows={2} />
-        <ToolInput value={careerGoal} onChange={setCareerGoal} label="Career Goal" placeholder="e.g. lead product at a mission-driven startup" rows={2} />
+        <ToolInput
+          value={value}
+          onChange={setValue}
+          label="Unique Value"
+          placeholder="e.g. bridge the gap between design and engineering"
+          rows={2}
+        />
+        <ToolInput
+          value={careerGoal}
+          onChange={setCareerGoal}
+          label="Career Goal"
+          placeholder="e.g. lead product at a mission-driven startup"
+          rows={2}
+        />
       </div>
       <ToolButton onClick={() => {}} disabled={!name.trim() || !role.trim()}>
         Generate Pitches

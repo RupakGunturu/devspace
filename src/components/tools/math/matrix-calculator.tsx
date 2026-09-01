@@ -11,7 +11,11 @@ export default function MatrixCalculator() {
   const [op, setOp] = useState<"add" | "multiply">("add");
   const [output, setOutput] = useState("");
 
-  const parse = (s: string) => s.trim().split("\n").map((row) => row.split(",").map(Number));
+  const parse = (s: string) =>
+    s
+      .trim()
+      .split("\n")
+      .map((row) => row.split(",").map(Number));
 
   const calculate = () => {
     try {
@@ -21,10 +25,14 @@ export default function MatrixCalculator() {
         const result = m1.map((row, i) => row.map((val, j) => val + m2[i][j]));
         setOutput(result.map((r) => r.join(", ")).join("\n"));
       } else {
-        const result = m1.map((row) => m2[0].map((_, j) => row.reduce((sum, val, k) => sum + val * m2[k][j], 0)));
+        const result = m1.map((row) =>
+          m2[0].map((_, j) => row.reduce((sum, val, k) => sum + val * m2[k][j], 0)),
+        );
         setOutput(result.map((r) => r.join(", ")).join("\n"));
       }
-    } catch { setOutput("Invalid matrix format"); }
+    } catch {
+      setOutput("Invalid matrix format");
+    }
   };
 
   return (

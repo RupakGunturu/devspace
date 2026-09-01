@@ -67,18 +67,25 @@ const MAX_BAR = 50;
 
 function computeOps(n: number, notation: string): number {
   switch (notation) {
-    case "O(1)": return 1;
-    case "O(log n)": return Math.max(1, Math.ceil(Math.log2(n)));
-    case "O(n)": return n;
-    case "O(n log n)": return Math.ceil(n * Math.log2(Math.max(2, n)));
-    case "O(n^2)": return n * n;
-    case "O(2^n)": return Math.min(2 ** Math.min(n, 30), 1e12);
+    case "O(1)":
+      return 1;
+    case "O(log n)":
+      return Math.max(1, Math.ceil(Math.log2(n)));
+    case "O(n)":
+      return n;
+    case "O(n log n)":
+      return Math.ceil(n * Math.log2(Math.max(2, n)));
+    case "O(n^2)":
+      return n * n;
+    case "O(2^n)":
+      return Math.min(2 ** Math.min(n, 30), 1e12);
     case "O(n!)": {
       let r = 1;
       for (let i = 2; i <= Math.min(n, 20); i++) r *= i;
       return Math.min(r, 1e12);
     }
-    default: return 0;
+    default:
+      return 0;
   }
 }
 
@@ -102,7 +109,7 @@ export function BigOCheatsheet() {
         c.notation.toLowerCase().includes(q) ||
         c.name.toLowerCase().includes(q) ||
         c.description.toLowerCase().includes(q) ||
-        c.examples.some((e) => e.toLowerCase().includes(q))
+        c.examples.some((e) => e.toLowerCase().includes(q)),
     );
   }, [filter]);
 
@@ -118,8 +125,12 @@ export function BigOCheatsheet() {
           placeholder="e.g. quadratic, O(n^2), binary search..."
           className="w-full rounded-md border-2 border-line bg-input-bg p-3 font-mono text-sm text-input-text outline-none placeholder:text-muted focus:border-accent"
           style={{ ["--tw-ring-color" as string]: color }}
-          onFocus={(e) => { e.currentTarget.style.borderColor = color; }}
-          onBlur={(e) => { e.currentTarget.style.borderColor = ""; }}
+          onFocus={(e) => {
+            e.currentTarget.style.borderColor = color;
+          }}
+          onBlur={(e) => {
+            e.currentTarget.style.borderColor = "";
+          }}
         />
       </div>
 
@@ -202,19 +213,29 @@ export function BigOCheatsheet() {
           {COMPLEXITIES.map((entry) => {
             const ops = computeOps(arraySize, entry.notation);
             const maxOps = computeOps(arraySize, "O(n^2)");
-            const barPct = maxOps > 0 ? Math.max(1, (Math.log10(ops + 1) / Math.log10(maxOps + 1)) * 100) : 1;
+            const barPct =
+              maxOps > 0 ? Math.max(1, (Math.log10(ops + 1) / Math.log10(maxOps + 1)) * 100) : 1;
             return (
               <div key={entry.notation} className="flex items-center gap-2">
-                <span className="w-16 shrink-0 text-right font-mono text-xs font-bold" style={{ color }}>
+                <span
+                  className="w-16 shrink-0 text-right font-mono text-xs font-bold"
+                  style={{ color }}
+                >
                   {entry.notation}
                 </span>
                 <div className="h-3 flex-1 overflow-hidden rounded-full bg-paper-dim/30">
                   <div
                     className="h-full rounded-full transition-all duration-300"
-                    style={{ width: `${Math.min(100, barPct)}%`, backgroundColor: color, opacity: 0.7 }}
+                    style={{
+                      width: `${Math.min(100, barPct)}%`,
+                      backgroundColor: color,
+                      opacity: 0.7,
+                    }}
                   />
                 </div>
-                <span className="w-16 shrink-0 font-mono text-[10px] text-muted">{formatOps(ops)}</span>
+                <span className="w-16 shrink-0 font-mono text-[10px] text-muted">
+                  {formatOps(ops)}
+                </span>
               </div>
             );
           })}

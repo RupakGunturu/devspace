@@ -10,7 +10,10 @@ export default function NpmPackageComparator() {
   const [output, setOutput] = useState("");
 
   const compare = async () => {
-    if (!pkg1.trim() || !pkg2.trim()) { setOutput("Please enter two package names"); return; }
+    if (!pkg1.trim() || !pkg2.trim()) {
+      setOutput("Please enter two package names");
+      return;
+    }
     setOutput("Loading package data...");
     try {
       const [data1, data2] = await Promise.all([
@@ -43,8 +46,20 @@ export default function NpmPackageComparator() {
   return (
     <ToolLayout id="npm-package-comparator">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <ToolInput value={pkg1} onChange={setPkg1} placeholder="e.g. lodash" label="Package 1" rows={1} />
-        <ToolInput value={pkg2} onChange={setPkg2} placeholder="e.g. ramda" label="Package 2" rows={1} />
+        <ToolInput
+          value={pkg1}
+          onChange={setPkg1}
+          placeholder="e.g. lodash"
+          label="Package 1"
+          rows={1}
+        />
+        <ToolInput
+          value={pkg2}
+          onChange={setPkg2}
+          placeholder="e.g. ramda"
+          label="Package 2"
+          rows={1}
+        />
       </div>
       <ToolButton onClick={compare}>Compare Packages</ToolButton>
       <ToolOutput value={output} label="Comparison" />

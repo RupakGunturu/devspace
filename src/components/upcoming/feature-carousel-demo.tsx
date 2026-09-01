@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
-import { FeatureCarousel } from "@/components/ui/feature-carousel"
+import { FeatureCarousel } from "@/components/ui/feature-carousel";
 
 export default function FeatureCarouselDemo() {
   return (
@@ -15,30 +15,30 @@ export default function FeatureCarouselDemo() {
             step1img1Class={cn(
               "pointer-events-none w-[50%] border border-stone-100/10 transition-all duration-500 dark:border-stone-700/50",
               "max-md:scale-[160%] max-md:rounded-[24px] rounded-[24px] left-[25%] top-[57%] md:left-[35px] md:top-[29%]",
-              "md:group-hover:translate-y-2"
+              "md:group-hover:translate-y-2",
             )}
             step1img2Class={cn(
               "pointer-events-none w-[60%] border border-stone-100/10 dark:border-stone-700/50 transition-all duration-500 overflow-hidden",
               "max-md:scale-[160%] rounded-2xl max-md:rounded-[24px] left-[69%] top-[53%] md:top-[21%] md:left-[calc(50%+35px+1rem)]",
-              "md:group-hover:-translate-y-6"
+              "md:group-hover:-translate-y-6",
             )}
             step2img1Class={cn(
               "pointer-events-none w-[50%] rounded-t-[24px] overflow-hidden border border-stone-100/10 transition-all duration-500 dark:border-stone-700",
               "max-md:scale-[160%] left-[25%] top-[69%] md:left-[35px] md:top-[30%]",
-              "md:group-hover:translate-y-2"
+              "md:group-hover:translate-y-2",
             )}
             step2img2Class={cn(
               "pointer-events-none w-[40%] rounded-t-[24px] border border-stone-100/10 dark:border-stone-700 transition-all duration-500 rounded-2xl overflow-hidden",
               "max-md:scale-[140%] left-[70%] top-[53%] md:top-[25%] md:left-[calc(50%+27px+1rem)]",
-              "md:group-hover:-translate-y-6"
+              "md:group-hover:-translate-y-6",
             )}
             step3imgClass={cn(
               "pointer-events-none w-[90%] border border-stone-100/10 dark:border-stone-700 rounded-t-[24px] transition-all duration-500 overflow-hidden",
-              "left-[5%] top-[50%] md:top-[30%] md:left-[68px]"
+              "left-[5%] top-[50%] md:top-[30%] md:left-[68px]",
             )}
             step4imgClass={cn(
               "pointer-events-none w-[90%] border border-stone-100/10 dark:border-stone-700 rounded-t-[24px] transition-all duration-500 overflow-hidden",
-              "left-[5%] top-[50%] md:top-[30%] md:left-[68px]"
+              "left-[5%] top-[50%] md:top-[30%] md:left-[68px]",
             )}
             image={{
               step1light1: "/feature-1.png",
@@ -54,5 +54,5 @@ export default function FeatureCarouselDemo() {
         </div>
       </div>
     </div>
-  )
+  );
 }

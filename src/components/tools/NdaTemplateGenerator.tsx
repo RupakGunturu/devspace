@@ -91,9 +91,24 @@ Date: ____________________________`;
   };
 
   const fields = [
-    { label: "Disclosing Party", value: disclosing, set: setDisclosing, placeholder: "e.g. Acme Corp" },
-    { label: "Receiving Party", value: receiving, set: setReceiving, placeholder: "e.g. John Smith" },
-    { label: "Purpose", value: purpose, set: setPurpose, placeholder: "e.g. evaluating a partnership" },
+    {
+      label: "Disclosing Party",
+      value: disclosing,
+      set: setDisclosing,
+      placeholder: "e.g. Acme Corp",
+    },
+    {
+      label: "Receiving Party",
+      value: receiving,
+      set: setReceiving,
+      placeholder: "e.g. John Smith",
+    },
+    {
+      label: "Purpose",
+      value: purpose,
+      set: setPurpose,
+      placeholder: "e.g. evaluating a partnership",
+    },
     { label: "Governing State", value: state, set: setState, placeholder: "e.g. Delaware" },
   ];
 
@@ -102,7 +117,9 @@ Date: ____________________________`;
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         {fields.map(({ label, value, set, placeholder }) => (
           <div key={label}>
-            <span className="mb-1 block font-mono text-xs font-medium uppercase tracking-wider text-muted">{label}</span>
+            <span className="mb-1 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+              {label}
+            </span>
             <input
               value={value}
               onChange={(e) => set(e.target.value)}
@@ -115,14 +132,20 @@ Date: ____________________________`;
       </div>
 
       <div>
-        <span className="mb-1 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Duration (years)</span>
+        <span className="mb-1 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+          Duration (years)
+        </span>
         <div className="flex gap-2">
           {DURATIONS.map((d) => (
             <button
               key={d}
               onClick={() => setDuration(d)}
               className="rounded-md border-2 px-4 py-2 font-mono text-sm transition-all"
-              style={duration === d ? { borderColor: color, backgroundColor: color, color: "#fff" } : { borderColor: "var(--border)" }}
+              style={
+                duration === d
+                  ? { borderColor: color, backgroundColor: color, color: "#fff" }
+                  : { borderColor: "var(--border)" }
+              }
             >
               {d} yr{d !== "1" ? "s" : ""}
             </button>
@@ -140,7 +163,9 @@ Date: ____________________________`;
         <div className="space-y-4">
           <div className="rounded-md border-2 border-line bg-input-bg p-4">
             <div className="mb-2 flex items-center justify-between">
-              <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">NDA Template</span>
+              <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">
+                NDA Template
+              </span>
               <CopyButton text={template} />
             </div>
             <pre className="max-h-[500px] overflow-auto whitespace-pre-wrap break-all font-mono text-sm text-input-text">
@@ -150,10 +175,21 @@ Date: ____________________________`;
 
           <div className="grid grid-cols-5 gap-2">
             {["Definition", "Obligations", "Exclusions", "Remedies", "Term"].map((section) => (
-              <div key={section} className="rounded-md border-2 border-line bg-input-bg p-2 text-center">
-                <div className="font-mono text-[10px] uppercase tracking-wider text-muted">{section}</div>
+              <div
+                key={section}
+                className="rounded-md border-2 border-line bg-input-bg p-2 text-center"
+              >
+                <div className="font-mono text-[10px] uppercase tracking-wider text-muted">
+                  {section}
+                </div>
                 <div className="mt-1 font-mono text-lg font-bold" style={{ color }}>
-                  <svg className="mx-auto h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <svg
+                    className="mx-auto h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                   </svg>
                 </div>

@@ -23,11 +23,35 @@ export default function CorsHeaderBuilder() {
 
   return (
     <ToolLayout id="cors-header-builder">
-      <ToolInput value={origin} onChange={setOrigin} placeholder="*" label="Allow Origin" rows={1} />
-      <ToolInput value={methods} onChange={setMethods} placeholder="GET, POST" label="Allow Methods" rows={1} />
-      <ToolInput value={headers} onChange={setHeaders} placeholder="Content-Type" label="Allow Headers" rows={1} />
+      <ToolInput
+        value={origin}
+        onChange={setOrigin}
+        placeholder="*"
+        label="Allow Origin"
+        rows={1}
+      />
+      <ToolInput
+        value={methods}
+        onChange={setMethods}
+        placeholder="GET, POST"
+        label="Allow Methods"
+        rows={1}
+      />
+      <ToolInput
+        value={headers}
+        onChange={setHeaders}
+        placeholder="Content-Type"
+        label="Allow Headers"
+        rows={1}
+      />
       <label className="flex items-center gap-2 text-sm text-foreground cursor-pointer">
-        <input type="checkbox" checked={credentials} onChange={(e) => setCredentials(e.target.checked)} className="accent-yellow" /> Allow Credentials
+        <input
+          type="checkbox"
+          checked={credentials}
+          onChange={(e) => setCredentials(e.target.checked)}
+          className="accent-yellow"
+        />{" "}
+        Allow Credentials
       </label>
       <ToolButton onClick={build}>Generate Headers</ToolButton>
       <ToolOutput value={output} />

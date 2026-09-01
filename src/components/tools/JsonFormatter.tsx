@@ -20,7 +20,9 @@ export function JsonFormatter() {
       <div className="grid gap-3 sm:grid-cols-2">
         <div>
           <div className="mb-2 flex items-center justify-between">
-            <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">Input</span>
+            <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">
+              Input
+            </span>
             <select
               value={indent}
               onChange={(e) => setIndent(Number(e.target.value))}
@@ -37,12 +39,18 @@ export function JsonFormatter() {
             spellCheck={false}
             className="h-72 w-full resize-none rounded-md border-2 bg-input-bg p-3 font-mono text-sm text-input-text outline-none transition-colors placeholder:text-muted"
             style={{ borderColor: "var(--border)" }}
-            onFocus={(e) => { e.currentTarget.style.borderColor = color; }}
-            onBlur={(e) => { e.currentTarget.style.borderColor = ""; }}
+            onFocus={(e) => {
+              e.currentTarget.style.borderColor = color;
+            }}
+            onBlur={(e) => {
+              e.currentTarget.style.borderColor = "";
+            }}
           />
         </div>
         <div>
-          <span className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Output</span>
+          <span className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+            Output
+          </span>
           {error ? (
             <pre className="h-72 overflow-auto rounded-md border-2 border-coral bg-input-bg p-3 font-mono text-sm text-coral">
               {error}

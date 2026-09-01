@@ -153,6 +153,7 @@ export async function signup(req: Request, res: Response) {
         name: user.name,
         email: user.email,
         avatar: user.avatar,
+        role: user.role,
         provider: user.provider,
       },
     });
@@ -188,6 +189,7 @@ export async function login(req: Request, res: Response) {
           name: user.name,
           email: user.email,
           avatar: user.avatar,
+          role: user.role,
           provider: user.provider,
         },
       });
@@ -286,6 +288,7 @@ export async function googleOneTap(req: Request, res: Response) {
         name: user.name,
         email: user.email,
         avatar: user.avatar,
+        role: user.role,
         provider: user.provider,
       },
     });
@@ -359,6 +362,7 @@ export async function resetPassword(req: Request, res: Response) {
         name: user.name,
         email: user.email,
         avatar: user.avatar,
+        role: user.role,
         provider: user.provider,
       },
     });
@@ -379,6 +383,7 @@ export async function getMe(req: Request, res: Response) {
       name: user.name,
       email: user.email,
       avatar: user.avatar,
+      role: user.role,
       provider: user.provider,
     },
   });
@@ -408,6 +413,7 @@ export async function updateProfile(req: Request, res: Response) {
       name: user.name,
       email: user.email,
       avatar: user.avatar,
+      role: user.role,
       provider: user.provider,
     },
   });

@@ -31,8 +31,15 @@ export default function HttpStatusCodes() {
     <ToolLayout id="http-status-codes">
       <div className="space-y-1.5">
         {Object.entries(codes).map(([code, { desc, cat }]) => (
-          <div key={code} className="flex items-center gap-3 p-2.5 bg-paper-dim/50 border border-border rounded-sm">
-            <span className={`font-mono text-sm font-bold w-10 ${cat === "Success" ? "text-coral" : cat === "Redirect" ? "text-yellow-500" : cat === "Client Error" ? "text-orange-500" : "text-coral"}`}>{code}</span>
+          <div
+            key={code}
+            className="flex items-center gap-3 p-2.5 bg-paper-dim/50 border border-border rounded-sm"
+          >
+            <span
+              className={`font-mono text-sm font-bold w-10 ${cat === "Success" ? "text-coral" : cat === "Redirect" ? "text-yellow-500" : cat === "Client Error" ? "text-orange-500" : "text-coral"}`}
+            >
+              {code}
+            </span>
             <span className="text-sm text-foreground">{desc}</span>
           </div>
         ))}

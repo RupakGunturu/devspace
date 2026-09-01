@@ -111,7 +111,7 @@ function Card({ item, dimmed, onHoverStart, onHoverEnd }: CardProps) {
         "group relative flex flex-col gap-5 overflow-hidden rounded-2xl border p-6",
         "border-line bg-paper",
         "transition-[border-color] duration-300",
-        "hover:border-muted"
+        "hover:border-muted",
       )}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -157,12 +157,8 @@ function Card({ item, dimmed, onHoverStart, onHoverEnd }: CardProps) {
       </div>
 
       <div className="relative z-10 flex flex-col gap-2">
-        <h3 className="text-sm font-semibold tracking-tight text-foreground">
-          {item.title}
-        </h3>
-        <p className="text-xs leading-relaxed text-muted">
-          {item.description}
-        </p>
+        <h3 className="text-sm font-semibold tracking-tight text-foreground">{item.title}</h3>
+        <p className="text-xs leading-relaxed text-muted">{item.description}</p>
       </div>
 
       <div
@@ -198,15 +194,14 @@ export default function SpotlightCards({
       className={cn(
         "relative w-full overflow-hidden rounded-2xl px-8 pt-9 pb-10",
         "bg-paper-dim",
-        className
+        className,
       )}
     >
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 dark:hidden"
         style={{
-          backgroundImage:
-            "radial-gradient(circle, rgba(0,0,0,0.055) 1px, transparent 1px)",
+          backgroundImage: "radial-gradient(circle, rgba(0,0,0,0.055) 1px, transparent 1px)",
           backgroundSize: "22px 22px",
         }}
       />

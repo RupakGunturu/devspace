@@ -48,7 +48,7 @@ export function UtmLinkBuilder() {
   const inputCls =
     "w-full rounded-md border-2 border-line bg-input-bg p-3 font-mono text-sm text-input-text outline-none transition-colors placeholder:text-muted";
 
-  const applyPreset = (p: typeof PRESETS[number]) => {
+  const applyPreset = (p: (typeof PRESETS)[number]) => {
     setSource(p.source);
     setMedium(p.medium);
   };
@@ -65,8 +65,14 @@ export function UtmLinkBuilder() {
               key={p.label}
               onClick={() => applyPreset(p)}
               className="rounded-full border-2 border-line px-3 py-1.5 font-mono text-xs text-muted transition-all hover:border-current"
-              onMouseEnter={(e) => { e.currentTarget.style.borderColor = color; e.currentTarget.style.color = color; }}
-              onMouseLeave={(e) => { e.currentTarget.style.borderColor = ""; e.currentTarget.style.color = ""; }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = color;
+                e.currentTarget.style.color = color;
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = "";
+                e.currentTarget.style.color = "";
+              }}
             >
               {p.label}
             </button>
@@ -84,8 +90,12 @@ export function UtmLinkBuilder() {
           onChange={(e) => setBaseUrl(e.target.value)}
           placeholder="https://example.com/landing-page"
           className={inputCls}
-          onFocus={(e) => { e.currentTarget.style.borderColor = color; }}
-          onBlur={(e) => { e.currentTarget.style.borderColor = ""; }}
+          onFocus={(e) => {
+            e.currentTarget.style.borderColor = color;
+          }}
+          onBlur={(e) => {
+            e.currentTarget.style.borderColor = "";
+          }}
         />
         {!isValidUrl && baseUrl.trim() && (
           <p className="mt-1 font-mono text-xs text-[#ef4444]">Enter a valid URL</p>
@@ -103,8 +113,12 @@ export function UtmLinkBuilder() {
             onChange={(e) => setSource(e.target.value)}
             placeholder="e.g. google, facebook"
             className={inputCls}
-            onFocus={(e) => { e.currentTarget.style.borderColor = color; }}
-            onBlur={(e) => { e.currentTarget.style.borderColor = ""; }}
+            onFocus={(e) => {
+              e.currentTarget.style.borderColor = color;
+            }}
+            onBlur={(e) => {
+              e.currentTarget.style.borderColor = "";
+            }}
           />
         </div>
         <div>
@@ -117,8 +131,12 @@ export function UtmLinkBuilder() {
             onChange={(e) => setMedium(e.target.value)}
             placeholder="e.g. cpc, social, email"
             className={inputCls}
-            onFocus={(e) => { e.currentTarget.style.borderColor = color; }}
-            onBlur={(e) => { e.currentTarget.style.borderColor = ""; }}
+            onFocus={(e) => {
+              e.currentTarget.style.borderColor = color;
+            }}
+            onBlur={(e) => {
+              e.currentTarget.style.borderColor = "";
+            }}
           />
         </div>
       </div>
@@ -133,8 +151,12 @@ export function UtmLinkBuilder() {
           onChange={(e) => setCampaign(e.target.value)}
           placeholder="e.g. spring_sale_2024"
           className={inputCls}
-          onFocus={(e) => { e.currentTarget.style.borderColor = color; }}
-          onBlur={(e) => { e.currentTarget.style.borderColor = ""; }}
+          onFocus={(e) => {
+            e.currentTarget.style.borderColor = color;
+          }}
+          onBlur={(e) => {
+            e.currentTarget.style.borderColor = "";
+          }}
         />
       </div>
 
@@ -149,8 +171,12 @@ export function UtmLinkBuilder() {
             onChange={(e) => setTerm(e.target.value)}
             placeholder="e.g. react+hooks"
             className={inputCls}
-            onFocus={(e) => { e.currentTarget.style.borderColor = color; }}
-            onBlur={(e) => { e.currentTarget.style.borderColor = ""; }}
+            onFocus={(e) => {
+              e.currentTarget.style.borderColor = color;
+            }}
+            onBlur={(e) => {
+              e.currentTarget.style.borderColor = "";
+            }}
           />
         </div>
         <div>
@@ -163,8 +189,12 @@ export function UtmLinkBuilder() {
             onChange={(e) => setContent(e.target.value)}
             placeholder="e.g. header_cta, sidebar_banner"
             className={inputCls}
-            onFocus={(e) => { e.currentTarget.style.borderColor = color; }}
-            onBlur={(e) => { e.currentTarget.style.borderColor = ""; }}
+            onFocus={(e) => {
+              e.currentTarget.style.borderColor = color;
+            }}
+            onBlur={(e) => {
+              e.currentTarget.style.borderColor = "";
+            }}
           />
         </div>
       </div>
@@ -189,31 +219,56 @@ export function UtmLinkBuilder() {
           <div className="space-y-2">
             {source.trim() && (
               <div className="flex items-center gap-2">
-                <span className="inline-block rounded px-1.5 py-0.5 font-mono text-[10px] font-bold" style={{ backgroundColor: color, color: "#1a1a2e" }}>utm_source</span>
+                <span
+                  className="inline-block rounded px-1.5 py-0.5 font-mono text-[10px] font-bold"
+                  style={{ backgroundColor: color, color: "#1a1a2e" }}
+                >
+                  utm_source
+                </span>
                 <span className="font-mono text-sm text-foreground">{source}</span>
               </div>
             )}
             {medium.trim() && (
               <div className="flex items-center gap-2">
-                <span className="inline-block rounded px-1.5 py-0.5 font-mono text-[10px] font-bold" style={{ backgroundColor: color, color: "#1a1a2e" }}>utm_medium</span>
+                <span
+                  className="inline-block rounded px-1.5 py-0.5 font-mono text-[10px] font-bold"
+                  style={{ backgroundColor: color, color: "#1a1a2e" }}
+                >
+                  utm_medium
+                </span>
                 <span className="font-mono text-sm text-foreground">{medium}</span>
               </div>
             )}
             {campaign.trim() && (
               <div className="flex items-center gap-2">
-                <span className="inline-block rounded px-1.5 py-0.5 font-mono text-[10px] font-bold" style={{ backgroundColor: color, color: "#1a1a2e" }}>utm_campaign</span>
+                <span
+                  className="inline-block rounded px-1.5 py-0.5 font-mono text-[10px] font-bold"
+                  style={{ backgroundColor: color, color: "#1a1a2e" }}
+                >
+                  utm_campaign
+                </span>
                 <span className="font-mono text-sm text-foreground">{campaign}</span>
               </div>
             )}
             {term.trim() && (
               <div className="flex items-center gap-2">
-                <span className="inline-block rounded px-1.5 py-0.5 font-mono text-[10px] font-bold" style={{ backgroundColor: color, color: "#1a1a2e" }}>utm_term</span>
+                <span
+                  className="inline-block rounded px-1.5 py-0.5 font-mono text-[10px] font-bold"
+                  style={{ backgroundColor: color, color: "#1a1a2e" }}
+                >
+                  utm_term
+                </span>
                 <span className="font-mono text-sm text-foreground">{term}</span>
               </div>
             )}
             {content.trim() && (
               <div className="flex items-center gap-2">
-                <span className="inline-block rounded px-1.5 py-0.5 font-mono text-[10px] font-bold" style={{ backgroundColor: color, color: "#1a1a2e" }}>utm_content</span>
+                <span
+                  className="inline-block rounded px-1.5 py-0.5 font-mono text-[10px] font-bold"
+                  style={{ backgroundColor: color, color: "#1a1a2e" }}
+                >
+                  utm_content
+                </span>
                 <span className="font-mono text-sm text-foreground">{content}</span>
               </div>
             )}

@@ -235,7 +235,7 @@ export function OnboardingChecklist() {
       plans.map((week) => ({
         ...week,
         tasks: week.tasks.map((t) => ({ ...t })),
-      }))
+      })),
     );
     setGenerated(true);
   };
@@ -247,17 +247,17 @@ export function OnboardingChecklist() {
           ? {
               ...week,
               tasks: week.tasks.map((t, ti) =>
-                ti === taskIndex ? { ...t, checked: !t.checked } : t
+                ti === taskIndex ? { ...t, checked: !t.checked } : t,
               ),
             }
-          : week
-      )
+          : week,
+      ),
     );
   };
 
   const completedCount = weekPlans.reduce(
     (acc, week) => acc + week.tasks.filter((t) => t.checked).length,
-    0
+    0,
   );
   const totalCount = weekPlans.reduce((acc, week) => acc + week.tasks.length, 0);
   const progress = totalCount > 0 ? (completedCount / totalCount) * 100 : 0;
@@ -267,7 +267,9 @@ export function OnboardingChecklist() {
     const lines: string[] = [];
     lines.push(`ONBOARDING CHECKLIST - ${role || "General"}`);
     if (department) lines.push(`Department: ${department}`);
-    lines.push(`Generated: ${new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}`);
+    lines.push(
+      `Generated: ${new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}`,
+    );
     lines.push("=".repeat(40));
     lines.push("");
 
@@ -348,10 +350,7 @@ export function OnboardingChecklist() {
           {weekPlans.map((week, weekIndex) => {
             const weekDone = week.tasks.filter((t) => t.checked).length;
             return (
-              <div
-                key={weekIndex}
-                className="rounded-md border-2 border-line bg-input-bg"
-              >
+              <div key={weekIndex} className="rounded-md border-2 border-line bg-input-bg">
                 <div className="flex items-center justify-between border-b border-line p-4">
                   <span className="font-mono text-sm font-medium text-input-text">
                     {week.title}
@@ -375,9 +374,7 @@ export function OnboardingChecklist() {
                       />
                       <span
                         className={`font-mono text-sm ${
-                          task.checked
-                            ? "text-muted line-through"
-                            : "text-input-text"
+                          task.checked ? "text-muted line-through" : "text-input-text"
                         }`}
                       >
                         {task.text}

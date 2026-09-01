@@ -259,20 +259,22 @@ export function CharacterNameGenerator() {
             Culture
           </label>
           <div className="flex flex-wrap gap-2">
-            {(["japanese", "norse", "celtic", "african", "indian", "greek"] as Culture[]).map((c) => (
-              <button
-                key={c}
-                onClick={() => setCulture(c)}
-                className="rounded-full border-2 px-3 py-1.5 font-mono text-xs font-medium capitalize transition-all"
-                style={{
-                  borderColor: culture === c ? color : "var(--border)",
-                  backgroundColor: culture === c ? color : undefined,
-                  color: culture === c ? "#fff" : undefined,
-                }}
-              >
-                {c}
-              </button>
-            ))}
+            {(["japanese", "norse", "celtic", "african", "indian", "greek"] as Culture[]).map(
+              (c) => (
+                <button
+                  key={c}
+                  onClick={() => setCulture(c)}
+                  className="rounded-full border-2 px-3 py-1.5 font-mono text-xs font-medium capitalize transition-all"
+                  style={{
+                    borderColor: culture === c ? color : "var(--border)",
+                    backgroundColor: culture === c ? color : undefined,
+                    color: culture === c ? "#fff" : undefined,
+                  }}
+                >
+                  {c}
+                </button>
+              ),
+            )}
           </div>
         </div>
         <div>

@@ -14,7 +14,7 @@ const STYLES: Record<string, { heading: string; body: string; label: string }> =
 function getCSSImport(style: string) {
   const s = STYLES[style];
   if (!s) return "";
-  return `/* Fonts are self-hosted via fontsource */\n/* Import in your CSS: */\n/* @import '@fontsource/${s.heading.toLowerCase().replace(/ /g, '-')}'; */\n/* @import '@fontsource/${s.body.toLowerCase().replace(/ /g, '-')}'; */\n\n/* CSS */\nbody {\n  font-family: '${s.body}', sans-serif;\n}\nh1, h2, h3 {\n  font-family: '${s.heading}', serif;\n}`;
+  return `/* Fonts are self-hosted via fontsource */\n/* Import in your CSS: */\n/* @import '@fontsource/${s.heading.toLowerCase().replace(/ /g, "-")}'; */\n/* @import '@fontsource/${s.body.toLowerCase().replace(/ /g, "-")}'; */\n\n/* CSS */\nbody {\n  font-family: '${s.body}', sans-serif;\n}\nh1, h2, h3 {\n  font-family: '${s.heading}', serif;\n}`;
 }
 
 export function TypographyPairer() {
@@ -60,8 +60,8 @@ export function TypographyPairer() {
           style={{ fontFamily: `'${current.body}', sans-serif` }}
         >
           Typography is the art and technique of arranging type to make written language legible,
-          readable, and appealing when displayed. Good typography enhances the user experience
-          and creates visual hierarchy that guides the reader's eye naturally through content.
+          readable, and appealing when displayed. Good typography enhances the user experience and
+          creates visual hierarchy that guides the reader's eye naturally through content.
         </p>
         <p
           className="mt-3 text-sm leading-relaxed text-muted"

@@ -47,29 +47,59 @@ export default function PomodoroTimer() {
     <ToolLayout id="pomodoro-timer">
       <div className="flex flex-col sm:flex-row sm:items-center gap-3">
         <div>
-          <label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">Work (min)</label>
-          <input type="number" value={workMin} onChange={(e) => { setWorkMin(Number(e.target.value)); if (!isRunning) setTimeLeft(Number(e.target.value) * 60); }} min={1} max={60} className="w-20 p-2 bg-paper-dim/50 border border-border rounded-sm text-sm font-mono text-foreground" />
+          <label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">
+            Work (min)
+          </label>
+          <input
+            type="number"
+            value={workMin}
+            onChange={(e) => {
+              setWorkMin(Number(e.target.value));
+              if (!isRunning) setTimeLeft(Number(e.target.value) * 60);
+            }}
+            min={1}
+            max={60}
+            className="w-20 p-2 bg-paper-dim/50 border border-border rounded-sm text-sm font-mono text-foreground"
+          />
         </div>
         <div>
-          <label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">Break (min)</label>
-          <input type="number" value={breakMin} onChange={(e) => setBreakMin(Number(e.target.value))} min={1} max={30} className="w-20 p-2 bg-paper-dim/50 border border-border rounded-sm text-sm font-mono text-foreground" />
+          <label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">
+            Break (min)
+          </label>
+          <input
+            type="number"
+            value={breakMin}
+            onChange={(e) => setBreakMin(Number(e.target.value))}
+            min={1}
+            max={30}
+            className="w-20 p-2 bg-paper-dim/50 border border-border rounded-sm text-sm font-mono text-foreground"
+          />
         </div>
       </div>
       <div className="flex flex-col items-center gap-4 py-8">
-        <span className={`text-xs uppercase tracking-widest font-medium ${isBreak ? "text-coral" : "text-yellow"}`}>
+        <span
+          className={`text-xs uppercase tracking-widest font-medium ${isBreak ? "text-coral" : "text-yellow"}`}
+        >
           {isBreak ? "Break Time" : "Focus Time"}
         </span>
         <span className="font-mono text-6xl md:text-8xl font-bold text-foreground tabular-nums">
           {String(mins).padStart(2, "0")}:{String(secs).padStart(2, "0")}
         </span>
         <div className="w-full max-w-64 h-2 bg-paper-dim rounded-full overflow-hidden">
-          <div className={`h-full rounded-full transition-all duration-1000 ${isBreak ? "bg-coral" : "bg-yellow"}`} style={{ width: `${progress}%` }} />
+          <div
+            className={`h-full rounded-full transition-all duration-1000 ${isBreak ? "bg-coral" : "bg-yellow"}`}
+            style={{ width: `${progress}%` }}
+          />
         </div>
         <span className="text-sm text-muted-foreground">Sessions completed: {sessions}</span>
       </div>
       <div className="flex justify-center gap-3">
-        <ToolButton onClick={() => setIsRunning(!isRunning)}>{isRunning ? "Pause" : "Start"}</ToolButton>
-        <ToolButton onClick={reset} variant="secondary">Reset</ToolButton>
+        <ToolButton onClick={() => setIsRunning(!isRunning)}>
+          {isRunning ? "Pause" : "Start"}
+        </ToolButton>
+        <ToolButton onClick={reset} variant="secondary">
+          Reset
+        </ToolButton>
       </div>
     </ToolLayout>
   );

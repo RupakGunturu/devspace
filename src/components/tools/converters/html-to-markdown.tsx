@@ -26,7 +26,13 @@ export default function HtmlToMarkdown() {
 
   return (
     <ToolLayout id="html-to-markdown">
-      <ToolInput value={input} onChange={setInput} placeholder="<h1>Title</h1>&#10;<p>Content</p>" label="HTML" rows={10} />
+      <ToolInput
+        value={input}
+        onChange={setInput}
+        placeholder="<h1>Title</h1>&#10;<p>Content</p>"
+        label="HTML"
+        rows={10}
+      />
       <ToolButton onClick={convert}>Convert to Markdown</ToolButton>
       <ToolOutput value={output} />
     </ToolLayout>

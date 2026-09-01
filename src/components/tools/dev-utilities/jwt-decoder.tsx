@@ -23,12 +23,21 @@ export default function JwtDecoder() {
       };
       setOutput(JSON.stringify(result, null, 2));
       setError("");
-    } catch (e: any) { setError(e.message); setOutput(""); }
+    } catch (e: any) {
+      setError(e.message);
+      setOutput("");
+    }
   };
 
   return (
     <ToolLayout id="jwt-decoder">
-      <ToolInput value={token} onChange={setToken} placeholder="Paste JWT token..." label="Token" rows={4} />
+      <ToolInput
+        value={token}
+        onChange={setToken}
+        placeholder="Paste JWT token..."
+        label="Token"
+        rows={4}
+      />
       <ToolButton onClick={decode}>Decode JWT</ToolButton>
       {error && <p className="text-sm text-coral font-mono">{error}</p>}
       <ToolOutput value={output} label="Decoded JWT" />

@@ -10,7 +10,8 @@ const DEVICE_STYLES: Record<Device, { frame: string; screen: string; label: stri
     label: "iPhone",
   },
   macbook: {
-    frame: "w-[480px] h-[320px] rounded-t-xl border-[6px] border-gray-700 border-b-0 bg-gray-700 shadow-xl",
+    frame:
+      "w-[480px] h-[320px] rounded-t-xl border-[6px] border-gray-700 border-b-0 bg-gray-700 shadow-xl",
     screen: "w-full h-[280px] rounded-t-lg overflow-hidden mx-auto",
     label: "MacBook",
   },
@@ -20,7 +21,8 @@ const DEVICE_STYLES: Record<Device, { frame: string; screen: string; label: stri
     label: "iPad",
   },
   desktop: {
-    frame: "w-[480px] h-[340px] rounded-t-lg border-[6px] border-gray-700 border-b-0 bg-gray-700 shadow-xl",
+    frame:
+      "w-[480px] h-[340px] rounded-t-lg border-[6px] border-gray-700 border-b-0 bg-gray-700 shadow-xl",
     screen: "w-full h-[300px] overflow-hidden mx-auto",
     label: "Desktop",
   },

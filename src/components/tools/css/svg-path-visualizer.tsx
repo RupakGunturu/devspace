@@ -14,9 +14,16 @@ export default function SvgPathVisualizer() {
       const type = cmd[0];
       const params = cmd.slice(1).trim();
       const names: Record<string, string> = {
-        M: "Move to", L: "Line to", H: "Horizontal line", V: "Vertical line",
-        C: "Cubic bezier", S: "Smooth cubic", Q: "Quadratic bezier", T: "Smooth quadratic",
-        A: "Arc", Z: "Close path",
+        M: "Move to",
+        L: "Line to",
+        H: "Horizontal line",
+        V: "Vertical line",
+        C: "Cubic bezier",
+        S: "Smooth cubic",
+        Q: "Quadratic bezier",
+        T: "Smooth quadratic",
+        A: "Arc",
+        Z: "Close path",
       };
       return `${type} — ${names[type] || "Unknown"}: ${params}`;
     });
@@ -25,7 +32,13 @@ export default function SvgPathVisualizer() {
 
   return (
     <ToolLayout id="svg-path-visualizer">
-      <ToolInput value={input} onChange={setInput} placeholder="M 10 80 Q 95 10 180 80" label="SVG Path" rows={3} />
+      <ToolInput
+        value={input}
+        onChange={setInput}
+        placeholder="M 10 80 Q 95 10 180 80"
+        label="SVG Path"
+        rows={3}
+      />
       <div className="w-full p-4 bg-paper-dim/50 border border-border rounded-sm flex justify-center">
         <svg width="200" height="120" viewBox="0 0 200 120">
           <path d={input} fill="none" stroke="hsl(var(--primary-sky))" strokeWidth="2" />

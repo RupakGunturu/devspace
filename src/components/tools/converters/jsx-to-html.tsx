@@ -20,7 +20,13 @@ export default function JsxToHtml() {
 
   return (
     <ToolLayout id="jsx-to-html">
-      <ToolInput value={input} onChange={setInput} placeholder='<div className="container">Hello</div>' label="JSX" rows={8} />
+      <ToolInput
+        value={input}
+        onChange={setInput}
+        placeholder='<div className="container">Hello</div>'
+        label="JSX"
+        rows={8}
+      />
       <ToolButton onClick={convert}>Convert to HTML</ToolButton>
       <ToolOutput value={output} />
     </ToolLayout>

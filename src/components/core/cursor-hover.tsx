@@ -5,15 +5,12 @@ import { motion } from "motion/react";
 import { SVGProps } from "react";
 import { cn } from "@/lib/utils";
 
-const MouseIcon = ({ color = "var(--yellow)", ...props }: SVGProps<SVGSVGElement> & { color?: string }) => {
+const MouseIcon = ({
+  color = "var(--yellow)",
+  ...props
+}: SVGProps<SVGSVGElement> & { color?: string }) => {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={26}
-      height={31}
-      fill="none"
-      {...props}
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" width={26} height={31} fill="none" {...props}>
       <g clipPath="url(#mouse-clip)">
         <path
           fill={color}

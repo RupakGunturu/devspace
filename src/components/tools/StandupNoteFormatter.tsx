@@ -85,7 +85,9 @@ export function StandupNoteFormatter() {
           <textarea
             value={yesterday}
             onChange={(e) => setYesterday(e.target.value)}
-            placeholder={"Completed auth module refactor\nMerged PR #342\nFixed staging deployment issue"}
+            placeholder={
+              "Completed auth module refactor\nMerged PR #342\nFixed staging deployment issue"
+            }
             rows={6}
             className="w-full resize-y rounded-md border-2 border-line bg-input-bg p-3 font-mono text-sm text-input-text outline-none transition-colors placeholder:text-muted"
             style={{ borderColor: yesterday ? color : undefined }}
@@ -98,7 +100,9 @@ export function StandupNoteFormatter() {
           <textarea
             value={today}
             onChange={(e) => setToday(e.target.value)}
-            placeholder={"Start user dashboard feature\nCode review for PR #345\nSprint planning meeting"}
+            placeholder={
+              "Start user dashboard feature\nCode review for PR #345\nSprint planning meeting"
+            }
             rows={6}
             className="w-full resize-y rounded-md border-2 border-line bg-input-bg p-3 font-mono text-sm text-input-text outline-none transition-colors placeholder:text-muted"
             style={{ borderColor: today ? color : undefined }}

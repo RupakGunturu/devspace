@@ -17,7 +17,10 @@ let globalAdd: ((msg: string, opts: ToastOptions) => void) | null = null;
 let idCounter = 0;
 
 function addToast(message: ReactNode, options?: ToastOptions) {
-  globalAdd?.(String(message), { variant: options?.variant ?? "default", description: options?.description });
+  globalAdd?.(String(message), {
+    variant: options?.variant ?? "default",
+    description: options?.description,
+  });
 }
 
 function toastSuccess(message: ReactNode, options?: Omit<ToastOptions, "variant">) {
@@ -68,7 +71,13 @@ export function Toaster() {
       const id = ++idCounter;
       setToasts((prev) => [
         ...prev,
-        { id, message, description: opts.description, variant: opts.variant ?? "default", exiting: false },
+        {
+          id,
+          message,
+          description: opts.description,
+          variant: opts.variant ?? "default",
+          exiting: false,
+        },
       ]);
       setTimeout(() => dismiss(id), DISMISS_MS);
     },
@@ -122,10 +131,7 @@ export function Toaster() {
                 ×
               </button>
             </div>
-            <div
-              className="toast-progress h-[2px]"
-              style={{ background: cfg.indicator }}
-            />
+            <div className="toast-progress h-[2px]" style={{ background: cfg.indicator }} />
           </div>
         );
       })}

@@ -5,10 +5,54 @@ import { CopyButton } from "./CopyButton";
 import { useToolAccent } from "@/components/ToolAccentContext";
 
 const SEO_KEYWORDS: Record<string, string[]> = {
-  viral: ["best", "ultimate", "insane", "incredible", "secret", "hack", "trick", "proven", "shocking", "unbelievable"],
-  engagement: ["how to", "why", "what", "guide", "tutorial", "tips", "tricks", "explained", "step by step", "beginner"],
-  urgency: ["now", "today", "2026", "new", "don't miss", "fast", "quick", "easy", "simple", "instant"],
-  emotional: ["amazing", "crazy", "epic", "mind-blowing", "game changer", "must watch", "never before", "exclusive", "free", "secret"],
+  viral: [
+    "best",
+    "ultimate",
+    "insane",
+    "incredible",
+    "secret",
+    "hack",
+    "trick",
+    "proven",
+    "shocking",
+    "unbelievable",
+  ],
+  engagement: [
+    "how to",
+    "why",
+    "what",
+    "guide",
+    "tutorial",
+    "tips",
+    "tricks",
+    "explained",
+    "step by step",
+    "beginner",
+  ],
+  urgency: [
+    "now",
+    "today",
+    "2026",
+    "new",
+    "don't miss",
+    "fast",
+    "quick",
+    "easy",
+    "simple",
+    "instant",
+  ],
+  emotional: [
+    "amazing",
+    "crazy",
+    "epic",
+    "mind-blowing",
+    "game changer",
+    "must watch",
+    "never before",
+    "exclusive",
+    "free",
+    "secret",
+  ],
   numbers: ["10", "7", "5", "3", "100", "1000", "top", "best", "worst", "first"],
 };
 
@@ -43,7 +87,9 @@ function calculateSeoScore(title: string): SeoScore {
   else if (len >= 10 && len <= 80) lengthScore = 20;
   else if (len > 0) lengthScore = 10;
 
-  const capsWords = title.split(/\s+/).filter((w) => w === w.toUpperCase() && w.length > 1 && /[A-Z]/.test(w)).length;
+  const capsWords = title
+    .split(/\s+/)
+    .filter((w) => w === w.toUpperCase() && w.length > 1 && /[A-Z]/.test(w)).length;
   const totalWords = title.split(/\s+/).length;
   const capsRatio = totalWords > 0 ? capsWords / totalWords : 0;
   let capsScore = 0;
@@ -75,7 +121,10 @@ function ThumbnailPreview({ text, bgColor }: { text: string; bgColor: string }) 
         className="absolute inset-0 flex items-center justify-center p-6"
         style={{ backgroundColor: bgColor }}
       >
-        <p className="text-center font-sans text-2xl font-black uppercase text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]" style={{ textShadow: "3px 3px 6px rgba(0,0,0,0.8)" }}>
+        <p
+          className="text-center font-sans text-2xl font-black uppercase text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
+          style={{ textShadow: "3px 3px 6px rgba(0,0,0,0.8)" }}
+        >
           {text || "THUMBNAIL TEXT"}
         </p>
       </div>
@@ -86,7 +135,17 @@ function ThumbnailPreview({ text, bgColor }: { text: string; bgColor: string }) 
   );
 }
 
-function ScoreBar({ label, score, max, color }: { label: string; score: number; max: number; color: string }) {
+function ScoreBar({
+  label,
+  score,
+  max,
+  color,
+}: {
+  label: string;
+  score: number;
+  max: number;
+  color: string;
+}) {
   const pct = max > 0 ? (score / max) * 100 : 0;
   return (
     <div className="flex items-center gap-2">
@@ -136,8 +195,12 @@ export function YoutubeAbTextTester() {
               placeholder="Enter title variant A..."
               maxLength={100}
               className="w-full rounded-md border-2 border-line bg-input-bg p-3 font-mono text-sm text-input-text outline-none transition-colors placeholder:text-muted"
-              onFocus={(e) => { e.currentTarget.style.borderColor = color; }}
-              onBlur={(e) => { e.currentTarget.style.borderColor = ""; }}
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = color;
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = "";
+              }}
             />
             <p className="mt-1 font-mono text-xs text-muted">{titleA.length}/100</p>
           </div>
@@ -168,7 +231,13 @@ export function YoutubeAbTextTester() {
             </div>
             <div className="flex flex-col gap-2">
               {scoreA.breakdown.map((b) => (
-                <ScoreBar key={b.label} label={b.label} score={b.score} max={b.max} color={scoreColor(b.score / b.max * 100)} />
+                <ScoreBar
+                  key={b.label}
+                  label={b.label}
+                  score={b.score}
+                  max={b.max}
+                  color={scoreColor((b.score / b.max) * 100)}
+                />
               ))}
             </div>
           </div>
@@ -187,8 +256,12 @@ export function YoutubeAbTextTester() {
               placeholder="Enter title variant B..."
               maxLength={100}
               className="w-full rounded-md border-2 border-line bg-input-bg p-3 font-mono text-sm text-input-text outline-none transition-colors placeholder:text-muted"
-              onFocus={(e) => { e.currentTarget.style.borderColor = color; }}
-              onBlur={(e) => { e.currentTarget.style.borderColor = ""; }}
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = color;
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = "";
+              }}
             />
             <p className="mt-1 font-mono text-xs text-muted">{titleB.length}/100</p>
           </div>
@@ -219,7 +292,13 @@ export function YoutubeAbTextTester() {
             </div>
             <div className="flex flex-col gap-2">
               {scoreB.breakdown.map((b) => (
-                <ScoreBar key={b.label} label={b.label} score={b.score} max={b.max} color={scoreColor(b.score / b.max * 100)} />
+                <ScoreBar
+                  key={b.label}
+                  label={b.label}
+                  score={b.score}
+                  max={b.max}
+                  color={scoreColor((b.score / b.max) * 100)}
+                />
               ))}
             </div>
           </div>
@@ -239,7 +318,10 @@ export function YoutubeAbTextTester() {
           <div className="grid grid-cols-3 gap-2">
             <div className="rounded-md border-2 border-line bg-input-bg p-3 text-center">
               <p className="mb-1 font-mono text-xs text-muted">A Keywords</p>
-              <p className="font-mono text-lg font-bold" style={{ color: scoreColor(scoreA.keywordScore / 40 * 100) }}>
+              <p
+                className="font-mono text-lg font-bold"
+                style={{ color: scoreColor((scoreA.keywordScore / 40) * 100) }}
+              >
                 {scoreA.keywordScore}
               </p>
             </div>
@@ -249,13 +331,19 @@ export function YoutubeAbTextTester() {
             </div>
             <div className="rounded-md border-2 border-line bg-input-bg p-3 text-center">
               <p className="mb-1 font-mono text-xs text-muted">B Keywords</p>
-              <p className="font-mono text-lg font-bold" style={{ color: scoreColor(scoreB.keywordScore / 40 * 100) }}>
+              <p
+                className="font-mono text-lg font-bold"
+                style={{ color: scoreColor((scoreB.keywordScore / 40) * 100) }}
+              >
                 {scoreB.keywordScore}
               </p>
             </div>
             <div className="rounded-md border-2 border-line bg-input-bg p-3 text-center">
               <p className="mb-1 font-mono text-xs text-muted">A Length</p>
-              <p className="font-mono text-lg font-bold" style={{ color: scoreColor(scoreA.lengthScore / 30 * 100) }}>
+              <p
+                className="font-mono text-lg font-bold"
+                style={{ color: scoreColor((scoreA.lengthScore / 30) * 100) }}
+              >
                 {titleA.length}
               </p>
             </div>
@@ -265,7 +353,10 @@ export function YoutubeAbTextTester() {
             </div>
             <div className="rounded-md border-2 border-line bg-input-bg p-3 text-center">
               <p className="mb-1 font-mono text-xs text-muted">B Length</p>
-              <p className="font-mono text-lg font-bold" style={{ color: scoreColor(scoreB.lengthScore / 30 * 100) }}>
+              <p
+                className="font-mono text-lg font-bold"
+                style={{ color: scoreColor((scoreB.lengthScore / 30) * 100) }}
+              >
                 {titleB.length}
               </p>
             </div>

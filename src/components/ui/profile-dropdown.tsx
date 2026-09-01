@@ -1,4 +1,4 @@
-import { LogOut, Settings, User } from "lucide-react";
+import { LogOut, Settings, Shield, User } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import * as React from "react";
 import {
@@ -25,11 +25,7 @@ interface ProfileDropdownProps {
   className?: string;
 }
 
-export default function ProfileDropdown({
-  user,
-  onLogout,
-  className,
-}: ProfileDropdownProps) {
+export default function ProfileDropdown({ user, onLogout, className }: ProfileDropdownProps) {
   const [isOpen, setIsOpen] = React.useState(false);
   const navigate = useNavigate();
 
@@ -57,6 +53,15 @@ export default function ProfileDropdown({
       href: "/settings",
       icon: <Settings className="h-4 w-4" />,
     },
+    ...(user.role === "admin"
+      ? [
+          {
+            label: "Admin",
+            href: "/admin",
+            icon: <Shield className="h-4 w-4" />,
+          },
+        ]
+      : []),
   ];
 
   return (
@@ -98,7 +103,7 @@ export default function ProfileDropdown({
           <div
             className={cn(
               "absolute top-1/2 -right-3 -translate-y-1/2 transition-all duration-200",
-              isOpen ? "opacity-100" : "opacity-60 group-hover:opacity-100"
+              isOpen ? "opacity-100" : "opacity-60 group-hover:opacity-100",
             )}
           >
             <svg
@@ -107,7 +112,7 @@ export default function ProfileDropdown({
                 "transition-all duration-200",
                 isOpen
                   ? "scale-110 text-blue-500 dark:text-blue-400"
-                  : "text-zinc-400 group-hover:text-zinc-600 dark:text-zinc-500 dark:group-hover:text-zinc-300"
+                  : "text-zinc-400 group-hover:text-zinc-600 dark:text-zinc-500 dark:group-hover:text-zinc-300",
               )}
               fill="none"
               height="24"
@@ -149,7 +154,7 @@ export default function ProfileDropdown({
                             "rounded-md px-2 py-1 font-medium text-xs tracking-tight",
                             item.label === "Model"
                               ? "border border-blue-500/10 bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400"
-                              : "border border-purple-500/10 bg-purple-50 text-purple-600 dark:bg-purple-500/10 dark:text-purple-400"
+                              : "border border-purple-500/10 bg-purple-50 text-purple-600 dark:bg-purple-500/10 dark:text-purple-400",
                           )}
                         >
                           {item.value}

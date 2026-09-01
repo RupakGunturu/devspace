@@ -1,6 +1,15 @@
 import { Link } from "react-router-dom";
 import { useMemo, useState, useEffect } from "react";
-import { Bug, LetterText, Brain, Layers, Building2, Globe, Binary, ChevronDown } from "lucide-react";
+import {
+  Bug,
+  LetterText,
+  Brain,
+  Layers,
+  Building2,
+  Globe,
+  Binary,
+  ChevronDown,
+} from "lucide-react";
 import { Marquee, SectionHead, StickerCard } from "../components/site";
 import {
   Drawer,
@@ -28,20 +37,90 @@ import { cn } from "@/lib/utils";
 import BookmarkButton from "../components/BookmarkButton";
 
 const SHEET_COLORS: Record<string, { bg: string; darkBg: string; icon: string; hex: string }> = {
-  "version-control": { bg: "bg-orange-100", darkBg: "dark:bg-orange-900/30", icon: "text-orange-600 dark:text-orange-400", hex: "#f97316" },
-  "css": { bg: "bg-blue-100", darkBg: "dark:bg-blue-900/30", icon: "text-blue-600 dark:text-blue-400", hex: "#3b82f6" },
-  "computer-science": { bg: "bg-purple-100", darkBg: "dark:bg-purple-900/30", icon: "text-purple-600 dark:text-purple-400", hex: "#a855f7" },
-  "javascript": { bg: "bg-yellow-100", darkBg: "dark:bg-yellow-900/30", icon: "text-yellow-600 dark:text-yellow-400", hex: "#eab308" },
-  "react": { bg: "bg-cyan-100", darkBg: "dark:bg-cyan-900/30", icon: "text-cyan-600 dark:text-cyan-400", hex: "#06b6d4" },
-  "devops": { bg: "bg-emerald-100", darkBg: "dark:bg-emerald-900/30", icon: "text-emerald-600 dark:text-emerald-400", hex: "#10b981" },
-  "typescript": { bg: "bg-indigo-100", darkBg: "dark:bg-indigo-900/30", icon: "text-indigo-600 dark:text-indigo-400", hex: "#6366f1" },
-  "backend": { bg: "bg-rose-100", darkBg: "dark:bg-rose-900/30", icon: "text-rose-600 dark:text-rose-400", hex: "#f43f5e" },
-  "python": { bg: "bg-green-100", darkBg: "dark:bg-green-900/30", icon: "text-green-600 dark:text-green-400", hex: "#22c55e" },
-  "database": { bg: "bg-amber-100", darkBg: "dark:bg-amber-900/30", icon: "text-amber-600 dark:text-amber-400", hex: "#d97706" },
-  "security": { bg: "bg-red-100", darkBg: "dark:bg-red-900/30", icon: "text-red-600 dark:text-red-400", hex: "#ef4444" },
-  "performance": { bg: "bg-lime-100", darkBg: "dark:bg-lime-900/30", icon: "text-lime-600 dark:text-lime-400", hex: "#84cc16" },
-  "productivity": { bg: "bg-pink-100", darkBg: "dark:bg-pink-900/30", icon: "text-pink-600 dark:text-pink-400", hex: "#ec4899" },
-  "accessibility": { bg: "bg-teal-100", darkBg: "dark:bg-teal-900/30", icon: "text-teal-600 dark:text-teal-400", hex: "#14b8a6" },
+  "version-control": {
+    bg: "bg-orange-100",
+    darkBg: "dark:bg-orange-900/30",
+    icon: "text-orange-600 dark:text-orange-400",
+    hex: "#f97316",
+  },
+  css: {
+    bg: "bg-blue-100",
+    darkBg: "dark:bg-blue-900/30",
+    icon: "text-blue-600 dark:text-blue-400",
+    hex: "#3b82f6",
+  },
+  "computer-science": {
+    bg: "bg-purple-100",
+    darkBg: "dark:bg-purple-900/30",
+    icon: "text-purple-600 dark:text-purple-400",
+    hex: "#a855f7",
+  },
+  javascript: {
+    bg: "bg-yellow-100",
+    darkBg: "dark:bg-yellow-900/30",
+    icon: "text-yellow-600 dark:text-yellow-400",
+    hex: "#eab308",
+  },
+  react: {
+    bg: "bg-cyan-100",
+    darkBg: "dark:bg-cyan-900/30",
+    icon: "text-cyan-600 dark:text-cyan-400",
+    hex: "#06b6d4",
+  },
+  devops: {
+    bg: "bg-emerald-100",
+    darkBg: "dark:bg-emerald-900/30",
+    icon: "text-emerald-600 dark:text-emerald-400",
+    hex: "#10b981",
+  },
+  typescript: {
+    bg: "bg-indigo-100",
+    darkBg: "dark:bg-indigo-900/30",
+    icon: "text-indigo-600 dark:text-indigo-400",
+    hex: "#6366f1",
+  },
+  backend: {
+    bg: "bg-rose-100",
+    darkBg: "dark:bg-rose-900/30",
+    icon: "text-rose-600 dark:text-rose-400",
+    hex: "#f43f5e",
+  },
+  python: {
+    bg: "bg-green-100",
+    darkBg: "dark:bg-green-900/30",
+    icon: "text-green-600 dark:text-green-400",
+    hex: "#22c55e",
+  },
+  database: {
+    bg: "bg-amber-100",
+    darkBg: "dark:bg-amber-900/30",
+    icon: "text-amber-600 dark:text-amber-400",
+    hex: "#d97706",
+  },
+  security: {
+    bg: "bg-red-100",
+    darkBg: "dark:bg-red-900/30",
+    icon: "text-red-600 dark:text-red-400",
+    hex: "#ef4444",
+  },
+  performance: {
+    bg: "bg-lime-100",
+    darkBg: "dark:bg-lime-900/30",
+    icon: "text-lime-600 dark:text-lime-400",
+    hex: "#84cc16",
+  },
+  productivity: {
+    bg: "bg-pink-100",
+    darkBg: "dark:bg-pink-900/30",
+    icon: "text-pink-600 dark:text-pink-400",
+    hex: "#ec4899",
+  },
+  accessibility: {
+    bg: "bg-teal-100",
+    darkBg: "dark:bg-teal-900/30",
+    icon: "text-teal-600 dark:text-teal-400",
+    hex: "#14b8a6",
+  },
 };
 
 const GAME_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -162,7 +241,10 @@ export default function Home() {
       <section className="mx-auto max-w-6xl px-6 py-16 sm:px-8 sm:py-20">
         <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
           <SectionHead idx="01" title="Tools" />
-          <Link to="/tools" className="ml-auto whitespace-nowrap font-mono text-xs text-muted no-underline hover:text-yellow">
+          <Link
+            to="/tools"
+            className="ml-auto whitespace-nowrap font-mono text-xs text-muted no-underline hover:text-yellow"
+          >
             all tools →
           </Link>
         </div>
@@ -195,7 +277,10 @@ export default function Home() {
       <section className="mx-auto max-w-6xl px-6 py-16 sm:px-8 sm:py-20">
         <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
           <SectionHead idx="02" title="Games" color="coral" />
-          <Link to="/games" className="ml-auto whitespace-nowrap font-mono text-xs text-muted no-underline hover:text-yellow">
+          <Link
+            to="/games"
+            className="ml-auto whitespace-nowrap font-mono text-xs text-muted no-underline hover:text-yellow"
+          >
             all games →
           </Link>
         </div>
@@ -228,7 +313,10 @@ export default function Home() {
       <section className="mx-auto max-w-6xl px-6 py-16 sm:px-8 sm:py-20">
         <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
           <SectionHead idx="03" title="Tips" />
-          <Link to="/tips" className="ml-auto whitespace-nowrap font-mono text-xs text-muted no-underline hover:text-yellow">
+          <Link
+            to="/tips"
+            className="ml-auto whitespace-nowrap font-mono text-xs text-muted no-underline hover:text-yellow"
+          >
             all tips →
           </Link>
         </div>
@@ -267,7 +355,10 @@ export default function Home() {
       <section className="mx-auto max-w-6xl px-6 py-16 sm:px-8 sm:py-20">
         <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
           <SectionHead idx="04" title="Cheat Sheets" />
-          <Link to="/cheat-sheets" className="ml-auto whitespace-nowrap font-mono text-xs text-muted no-underline hover:text-yellow">
+          <Link
+            to="/cheat-sheets"
+            className="ml-auto whitespace-nowrap font-mono text-xs text-muted no-underline hover:text-yellow"
+          >
             all sheets →
           </Link>
         </div>
@@ -306,7 +397,10 @@ export default function Home() {
       <section className="mx-auto max-w-6xl px-6 py-16 sm:px-8 sm:py-20">
         <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
           <SectionHead idx="05" title="This Week's Feed" color="coral" />
-          <Link to="/feed" className="ml-auto whitespace-nowrap font-mono text-xs text-muted no-underline hover:text-coral">
+          <Link
+            to="/feed"
+            className="ml-auto whitespace-nowrap font-mono text-xs text-muted no-underline hover:text-coral"
+          >
             view feed →
           </Link>
         </div>

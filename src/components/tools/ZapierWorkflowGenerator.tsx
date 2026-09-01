@@ -33,9 +33,9 @@ const TRIGGER_KEYWORDS: Record<string, string> = {
   "new customer": "Shopify / Stripe",
   "new tweet": "Twitter / X",
   "new post": "WordPress / Webflow",
-  "schedule": "Schedule / Cron",
-  "daily": "Schedule / Cron",
-  "weekly": "Schedule / Cron",
+  schedule: "Schedule / Cron",
+  daily: "Schedule / Cron",
+  weekly: "Schedule / Cron",
   "every day": "Schedule / Cron",
 };
 
@@ -77,7 +77,9 @@ function parseWorkflow(input: string): WorkflowStep[] {
   for (const sentence of sentences) {
     const trimmed = sentence.trim();
 
-    const isCondition = CONDITION_KEYWORDS.some((kw) => trimmed.startsWith(kw) || trimmed.includes(` ${kw} `));
+    const isCondition = CONDITION_KEYWORDS.some(
+      (kw) => trimmed.startsWith(kw) || trimmed.includes(` ${kw} `),
+    );
     if (isCondition) {
       steps.push({ type: "condition", app: "Filter by Zapier", description: trimmed });
       continue;
@@ -115,7 +117,11 @@ function parseWorkflow(input: string): WorkflowStep[] {
   }
 
   if (steps.length === 0) {
-    steps.push({ type: "trigger", app: "Webhooks by Zapier", description: "When webhook is received" });
+    steps.push({
+      type: "trigger",
+      app: "Webhooks by Zapier",
+      description: "When webhook is received",
+    });
     steps.push({ type: "action", app: "Unknown App", description: input.trim() });
   }
 
@@ -143,27 +149,37 @@ export function ZapierWorkflowGenerator() {
     condition: "#f59e0b",
   };
 
-  const allText = steps.map((s, i) => `${i + 1}. [${s.type.toUpperCase()}] ${s.app}\n   ${s.description}`).join("\n\n");
+  const allText = steps
+    .map((s, i) => `${i + 1}. [${s.type.toUpperCase()}] ${s.app}\n   ${s.description}`)
+    .join("\n\n");
 
   return (
     <ToolLayout id="zapier-workflow-generator">
       <ToolInput
         value={description}
         onChange={setDescription}
-        placeholder={"e.g. When I receive a new email with an attachment, save it to Google Drive, then send a Slack notification to my team, and if the sender is a VIP, create a task in Asana"}
+        placeholder={
+          "e.g. When I receive a new email with an attachment, save it to Google Drive, then send a Slack notification to my team, and if the sender is a VIP, create a task in Asana"
+        }
         label="Describe your automation in plain English"
         rows={4}
       />
 
       <div className="flex flex-wrap gap-2">
-        <ToolButton onClick={generate} disabled={!description.trim()}>Generate Workflow</ToolButton>
-        <ToolButton variant="secondary" onClick={reset}>Reset</ToolButton>
+        <ToolButton onClick={generate} disabled={!description.trim()}>
+          Generate Workflow
+        </ToolButton>
+        <ToolButton variant="secondary" onClick={reset}>
+          Reset
+        </ToolButton>
       </div>
 
       {steps.length > 0 && (
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">Workflow Steps ({steps.length})</span>
+            <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">
+              Workflow Steps ({steps.length})
+            </span>
             <CopyButton text={allText} />
           </div>
           {steps.map((step, i) => (
@@ -172,15 +188,23 @@ export function ZapierWorkflowGenerator() {
                 <div className="absolute left-5 top-full h-3 w-0.5 bg-line" />
               )}
               <div className="flex items-start gap-3 rounded-lg border-2 border-line bg-input-bg p-3">
-                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full font-mono text-[10px] font-bold text-white" style={{ backgroundColor: typeColors[step.type] }}>
+                <span
+                  className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full font-mono text-[10px] font-bold text-white"
+                  style={{ backgroundColor: typeColors[step.type] }}
+                >
                   {i + 1}
                 </span>
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="rounded px-1.5 py-0.5 font-mono text-[10px] font-bold uppercase" style={{ backgroundColor: typeColors[step.type], color: "#fff" }}>
+                    <span
+                      className="rounded px-1.5 py-0.5 font-mono text-[10px] font-bold uppercase"
+                      style={{ backgroundColor: typeColors[step.type], color: "#fff" }}
+                    >
                       {step.type}
                     </span>
-                    <span className="font-mono text-xs font-medium text-foreground">{step.app}</span>
+                    <span className="font-mono text-xs font-medium text-foreground">
+                      {step.app}
+                    </span>
                   </div>
                   <p className="font-mono text-xs text-input-text">{step.description}</p>
                 </div>

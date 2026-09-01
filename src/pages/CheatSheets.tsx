@@ -23,7 +23,10 @@ import { Switch } from "@/components/ui/switch";
 import BookmarkButton from "../components/BookmarkButton";
 import type { ResourceCost } from "../types";
 
-const RESOURCE_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
+const RESOURCE_ICONS: Record<
+  string,
+  React.ComponentType<{ className?: string; style?: React.CSSProperties }>
+> = {
   git: GitBranch,
   css: Palette,
   sql: Database,
@@ -59,36 +62,92 @@ function CostBadge({ cost }: { cost?: ResourceCost }) {
 
 const COLOR_HEX: Record<string, string> = {
   "version-control": "#f97316",
-  "css": "#3b82f6",
+  css: "#3b82f6",
   "computer-science": "#a855f7",
-  "javascript": "#eab308",
-  "react": "#06b6d4",
-  "devops": "#10b981",
-  "typescript": "#6366f1",
-  "backend": "#f43f5e",
-  "python": "#22c55e",
-  "database": "#d97706",
-  "security": "#ef4444",
-  "performance": "#84cc16",
-  "productivity": "#ec4899",
-  "accessibility": "#14b8a6",
+  javascript: "#eab308",
+  react: "#06b6d4",
+  devops: "#10b981",
+  typescript: "#6366f1",
+  backend: "#f43f5e",
+  python: "#22c55e",
+  database: "#d97706",
+  security: "#ef4444",
+  performance: "#84cc16",
+  productivity: "#ec4899",
+  accessibility: "#14b8a6",
 };
 
 const CATEGORY_COLORS: Record<string, { bg: string; darkBg: string; icon: string }> = {
-  "version-control": { bg: "bg-orange-100", darkBg: "dark:bg-orange-900/30", icon: "text-orange-600 dark:text-orange-400" },
-  "css": { bg: "bg-blue-100", darkBg: "dark:bg-blue-900/30", icon: "text-blue-600 dark:text-blue-400" },
-  "computer-science": { bg: "bg-purple-100", darkBg: "dark:bg-purple-900/30", icon: "text-purple-600 dark:text-purple-400" },
-  "javascript": { bg: "bg-yellow-100", darkBg: "dark:bg-yellow-900/30", icon: "text-yellow-600 dark:text-yellow-400" },
-  "react": { bg: "bg-cyan-100", darkBg: "dark:bg-cyan-900/30", icon: "text-cyan-600 dark:text-cyan-400" },
-  "devops": { bg: "bg-emerald-100", darkBg: "dark:bg-emerald-900/30", icon: "text-emerald-600 dark:text-emerald-400" },
-  "typescript": { bg: "bg-indigo-100", darkBg: "dark:bg-indigo-900/30", icon: "text-indigo-600 dark:text-indigo-400" },
-  "backend": { bg: "bg-rose-100", darkBg: "dark:bg-rose-900/30", icon: "text-rose-600 dark:text-rose-400" },
-  "python": { bg: "bg-green-100", darkBg: "dark:bg-green-900/30", icon: "text-green-600 dark:text-green-400" },
-  "database": { bg: "bg-amber-100", darkBg: "dark:bg-amber-900/30", icon: "text-amber-600 dark:text-amber-400" },
-  "security": { bg: "bg-red-100", darkBg: "dark:bg-red-900/30", icon: "text-red-600 dark:text-red-400" },
-  "performance": { bg: "bg-lime-100", darkBg: "dark:bg-lime-900/30", icon: "text-lime-600 dark:text-lime-400" },
-  "productivity": { bg: "bg-pink-100", darkBg: "dark:bg-pink-900/30", icon: "text-pink-600 dark:text-pink-400" },
-  "accessibility": { bg: "bg-teal-100", darkBg: "dark:bg-teal-900/30", icon: "text-teal-600 dark:text-teal-400" },
+  "version-control": {
+    bg: "bg-orange-100",
+    darkBg: "dark:bg-orange-900/30",
+    icon: "text-orange-600 dark:text-orange-400",
+  },
+  css: {
+    bg: "bg-blue-100",
+    darkBg: "dark:bg-blue-900/30",
+    icon: "text-blue-600 dark:text-blue-400",
+  },
+  "computer-science": {
+    bg: "bg-purple-100",
+    darkBg: "dark:bg-purple-900/30",
+    icon: "text-purple-600 dark:text-purple-400",
+  },
+  javascript: {
+    bg: "bg-yellow-100",
+    darkBg: "dark:bg-yellow-900/30",
+    icon: "text-yellow-600 dark:text-yellow-400",
+  },
+  react: {
+    bg: "bg-cyan-100",
+    darkBg: "dark:bg-cyan-900/30",
+    icon: "text-cyan-600 dark:text-cyan-400",
+  },
+  devops: {
+    bg: "bg-emerald-100",
+    darkBg: "dark:bg-emerald-900/30",
+    icon: "text-emerald-600 dark:text-emerald-400",
+  },
+  typescript: {
+    bg: "bg-indigo-100",
+    darkBg: "dark:bg-indigo-900/30",
+    icon: "text-indigo-600 dark:text-indigo-400",
+  },
+  backend: {
+    bg: "bg-rose-100",
+    darkBg: "dark:bg-rose-900/30",
+    icon: "text-rose-600 dark:text-rose-400",
+  },
+  python: {
+    bg: "bg-green-100",
+    darkBg: "dark:bg-green-900/30",
+    icon: "text-green-600 dark:text-green-400",
+  },
+  database: {
+    bg: "bg-amber-100",
+    darkBg: "dark:bg-amber-900/30",
+    icon: "text-amber-600 dark:text-amber-400",
+  },
+  security: {
+    bg: "bg-red-100",
+    darkBg: "dark:bg-red-900/30",
+    icon: "text-red-600 dark:text-red-400",
+  },
+  performance: {
+    bg: "bg-lime-100",
+    darkBg: "dark:bg-lime-900/30",
+    icon: "text-lime-600 dark:text-lime-400",
+  },
+  productivity: {
+    bg: "bg-pink-100",
+    darkBg: "dark:bg-pink-900/30",
+    icon: "text-pink-600 dark:text-pink-400",
+  },
+  accessibility: {
+    bg: "bg-teal-100",
+    darkBg: "dark:bg-teal-900/30",
+    icon: "text-teal-600 dark:text-teal-400",
+  },
 };
 
 export default function CheatSheetsIndex() {
@@ -124,7 +183,11 @@ export default function CheatSheetsIndex() {
         <div className="flex shrink-0 items-center gap-2.5 sm:pt-1">
           <Gamepad2 className="h-5 w-5 text-coral" />
           <span className="font-mono text-xs font-medium text-foreground">Learn by Playing</span>
-          <Switch checked={showExternal} onCheckedChange={setShowExternal} aria-label="Toggle Learn by Playing section" />
+          <Switch
+            checked={showExternal}
+            onCheckedChange={setShowExternal}
+            aria-label="Toggle Learn by Playing section"
+          />
           <span className="rounded-full border border-coral/30 bg-coral/10 px-2 py-0.5 font-mono text-[10px] font-bold text-coral">
             {learningResources.length}
           </span>
@@ -151,14 +214,21 @@ export default function CheatSheetsIndex() {
                 <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
                   {items.map((r, i) => (
                     <CursorHover label={r.title} color={cat.accent} key={r.id}>
-                      <a href={r.url} target="_blank" rel="noopener noreferrer" className="block no-underline">
+                      <a
+                        href={r.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block no-underline"
+                      >
                         <StickerCard
                           icon={
                             <div
                               className="flex h-10 w-10 items-center justify-center rounded-full"
                               style={{ background: `${cat.accent}18` }}
                             >
-                              {CatIcon && <CatIcon className="h-5 w-5" style={{ color: cat.accent }} />}
+                              {CatIcon && (
+                                <CatIcon className="h-5 w-5" style={{ color: cat.accent }} />
+                              )}
                             </div>
                           }
                           title={r.title}
@@ -194,13 +264,15 @@ export default function CheatSheetsIndex() {
       <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
         {paginatedItems.map((s, i) => (
           <CursorHover label={s.title} color={COLOR_HEX[s.category]} key={s.id}>
-              <StickerCard
+            <StickerCard
               icon={
-                <div className={cn(
-                  "flex h-10 w-10 items-center justify-center rounded-full",
-                  CATEGORY_COLORS[s.category]?.bg ?? "bg-zinc-100",
-                  CATEGORY_COLORS[s.category]?.darkBg ?? "dark:bg-zinc-800",
-                )}>
+                <div
+                  className={cn(
+                    "flex h-10 w-10 items-center justify-center rounded-full",
+                    CATEGORY_COLORS[s.category]?.bg ?? "bg-zinc-100",
+                    CATEGORY_COLORS[s.category]?.darkBg ?? "dark:bg-zinc-800",
+                  )}
+                >
                   <ToolIcon name={s.icon} className={CATEGORY_COLORS[s.category]?.icon} />
                 </div>
               }

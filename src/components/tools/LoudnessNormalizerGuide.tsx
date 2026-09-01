@@ -4,7 +4,10 @@ import { useToolAccent } from "@/components/ToolAccentContext";
 
 type Platform = "youtube" | "spotify" | "apple" | "broadcast" | "film";
 
-const PLATFORMS: Record<Platform, { label: string; lufs: string; truePeak: string; tips: string[] }> = {
+const PLATFORMS: Record<
+  Platform,
+  { label: string; lufs: string; truePeak: string; tips: string[] }
+> = {
   youtube: {
     label: "YouTube",
     lufs: "-14 LUFS",
@@ -99,11 +102,15 @@ export function LoudnessNormalizerGuide() {
 
       <div className="grid gap-3 sm:grid-cols-2">
         <div className="rounded-md border-2 border-line bg-input-bg px-5 py-4 text-center">
-          <p className="font-mono text-3xl font-bold" style={{ color }}>{current.lufs}</p>
+          <p className="font-mono text-3xl font-bold" style={{ color }}>
+            {current.lufs}
+          </p>
           <p className="font-mono text-[10px] uppercase text-muted">Target Loudness</p>
         </div>
         <div className="rounded-md border-2 border-line bg-input-bg px-5 py-4 text-center">
-          <p className="font-mono text-3xl font-bold" style={{ color }}>{current.truePeak}</p>
+          <p className="font-mono text-3xl font-bold" style={{ color }}>
+            {current.truePeak}
+          </p>
           <p className="font-mono text-[10px] uppercase text-muted">Max True Peak</p>
         </div>
       </div>

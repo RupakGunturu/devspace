@@ -34,9 +34,7 @@ export function MoodPaletteGenerator() {
   const { color } = useToolAccent();
   const moods = Object.keys(MOODS);
 
-  const filtered = mood.trim()
-    ? moods.filter((m) => m.includes(mood.toLowerCase()))
-    : moods;
+  const filtered = mood.trim() ? moods.filter((m) => m.includes(mood.toLowerCase())) : moods;
 
   return (
     <ToolLayout id="mood-palette-generator">
@@ -50,8 +48,12 @@ export function MoodPaletteGenerator() {
           onChange={(e) => setMood(e.target.value)}
           placeholder="e.g. sunset, neon, forest..."
           className="w-full rounded-md border-2 border-line bg-input-bg p-3 font-mono text-sm text-input-text outline-none transition-colors placeholder:text-muted"
-          onFocus={(e) => { e.currentTarget.style.borderColor = color; }}
-          onBlur={(e) => { e.currentTarget.style.borderColor = ""; }}
+          onFocus={(e) => {
+            e.currentTarget.style.borderColor = color;
+          }}
+          onBlur={(e) => {
+            e.currentTarget.style.borderColor = "";
+          }}
         />
       </div>
 
@@ -92,7 +94,10 @@ export function MoodPaletteGenerator() {
                       style={{ backgroundColor: c }}
                     />
                     <span className="font-mono text-[10px] text-muted">{c}</span>
-                    <CopyButton text={c} className="border-0 px-1 py-0 opacity-0 group-hover:opacity-100" />
+                    <CopyButton
+                      text={c}
+                      className="border-0 px-1 py-0 opacity-0 group-hover:opacity-100"
+                    />
                   </div>
                 ))}
               </div>

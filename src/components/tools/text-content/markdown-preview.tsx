@@ -5,11 +5,15 @@ import { ToolOutput } from "../ToolOutput";
 import { ToolButton } from "../ToolButton";
 
 export default function MarkdownPreview() {
-  const [input, setInput] = useState("# Hello World\n\nThis is **bold** and *italic* text.\n\n- Item 1\n- Item 2\n- Item 3\n\n```js\nconsole.log('Hello');\n```");
+  const [input, setInput] = useState(
+    "# Hello World\n\nThis is **bold** and *italic* text.\n\n- Item 1\n- Item 2\n- Item 3\n\n```js\nconsole.log('Hello');\n```",
+  );
 
   const renderMarkdown = (md: string): string => {
-    let html = md
-      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+    const html = md
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
       .replace(/^### (.+)$/gm, "<h3>$1</h3>")
       .replace(/^## (.+)$/gm, "<h2>$1</h2>")
       .replace(/^# (.+)$/gm, "<h1>$1</h1>")
@@ -25,10 +29,21 @@ export default function MarkdownPreview() {
   return (
     <ToolLayout id="markdown-preview">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <ToolInput value={input} onChange={setInput} placeholder="Write Markdown..." label="Markdown" rows={15} />
+        <ToolInput
+          value={input}
+          onChange={setInput}
+          placeholder="Write Markdown..."
+          label="Markdown"
+          rows={15}
+        />
         <div>
-          <span className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2">Preview</span>
-          <div className="w-full min-h-[380px] p-4 bg-paper-dim/50 border border-border rounded-sm prose prose-sm dark:prose-invert max-w-none font-sans" dangerouslySetInnerHTML={{ __html: renderMarkdown(input) }} />
+          <span className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2">
+            Preview
+          </span>
+          <div
+            className="w-full min-h-[380px] p-4 bg-paper-dim/50 border border-border rounded-sm prose prose-sm dark:prose-invert max-w-none font-sans"
+            dangerouslySetInnerHTML={{ __html: renderMarkdown(input) }}
+          />
         </div>
       </div>
     </ToolLayout>

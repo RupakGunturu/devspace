@@ -5,9 +5,21 @@ import { ToolInput } from "./ToolInput";
 import { CopyButton } from "./CopyButton";
 
 const ACTION_VERBS = [
-  "Spearheaded", "Engineered", "Optimized", "Architected", "Implemented",
-  "Streamlined", "Accelerated", "Launched", "Transformed", "Revolutionized",
-  "Spearheaded", "Delivered", "Drove", "Pioneered", "Orchestrated",
+  "Spearheaded",
+  "Engineered",
+  "Optimized",
+  "Architected",
+  "Implemented",
+  "Streamlined",
+  "Accelerated",
+  "Launched",
+  "Transformed",
+  "Revolutionized",
+  "Spearheaded",
+  "Delivered",
+  "Drove",
+  "Pioneered",
+  "Orchestrated",
 ];
 
 const METRICS = [

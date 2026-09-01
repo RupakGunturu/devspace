@@ -8,7 +8,18 @@ export default function TimezoneOverlap() {
   const [zones, setZones] = useState("UTC,EST,PST");
   const [output, setOutput] = useState("");
 
-  const offsets: Record<string, number> = { "UTC": 0, "EST": -5, "PST": -8, "CST": -6, "MST": -7, "GMT": 0, "IST": 5.5, "CET": 1, "JST": 9, "AEST": 10 };
+  const offsets: Record<string, number> = {
+    UTC: 0,
+    EST: -5,
+    PST: -8,
+    CST: -6,
+    MST: -7,
+    GMT: 0,
+    IST: 5.5,
+    CET: 1,
+    JST: 9,
+    AEST: 10,
+  };
 
   const calculate = () => {
     const list = zones.split(",").map((z) => z.trim().toUpperCase());
@@ -26,7 +37,13 @@ export default function TimezoneOverlap() {
 
   return (
     <ToolLayout id="timezone-overlap">
-      <ToolInput value={zones} onChange={setZones} placeholder="UTC,EST,PST" label="Timezones (comma separated)" rows={1} />
+      <ToolInput
+        value={zones}
+        onChange={setZones}
+        placeholder="UTC,EST,PST"
+        label="Timezones (comma separated)"
+        rows={1}
+      />
       <ToolButton onClick={calculate}>Calculate Overlap</ToolButton>
       <ToolOutput value={output} />
     </ToolLayout>

@@ -41,7 +41,7 @@ export function HeadshotBgRemover() {
     const original = new ImageData(
       new Uint8ClampedArray(originalRef.current.data),
       originalRef.current.width,
-      originalRef.current.height
+      originalRef.current.height,
     );
     const data = original.data;
     const sens = parseInt(sensitivity) || 30;
@@ -131,9 +131,7 @@ export function HeadshotBgRemover() {
             />
           </div>
 
-          <ToolButton onClick={handleDownload}>
-            Download Processed Image
-          </ToolButton>
+          <ToolButton onClick={handleDownload}>Download Processed Image</ToolButton>
         </div>
       )}
     </ToolLayout>

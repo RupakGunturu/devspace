@@ -11,11 +11,22 @@ export function KeywordDensityAnalyzer() {
 
   const analysis = useMemo(() => {
     if (!content.trim()) {
-      return { density: 0, count: 0, totalWords: 0, topWords: [], highlightedContent: "", tfidf: [] };
+      return {
+        density: 0,
+        count: 0,
+        totalWords: 0,
+        topWords: [],
+        highlightedContent: "",
+        tfidf: [],
+      };
     }
 
     const text = content.trim();
-    const words = text.toLowerCase().replace(/[^a-z0-9\s]/g, "").split(/\s+/).filter(Boolean);
+    const words = text
+      .toLowerCase()
+      .replace(/[^a-z0-9\s]/g, "")
+      .split(/\s+/)
+      .filter(Boolean);
     const totalWords = words.length;
 
     const freq: Record<string, number> = {};
@@ -98,29 +109,41 @@ export function KeywordDensityAnalyzer() {
             onChange={(e) => setKeyword(e.target.value)}
             placeholder="e.g. react hooks"
             className="w-full rounded-md border-2 border-line bg-input-bg p-3 font-mono text-sm text-input-text outline-none transition-colors placeholder:text-muted"
-            onFocus={(e) => { e.currentTarget.style.borderColor = color; }}
-            onBlur={(e) => { e.currentTarget.style.borderColor = ""; }}
+            onFocus={(e) => {
+              e.currentTarget.style.borderColor = color;
+            }}
+            onBlur={(e) => {
+              e.currentTarget.style.borderColor = "";
+            }}
           />
           {keyword.trim() && (
             <div className="mt-4 space-y-3">
               <div className="rounded-md border-2 border-line bg-input-bg p-4 text-center">
-                <div className="font-mono text-3xl font-bold" style={{ color: densityColor(analysis.density) }}>
+                <div
+                  className="font-mono text-3xl font-bold"
+                  style={{ color: densityColor(analysis.density) }}
+                >
                   {analysis.density.toFixed(2)}%
                 </div>
-                <div className="mt-1 font-mono text-xs text-muted">
-                  Keyword Density
-                </div>
-                <div className="mt-1 font-mono text-xs font-medium" style={{ color: densityColor(analysis.density) }}>
+                <div className="mt-1 font-mono text-xs text-muted">Keyword Density</div>
+                <div
+                  className="mt-1 font-mono text-xs font-medium"
+                  style={{ color: densityColor(analysis.density) }}
+                >
                   {densityLabel(analysis.density)}
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-2">
                 <div className="rounded-md border-2 border-line bg-input-bg p-3 text-center">
-                  <div className="font-mono text-lg font-bold" style={{ color }}>{analysis.count}</div>
+                  <div className="font-mono text-lg font-bold" style={{ color }}>
+                    {analysis.count}
+                  </div>
                   <div className="font-mono text-[10px] text-muted">Occurrences</div>
                 </div>
                 <div className="rounded-md border-2 border-line bg-input-bg p-3 text-center">
-                  <div className="font-mono text-lg font-bold text-foreground">{analysis.totalWords}</div>
+                  <div className="font-mono text-lg font-bold text-foreground">
+                    {analysis.totalWords}
+                  </div>
                   <div className="font-mono text-[10px] text-muted">Total Words</div>
                 </div>
               </div>
@@ -135,22 +158,24 @@ export function KeywordDensityAnalyzer() {
             Highlighted Text
           </span>
           <div className="max-h-[300px] overflow-auto rounded-md border-2 border-line bg-input-bg p-3 font-mono text-sm leading-relaxed text-foreground">
-            {Array.isArray(analysis.highlightedContent)
-              ? analysis.highlightedContent.map((part, i) => {
-                  const isMatch = part.toLowerCase() === keyword.toLowerCase();
-                  return isMatch ? (
-                    <mark
-                      key={i}
-                      className="rounded-sm px-0.5"
-                      style={{ backgroundColor: color, color: "#fff" }}
-                    >
-                      {part}
-                    </mark>
-                  ) : (
-                    <span key={i}>{part}</span>
-                  );
-                })
-              : <span>{analysis.highlightedContent}</span>}
+            {Array.isArray(analysis.highlightedContent) ? (
+              analysis.highlightedContent.map((part, i) => {
+                const isMatch = part.toLowerCase() === keyword.toLowerCase();
+                return isMatch ? (
+                  <mark
+                    key={i}
+                    className="rounded-sm px-0.5"
+                    style={{ backgroundColor: color, color: "#fff" }}
+                  >
+                    {part}
+                  </mark>
+                ) : (
+                  <span key={i}>{part}</span>
+                );
+              })
+            ) : (
+              <span>{analysis.highlightedContent}</span>
+            )}
           </div>
         </div>
       )}
@@ -174,7 +199,9 @@ export function KeywordDensityAnalyzer() {
                   <span className="w-5 text-right font-mono text-xs text-muted">#{i + 1}</span>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center justify-between">
-                      <span className="font-mono text-sm font-medium text-foreground truncate">{w.word}</span>
+                      <span className="font-mono text-sm font-medium text-foreground truncate">
+                        {w.word}
+                      </span>
                       <span className="ml-2 font-mono text-xs text-muted whitespace-nowrap">
                         {w.count} ({w.density}%)
                       </span>
@@ -198,10 +225,14 @@ export function KeywordDensityAnalyzer() {
 
       {content.trim() && (
         <div className="flex items-center justify-between rounded-md border-2 border-line bg-input-bg p-3">
-          <span className="font-mono text-xs text-muted">
-            Total words: {analysis.totalWords}
-          </span>
-          <ToolButton onClick={() => { setContent(""); setKeyword(""); }} variant="secondary">
+          <span className="font-mono text-xs text-muted">Total words: {analysis.totalWords}</span>
+          <ToolButton
+            onClick={() => {
+              setContent("");
+              setKeyword("");
+            }}
+            variant="secondary"
+          >
             Clear All
           </ToolButton>
         </div>

@@ -88,7 +88,10 @@ export default function GamePage() {
           <p className="mt-2 text-muted">{game.description}</p>
         </div>
         {favLoading ? (
-          <div className="mt-2 h-8 w-20 shrink-0 animate-pulse rounded-md bg-line" data-skeleton="favorite" />
+          <div
+            className="mt-2 h-8 w-20 shrink-0 animate-pulse rounded-md bg-line"
+            data-skeleton="favorite"
+          />
         ) : (
           <button
             onClick={toggleFav}

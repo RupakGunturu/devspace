@@ -36,12 +36,30 @@ export default function PasswordGenerator() {
     <ToolLayout id="password-generator">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
         <div>
-          <label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">Length</label>
-          <input type="number" value={length} onChange={(e) => setLength(Number(e.target.value))} min={4} max={128} className="w-full p-2.5 bg-paper-dim/50 border border-border rounded-sm text-sm font-mono text-foreground" />
+          <label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">
+            Length
+          </label>
+          <input
+            type="number"
+            value={length}
+            onChange={(e) => setLength(Number(e.target.value))}
+            min={4}
+            max={128}
+            className="w-full p-2.5 bg-paper-dim/50 border border-border rounded-sm text-sm font-mono text-foreground"
+          />
         </div>
         <div>
-          <label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">Count</label>
-          <input type="number" value={count} onChange={(e) => setCount(Math.min(20, Math.max(1, Number(e.target.value))))} min={1} max={20} className="w-full p-2.5 bg-paper-dim/50 border border-border rounded-sm text-sm font-mono text-foreground" />
+          <label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">
+            Count
+          </label>
+          <input
+            type="number"
+            value={count}
+            onChange={(e) => setCount(Math.min(20, Math.max(1, Number(e.target.value))))}
+            min={1}
+            max={20}
+            className="w-full p-2.5 bg-paper-dim/50 border border-border rounded-sm text-sm font-mono text-foreground"
+          />
         </div>
       </div>
       <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2 sm:gap-4">
@@ -51,8 +69,16 @@ export default function PasswordGenerator() {
           { label: "Numbers", value: numbers, set: setNumbers },
           { label: "Symbols", value: symbols, set: setSymbols },
         ].map((o) => (
-          <label key={o.label} className="flex items-center gap-2 text-sm text-foreground cursor-pointer">
-            <input type="checkbox" checked={o.value} onChange={(e) => o.set(e.target.checked)} className="accent-yellow" />
+          <label
+            key={o.label}
+            className="flex items-center gap-2 text-sm text-foreground cursor-pointer"
+          >
+            <input
+              type="checkbox"
+              checked={o.value}
+              onChange={(e) => o.set(e.target.checked)}
+              className="accent-yellow"
+            />
             {o.label}
           </label>
         ))}
@@ -61,9 +87,17 @@ export default function PasswordGenerator() {
       {passwords.length > 0 && (
         <div className="space-y-2">
           {passwords.map((pw, i) => (
-            <div key={i} className="flex items-center justify-between p-3 bg-paper-dim/50 border border-border rounded-sm">
+            <div
+              key={i}
+              className="flex items-center justify-between p-3 bg-paper-dim/50 border border-border rounded-sm"
+            >
               <code className="font-mono text-sm text-foreground break-all">{pw}</code>
-              <button onClick={() => navigator.clipboard.writeText(pw)} className="text-xs text-muted-foreground hover:text-foreground px-2 py-1 rounded hover:bg-paper-dim transition-colors shrink-0 ml-2">Copy</button>
+              <button
+                onClick={() => navigator.clipboard.writeText(pw)}
+                className="text-xs text-muted-foreground hover:text-foreground px-2 py-1 rounded hover:bg-paper-dim transition-colors shrink-0 ml-2"
+              >
+                Copy
+              </button>
             </div>
           ))}
         </div>

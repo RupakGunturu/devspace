@@ -80,9 +80,7 @@ export default function FeedSearchBar({
     if (debouncedQuery.trim()) {
       const q = debouncedQuery.toLowerCase();
       result = result.filter(
-        (p) =>
-          p.title.toLowerCase().includes(q) ||
-          p.excerpt?.toLowerCase().includes(q),
+        (p) => p.title.toLowerCase().includes(q) || p.excerpt?.toLowerCase().includes(q),
       );
     }
     return result;
@@ -116,22 +114,24 @@ export default function FeedSearchBar({
       switch (e.key) {
         case "ArrowDown":
           e.preventDefault();
-          setActiveIndex((prev) =>
-            prev < displayPosts.length - 1 ? prev + 1 : 0,
-          );
+          setActiveIndex((prev) => (prev < displayPosts.length - 1 ? prev + 1 : 0));
           break;
         case "ArrowUp":
           e.preventDefault();
-          setActiveIndex((prev) =>
-            prev > 0 ? prev - 1 : displayPosts.length - 1,
-          );
+          setActiveIndex((prev) => (prev > 0 ? prev - 1 : displayPosts.length - 1));
           break;
         case "Enter":
           e.preventDefault();
           if (activeIndex >= 0 && displayPosts[activeIndex]) {
             setSelectedId(displayPosts[activeIndex].id);
             const p = displayPosts[activeIndex];
-            navigate(p.series === "stack-breakdown" ? `/stack-breakdown/${p.slug}` : p.series === "hot-take" ? `/hot-take/${p.slug}` : `/post/${p.slug}`);
+            navigate(
+              p.series === "stack-breakdown"
+                ? `/stack-breakdown/${p.slug}`
+                : p.series === "hot-take"
+                  ? `/hot-take/${p.slug}`
+                  : `/post/${p.slug}`,
+            );
             setIsFocused(false);
           }
           break;
@@ -147,7 +147,13 @@ export default function FeedSearchBar({
   const handleResultClick = useCallback(
     (post: Post) => {
       setSelectedId(post.id);
-      navigate(post.series === "stack-breakdown" ? `/stack-breakdown/${post.slug}` : post.series === "hot-take" ? `/hot-take/${post.slug}` : `/post/${post.slug}`);
+      navigate(
+        post.series === "stack-breakdown"
+          ? `/stack-breakdown/${post.slug}`
+          : post.series === "hot-take"
+            ? `/hot-take/${post.slug}`
+            : `/post/${post.slug}`,
+      );
       setIsFocused(false);
     },
     [navigate],
@@ -170,7 +176,10 @@ export default function FeedSearchBar({
             className="h-9 rounded-lg py-1.5 pr-9 pl-3 text-sm focus-visible:ring-offset-0"
             onBlur={() => setTimeout(() => setIsFocused(false), 200)}
             onChange={handleInputChange}
-            onFocus={() => { setIsFocused(true); setSelectedId(null); }}
+            onFocus={() => {
+              setIsFocused(true);
+              setSelectedId(null);
+            }}
             onKeyDown={handleKeyDown}
             placeholder="Search feed…"
             role="combobox"
@@ -221,10 +230,12 @@ export default function FeedSearchBar({
                 <ToolIcon name={activeSeriesData?.icon ?? "Newspaper"} className="h-3.5 w-3.5" />
               </span>
               <span>{activeSeriesData?.label ?? "All series"}</span>
-              <ChevronDown className={cn(
-                "h-3.5 w-3.5 text-zinc-400 transition-transform duration-200 dark:text-zinc-500",
-                seriesOpen && "rotate-180",
-              )} />
+              <ChevronDown
+                className={cn(
+                  "h-3.5 w-3.5 text-zinc-400 transition-transform duration-200 dark:text-zinc-500",
+                  seriesOpen && "rotate-180",
+                )}
+              />
             </button>
           </DropdownMenuTrigger>
           <DropdownMenuContent
@@ -324,12 +335,14 @@ export default function FeedSearchBar({
                     {activeIndex >= 0 ? " · Press Enter to view" : ""}
                   </p>
                 </div>
-              ) : filteredPosts.length > 4 && (
-                <div className="border-t border-zinc-100 px-3.5 py-2 dark:border-zinc-800">
-                  <p className="text-[11px] text-zinc-400">
-                    +{filteredPosts.length - 4} more — type to search
-                  </p>
-                </div>
+              ) : (
+                filteredPosts.length > 4 && (
+                  <div className="border-t border-zinc-100 px-3.5 py-2 dark:border-zinc-800">
+                    <p className="text-[11px] text-zinc-400">
+                      +{filteredPosts.length - 4} more — type to search
+                    </p>
+                  </div>
+                )
               )}
             </motion.div>
           )}

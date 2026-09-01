@@ -20,9 +20,7 @@ export default function FeedArchive() {
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
       result = result.filter(
-        (p) =>
-          p.title.toLowerCase().includes(q) ||
-          p.excerpt?.toLowerCase().includes(q),
+        (p) => p.title.toLowerCase().includes(q) || p.excerpt?.toLowerCase().includes(q),
       );
     }
     return result;

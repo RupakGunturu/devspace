@@ -17,12 +17,7 @@ export function NeuFollowButton({
   className,
 }: NeuFollowButtonProps) {
   return (
-    <div
-      className={cn(
-        "relative h-12 w-full max-w-[280px] bg-coral",
-        className
-      )}
-    >
+    <div className={cn("relative h-12 w-full max-w-[280px] bg-coral", className)}>
       <Link
         to={to}
         className="group flex h-full w-full items-center justify-between border-2 border-coral bg-background px-6 font-mono text-sm font-bold no-underline transition-colors duration-300 hover:bg-coral hover:text-white"

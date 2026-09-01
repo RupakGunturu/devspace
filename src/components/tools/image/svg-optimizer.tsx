@@ -22,7 +22,13 @@ export default function SvgOptimizer() {
 
   return (
     <ToolLayout id="svg-optimizer">
-      <ToolInput value={input} onChange={setInput} placeholder="Paste SVG code..." label="SVG Input" rows={10} />
+      <ToolInput
+        value={input}
+        onChange={setInput}
+        placeholder="Paste SVG code..."
+        label="SVG Input"
+        rows={10}
+      />
       <ToolButton onClick={optimize}>Optimize</ToolButton>
       <ToolOutput value={output} />
     </ToolLayout>

@@ -21,7 +21,9 @@ export default function ScientificCalculator() {
         .replace(/\^/g, "**");
       const result = new Function("return " + sanitized)();
       setOutput(String(result));
-    } catch { setOutput("Invalid expression"); }
+    } catch {
+      setOutput("Invalid expression");
+    }
   };
 
   const buttons = ["sin(", "cos(", "tan(", "sqrt(", "log(", "pi", "^", "(", ")", "Math.abs("];
@@ -29,9 +31,23 @@ export default function ScientificCalculator() {
   return (
     <ToolLayout id="scientific-calculator">
       <div className="flex gap-1.5 flex-wrap">
-        {buttons.map((b) => <button key={b} onClick={() => setExpression(expression + b)} className="px-2 py-1 text-xs font-mono bg-paper-dim border border-border rounded hover:bg-paper-dim/80 transition-colors">{b}</button>)}
+        {buttons.map((b) => (
+          <button
+            key={b}
+            onClick={() => setExpression(expression + b)}
+            className="px-2 py-1 text-xs font-mono bg-paper-dim border border-border rounded hover:bg-paper-dim/80 transition-colors"
+          >
+            {b}
+          </button>
+        ))}
       </div>
-      <ToolInput value={expression} onChange={setExpression} placeholder="sin(pi/2) + sqrt(16)" label="Expression" rows={2} />
+      <ToolInput
+        value={expression}
+        onChange={setExpression}
+        placeholder="sin(pi/2) + sqrt(16)"
+        label="Expression"
+        rows={2}
+      />
       <ToolButton onClick={calculate}>Calculate</ToolButton>
       <ToolOutput value={output} />
     </ToolLayout>

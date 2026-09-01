@@ -45,11 +45,15 @@ export function ExifDataViewer() {
           <div className="grid gap-3 sm:grid-cols-2">
             <div className="rounded-md border-2 border-line bg-input-bg px-4 py-3">
               <p className="font-mono text-[10px] uppercase text-muted">Filename</p>
-              <p className="mt-1 font-mono text-sm font-bold text-foreground break-all">{fileInfo.name}</p>
+              <p className="mt-1 font-mono text-sm font-bold text-foreground break-all">
+                {fileInfo.name}
+              </p>
             </div>
             <div className="rounded-md border-2 border-line bg-input-bg px-4 py-3">
               <p className="font-mono text-[10px] uppercase text-muted">Type</p>
-              <p className="mt-1 font-mono text-sm font-bold" style={{ color }}>{fileInfo.type}</p>
+              <p className="mt-1 font-mono text-sm font-bold" style={{ color }}>
+                {fileInfo.type}
+              </p>
             </div>
             <div className="rounded-md border-2 border-line bg-input-bg px-4 py-3">
               <p className="font-mono text-[10px] uppercase text-muted">Dimensions</p>
@@ -59,7 +63,9 @@ export function ExifDataViewer() {
             </div>
             <div className="rounded-md border-2 border-line bg-input-bg px-4 py-3">
               <p className="font-mono text-[10px] uppercase text-muted">File Size</p>
-              <p className="mt-1 font-mono text-sm font-bold" style={{ color }}>{fileInfo.size}</p>
+              <p className="mt-1 font-mono text-sm font-bold" style={{ color }}>
+                {fileInfo.size}
+              </p>
             </div>
           </div>
         </div>

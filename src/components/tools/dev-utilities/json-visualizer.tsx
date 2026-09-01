@@ -23,9 +23,12 @@ export default function JsonVisualizer() {
           if (entries.length === 0) return "{}";
           const items = entries.map(([key, val]) => {
             const type = Array.isArray(val) ? "array" : val === null ? "null" : typeof val;
-            const preview = typeof val === "object" && val !== null
-              ? Array.isArray(val) ? `Array(${val.length})` : `Object{${Object.keys(val).length}}`
-              : JSON.stringify(val);
+            const preview =
+              typeof val === "object" && val !== null
+                ? Array.isArray(val)
+                  ? `Array(${val.length})`
+                  : `Object{${Object.keys(val).length}}`
+                : JSON.stringify(val);
             return `${pad}  "${key}" → ${preview}  (${type})`;
           });
           return `{\n${items.join(",\n")}\n${pad}}`;
@@ -40,7 +43,13 @@ export default function JsonVisualizer() {
 
   return (
     <ToolLayout id="json-visualizer">
-      <ToolInput value={input} onChange={setInput} placeholder='Paste JSON here...' label="JSON Input" rows={10} />
+      <ToolInput
+        value={input}
+        onChange={setInput}
+        placeholder="Paste JSON here..."
+        label="JSON Input"
+        rows={10}
+      />
       <ToolButton onClick={visualize}>Visualize</ToolButton>
       <ToolOutput value={output} label="Tree View" />
     </ToolLayout>

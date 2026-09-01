@@ -4,7 +4,12 @@ import { ToolButton } from "../ToolButton";
 import { ToolFileInput } from "../ToolFileInput";
 
 export default function GifFrameExtractor() {
-  const [info, setInfo] = useState<{ name: string; size: string; type: string; lastModified: string } | null>(null);
+  const [info, setInfo] = useState<{
+    name: string;
+    size: string;
+    type: string;
+    lastModified: string;
+  } | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
   const handle = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,12 +29,17 @@ export default function GifFrameExtractor() {
       {info && (
         <div className="space-y-1.5">
           {Object.entries(info).map(([key, val]) => (
-            <div key={key} className="flex items-center justify-between p-3 bg-paper-dim/50 border border-border rounded-sm">
+            <div
+              key={key}
+              className="flex items-center justify-between p-3 bg-paper-dim/50 border border-border rounded-sm"
+            >
               <span className="text-xs text-muted-foreground uppercase">{key}</span>
               <span className="font-mono text-sm text-foreground">{val}</span>
             </div>
           ))}
-          <p className="text-xs text-muted-foreground">Note: Full frame extraction requires complex GIF parsing. This shows file metadata.</p>
+          <p className="text-xs text-muted-foreground">
+            Note: Full frame extraction requires complex GIF parsing. This shows file metadata.
+          </p>
         </div>
       )}
     </ToolLayout>

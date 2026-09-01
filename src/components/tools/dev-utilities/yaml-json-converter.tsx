@@ -12,18 +12,30 @@ export default function YamlJsonConverter() {
 
   const yamlToJson = () => {
     const obj: Record<string, any> = {};
-    input.split("\n").filter(Boolean).forEach((line) => {
-      const match = line.match(/^(\s*)(\w+):\s*(.*)$/);
-      if (match) { const [, indent, key, val] = match; obj[key] = isNaN(Number(val)) ? val : Number(val); }
-    });
+    input
+      .split("\n")
+      .filter(Boolean)
+      .forEach((line) => {
+        const match = line.match(/^(\s*)(\w+):\s*(.*)$/);
+        if (match) {
+          const [, indent, key, val] = match;
+          obj[key] = isNaN(Number(val)) ? val : Number(val);
+        }
+      });
     setOutput(JSON.stringify(obj, null, 2));
   };
 
   const jsonToYaml = () => {
     try {
       const obj = JSON.parse(input);
-      setOutput(Object.entries(obj).map(([k, v]) => `${k}: ${v}`).join("\n"));
-    } catch { setOutput("Invalid JSON"); }
+      setOutput(
+        Object.entries(obj)
+          .map(([k, v]) => `${k}: ${v}`)
+          .join("\n"),
+      );
+    } catch {
+      setOutput("Invalid JSON");
+    }
   };
 
   return (
@@ -37,7 +49,13 @@ export default function YamlJsonConverter() {
         onChange={(v) => setMode(v as any)}
         className="mb-2"
       />
-      <ToolInput value={input} onChange={setInput} placeholder="Enter YAML or JSON..." label="Input" rows={8} />
+      <ToolInput
+        value={input}
+        onChange={setInput}
+        placeholder="Enter YAML or JSON..."
+        label="Input"
+        rows={8}
+      />
       <ToolButton onClick={mode === "yamlToJson" ? yamlToJson : jsonToYaml}>Convert</ToolButton>
       <ToolOutput value={output} />
     </ToolLayout>

@@ -19,9 +19,14 @@ export default function SocialMediaImageSizer() {
     <ToolLayout id="social-media-image-sizer">
       <div className="space-y-1.5">
         {platforms.map((p) => (
-          <div key={p.name} className="flex items-center justify-between p-3 bg-paper-dim/50 border border-border rounded-sm">
+          <div
+            key={p.name}
+            className="flex items-center justify-between p-3 bg-paper-dim/50 border border-border rounded-sm"
+          >
             <span className="text-sm font-medium text-foreground">{p.name}</span>
-            <span className="font-mono text-xs text-muted-foreground">{p.width}×{p.height} ({p.ratio})</span>
+            <span className="font-mono text-xs text-muted-foreground">
+              {p.width}×{p.height} ({p.ratio})
+            </span>
           </div>
         ))}
       </div>

@@ -28,10 +28,34 @@ export default function MetaTagGenerator() {
 
   return (
     <ToolLayout id="meta-tag-generator">
-      <ToolInput value={title} onChange={setTitle} placeholder="Page title" label="Title" rows={1} />
-      <ToolInput value={description} onChange={setDescription} placeholder="Page description" label="Description" rows={2} />
-      <ToolInput value={keywords} onChange={setKeywords} placeholder="keyword1, keyword2" label="Keywords" rows={1} />
-      <ToolInput value={ogImage} onChange={setOgImage} placeholder="https://..." label="OG Image URL" rows={1} />
+      <ToolInput
+        value={title}
+        onChange={setTitle}
+        placeholder="Page title"
+        label="Title"
+        rows={1}
+      />
+      <ToolInput
+        value={description}
+        onChange={setDescription}
+        placeholder="Page description"
+        label="Description"
+        rows={2}
+      />
+      <ToolInput
+        value={keywords}
+        onChange={setKeywords}
+        placeholder="keyword1, keyword2"
+        label="Keywords"
+        rows={1}
+      />
+      <ToolInput
+        value={ogImage}
+        onChange={setOgImage}
+        placeholder="https://..."
+        label="OG Image URL"
+        rows={1}
+      />
       <ToolButton onClick={generate}>Generate Meta Tags</ToolButton>
       <ToolOutput value={output} />
     </ToolLayout>

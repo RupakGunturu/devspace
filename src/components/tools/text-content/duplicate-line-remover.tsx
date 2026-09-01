@@ -16,7 +16,13 @@ export default function DuplicateLineRemover() {
 
   return (
     <ToolLayout id="duplicate-line-remover">
-      <ToolInput value={input} onChange={setInput} placeholder="Paste text with duplicate lines..." label="Input" rows={10} />
+      <ToolInput
+        value={input}
+        onChange={setInput}
+        placeholder="Paste text with duplicate lines..."
+        label="Input"
+        rows={10}
+      />
       <ToolButton onClick={process}>Remove Duplicates</ToolButton>
       <ToolOutput value={output} />
     </ToolLayout>

@@ -66,14 +66,44 @@ ${results.trim() || "Quantify the outcomes and business impact"}
 
   return (
     <ToolLayout id="case-study-outline-generator">
-      <ToolInput value={project} onChange={setProject} label="Project Name" placeholder="e.g. E-Commerce Platform Redesign" rows={2} />
+      <ToolInput
+        value={project}
+        onChange={setProject}
+        label="Project Name"
+        placeholder="e.g. E-Commerce Platform Redesign"
+        rows={2}
+      />
       <div className="grid gap-4 sm:grid-cols-2">
-        <ToolInput value={problem} onChange={setProblem} label="Problem" placeholder="Describe the problem you solved" rows={3} />
-        <ToolInput value={role} onChange={setRole} label="Your Role" placeholder="e.g. Lead Frontend Developer" rows={3} />
+        <ToolInput
+          value={problem}
+          onChange={setProblem}
+          label="Problem"
+          placeholder="Describe the problem you solved"
+          rows={3}
+        />
+        <ToolInput
+          value={role}
+          onChange={setRole}
+          label="Your Role"
+          placeholder="e.g. Lead Frontend Developer"
+          rows={3}
+        />
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
-        <ToolInput value={technologies} onChange={setTechnologies} label="Technologies (comma separated)" placeholder="e.g. React, Node.js, PostgreSQL" rows={2} />
-        <ToolInput value={results} onChange={setResults} label="Results" placeholder="e.g. 40% conversion increase" rows={2} />
+        <ToolInput
+          value={technologies}
+          onChange={setTechnologies}
+          label="Technologies (comma separated)"
+          placeholder="e.g. React, Node.js, PostgreSQL"
+          rows={2}
+        />
+        <ToolInput
+          value={results}
+          onChange={setResults}
+          label="Results"
+          placeholder="e.g. 40% conversion increase"
+          rows={2}
+        />
       </div>
       <ToolButton onClick={() => {}} disabled={!output}>
         Generate Outline

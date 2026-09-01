@@ -26,12 +26,20 @@ export default function CommitMessageGenerator() {
     else if (added > 0 && removed > 0) type = "fix";
 
     const scope = diff.match(/(?:src|components|pages)\/(\w+)/)?.[1] || "";
-    setOutput(`${type}${scope ? `(${scope})` : ""}: ${added} files changed, ${added} insertions, ${removed} deletions\n\nCo-authored-by: AI <ai@example.com>`);
+    setOutput(
+      `${type}${scope ? `(${scope})` : ""}: ${added} files changed, ${added} insertions, ${removed} deletions\n\nCo-authored-by: AI <ai@example.com>`,
+    );
   };
 
   return (
     <ToolLayout id="commit-message-generator">
-      <ToolInput value={diff} onChange={setDiff} placeholder="Paste git diff output..." label="Diff" rows={10} />
+      <ToolInput
+        value={diff}
+        onChange={setDiff}
+        placeholder="Paste git diff output..."
+        label="Diff"
+        rows={10}
+      />
       <ToolButton onClick={generate}>Generate Message</ToolButton>
       <ToolOutput value={output} />
     </ToolLayout>

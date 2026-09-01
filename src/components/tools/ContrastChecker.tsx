@@ -5,7 +5,13 @@ import { useToolAccent } from "@/components/ToolAccentContext";
 function hexToRgb(hex: string): [number, number, number] | null {
   const m = hex.trim().replace(/^#/, "");
   if (!/^([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(m)) return null;
-  const full = m.length === 3 ? m.split("").map((c) => c + c).join("") : m;
+  const full =
+    m.length === 3
+      ? m
+          .split("")
+          .map((c) => c + c)
+          .join("")
+      : m;
   const n = parseInt(full, 16);
   return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
 }
@@ -42,7 +48,11 @@ export function ContrastChecker() {
       <span className="font-mono text-sm text-input-text">{label}</span>
       <span
         className="rounded-md px-2 py-1 font-mono text-xs font-bold"
-        style={pass ? { backgroundColor: color, color: "#fff" } : { backgroundColor: "var(--coral)", color: "#fff" }}
+        style={
+          pass
+            ? { backgroundColor: color, color: "#fff" }
+            : { backgroundColor: "var(--coral)", color: "#fff" }
+        }
       >
         {pass ? "PASS" : "FAIL"}
       </span>
@@ -84,11 +94,21 @@ export function ContrastChecker() {
   );
 }
 
-function ColorInput({ label, value, onChange }: { label: string; value: string; onChange: (v: string) => void }) {
+function ColorInput({
+  label,
+  value,
+  onChange,
+}: {
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+}) {
   const safe = /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(value) ? value : "#000000";
   return (
     <div>
-      <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">{label}</span>
+      <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">
+        {label}
+      </span>
       <div className="mt-1 flex items-center gap-2 rounded-md border-2 border-line bg-input-bg p-2">
         <input
           type="color"

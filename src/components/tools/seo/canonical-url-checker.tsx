@@ -25,7 +25,13 @@ export default function CanonicalUrlChecker() {
 
   return (
     <ToolLayout id="canonical-url-checker">
-      <ToolInput value={url} onChange={setUrl} placeholder="https://example.com/page" label="URL" rows={1} />
+      <ToolInput
+        value={url}
+        onChange={setUrl}
+        placeholder="https://example.com/page"
+        label="URL"
+        rows={1}
+      />
       <ToolButton onClick={check}>Check</ToolButton>
       <ToolOutput value={output} />
     </ToolLayout>

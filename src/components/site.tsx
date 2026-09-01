@@ -90,7 +90,11 @@ export function Header() {
           <NavItem to="/about">About</NavItem>
         </nav>
         <div className="flex items-center gap-3">
-          <AnimatedThemeToggler className="text-text" theme={theme} onThemeChange={setTheme} />
+          <AnimatedThemeToggler
+            className="text-text"
+            theme={theme === "system" ? undefined : theme}
+            onThemeChange={(t) => setTheme(t)}
+          />
           {user ? (
             <ProfileDropdown user={user} onLogout={logout} />
           ) : (

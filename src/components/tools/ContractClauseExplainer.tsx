@@ -6,18 +6,43 @@ import { CopyButton } from "./CopyButton";
 
 const RISK_KEYWORDS: Record<string, string[]> = {
   high: [
-    "indemnif", "liabil", "penalty", "forfeit", "waiver", "arbitrat",
-    "exclusive", "perpetual", "irrevocable", "sole discretion", "without limit",
-    "personal guarantee", "joint and several", "consequential damages",
+    "indemnif",
+    "liabil",
+    "penalty",
+    "forfeit",
+    "waiver",
+    "arbitrat",
+    "exclusive",
+    "perpetual",
+    "irrevocable",
+    "sole discretion",
+    "without limit",
+    "personal guarantee",
+    "joint and several",
+    "consequential damages",
   ],
   medium: [
-    "termination", "notice period", "cure period", "material breach",
-    "reasonable", "good faith", "assignment", "change of control",
-    "non-compete", "non-solicitation", "audit right",
+    "termination",
+    "notice period",
+    "cure period",
+    "material breach",
+    "reasonable",
+    "good faith",
+    "assignment",
+    "change of control",
+    "non-compete",
+    "non-solicitation",
+    "audit right",
   ],
   low: [
-    "standard", "customary", "industry practice", "mutual", "confidential",
-    "reasonable efforts", "commercially reasonable", "best efforts",
+    "standard",
+    "customary",
+    "industry practice",
+    "mutual",
+    "confidential",
+    "reasonable efforts",
+    "commercially reasonable",
+    "best efforts",
   ],
 };
 
@@ -83,11 +108,17 @@ function generateSummary(text: string, words: number): string {
   if (lower.includes("penalt") || lower.includes("liquidat") || lower.includes("damage")) {
     parts.push("It specifies penalty or damage provisions for non-compliance.");
   }
-  if (lower.includes("governing law") || lower.includes("jurisdiction") || lower.includes("arbitrat")) {
+  if (
+    lower.includes("governing law") ||
+    lower.includes("jurisdiction") ||
+    lower.includes("arbitrat")
+  ) {
     parts.push("Governing law and dispute resolution mechanisms are defined.");
   }
   if (parts.length === 0) {
-    parts.push(`This is a ${words}-word clause outlining terms and conditions between the contracting parties.`);
+    parts.push(
+      `This is a ${words}-word clause outlining terms and conditions between the contracting parties.`,
+    );
   }
 
   return parts.join(" ");
@@ -98,19 +129,29 @@ function generateObligations(text: string): string[] {
   const obligations: string[] = [];
 
   if (lower.includes("shall") || lower.includes("must")) {
-    obligations.push("You are required to comply with specific obligations defined in this clause.");
+    obligations.push(
+      "You are required to comply with specific obligations defined in this clause.",
+    );
   }
   if (lower.includes("warrant") || lower.includes("represent")) {
-    obligations.push("You are making warranties or representations that must be true and accurate.");
+    obligations.push(
+      "You are making warranties or representations that must be true and accurate.",
+    );
   }
   if (lower.includes("indemnif")) {
-    obligations.push("You may be required to indemnify the other party against certain claims or losses.");
+    obligations.push(
+      "You may be required to indemnify the other party against certain claims or losses.",
+    );
   }
   if (lower.includes("confidential") || lower.includes("non-disclosure")) {
-    obligations.push("You are bound by confidentiality requirements regarding specified information.");
+    obligations.push(
+      "You are bound by confidentiality requirements regarding specified information.",
+    );
   }
   if (lower.includes("non-compete")) {
-    obligations.push("You are restricted from competing for a defined period or within a defined scope.");
+    obligations.push(
+      "You are restricted from competing for a defined period or within a defined scope.",
+    );
   }
   if (lower.includes("payment") || lower.includes("fee") || lower.includes("compensation")) {
     obligations.push("Financial obligations or payment terms are specified.");
@@ -160,7 +201,12 @@ export function ContractClauseExplainer() {
     if (clause.trim()) setAnalyzed(true);
   };
 
-  const riskColor = result?.riskLevel === "high" ? "#ef4444" : result?.riskLevel === "medium" ? "#f59e0b" : "#22c55e";
+  const riskColor =
+    result?.riskLevel === "high"
+      ? "#ef4444"
+      : result?.riskLevel === "medium"
+        ? "#f59e0b"
+        : "#22c55e";
 
   const fullText = useMemo(() => {
     if (!result) return "";
@@ -188,7 +234,10 @@ export function ContractClauseExplainer() {
         </span>
         <textarea
           value={clause}
-          onChange={(e) => { setClause(e.target.value); setAnalyzed(false); }}
+          onChange={(e) => {
+            setClause(e.target.value);
+            setAnalyzed(false);
+          }}
           rows={10}
           placeholder="Paste the contract clause you want analyzed..."
           className="w-full resize-y rounded-md border-2 border-line bg-input-bg p-4 font-mono text-sm text-input-text outline-none transition-colors placeholder:text-muted"
@@ -206,14 +255,24 @@ export function ContractClauseExplainer() {
         <div className="space-y-4">
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
             <div className="rounded-md border-2 border-line bg-input-bg p-4 text-center">
-              <div className="font-mono text-xs uppercase tracking-wider text-muted">Risk Level</div>
-              <div className="mt-1 font-display text-2xl font-extrabold uppercase" style={{ color: riskColor }}>
+              <div className="font-mono text-xs uppercase tracking-wider text-muted">
+                Risk Level
+              </div>
+              <div
+                className="mt-1 font-display text-2xl font-extrabold uppercase"
+                style={{ color: riskColor }}
+              >
                 {result.riskLevel}
               </div>
             </div>
             <div className="rounded-md border-2 border-line bg-input-bg p-4 text-center">
-              <div className="font-mono text-xs uppercase tracking-wider text-muted">Risk Score</div>
-              <div className="mt-1 font-display text-2xl font-extrabold" style={{ color: riskColor }}>
+              <div className="font-mono text-xs uppercase tracking-wider text-muted">
+                Risk Score
+              </div>
+              <div
+                className="mt-1 font-display text-2xl font-extrabold"
+                style={{ color: riskColor }}
+              >
                 {result.riskPercent}%
               </div>
               <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-paper-dim/50">
@@ -224,7 +283,9 @@ export function ContractClauseExplainer() {
               </div>
             </div>
             <div className="rounded-md border-2 border-line bg-input-bg p-4 text-center">
-              <div className="font-mono text-xs uppercase tracking-wider text-muted">Word Count</div>
+              <div className="font-mono text-xs uppercase tracking-wider text-muted">
+                Word Count
+              </div>
               <div className="mt-1 font-display text-2xl font-extrabold" style={{ color }}>
                 {result.wordCount}
               </div>
@@ -287,7 +348,9 @@ export function ContractClauseExplainer() {
 
           <div className="rounded-md border-2 border-line bg-input-bg p-4">
             <div className="mb-1 flex items-center justify-between">
-              <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">Full Analysis</span>
+              <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">
+                Full Analysis
+              </span>
               <CopyButton text={fullText} />
             </div>
             <pre className="max-h-[300px] overflow-auto whitespace-pre-wrap break-all font-mono text-sm text-input-text">

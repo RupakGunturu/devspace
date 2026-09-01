@@ -12,7 +12,10 @@ export default function I18nJsonGenerator() {
     const lines = input.split("\n").filter(Boolean);
     const obj: Record<string, string> = {};
     lines.forEach((line, i) => {
-      const key = line.toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_|_$/g, "");
+      const key = line
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "_")
+        .replace(/^_|_$/g, "");
       obj[key || `key_${i}`] = line;
     });
     setOutput(JSON.stringify(obj, null, 2));
@@ -20,7 +23,13 @@ export default function I18nJsonGenerator() {
 
   return (
     <ToolLayout id="i18n-json-generator">
-      <ToolInput value={input} onChange={setInput} placeholder="Welcome&#10;Login&#10;Sign Up&#10;Settings" label="UI Text (one per line)" rows={8} />
+      <ToolInput
+        value={input}
+        onChange={setInput}
+        placeholder="Welcome&#10;Login&#10;Sign Up&#10;Settings"
+        label="UI Text (one per line)"
+        rows={8}
+      />
       <ToolButton onClick={generate}>Generate JSON</ToolButton>
       <ToolOutput value={output} />
     </ToolLayout>

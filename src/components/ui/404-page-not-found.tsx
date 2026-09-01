@@ -143,15 +143,15 @@ export function NotFoundPage() {
           Let's get you back on track.
         </p>
 
-        <div
-          className="opacity-0"
-          style={{ animation: "slide-up 0.6s ease-out 0.8s both" }}
-        >
+        <div className="opacity-0" style={{ animation: "slide-up 0.6s ease-out 0.8s both" }}>
           <Button
             variant="default"
             onClick={() => navigate("/")}
             className="bg-yellow text-ink border-2 border-yellow font-mono text-sm font-bold hover:bg-yellow/90 cursor-pointer"
-            style={{ animation: "pulse-border 3s ease-in-out infinite", boxShadow: "4px 4px 0 var(--coral)" }}
+            style={{
+              animation: "pulse-border 3s ease-in-out infinite",
+              boxShadow: "4px 4px 0 var(--coral)",
+            }}
           >
             ← Go to Home
           </Button>
@@ -166,9 +166,10 @@ export function NotFoundPage() {
             className="whitespace-nowrap font-mono text-[11px] text-muted/25 tracking-[0.3em] uppercase"
             style={{ animation: "ticker-scroll 15s linear infinite", width: "max-content" }}
           >
-            404 NOT FOUND · PAGE MISSING · DEAD END · NOWHERE · SERVER GHOST · BROKEN LINK · VOID · &nbsp;
-            404 NOT FOUND · PAGE MISSING · DEAD END · NOWHERE · SERVER GHOST · BROKEN LINK · VOID · &nbsp;
-            404 NOT FOUND · PAGE MISSING · DEAD END · NOWHERE · SERVER GHOST · BROKEN LINK · VOID
+            404 NOT FOUND · PAGE MISSING · DEAD END · NOWHERE · SERVER GHOST · BROKEN LINK · VOID ·
+            &nbsp; 404 NOT FOUND · PAGE MISSING · DEAD END · NOWHERE · SERVER GHOST · BROKEN LINK ·
+            VOID · &nbsp; 404 NOT FOUND · PAGE MISSING · DEAD END · NOWHERE · SERVER GHOST · BROKEN
+            LINK · VOID
           </div>
         </div>
       </div>

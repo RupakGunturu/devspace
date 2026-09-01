@@ -19,13 +19,16 @@ export function LeadScoringCalculator() {
   const [interest, setInterest] = useState(3);
   const { color } = useToolAccent();
 
-  const factors = useMemo<Factor[]>(() => [
-    { label: "Company Size", value: companySize, weight: 20, max: 1000 },
-    { label: "Budget Fit", value: budgetFit, weight: 25, max: 100 },
-    { label: "Decision Maker", value: decisionMaker === "Y" ? 100 : 0, weight: 20, max: 100 },
-    { label: "Timeline", value: timeline, weight: 15, max: 100 },
-    { label: "Interest Level", value: (interest / 5) * 100, weight: 20, max: 100 },
-  ], [companySize, budgetFit, decisionMaker, timeline, interest]);
+  const factors = useMemo<Factor[]>(
+    () => [
+      { label: "Company Size", value: companySize, weight: 20, max: 1000 },
+      { label: "Budget Fit", value: budgetFit, weight: 25, max: 100 },
+      { label: "Decision Maker", value: decisionMaker === "Y" ? 100 : 0, weight: 20, max: 100 },
+      { label: "Timeline", value: timeline, weight: 15, max: 100 },
+      { label: "Interest Level", value: (interest / 5) * 100, weight: 20, max: 100 },
+    ],
+    [companySize, budgetFit, decisionMaker, timeline, interest],
+  );
 
   const score = useMemo(() => {
     return Math.round(factors.reduce((sum, f) => sum + (f.value / f.max) * f.weight, 0));
@@ -71,21 +74,34 @@ export function LeadScoringCalculator() {
 
   return (
     <ToolLayout id="lead-scoring-calculator">
-      <div className="rounded-lg border-2 p-4 text-center" style={{ borderColor: category.color, backgroundColor: category.bg }}>
+      <div
+        className="rounded-lg border-2 p-4 text-center"
+        style={{ borderColor: category.color, backgroundColor: category.bg }}
+      >
         <span className="font-mono text-xs uppercase tracking-wider text-muted">Lead Score</span>
-        <div className="font-display text-5xl font-extrabold" style={{ color: category.color }}>{score}</div>
-        <span className="font-mono text-sm font-bold" style={{ color: category.color }}>{category.label}</span>
+        <div className="font-display text-5xl font-extrabold" style={{ color: category.color }}>
+          {score}
+        </div>
+        <span className="font-mono text-sm font-bold" style={{ color: category.color }}>
+          {category.label}
+        </span>
       </div>
 
       <div>
-        <span className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Company Size</span>
+        <span className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+          Company Size
+        </span>
         <div className="flex flex-wrap gap-1">
           {sizeOptions.map((o) => (
             <button
               key={o.value}
               onClick={() => setCompanySize(o.value)}
               className="rounded-md border-2 px-3 py-1.5 font-mono text-xs transition-all"
-              style={companySize === o.value ? { borderColor: color, backgroundColor: color, color: "#fff" } : { borderColor: "var(--border)" }}
+              style={
+                companySize === o.value
+                  ? { borderColor: color, backgroundColor: color, color: "#fff" }
+                  : { borderColor: "var(--border)" }
+              }
             >
               {o.label}
             </button>
@@ -94,14 +110,20 @@ export function LeadScoringCalculator() {
       </div>
 
       <div>
-        <span className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Budget Fit</span>
+        <span className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+          Budget Fit
+        </span>
         <div className="flex flex-wrap gap-1">
           {budgetOptions.map((o) => (
             <button
               key={o.value}
               onClick={() => setBudgetFit(o.value)}
               className="rounded-md border-2 px-3 py-1.5 font-mono text-xs transition-all"
-              style={budgetFit === o.value ? { borderColor: color, backgroundColor: color, color: "#fff" } : { borderColor: "var(--border)" }}
+              style={
+                budgetFit === o.value
+                  ? { borderColor: color, backgroundColor: color, color: "#fff" }
+                  : { borderColor: "var(--border)" }
+              }
             >
               {o.label}
             </button>
@@ -110,14 +132,20 @@ export function LeadScoringCalculator() {
       </div>
 
       <div>
-        <span className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Decision Maker?</span>
+        <span className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+          Decision Maker?
+        </span>
         <div className="flex gap-1">
           {(["Y", "N"] as DecisionMaker[]).map((v) => (
             <button
               key={v}
               onClick={() => setDecisionMaker(v)}
               className="rounded-md border-2 px-5 py-1.5 font-mono text-xs transition-all"
-              style={decisionMaker === v ? { borderColor: color, backgroundColor: color, color: "#fff" } : { borderColor: "var(--border)" }}
+              style={
+                decisionMaker === v
+                  ? { borderColor: color, backgroundColor: color, color: "#fff" }
+                  : { borderColor: "var(--border)" }
+              }
             >
               {v === "Y" ? "Yes" : "No"}
             </button>
@@ -126,14 +154,20 @@ export function LeadScoringCalculator() {
       </div>
 
       <div>
-        <span className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Timeline</span>
+        <span className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+          Timeline
+        </span>
         <div className="flex flex-wrap gap-1">
           {timelineOptions.map((o) => (
             <button
               key={o.value}
               onClick={() => setTimeline(o.value)}
               className="rounded-md border-2 px-3 py-1.5 font-mono text-xs transition-all"
-              style={timeline === o.value ? { borderColor: color, backgroundColor: color, color: "#fff" } : { borderColor: "var(--border)" }}
+              style={
+                timeline === o.value
+                  ? { borderColor: color, backgroundColor: color, color: "#fff" }
+                  : { borderColor: "var(--border)" }
+              }
             >
               {o.label}
             </button>
@@ -142,14 +176,20 @@ export function LeadScoringCalculator() {
       </div>
 
       <div>
-        <span className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Interest Level: {interest}/5</span>
+        <span className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+          Interest Level: {interest}/5
+        </span>
         <div className="flex gap-1">
           {[1, 2, 3, 4, 5].map((v) => (
             <button
               key={v}
               onClick={() => setInterest(v)}
               className="h-10 w-10 rounded-md border-2 font-mono text-sm font-bold transition-all"
-              style={interest === v ? { borderColor: color, backgroundColor: color, color: "#fff" } : { borderColor: "var(--border)" }}
+              style={
+                interest === v
+                  ? { borderColor: color, backgroundColor: color, color: "#fff" }
+                  : { borderColor: "var(--border)" }
+              }
             >
               {v}
             </button>
@@ -157,12 +197,17 @@ export function LeadScoringCalculator() {
         </div>
       </div>
 
-      <button onClick={reset} className="font-mono text-xs text-muted underline transition-colors hover:text-foreground">
+      <button
+        onClick={reset}
+        className="font-mono text-xs text-muted underline transition-colors hover:text-foreground"
+      >
         Reset all
       </button>
 
       <div>
-        <span className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Score Breakdown</span>
+        <span className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+          Score Breakdown
+        </span>
         <div className="space-y-2">
           {factors.map((f) => {
             const pct = f.max > 0 ? (f.value / f.max) * 100 : 0;
@@ -171,10 +216,15 @@ export function LeadScoringCalculator() {
               <div key={f.label} className="rounded-md border-2 border-line bg-input-bg px-3 py-2">
                 <div className="flex items-center justify-between mb-1">
                   <span className="font-mono text-xs text-foreground">{f.label}</span>
-                  <span className="font-mono text-xs" style={{ color }}>{weighted}/{f.weight} pts</span>
+                  <span className="font-mono text-xs" style={{ color }}>
+                    {weighted}/{f.weight} pts
+                  </span>
                 </div>
                 <div className="h-2 overflow-hidden rounded-full bg-line">
-                  <div className="h-full rounded-full transition-all duration-300" style={{ width: `${pct}%`, backgroundColor: color }} />
+                  <div
+                    className="h-full rounded-full transition-all duration-300"
+                    style={{ width: `${pct}%`, backgroundColor: color }}
+                  />
                 </div>
               </div>
             );

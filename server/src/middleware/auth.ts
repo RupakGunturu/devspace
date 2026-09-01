@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { config } from "../config/env";
-import { User, IUser } from "../models/User";
+import { User, IUser, UserRole } from "../models/User";
 
 export interface AuthRequest extends Request {
   user?: IUser;
@@ -57,4 +57,18 @@ export function optionalAuth(req: AuthRequest, _res: Response, next: NextFunctio
   } catch {
     next();
   }
+}
+
+export function authorize(...roles: UserRole[]) {
+  return (req: AuthRequest, res: Response, next: NextFunction) => {
+    if (!req.user) {
+      res.status(401).json({ error: "Not authenticated" });
+      return;
+    }
+    if (!roles.includes(req.user.role)) {
+      res.status(403).json({ error: "Admin access required" });
+      return;
+    }
+    next();
+  };
 }

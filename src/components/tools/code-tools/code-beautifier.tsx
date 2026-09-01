@@ -23,7 +23,9 @@ export default function CodeBeautifier() {
           .replace(/,\s*/g, ",\n" + "  ".repeat(indent));
         setOutput(formatted);
       }
-    } catch { setOutput("Error formatting code"); }
+    } catch {
+      setOutput("Error formatting code");
+    }
   };
 
   const minify = () => {
@@ -42,10 +44,18 @@ export default function CodeBeautifier() {
         value={language}
         onChange={setLanguage}
       />
-      <ToolInput value={input} onChange={setInput} placeholder="Paste code..." label="Input" rows={10} />
+      <ToolInput
+        value={input}
+        onChange={setInput}
+        placeholder="Paste code..."
+        label="Input"
+        rows={10}
+      />
       <div className="flex flex-col sm:flex-row gap-2">
         <ToolButton onClick={format}>Beautify</ToolButton>
-        <ToolButton onClick={minify} variant="secondary">Minify</ToolButton>
+        <ToolButton onClick={minify} variant="secondary">
+          Minify
+        </ToolButton>
       </div>
       <ToolOutput value={output} />
     </ToolLayout>

@@ -14,7 +14,10 @@ export function RaffleWinnerPicker() {
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const { color } = useToolAccent();
 
-  const names = entries.split("\n").map((l) => l.trim()).filter((l) => l.length > 0);
+  const names = entries
+    .split("\n")
+    .map((l) => l.trim())
+    .filter((l) => l.length > 0);
   const available = names.filter((n) => !winners.includes(n));
 
   const stopPicking = useCallback(() => {
@@ -72,7 +75,9 @@ export function RaffleWinnerPicker() {
   return (
     <ToolLayout id="raffle-winner-picker">
       <div>
-        <label className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Names / Entries (one per line)</label>
+        <label className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+          Names / Entries (one per line)
+        </label>
         <textarea
           value={entries}
           onChange={(e) => setEntries(e.target.value)}
@@ -85,32 +90,61 @@ export function RaffleWinnerPicker() {
 
       <div className="flex items-center gap-3">
         <div>
-          <label className="mb-1 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Number of Winners</label>
-          <input type="number" min={1} max={Math.max(1, available.length)} value={numWinners} onChange={(e) => setNumWinners(Math.max(1, parseInt(e.target.value) || 1))} className="w-20 rounded-md border-2 border-line bg-input-bg p-2.5 font-mono text-sm text-input-text outline-none" />
+          <label className="mb-1 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+            Number of Winners
+          </label>
+          <input
+            type="number"
+            min={1}
+            max={Math.max(1, available.length)}
+            value={numWinners}
+            onChange={(e) => setNumWinners(Math.max(1, parseInt(e.target.value) || 1))}
+            className="w-20 rounded-md border-2 border-line bg-input-bg p-2.5 font-mono text-sm text-input-text outline-none"
+          />
         </div>
-        <span className="self-end font-mono text-xs text-muted">{names.length} entries, {available.length} remaining</span>
+        <span className="self-end font-mono text-xs text-muted">
+          {names.length} entries, {available.length} remaining
+        </span>
       </div>
 
       <div className="flex flex-wrap gap-2">
-        <ToolButton onClick={pickWinners} disabled={available.length === 0 || isPicking || numWinners > available.length}>
+        <ToolButton
+          onClick={pickWinners}
+          disabled={available.length === 0 || isPicking || numWinners > available.length}
+        >
           {isPicking ? "Picking..." : "Pick Winner(s)"}
         </ToolButton>
-        <ToolButton variant="secondary" onClick={reset}>Reset</ToolButton>
+        <ToolButton variant="secondary" onClick={reset}>
+          Reset
+        </ToolButton>
       </div>
 
       {isPicking && (
         <div className="rounded-lg border-2 p-8 text-center" style={{ borderColor: color }}>
-          <span className="font-mono text-[10px] uppercase tracking-wider text-muted">Spinning...</span>
-          <div className="font-display text-4xl font-extrabold text-foreground animate-pulse">{currentName}</div>
+          <span className="font-mono text-[10px] uppercase tracking-wider text-muted">
+            Spinning...
+          </span>
+          <div className="font-display text-4xl font-extrabold text-foreground animate-pulse">
+            {currentName}
+          </div>
         </div>
       )}
 
       {showResult && winners.length > 0 && (
         <div className="space-y-2">
-          <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">Winner(s)</span>
+          <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">
+            Winner(s)
+          </span>
           {winners.map((w, i) => (
-            <div key={i} className="flex items-center gap-3 rounded-lg border-2 bg-input-bg px-4 py-3" style={{ borderColor: color }}>
-              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full font-mono text-sm font-bold" style={{ backgroundColor: color, color: "#fff" }}>
+            <div
+              key={i}
+              className="flex items-center gap-3 rounded-lg border-2 bg-input-bg px-4 py-3"
+              style={{ borderColor: color }}
+            >
+              <span
+                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full font-mono text-sm font-bold"
+                style={{ backgroundColor: color, color: "#fff" }}
+              >
                 {i + 1}
               </span>
               <span className="font-display text-xl font-extrabold text-foreground">{w}</span>
@@ -122,12 +156,24 @@ export function RaffleWinnerPicker() {
       {history.length > 0 && (
         <div>
           <div className="flex items-center justify-between mb-2">
-            <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">Pick History ({history.length})</span>
-            <button onClick={clearHistory} className="font-mono text-[10px] text-muted underline transition-colors hover:text-foreground">Clear</button>
+            <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">
+              Pick History ({history.length})
+            </span>
+            <button
+              onClick={clearHistory}
+              className="font-mono text-[10px] text-muted underline transition-colors hover:text-foreground"
+            >
+              Clear
+            </button>
           </div>
           <div className="flex flex-wrap gap-1.5">
             {history.map((h, i) => (
-              <span key={i} className="rounded-full border-2 border-line bg-input-bg px-3 py-1 font-mono text-xs text-input-text">{h}</span>
+              <span
+                key={i}
+                className="rounded-full border-2 border-line bg-input-bg px-3 py-1 font-mono text-xs text-input-text"
+              >
+                {h}
+              </span>
             ))}
           </div>
         </div>

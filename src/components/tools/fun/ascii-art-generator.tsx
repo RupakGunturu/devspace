@@ -25,7 +25,9 @@ export default function AsciiArtGenerator() {
     const f = fonts.standard;
     chars.forEach((c) => {
       const charLines = f[c] || f[" "];
-      charLines.forEach((line, i) => { lines[i] += line + " "; });
+      charLines.forEach((line, i) => {
+        lines[i] += line + " ";
+      });
     });
     setOutput(lines.join("\n"));
   };

@@ -19,7 +19,13 @@ export default function BlogIntroGenerator() {
 
   return (
     <ToolLayout id="blog-intro-generator">
-      <ToolInput value={topic} onChange={setTopic} placeholder="React performance optimization" label="Topic" rows={1} />
+      <ToolInput
+        value={topic}
+        onChange={setTopic}
+        placeholder="React performance optimization"
+        label="Topic"
+        rows={1}
+      />
       <ToolButton onClick={generate}>Generate Intro</ToolButton>
       <ToolOutput value={output} />
     </ToolLayout>

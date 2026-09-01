@@ -25,13 +25,43 @@ export default function UtmBuilder() {
 
   return (
     <ToolLayout id="utm-builder">
-      <ToolInput value={url} onChange={setUrl} placeholder="https://example.com" label="Base URL" rows={1} />
+      <ToolInput
+        value={url}
+        onChange={setUrl}
+        placeholder="https://example.com"
+        label="Base URL"
+        rows={1}
+      />
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <ToolInput value={source} onChange={setSource} placeholder="google" label="Source" rows={1} />
+        <ToolInput
+          value={source}
+          onChange={setSource}
+          placeholder="google"
+          label="Source"
+          rows={1}
+        />
         <ToolInput value={medium} onChange={setMedium} placeholder="cpc" label="Medium" rows={1} />
-        <ToolInput value={campaign} onChange={setCampaign} placeholder="spring_sale" label="Campaign" rows={1} />
-        <ToolInput value={term} onChange={setTerm} placeholder="running+shoes" label="Term" rows={1} />
-        <ToolInput value={content} onChange={setContent} placeholder="banner_ad" label="Content" rows={1} />
+        <ToolInput
+          value={campaign}
+          onChange={setCampaign}
+          placeholder="spring_sale"
+          label="Campaign"
+          rows={1}
+        />
+        <ToolInput
+          value={term}
+          onChange={setTerm}
+          placeholder="running+shoes"
+          label="Term"
+          rows={1}
+        />
+        <ToolInput
+          value={content}
+          onChange={setContent}
+          placeholder="banner_ad"
+          label="Content"
+          rows={1}
+        />
       </div>
       <ToolButton onClick={build}>Build URL</ToolButton>
       <ToolOutput value={output} />

@@ -36,8 +36,12 @@ export function UuidHashGenerator() {
     <ToolLayout id="uuid-hash-generator">
       <div>
         <div className="mb-2 flex items-center justify-between">
-          <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">UUIDs (v4)</span>
-          <ToolButton onClick={addUuid} variant="secondary">Generate</ToolButton>
+          <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">
+            UUIDs (v4)
+          </span>
+          <ToolButton onClick={addUuid} variant="secondary">
+            Generate
+          </ToolButton>
         </div>
         <ul className="space-y-1">
           {uuids.map((u, i) => (
@@ -53,7 +57,9 @@ export function UuidHashGenerator() {
       </div>
 
       <div className="space-y-2">
-        <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">Hash</span>
+        <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">
+          Hash
+        </span>
         <ToolInput value={text} onChange={setText} placeholder="Enter text..." label="" rows={3} />
         <div className="flex flex-wrap gap-2">
           <ToolToggleGroup

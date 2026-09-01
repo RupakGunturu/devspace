@@ -16,17 +16,26 @@ export default function BmiCalculator() {
     if (unit === "metric") {
       const w = parseFloat(weight);
       const h = parseFloat(height) / 100;
-      if (isNaN(w) || isNaN(h) || h <= 0) { setResult("Enter valid numbers"); return; }
+      if (isNaN(w) || isNaN(h) || h <= 0) {
+        setResult("Enter valid numbers");
+        return;
+      }
       bmi = w / (h * h);
     } else {
       const w = parseFloat(weight) * 0.453592;
       const h = parseFloat(height) * 0.0254;
-      if (isNaN(w) || isNaN(h) || h <= 0) { setResult("Enter valid numbers"); return; }
+      if (isNaN(w) || isNaN(h) || h <= 0) {
+        setResult("Enter valid numbers");
+        return;
+      }
       bmi = w / (h * h);
     }
-    const category = bmi < 18.5 ? "Underweight" : bmi < 25 ? "Normal weight" : bmi < 30 ? "Overweight" : "Obese";
+    const category =
+      bmi < 18.5 ? "Underweight" : bmi < 25 ? "Normal weight" : bmi < 30 ? "Overweight" : "Obese";
     const color = bmi < 18.5 ? "🔵" : bmi < 25 ? "🟢" : bmi < 30 ? "🟡" : "🔴";
-    setResult(`BMI: ${bmi.toFixed(1)}\nCategory: ${color} ${category}\n\nHealthy range: 18.5 - 24.9`);
+    setResult(
+      `BMI: ${bmi.toFixed(1)}\nCategory: ${color} ${category}\n\nHealthy range: 18.5 - 24.9`,
+    );
   };
 
   return (
@@ -42,12 +51,26 @@ export default function BmiCalculator() {
       />
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">Weight ({unit === "metric" ? "kg" : "lbs"})</label>
-          <input type="number" value={weight} onChange={(e) => setWeight(e.target.value)} className="w-full p-3 bg-paper-dim/50 border border-border rounded-sm text-sm font-mono text-foreground" />
+          <label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">
+            Weight ({unit === "metric" ? "kg" : "lbs"})
+          </label>
+          <input
+            type="number"
+            value={weight}
+            onChange={(e) => setWeight(e.target.value)}
+            className="w-full p-3 bg-paper-dim/50 border border-border rounded-sm text-sm font-mono text-foreground"
+          />
         </div>
         <div>
-          <label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">Height ({unit === "metric" ? "cm" : "inches"})</label>
-          <input type="number" value={height} onChange={(e) => setHeight(e.target.value)} className="w-full p-3 bg-paper-dim/50 border border-border rounded-sm text-sm font-mono text-foreground" />
+          <label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">
+            Height ({unit === "metric" ? "cm" : "inches"})
+          </label>
+          <input
+            type="number"
+            value={height}
+            onChange={(e) => setHeight(e.target.value)}
+            className="w-full p-3 bg-paper-dim/50 border border-border rounded-sm text-sm font-mono text-foreground"
+          />
         </div>
       </div>
       <ToolButton onClick={calculate}>Calculate BMI</ToolButton>

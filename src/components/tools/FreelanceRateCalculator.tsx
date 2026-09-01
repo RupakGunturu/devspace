@@ -179,10 +179,22 @@ export function FreelanceRateCalculator() {
               {[
                 { label: "Desired Income", value: result.income, color: color },
                 { label: "Annual Expenses", value: result.annualExpenses, color: "#64748b" },
-                { label: "Before Tax (Income + Expenses)", value: result.taxedAmount, color: "#f59e0b" },
-                { label: "Tax Amount", value: result.taxedAmount * (result.tax / 100), color: "#ef4444" },
+                {
+                  label: "Before Tax (Income + Expenses)",
+                  value: result.taxedAmount,
+                  color: "#f59e0b",
+                },
+                {
+                  label: "Tax Amount",
+                  value: result.taxedAmount * (result.tax / 100),
+                  color: "#ef4444",
+                },
                 { label: "Profit Margin", value: result.profitAmount, color: "#10b981" },
-                { label: "Total Annual Revenue Needed", value: result.annualRevenueNeeded, color: color },
+                {
+                  label: "Total Annual Revenue Needed",
+                  value: result.annualRevenueNeeded,
+                  color: color,
+                },
               ].map(({ label, value, color: c }) => (
                 <div key={label}>
                   <div className="mb-1 flex items-center justify-between">
@@ -208,11 +220,20 @@ export function FreelanceRateCalculator() {
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
             {[
               { label: "Billable Hours/Year", value: `${result.annualBillableHours}` },
-              { label: "Effective Hourly Income", value: fmtCurrency(result.income / result.annualBillableHours) },
+              {
+                label: "Effective Hourly Income",
+                value: fmtCurrency(result.income / result.annualBillableHours),
+              },
               { label: "Total Revenue Needed", value: fmtCurrency(result.annualRevenueNeeded) },
-              { label: "Revenue/Income Ratio", value: `${(result.annualRevenueNeeded / result.income).toFixed(1)}x` },
+              {
+                label: "Revenue/Income Ratio",
+                value: `${(result.annualRevenueNeeded / result.income).toFixed(1)}x`,
+              },
             ].map(({ label, value }) => (
-              <div key={label} className="rounded-md border-2 border-line bg-input-bg p-3 text-center">
+              <div
+                key={label}
+                className="rounded-md border-2 border-line bg-input-bg p-3 text-center"
+              >
                 <div className="font-mono text-xs text-muted">{label}</div>
                 <div className="mt-1 font-mono text-sm font-bold text-input-text">{value}</div>
               </div>

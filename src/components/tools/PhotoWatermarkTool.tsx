@@ -3,18 +3,39 @@ import { ToolLayout } from "./ToolLayout";
 import { ToolButton } from "./ToolButton";
 import { ToolFileInput } from "./ToolFileInput";
 
-type Position = "top-left" | "top-center" | "top-right" | "middle-left" | "center" | "middle-right" | "bottom-left" | "bottom-center" | "bottom-right";
+type Position =
+  | "top-left"
+  | "top-center"
+  | "top-right"
+  | "middle-left"
+  | "center"
+  | "middle-right"
+  | "bottom-left"
+  | "bottom-center"
+  | "bottom-right";
 
 const POSITIONS: Position[] = [
-  "top-left", "top-center", "top-right",
-  "middle-left", "center", "middle-right",
-  "bottom-left", "bottom-center", "bottom-right",
+  "top-left",
+  "top-center",
+  "top-right",
+  "middle-left",
+  "center",
+  "middle-right",
+  "bottom-left",
+  "bottom-center",
+  "bottom-right",
 ];
 
 const POS_LABELS: Record<Position, string> = {
-  "top-left": "TL", "top-center": "TC", "top-right": "TR",
-  "middle-left": "ML", "center": "C", "middle-right": "MR",
-  "bottom-left": "BL", "bottom-center": "BC", "bottom-right": "BR",
+  "top-left": "TL",
+  "top-center": "TC",
+  "top-right": "TR",
+  "middle-left": "ML",
+  center: "C",
+  "middle-right": "MR",
+  "bottom-left": "BL",
+  "bottom-center": "BC",
+  "bottom-right": "BR",
 };
 
 export function PhotoWatermarkTool() {
@@ -45,7 +66,7 @@ export function PhotoWatermarkTool() {
       const fontSize = Math.max(16, Math.round(img.width * 0.03));
       ctx.font = `bold ${fontSize}px sans-serif`;
       ctx.fillStyle = `rgba(255, 255, 255, ${parseInt(opacity) / 100})`;
-      ctx.strokeStyle = `rgba(0, 0, 0, ${parseInt(opacity) / 100 * 0.5})`;
+      ctx.strokeStyle = `rgba(0, 0, 0, ${(parseInt(opacity) / 100) * 0.5})`;
       ctx.lineWidth = 2;
 
       const metrics = ctx.measureText(watermarkText);
@@ -139,9 +160,7 @@ export function PhotoWatermarkTool() {
             />
           </div>
 
-          <ToolButton onClick={handleDownload}>
-            Download Watermarked Image
-          </ToolButton>
+          <ToolButton onClick={handleDownload}>Download Watermarked Image</ToolButton>
         </div>
       )}
     </ToolLayout>

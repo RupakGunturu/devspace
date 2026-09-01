@@ -32,8 +32,29 @@ export default function WatermarkAdder() {
   return (
     <ToolLayout id="watermark-adder">
       <ToolFileInput accept="image/*" onChange={handle} label="Choose image" />
-      <div><label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">Watermark Text</label><input value={text} onChange={(e) => setText(e.target.value)} className="w-full p-2.5 bg-paper-dim/50 border border-border rounded-sm text-sm text-foreground" /></div>
-      {url && <div className="flex flex-col items-center gap-4"><img src={url} alt="Watermarked" className="max-h-48 border border-border rounded" /><a href={url} download="watermarked.png" className="text-sm hover:underline" style={{ color }}>Download</a></div>}
+      <div>
+        <label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">
+          Watermark Text
+        </label>
+        <input
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          className="w-full p-2.5 bg-paper-dim/50 border border-border rounded-sm text-sm text-foreground"
+        />
+      </div>
+      {url && (
+        <div className="flex flex-col items-center gap-4">
+          <img src={url} alt="Watermarked" className="max-h-48 border border-border rounded" />
+          <a
+            href={url}
+            download="watermarked.png"
+            className="text-sm hover:underline"
+            style={{ color }}
+          >
+            Download
+          </a>
+        </div>
+      )}
     </ToolLayout>
   );
 }

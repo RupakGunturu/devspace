@@ -41,7 +41,9 @@ export default function DevExcuseGenerator() {
         <ToolButton onClick={generate}>Generate Excuse</ToolButton>
         {excuse && (
           <div className="p-6 bg-paper-dim/50 border border-border rounded-sm text-center max-w-lg">
-            <p className="font-display text-xl font-bold text-foreground leading-relaxed">&ldquo;{excuse}&rdquo;</p>
+            <p className="font-display text-xl font-bold text-foreground leading-relaxed">
+              &ldquo;{excuse}&rdquo;
+            </p>
           </div>
         )}
       </div>

@@ -26,7 +26,9 @@ function hslToHex(h: number, s: number, l: number): string {
   const f = (n: number) => {
     const k = (n + h / 30) % 12;
     const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
-    return Math.round(255 * color).toString(16).padStart(2, "0");
+    return Math.round(255 * color)
+      .toString(16)
+      .padStart(2, "0");
   };
   return `#${f(0)}${f(8)}${f(4)}`;
 }
@@ -54,27 +56,15 @@ export function ColorPaletteExtractor() {
       },
       {
         name: "Analogous",
-        colors: [
-          hslToHex((h - 30 + 360) % 360, s, l),
-          hex,
-          hslToHex((h + 30) % 360, s, l),
-        ],
+        colors: [hslToHex((h - 30 + 360) % 360, s, l), hex, hslToHex((h + 30) % 360, s, l)],
       },
       {
         name: "Triadic",
-        colors: [
-          hex,
-          hslToHex((h + 120) % 360, s, l),
-          hslToHex((h + 240) % 360, s, l),
-        ],
+        colors: [hex, hslToHex((h + 120) % 360, s, l), hslToHex((h + 240) % 360, s, l)],
       },
       {
         name: "Split-Complementary",
-        colors: [
-          hex,
-          hslToHex((h + 150) % 360, s, l),
-          hslToHex((h + 210) % 360, s, l),
-        ],
+        colors: [hex, hslToHex((h + 150) % 360, s, l), hslToHex((h + 210) % 360, s, l)],
       },
     ];
   }, [hex]);
@@ -103,7 +93,10 @@ export function ColorPaletteExtractor() {
           </div>
         </div>
         {isValidHex(hex) && (
-          <div className="flex-1 rounded-md border-2 border-line p-4" style={{ backgroundColor: hex }}>
+          <div
+            className="flex-1 rounded-md border-2 border-line p-4"
+            style={{ backgroundColor: hex }}
+          >
             <span
               className="font-mono text-sm font-bold"
               style={{ color: hexToHsl(hex)[2] > 0.5 ? "#000" : "#fff" }}
@@ -132,7 +125,10 @@ export function ColorPaletteExtractor() {
                       style={{ backgroundColor: c }}
                     />
                     <span className="font-mono text-[10px] text-muted">{c}</span>
-                    <CopyButton text={c} className="border-0 px-1 py-0 opacity-0 group-hover:opacity-100" />
+                    <CopyButton
+                      text={c}
+                      className="border-0 px-1 py-0 opacity-0 group-hover:opacity-100"
+                    />
                   </div>
                 ))}
               </div>

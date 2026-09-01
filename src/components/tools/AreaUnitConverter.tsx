@@ -58,7 +58,7 @@ export function AreaUnitConverter() {
     if (!result) return "";
     const refs = REFERENCES.map((r) => {
       const refConv = result.fromSqFt / (UNITS.find((u) => u.abbr === toUnit)?.toSqFt || 1);
-      const refRatio = refConv / ((r.sqft / (UNITS.find((u) => u.abbr === fromUnit)?.toSqFt || 1)));
+      const refRatio = refConv / (r.sqft / (UNITS.find((u) => u.abbr === fromUnit)?.toSqFt || 1));
       return `  ${r.label} (${fmt(r.sqft)} sq ft): ${fmt(refRatio)}x`;
     }).join("\n");
 
@@ -83,7 +83,9 @@ export function AreaUnitConverter() {
     <ToolLayout id="area-unit-converter">
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-[1fr_auto_1fr] sm:items-end">
         <div>
-          <span className="mb-1 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Value</span>
+          <span className="mb-1 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+            Value
+          </span>
           <input
             type="number"
             value={value}
@@ -97,7 +99,11 @@ export function AreaUnitConverter() {
             onChange={(e) => setFromUnit(e.target.value)}
             className="mt-2 w-full rounded-md border-2 border-line bg-input-bg p-3 font-mono text-sm text-input-text outline-none"
           >
-            {UNITS.map((u) => <option key={u.abbr} value={u.abbr}>{u.name} ({u.abbr})</option>)}
+            {UNITS.map((u) => (
+              <option key={u.abbr} value={u.abbr}>
+                {u.name} ({u.abbr})
+              </option>
+            ))}
           </select>
         </div>
 
@@ -105,13 +111,25 @@ export function AreaUnitConverter() {
           onClick={swap}
           className="mb-2 hidden self-center rounded-md border-2 border-line bg-input-bg p-2 transition-colors hover:bg-paper-dim/50 sm:block"
         >
-          <svg className="h-5 w-5 text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
+          <svg
+            className="h-5 w-5 text-muted"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"
+            />
           </svg>
         </button>
 
         <div>
-          <span className="mb-1 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Result</span>
+          <span className="mb-1 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+            Result
+          </span>
           <div
             className="w-full rounded-md border-2 border-line bg-input-bg p-3 font-mono text-lg font-bold"
             style={{ color: result !== null ? color : undefined }}
@@ -123,7 +141,11 @@ export function AreaUnitConverter() {
             onChange={(e) => setToUnit(e.target.value)}
             className="mt-2 w-full rounded-md border-2 border-line bg-input-bg p-3 font-mono text-sm text-input-text outline-none"
           >
-            {UNITS.map((u) => <option key={u.abbr} value={u.abbr}>{u.name} ({u.abbr})</option>)}
+            {UNITS.map((u) => (
+              <option key={u.abbr} value={u.abbr}>
+                {u.name} ({u.abbr})
+              </option>
+            ))}
           </select>
         </div>
       </div>
@@ -132,8 +154,18 @@ export function AreaUnitConverter() {
         onClick={swap}
         className="flex w-full items-center justify-center gap-2 rounded-md border-2 border-line bg-input-bg p-2 font-mono text-sm text-muted transition-colors hover:bg-paper-dim/50 sm:hidden"
       >
-        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
+        <svg
+          className="h-4 w-4"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"
+          />
         </svg>
         Swap Units
       </button>
@@ -141,7 +173,9 @@ export function AreaUnitConverter() {
       {result && (
         <div className="rounded-md border-2 border-line bg-input-bg p-4">
           <div className="mb-2 flex items-center justify-between">
-            <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">All Conversions</span>
+            <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">
+              All Conversions
+            </span>
             <CopyButton text={fullText} />
           </div>
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
@@ -157,8 +191,13 @@ export function AreaUnitConverter() {
                     backgroundColor: isTarget ? `${color}10` : undefined,
                   }}
                 >
-                  <div className="font-mono text-[10px] uppercase tracking-wider text-muted">{u.name}</div>
-                  <div className="mt-1 font-mono text-sm font-bold" style={{ color: isTarget ? color : undefined }}>
+                  <div className="font-mono text-[10px] uppercase tracking-wider text-muted">
+                    {u.name}
+                  </div>
+                  <div
+                    className="mt-1 font-mono text-sm font-bold"
+                    style={{ color: isTarget ? color : undefined }}
+                  >
                     {fmt(val)} {u.abbr}
                   </div>
                 </div>
@@ -179,7 +218,9 @@ export function AreaUnitConverter() {
               const times = (parseFloat(value) || 0) / refInFromUnit;
               return (
                 <div key={r.label} className="rounded-md border-2 border-line bg-input-bg p-3">
-                  <div className="font-mono text-[10px] uppercase tracking-wider text-muted">{r.label}</div>
+                  <div className="font-mono text-[10px] uppercase tracking-wider text-muted">
+                    {r.label}
+                  </div>
                   <div className="mt-1 font-mono text-xs text-input-text">{fmt(r.sqft)} sq ft</div>
                   <div className="mt-0.5 font-mono text-xs font-bold" style={{ color }}>
                     {times >= 1 ? `${fmt(times)}x` : `${fmt(times * 100)}%`}

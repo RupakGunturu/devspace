@@ -23,11 +23,22 @@ export default function ImageToBase64() {
   return (
     <ToolLayout id="image-to-base64">
       <ToolFileInput accept="image/*" onChange={handle} label="Choose image" />
-      {preview && <div className="flex justify-center p-4 bg-paper-dim/50 border border-border rounded-sm"><img src={preview} alt="Preview" className="max-h-48 rounded" /></div>}
+      {preview && (
+        <div className="flex justify-center p-4 bg-paper-dim/50 border border-border rounded-sm">
+          <img src={preview} alt="Preview" className="max-h-48 rounded" />
+        </div>
+      )}
       {base64 && (
         <div className="flex items-center justify-between p-3 bg-paper-dim/50 border border-border rounded-sm">
-          <span className="text-xs text-muted-foreground">Base64 ready ({Math.round(base64.length / 1024)}KB)</span>
-          <button onClick={() => navigator.clipboard.writeText(base64)} className="text-xs text-muted-foreground hover:text-foreground px-2 py-1 rounded hover:bg-paper-dim transition-colors">Copy</button>
+          <span className="text-xs text-muted-foreground">
+            Base64 ready ({Math.round(base64.length / 1024)}KB)
+          </span>
+          <button
+            onClick={() => navigator.clipboard.writeText(base64)}
+            className="text-xs text-muted-foreground hover:text-foreground px-2 py-1 rounded hover:bg-paper-dim transition-colors"
+          >
+            Copy
+          </button>
         </div>
       )}
     </ToolLayout>

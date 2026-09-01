@@ -19,12 +19,23 @@ export default function WordCounter() {
 
   return (
     <ToolLayout id="word-counter">
-      <ToolInput value={input} onChange={setInput} placeholder="Paste your text here..." label="Text" rows={10} />
+      <ToolInput
+        value={input}
+        onChange={setInput}
+        placeholder="Paste your text here..."
+        label="Text"
+        rows={10}
+      />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3">
         {Object.entries(stats).map(([key, val]) => (
-          <div key={key} className="p-3 bg-paper-dim/50 border border-border rounded-sm text-center">
+          <div
+            key={key}
+            className="p-3 bg-paper-dim/50 border border-border rounded-sm text-center"
+          >
             <span className="text-2xl font-bold text-foreground font-sans">{val}</span>
-            <p className="text-[10px] uppercase tracking-wider text-muted-foreground mt-1">{key.replace(/([A-Z])/g, " $1")}</p>
+            <p className="text-[10px] uppercase tracking-wider text-muted-foreground mt-1">
+              {key.replace(/([A-Z])/g, " $1")}
+            </p>
           </div>
         ))}
       </div>

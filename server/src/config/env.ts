@@ -25,4 +25,7 @@ export const config = {
   googleClientSecret: optional("GOOGLE_CLIENT_SECRET"),
   resendApiKey: optional("RESEND_API_KEY"),
   clientUrl: required("CLIENT_URL", isProd ? undefined : "http://localhost:1000"),
+  githubToken: optional("GITHUB_TOKEN"),
+  githubOwner: optional("GITHUB_OWNER"),
+  githubRepo: optional("GITHUB_REPO", "devspace"),
 };

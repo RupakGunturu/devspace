@@ -13,22 +13,34 @@ export default function Base64Encoder() {
     try {
       setOutput(btoa(unescape(encodeURIComponent(input))));
       setError("");
-    } catch (e: any) { setError(e.message); }
+    } catch (e: any) {
+      setError(e.message);
+    }
   };
 
   const decode = () => {
     try {
       setOutput(decodeURIComponent(escape(atob(input))));
       setError("");
-    } catch (e: any) { setError("Invalid Base64 string"); }
+    } catch (e: any) {
+      setError("Invalid Base64 string");
+    }
   };
 
   return (
     <ToolLayout id="base64-encoder">
-      <ToolInput value={input} onChange={setInput} placeholder="Enter text to encode/decode..." label="Input" rows={6} />
+      <ToolInput
+        value={input}
+        onChange={setInput}
+        placeholder="Enter text to encode/decode..."
+        label="Input"
+        rows={6}
+      />
       <div className="flex flex-col sm:flex-row gap-2">
         <ToolButton onClick={encode}>Encode</ToolButton>
-        <ToolButton onClick={decode} variant="secondary">Decode</ToolButton>
+        <ToolButton onClick={decode} variant="secondary">
+          Decode
+        </ToolButton>
       </div>
       {error && <p className="text-sm text-coral font-mono">{error}</p>}
       <ToolOutput value={output} />

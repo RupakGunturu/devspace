@@ -8,34 +8,55 @@ import { toast } from "@/components/ui/toaster";
 
 function getFavoriteHref(f: Favorite): string {
   switch (f.type) {
-    case "tool": return `/tools/${f.slug}`;
-    case "tip": return "/tips";
-    case "cheatsheet": return `/cheat-sheets/${f.slug}`;
-    case "game": return `/games/${f.slug}`;
-    case "stack-breakdown": return `/stack-breakdown/${f.slug}`;
-    default: return "#";
+    case "tool":
+      return `/tools/${f.slug}`;
+    case "tip":
+      return "/tips";
+    case "cheatsheet":
+      return `/cheat-sheets/${f.slug}`;
+    case "game":
+      return `/games/${f.slug}`;
+    case "stack-breakdown":
+      return `/stack-breakdown/${f.slug}`;
+    default:
+      return "#";
   }
 }
 
 function getFavoriteLabel(f: Favorite): string {
   switch (f.type) {
-    case "tool": return f.slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
-    case "tip": return f.slug.toUpperCase();
-    case "cheatsheet": return f.slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
-    case "game": return gameBySlug(f.slug)?.name ?? f.slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
-    case "stack-breakdown": return f.slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
-    default: return f.slug;
+    case "tool":
+      return f.slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+    case "tip":
+      return f.slug.toUpperCase();
+    case "cheatsheet":
+      return f.slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+    case "game":
+      return (
+        gameBySlug(f.slug)?.name ??
+        f.slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
+      );
+    case "stack-breakdown":
+      return f.slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+    default:
+      return f.slug;
   }
 }
 
 function getFavoriteIcon(type: string): string {
   switch (type) {
-    case "tool": return "🛠️";
-    case "tip": return "💡";
-    case "cheatsheet": return "📋";
-    case "game": return "🎮";
-    case "stack-breakdown": return "🧱";
-    default: return "🔖";
+    case "tool":
+      return "🛠️";
+    case "tip":
+      return "💡";
+    case "cheatsheet":
+      return "📋";
+    case "game":
+      return "🎮";
+    case "stack-breakdown":
+      return "🧱";
+    default:
+      return "🔖";
   }
 }
 
@@ -67,7 +88,10 @@ export default function Profile() {
   };
 
   // Aggregate game scores
-  const gameStats: Record<string, { best: number; total: number; games: number; bestStreak: number }> = {};
+  const gameStats: Record<
+    string,
+    { best: number; total: number; games: number; bestStreak: number }
+  > = {};
   activity?.gameScores.forEach((s) => {
     if (!gameStats[s.gameSlug]) {
       gameStats[s.gameSlug] = { best: 0, total: 0, games: 0, bestStreak: 0 };
@@ -147,10 +171,7 @@ export default function Profile() {
               { val: String(totalScore), lbl: "Total Score" },
               { val: String(activity?.favorites.length ?? 0), lbl: "Bookmarks" },
             ].map((s) => (
-              <div
-                key={s.lbl}
-                className="rounded-md border border-line bg-paper p-4 text-center"
-              >
+              <div key={s.lbl} className="rounded-md border border-line bg-paper p-4 text-center">
                 <div className="text-[10px] uppercase tracking-wider text-muted">{s.lbl}</div>
                 <div className="mt-1 font-mono text-xl font-bold text-foreground">{s.val}</div>
               </div>
@@ -180,7 +201,9 @@ export default function Profile() {
                         </div>
                         <div>
                           <div className="text-[9px] uppercase text-muted">Played</div>
-                          <div className="font-mono text-xs font-bold text-foreground">{stats.games}</div>
+                          <div className="font-mono text-xs font-bold text-foreground">
+                            {stats.games}
+                          </div>
                         </div>
                         <div>
                           <div className="text-[9px] uppercase text-muted">Streak</div>
@@ -213,8 +236,12 @@ export default function Profile() {
                     >
                       <span className="text-base">{icon}</span>
                       <div className="min-w-0 flex-1">
-                        <div className="truncate text-sm font-semibold text-foreground">{label}</div>
-                        <div className="text-[10px] uppercase tracking-wider text-muted">{f.type}</div>
+                        <div className="truncate text-sm font-semibold text-foreground">
+                          {label}
+                        </div>
+                        <div className="text-[10px] uppercase tracking-wider text-muted">
+                          {f.type}
+                        </div>
                       </div>
                     </Link>
                   );
@@ -253,7 +280,9 @@ export default function Profile() {
               <div className="rounded-md border-2 border-dashed border-line py-16 text-center">
                 <div className="mb-3 text-4xl">🎮</div>
                 <h3 className="mb-1 font-display text-lg font-bold">No activity yet</h3>
-                <p className="mb-4 text-sm text-muted">Play some games and explore tools to see your stats here.</p>
+                <p className="mb-4 text-sm text-muted">
+                  Play some games and explore tools to see your stats here.
+                </p>
                 <Link
                   to="/games"
                   className="inline-block rounded-md border-0 bg-green px-6 py-2.5 text-sm font-bold text-ink no-underline transition-all hover:opacity-85"

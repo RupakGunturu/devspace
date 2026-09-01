@@ -15,7 +15,7 @@ const FIELDS = [
 
 export function RentVsBuyCalculator() {
   const [inputs, setInputs] = useState<Record<string, string>>(
-    Object.fromEntries(FIELDS.map((f) => [f.key, f.default]))
+    Object.fromEntries(FIELDS.map((f) => [f.key, f.default])),
   );
   const { color } = useToolAccent();
 
@@ -30,7 +30,8 @@ export function RentVsBuyCalculator() {
     const appreciation = parseFloat(inputs.appreciation) / 100;
     const years = parseInt(inputs.horizon);
 
-    if ([rent, homePrice, downPct, mortgageRate, rentInc, appreciation, years].some(isNaN)) return null;
+    if ([rent, homePrice, downPct, mortgageRate, rentInc, appreciation, years].some(isNaN))
+      return null;
     if (rent <= 0 || homePrice <= 0 || years <= 0) return null;
 
     const loanAmount = homePrice * (1 - downPct);
@@ -39,9 +40,11 @@ export function RentVsBuyCalculator() {
     const totalUpfront = downPayment + closingCosts;
 
     const months = years * 12;
-    const monthlyPayment = mortgageRate > 0
-      ? (loanAmount * mortgageRate * Math.pow(1 + mortgageRate, months)) / (Math.pow(1 + mortgageRate, months) - 1)
-      : loanAmount / months;
+    const monthlyPayment =
+      mortgageRate > 0
+        ? (loanAmount * mortgageRate * Math.pow(1 + mortgageRate, months)) /
+          (Math.pow(1 + mortgageRate, months) - 1)
+        : loanAmount / months;
 
     const yearData: {
       year: number;
@@ -78,7 +81,7 @@ export function RentVsBuyCalculator() {
       }
 
       remainingLoan = balance;
-      homeValue *= (1 + appreciation);
+      homeValue *= 1 + appreciation;
 
       const annualBuy = annualPrincipal + annualInterest;
       cumulativeBuy += annualBuy;
@@ -103,7 +106,7 @@ export function RentVsBuyCalculator() {
         winner,
       });
 
-      currentRent *= (1 + rentInc);
+      currentRent *= 1 + rentInc;
     }
 
     const fmt = (v: number) => v.toLocaleString("en-US", { maximumFractionDigits: 0 });
@@ -125,7 +128,9 @@ export function RentVsBuyCalculator() {
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {FIELDS.map(({ key, label, placeholder }) => (
           <div key={key}>
-            <span className="mb-1 block font-mono text-xs font-medium uppercase tracking-wider text-muted">{label}</span>
+            <span className="mb-1 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+              {label}
+            </span>
             <input
               type="number"
               value={inputs[key]}
@@ -144,25 +149,39 @@ export function RentVsBuyCalculator() {
             {[
               { label: "Monthly Mortgage", value: `$${result.fmt(result.monthlyMortgage)}` },
               { label: "Total Upfront Cost", value: `$${result.fmt(result.totalUpfront)}` },
-              { label: "Break-Even Year", value: result.breakEvenYear > 0 ? `Year ${result.breakEvenYear}` : "N/A" },
+              {
+                label: "Break-Even Year",
+                value: result.breakEvenYear > 0 ? `Year ${result.breakEvenYear}` : "N/A",
+              },
               { label: "Final Equity", value: `$${result.fmt(result.finalEquity)}` },
             ].map(({ label, value }) => (
-              <div key={label} className="rounded-md border-2 border-line bg-input-bg p-4 text-center">
-                <div className="font-mono text-[10px] uppercase tracking-wider text-muted">{label}</div>
-                <div className="mt-1 font-display text-lg font-extrabold" style={{ color }}>{value}</div>
+              <div
+                key={label}
+                className="rounded-md border-2 border-line bg-input-bg p-4 text-center"
+              >
+                <div className="font-mono text-[10px] uppercase tracking-wider text-muted">
+                  {label}
+                </div>
+                <div className="mt-1 font-display text-lg font-extrabold" style={{ color }}>
+                  {value}
+                </div>
               </div>
             ))}
           </div>
 
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <div className="rounded-md border-2 border-line bg-input-bg p-4">
-              <div className="mb-1 font-mono text-xs font-medium uppercase tracking-wider text-muted">Total Rent Cost</div>
+              <div className="mb-1 font-mono text-xs font-medium uppercase tracking-wider text-muted">
+                Total Rent Cost
+              </div>
               <div className="font-display text-2xl font-extrabold" style={{ color: "#f59e0b" }}>
                 ${result.fmt(result.finalCumulativeRent)}
               </div>
             </div>
             <div className="rounded-md border-2 border-line bg-input-bg p-4">
-              <div className="mb-1 font-mono text-xs font-medium uppercase tracking-wider text-muted">Total Buy Cost (net of equity)</div>
+              <div className="mb-1 font-mono text-xs font-medium uppercase tracking-wider text-muted">
+                Total Buy Cost (net of equity)
+              </div>
               <div className="font-display text-2xl font-extrabold" style={{ color: "#22c55e" }}>
                 ${result.fmt(result.finalCumulativeBuy - result.finalEquity)}
               </div>
@@ -170,8 +189,13 @@ export function RentVsBuyCalculator() {
           </div>
 
           {result.breakEvenYear > 0 && (
-            <div className="rounded-md border-2 bg-input-bg p-4 text-center" style={{ borderColor: color }}>
-              <div className="font-mono text-xs uppercase tracking-wider text-muted">Buying becomes cheaper than renting after year {result.breakEvenYear}</div>
+            <div
+              className="rounded-md border-2 bg-input-bg p-4 text-center"
+              style={{ borderColor: color }}
+            >
+              <div className="font-mono text-xs uppercase tracking-wider text-muted">
+                Buying becomes cheaper than renting after year {result.breakEvenYear}
+              </div>
             </div>
           )}
 
@@ -196,11 +220,21 @@ export function RentVsBuyCalculator() {
                   {result.yearData.map((row) => (
                     <tr key={row.year} className="border-b border-line last:border-b-0">
                       <td className="px-3 py-2 font-bold text-input-text">{row.year}</td>
-                      <td className="px-3 py-2 text-right text-input-text">${result.fmt(row.rentCost)}</td>
-                      <td className="px-3 py-2 text-right text-input-text">${result.fmt(row.buyCost)}</td>
-                      <td className="px-3 py-2 text-right text-input-text">${result.fmt(row.cumulativeRent)}</td>
-                      <td className="px-3 py-2 text-right text-input-text">${result.fmt(row.netBuy)}</td>
-                      <td className="px-3 py-2 text-right" style={{ color }}>${result.fmt(row.homeEquity)}</td>
+                      <td className="px-3 py-2 text-right text-input-text">
+                        ${result.fmt(row.rentCost)}
+                      </td>
+                      <td className="px-3 py-2 text-right text-input-text">
+                        ${result.fmt(row.buyCost)}
+                      </td>
+                      <td className="px-3 py-2 text-right text-input-text">
+                        ${result.fmt(row.cumulativeRent)}
+                      </td>
+                      <td className="px-3 py-2 text-right text-input-text">
+                        ${result.fmt(row.netBuy)}
+                      </td>
+                      <td className="px-3 py-2 text-right" style={{ color }}>
+                        ${result.fmt(row.homeEquity)}
+                      </td>
                       <td className="px-3 py-2 text-center">
                         <span
                           className="rounded-full px-2 py-0.5 text-[10px] font-bold uppercase"

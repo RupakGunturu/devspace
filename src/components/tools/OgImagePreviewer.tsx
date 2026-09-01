@@ -21,7 +21,10 @@ function TwitterPreview({ fields }: { fields: OgFields }) {
   return (
     <div className="overflow-hidden rounded-xl border border-gray-700 bg-black">
       {fields.imageUrl ? (
-        <div className="h-48 w-full bg-gray-800 bg-cover bg-center" style={{ backgroundImage: `url(${fields.imageUrl})` }} />
+        <div
+          className="h-48 w-full bg-gray-800 bg-cover bg-center"
+          style={{ backgroundImage: `url(${fields.imageUrl})` }}
+        />
       ) : (
         <div className="flex h-48 w-full items-center justify-center bg-gray-800 font-mono text-xs text-gray-500">
           No image
@@ -46,7 +49,10 @@ function FacebookPreview({ fields }: { fields: OgFields }) {
   return (
     <div className="overflow-hidden rounded-lg border border-gray-700 bg-[#242526]">
       {fields.imageUrl ? (
-        <div className="h-52 w-full bg-gray-700 bg-cover bg-center" style={{ backgroundImage: `url(${fields.imageUrl})` }} />
+        <div
+          className="h-52 w-full bg-gray-700 bg-cover bg-center"
+          style={{ backgroundImage: `url(${fields.imageUrl})` }}
+        />
       ) : (
         <div className="flex h-52 w-full items-center justify-center bg-gray-700 font-mono text-xs text-gray-500">
           No image
@@ -71,7 +77,10 @@ function LinkedInPreview({ fields }: { fields: OgFields }) {
   return (
     <div className="overflow-hidden rounded-lg border border-gray-700 bg-[#1b1f23]">
       {fields.imageUrl ? (
-        <div className="h-40 w-full bg-gray-700 bg-cover bg-center" style={{ backgroundImage: `url(${fields.imageUrl})` }} />
+        <div
+          className="h-40 w-full bg-gray-700 bg-cover bg-center"
+          style={{ backgroundImage: `url(${fields.imageUrl})` }}
+        />
       ) : (
         <div className="flex h-40 w-full items-center justify-center bg-gray-700 font-mono text-xs text-gray-500">
           No image
@@ -128,14 +137,14 @@ export function OgImagePreviewer() {
     fields.title.length > 60
       ? `${fields.title.length}/60 — too long`
       : fields.title.length > 0
-      ? `${fields.title.length}/60`
-      : "";
+        ? `${fields.title.length}/60`
+        : "";
   const descWarning =
     fields.description.length > 160
       ? `${fields.description.length}/160 — too long`
       : fields.description.length > 0
-      ? `${fields.description.length}/160`
-      : "";
+        ? `${fields.description.length}/160`
+        : "";
 
   return (
     <ToolLayout id="og-image-previewer">
@@ -144,13 +153,13 @@ export function OgImagePreviewer() {
           <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">
             Meta Fields
           </span>
-          {([
+          {[
             { key: "title" as const, label: "Title", limit: 60 },
             { key: "description" as const, label: "Description", limit: 160 },
             { key: "imageUrl" as const, label: "Image URL", limit: 0 },
             { key: "siteName" as const, label: "Site Name", limit: 0 },
             { key: "url" as const, label: "URL", limit: 0 },
-          ]).map(({ key, label }) => (
+          ].map(({ key, label }) => (
             <div key={key}>
               <label className="mb-1 block font-mono text-xs text-muted">{label}</label>
               {key === "description" ? (
@@ -160,8 +169,12 @@ export function OgImagePreviewer() {
                   rows={3}
                   placeholder={label}
                   className="w-full resize-none rounded-md border-2 border-line bg-input-bg p-3 font-mono text-sm text-input-text outline-none transition-colors placeholder:text-muted"
-                  onFocus={(e) => { e.currentTarget.style.borderColor = color; }}
-                  onBlur={(e) => { e.currentTarget.style.borderColor = ""; }}
+                  onFocus={(e) => {
+                    e.currentTarget.style.borderColor = color;
+                  }}
+                  onBlur={(e) => {
+                    e.currentTarget.style.borderColor = "";
+                  }}
                 />
               ) : (
                 <input
@@ -170,17 +183,25 @@ export function OgImagePreviewer() {
                   onChange={(e) => update(key, e.target.value)}
                   placeholder={label}
                   className="w-full rounded-md border-2 border-line bg-input-bg p-3 font-mono text-sm text-input-text outline-none transition-colors placeholder:text-muted"
-                  onFocus={(e) => { e.currentTarget.style.borderColor = color; }}
-                  onBlur={(e) => { e.currentTarget.style.borderColor = ""; }}
+                  onFocus={(e) => {
+                    e.currentTarget.style.borderColor = color;
+                  }}
+                  onBlur={(e) => {
+                    e.currentTarget.style.borderColor = "";
+                  }}
                 />
               )}
-              {(key === "title" && titleWarning) && (
-                <p className={`mt-1 font-mono text-xs ${fields.title.length > 60 ? "text-red-500" : "text-muted"}`}>
+              {key === "title" && titleWarning && (
+                <p
+                  className={`mt-1 font-mono text-xs ${fields.title.length > 60 ? "text-red-500" : "text-muted"}`}
+                >
                   {titleWarning}
                 </p>
               )}
-              {(key === "description" && descWarning) && (
-                <p className={`mt-1 font-mono text-xs ${fields.description.length > 160 ? "text-red-500" : "text-muted"}`}>
+              {key === "description" && descWarning && (
+                <p
+                  className={`mt-1 font-mono text-xs ${fields.description.length > 160 ? "text-red-500" : "text-muted"}`}
+                >
                   {descWarning}
                 </p>
               )}

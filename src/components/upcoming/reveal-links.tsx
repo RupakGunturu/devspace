@@ -15,7 +15,7 @@ export const RevealLinks = () => {
 const DURATION = 0.25;
 const STAGGER = 0.025;
 
-const FlipLink = ({ children, href }) => {
+const FlipLink = ({ children, href }: { children: string; href: string }) => {
   return (
     <motion.a
       initial="initial"

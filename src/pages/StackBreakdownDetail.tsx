@@ -10,12 +10,12 @@ function slugify(text: string): string {
   return text
     .toLowerCase()
     .replace(/[^\w\s-]/g, "")
-    .replace(/\s+/g, "-") 
+    .replace(/\s+/g, "-")
     .replace(/-+/g, "-")
     .trim();
 }
 
-function extractHeadings(md: string): TocItem[] { 
+function extractHeadings(md: string): TocItem[] {
   const headings: TocItem[] = [];
   const lines = md.split("\n");
   for (const line of lines) {
@@ -33,8 +33,8 @@ const SECTION_ICONS: Record<string, string> = {
   "Product Overview": `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>`,
   "Frontend Stack": `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>`,
   "Backend Stack": `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg>`,
-  "Database": `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>`,
-  "Infrastructure": `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>`,
+  Database: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>`,
+  Infrastructure: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>`,
   "APIs & Services": `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8v5a6 6 0 0 1-6 6 6 6 0 0 1-6-6V8z"/></svg>`,
   "Scaling Techniques": `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>`,
   "Security & Reliability": `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
@@ -44,7 +44,7 @@ const SECTION_ICONS: Record<string, string> = {
   "Student Version": `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>`,
   "Technologies Used": `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>`,
   "Engineering Lessons": `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>`,
-  "References": `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>`,
+  References: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>`,
 };
 
 export default function StackBreakdownDetailPage() {
@@ -58,10 +58,7 @@ export default function StackBreakdownDetailPage() {
     document.title = item ? `${item.title} — DevSpace` : "Not found — DevSpace";
   }, [item]);
 
-  const headings = useMemo(
-    () => (item ? extractHeadings(item.body) : []),
-    [item]
-  );
+  const headings = useMemo(() => (item ? extractHeadings(item.body) : []), [item]);
 
   const setupObserver = useCallback(() => {
     if (observerRef.current) observerRef.current.disconnect();
@@ -73,7 +70,7 @@ export default function StackBreakdownDetailPage() {
           }
         }
       },
-      { root: scrollRef.current, rootMargin: "-80px 0px -70% 0px", threshold: 0 }
+      { root: scrollRef.current, rootMargin: "-80px 0px -70% 0px", threshold: 0 },
     );
     for (const h of headings) {
       const el = document.getElementById(h.id);
@@ -101,17 +98,13 @@ export default function StackBreakdownDetailPage() {
       return `<h${depth} id="${id}">${iconHtml}${content}</h${depth}>`;
     };
     const raw = marked.parse(item.body, { async: false, renderer }) as string;
-    return typeof window !== "undefined"
-      ? DOMPurify.sanitize(raw)
-      : raw;
+    return typeof window !== "undefined" ? DOMPurify.sanitize(raw) : raw;
   }, [item]);
 
   if (!item) {
     return (
       <div className="mx-auto max-w-2xl px-6 py-24 text-center">
-        <h1 className="font-display text-3xl font-bold">
-          Breakdown not found
-        </h1>
+        <h1 className="font-display text-3xl font-bold">Breakdown not found</h1>
         <Link
           to="/stack-breakdown"
           className="mt-6 inline-block font-mono text-sm text-yellow no-underline"
@@ -126,7 +119,10 @@ export default function StackBreakdownDetailPage() {
     const el = document.getElementById(id);
     const container = scrollRef.current;
     if (el && container) {
-      const elTop = el.getBoundingClientRect().top - container.getBoundingClientRect().top + container.scrollTop;
+      const elTop =
+        el.getBoundingClientRect().top -
+        container.getBoundingClientRect().top +
+        container.scrollTop;
       container.scrollTo({ top: elTop - 24, behavior: "smooth" });
       setActiveId(id);
       setTocOpen(false);
@@ -205,9 +201,7 @@ export default function StackBreakdownDetailPage() {
                 className={`block w-full text-left transition-colors ${
                   h.level === 3 ? "pl-4" : ""
                 } ${
-                  activeId === h.id
-                    ? "text-yellow"
-                    : "text-muted hover:text-yellow"
+                  activeId === h.id ? "text-yellow" : "text-muted hover:text-yellow"
                 } py-1 font-mono text-[12px]`}
               >
                 {h.text}
@@ -249,22 +243,22 @@ export default function StackBreakdownDetailPage() {
         <div ref={scrollRef} className="min-h-0 flex-1 overflow-y-auto">
           {/* Rendered markdown content */}
           <article className="min-w-0">
-          <div
-            className="prose-stackbreakdown text-foreground"
-            dangerouslySetInnerHTML={{ __html: html }}
-          />
+            <div
+              className="prose-stackbreakdown text-foreground"
+              dangerouslySetInnerHTML={{ __html: html }}
+            />
 
-          {/* Footer CTA */}
-          <div className="mt-16 border-t-2 border-dashed border-line pt-8 text-center">
-            <Link
-              to="/stack-breakdown"
-              className="inline-block rounded-sm border-2 border-yellow bg-yellow px-6 py-3 font-mono text-[13px] font-bold text-ink no-underline"
-              style={{ boxShadow: "4px 4px 0 var(--coral)" }}
-            >
-              more breakdowns →
-            </Link>
-          </div>
-        </article>
+            {/* Footer CTA */}
+            <div className="mt-16 border-t-2 border-dashed border-line pt-8 text-center">
+              <Link
+                to="/stack-breakdown"
+                className="inline-block rounded-sm border-2 border-yellow bg-yellow px-6 py-3 font-mono text-[13px] font-bold text-ink no-underline"
+                style={{ boxShadow: "4px 4px 0 var(--coral)" }}
+              >
+                more breakdowns →
+              </Link>
+            </div>
+          </article>
         </div>
       </div>
 

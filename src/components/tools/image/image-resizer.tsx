@@ -31,11 +31,47 @@ export default function ImageResizer() {
     <ToolLayout id="image-resizer">
       <ToolFileInput accept="image/*" onChange={handle} label="Choose image" />
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div><label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">Width</label><input type="number" value={width} onChange={(e) => setWidth(Number(e.target.value))} className="w-full p-2.5 bg-paper-dim/50 border border-border rounded-sm text-sm font-mono text-foreground" /></div>
-        <div><label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">Height</label><input type="number" value={height} onChange={(e) => setHeight(Number(e.target.value))} className="w-full p-2.5 bg-paper-dim/50 border border-border rounded-sm text-sm font-mono text-foreground" /></div>
+        <div>
+          <label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">
+            Width
+          </label>
+          <input
+            type="number"
+            value={width}
+            onChange={(e) => setWidth(Number(e.target.value))}
+            className="w-full p-2.5 bg-paper-dim/50 border border-border rounded-sm text-sm font-mono text-foreground"
+          />
+        </div>
+        <div>
+          <label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">
+            Height
+          </label>
+          <input
+            type="number"
+            value={height}
+            onChange={(e) => setHeight(Number(e.target.value))}
+            className="w-full p-2.5 bg-paper-dim/50 border border-border rounded-sm text-sm font-mono text-foreground"
+          />
+        </div>
       </div>
-      {original && <p className="text-xs text-muted-foreground">Original: {original.w}×{original.h}</p>}
-      {url && <div className="flex flex-col items-center gap-4"><img src={url} alt="Resized" className="max-h-48 border border-border rounded" /><a href={url} download="resized.png" className="text-sm hover:underline" style={{ color }}>Download</a></div>}
+      {original && (
+        <p className="text-xs text-muted-foreground">
+          Original: {original.w}×{original.h}
+        </p>
+      )}
+      {url && (
+        <div className="flex flex-col items-center gap-4">
+          <img src={url} alt="Resized" className="max-h-48 border border-border rounded" />
+          <a
+            href={url}
+            download="resized.png"
+            className="text-sm hover:underline"
+            style={{ color }}
+          >
+            Download
+          </a>
+        </div>
+      )}
     </ToolLayout>
   );
 }

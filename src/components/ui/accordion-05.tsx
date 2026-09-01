@@ -48,7 +48,7 @@ const items = [
     id: "7",
     title: "Is it free?",
     content:
-      "Yes. Everything on DevSpace — tools, games, and the feed — is free. No subscriptions, no premium tiers, no \"enter your credit card for the free trial\" nonsense.",
+      'Yes. Everything on DevSpace — tools, games, and the feed — is free. No subscriptions, no premium tiers, no "enter your credit card for the free trial" nonsense.',
   },
   {
     id: "8",

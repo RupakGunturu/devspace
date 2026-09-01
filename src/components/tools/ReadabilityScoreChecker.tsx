@@ -22,9 +22,24 @@ export function ReadabilityScoreChecker() {
     const fkGrade = Math.max(0, Math.round(gradeLevel * 10) / 10);
     const fkReading = Math.min(100, Math.max(0, Math.round(fleschKincaid * 10) / 10));
 
-    const readingLevel = fkReading >= 80 ? "Easy" : fkReading >= 60 ? "Standard" : fkReading >= 40 ? "Difficult" : "Very Difficult";
+    const readingLevel =
+      fkReading >= 80
+        ? "Easy"
+        : fkReading >= 60
+          ? "Standard"
+          : fkReading >= 40
+            ? "Difficult"
+            : "Very Difficult";
 
-    return { wordCount, sentenceCount, avgWordsPerSentence: Math.round(avgWordsPerSentence * 10) / 10, fkGrade, fkReading, readingLevel, syllables };
+    return {
+      wordCount,
+      sentenceCount,
+      avgWordsPerSentence: Math.round(avgWordsPerSentence * 10) / 10,
+      fkGrade,
+      fkReading,
+      readingLevel,
+      syllables,
+    };
   }, [text]);
 
   function countSyllables(word: string): number {
@@ -63,27 +78,45 @@ export function ReadabilityScoreChecker() {
         <div className="flex flex-col gap-4">
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
             <div className="rounded-md border-2 border-line bg-input-bg px-4 py-3 text-center">
-              <p className="font-mono text-2xl font-bold" style={{ color }}>{result.wordCount}</p>
+              <p className="font-mono text-2xl font-bold" style={{ color }}>
+                {result.wordCount}
+              </p>
               <p className="font-mono text-[10px] uppercase text-muted">Words</p>
             </div>
             <div className="rounded-md border-2 border-line bg-input-bg px-4 py-3 text-center">
-              <p className="font-mono text-2xl font-bold" style={{ color }}>{result.sentenceCount}</p>
+              <p className="font-mono text-2xl font-bold" style={{ color }}>
+                {result.sentenceCount}
+              </p>
               <p className="font-mono text-[10px] uppercase text-muted">Sentences</p>
             </div>
             <div className="rounded-md border-2 border-line bg-input-bg px-4 py-3 text-center">
-              <p className="font-mono text-2xl font-bold" style={{ color }}>{result.syllables}</p>
+              <p className="font-mono text-2xl font-bold" style={{ color }}>
+                {result.syllables}
+              </p>
               <p className="font-mono text-[10px] uppercase text-muted">Syllables</p>
             </div>
             <div className="rounded-md border-2 border-line bg-input-bg px-4 py-3 text-center">
-              <p className="font-mono text-2xl font-bold" style={{ color }}>{result.avgWordsPerSentence}</p>
+              <p className="font-mono text-2xl font-bold" style={{ color }}>
+                {result.avgWordsPerSentence}
+              </p>
               <p className="font-mono text-[10px] uppercase text-muted">Avg Words/Sentence</p>
             </div>
             <div className="rounded-md border-2 border-line bg-input-bg px-4 py-3 text-center">
-              <p className="font-mono text-2xl font-bold" style={{ color: scoreColor(100 - result.fkGrade, 100) }}>{result.fkGrade}</p>
+              <p
+                className="font-mono text-2xl font-bold"
+                style={{ color: scoreColor(100 - result.fkGrade, 100) }}
+              >
+                {result.fkGrade}
+              </p>
               <p className="font-mono text-[10px] uppercase text-muted">Flesch-Kincaid Grade</p>
             </div>
             <div className="rounded-md border-2 border-line bg-input-bg px-4 py-3 text-center">
-              <p className="font-mono text-2xl font-bold" style={{ color: scoreColor(result.fkReading) }}>{result.fkReading}</p>
+              <p
+                className="font-mono text-2xl font-bold"
+                style={{ color: scoreColor(result.fkReading) }}
+              >
+                {result.fkReading}
+              </p>
               <p className="font-mono text-[10px] uppercase text-muted">Reading Ease</p>
             </div>
           </div>
@@ -93,10 +126,15 @@ export function ReadabilityScoreChecker() {
               Interpretation
             </p>
             <p className="font-mono text-sm text-foreground">
-              This text has a Flesch Reading Ease score of <strong style={{ color }}>{result.fkReading}</strong>, which is
-              considered <strong style={{ color }}>{result.readingLevel}</strong>.
-              A {result.fkGrade > 8 ? "college" : result.fkGrade > 6 ? "high school" : "middle school"} level education
-              would be needed to understand this text ({result.fkGrade}th grade).
+              This text has a Flesch Reading Ease score of{" "}
+              <strong style={{ color }}>{result.fkReading}</strong>, which is considered{" "}
+              <strong style={{ color }}>{result.readingLevel}</strong>. A{" "}
+              {result.fkGrade > 8
+                ? "college"
+                : result.fkGrade > 6
+                  ? "high school"
+                  : "middle school"}{" "}
+              level education would be needed to understand this text ({result.fkGrade}th grade).
             </p>
           </div>
         </div>

@@ -9,8 +9,16 @@ interface Variant {
 }
 
 export function ThumbnailAbPreviewer() {
-  const [variantA, setVariantA] = useState<Variant>({ title: "10 Tips for Better Code", bgColor: "#1E293B", notes: "" });
-  const [variantB, setVariantB] = useState<Variant>({ title: "Master Programming Today", bgColor: "#7C3AED", notes: "" });
+  const [variantA, setVariantA] = useState<Variant>({
+    title: "10 Tips for Better Code",
+    bgColor: "#1E293B",
+    notes: "",
+  });
+  const [variantB, setVariantB] = useState<Variant>({
+    title: "Master Programming Today",
+    bgColor: "#7C3AED",
+    notes: "",
+  });
   const { color } = useToolAccent();
 
   const updateA = (field: keyof Variant, val: string) => setVariantA({ ...variantA, [field]: val });
@@ -27,7 +35,9 @@ export function ThumbnailAbPreviewer() {
     <ToolLayout id="thumbnail-ab-previewer">
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="flex flex-col gap-2">
-          <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">Variant A</span>
+          <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">
+            Variant A
+          </span>
           <input
             type="text"
             value={variantA.title}
@@ -46,7 +56,9 @@ export function ThumbnailAbPreviewer() {
           </div>
         </div>
         <div className="flex flex-col gap-2">
-          <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">Variant B</span>
+          <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">
+            Variant B
+          </span>
           <input
             type="text"
             value={variantB.title}
@@ -68,7 +80,9 @@ export function ThumbnailAbPreviewer() {
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="rounded-md border-2 border-line bg-input-bg p-4">
-          <p className="mb-2 font-mono text-[10px] uppercase text-muted text-center">Variant A Preview</p>
+          <p className="mb-2 font-mono text-[10px] uppercase text-muted text-center">
+            Variant A Preview
+          </p>
           <div
             className="flex aspect-video items-center justify-center rounded-lg p-4 text-center"
             style={{ backgroundColor: variantA.bgColor }}
@@ -82,7 +96,9 @@ export function ThumbnailAbPreviewer() {
           </div>
         </div>
         <div className="rounded-md border-2 border-line bg-input-bg p-4">
-          <p className="mb-2 font-mono text-[10px] uppercase text-muted text-center">Variant B Preview</p>
+          <p className="mb-2 font-mono text-[10px] uppercase text-muted text-center">
+            Variant B Preview
+          </p>
           <div
             className="flex aspect-video items-center justify-center rounded-lg p-4 text-center"
             style={{ backgroundColor: variantB.bgColor }}

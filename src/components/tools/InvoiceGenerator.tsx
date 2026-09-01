@@ -52,7 +52,7 @@ export function InvoiceGenerator() {
 
   const updateLineItem = (index: number, field: keyof LineItem, value: string) => {
     setLineItems((prev) =>
-      prev.map((item, i) => (i === index ? { ...item, [field]: value } : item))
+      prev.map((item, i) => (i === index ? { ...item, [field]: value } : item)),
     );
   };
 
@@ -106,7 +106,7 @@ export function InvoiceGenerator() {
     lines.push("");
     lines.push("-".repeat(60));
     lines.push(
-      `${"Description".padEnd(30)} ${"Qty".padStart(5)} ${"Rate".padStart(10)} ${"Amount".padStart(12)}`
+      `${"Description".padEnd(30)} ${"Qty".padStart(5)} ${"Rate".padStart(10)} ${"Amount".padStart(12)}`,
     );
     lines.push("-".repeat(60));
     for (const item of calculations.items) {
@@ -137,7 +137,10 @@ export function InvoiceGenerator() {
     printWindow.document.write(`
       <html><head><title>Invoice ${invoice.invoiceNumber || ""}</title>
       <style>body{font-family:'Courier New',monospace;max-width:700px;margin:40px auto;padding:20px;line-height:1.6;color:#1a1a2e;white-space:pre-wrap}h1{text-align:center;font-size:24px;margin-bottom:20px;letter-spacing:2px;}table{width:100%;border-collapse:collapse;margin:16px 0}th,td{padding:8px;text-align:left;border-bottom:1px solid #ddd}th{text-align:right}.total{font-weight:bold;font-size:14px;border-top:2px solid #1a1a2e;padding-top:8px;}</style>
-      </head><body>${previewText.split("\n").map((l) => l || "<br>").join("\n")}</body></html>
+      </head><body>${previewText
+        .split("\n")
+        .map((l) => l || "<br>")
+        .join("\n")}</body></html>
     `);
     printWindow.document.close();
     printWindow.print();

@@ -19,7 +19,7 @@ export function CoverLetterTailor() {
         .split(",")
         .map((s) => s.trim())
         .filter(Boolean),
-    [skills]
+    [skills],
   );
 
   const letter = useMemo(() => {
@@ -116,7 +116,10 @@ export function CoverLetterTailor() {
       </div>
 
       <div className="flex gap-2">
-        <ToolButton onClick={handleGenerate} disabled={!yourName.trim() && !company.trim() && !role.trim()}>
+        <ToolButton
+          onClick={handleGenerate}
+          disabled={!yourName.trim() && !company.trim() && !role.trim()}
+        >
           Generate Cover Letter
         </ToolButton>
       </div>

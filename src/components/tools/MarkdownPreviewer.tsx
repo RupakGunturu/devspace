@@ -32,19 +32,27 @@ export function MarkdownPreviewer() {
     <ToolLayout id="markdown-preview">
       <div className="grid gap-3 sm:grid-cols-2">
         <div>
-          <span className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Markdown</span>
+          <span className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+            Markdown
+          </span>
           <textarea
             value={text}
             onChange={(e) => setText(e.target.value)}
             spellCheck={false}
             className="h-96 w-full resize-none rounded-md border-2 bg-input-bg p-3 font-mono text-sm text-input-text outline-none transition-colors placeholder:text-muted"
             style={{ borderColor: "var(--border)" }}
-            onFocus={(e) => { e.currentTarget.style.borderColor = color; }}
-            onBlur={(e) => { e.currentTarget.style.borderColor = ""; }}
+            onFocus={(e) => {
+              e.currentTarget.style.borderColor = color;
+            }}
+            onBlur={(e) => {
+              e.currentTarget.style.borderColor = "";
+            }}
           />
         </div>
         <div>
-          <span className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Preview</span>
+          <span className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+            Preview
+          </span>
           <div
             className="md-preview h-96 overflow-auto rounded-md border-2 border-line bg-paper p-4 text-ink"
             dangerouslySetInnerHTML={{ __html: html }}

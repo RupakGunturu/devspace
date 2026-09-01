@@ -39,34 +39,86 @@ export default function RegexTester() {
     if (!pattern || error) return testString;
     try {
       const regex = new RegExp(pattern, flags.replace("g", ""));
-      return testString.replace(regex, (m) => `<mark style="background-color:${color};color:#fff;padding:0 2px;border-radius:4px">${m}</mark>`);
-    } catch { return testString; }
+      return testString.replace(
+        regex,
+        (m) =>
+          `<mark style="background-color:${color};color:#fff;padding:0 2px;border-radius:4px">${m}</mark>`,
+      );
+    } catch {
+      return testString;
+    }
   })();
 
   return (
     <ToolLayout id="regex-tester">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2">Pattern</label>
-          <input value={pattern} onChange={(e) => setPattern(e.target.value)} placeholder="e.g. \d+|[a-z]+" className="w-full p-3 bg-input-bg border border-border rounded-md text-sm font-mono text-input-text focus:outline-none" style={{ ["--tw-ring-color" as string]: color }} onFocus={(e) => { e.currentTarget.style.borderColor = color; }} onBlur={(e) => { e.currentTarget.style.borderColor = ""; }} />
+          <label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2">
+            Pattern
+          </label>
+          <input
+            value={pattern}
+            onChange={(e) => setPattern(e.target.value)}
+            placeholder="e.g. \d+|[a-z]+"
+            className="w-full p-3 bg-input-bg border border-border rounded-md text-sm font-mono text-input-text focus:outline-none"
+            style={{ ["--tw-ring-color" as string]: color }}
+            onFocus={(e) => {
+              e.currentTarget.style.borderColor = color;
+            }}
+            onBlur={(e) => {
+              e.currentTarget.style.borderColor = "";
+            }}
+          />
         </div>
         <div>
-          <label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2">Flags</label>
-          <input value={flags} onChange={(e) => setFlags(e.target.value)} placeholder="g, i, m" className="w-full p-3 bg-input-bg border border-border rounded-md text-sm font-mono text-input-text focus:outline-none" style={{ ["--tw-ring-color" as string]: color }} onFocus={(e) => { e.currentTarget.style.borderColor = color; }} onBlur={(e) => { e.currentTarget.style.borderColor = ""; }} />
+          <label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2">
+            Flags
+          </label>
+          <input
+            value={flags}
+            onChange={(e) => setFlags(e.target.value)}
+            placeholder="g, i, m"
+            className="w-full p-3 bg-input-bg border border-border rounded-md text-sm font-mono text-input-text focus:outline-none"
+            style={{ ["--tw-ring-color" as string]: color }}
+            onFocus={(e) => {
+              e.currentTarget.style.borderColor = color;
+            }}
+            onBlur={(e) => {
+              e.currentTarget.style.borderColor = "";
+            }}
+          />
         </div>
       </div>
-      <ToolInput value={testString} onChange={setTestString} placeholder="Enter test string..." label="Test String" rows={5} />
+      <ToolInput
+        value={testString}
+        onChange={setTestString}
+        placeholder="Enter test string..."
+        label="Test String"
+        rows={5}
+      />
       <ToolButton onClick={test}>Test Regex</ToolButton>
       {error && <p className="text-sm text-coral font-mono">Error: {error}</p>}
       <div className="w-full">
-        <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2 block">Highlighted Matches</span>
-        <div className="w-full min-h-[60px] p-4 bg-input-bg border border-border rounded-md text-sm font-mono text-input-text whitespace-pre-wrap" dangerouslySetInnerHTML={{ __html: highlighted }} />
+        <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2 block">
+          Highlighted Matches
+        </span>
+        <div
+          className="w-full min-h-[60px] p-4 bg-input-bg border border-border rounded-md text-sm font-mono text-input-text whitespace-pre-wrap"
+          dangerouslySetInnerHTML={{ __html: highlighted }}
+        />
       </div>
       <div className="w-full">
-        <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2 block">Matches ({matches.length})</span>
+        <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2 block">
+          Matches ({matches.length})
+        </span>
         <div className="flex flex-wrap gap-2">
           {matches.map((m, i) => (
-            <span key={i} className="px-2 py-1 bg-coral/10 text-green-600 border border-green-500/30 rounded font-mono text-xs">"{m}"</span>
+            <span
+              key={i}
+              className="px-2 py-1 bg-coral/10 text-green-600 border border-green-500/30 rounded font-mono text-xs"
+            >
+              "{m}"
+            </span>
           ))}
         </div>
       </div>

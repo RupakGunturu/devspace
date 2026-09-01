@@ -9,14 +9,28 @@ export default function UrlEncoder() {
   const [output, setOutput] = useState("");
 
   const encode = () => setOutput(encodeURIComponent(input));
-  const decode = () => { try { setOutput(decodeURIComponent(input)); } catch { setOutput("Invalid URL encoding"); } };
+  const decode = () => {
+    try {
+      setOutput(decodeURIComponent(input));
+    } catch {
+      setOutput("Invalid URL encoding");
+    }
+  };
 
   return (
     <ToolLayout id="url-encoder">
-      <ToolInput value={input} onChange={setInput} placeholder="Enter URL or text..." label="Input" rows={4} />
+      <ToolInput
+        value={input}
+        onChange={setInput}
+        placeholder="Enter URL or text..."
+        label="Input"
+        rows={4}
+      />
       <div className="flex flex-col sm:flex-row gap-2">
         <ToolButton onClick={encode}>Encode</ToolButton>
-        <ToolButton onClick={decode} variant="secondary">Decode</ToolButton>
+        <ToolButton onClick={decode} variant="secondary">
+          Decode
+        </ToolButton>
       </div>
       <ToolOutput value={output} />
     </ToolLayout>

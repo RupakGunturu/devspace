@@ -105,12 +105,14 @@ export function VideoAspectRatioCalculator() {
                   className="rounded border-2 border-dashed"
                   style={{
                     width: 80,
-                    height: Math.round(80 * (parseInt(srcH) || 1080) / (parseInt(srcW) || 1920)),
+                    height: Math.round((80 * (parseInt(srcH) || 1080)) / (parseInt(srcW) || 1920)),
                     borderColor: `${color}60`,
                     backgroundColor: `${color}15`,
                   }}
                 />
-                <p className="mt-1 font-mono text-[10px] text-muted">Source {srcW}×{srcH}</p>
+                <p className="mt-1 font-mono text-[10px] text-muted">
+                  Source {srcW}×{srcH}
+                </p>
               </div>
               <span className="font-mono text-lg text-muted">→</span>
               <div className="text-center">
@@ -118,12 +120,14 @@ export function VideoAspectRatioCalculator() {
                   className="rounded border-2"
                   style={{
                     width: 80,
-                    height: Math.round(80 * result.targetH / result.targetW),
+                    height: Math.round((80 * result.targetH) / result.targetW),
                     borderColor: color,
                     backgroundColor: `${color}30`,
                   }}
                 />
-                <p className="mt-1 font-mono text-[10px] text-muted">Target {result.targetW}×{result.targetH}</p>
+                <p className="mt-1 font-mono text-[10px] text-muted">
+                  Target {result.targetW}×{result.targetH}
+                </p>
               </div>
             </div>
           </div>

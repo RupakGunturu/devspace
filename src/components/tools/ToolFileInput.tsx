@@ -8,19 +8,18 @@ interface ToolFileInputProps {
   className?: string;
 }
 
-export function ToolFileInput({ accept = "*/*", onChange, label = "Choose file", className = "" }: ToolFileInputProps) {
+export function ToolFileInput({
+  accept = "*/*",
+  onChange,
+  label = "Choose file",
+  className = "",
+}: ToolFileInputProps) {
   const { color, fg } = useToolAccent();
   const fileRef = useRef<HTMLInputElement>(null);
 
   return (
     <div className={className}>
-      <input
-        ref={fileRef}
-        type="file"
-        accept={accept}
-        onChange={onChange}
-        className="hidden"
-      />
+      <input ref={fileRef} type="file" accept={accept} onChange={onChange} className="hidden" />
       <button
         onClick={() => fileRef.current?.click()}
         className="w-full rounded-md border-2 border-dashed p-6 text-center text-sm font-medium transition-all hover:opacity-90"

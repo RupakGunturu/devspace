@@ -30,9 +30,7 @@ export default function CardFlip({
           "relative h-full w-full",
           "[transform-style:preserve-3d]",
           "transition-[transform] duration-500 ease-[cubic-bezier(0.77,0,0.175,1)]",
-          isFlipped
-            ? "[transform:rotateY(180deg)]"
-            : "[transform:rotateY(0deg)]"
+          isFlipped ? "[transform:rotateY(180deg)]" : "[transform:rotateY(0deg)]",
         )}
       >
         {/* Front of card */}
@@ -44,7 +42,7 @@ export default function CardFlip({
             "bg-paper",
             "border-2 border-line",
             "transition-shadow duration-500",
-            "group-hover:shadow-lg"
+            "group-hover:shadow-lg",
           )}
         >
           <div className="relative h-full overflow-hidden bg-paper-dim">
@@ -66,7 +64,7 @@ export default function CardFlip({
                       "absolute h-[50px] w-[50px]",
                       "rounded-full",
                       "opacity-0",
-                      "group-hover:animate-[flipScale_3s_linear_infinite]"
+                      "group-hover:animate-[flipScale_3s_linear_infinite]",
                     )}
                     key={i}
                     style={{
@@ -116,7 +114,7 @@ export default function CardFlip({
             "border-2 border-line",
             "flex flex-col",
             "transition-shadow duration-500",
-            "group-hover:shadow-lg"
+            "group-hover:shadow-lg",
           )}
         >
           <div className="flex-1 space-y-6">
@@ -140,11 +138,7 @@ export default function CardFlip({
                     transitionDelay: `${index * 50 + 150}ms`,
                   }}
                 >
-                  <ArrowRight
-                    aria-hidden="true"
-                    className="h-3 w-3"
-                    style={{ color }}
-                  />
+                  <ArrowRight aria-hidden="true" className="h-3 w-3" style={{ color }} />
                   <span>{feature}</span>
                 </div>
               ))}
@@ -160,7 +154,7 @@ export default function CardFlip({
                 "transition-[transform,background] duration-300",
                 "bg-paper-dim",
                 "hover:scale-[1.02] active:scale-[0.98]",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
+                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-paper",
               )}
               type="button"
             >

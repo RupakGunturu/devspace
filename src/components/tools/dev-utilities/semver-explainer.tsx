@@ -10,7 +10,10 @@ export default function SemverExplainer() {
 
   const explain = () => {
     const match = input.match(/^v?(\d+)\.(\d+)\.(\d+)(?:-(.+))?(?:\+(.+))?$/);
-    if (!match) { setOutput("Invalid semver. Format: 1.2.3 or v1.2.3"); return; }
+    if (!match) {
+      setOutput("Invalid semver. Format: 1.2.3 or v1.2.3");
+      return;
+    }
     const [, major, minor, pre, build] = match;
     const lines = [
       `Version: ${input}`,
@@ -33,7 +36,13 @@ export default function SemverExplainer() {
 
   return (
     <ToolLayout id="semver-explainer">
-      <ToolInput value={input} onChange={setInput} placeholder="e.g. 2.1.0, v1.4.2-beta.1" label="Version" rows={1} />
+      <ToolInput
+        value={input}
+        onChange={setInput}
+        placeholder="e.g. 2.1.0, v1.4.2-beta.1"
+        label="Version"
+        rows={1}
+      />
       <ToolButton onClick={explain}>Explain</ToolButton>
       <ToolOutput value={output} label="Breakdown" />
     </ToolLayout>

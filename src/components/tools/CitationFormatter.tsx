@@ -22,13 +22,31 @@ export function CitationFormatter() {
     if (!a || !t) return { apa: "", mla: "", chicago: "" };
 
     const lastName = a.split(",").pop()?.trim() || a;
-    const firstNames = a.includes(",") ? a.split(",").slice(0, -1).map((s) => s.trim()).join(", ") : "";
+    const firstNames = a.includes(",")
+      ? a
+          .split(",")
+          .slice(0, -1)
+          .map((s) => s.trim())
+          .join(", ")
+      : "";
 
-    const apa = `${lastName}${firstNames ? ", " + firstNames.charAt(0) + "." : ""} (${y || "n.d."}). ${t}. ${p ? p : ""}${j ? ". " + j : ""}${u ? ". " + u : ""}`.replace(/\.\./g, ".").replace(/\.\s*\./g, ".").trim();
+    const apa =
+      `${lastName}${firstNames ? ", " + firstNames.charAt(0) + "." : ""} (${y || "n.d."}). ${t}. ${p ? p : ""}${j ? ". " + j : ""}${u ? ". " + u : ""}`
+        .replace(/\.\./g, ".")
+        .replace(/\.\s*\./g, ".")
+        .trim();
 
-    const mla = `${a}. "${t}." ${j ? j + ", " : ""}${p ? p + ", " : ""}${y || "n.d."}. ${u ? "Web." : ""}`.replace(/\.\./g, ".").replace(/\.\s*\./g, ".").trim();
+    const mla =
+      `${a}. "${t}." ${j ? j + ", " : ""}${p ? p + ", " : ""}${y || "n.d."}. ${u ? "Web." : ""}`
+        .replace(/\.\./g, ".")
+        .replace(/\.\s*\./g, ".")
+        .trim();
 
-    const chicago = `${a}. "${t}." ${p ? p : ""}${j ? ", " + j : ""} (${y || "n.d."}).${u ? " " + u : ""}`.replace(/\.\./g, ".").replace(/\.\s*\./g, ".").trim();
+    const chicago =
+      `${a}. "${t}." ${p ? p : ""}${j ? ", " + j : ""} (${y || "n.d."}).${u ? " " + u : ""}`
+        .replace(/\.\./g, ".")
+        .replace(/\.\s*\./g, ".")
+        .trim();
 
     return { apa, mla, chicago };
   }, [author, title, year, publisher, url, journal]);
@@ -42,16 +60,46 @@ export function CitationFormatter() {
   return (
     <ToolLayout id="citation-formatter">
       <div className="grid gap-4 sm:grid-cols-2">
-        <ToolInput value={author} onChange={setAuthor} label="Author(s)" placeholder="e.g. Smith, John and Doe, Jane" rows={2} />
-        <ToolInput value={title} onChange={setTitle} label="Title" placeholder="e.g. The Art of Programming" rows={2} />
+        <ToolInput
+          value={author}
+          onChange={setAuthor}
+          label="Author(s)"
+          placeholder="e.g. Smith, John and Doe, Jane"
+          rows={2}
+        />
+        <ToolInput
+          value={title}
+          onChange={setTitle}
+          label="Title"
+          placeholder="e.g. The Art of Programming"
+          rows={2}
+        />
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
         <ToolInput value={year} onChange={setYear} label="Year" placeholder="e.g. 2024" rows={1} />
-        <ToolInput value={publisher} onChange={setPublisher} label="Publisher" placeholder="e.g. Tech Press" rows={1} />
+        <ToolInput
+          value={publisher}
+          onChange={setPublisher}
+          label="Publisher"
+          placeholder="e.g. Tech Press"
+          rows={1}
+        />
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
-        <ToolInput value={journal} onChange={setJournal} label="Journal (if applicable)" placeholder="e.g. Journal of CS" rows={1} />
-        <ToolInput value={url} onChange={setUrl} label="URL (if applicable)" placeholder="https://..." rows={1} />
+        <ToolInput
+          value={journal}
+          onChange={setJournal}
+          label="Journal (if applicable)"
+          placeholder="e.g. Journal of CS"
+          rows={1}
+        />
+        <ToolInput
+          value={url}
+          onChange={setUrl}
+          label="URL (if applicable)"
+          placeholder="https://..."
+          rows={1}
+        />
       </div>
       <ToolButton onClick={() => {}} disabled={!author.trim() || !title.trim()}>
         Format Citation

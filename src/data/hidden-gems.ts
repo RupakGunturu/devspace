@@ -47,7 +47,8 @@ export const HIDDEN_GEMS: HiddenGem[] = [
     id: "excalidraw",
     name: "Excalidraw",
     url: "https://excalidraw.com",
-    description: "Whiteboard-style sketching tool with a hand-drawn feel — perfect for diagrams and architecture.",
+    description:
+      "Whiteboard-style sketching tool with a hand-drawn feel — perfect for diagrams and architecture.",
     icon: "PenTool",
     category: "tools",
     tags: ["whiteboard", "diagrams", "sketch", "open-source"],
@@ -56,7 +57,8 @@ export const HIDDEN_GEMS: HiddenGem[] = [
     id: "regex101",
     name: "regex101",
     url: "https://regex101.com",
-    description: "Live regex debugger with explanation, match info, and a cheatsheet — never guess regex again.",
+    description:
+      "Live regex debugger with explanation, match info, and a cheatsheet — never guess regex again.",
     icon: "Code",
     category: "reference",
     tags: ["regex", "debugger", "explain", "live"],
@@ -65,7 +67,8 @@ export const HIDDEN_GEMS: HiddenGem[] = [
     id: "roadmap-sh",
     name: "roadmap.sh",
     url: "https://roadmap.sh",
-    description: "Community-driven learning paths for every dev role — frontend, backend, DevOps, and more.",
+    description:
+      "Community-driven learning paths for every dev role — frontend, backend, DevOps, and more.",
     icon: "Map",
     category: "learning",
     tags: ["roadmap", "career", "learning-paths", "community"],
@@ -83,7 +86,8 @@ export const HIDDEN_GEMS: HiddenGem[] = [
     id: "carbon-now",
     name: "Carbon",
     url: "https://carbon.now.sh",
-    description: "Turn code into beautiful shareable images — great for social media and presentations.",
+    description:
+      "Turn code into beautiful shareable images — great for social media and presentations.",
     icon: "Camera",
     category: "tools",
     tags: ["code-image", "share", "social", "presentation"],
@@ -101,7 +105,8 @@ export const HIDDEN_GEMS: HiddenGem[] = [
     id: "ohshitgit",
     name: "Oh Shit, Git",
     url: "https://ohshitgit.com",
-    description: "Plain-English git commands for when you've already messed up — recovery made simple.",
+    description:
+      "Plain-English git commands for when you've already messed up — recovery made simple.",
     icon: "AlertTriangle",
     category: "learning",
     tags: ["git", "recovery", "beginner", "lifesaver"],
@@ -119,7 +124,8 @@ export const HIDDEN_GEMS: HiddenGem[] = [
     id: "_ui-avatars",
     name: "UI Avatars",
     url: "https://ui-avatars.com",
-    description: "Generate avatar initials from any string — API-based, customizable, no upload needed.",
+    description:
+      "Generate avatar initials from any string — API-based, customizable, no upload needed.",
     icon: "User",
     category: "tools",
     tags: ["avatar", "generator", "api", "placeholder"],

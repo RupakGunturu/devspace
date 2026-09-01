@@ -14,13 +14,27 @@ export default function JwtGenerator() {
       const h = btoa(header).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
       const p = btoa(payload).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
       setOutput(`${h}.${p}.[signature]`);
-    } catch { setOutput("Invalid JSON"); }
+    } catch {
+      setOutput("Invalid JSON");
+    }
   };
 
   return (
     <ToolLayout id="jwt-generator">
-      <ToolInput value={header} onChange={setHeader} placeholder='{"alg":"HS256"}' label="Header (JSON)" rows={3} />
-      <ToolInput value={payload} onChange={setPayload} placeholder='{"sub":"123"}' label="Payload (JSON)" rows={3} />
+      <ToolInput
+        value={header}
+        onChange={setHeader}
+        placeholder='{"alg":"HS256"}'
+        label="Header (JSON)"
+        rows={3}
+      />
+      <ToolInput
+        value={payload}
+        onChange={setPayload}
+        placeholder='{"sub":"123"}'
+        label="Payload (JSON)"
+        rows={3}
+      />
       <ToolButton onClick={generate}>Generate JWT</ToolButton>
       <ToolOutput value={output} />
     </ToolLayout>

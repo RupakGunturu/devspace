@@ -2,9 +2,25 @@ import { useEffect, useMemo, useState } from "react";
 import { useSaveGameScore } from "@/hooks/useSaveGameScore";
 
 const WORDS = [
-  "REACT", "ASYNC", "MERGE", "BUILD", "CACHE", "STACK", "QUEUE", "MODEL",
-  "PROXY", "SHELL", "ROUTE", "TOKEN", "REDUX", "SWIFT", "SCOPE", "MUTEX",
-  "LINUX", "PATCH", "NPMJS",
+  "REACT",
+  "ASYNC",
+  "MERGE",
+  "BUILD",
+  "CACHE",
+  "STACK",
+  "QUEUE",
+  "MODEL",
+  "PROXY",
+  "SHELL",
+  "ROUTE",
+  "TOKEN",
+  "REDUX",
+  "SWIFT",
+  "SCOPE",
+  "MUTEX",
+  "LINUX",
+  "PATCH",
+  "NPMJS",
 ];
 
 type Verdict = "hit" | "near" | "miss";
@@ -102,7 +118,8 @@ export function DevWordle() {
 
   const reset = () => {
     let next = WORDS[Math.floor(Math.random() * WORDS.length)];
-    if (WORDS.length > 1) while (next === answer) next = WORDS[Math.floor(Math.random() * WORDS.length)];
+    if (WORDS.length > 1)
+      while (next === answer) next = WORDS[Math.floor(Math.random() * WORDS.length)];
     setAnswer(next);
     setGuesses([]);
     setCurrent("");

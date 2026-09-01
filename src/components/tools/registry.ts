@@ -10,32 +10,72 @@ function createToolStub(name: string, description: string): React.ComponentType 
 }
 
 // Content tools
-const TwitterThreadFormatter = React.lazy(() => import("./TwitterThreadFormatter").then((m) => ({ default: m.TwitterThreadFormatter })));
-const HashtagGenerator = React.lazy(() => import("./HashtagGenerator").then((m) => ({ default: m.HashtagGenerator })));
-const OgImagePreviewer = React.lazy(() => import("./OgImagePreviewer").then((m) => ({ default: m.OgImagePreviewer })));
-const InstagramCaptionFormatter = React.lazy(() => import("./InstagramCaptionFormatter").then((m) => ({ default: m.InstagramCaptionFormatter })));
-const YoutubeAbTextTester = React.lazy(() => import("./YoutubeAbTextTester").then((m) => ({ default: m.YoutubeAbTextTester })));
+const TwitterThreadFormatter = React.lazy(() =>
+  import("./TwitterThreadFormatter").then((m) => ({ default: m.TwitterThreadFormatter })),
+);
+const HashtagGenerator = React.lazy(() =>
+  import("./HashtagGenerator").then((m) => ({ default: m.HashtagGenerator })),
+);
+const OgImagePreviewer = React.lazy(() =>
+  import("./OgImagePreviewer").then((m) => ({ default: m.OgImagePreviewer })),
+);
+const InstagramCaptionFormatter = React.lazy(() =>
+  import("./InstagramCaptionFormatter").then((m) => ({ default: m.InstagramCaptionFormatter })),
+);
+const YoutubeAbTextTester = React.lazy(() =>
+  import("./YoutubeAbTextTester").then((m) => ({ default: m.YoutubeAbTextTester })),
+);
 
 // Existing tools (named exports → wrap for React.lazy)
-const JsonFormatter = React.lazy(() => import("./JsonFormatter").then((m) => ({ default: m.JsonFormatter })));
-const RegexTester = React.lazy(() => import("./RegexTester").then((m) => ({ default: m.RegexTester })));
-const ContrastChecker = React.lazy(() => import("./ContrastChecker").then((m) => ({ default: m.ContrastChecker })));
-const MarkdownPreviewer = React.lazy(() => import("./MarkdownPreviewer").then((m) => ({ default: m.MarkdownPreviewer })));
-const Base64UrlCodec = React.lazy(() => import("./Base64UrlCodec").then((m) => ({ default: m.Base64UrlCodec })));
-const UuidHashGenerator = React.lazy(() => import("./UuidHashGenerator").then((m) => ({ default: m.UuidHashGenerator })));
+const JsonFormatter = React.lazy(() =>
+  import("./JsonFormatter").then((m) => ({ default: m.JsonFormatter })),
+);
+const RegexTester = React.lazy(() =>
+  import("./RegexTester").then((m) => ({ default: m.RegexTester })),
+);
+const ContrastChecker = React.lazy(() =>
+  import("./ContrastChecker").then((m) => ({ default: m.ContrastChecker })),
+);
+const MarkdownPreviewer = React.lazy(() =>
+  import("./MarkdownPreviewer").then((m) => ({ default: m.MarkdownPreviewer })),
+);
+const Base64UrlCodec = React.lazy(() =>
+  import("./Base64UrlCodec").then((m) => ({ default: m.Base64UrlCodec })),
+);
+const UuidHashGenerator = React.lazy(() =>
+  import("./UuidHashGenerator").then((m) => ({ default: m.UuidHashGenerator })),
+);
 
 // Developer tools
-const DiffChecker = React.lazy(() => import("./DiffChecker").then((m) => ({ default: m.DiffChecker })));
-const GitCommandBuilder = React.lazy(() => import("./GitCommandBuilder").then((m) => ({ default: m.GitCommandBuilder })));
-const PackageJsonChecker = React.lazy(() => import("./PackageJsonChecker").then((m) => ({ default: m.PackageJsonChecker })));
+const DiffChecker = React.lazy(() =>
+  import("./DiffChecker").then((m) => ({ default: m.DiffChecker })),
+);
+const GitCommandBuilder = React.lazy(() =>
+  import("./GitCommandBuilder").then((m) => ({ default: m.GitCommandBuilder })),
+);
+const PackageJsonChecker = React.lazy(() =>
+  import("./PackageJsonChecker").then((m) => ({ default: m.PackageJsonChecker })),
+);
 
 // Learning tools
-const BigOCheatsheet = React.lazy(() => import("./BigOCheatsheet").then((m) => ({ default: m.BigOCheatsheet })));
-const AlgorithmPatternMatcher = React.lazy(() => import("./AlgorithmPatternMatcher").then((m) => ({ default: m.AlgorithmPatternMatcher })));
-const FlashcardGenerator = React.lazy(() => import("./FlashcardGenerator").then((m) => ({ default: m.FlashcardGenerator })));
-const SystemDesignCheatsheet = React.lazy(() => import("./SystemDesignCheatsheet").then((m) => ({ default: m.SystemDesignCheatsheet })));
-const LeetcodeStreakVisualizer = React.lazy(() => import("./LeetcodeStreakVisualizer").then((m) => ({ default: m.LeetcodeStreakVisualizer })));
-const SpacedRepetitionTimer = React.lazy(() => import("./SpacedRepetitionTimer").then((m) => ({ default: m.SpacedRepetitionTimer })));
+const BigOCheatsheet = React.lazy(() =>
+  import("./BigOCheatsheet").then((m) => ({ default: m.BigOCheatsheet })),
+);
+const AlgorithmPatternMatcher = React.lazy(() =>
+  import("./AlgorithmPatternMatcher").then((m) => ({ default: m.AlgorithmPatternMatcher })),
+);
+const FlashcardGenerator = React.lazy(() =>
+  import("./FlashcardGenerator").then((m) => ({ default: m.FlashcardGenerator })),
+);
+const SystemDesignCheatsheet = React.lazy(() =>
+  import("./SystemDesignCheatsheet").then((m) => ({ default: m.SystemDesignCheatsheet })),
+);
+const LeetcodeStreakVisualizer = React.lazy(() =>
+  import("./LeetcodeStreakVisualizer").then((m) => ({ default: m.LeetcodeStreakVisualizer })),
+);
+const SpacedRepetitionTimer = React.lazy(() =>
+  import("./SpacedRepetitionTimer").then((m) => ({ default: m.SpacedRepetitionTimer })),
+);
 
 // CSS Tools
 const BoxShadowGenerator = React.lazy(() => import("./css/box-shadow-generator"));
@@ -83,7 +123,9 @@ const ColorShadesGenerator = React.lazy(() => import("./color/color-shades-gener
 const PantoneToHex = React.lazy(() => import("./color/pantone-to-hex"));
 const ColorHarmonyExplorer = React.lazy(() => import("./color/color-harmony-explorer"));
 const DarkModePaletteGenerator = React.lazy(() => import("./color/dark-mode-palette-generator"));
-const CssColorVariablesGenerator = React.lazy(() => import("./color/css-color-variables-generator"));
+const CssColorVariablesGenerator = React.lazy(
+  () => import("./color/css-color-variables-generator"),
+);
 const ColorStoryFromEmotion = React.lazy(() => import("./color/color-story-from-emotion"));
 const BrandColorExtractor = React.lazy(() => import("./color/brand-color-extractor"));
 
@@ -122,7 +164,9 @@ const SqlFormatterExplainer = React.lazy(() => import("./dev-utilities/sql-forma
 const DockerCommandBuilder = React.lazy(() => import("./dev-utilities/docker-command-builder"));
 const UnicodeSymbolFinder = React.lazy(() => import("./dev-utilities/unicode-symbol-finder"));
 const EnvVarGenerator = React.lazy(() => import("./dev-utilities/env-var-generator"));
-const BrowserStorageInspector = React.lazy(() => import("./dev-utilities/browser-storage-inspector"));
+const BrowserStorageInspector = React.lazy(
+  () => import("./dev-utilities/browser-storage-inspector"),
+);
 const ApiRateLimitEstimator = React.lazy(() => import("./dev-utilities/api-rate-limit-estimator"));
 const RegexTesterExplainer = React.lazy(() => import("./dev-utilities/regex-tester-explainer"));
 
@@ -288,66 +332,160 @@ const MatrixCalculator = React.lazy(() => import("./math/matrix-calculator"));
 const BinaryMathCalculator = React.lazy(() => import("./math/binary-math-calculator"));
 
 // Finance Tools
-const EmiLoanCalculator = React.lazy(() => import("./EmiLoanCalculator").then((m) => ({ default: m.EmiLoanCalculator })));
-const BudgetSplitPlanner = React.lazy(() => import("./BudgetSplitPlanner").then((m) => ({ default: m.BudgetSplitPlanner })));
-const CurrencyConverter = React.lazy(() => import("./CurrencyConverter").then((m) => ({ default: m.CurrencyConverter })));
-const FreelanceTaxEstimator = React.lazy(() => import("./FreelanceTaxEstimator").then((m) => ({ default: m.FreelanceTaxEstimator })));
-const ExpenseSplitter = React.lazy(() => import("./ExpenseSplitter").then((m) => ({ default: m.ExpenseSplitter })));
+const EmiLoanCalculator = React.lazy(() =>
+  import("./EmiLoanCalculator").then((m) => ({ default: m.EmiLoanCalculator })),
+);
+const BudgetSplitPlanner = React.lazy(() =>
+  import("./BudgetSplitPlanner").then((m) => ({ default: m.BudgetSplitPlanner })),
+);
+const CurrencyConverter = React.lazy(() =>
+  import("./CurrencyConverter").then((m) => ({ default: m.CurrencyConverter })),
+);
+const FreelanceTaxEstimator = React.lazy(() =>
+  import("./FreelanceTaxEstimator").then((m) => ({ default: m.FreelanceTaxEstimator })),
+);
+const ExpenseSplitter = React.lazy(() =>
+  import("./ExpenseSplitter").then((m) => ({ default: m.ExpenseSplitter })),
+);
 
 // HR Tools (already implemented)
-const JdGenerator = React.lazy(() => import("./JdGenerator").then((m) => ({ default: m.JdGenerator })));
-const OfferLetterGenerator = React.lazy(() => import("./OfferLetterGenerator").then((m) => ({ default: m.OfferLetterGenerator })));
+const JdGenerator = React.lazy(() =>
+  import("./JdGenerator").then((m) => ({ default: m.JdGenerator })),
+);
+const OfferLetterGenerator = React.lazy(() =>
+  import("./OfferLetterGenerator").then((m) => ({ default: m.OfferLetterGenerator })),
+);
 
 // Branding/Profile tools
-const LinkedinBannerGenerator = React.lazy(() => import("./LinkedinBannerGenerator").then((m) => ({ default: m.LinkedinBannerGenerator })));
-const LinkedinPostFormatter = React.lazy(() => import("./LinkedinPostFormatter").then((m) => ({ default: m.LinkedinPostFormatter })));
-const GithubProfileBuilder = React.lazy(() => import("./GithubProfileBuilder").then((m) => ({ default: m.GithubProfileBuilder })));
-const PortfolioBioGenerator = React.lazy(() => import("./PortfolioBioGenerator").then((m) => ({ default: m.PortfolioBioGenerator })));
-const TechStackBadgeGenerator = React.lazy(() => import("./TechStackBadgeGenerator").then((m) => ({ default: m.TechStackBadgeGenerator })));
-const LinkedinAboutGenerator = React.lazy(() => import("./LinkedinAboutGenerator").then((m) => ({ default: m.LinkedinAboutGenerator })));
-const GithubContributionCustomizer = React.lazy(() => import("./GithubContributionCustomizer").then((m) => ({ default: m.GithubContributionCustomizer })));
-const CaseStudyOutlineGenerator = React.lazy(() => import("./CaseStudyOutlineGenerator").then((m) => ({ default: m.CaseStudyOutlineGenerator })));
-const ResumeAtsChecker = React.lazy(() => import("./ResumeAtsChecker").then((m) => ({ default: m.ResumeAtsChecker })));
-const ResumeBulletRewriter = React.lazy(() => import("./ResumeBulletRewriter").then((m) => ({ default: m.ResumeBulletRewriter })));
-const ElevatorPitchGenerator = React.lazy(() => import("./ElevatorPitchGenerator").then((m) => ({ default: m.ElevatorPitchGenerator })));
+const LinkedinBannerGenerator = React.lazy(() =>
+  import("./LinkedinBannerGenerator").then((m) => ({ default: m.LinkedinBannerGenerator })),
+);
+const LinkedinPostFormatter = React.lazy(() =>
+  import("./LinkedinPostFormatter").then((m) => ({ default: m.LinkedinPostFormatter })),
+);
+const GithubProfileBuilder = React.lazy(() =>
+  import("./GithubProfileBuilder").then((m) => ({ default: m.GithubProfileBuilder })),
+);
+const PortfolioBioGenerator = React.lazy(() =>
+  import("./PortfolioBioGenerator").then((m) => ({ default: m.PortfolioBioGenerator })),
+);
+const TechStackBadgeGenerator = React.lazy(() =>
+  import("./TechStackBadgeGenerator").then((m) => ({ default: m.TechStackBadgeGenerator })),
+);
+const LinkedinAboutGenerator = React.lazy(() =>
+  import("./LinkedinAboutGenerator").then((m) => ({ default: m.LinkedinAboutGenerator })),
+);
+const GithubContributionCustomizer = React.lazy(() =>
+  import("./GithubContributionCustomizer").then((m) => ({
+    default: m.GithubContributionCustomizer,
+  })),
+);
+const CaseStudyOutlineGenerator = React.lazy(() =>
+  import("./CaseStudyOutlineGenerator").then((m) => ({ default: m.CaseStudyOutlineGenerator })),
+);
+const ResumeAtsChecker = React.lazy(() =>
+  import("./ResumeAtsChecker").then((m) => ({ default: m.ResumeAtsChecker })),
+);
+const ResumeBulletRewriter = React.lazy(() =>
+  import("./ResumeBulletRewriter").then((m) => ({ default: m.ResumeBulletRewriter })),
+);
+const ElevatorPitchGenerator = React.lazy(() =>
+  import("./ElevatorPitchGenerator").then((m) => ({ default: m.ElevatorPitchGenerator })),
+);
 
 // Design tools
-const ColorPaletteExtractor = React.lazy(() => import("./ColorPaletteExtractor").then((m) => ({ default: m.ColorPaletteExtractor })));
-const MoodPaletteGenerator = React.lazy(() => import("./MoodPaletteGenerator").then((m) => ({ default: m.MoodPaletteGenerator })));
-const TypographyPairer = React.lazy(() => import("./TypographyPairer").then((m) => ({ default: m.TypographyPairer })));
-const SvgToPngConverter = React.lazy(() => import("./SvgToPngConverter").then((m) => ({ default: m.SvgToPngConverter })));
-const MockupFrameGenerator = React.lazy(() => import("./MockupFrameGenerator").then((m) => ({ default: m.MockupFrameGenerator })));
-const FaviconGeneratorTool = React.lazy(() => import("./FaviconGenerator").then((m) => ({ default: m.FaviconGenerator })));
-const AspectRatioCropper = React.lazy(() => import("./AspectRatioCropper").then((m) => ({ default: m.AspectRatioCropper })));
-const SpacingGridGenerator = React.lazy(() => import("./SpacingGridGenerator").then((m) => ({ default: m.SpacingGridGenerator })));
-const IconPackBrowser = React.lazy(() => import("./IconPackBrowser").then((m) => ({ default: m.IconPackBrowser })));
-const DesignTokenExporter = React.lazy(() => import("./DesignTokenExporter").then((m) => ({ default: m.DesignTokenExporter })));
+const ColorPaletteExtractor = React.lazy(() =>
+  import("./ColorPaletteExtractor").then((m) => ({ default: m.ColorPaletteExtractor })),
+);
+const MoodPaletteGenerator = React.lazy(() =>
+  import("./MoodPaletteGenerator").then((m) => ({ default: m.MoodPaletteGenerator })),
+);
+const TypographyPairer = React.lazy(() =>
+  import("./TypographyPairer").then((m) => ({ default: m.TypographyPairer })),
+);
+const SvgToPngConverter = React.lazy(() =>
+  import("./SvgToPngConverter").then((m) => ({ default: m.SvgToPngConverter })),
+);
+const MockupFrameGenerator = React.lazy(() =>
+  import("./MockupFrameGenerator").then((m) => ({ default: m.MockupFrameGenerator })),
+);
+const FaviconGeneratorTool = React.lazy(() =>
+  import("./FaviconGenerator").then((m) => ({ default: m.FaviconGenerator })),
+);
+const AspectRatioCropper = React.lazy(() =>
+  import("./AspectRatioCropper").then((m) => ({ default: m.AspectRatioCropper })),
+);
+const SpacingGridGenerator = React.lazy(() =>
+  import("./SpacingGridGenerator").then((m) => ({ default: m.SpacingGridGenerator })),
+);
+const IconPackBrowser = React.lazy(() =>
+  import("./IconPackBrowser").then((m) => ({ default: m.IconPackBrowser })),
+);
+const DesignTokenExporter = React.lazy(() =>
+  import("./DesignTokenExporter").then((m) => ({ default: m.DesignTokenExporter })),
+);
 
 // Writing tools
-const WordCountTracker = React.lazy(() => import("./WordCountTracker").then((m) => ({ default: m.WordCountTracker })));
-const PlotOutlineGenerator = React.lazy(() => import("./PlotOutlineGenerator").then((m) => ({ default: m.PlotOutlineGenerator })));
-const CharacterNameGenerator = React.lazy(() => import("./CharacterNameGenerator").then((m) => ({ default: m.CharacterNameGenerator })));
-const ReadabilityScoreChecker = React.lazy(() => import("./ReadabilityScoreChecker").then((m) => ({ default: m.ReadabilityScoreChecker })));
-const CitationFormatter = React.lazy(() => import("./CitationFormatter").then((m) => ({ default: m.CitationFormatter })));
+const WordCountTracker = React.lazy(() =>
+  import("./WordCountTracker").then((m) => ({ default: m.WordCountTracker })),
+);
+const PlotOutlineGenerator = React.lazy(() =>
+  import("./PlotOutlineGenerator").then((m) => ({ default: m.PlotOutlineGenerator })),
+);
+const CharacterNameGenerator = React.lazy(() =>
+  import("./CharacterNameGenerator").then((m) => ({ default: m.CharacterNameGenerator })),
+);
+const ReadabilityScoreChecker = React.lazy(() =>
+  import("./ReadabilityScoreChecker").then((m) => ({ default: m.ReadabilityScoreChecker })),
+);
+const CitationFormatter = React.lazy(() =>
+  import("./CitationFormatter").then((m) => ({ default: m.CitationFormatter })),
+);
 
 // Media tools
-const BpmTapTempo = React.lazy(() => import("./BpmTapTempo").then((m) => ({ default: m.BpmTapTempo })));
-const VideoAspectRatioCalculator = React.lazy(() => import("./VideoAspectRatioCalculator").then((m) => ({ default: m.VideoAspectRatioCalculator })));
-const ThumbnailAbPreviewer = React.lazy(() => import("./ThumbnailAbPreviewer").then((m) => ({ default: m.ThumbnailAbPreviewer })));
-const PodcastShowNotesGenerator = React.lazy(() => import("./PodcastShowNotesGenerator").then((m) => ({ default: m.PodcastShowNotesGenerator })));
-const AudioFormatConverter = React.lazy(() => import("./AudioFormatConverter").then((m) => ({ default: m.AudioFormatConverter })));
-const LoudnessNormalizerGuide = React.lazy(() => import("./LoudnessNormalizerGuide").then((m) => ({ default: m.LoudnessNormalizerGuide })));
+const BpmTapTempo = React.lazy(() =>
+  import("./BpmTapTempo").then((m) => ({ default: m.BpmTapTempo })),
+);
+const VideoAspectRatioCalculator = React.lazy(() =>
+  import("./VideoAspectRatioCalculator").then((m) => ({ default: m.VideoAspectRatioCalculator })),
+);
+const ThumbnailAbPreviewer = React.lazy(() =>
+  import("./ThumbnailAbPreviewer").then((m) => ({ default: m.ThumbnailAbPreviewer })),
+);
+const PodcastShowNotesGenerator = React.lazy(() =>
+  import("./PodcastShowNotesGenerator").then((m) => ({ default: m.PodcastShowNotesGenerator })),
+);
+const AudioFormatConverter = React.lazy(() =>
+  import("./AudioFormatConverter").then((m) => ({ default: m.AudioFormatConverter })),
+);
+const LoudnessNormalizerGuide = React.lazy(() =>
+  import("./LoudnessNormalizerGuide").then((m) => ({ default: m.LoudnessNormalizerGuide })),
+);
 
 // Photography tools
-const HeadshotBgRemover = React.lazy(() => import("./HeadshotBgRemover").then((m) => ({ default: m.HeadshotBgRemover })));
-const EventTimelineGenerator = React.lazy(() => import("./EventTimelineGenerator").then((m) => ({ default: m.EventTimelineGenerator })));
-const PhotographyPricingBuilder = React.lazy(() => import("./PhotographyPricingBuilder").then((m) => ({ default: m.PhotographyPricingBuilder })));
-const PhotoWatermarkTool = React.lazy(() => import("./PhotoWatermarkTool").then((m) => ({ default: m.PhotoWatermarkTool })));
-const ExifDataViewer = React.lazy(() => import("./ExifDataViewer").then((m) => ({ default: m.ExifDataViewer })));
-const ClientContractChecklist = React.lazy(() => import("./ClientContractChecklist").then((m) => ({ default: m.ClientContractChecklist })));
+const HeadshotBgRemover = React.lazy(() =>
+  import("./HeadshotBgRemover").then((m) => ({ default: m.HeadshotBgRemover })),
+);
+const EventTimelineGenerator = React.lazy(() =>
+  import("./EventTimelineGenerator").then((m) => ({ default: m.EventTimelineGenerator })),
+);
+const PhotographyPricingBuilder = React.lazy(() =>
+  import("./PhotographyPricingBuilder").then((m) => ({ default: m.PhotographyPricingBuilder })),
+);
+const PhotoWatermarkTool = React.lazy(() =>
+  import("./PhotoWatermarkTool").then((m) => ({ default: m.PhotoWatermarkTool })),
+);
+const ExifDataViewer = React.lazy(() =>
+  import("./ExifDataViewer").then((m) => ({ default: m.ExifDataViewer })),
+);
+const ClientContractChecklist = React.lazy(() =>
+  import("./ClientContractChecklist").then((m) => ({ default: m.ClientContractChecklist })),
+);
 
 // Content tools
-const ContentCalendarGenerator = React.lazy(() => import("./ContentCalendarGenerator").then((m) => ({ default: m.ContentCalendarGenerator })));
+const ContentCalendarGenerator = React.lazy(() =>
+  import("./ContentCalendarGenerator").then((m) => ({ default: m.ContentCalendarGenerator })),
+);
 
 // Productivity
 const PomodoroTimer = React.lazy(() => import("./productivity/pomodoro-timer"));
@@ -364,89 +502,217 @@ const HabitStreakTracker = React.lazy(() => import("./productivity/habit-streak-
 const NoteToSelf = React.lazy(() => import("./productivity/note-to-self"));
 
 // Career Tools
-const CoverLetterTailor = React.lazy(() => import("./CoverLetterTailor").then((m) => ({ default: m.CoverLetterTailor })));
-const InterviewQuestionBank = React.lazy(() => import("./InterviewQuestionBank").then((m) => ({ default: m.InterviewQuestionBank })));
-const SalaryNegotiationScript = React.lazy(() => import("./SalaryNegotiationScript").then((m) => ({ default: m.SalaryNegotiationScript })));
-const FreelanceRateCalculator = React.lazy(() => import("./FreelanceRateCalculator").then((m) => ({ default: m.FreelanceRateCalculator })));
-const InvoiceGenerator = React.lazy(() => import("./InvoiceGenerator").then((m) => ({ default: m.InvoiceGenerator })));
-const StandupNoteFormatter = React.lazy(() => import("./StandupNoteFormatter").then((m) => ({ default: m.StandupNoteFormatter })));
-const MockInterviewTimer = React.lazy(() => import("./MockInterviewTimer").then((m) => ({ default: m.MockInterviewTimer })));
-const InterviewScorecard = React.lazy(() => import("./InterviewScorecard").then((m) => ({ default: m.InterviewScorecard })));
-const OnboardingChecklist = React.lazy(() => import("./OnboardingChecklist").then((m) => ({ default: m.OnboardingChecklist })));
-const SalaryBandCalculator = React.lazy(() => import("./SalaryBandCalculator").then((m) => ({ default: m.SalaryBandCalculator })));
-const EmployeeHandbookGenerator = React.lazy(() => import("./EmployeeHandbookGenerator").then((m) => ({ default: m.EmployeeHandbookGenerator })));
+const CoverLetterTailor = React.lazy(() =>
+  import("./CoverLetterTailor").then((m) => ({ default: m.CoverLetterTailor })),
+);
+const InterviewQuestionBank = React.lazy(() =>
+  import("./InterviewQuestionBank").then((m) => ({ default: m.InterviewQuestionBank })),
+);
+const SalaryNegotiationScript = React.lazy(() =>
+  import("./SalaryNegotiationScript").then((m) => ({ default: m.SalaryNegotiationScript })),
+);
+const FreelanceRateCalculator = React.lazy(() =>
+  import("./FreelanceRateCalculator").then((m) => ({ default: m.FreelanceRateCalculator })),
+);
+const InvoiceGenerator = React.lazy(() =>
+  import("./InvoiceGenerator").then((m) => ({ default: m.InvoiceGenerator })),
+);
+const StandupNoteFormatter = React.lazy(() =>
+  import("./StandupNoteFormatter").then((m) => ({ default: m.StandupNoteFormatter })),
+);
+const MockInterviewTimer = React.lazy(() =>
+  import("./MockInterviewTimer").then((m) => ({ default: m.MockInterviewTimer })),
+);
+const InterviewScorecard = React.lazy(() =>
+  import("./InterviewScorecard").then((m) => ({ default: m.InterviewScorecard })),
+);
+const OnboardingChecklist = React.lazy(() =>
+  import("./OnboardingChecklist").then((m) => ({ default: m.OnboardingChecklist })),
+);
+const SalaryBandCalculator = React.lazy(() =>
+  import("./SalaryBandCalculator").then((m) => ({ default: m.SalaryBandCalculator })),
+);
+const EmployeeHandbookGenerator = React.lazy(() =>
+  import("./EmployeeHandbookGenerator").then((m) => ({ default: m.EmployeeHandbookGenerator })),
+);
 
 // Marketing/SEO tools
-const MetaTitleLengthChecker = React.lazy(() => import("./MetaTitleLengthChecker").then((m) => ({ default: m.MetaTitleLengthChecker })));
-const KeywordDensityAnalyzer = React.lazy(() => import("./KeywordDensityAnalyzer").then((m) => ({ default: m.KeywordDensityAnalyzer })));
-const UtmLinkBuilder = React.lazy(() => import("./UtmLinkBuilder").then((m) => ({ default: m.UtmLinkBuilder })));
-const AdCopyGenerator = React.lazy(() => import("./AdCopyGenerator").then((m) => ({ default: m.AdCopyGenerator })));
-const EmailSubjectTester = React.lazy(() => import("./EmailSubjectTester").then((m) => ({ default: m.EmailSubjectTester })));
-const SeoSlugGenerator = React.lazy(() => import("./SeoSlugGenerator").then((m) => ({ default: m.SeoSlugGenerator })));
-const ContentBriefGenerator = React.lazy(() => import("./ContentBriefGenerator").then((m) => ({ default: m.ContentBriefGenerator })));
-const BacklinkAnchorChecker = React.lazy(() => import("./BacklinkAnchorChecker").then((m) => ({ default: m.BacklinkAnchorChecker })));
+const MetaTitleLengthChecker = React.lazy(() =>
+  import("./MetaTitleLengthChecker").then((m) => ({ default: m.MetaTitleLengthChecker })),
+);
+const KeywordDensityAnalyzer = React.lazy(() =>
+  import("./KeywordDensityAnalyzer").then((m) => ({ default: m.KeywordDensityAnalyzer })),
+);
+const UtmLinkBuilder = React.lazy(() =>
+  import("./UtmLinkBuilder").then((m) => ({ default: m.UtmLinkBuilder })),
+);
+const AdCopyGenerator = React.lazy(() =>
+  import("./AdCopyGenerator").then((m) => ({ default: m.AdCopyGenerator })),
+);
+const EmailSubjectTester = React.lazy(() =>
+  import("./EmailSubjectTester").then((m) => ({ default: m.EmailSubjectTester })),
+);
+const SeoSlugGenerator = React.lazy(() =>
+  import("./SeoSlugGenerator").then((m) => ({ default: m.SeoSlugGenerator })),
+);
+const ContentBriefGenerator = React.lazy(() =>
+  import("./ContentBriefGenerator").then((m) => ({ default: m.ContentBriefGenerator })),
+);
+const BacklinkAnchorChecker = React.lazy(() =>
+  import("./BacklinkAnchorChecker").then((m) => ({ default: m.BacklinkAnchorChecker })),
+);
 
 // E-commerce tools
-const ProductDescriptionGenerator = React.lazy(() => import("./ProductDescriptionGenerator").then((m) => ({ default: m.ProductDescriptionGenerator })));
-const ProfitMarginCalculator = React.lazy(() => import("./ProfitMarginCalculator").then((m) => ({ default: m.ProfitMarginCalculator })));
-const SkuBarcodeGenerator = React.lazy(() => import("./SkuBarcodeGenerator").then((m) => ({ default: m.SkuBarcodeGenerator })));
-const ShippingCostEstimator = React.lazy(() => import("./ShippingCostEstimator").then((m) => ({ default: m.ShippingCostEstimator })));
-const ReturnPolicyGenerator = React.lazy(() => import("./ReturnPolicyGenerator").then((m) => ({ default: m.ReturnPolicyGenerator })));
-const CouponCodeGenerator = React.lazy(() => import("./CouponCodeGenerator").then((m) => ({ default: m.CouponCodeGenerator })));
-const InventoryReorderCalculator = React.lazy(() => import("./InventoryReorderCalculator").then((m) => ({ default: m.InventoryReorderCalculator })));
-const ProductPhotoBgRemover = React.lazy(() => import("./ProductPhotoBgRemover").then((m) => ({ default: m.ProductPhotoBgRemover })));
+const ProductDescriptionGenerator = React.lazy(() =>
+  import("./ProductDescriptionGenerator").then((m) => ({ default: m.ProductDescriptionGenerator })),
+);
+const ProfitMarginCalculator = React.lazy(() =>
+  import("./ProfitMarginCalculator").then((m) => ({ default: m.ProfitMarginCalculator })),
+);
+const SkuBarcodeGenerator = React.lazy(() =>
+  import("./SkuBarcodeGenerator").then((m) => ({ default: m.SkuBarcodeGenerator })),
+);
+const ShippingCostEstimator = React.lazy(() =>
+  import("./ShippingCostEstimator").then((m) => ({ default: m.ShippingCostEstimator })),
+);
+const ReturnPolicyGenerator = React.lazy(() =>
+  import("./ReturnPolicyGenerator").then((m) => ({ default: m.ReturnPolicyGenerator })),
+);
+const CouponCodeGenerator = React.lazy(() =>
+  import("./CouponCodeGenerator").then((m) => ({ default: m.CouponCodeGenerator })),
+);
+const InventoryReorderCalculator = React.lazy(() =>
+  import("./InventoryReorderCalculator").then((m) => ({ default: m.InventoryReorderCalculator })),
+);
+const ProductPhotoBgRemover = React.lazy(() =>
+  import("./ProductPhotoBgRemover").then((m) => ({ default: m.ProductPhotoBgRemover })),
+);
 
 // Legal tools
-const NdaTemplateGenerator = React.lazy(() => import("./NdaTemplateGenerator").then((m) => ({ default: m.NdaTemplateGenerator })));
-const ContractClauseExplainer = React.lazy(() => import("./ContractClauseExplainer").then((m) => ({ default: m.ContractClauseExplainer })));
-const TrademarkChecker = React.lazy(() => import("./TrademarkChecker").then((m) => ({ default: m.TrademarkChecker })));
+const NdaTemplateGenerator = React.lazy(() =>
+  import("./NdaTemplateGenerator").then((m) => ({ default: m.NdaTemplateGenerator })),
+);
+const ContractClauseExplainer = React.lazy(() =>
+  import("./ContractClauseExplainer").then((m) => ({ default: m.ContractClauseExplainer })),
+);
+const TrademarkChecker = React.lazy(() =>
+  import("./TrademarkChecker").then((m) => ({ default: m.TrademarkChecker })),
+);
 
 // Real Estate tools
-const RentVsBuyCalculator = React.lazy(() => import("./RentVsBuyCalculator").then((m) => ({ default: m.RentVsBuyCalculator })));
-const MortgageAffordability = React.lazy(() => import("./MortgageAffordability").then((m) => ({ default: m.MortgageAffordability })));
-const PropertyListingGenerator = React.lazy(() => import("./PropertyListingGenerator").then((m) => ({ default: m.PropertyListingGenerator })));
-const AreaUnitConverter = React.lazy(() => import("./AreaUnitConverter").then((m) => ({ default: m.AreaUnitConverter })));
-const RentalYieldCalculator = React.lazy(() => import("./RentalYieldCalculator").then((m) => ({ default: m.RentalYieldCalculator })));
+const RentVsBuyCalculator = React.lazy(() =>
+  import("./RentVsBuyCalculator").then((m) => ({ default: m.RentVsBuyCalculator })),
+);
+const MortgageAffordability = React.lazy(() =>
+  import("./MortgageAffordability").then((m) => ({ default: m.MortgageAffordability })),
+);
+const PropertyListingGenerator = React.lazy(() =>
+  import("./PropertyListingGenerator").then((m) => ({ default: m.PropertyListingGenerator })),
+);
+const AreaUnitConverter = React.lazy(() =>
+  import("./AreaUnitConverter").then((m) => ({ default: m.AreaUnitConverter })),
+);
+const RentalYieldCalculator = React.lazy(() =>
+  import("./RentalYieldCalculator").then((m) => ({ default: m.RentalYieldCalculator })),
+);
 
 // Health tools
-const BmiBodyMetrics = React.lazy(() => import("./BmiBodyMetrics").then((m) => ({ default: m.BmiBodyMetrics })));
-const WaterIntakeCalculator = React.lazy(() => import("./WaterIntakeCalculator").then((m) => ({ default: m.WaterIntakeCalculator })));
-const SleepCycleCalculator = React.lazy(() => import("./SleepCycleCalculator").then((m) => ({ default: m.SleepCycleCalculator })));
-const MedicationReminderBuilder = React.lazy(() => import("./MedicationReminderBuilder").then((m) => ({ default: m.MedicationReminderBuilder })));
-const StepActivityTracker = React.lazy(() => import("./StepActivityTracker").then((m) => ({ default: m.StepActivityTracker })));
-const WorkoutPlanGenerator = React.lazy(() => import("./WorkoutPlanGenerator").then((m) => ({ default: m.WorkoutPlanGenerator })));
-const MacroCalorieCalculator = React.lazy(() => import("./MacroCalorieCalculator").then((m) => ({ default: m.MacroCalorieCalculator })));
-const ProgressiveOverloadTracker = React.lazy(() => import("./ProgressiveOverloadTracker").then((m) => ({ default: m.ProgressiveOverloadTracker })));
+const BmiBodyMetrics = React.lazy(() =>
+  import("./BmiBodyMetrics").then((m) => ({ default: m.BmiBodyMetrics })),
+);
+const WaterIntakeCalculator = React.lazy(() =>
+  import("./WaterIntakeCalculator").then((m) => ({ default: m.WaterIntakeCalculator })),
+);
+const SleepCycleCalculator = React.lazy(() =>
+  import("./SleepCycleCalculator").then((m) => ({ default: m.SleepCycleCalculator })),
+);
+const MedicationReminderBuilder = React.lazy(() =>
+  import("./MedicationReminderBuilder").then((m) => ({ default: m.MedicationReminderBuilder })),
+);
+const StepActivityTracker = React.lazy(() =>
+  import("./StepActivityTracker").then((m) => ({ default: m.StepActivityTracker })),
+);
+const WorkoutPlanGenerator = React.lazy(() =>
+  import("./WorkoutPlanGenerator").then((m) => ({ default: m.WorkoutPlanGenerator })),
+);
+const MacroCalorieCalculator = React.lazy(() =>
+  import("./MacroCalorieCalculator").then((m) => ({ default: m.MacroCalorieCalculator })),
+);
+const ProgressiveOverloadTracker = React.lazy(() =>
+  import("./ProgressiveOverloadTracker").then((m) => ({ default: m.ProgressiveOverloadTracker })),
+);
 const RestTimer = React.lazy(() => import("./RestTimer").then((m) => ({ default: m.RestTimer })));
 
 // Education tools
-const LessonPlanGenerator = React.lazy(() => import("./LessonPlanGenerator").then((m) => ({ default: m.LessonPlanGenerator })));
-const RubricBuilder = React.lazy(() => import("./RubricBuilder").then((m) => ({ default: m.RubricBuilder })));
-const QuizGenerator = React.lazy(() => import("./QuizGenerator").then((m) => ({ default: m.QuizGenerator })));
-const GradeCurveCalculator = React.lazy(() => import("./GradeCurveCalculator").then((m) => ({ default: m.GradeCurveCalculator })));
-const CertificateGenerator = React.lazy(() => import("./CertificateGenerator").then((m) => ({ default: m.CertificateGenerator })));
-const AttendanceTracker = React.lazy(() => import("./AttendanceTracker").then((m) => ({ default: m.AttendanceTracker })));
+const LessonPlanGenerator = React.lazy(() =>
+  import("./LessonPlanGenerator").then((m) => ({ default: m.LessonPlanGenerator })),
+);
+const RubricBuilder = React.lazy(() =>
+  import("./RubricBuilder").then((m) => ({ default: m.RubricBuilder })),
+);
+const QuizGenerator = React.lazy(() =>
+  import("./QuizGenerator").then((m) => ({ default: m.QuizGenerator })),
+);
+const GradeCurveCalculator = React.lazy(() =>
+  import("./GradeCurveCalculator").then((m) => ({ default: m.GradeCurveCalculator })),
+);
+const CertificateGenerator = React.lazy(() =>
+  import("./CertificateGenerator").then((m) => ({ default: m.CertificateGenerator })),
+);
+const AttendanceTracker = React.lazy(() =>
+  import("./AttendanceTracker").then((m) => ({ default: m.AttendanceTracker })),
+);
 
 // Sales tools
-const ColdEmailSequenceGenerator = React.lazy(() => import("./ColdEmailSequenceGenerator").then((m) => ({ default: m.ColdEmailSequenceGenerator })));
-const SalesPitchDeckOutline = React.lazy(() => import("./SalesPitchDeckOutline").then((m) => ({ default: m.SalesPitchDeckOutline })));
-const LeadScoringCalculator = React.lazy(() => import("./LeadScoringCalculator").then((m) => ({ default: m.LeadScoringCalculator })));
-const CommissionCalculator = React.lazy(() => import("./CommissionCalculator").then((m) => ({ default: m.CommissionCalculator })));
-const FollowupReminderScheduler = React.lazy(() => import("./FollowupReminderScheduler").then((m) => ({ default: m.FollowupReminderScheduler })));
+const ColdEmailSequenceGenerator = React.lazy(() =>
+  import("./ColdEmailSequenceGenerator").then((m) => ({ default: m.ColdEmailSequenceGenerator })),
+);
+const SalesPitchDeckOutline = React.lazy(() =>
+  import("./SalesPitchDeckOutline").then((m) => ({ default: m.SalesPitchDeckOutline })),
+);
+const LeadScoringCalculator = React.lazy(() =>
+  import("./LeadScoringCalculator").then((m) => ({ default: m.LeadScoringCalculator })),
+);
+const CommissionCalculator = React.lazy(() =>
+  import("./CommissionCalculator").then((m) => ({ default: m.CommissionCalculator })),
+);
+const FollowupReminderScheduler = React.lazy(() =>
+  import("./FollowupReminderScheduler").then((m) => ({ default: m.FollowupReminderScheduler })),
+);
 
 // Events tools
-const EventBudgetPlanner = React.lazy(() => import("./EventBudgetPlanner").then((m) => ({ default: m.EventBudgetPlanner })));
-const EventBudgetSplitter = React.lazy(() => import("./EventBudgetSplitter").then((m) => ({ default: m.EventBudgetSplitter })));
-const RaffleWinnerPicker = React.lazy(() => import("./RaffleWinnerPicker").then((m) => ({ default: m.RaffleWinnerPicker })));
-const PollSurveyBuilder = React.lazy(() => import("./PollSurveyBuilder").then((m) => ({ default: m.PollSurveyBuilder })));
-const RsvpTracker = React.lazy(() => import("./RsvpTracker").then((m) => ({ default: m.RsvpTracker })));
-const SeatingChartGenerator = React.lazy(() => import("./SeatingChartGenerator").then((m) => ({ default: m.SeatingChartGenerator })));
+const EventBudgetPlanner = React.lazy(() =>
+  import("./EventBudgetPlanner").then((m) => ({ default: m.EventBudgetPlanner })),
+);
+const EventBudgetSplitter = React.lazy(() =>
+  import("./EventBudgetSplitter").then((m) => ({ default: m.EventBudgetSplitter })),
+);
+const RaffleWinnerPicker = React.lazy(() =>
+  import("./RaffleWinnerPicker").then((m) => ({ default: m.RaffleWinnerPicker })),
+);
+const PollSurveyBuilder = React.lazy(() =>
+  import("./PollSurveyBuilder").then((m) => ({ default: m.PollSurveyBuilder })),
+);
+const RsvpTracker = React.lazy(() =>
+  import("./RsvpTracker").then((m) => ({ default: m.RsvpTracker })),
+);
+const SeatingChartGenerator = React.lazy(() =>
+  import("./SeatingChartGenerator").then((m) => ({ default: m.SeatingChartGenerator })),
+);
 
 // No-Code tools
-const ZapierWorkflowGenerator = React.lazy(() => import("./ZapierWorkflowGenerator").then((m) => ({ default: m.ZapierWorkflowGenerator })));
-const WebhookPayloadTester = React.lazy(() => import("./WebhookPayloadTester").then((m) => ({ default: m.WebhookPayloadTester })));
-const AirtableFormulaHelper = React.lazy(() => import("./AirtableFormulaHelper").then((m) => ({ default: m.AirtableFormulaHelper })));
-const FormSheetMapper = React.lazy(() => import("./FormSheetMapper").then((m) => ({ default: m.FormSheetMapper })));
+const ZapierWorkflowGenerator = React.lazy(() =>
+  import("./ZapierWorkflowGenerator").then((m) => ({ default: m.ZapierWorkflowGenerator })),
+);
+const WebhookPayloadTester = React.lazy(() =>
+  import("./WebhookPayloadTester").then((m) => ({ default: m.WebhookPayloadTester })),
+);
+const AirtableFormulaHelper = React.lazy(() =>
+  import("./AirtableFormulaHelper").then((m) => ({ default: m.AirtableFormulaHelper })),
+);
+const FormSheetMapper = React.lazy(() =>
+  import("./FormSheetMapper").then((m) => ({ default: m.FormSheetMapper })),
+);
 
 // Fun
 const QrCodeGenerator = React.lazy(() => import("./fun/qr-code-generator"));

@@ -16,25 +16,101 @@ import { cn } from "@/lib/utils";
 import type { Tip } from "@/types/tips";
 
 const CATEGORY_COLORS: Record<string, { bg: string; darkBg: string; icon: string }> = {
-  "Coding Tips": { bg: "bg-blue-100", darkBg: "dark:bg-blue-900/30", icon: "text-blue-600 dark:text-blue-400" },
-  "🚀 Productivity": { bg: "bg-yellow-100", darkBg: "dark:bg-yellow-900/30", icon: "text-yellow-600 dark:text-yellow-400" },
-  "📚 Student Tips": { bg: "bg-green-100", darkBg: "dark:bg-green-900/30", icon: "text-green-600 dark:text-green-400" },
-  "💼 Career Tips": { bg: "bg-indigo-100", darkBg: "dark:bg-indigo-900/30", icon: "text-indigo-600 dark:text-indigo-400" },
-  "🧠 Learning Hacks": { bg: "bg-purple-100", darkBg: "dark:bg-purple-900/30", icon: "text-purple-600 dark:text-purple-400" },
-  "🔥 Git & GitHub": { bg: "bg-orange-100", darkBg: "dark:bg-orange-900/30", icon: "text-orange-600 dark:text-orange-400" },
-  "🌐 Web Development": { bg: "bg-cyan-100", darkBg: "dark:bg-cyan-900/30", icon: "text-cyan-600 dark:text-cyan-400" },
-  "🔒 Cybersecurity": { bg: "bg-red-100", darkBg: "dark:bg-red-900/30", icon: "text-red-600 dark:text-red-400" },
-  "🤖 AI Tips": { bg: "bg-violet-100", darkBg: "dark:bg-violet-900/30", icon: "text-violet-600 dark:text-violet-400" },
-  "⚡ VS Code Tips": { bg: "bg-sky-100", darkBg: "dark:bg-sky-900/30", icon: "text-sky-600 dark:text-sky-400" },
-  "🖥️ Windows/Mac/Linux": { bg: "bg-zinc-100", darkBg: "dark:bg-zinc-800/50", icon: "text-zinc-600 dark:text-zinc-400" },
-  "🎯 DSA Tips": { bg: "bg-emerald-100", darkBg: "dark:bg-emerald-900/30", icon: "text-emerald-600 dark:text-emerald-400" },
-  "🏗️ System Design": { bg: "bg-amber-100", darkBg: "dark:bg-amber-900/30", icon: "text-amber-600 dark:text-amber-400" },
-  "📱 Mobile Development": { bg: "bg-teal-100", darkBg: "dark:bg-teal-900/30", icon: "text-teal-600 dark:text-teal-400" },
-  "🎨 UI/UX": { bg: "bg-pink-100", darkBg: "dark:bg-pink-900/30", icon: "text-pink-600 dark:text-pink-400" },
-  "🛠️ Developer Toolbox": { bg: "bg-stone-100", darkBg: "dark:bg-stone-800/50", icon: "text-stone-600 dark:text-stone-400" },
-  "💰 Freelancing": { bg: "bg-lime-100", darkBg: "dark:bg-lime-900/30", icon: "text-lime-600 dark:text-lime-400" },
-  "🌱 Personal Growth": { bg: "bg-fuchsia-100", darkBg: "dark:bg-fuchsia-900/30", icon: "text-fuchsia-600 dark:text-fuchsia-400" },
-  "🧩 Micro Life Hacks": { bg: "bg-rose-100", darkBg: "dark:bg-rose-900/30", icon: "text-rose-600 dark:text-rose-400" },
+  "Coding Tips": {
+    bg: "bg-blue-100",
+    darkBg: "dark:bg-blue-900/30",
+    icon: "text-blue-600 dark:text-blue-400",
+  },
+  "🚀 Productivity": {
+    bg: "bg-yellow-100",
+    darkBg: "dark:bg-yellow-900/30",
+    icon: "text-yellow-600 dark:text-yellow-400",
+  },
+  "📚 Student Tips": {
+    bg: "bg-green-100",
+    darkBg: "dark:bg-green-900/30",
+    icon: "text-green-600 dark:text-green-400",
+  },
+  "💼 Career Tips": {
+    bg: "bg-indigo-100",
+    darkBg: "dark:bg-indigo-900/30",
+    icon: "text-indigo-600 dark:text-indigo-400",
+  },
+  "🧠 Learning Hacks": {
+    bg: "bg-purple-100",
+    darkBg: "dark:bg-purple-900/30",
+    icon: "text-purple-600 dark:text-purple-400",
+  },
+  "🔥 Git & GitHub": {
+    bg: "bg-orange-100",
+    darkBg: "dark:bg-orange-900/30",
+    icon: "text-orange-600 dark:text-orange-400",
+  },
+  "🌐 Web Development": {
+    bg: "bg-cyan-100",
+    darkBg: "dark:bg-cyan-900/30",
+    icon: "text-cyan-600 dark:text-cyan-400",
+  },
+  "🔒 Cybersecurity": {
+    bg: "bg-red-100",
+    darkBg: "dark:bg-red-900/30",
+    icon: "text-red-600 dark:text-red-400",
+  },
+  "🤖 AI Tips": {
+    bg: "bg-violet-100",
+    darkBg: "dark:bg-violet-900/30",
+    icon: "text-violet-600 dark:text-violet-400",
+  },
+  "⚡ VS Code Tips": {
+    bg: "bg-sky-100",
+    darkBg: "dark:bg-sky-900/30",
+    icon: "text-sky-600 dark:text-sky-400",
+  },
+  "🖥️ Windows/Mac/Linux": {
+    bg: "bg-zinc-100",
+    darkBg: "dark:bg-zinc-800/50",
+    icon: "text-zinc-600 dark:text-zinc-400",
+  },
+  "🎯 DSA Tips": {
+    bg: "bg-emerald-100",
+    darkBg: "dark:bg-emerald-900/30",
+    icon: "text-emerald-600 dark:text-emerald-400",
+  },
+  "🏗️ System Design": {
+    bg: "bg-amber-100",
+    darkBg: "dark:bg-amber-900/30",
+    icon: "text-amber-600 dark:text-amber-400",
+  },
+  "📱 Mobile Development": {
+    bg: "bg-teal-100",
+    darkBg: "dark:bg-teal-900/30",
+    icon: "text-teal-600 dark:text-teal-400",
+  },
+  "🎨 UI/UX": {
+    bg: "bg-pink-100",
+    darkBg: "dark:bg-pink-900/30",
+    icon: "text-pink-600 dark:text-pink-400",
+  },
+  "🛠️ Developer Toolbox": {
+    bg: "bg-stone-100",
+    darkBg: "dark:bg-stone-800/50",
+    icon: "text-stone-600 dark:text-stone-400",
+  },
+  "💰 Freelancing": {
+    bg: "bg-lime-100",
+    darkBg: "dark:bg-lime-900/30",
+    icon: "text-lime-600 dark:text-lime-400",
+  },
+  "🌱 Personal Growth": {
+    bg: "bg-fuchsia-100",
+    darkBg: "dark:bg-fuchsia-900/30",
+    icon: "text-fuchsia-600 dark:text-fuchsia-400",
+  },
+  "🧩 Micro Life Hacks": {
+    bg: "bg-rose-100",
+    darkBg: "dark:bg-rose-900/30",
+    icon: "text-rose-600 dark:text-rose-400",
+  },
 };
 
 const ANIMATION_VARIANTS = {
@@ -105,9 +181,7 @@ export default function TipSearchBar({
     if (debouncedQuery.trim()) {
       const q = debouncedQuery.toLowerCase();
       result = result.filter(
-        (t) =>
-          t.title.toLowerCase().includes(q) ||
-          t.content.toLowerCase().includes(q),
+        (t) => t.title.toLowerCase().includes(q) || t.content.toLowerCase().includes(q),
       );
     }
     return result;
@@ -161,21 +235,16 @@ export default function TipSearchBar({
     [displayTips, activeIndex],
   );
 
-  const handleResultClick = useCallback(
-    (tip: Tip) => {
-      setSelectedId(tip.id);
-      setIsFocused(false);
-    },
-    [],
-  );
+  const handleResultClick = useCallback((tip: Tip) => {
+    setSelectedId(tip.id);
+    setIsFocused(false);
+  }, []);
 
   const activeCategoryData = activeCategory
     ? CATEGORIES.find((c) => c.slug === activeCategory)
     : null;
 
-  const activeColors = activeCategory
-    ? CATEGORY_COLORS[activeCategory]
-    : null;
+  const activeColors = activeCategory ? CATEGORY_COLORS[activeCategory] : null;
 
   return (
     <div className="w-full max-w-xl">
@@ -191,7 +260,10 @@ export default function TipSearchBar({
             className="h-9 rounded-lg py-1.5 pr-9 pl-3 text-sm focus-visible:ring-offset-0"
             onBlur={() => setTimeout(() => setIsFocused(false), 200)}
             onChange={handleInputChange}
-            onFocus={() => { setIsFocused(true); setSelectedId(null); }}
+            onFocus={() => {
+              setIsFocused(true);
+              setSelectedId(null);
+            }}
             onKeyDown={handleKeyDown}
             placeholder="Search tips…"
             role="combobox"
@@ -233,7 +305,8 @@ export default function TipSearchBar({
                 activeCategory === null
                   ? "border-zinc-200/60 bg-white text-zinc-600 hover:border-zinc-300 hover:bg-zinc-50 dark:border-zinc-700/60 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:border-zinc-600 dark:hover:bg-zinc-800/60"
                   : "border-zinc-200/60 bg-white text-zinc-800 hover:border-zinc-300 hover:bg-zinc-50 dark:border-zinc-700/60 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:border-zinc-600 dark:hover:bg-zinc-800/60",
-                categoryOpen && "border-zinc-300 bg-zinc-50 dark:border-zinc-600 dark:bg-zinc-800/60",
+                categoryOpen &&
+                  "border-zinc-300 bg-zinc-50 dark:border-zinc-600 dark:bg-zinc-800/60",
               )}
               type="button"
             >
@@ -243,10 +316,12 @@ export default function TipSearchBar({
                 <Lightbulb className="h-3.5 w-3.5" />
               )}
               <span>{activeCategoryData?.label ?? "All tips"}</span>
-              <ChevronDown className={cn(
-                "h-3.5 w-3.5 text-zinc-400 transition-transform duration-200 dark:text-zinc-500",
-                categoryOpen && "rotate-180",
-              )} />
+              <ChevronDown
+                className={cn(
+                  "h-3.5 w-3.5 text-zinc-400 transition-transform duration-200 dark:text-zinc-500",
+                  categoryOpen && "rotate-180",
+                )}
+              />
             </button>
           </DropdownMenuTrigger>
           <DropdownMenuContent
@@ -279,11 +354,13 @@ export default function TipSearchBar({
                       activeCategory === c.slug && "bg-zinc-100 dark:bg-zinc-800/60",
                     )}
                   >
-                    <span className={cn(
-                      "flex h-6 w-6 items-center justify-center rounded-full",
-                      colors?.bg ?? "bg-zinc-100",
-                      colors?.darkBg ?? "dark:bg-zinc-800",
-                    )}>
+                    <span
+                      className={cn(
+                        "flex h-6 w-6 items-center justify-center rounded-full",
+                        colors?.bg ?? "bg-zinc-100",
+                        colors?.darkBg ?? "dark:bg-zinc-800",
+                      )}
+                    >
                       <ToolIcon name={c.icon} className={cn("h-3.5 w-3.5", colors?.icon)} />
                     </span>
                     <span className="font-medium text-zinc-900 dark:text-zinc-100">{c.label}</span>
@@ -327,12 +404,17 @@ export default function TipSearchBar({
                       role="option"
                       variants={ANIMATION_VARIANTS.item}
                     >
-                      <span className={cn(
-                        "flex h-7 w-7 shrink-0 items-center justify-center rounded-full",
-                        colors?.bg ?? "bg-zinc-100",
-                        colors?.darkBg ?? "dark:bg-zinc-800",
-                      )}>
-                        <ToolIcon name={tip.icon} className={cn("h-3.5 w-3.5", colors?.icon ?? "text-zinc-600")} />
+                      <span
+                        className={cn(
+                          "flex h-7 w-7 shrink-0 items-center justify-center rounded-full",
+                          colors?.bg ?? "bg-zinc-100",
+                          colors?.darkBg ?? "dark:bg-zinc-800",
+                        )}
+                      >
+                        <ToolIcon
+                          name={tip.icon}
+                          className={cn("h-3.5 w-3.5", colors?.icon ?? "text-zinc-600")}
+                        />
                       </span>
                       <div className="min-w-0 flex-1">
                         <div className="truncate text-sm font-medium text-zinc-900 dark:text-zinc-100">
@@ -356,12 +438,14 @@ export default function TipSearchBar({
                     {activeIndex >= 0 ? " · Press Enter to expand" : ""}
                   </p>
                 </div>
-              ) : filteredTips.length > 4 && (
-                <div className="border-t border-zinc-100 px-3.5 py-2 dark:border-zinc-800">
-                  <p className="text-[11px] text-zinc-400">
-                    +{filteredTips.length - 4} more — type to search
-                  </p>
-                </div>
+              ) : (
+                filteredTips.length > 4 && (
+                  <div className="border-t border-zinc-100 px-3.5 py-2 dark:border-zinc-800">
+                    <p className="text-[11px] text-zinc-400">
+                      +{filteredTips.length - 4} more — type to search
+                    </p>
+                  </div>
+                )
               )}
             </motion.div>
           )}

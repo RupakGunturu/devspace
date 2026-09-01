@@ -12,7 +12,10 @@ export default function CssPxPt() {
 
   const convert = () => {
     const val = parseFloat(input);
-    if (isNaN(val)) { setOutput("Enter valid number"); return; }
+    if (isNaN(val)) {
+      setOutput("Enter valid number");
+      return;
+    }
     if (mode === "pxToPt") setOutput(`${val}px = ${(val * 0.75).toFixed(2)}pt`);
     else setOutput(`${val}pt = ${(val / 0.75).toFixed(2)}px`);
   };
@@ -28,7 +31,13 @@ export default function CssPxPt() {
         onChange={(v) => setMode(v as any)}
         className="mb-2"
       />
-      <ToolInput value={input} onChange={setInput} placeholder="Enter value..." label="Value" rows={1} />
+      <ToolInput
+        value={input}
+        onChange={setInput}
+        placeholder="Enter value..."
+        label="Value"
+        rows={1}
+      />
       <ToolButton onClick={convert}>Convert</ToolButton>
       <ToolOutput value={output} />
     </ToolLayout>

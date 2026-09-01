@@ -21,11 +21,56 @@ interface SessionEntry {
 }
 
 const INITIAL_CARDS: StudyCard[] = [
-  { id: "1", topic: "Binary Search", difficulty: "medium", interval: 1, easeFactor: 2.5, dueDate: new Date(), lastReviewed: null, reviewCount: 0 },
-  { id: "2", topic: "Graph BFS/DFS", difficulty: "hard", interval: 1, easeFactor: 2.5, dueDate: new Date(), lastReviewed: null, reviewCount: 0 },
-  { id: "3", topic: "Array Sliding Window", difficulty: "easy", interval: 1, easeFactor: 2.5, dueDate: new Date(), lastReviewed: null, reviewCount: 0 },
-  { id: "4", topic: "Dynamic Programming", difficulty: "hard", interval: 1, easeFactor: 2.5, dueDate: new Date(), lastReviewed: null, reviewCount: 0 },
-  { id: "5", topic: "Tree Traversal", difficulty: "medium", interval: 1, easeFactor: 2.5, dueDate: new Date(), lastReviewed: null, reviewCount: 0 },
+  {
+    id: "1",
+    topic: "Binary Search",
+    difficulty: "medium",
+    interval: 1,
+    easeFactor: 2.5,
+    dueDate: new Date(),
+    lastReviewed: null,
+    reviewCount: 0,
+  },
+  {
+    id: "2",
+    topic: "Graph BFS/DFS",
+    difficulty: "hard",
+    interval: 1,
+    easeFactor: 2.5,
+    dueDate: new Date(),
+    lastReviewed: null,
+    reviewCount: 0,
+  },
+  {
+    id: "3",
+    topic: "Array Sliding Window",
+    difficulty: "easy",
+    interval: 1,
+    easeFactor: 2.5,
+    dueDate: new Date(),
+    lastReviewed: null,
+    reviewCount: 0,
+  },
+  {
+    id: "4",
+    topic: "Dynamic Programming",
+    difficulty: "hard",
+    interval: 1,
+    easeFactor: 2.5,
+    dueDate: new Date(),
+    lastReviewed: null,
+    reviewCount: 0,
+  },
+  {
+    id: "5",
+    topic: "Tree Traversal",
+    difficulty: "medium",
+    interval: 1,
+    easeFactor: 2.5,
+    dueDate: new Date(),
+    lastReviewed: null,
+    reviewCount: 0,
+  },
 ];
 
 function createId(): string {
@@ -33,7 +78,8 @@ function createId(): string {
 }
 
 function updateCard(card: StudyCard, quality: number): StudyCard {
-  let { easeFactor, interval, reviewCount } = card;
+  let { easeFactor, interval } = card;
+  const reviewCount = card.reviewCount;
   if (quality >= 3) {
     if (reviewCount === 0) interval = 1;
     else if (reviewCount === 1) interval = 3;
@@ -150,15 +196,12 @@ export function SpacedRepetitionTimer() {
     setNewTopic("");
   }, [newTopic, newDifficulty]);
 
-  const reviewCard = useCallback(
-    (cardId: string, quality: number) => {
-      setCards((prev) => prev.map((c) => (c.id === cardId ? updateCard(c, quality) : c)));
-      setSessionCardsReviewed((prev) => prev + 1);
-      setCurrentCardIndex(null);
-      setShowAnswer(false);
-    },
-    []
-  );
+  const reviewCard = useCallback((cardId: string, quality: number) => {
+    setCards((prev) => prev.map((c) => (c.id === cardId ? updateCard(c, quality) : c)));
+    setSessionCardsReviewed((prev) => prev + 1);
+    setCurrentCardIndex(null);
+    setShowAnswer(false);
+  }, []);
 
   const removeCard = useCallback((id: string) => {
     setCards((prev) => prev.filter((c) => c.id !== id));
@@ -173,7 +216,11 @@ export function SpacedRepetitionTimer() {
     }
   }, [dueCards, cards]);
 
-  const diffColors: Record<string, string> = { easy: "#4ade80", medium: "#facc15", hard: "#f87171" };
+  const diffColors: Record<string, string> = {
+    easy: "#4ade80",
+    medium: "#facc15",
+    hard: "#f87171",
+  };
 
   return (
     <ToolLayout id="spaced-repetition-timer">
@@ -182,10 +229,7 @@ export function SpacedRepetitionTimer() {
           <span className="mb-2 font-mono text-xs uppercase tracking-wider text-muted">
             {isBreak ? "Break Time" : "Focus Session"}
           </span>
-          <span
-            className="mb-4 font-mono text-5xl font-bold tabular-nums"
-            style={{ color }}
-          >
+          <span className="mb-4 font-mono text-5xl font-bold tabular-nums" style={{ color }}>
             {formatTime(timeLeft)}
           </span>
           <div className="mb-4 h-2 w-full overflow-hidden rounded-full bg-paper-dim/50">
@@ -198,9 +242,7 @@ export function SpacedRepetitionTimer() {
             />
           </div>
           <div className="flex gap-2">
-            <ToolButton onClick={toggleTimer}>
-              {timerRunning ? "Pause" : "Start"}
-            </ToolButton>
+            <ToolButton onClick={toggleTimer}>{timerRunning ? "Pause" : "Start"}</ToolButton>
             <ToolButton variant="secondary" onClick={resetTimer}>
               Reset
             </ToolButton>
@@ -217,8 +259,12 @@ export function SpacedRepetitionTimer() {
             onKeyDown={(e) => e.key === "Enter" && addCard()}
             placeholder="e.g. Red-Black Trees"
             className="mb-2 w-full rounded-md border-2 border-line bg-input-bg p-2 font-mono text-sm text-input-text outline-none placeholder:text-muted"
-            onFocus={(e) => { e.currentTarget.style.borderColor = color; }}
-            onBlur={(e) => { e.currentTarget.style.borderColor = ""; }}
+            onFocus={(e) => {
+              e.currentTarget.style.borderColor = color;
+            }}
+            onBlur={(e) => {
+              e.currentTarget.style.borderColor = "";
+            }}
           />
           <div className="mb-3 flex gap-1.5">
             {(["easy", "medium", "hard"] as const).map((d) => (
@@ -236,7 +282,9 @@ export function SpacedRepetitionTimer() {
               </button>
             ))}
           </div>
-          <ToolButton onClick={addCard} disabled={!newTopic.trim()}>Add Card</ToolButton>
+          <ToolButton onClick={addCard} disabled={!newTopic.trim()}>
+            Add Card
+          </ToolButton>
         </div>
       </div>
 
@@ -269,7 +317,8 @@ export function SpacedRepetitionTimer() {
                 {showAnswer ? (
                   <div className="space-y-2">
                     <p className="text-sm text-muted">
-                      Interval: {cards[currentCardIndex].interval}d · Ease: {cards[currentCardIndex].easeFactor}
+                      Interval: {cards[currentCardIndex].interval}d · Ease:{" "}
+                      {cards[currentCardIndex].easeFactor}
                     </p>
                     <div className="flex justify-center gap-1.5">
                       {[
@@ -319,7 +368,10 @@ export function SpacedRepetitionTimer() {
                   />
                   <span className="font-mono text-sm text-foreground">{card.topic}</span>
                   {isDue && (
-                    <span className="rounded-full px-1.5 py-0.5 font-mono text-[10px] font-bold" style={{ backgroundColor: color, color: "#fff" }}>
+                    <span
+                      className="rounded-full px-1.5 py-0.5 font-mono text-[10px] font-bold"
+                      style={{ backgroundColor: color, color: "#fff" }}
+                    >
                       DUE
                     </span>
                   )}
@@ -348,7 +400,10 @@ export function SpacedRepetitionTimer() {
           </span>
           <div className="space-y-1">
             {sessions.map((s, i) => (
-              <div key={i} className="flex items-center justify-between rounded-md bg-paper-dim/10 px-3 py-1.5 font-mono text-xs">
+              <div
+                key={i}
+                className="flex items-center justify-between rounded-md bg-paper-dim/10 px-3 py-1.5 font-mono text-xs"
+              >
                 <span className="text-muted">{s.date}</span>
                 <span style={{ color }}>{s.cardsReviewed} cards</span>
                 <span className="text-muted">{Math.floor(s.duration / 60)}min</span>

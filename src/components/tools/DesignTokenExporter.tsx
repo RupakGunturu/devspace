@@ -4,9 +4,18 @@ import { ToolButton } from "./ToolButton";
 import { CopyButton } from "./CopyButton";
 import { useToolAccent } from "@/components/ToolAccentContext";
 
-interface ColorToken { name: string; hex: string; }
-interface SpacingToken { name: string; value: string; }
-interface FontToken { name: string; size: string; }
+interface ColorToken {
+  name: string;
+  hex: string;
+}
+interface SpacingToken {
+  name: string;
+  value: string;
+}
+interface FontToken {
+  name: string;
+  size: string;
+}
 
 type ExportFormat = "css" | "json" | "tailwind";
 
@@ -45,33 +54,60 @@ export function DesignTokenExporter() {
   const output = useMemo(() => {
     if (format === "css") {
       const lines = [":root {"];
-      colors.forEach((c) => { if (c.name) lines.push(`  --color-${c.name}: ${c.hex};`); });
-      spacings.forEach((s) => { if (s.name) lines.push(`  --spacing-${s.name}: ${s.value};`); });
-      fonts.forEach((f) => { if (f.name) lines.push(`  --font-${f.name}: ${f.size};`); });
+      colors.forEach((c) => {
+        if (c.name) lines.push(`  --color-${c.name}: ${c.hex};`);
+      });
+      spacings.forEach((s) => {
+        if (s.name) lines.push(`  --spacing-${s.name}: ${s.value};`);
+      });
+      fonts.forEach((f) => {
+        if (f.name) lines.push(`  --font-${f.name}: ${f.size};`);
+      });
       lines.push("}");
       return lines.join("\n");
     }
     if (format === "json") {
       const obj: Record<string, Record<string, string>> = {};
-      colors.forEach((c) => { if (c.name) { if (!obj.colors) obj.colors = {}; obj.colors[c.name] = c.hex; } });
-      spacings.forEach((s) => { if (s.name) { if (!obj.spacing) obj.spacing = {}; obj.spacing[s.name] = s.value; } });
-      fonts.forEach((f) => { if (f.name) { if (!obj.fontSize) obj.fontSize = {}; obj.fontSize[f.name] = f.size; } });
+      colors.forEach((c) => {
+        if (c.name) {
+          if (!obj.colors) obj.colors = {};
+          obj.colors[c.name] = c.hex;
+        }
+      });
+      spacings.forEach((s) => {
+        if (s.name) {
+          if (!obj.spacing) obj.spacing = {};
+          obj.spacing[s.name] = s.value;
+        }
+      });
+      fonts.forEach((f) => {
+        if (f.name) {
+          if (!obj.fontSize) obj.fontSize = {};
+          obj.fontSize[f.name] = f.size;
+        }
+      });
       return JSON.stringify(obj, null, 2);
     }
     const lines = ["module.exports = {", "  theme: {", "    extend: {"];
     if (colors.length) {
       lines.push("      colors: {");
-      colors.forEach((c) => { if (c.name) lines.push(`        '${c.name}': '${c.hex}',`); });
+      colors.forEach((c) => {
+        if (c.name) lines.push(`        '${c.name}': '${c.hex}',`);
+      });
       lines.push("      },");
     }
     if (spacings.length) {
       lines.push("      spacing: {");
-      spacings.forEach((s) => { if (s.name) lines.push(`        '${s.name}': '${s.value}',`); });
+      spacings.forEach((s) => {
+        if (s.name) lines.push(`        '${s.name}': '${s.value}',`);
+      });
       lines.push("      },");
     }
     if (fonts.length) {
       lines.push("      fontSize: {");
-      fonts.forEach((f) => { if (f.name) lines.push(`        '${f.name}': '${f.size}',`); });
+      fonts.forEach((f) => {
+        if (f.name) lines.push(`        '${f.name}': '${f.size}',`);
+      });
       lines.push("      },");
     }
     lines.push("    },");
@@ -102,8 +138,12 @@ export function DesignTokenExporter() {
       <div className="flex flex-col gap-3">
         <div>
           <div className="mb-2 flex items-center justify-between">
-            <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">Colors</span>
-            <button onClick={addColor} className="font-mono text-xs underline" style={{ color }}>+ Add</button>
+            <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">
+              Colors
+            </span>
+            <button onClick={addColor} className="font-mono text-xs underline" style={{ color }}>
+              + Add
+            </button>
           </div>
           {colors.map((c, i) => (
             <div key={i} className="mb-2 flex items-center gap-2">
@@ -126,15 +166,21 @@ export function DesignTokenExporter() {
                 placeholder="name"
                 className="flex-1 rounded border border-line bg-input-bg px-2 py-1 font-mono text-xs text-foreground"
               />
-              <button onClick={() => removeColor(i)} className="font-mono text-xs text-red-500">✕</button>
+              <button onClick={() => removeColor(i)} className="font-mono text-xs text-red-500">
+                ✕
+              </button>
             </div>
           ))}
         </div>
 
         <div>
           <div className="mb-2 flex items-center justify-between">
-            <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">Spacing</span>
-            <button onClick={addSpacing} className="font-mono text-xs underline" style={{ color }}>+ Add</button>
+            <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">
+              Spacing
+            </span>
+            <button onClick={addSpacing} className="font-mono text-xs underline" style={{ color }}>
+              + Add
+            </button>
           </div>
           {spacings.map((s, i) => (
             <div key={i} className="mb-2 flex items-center gap-2">
@@ -152,15 +198,21 @@ export function DesignTokenExporter() {
                 placeholder="e.g. 16px"
                 className="flex-1 rounded border border-line bg-input-bg px-2 py-1 font-mono text-xs text-foreground"
               />
-              <button onClick={() => removeSpacing(i)} className="font-mono text-xs text-red-500">✕</button>
+              <button onClick={() => removeSpacing(i)} className="font-mono text-xs text-red-500">
+                ✕
+              </button>
             </div>
           ))}
         </div>
 
         <div>
           <div className="mb-2 flex items-center justify-between">
-            <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">Font Sizes</span>
-            <button onClick={addFont} className="font-mono text-xs underline" style={{ color }}>+ Add</button>
+            <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">
+              Font Sizes
+            </span>
+            <button onClick={addFont} className="font-mono text-xs underline" style={{ color }}>
+              + Add
+            </button>
           </div>
           {fonts.map((f, i) => (
             <div key={i} className="mb-2 flex items-center gap-2">
@@ -178,7 +230,9 @@ export function DesignTokenExporter() {
                 placeholder="e.g. 16px"
                 className="flex-1 rounded border border-line bg-input-bg px-2 py-1 font-mono text-xs text-foreground"
               />
-              <button onClick={() => removeFont(i)} className="font-mono text-xs text-red-500">✕</button>
+              <button onClick={() => removeFont(i)} className="font-mono text-xs text-red-500">
+                ✕
+              </button>
             </div>
           ))}
         </div>

@@ -29,7 +29,8 @@ export default function ForgotPassword() {
           <div className="mb-4 text-4xl">📧</div>
           <h1 className="mb-2 font-display text-2xl font-bold">Check your email</h1>
           <p className="mb-6 text-sm text-muted">
-            If an account exists with <strong>{email}</strong>, we sent a password reset link. Check your spam folder if you don't see it.
+            If an account exists with <strong>{email}</strong>, we sent a password reset link. Check
+            your spam folder if you don't see it.
           </p>
           <Link
             to="/login"
@@ -46,9 +47,7 @@ export default function ForgotPassword() {
     <div className="mx-auto flex min-h-[60vh] max-w-[420px] flex-col items-center justify-center px-6 py-16">
       <div className="w-full rounded-md border-2 border-line bg-paper p-8">
         <h1 className="mb-2 font-display text-2xl font-bold">Forgot password?</h1>
-        <p className="mb-6 text-sm text-muted">
-          Enter your email and we'll send you a reset link.
-        </p>
+        <p className="mb-6 text-sm text-muted">Enter your email and we'll send you a reset link.</p>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
           <input

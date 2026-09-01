@@ -19,7 +19,7 @@ const MARKET_DATA = [
 
 export function RentalYieldCalculator() {
   const [inputs, setInputs] = useState<Record<string, string>>(
-    Object.fromEntries(FIELDS.map((f) => [f.key, f.default]))
+    Object.fromEntries(FIELDS.map((f) => [f.key, f.default])),
   );
   const { color } = useToolAccent();
 
@@ -38,12 +38,13 @@ export function RentalYieldCalculator() {
     const netIncome = annualRent - expenses;
     const netYield = (netIncome / price) * 100;
     const capRate = netYield;
-    const cashOnCash = ((netIncome / price) * 100);
+    const cashOnCash = (netIncome / price) * 100;
     const monthlyExpenses = expenses / 12;
     const monthlyNet = monthlyRent - monthlyExpenses;
     const priceToRent = price / monthlyRent;
 
-    const fmt = (v: number) => v.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const fmt = (v: number) =>
+      v.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
     return {
       annualRent,
@@ -70,7 +71,9 @@ export function RentalYieldCalculator() {
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
         {FIELDS.map(({ key, label, placeholder }) => (
           <div key={key}>
-            <span className="mb-1 block font-mono text-xs font-medium uppercase tracking-wider text-muted">{label}</span>
+            <span className="mb-1 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+              {label}
+            </span>
             <input
               type="number"
               value={inputs[key]}
@@ -87,13 +90,30 @@ export function RentalYieldCalculator() {
         <div className="space-y-4">
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
             {[
-              { label: "Gross Yield", value: `${result.fmt(result.grossYield)}%`, c: yieldColor(result.grossYield) },
-              { label: "Net Yield", value: `${result.fmt(result.netYield)}%`, c: yieldColor(result.netYield) },
-              { label: "Cap Rate", value: `${result.fmt(result.capRate)}%`, c: yieldColor(result.capRate) },
+              {
+                label: "Gross Yield",
+                value: `${result.fmt(result.grossYield)}%`,
+                c: yieldColor(result.grossYield),
+              },
+              {
+                label: "Net Yield",
+                value: `${result.fmt(result.netYield)}%`,
+                c: yieldColor(result.netYield),
+              },
+              {
+                label: "Cap Rate",
+                value: `${result.fmt(result.capRate)}%`,
+                c: yieldColor(result.capRate),
+              },
             ].map(({ label, value, c }) => (
-              <div key={label} className="rounded-md border-2 border-line bg-input-bg p-4 text-center">
+              <div
+                key={label}
+                className="rounded-md border-2 border-line bg-input-bg p-4 text-center"
+              >
                 <div className="font-mono text-xs uppercase tracking-wider text-muted">{label}</div>
-                <div className="mt-1 font-display text-3xl font-extrabold" style={{ color: c }}>{value}</div>
+                <div className="mt-1 font-display text-3xl font-extrabold" style={{ color: c }}>
+                  {value}
+                </div>
               </div>
             ))}
           </div>
@@ -101,29 +121,47 @@ export function RentalYieldCalculator() {
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
             {[
               { label: "Annual Rent", value: `$${result.fmt(result.annualRent)}` },
-              { label: "Annual Expenses", value: `$${result.fmt(result.annualRent - result.netIncome)}` },
+              {
+                label: "Annual Expenses",
+                value: `$${result.fmt(result.annualRent - result.netIncome)}`,
+              },
               { label: "Net Annual Income", value: `$${result.fmt(result.netIncome)}` },
               { label: "Price-to-Rent Ratio", value: `${result.fmt(result.priceToRent)}x` },
             ].map(({ label, value }) => (
-              <div key={label} className="rounded-md border-2 border-line bg-input-bg p-3 text-center">
-                <div className="font-mono text-[10px] uppercase tracking-wider text-muted">{label}</div>
-                <div className="mt-1 font-mono text-sm font-bold" style={{ color }}>{value}</div>
+              <div
+                key={label}
+                className="rounded-md border-2 border-line bg-input-bg p-3 text-center"
+              >
+                <div className="font-mono text-[10px] uppercase tracking-wider text-muted">
+                  {label}
+                </div>
+                <div className="mt-1 font-mono text-sm font-bold" style={{ color }}>
+                  {value}
+                </div>
               </div>
             ))}
           </div>
 
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <div className="rounded-md border-2 border-line bg-input-bg p-4">
-              <div className="mb-1 font-mono text-xs uppercase tracking-wider text-muted">Monthly Cash Flow</div>
-              <div className="font-display text-2xl font-extrabold" style={{ color: result.monthlyNet >= 0 ? "#22c55e" : "#ef4444" }}>
+              <div className="mb-1 font-mono text-xs uppercase tracking-wider text-muted">
+                Monthly Cash Flow
+              </div>
+              <div
+                className="font-display text-2xl font-extrabold"
+                style={{ color: result.monthlyNet >= 0 ? "#22c55e" : "#ef4444" }}
+              >
                 {result.monthlyNet >= 0 ? "+" : ""}${result.fmt(result.monthlyNet)}
               </div>
               <div className="mt-1 font-mono text-xs text-muted">
-                ${result.fmt(parseFloat(inputs.rent))}/mo rent - ${result.fmt(result.monthlyExpenses)}/mo expenses
+                ${result.fmt(parseFloat(inputs.rent))}/mo rent - $
+                {result.fmt(result.monthlyExpenses)}/mo expenses
               </div>
             </div>
             <div className="rounded-md border-2 border-line bg-input-bg p-4">
-              <div className="mb-1 font-mono text-xs uppercase tracking-wider text-muted">Investment Quality</div>
+              <div className="mb-1 font-mono text-xs uppercase tracking-wider text-muted">
+                Investment Quality
+              </div>
               <div className="mt-2 flex gap-2">
                 {[
                   { label: "Cash Flow", pass: result.monthlyNet > 0 },
@@ -172,15 +210,22 @@ export function RentalYieldCalculator() {
                           className="px-3 py-2 text-right font-bold"
                           style={{ color: diff > 0 ? "#22c55e" : diff < 0 ? "#ef4444" : "#f59e0b" }}
                         >
-                          {diff > 0 ? "+" : ""}{result.fmt(diff)}%
+                          {diff > 0 ? "+" : ""}
+                          {result.fmt(diff)}%
                         </td>
                       </tr>
                     );
                   })}
                   <tr className="bg-input-bg font-bold">
-                    <td className="px-3 py-2" style={{ color }}>Your Property</td>
-                    <td className="px-3 py-2 text-right" style={{ color }}>{result.fmt(result.grossYield)}%</td>
-                    <td className="px-3 py-2 text-right" style={{ color }}>{result.fmt(result.netYield)}%</td>
+                    <td className="px-3 py-2" style={{ color }}>
+                      Your Property
+                    </td>
+                    <td className="px-3 py-2 text-right" style={{ color }}>
+                      {result.fmt(result.grossYield)}%
+                    </td>
+                    <td className="px-3 py-2 text-right" style={{ color }}>
+                      {result.fmt(result.netYield)}%
+                    </td>
                     <td className="px-3 py-2 text-right text-muted">-</td>
                   </tr>
                 </tbody>

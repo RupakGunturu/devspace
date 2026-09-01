@@ -6,18 +6,85 @@ import { useToolAccent } from "@/components/ToolAccentContext";
 
 function extractKeywords(text: string): string[] {
   const stopWords = new Set([
-    "the", "a", "an", "and", "or", "but", "in", "on", "at", "to", "for",
-    "of", "with", "by", "from", "is", "was", "are", "were", "be", "been",
-    "being", "have", "has", "had", "do", "does", "did", "will", "would",
-    "could", "should", "may", "might", "shall", "can", "this", "that",
-    "these", "those", "i", "we", "you", "he", "she", "it", "they",
-    "me", "him", "her", "us", "them", "my", "your", "his", "its", "our",
-    "their", "what", "which", "who", "whom", "where", "when", "why", "how",
-    "not", "no", "nor", "as", "if", "then", "than", "too", "very",
+    "the",
+    "a",
+    "an",
+    "and",
+    "or",
+    "but",
+    "in",
+    "on",
+    "at",
+    "to",
+    "for",
+    "of",
+    "with",
+    "by",
+    "from",
+    "is",
+    "was",
+    "are",
+    "were",
+    "be",
+    "been",
+    "being",
+    "have",
+    "has",
+    "had",
+    "do",
+    "does",
+    "did",
+    "will",
+    "would",
+    "could",
+    "should",
+    "may",
+    "might",
+    "shall",
+    "can",
+    "this",
+    "that",
+    "these",
+    "those",
+    "i",
+    "we",
+    "you",
+    "he",
+    "she",
+    "it",
+    "they",
+    "me",
+    "him",
+    "her",
+    "us",
+    "them",
+    "my",
+    "your",
+    "his",
+    "its",
+    "our",
+    "their",
+    "what",
+    "which",
+    "who",
+    "whom",
+    "where",
+    "when",
+    "why",
+    "how",
+    "not",
+    "no",
+    "nor",
+    "as",
+    "if",
+    "then",
+    "than",
+    "too",
+    "very",
   ]);
   const words = text
     .toLowerCase()
-    .replace(/[^a-z0-9\s\-\.]/g, " ")
+    .replace(/[^a-z0-9\s\-.]/g, " ")
     .split(/\s+/)
     .filter((w) => w.length > 2 && !stopWords.has(w));
   return [...new Set(words)];
@@ -46,8 +113,20 @@ export function ResumeAtsChecker() {
 
   return (
     <ToolLayout id="resume-ats-checker">
-      <ToolInput value={resume} onChange={setResume} label="Resume Text" placeholder="Paste your resume text here..." rows={6} />
-      <ToolInput value={jobDesc} onChange={setJobDesc} label="Job Description" placeholder="Paste the job description..." rows={6} />
+      <ToolInput
+        value={resume}
+        onChange={setResume}
+        label="Resume Text"
+        placeholder="Paste your resume text here..."
+        rows={6}
+      />
+      <ToolInput
+        value={jobDesc}
+        onChange={setJobDesc}
+        label="Job Description"
+        placeholder="Paste the job description..."
+        rows={6}
+      />
       <ToolButton onClick={() => {}} disabled={!resume.trim() || !jobDesc.trim()}>
         Check ATS Score
       </ToolButton>
@@ -72,7 +151,9 @@ export function ResumeAtsChecker() {
               </div>
               <div className="font-mono text-sm">
                 <span className="text-muted">Total job keywords: </span>
-                <span className="font-bold" style={{ color }}>{result.jobKeywords.length}</span>
+                <span className="font-bold" style={{ color }}>
+                  {result.jobKeywords.length}
+                </span>
               </div>
             </div>
           </div>
@@ -84,7 +165,10 @@ export function ResumeAtsChecker() {
               </p>
               <div className="flex flex-wrap gap-1.5">
                 {result.found.map((k) => (
-                  <span key={k} className="rounded-full bg-green-500/10 px-2 py-0.5 font-mono text-xs text-green-500">
+                  <span
+                    key={k}
+                    className="rounded-full bg-green-500/10 px-2 py-0.5 font-mono text-xs text-green-500"
+                  >
                     {k}
                   </span>
                 ))}
@@ -96,7 +180,10 @@ export function ResumeAtsChecker() {
               </p>
               <div className="flex flex-wrap gap-1.5">
                 {result.missing.map((k) => (
-                  <span key={k} className="rounded-full bg-red-500/10 px-2 py-0.5 font-mono text-xs text-red-500">
+                  <span
+                    key={k}
+                    className="rounded-full bg-red-500/10 px-2 py-0.5 font-mono text-xs text-red-500"
+                  >
                     {k}
                   </span>
                 ))}

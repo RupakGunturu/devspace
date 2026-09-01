@@ -20,7 +20,13 @@ export default function CsvToMarkdownTable() {
 
   return (
     <ToolLayout id="csv-to-markdown-table">
-      <ToolInput value={input} onChange={setInput} placeholder="Name,Age&#10;Alice,30&#10;Bob,25" label="CSV Input" rows={8} />
+      <ToolInput
+        value={input}
+        onChange={setInput}
+        placeholder="Name,Age&#10;Alice,30&#10;Bob,25"
+        label="CSV Input"
+        rows={8}
+      />
       <ToolButton onClick={convert}>Convert</ToolButton>
       <ToolOutput value={output} />
     </ToolLayout>

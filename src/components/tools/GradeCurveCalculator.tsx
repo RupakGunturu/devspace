@@ -34,9 +34,7 @@ function calcStats(scores: number[]) {
   const n = scores.length;
   const mean = scores.reduce((s, v) => s + v, 0) / n;
   const sorted = [...scores].sort((a, b) => a - b);
-  const median = n % 2 === 0
-    ? (sorted[n / 2 - 1] + sorted[n / 2]) / 2
-    : sorted[Math.floor(n / 2)];
+  const median = n % 2 === 0 ? (sorted[n / 2 - 1] + sorted[n / 2]) / 2 : sorted[Math.floor(n / 2)];
   const variance = scores.reduce((s, v) => s + Math.pow(v - mean, 2), 0) / n;
   const stdDev = Math.sqrt(variance);
   return { mean, median, stdDev, min: sorted[0], max: sorted[n - 1] };
@@ -76,12 +74,12 @@ export function GradeCurveCalculator() {
   const stats = useMemo(() => (scores.length > 0 ? calcStats(scores) : null), [scores]);
   const curvedScores = useMemo(
     () => (applied ? applyCurve(scores, curveType) : []),
-    [scores, curveType, applied]
+    [scores, curveType, applied],
   );
 
   const curvedStats = useMemo(
     () => (curvedScores.length > 0 ? calcStats(curvedScores) : null),
-    [curvedScores]
+    [curvedScores],
   );
 
   const fmt = (v: number) => v.toFixed(1);
@@ -108,11 +106,11 @@ export function GradeCurveCalculator() {
         `\nCURVED SCORES:`,
         `  Mean: ${fmt(cs.mean)} | Median: ${fmt(cs.median)} | Std Dev: ${fmt(cs.stdDev)}`,
         `\nINDIVIDUAL SCORES:`,
-        `Raw    Curved  Grade  Curved Grade`
+        `Raw    Curved  Grade  Curved Grade`,
       );
       scores.forEach((raw, i) => {
         lines.push(
-          `${fmt(raw).padStart(6)} ${fmt(curvedScores[i]).padStart(7)} ${getLetterGrade(raw).padStart(6)} ${getLetterGrade(curvedScores[i]).padStart(12)}`
+          `${fmt(raw).padStart(6)} ${fmt(curvedScores[i]).padStart(7)} ${getLetterGrade(raw).padStart(6)} ${getLetterGrade(curvedScores[i]).padStart(12)}`,
         );
       });
     } else {
@@ -133,7 +131,10 @@ export function GradeCurveCalculator() {
         </span>
         <textarea
           value={raw}
-          onChange={(e) => { setRaw(e.target.value); setApplied(false); }}
+          onChange={(e) => {
+            setRaw(e.target.value);
+            setApplied(false);
+          }}
           rows={6}
           placeholder={"72\n85\n91\n68\n78\n95\n82\n88\n76\n90"}
           className="w-full resize-y rounded-md border-2 border-line bg-input-bg p-4 font-mono text-sm text-input-text outline-none transition-colors placeholder:text-muted"
@@ -142,16 +143,29 @@ export function GradeCurveCalculator() {
       </div>
 
       <div>
-        <span className="mb-1 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Curve Type</span>
+        <span className="mb-1 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+          Curve Type
+        </span>
         <div className="flex gap-2">
           {CURVE_TYPES.map((t) => (
             <button
               key={t}
-              onClick={() => { setCurveType(t); setApplied(false); }}
+              onClick={() => {
+                setCurveType(t);
+                setApplied(false);
+              }}
               className="rounded-md border-2 px-4 py-2 font-mono text-sm transition-all"
-              style={curveType === t ? { borderColor: color, backgroundColor: color, color: "#fff" } : { borderColor: "var(--border)" }}
+              style={
+                curveType === t
+                  ? { borderColor: color, backgroundColor: color, color: "#fff" }
+                  : { borderColor: "var(--border)" }
+              }
             >
-              {t === "linear" ? "Linear (Max to 100)" : t === "bell" ? "Bell Curve" : "Flat Bonus (+5)"}
+              {t === "linear"
+                ? "Linear (Max to 100)"
+                : t === "bell"
+                  ? "Bell Curve"
+                  : "Flat Bonus (+5)"}
             </button>
           ))}
         </div>
@@ -166,9 +180,16 @@ export function GradeCurveCalculator() {
             { label: "Std Dev", value: fmt(stats.stdDev) },
             { label: "Range", value: `${fmt(stats.min)}-${fmt(stats.max)}` },
           ].map(({ label, value }) => (
-            <div key={label} className="rounded-md border-2 border-line bg-input-bg p-3 text-center">
-              <div className="font-mono text-[10px] uppercase tracking-wider text-muted">{label}</div>
-              <div className="mt-1 font-mono text-sm font-bold" style={{ color }}>{value}</div>
+            <div
+              key={label}
+              className="rounded-md border-2 border-line bg-input-bg p-3 text-center"
+            >
+              <div className="font-mono text-[10px] uppercase tracking-wider text-muted">
+                {label}
+              </div>
+              <div className="mt-1 font-mono text-sm font-bold" style={{ color }}>
+                {value}
+              </div>
             </div>
           ))}
         </div>
@@ -184,20 +205,36 @@ export function GradeCurveCalculator() {
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
             <div className="rounded-md border-2 border-line bg-input-bg p-3 text-center">
-              <div className="font-mono text-[10px] uppercase tracking-wider text-muted">Curved Mean</div>
-              <div className="mt-1 font-display text-lg font-extrabold" style={{ color }}>{fmt(curvedStats.mean)}</div>
+              <div className="font-mono text-[10px] uppercase tracking-wider text-muted">
+                Curved Mean
+              </div>
+              <div className="mt-1 font-display text-lg font-extrabold" style={{ color }}>
+                {fmt(curvedStats.mean)}
+              </div>
             </div>
             <div className="rounded-md border-2 border-line bg-input-bg p-3 text-center">
-              <div className="font-mono text-[10px] uppercase tracking-wider text-muted">Curved Median</div>
-              <div className="mt-1 font-display text-lg font-extrabold" style={{ color }}>{fmt(curvedStats.median)}</div>
+              <div className="font-mono text-[10px] uppercase tracking-wider text-muted">
+                Curved Median
+              </div>
+              <div className="mt-1 font-display text-lg font-extrabold" style={{ color }}>
+                {fmt(curvedStats.median)}
+              </div>
             </div>
             <div className="rounded-md border-2 border-line bg-input-bg p-3 text-center">
-              <div className="font-mono text-[10px] uppercase tracking-wider text-muted">Curved Std Dev</div>
-              <div className="mt-1 font-display text-lg font-extrabold" style={{ color }}>{fmt(curvedStats.stdDev)}</div>
+              <div className="font-mono text-[10px] uppercase tracking-wider text-muted">
+                Curved Std Dev
+              </div>
+              <div className="mt-1 font-display text-lg font-extrabold" style={{ color }}>
+                {fmt(curvedStats.stdDev)}
+              </div>
             </div>
             <div className="rounded-md border-2 border-line bg-input-bg p-3 text-center">
-              <div className="font-mono text-[10px] uppercase tracking-wider text-muted">Curved Range</div>
-              <div className="mt-1 font-display text-lg font-extrabold" style={{ color }}>{fmt(curvedStats.min)}-{fmt(curvedStats.max)}</div>
+              <div className="font-mono text-[10px] uppercase tracking-wider text-muted">
+                Curved Range
+              </div>
+              <div className="mt-1 font-display text-lg font-extrabold" style={{ color }}>
+                {fmt(curvedStats.min)}-{fmt(curvedStats.max)}
+              </div>
             </div>
           </div>
 
@@ -225,14 +262,21 @@ export function GradeCurveCalculator() {
                       <tr key={i} className="border-b border-line last:border-b-0">
                         <td className="px-3 py-2 text-muted">{i + 1}</td>
                         <td className="px-3 py-2 text-right text-input-text">{fmt(s)}</td>
-                        <td className="px-3 py-2 text-center text-input-text">{getLetterGrade(s)}</td>
-                        <td className="px-3 py-2 text-right font-bold" style={{ color }}>{fmt(curved)}</td>
-                        <td className="px-3 py-2 text-center font-bold" style={{ color }}>{getLetterGrade(curved)}</td>
+                        <td className="px-3 py-2 text-center text-input-text">
+                          {getLetterGrade(s)}
+                        </td>
+                        <td className="px-3 py-2 text-right font-bold" style={{ color }}>
+                          {fmt(curved)}
+                        </td>
+                        <td className="px-3 py-2 text-center font-bold" style={{ color }}>
+                          {getLetterGrade(curved)}
+                        </td>
                         <td
                           className="px-3 py-2 text-right font-bold"
                           style={{ color: diff > 0 ? "#22c55e" : diff < 0 ? "#ef4444" : "#f59e0b" }}
                         >
-                          {diff > 0 ? "+" : ""}{fmt(diff)}
+                          {diff > 0 ? "+" : ""}
+                          {fmt(diff)}
                         </td>
                       </tr>
                     );
@@ -244,7 +288,9 @@ export function GradeCurveCalculator() {
 
           <div className="rounded-md border-2 border-line bg-input-bg p-4">
             <div className="mb-1 flex items-center justify-between">
-              <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">Full Report</span>
+              <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">
+                Full Report
+              </span>
               <CopyButton text={fullText} />
             </div>
             <pre className="max-h-[300px] overflow-auto whitespace-pre-wrap break-all font-mono text-sm text-input-text">

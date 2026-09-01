@@ -15,7 +15,7 @@ const REGIONS: Record<string, { label: string; multiplier: number; currency: str
   UK: { label: "United Kingdom", multiplier: 0.72, currency: "\u00a3" },
   EU: { label: "Europe (Avg)", multiplier: 0.75, currency: "\u20ac" },
   India: { label: "India", multiplier: 0.25, currency: "\u20b9" },
-  Remote: { label: "Remote (Global Avg)", multiplier: 0.80, currency: "$" },
+  Remote: { label: "Remote (Global Avg)", multiplier: 0.8, currency: "$" },
 };
 
 const ROLE_BANDS: Record<string, { baseMin: number; baseMedian: number; baseMax: number }> = {
@@ -27,7 +27,7 @@ const ROLE_BANDS: Record<string, { baseMin: number; baseMedian: number; baseMax:
   "Engineering Manager": { baseMin: 150000, baseMedian: 190000, baseMax: 250000 },
   "Product Manager": { baseMin: 110000, baseMedian: 145000, baseMax: 195000 },
   "Senior Product Manager": { baseMin: 140000, baseMedian: 180000, baseMax: 240000 },
-  "Designer": { baseMin: 80000, baseMedian: 105000, baseMax: 140000 },
+  Designer: { baseMin: 80000, baseMedian: 105000, baseMax: 140000 },
   "Senior Designer": { baseMin: 120000, baseMedian: 155000, baseMax: 200000 },
   "Data Scientist": { baseMin: 100000, baseMedian: 135000, baseMax: 180000 },
   "DevOps Engineer": { baseMin: 95000, baseMedian: 130000, baseMax: 175000 },
@@ -40,15 +40,26 @@ const EXPERIENCE_MULTIPLIERS: Record<string, number> = {
   "Entry (0-2 years)": 0.75,
   "Mid (3-5 years)": 1.0,
   "Senior (6-10 years)": 1.25,
-  "Lead (10+ years)": 1.50,
+  "Lead (10+ years)": 1.5,
 };
 
 const COL_INDEX: Record<string, Record<string, number>> = {
-  US: { "New York": 1.30, "San Francisco": 1.40, "Seattle": 1.25, "Austin": 1.05, "Chicago": 1.00, "Remote": 0.90 },
-  UK: { "London": 1.25, "Manchester": 0.95, "Edinburgh": 0.90, "Remote": 0.85 },
-  EU: { "Amsterdam": 1.10, "Berlin": 0.95, "Paris": 1.15, "Barcelona": 0.90, "Remote": 0.85 },
-  India: { "Bangalore": 1.15, "Mumbai": 1.10, "Hyderabad": 0.95, "Pune": 0.90, "Remote": 0.85 },
-  Remote: { "Tier 1 (US/UK/EU)": 1.00, "Tier 2 (LATAM/Eastern EU)": 0.70, "Tier 3 (Asia/Africa)": 0.50 },
+  US: {
+    "New York": 1.3,
+    "San Francisco": 1.4,
+    Seattle: 1.25,
+    Austin: 1.05,
+    Chicago: 1.0,
+    Remote: 0.9,
+  },
+  UK: { London: 1.25, Manchester: 0.95, Edinburgh: 0.9, Remote: 0.85 },
+  EU: { Amsterdam: 1.1, Berlin: 0.95, Paris: 1.15, Barcelona: 0.9, Remote: 0.85 },
+  India: { Bangalore: 1.15, Mumbai: 1.1, Hyderabad: 0.95, Pune: 0.9, Remote: 0.85 },
+  Remote: {
+    "Tier 1 (US/UK/EU)": 1.0,
+    "Tier 2 (LATAM/Eastern EU)": 0.7,
+    "Tier 3 (Asia/Africa)": 0.5,
+  },
 };
 
 export function SalaryBandCalculator() {
@@ -84,11 +95,11 @@ export function SalaryBandCalculator() {
 
     const totalRange = max - min;
     const percentiles = [
-      { label: "10th Percentile", value: Math.round(min + totalRange * 0.10), pct: "10%" },
+      { label: "10th Percentile", value: Math.round(min + totalRange * 0.1), pct: "10%" },
       { label: "25th Percentile", value: p25, pct: "25%" },
       { label: "50th Percentile (Median)", value: median, pct: "50%", highlight: true },
       { label: "75th Percentile", value: p75, pct: "75%" },
-      { label: "90th Percentile", value: Math.round(min + totalRange * 0.90), pct: "90%" },
+      { label: "90th Percentile", value: Math.round(min + totalRange * 0.9), pct: "90%" },
     ];
 
     return { band, percentiles, currency: regionData.currency, colMultiplier, city };
@@ -113,7 +124,9 @@ export function SalaryBandCalculator() {
           >
             <option value="">Select role...</option>
             {Object.keys(ROLE_BANDS).map((r) => (
-              <option key={r} value={r}>{r}</option>
+              <option key={r} value={r}>
+                {r}
+              </option>
             ))}
           </select>
         </div>
@@ -130,7 +143,9 @@ export function SalaryBandCalculator() {
             className="w-full rounded-md border-2 border-line bg-input-bg p-3 font-mono text-sm text-input-text outline-none"
           >
             {Object.entries(REGIONS).map(([key, r]) => (
-              <option key={key} value={key}>{r.label}</option>
+              <option key={key} value={key}>
+                {r.label}
+              </option>
             ))}
           </select>
         </div>
@@ -144,7 +159,9 @@ export function SalaryBandCalculator() {
             className="w-full rounded-md border-2 border-line bg-input-bg p-3 font-mono text-sm text-input-text outline-none"
           >
             {Object.keys(EXPERIENCE_MULTIPLIERS).map((e) => (
-              <option key={e} value={e}>{e}</option>
+              <option key={e} value={e}>
+                {e}
+              </option>
             ))}
           </select>
         </div>
@@ -205,13 +222,16 @@ export function SalaryBandCalculator() {
             </div>
             <div className="mt-2 flex justify-between">
               <span className="font-mono text-xs text-muted">
-                Min: {result.currency}{fmt(result.band.min)}
+                Min: {result.currency}
+                {fmt(result.band.min)}
               </span>
               <span className="font-mono text-xs font-bold" style={{ color }}>
-                Median: {result.currency}{fmt(result.band.median)}
+                Median: {result.currency}
+                {fmt(result.band.median)}
               </span>
               <span className="font-mono text-xs text-muted">
-                Max: {result.currency}{fmt(result.band.max)}
+                Max: {result.currency}
+                {fmt(result.band.max)}
               </span>
             </div>
           </div>
@@ -220,10 +240,17 @@ export function SalaryBandCalculator() {
             {[
               { label: "Minimum", value: `${result.currency}${fmt(result.band.min)}` },
               { label: "25th Percentile", value: `${result.currency}${fmt(result.band.p25)}` },
-              { label: "Median", value: `${result.currency}${fmt(result.band.median)}`, highlight: true },
+              {
+                label: "Median",
+                value: `${result.currency}${fmt(result.band.median)}`,
+                highlight: true,
+              },
               { label: "75th Percentile", value: `${result.currency}${fmt(result.band.p75)}` },
             ].map(({ label, value, highlight }) => (
-              <div key={label} className="rounded-md border-2 border-line bg-input-bg p-3 text-center">
+              <div
+                key={label}
+                className="rounded-md border-2 border-line bg-input-bg p-3 text-center"
+              >
                 <div className="font-mono text-xs text-muted">{label}</div>
                 <div
                   className="mt-1 font-mono text-sm font-bold"
@@ -248,7 +275,8 @@ export function SalaryBandCalculator() {
                       className="font-mono text-sm font-bold"
                       style={{ color: p.highlight ? color : undefined }}
                     >
-                      {result.currency}{fmt(p.value)}
+                      {result.currency}
+                      {fmt(p.value)}
                     </span>
                   </div>
                   <div className="h-2 overflow-hidden rounded-full bg-line">
@@ -267,7 +295,8 @@ export function SalaryBandCalculator() {
 
           {result.city && (
             <div className="rounded-md border-2 border-dashed border-line p-3 font-mono text-xs text-muted">
-              Cost of living adjustment for {result.city}: {(result.colMultiplier * 100).toFixed(0)}% of regional baseline
+              Cost of living adjustment for {result.city}: {(result.colMultiplier * 100).toFixed(0)}
+              % of regional baseline
             </div>
           )}
         </>

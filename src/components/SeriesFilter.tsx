@@ -10,7 +10,15 @@ export function SeriesFilter({
   series?: string[];
 }) {
   const list = SERIES.filter((s) => series.includes(s.slug));
-  const Pill = ({ label, isActive, onClick }: { label: string; isActive: boolean; onClick: () => void }) => (
+  const Pill = ({
+    label,
+    isActive,
+    onClick,
+  }: {
+    label: string;
+    isActive: boolean;
+    onClick: () => void;
+  }) => (
     <button
       type="button"
       onClick={onClick}

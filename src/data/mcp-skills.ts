@@ -52,7 +52,8 @@ export const MCP_SKILLS: McpSkill[] = [
   {
     id: "filesystem",
     name: "Filesystem",
-    description: "Read, write, and manage files and directories through a safe, sandboxed interface.",
+    description:
+      "Read, write, and manage files and directories through a safe, sandboxed interface.",
     icon: "FolderOpen",
     category: "code",
     tags: ["files", "read", "write", "sandbox"],
@@ -61,7 +62,8 @@ export const MCP_SKILLS: McpSkill[] = [
   {
     id: "github-mcp",
     name: "GitHub",
-    description: "Create repos, manage issues, search code, and interact with the GitHub API seamlessly.",
+    description:
+      "Create repos, manage issues, search code, and interact with the GitHub API seamlessly.",
     icon: "GitBranch",
     category: "code",
     tags: ["github", "repos", "issues", "PR"],
@@ -97,7 +99,8 @@ export const MCP_SKILLS: McpSkill[] = [
   {
     id: "slack",
     name: "Slack",
-    description: "Read and post messages, manage channels, and search conversations in Slack workspaces.",
+    description:
+      "Read and post messages, manage channels, and search conversations in Slack workspaces.",
     icon: "MessageSquare",
     category: "communication",
     tags: ["slack", "messaging", "channels", "workspace"],

@@ -62,7 +62,9 @@ export function FeatureCarousel({
   }, []);
 
   return (
-    <div className={cn("group relative w-full overflow-hidden rounded-[24px] p-6 md:p-10", bgClass)}>
+    <div
+      className={cn("group relative w-full overflow-hidden rounded-[24px] p-6 md:p-10", bgClass)}
+    >
       {/* Header */}
       <div className="relative z-20 mb-8">
         <h2 className="mb-2 text-2xl font-bold text-white md:text-3xl">{title}</h2>
@@ -85,9 +87,7 @@ export function FeatureCarousel({
             <span
               className={cn(
                 "flex h-5 w-5 items-center justify-center rounded-full text-[10px] font-bold",
-                currentStep === i
-                  ? "bg-neutral-950 text-white"
-                  : "bg-neutral-700 text-neutral-400",
+                currentStep === i ? "bg-neutral-950 text-white" : "bg-neutral-700 text-neutral-400",
               )}
             >
               {i + 1}
@@ -110,10 +110,18 @@ export function FeatureCarousel({
               className="absolute inset-0"
             >
               {image.step1light1 && (
-                <img src={image.step1light1} alt={image.alt} className={cn("absolute", step1img1Class)} />
+                <img
+                  src={image.step1light1}
+                  alt={image.alt}
+                  className={cn("absolute", step1img1Class)}
+                />
               )}
               {image.step1light2 && (
-                <img src={image.step1light2} alt={image.alt} className={cn("absolute", step1img2Class)} />
+                <img
+                  src={image.step1light2}
+                  alt={image.alt}
+                  className={cn("absolute", step1img2Class)}
+                />
               )}
             </motion.div>
           )}
@@ -127,10 +135,18 @@ export function FeatureCarousel({
               className="absolute inset-0"
             >
               {image.step2light1 && (
-                <img src={image.step2light1} alt={image.alt} className={cn("absolute", step2img1Class)} />
+                <img
+                  src={image.step2light1}
+                  alt={image.alt}
+                  className={cn("absolute", step2img1Class)}
+                />
               )}
               {image.step2light2 && (
-                <img src={image.step2light2} alt={image.alt} className={cn("absolute", step2img2Class)} />
+                <img
+                  src={image.step2light2}
+                  alt={image.alt}
+                  className={cn("absolute", step2img2Class)}
+                />
               )}
             </motion.div>
           )}
@@ -144,7 +160,11 @@ export function FeatureCarousel({
               className="absolute inset-0"
             >
               {image.step3light && (
-                <img src={image.step3light} alt={image.alt} className={cn("absolute", step3imgClass)} />
+                <img
+                  src={image.step3light}
+                  alt={image.alt}
+                  className={cn("absolute", step3imgClass)}
+                />
               )}
             </motion.div>
           )}
@@ -158,7 +178,11 @@ export function FeatureCarousel({
               className="absolute inset-0"
             >
               {image.step4light && (
-                <img src={image.step4light} alt={image.alt} className={cn("absolute", step4imgClass)} />
+                <img
+                  src={image.step4light}
+                  alt={image.alt}
+                  className={cn("absolute", step4imgClass)}
+                />
               )}
             </motion.div>
           )}

@@ -33,10 +33,22 @@ export default function Base64ImageConverter() {
       {output && (
         <div>
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Base64 Output</span>
-            <button onClick={() => { navigator.clipboard.writeText(output); }} className="text-xs hover:underline" style={{ color }}>Copy</button>
+            <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+              Base64 Output
+            </span>
+            <button
+              onClick={() => {
+                navigator.clipboard.writeText(output);
+              }}
+              className="text-xs hover:underline"
+              style={{ color }}
+            >
+              Copy
+            </button>
           </div>
-          <pre className="w-full min-h-[100px] max-h-[300px] overflow-auto p-4 bg-paper-dim/50 border border-border rounded-sm text-[10px] font-mono text-foreground whitespace-pre-wrap break-all">{output}</pre>
+          <pre className="w-full min-h-[100px] max-h-[300px] overflow-auto p-4 bg-paper-dim/50 border border-border rounded-sm text-[10px] font-mono text-foreground whitespace-pre-wrap break-all">
+            {output}
+          </pre>
         </div>
       )}
     </ToolLayout>

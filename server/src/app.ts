@@ -6,6 +6,7 @@ import passport from "passport";
 import { config } from "./config/env";
 import authRoutes from "./routes/auth";
 import activityRoutes from "./routes/activity";
+import adminRoutes from "./routes/admin";
 
 const app = express();
 
@@ -62,6 +63,16 @@ app.use(passport.initialize());
 // Routes — auth gets stricter rate limit
 app.use("/api/auth", authLimiter, authRoutes);
 app.use("/api/activity", activityRoutes);
+
+// Admin routes — protected by authenticate + authorize("admin") at route level.
+// A looser rate limit so admin CRUD/deploy operations are not throttled out.
+app.use(
+  "/api/admin",
+  process.env.NODE_ENV === "test"
+    ? (req: Request, _res: Response, next: NextFunction) => next()
+    : rateLimit({ windowMs: 60_000, max: 300, standardHeaders: true, legacyHeaders: false }),
+  adminRoutes,
+);
 
 // Health check
 app.get("/api/health", (_req, res) => {

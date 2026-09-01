@@ -24,7 +24,8 @@ export function PhotographyPricingBuilder() {
     const albumRate = 200;
     const travelRate = 0.65;
 
-    const baseCost = h * hourlyRate + p * photoRate + pr * printRate + a * albumRate + t * travelRate;
+    const baseCost =
+      h * hourlyRate + p * photoRate + pr * printRate + a * albumRate + t * travelRate;
 
     return {
       basic: {
@@ -55,7 +56,9 @@ export function PhotographyPricingBuilder() {
   }, [hours, photos, prints, album, travel]);
 
   const calcPrice = (tier: typeof pricing.basic) => {
-    return tier.hours * 150 + tier.photos * 5 + tier.prints * 25 + tier.album * 200 + tier.travel * 0.65;
+    return (
+      tier.hours * 150 + tier.photos * 5 + tier.prints * 25 + tier.album * 200 + tier.travel * 0.65
+    );
   };
 
   return (
@@ -118,11 +121,27 @@ export function PhotographyPricingBuilder() {
               <div className="border-t border-line pt-2">
                 <p className="font-mono text-[10px] uppercase text-muted">Breakdown</p>
                 <div className="mt-1 flex flex-col gap-0.5 font-mono text-[10px] text-muted">
-                  <span>Coverage: {tier.hours}h × $150 = ${tier.hours * 150}</span>
-                  <span>Photos: {tier.photos} × $5 = ${tier.photos * 5}</span>
-                  {tier.prints > 0 && <span>Prints: {tier.prints} × $25 = ${tier.prints * 25}</span>}
-                  {tier.album > 0 && <span>Album: {tier.album} × $200 = ${tier.album * 200}</span>}
-                  {tier.travel > 0 && <span>Travel: {tier.travel}mi × $0.65 = $${(tier.travel * 0.65).toFixed(0)}</span>}
+                  <span>
+                    Coverage: {tier.hours}h × $150 = ${tier.hours * 150}
+                  </span>
+                  <span>
+                    Photos: {tier.photos} × $5 = ${tier.photos * 5}
+                  </span>
+                  {tier.prints > 0 && (
+                    <span>
+                      Prints: {tier.prints} × $25 = ${tier.prints * 25}
+                    </span>
+                  )}
+                  {tier.album > 0 && (
+                    <span>
+                      Album: {tier.album} × $200 = ${tier.album * 200}
+                    </span>
+                  )}
+                  {tier.travel > 0 && (
+                    <span>
+                      Travel: {tier.travel}mi × $0.65 = $${(tier.travel * 0.65).toFixed(0)}
+                    </span>
+                  )}
                 </div>
               </div>
             </div>

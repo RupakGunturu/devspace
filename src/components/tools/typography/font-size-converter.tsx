@@ -12,14 +12,19 @@ export default function FontSizeConverter() {
 
   const convert = () => {
     const val = parseFloat(input);
-    if (isNaN(val)) { setOutput("Enter valid number"); return; }
+    if (isNaN(val)) {
+      setOutput("Enter valid number");
+      return;
+    }
     const base = 16;
     let px: number;
     if (unit === "px") px = val;
     else if (unit === "pt") px = val * 1.333;
     else if (unit === "em" || unit === "rem") px = val * base;
     else px = (val / 100) * base;
-    setOutput(`px: ${px.toFixed(2)}\npt: ${(px / 1.333).toFixed(2)}\nem: ${(px / base).toFixed(3)}\nrem: ${(px / base).toFixed(3)}\n%: ${((px / base) * 100).toFixed(1)}%`);
+    setOutput(
+      `px: ${px.toFixed(2)}\npt: ${(px / 1.333).toFixed(2)}\nem: ${(px / base).toFixed(3)}\nrem: ${(px / base).toFixed(3)}\n%: ${((px / base) * 100).toFixed(1)}%`,
+    );
   };
 
   return (
@@ -36,7 +41,13 @@ export default function FontSizeConverter() {
         onChange={(v) => setUnit(v as any)}
         className="mb-2"
       />
-      <ToolInput value={input} onChange={setInput} placeholder={`Enter value in ${unit}...`} label="Value" rows={1} />
+      <ToolInput
+        value={input}
+        onChange={setInput}
+        placeholder={`Enter value in ${unit}...`}
+        label="Value"
+        rows={1}
+      />
       <ToolButton onClick={convert}>Convert</ToolButton>
       <ToolOutput value={output} />
     </ToolLayout>

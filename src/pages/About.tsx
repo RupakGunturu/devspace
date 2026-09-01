@@ -11,67 +11,104 @@ export default function About() {
   const releases = [
     {
       id: "v140",
-      version: "v1.4.0", date: "August 2026", latest: true,
+      version: "v1.4.0",
+      date: "August 2026",
+      latest: true,
       groups: [
-        { type: "New", accent: "text-green-600 dark:text-green-400", items: [
-          "\"Learn by Playing\" section on Cheat Sheets — 24 community-curated external learning links across 9 topics (Git, CSS, SQL, regex, Vim, algorithms, security, coding games, curated lists)",
-          "Each learning link carries a Free / Freemium / Paid badge and a clear \"not built by DevSpace\" attribution",
-          "Lazy-loaded pages with skeleton loading states for faster initial loads",
-          "Privacy Policy & Terms of Service updated to cover external resources",
-        ]},
-        { type: "Improved", accent: "text-sky-600 dark:text-sky-400", items: [
-          "Home featured tools now prefer popular tools instead of the first three",
-          "Bookmarks and Profile show skeleton placeholders while loading",
-          "Game save button shows a loading state before the saved state is known",
-        ]},
+        {
+          type: "New",
+          accent: "text-green-600 dark:text-green-400",
+          items: [
+            '"Learn by Playing" section on Cheat Sheets — 24 community-curated external learning links across 9 topics (Git, CSS, SQL, regex, Vim, algorithms, security, coding games, curated lists)',
+            'Each learning link carries a Free / Freemium / Paid badge and a clear "not built by DevSpace" attribution',
+            "Lazy-loaded pages with skeleton loading states for faster initial loads",
+            "Privacy Policy & Terms of Service updated to cover external resources",
+          ],
+        },
+        {
+          type: "Improved",
+          accent: "text-sky-600 dark:text-sky-400",
+          items: [
+            "Home featured tools now prefer popular tools instead of the first three",
+            "Bookmarks and Profile show skeleton placeholders while loading",
+            "Game save button shows a loading state before the saved state is known",
+          ],
+        },
       ],
     },
     {
       id: "v130",
-      version: "v1.3.0", date: "July 2026",
+      version: "v1.3.0",
+      date: "July 2026",
       groups: [
-        { type: "New", accent: "text-green-600 dark:text-green-400", items: [
-          "Changelog on this page",
-          "Lucide SVG icons for all 284 tools — unique per tool, colored by category",
-          "Tool search bar with animated FeedSearchBar-style filter and category dropdown",
-          "Shuffle component — randomized letter animation on hero text",
-        ]},
-        { type: "Improved", accent: "text-sky-600 dark:text-sky-400", items: [
-          "Tools page now randomized so CSS tools aren't all grouped together",
-          "Feed search with height/opacity animation, keyboard nav, 4-result cap",
-          "StickerCard accepts Lucide icons in colored badge or emoji strings",
-        ]},
-        { type: "Fixed", accent: "text-orange-600 dark:text-orange-400", items: [
-          "Invalid Lucide names — Shadow/Height/Eyedropper replaced with valid ones",
-          "Build warnings — removed leftover references from tools.ts",
-        ]},
+        {
+          type: "New",
+          accent: "text-green-600 dark:text-green-400",
+          items: [
+            "Changelog on this page",
+            "Lucide SVG icons for all 284 tools — unique per tool, colored by category",
+            "Tool search bar with animated FeedSearchBar-style filter and category dropdown",
+            "Shuffle component — randomized letter animation on hero text",
+          ],
+        },
+        {
+          type: "Improved",
+          accent: "text-sky-600 dark:text-sky-400",
+          items: [
+            "Tools page now randomized so CSS tools aren't all grouped together",
+            "Feed search with height/opacity animation, keyboard nav, 4-result cap",
+            "StickerCard accepts Lucide icons in colored badge or emoji strings",
+          ],
+        },
+        {
+          type: "Fixed",
+          accent: "text-orange-600 dark:text-orange-400",
+          items: [
+            "Invalid Lucide names — Shadow/Height/Eyedropper replaced with valid ones",
+            "Build warnings — removed leftover references from tools.ts",
+          ],
+        },
       ],
     },
     {
       id: "v120",
-      version: "v1.2.0", date: "June 2026",
+      version: "v1.2.0",
+      date: "June 2026",
       groups: [
-        { type: "New", accent: "text-green-600 dark:text-green-400", items: [
-          "FeedArchive page at /feed with staggered animation and search",
-          "FeedSearchBar animated dropdown with series filter and keyboard nav",
-          "useDebounce hook (150ms) for search inputs across the site",
-        ]},
-        { type: "Improved", accent: "text-sky-600 dark:text-sky-400", items: [
-          'Home page layout — "view all feed" now inline with SectionHead',
-          "Home feed with LineSidebar on desktop, SeriesFilter pills on mobile",
-        ]},
+        {
+          type: "New",
+          accent: "text-green-600 dark:text-green-400",
+          items: [
+            "FeedArchive page at /feed with staggered animation and search",
+            "FeedSearchBar animated dropdown with series filter and keyboard nav",
+            "useDebounce hook (150ms) for search inputs across the site",
+          ],
+        },
+        {
+          type: "Improved",
+          accent: "text-sky-600 dark:text-sky-400",
+          items: [
+            'Home page layout — "view all feed" now inline with SectionHead',
+            "Home feed with LineSidebar on desktop, SeriesFilter pills on mobile",
+          ],
+        },
       ],
     },
     {
       id: "v110",
-      version: "v1.1.0", date: "May 2026",
+      version: "v1.1.0",
+      date: "May 2026",
       groups: [
-        { type: "New", accent: "text-green-600 dark:text-green-400", items: [
-          "Initial launch — Home, Tools, Games, Cheat Sheets, and About pages",
-          "200+ developer tools across 14 categories",
-          "Dark/light theme toggle with system preference",
-          "Feed section with weekly dev zine posts across 7 series",
-        ]},
+        {
+          type: "New",
+          accent: "text-green-600 dark:text-green-400",
+          items: [
+            "Initial launch — Home, Tools, Games, Cheat Sheets, and About pages",
+            "200+ developer tools across 14 categories",
+            "Dark/light theme toggle with system preference",
+            "Feed section with weekly dev zine posts across 7 series",
+          ],
+        },
       ],
     },
   ];
@@ -116,8 +153,27 @@ export default function About() {
             <div className="space-y-3">
               {[
                 { n: "4", label: "releases" },
-                { n: releases.reduce((s, r) => s + r.groups.reduce((c, g) => c + g.items.length, 0), 0) + "+", label: "changes" },
-                { n: releases.reduce((s, r) => s + r.groups.filter((g) => g.type === "Fixed").reduce((c, g) => c + g.items.length, 0), 0).toString(), label: "bugs fixed" },
+                {
+                  n:
+                    releases.reduce(
+                      (s, r) => s + r.groups.reduce((c, g) => c + g.items.length, 0),
+                      0,
+                    ) + "+",
+                  label: "changes",
+                },
+                {
+                  n: releases
+                    .reduce(
+                      (s, r) =>
+                        s +
+                        r.groups
+                          .filter((g) => g.type === "Fixed")
+                          .reduce((c, g) => c + g.items.length, 0),
+                      0,
+                    )
+                    .toString(),
+                  label: "bugs fixed",
+                },
               ].map((stat) => (
                 <div key={stat.label} className="flex flex-col gap-0.5 leading-none">
                   <span className="font-mono text-xl font-bold text-yellow">{stat.n}</span>
@@ -129,11 +185,16 @@ export default function About() {
         </aside>
 
         <div className="min-w-0 flex-1 max-w-2xl" id="DevSpace">
-          <div className="mb-4 font-mono text-xs uppercase tracking-widest text-coral">▸ about DevSpace</div>
+          <div className="mb-4 font-mono text-xs uppercase tracking-widest text-coral">
+            ▸ about DevSpace
+          </div>
           <h1 className="font-display text-5xl font-extrabold leading-tight">
             Tools that work.
             <br />
-            <span className="inline-block bg-yellow px-2 text-ink" style={{ transform: "rotate(-1deg)" }}>
+            <span
+              className="inline-block bg-yellow px-2 text-ink"
+              style={{ transform: "rotate(-1deg)" }}
+            >
               Games that teach.
             </span>
             <br />
@@ -147,19 +208,29 @@ export default function About() {
               that are actually useful.
             </p>
             <div className="mt-8">
-              <h2 className="font-display text-xl font-bold text-foreground mb-4">What's inside:</h2>
+              <h2 className="font-display text-xl font-bold text-foreground mb-4">
+                What's inside:
+              </h2>
               <div className="space-y-4">
                 <div>
-                  <span className="font-bold text-foreground">Tools</span> — small, browser-based utilities for everyday dev work: formatters, converters, generators, calculators. Nothing installs, nothing tracks you, everything just runs.
+                  <span className="font-bold text-foreground">Tools</span> — small, browser-based
+                  utilities for everyday dev work: formatters, converters, generators, calculators.
+                  Nothing installs, nothing tracks you, everything just runs.
                 </div>
                 <div>
-                  <span className="font-bold text-foreground">Games</span> — interactive ways to learn concepts that are usually taught through boring slides: algorithms, SQL, terminal commands, system design. They're built to be fun first, educational second (though don't tell your professor that).
+                  <span className="font-bold text-foreground">Games</span> — interactive ways to
+                  learn concepts that are usually taught through boring slides: algorithms, SQL,
+                  terminal commands, system design. They're built to be fun first, educational
+                  second (though don't tell your professor that).
                 </div>
                 <div>
-                  <span className="font-bold text-foreground">Tips & Resource Drops</span> — quick, no-fluff notes on things worth knowing: a library you haven't tried, a shortcut that saves time, a concept explained without the jargon.
+                  <span className="font-bold text-foreground">Tips & Resource Drops</span> — quick,
+                  no-fluff notes on things worth knowing: a library you haven't tried, a shortcut
+                  that saves time, a concept explained without the jargon.
                 </div>
                 <div>
-                  <span className="font-bold text-foreground">Feed</span> — short posts from students documenting what they're learning in real time, mistakes included.
+                  <span className="font-bold text-foreground">Feed</span> — short posts from
+                  students documenting what they're learning in real time, mistakes included.
                 </div>
               </div>
             </div>
@@ -167,9 +238,14 @@ export default function About() {
               DevSpace is built by a student, in public, still figuring a lot of this out. If
               something's broken, missing, or could just be better — that's an invitation, not a
               complaint box.{" "}
-              <Link to="/tools" className="text-yellow no-underline">Contribute a tool</Link>,{" "}
-              <Link to="/tips" className="text-yellow no-underline">submit a tip</Link>, or just
-              tell us what's confusing.
+              <Link to="/tools" className="text-yellow no-underline">
+                Contribute a tool
+              </Link>
+              ,{" "}
+              <Link to="/tips" className="text-yellow no-underline">
+                submit a tip
+              </Link>
+              , or just tell us what's confusing.
             </p>
           </div>
 
@@ -200,12 +276,16 @@ export default function About() {
           </div>
 
           <div className="mt-16 border-t-2 border-dashed border-line pt-10">
-            <div className="mb-2 font-mono text-xs uppercase tracking-widest text-yellow">▸ what's new</div>
+            <div className="mb-2 font-mono text-xs uppercase tracking-widest text-yellow">
+              ▸ what's new
+            </div>
             <div className="space-y-10">
               {releases.map((release) => (
                 <div key={release.id} id={release.id} className="scroll-mt-24">
                   <div className="mb-4 flex items-center gap-3">
-                    <span className="font-mono text-xl font-bold text-foreground">{release.version}</span>
+                    <span className="font-mono text-xl font-bold text-foreground">
+                      {release.version}
+                    </span>
                     <span className="font-mono text-xs text-muted">{release.date}</span>
                     {release.latest && (
                       <span className="rounded-full border border-yellow/30 bg-yellow/10 px-2 py-0.5 text-[10px] font-mono font-bold uppercase tracking-widest text-yellow">
@@ -216,7 +296,12 @@ export default function About() {
                   <div className="space-y-3 pl-4 border-l-2 border-line">
                     {release.groups.map((group) => (
                       <div key={group.type}>
-                        <span className={cn("font-mono text-[11px] font-bold uppercase tracking-wider", group.accent)}>
+                        <span
+                          className={cn(
+                            "font-mono text-[11px] font-bold uppercase tracking-wider",
+                            group.accent,
+                          )}
+                        >
                           {group.type}
                         </span>
                         <ul className="mt-1 space-y-1">

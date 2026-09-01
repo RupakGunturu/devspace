@@ -12,16 +12,30 @@ export default function QrCodeGenerator() {
   const { color } = useToolAccent();
 
   const generate = () => {
-    setQrUrl(`https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(text)}`);
+    setQrUrl(
+      `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(text)}`,
+    );
   };
 
   return (
     <ToolLayout id="qr-code-generator">
-      <ToolInput value={text} onChange={setText} placeholder="Enter URL or text..." label="Content" rows={2} />
+      <ToolInput
+        value={text}
+        onChange={setText}
+        placeholder="Enter URL or text..."
+        label="Content"
+        rows={2}
+      />
       <div className="flex items-center gap-4">
         <div>
-          <label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">Size</label>
-          <select value={size} onChange={(e) => setSize(Number(e.target.value))} className="p-2.5 bg-paper-dim/50 border border-border rounded-sm text-sm text-foreground">
+          <label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">
+            Size
+          </label>
+          <select
+            value={size}
+            onChange={(e) => setSize(Number(e.target.value))}
+            className="p-2.5 bg-paper-dim/50 border border-border rounded-sm text-sm text-foreground"
+          >
             <option value={100}>100x100</option>
             <option value={200}>200x200</option>
             <option value={300}>300x300</option>
@@ -34,7 +48,9 @@ export default function QrCodeGenerator() {
       {qrUrl && (
         <div className="flex flex-col items-center gap-4 p-6 bg-paper-dim/50 border border-border rounded-sm">
           <img src={qrUrl} alt="QR Code" width={size} height={size} className="rounded-sm" />
-          <a href={qrUrl} download className="text-sm hover:underline" style={{ color }}>Download QR Code</a>
+          <a href={qrUrl} download className="text-sm hover:underline" style={{ color }}>
+            Download QR Code
+          </a>
         </div>
       )}
     </ToolLayout>

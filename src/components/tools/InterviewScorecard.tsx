@@ -30,9 +30,7 @@ export function InterviewScorecard() {
   const { color } = useToolAccent();
 
   const updateCriterion = (index: number, field: keyof Criterion, value: string | number) => {
-    setCriteria((prev) =>
-      prev.map((c, i) => (i === index ? { ...c, [field]: value } : c))
-    );
+    setCriteria((prev) => prev.map((c, i) => (i === index ? { ...c, [field]: value } : c)));
   };
 
   const addCriterion = () => {
@@ -89,7 +87,9 @@ export function InterviewScorecard() {
     lines.push("INTERVIEW SCORECARD");
     lines.push("=".repeat(40));
     lines.push(`Candidate: ${candidateName || "[Candidate Name]"}`);
-    lines.push(`Date: ${new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}`);
+    lines.push(
+      `Date: ${new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}`,
+    );
     lines.push("");
     lines.push("SCORES");
     lines.push("-".repeat(40));
@@ -175,7 +175,11 @@ export function InterviewScorecard() {
                   max="5"
                   value={c.weight}
                   onChange={(e) =>
-                    updateCriterion(index, "weight", Math.max(1, Math.min(5, parseInt(e.target.value) || 1)))
+                    updateCriterion(
+                      index,
+                      "weight",
+                      Math.max(1, Math.min(5, parseInt(e.target.value) || 1)),
+                    )
                   }
                   className="w-full rounded-md border border-line bg-input-bg p-2 font-mono text-sm text-input-text outline-none"
                 />
@@ -188,7 +192,11 @@ export function InterviewScorecard() {
                   max="5"
                   value={c.score}
                   onChange={(e) =>
-                    updateCriterion(index, "score", Math.max(1, Math.min(5, parseInt(e.target.value) || 1)))
+                    updateCriterion(
+                      index,
+                      "score",
+                      Math.max(1, Math.min(5, parseInt(e.target.value) || 1)),
+                    )
                   }
                   className="w-full rounded-md border border-line bg-input-bg p-2 font-mono text-sm text-input-text outline-none"
                 />

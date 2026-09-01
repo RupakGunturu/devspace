@@ -38,8 +38,8 @@ export default function Hiring() {
     <section className="mx-auto max-w-6xl px-6 py-16 sm:px-8 sm:py-20">
       <SectionHead idx="01" title="Hiring Opportunities" />
       <p className="mb-6 max-w-xl text-sm text-muted">
-        Curated job boards, freelance platforms, and active listings to land your next role. All links
-        open in a new tab.
+        Curated job boards, freelance platforms, and active listings to land your next role. All
+        links open in a new tab.
       </p>
 
       <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center">
@@ -75,9 +75,7 @@ export default function Hiring() {
                   : "border-line text-muted hover:text-foreground",
               )}
               style={
-                activeCategory === key
-                  ? { borderColor: color, backgroundColor: color }
-                  : undefined
+                activeCategory === key ? { borderColor: color, backgroundColor: color } : undefined
               }
             >
               {label}
@@ -105,18 +103,14 @@ export default function Hiring() {
                         colors?.darkBg ?? "dark:bg-zinc-800",
                       )}
                     >
-                      <span
-                        className={cn("text-sm font-bold", colors?.icon ?? "text-zinc-600")}
-                      >
+                      <span className={cn("text-sm font-bold", colors?.icon ?? "text-zinc-600")}>
                         {item.name.charAt(0)}
                       </span>
                     </div>
                   }
                   title={item.name}
                   index={i}
-                  actions={
-                    <ExternalLink className="h-4 w-4 shrink-0 text-muted" />
-                  }
+                  actions={<ExternalLink className="h-4 w-4 shrink-0 text-muted" />}
                 >
                   <span className="block">{item.tagline}</span>
                   <span

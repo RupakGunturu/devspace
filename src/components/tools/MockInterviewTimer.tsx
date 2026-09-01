@@ -80,9 +80,12 @@ export function MockInterviewTimer() {
       });
     }, 1000);
 
-    questionTimerRef.current = setInterval(() => {
-      pickRandomQuestion();
-    }, questionInterval * 60 * 1000);
+    questionTimerRef.current = setInterval(
+      () => {
+        pickRandomQuestion();
+      },
+      questionInterval * 60 * 1000,
+    );
 
     if (!currentQuestion) pickRandomQuestion();
   };
@@ -149,14 +152,7 @@ export function MockInterviewTimer() {
 
         <div className="relative flex h-48 w-48 items-center justify-center">
           <svg className="absolute h-full w-full -rotate-90" viewBox="0 0 200 200">
-            <circle
-              cx="100"
-              cy="100"
-              r="90"
-              fill="none"
-              stroke="var(--border)"
-              strokeWidth="8"
-            />
+            <circle cx="100" cy="100" r="90" fill="none" stroke="var(--border)" strokeWidth="8" />
             <circle
               cx="100"
               cy="100"

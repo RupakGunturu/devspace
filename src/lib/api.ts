@@ -8,14 +8,19 @@ function getToken(): string | null {
   return localStorage.getItem("ds_token");
 }
 
-async function request<T>(endpoint: string, options: ApiOptions = {}): Promise<T> {
+export async function request<T>(endpoint: string, options: ApiOptions = {}): Promise<T> {
   const { token, ...fetchOptions } = options;
   const authToken = token || getToken();
 
   const headers: Record<string, string> = {
-    "Content-Type": "application/json",
     ...(fetchOptions.headers as Record<string, string>),
   };
+
+  // Only set JSON content-type for JSON bodies — FormData sets its own multipart boundary.
+  const isFormData = fetchOptions.body instanceof FormData;
+  if (!isFormData && !headers["Content-Type"]) {
+    headers["Content-Type"] = "application/json";
+  }
 
   if (authToken) {
     headers["Authorization"] = `Bearer ${authToken}`;
@@ -49,6 +54,7 @@ export interface AuthUser {
   name: string;
   email: string;
   avatar?: string;
+  role: "user" | "admin";
   provider: "local" | "google";
 }
 

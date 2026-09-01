@@ -4,7 +4,10 @@ import { SectionHead, StickerCard } from "../components/site";
 import { GAMES } from "../data/games";
 import { CursorHover } from "../components/core/cursor-hover";
 
-const GAME_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
+const GAME_ICONS: Record<
+  string,
+  React.ComponentType<{ className?: string; style?: React.CSSProperties }>
+> = {
   "bug-finder": Bug,
   devwordle: LetterText,
   "dev-trivia": Brain,

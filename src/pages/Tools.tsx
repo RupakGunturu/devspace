@@ -96,11 +96,13 @@ export default function ToolsIndex() {
             <CursorHover label={t.name} color={COLOR_HEX[t.category]} key={t.slug}>
               <StickerCard
                 icon={
-                  <div className={cn(
-                    "flex h-10 w-10 items-center justify-center rounded-full",
-                    CATEGORY_COLORS[t.category]?.bg ?? "bg-zinc-100",
-                    CATEGORY_COLORS[t.category]?.darkBg ?? "dark:bg-zinc-800",
-                  )}>
+                  <div
+                    className={cn(
+                      "flex h-10 w-10 items-center justify-center rounded-full",
+                      CATEGORY_COLORS[t.category]?.bg ?? "bg-zinc-100",
+                      CATEGORY_COLORS[t.category]?.darkBg ?? "dark:bg-zinc-800",
+                    )}
+                  >
                     <ToolIcon name={t.icon} className={CATEGORY_COLORS[t.category]?.icon} />
                   </div>
                 }

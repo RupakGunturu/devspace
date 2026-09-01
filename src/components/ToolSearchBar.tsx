@@ -207,7 +207,10 @@ export default function ToolSearchBar({
             className="h-9 rounded-lg py-1.5 pr-9 pl-3 text-sm focus-visible:ring-offset-0"
             onBlur={() => setTimeout(() => setIsFocused(false), 200)}
             onChange={handleInputChange}
-            onFocus={() => { setIsFocused(true); setSelectedId(null); }}
+            onFocus={() => {
+              setIsFocused(true);
+              setSelectedId(null);
+            }}
             onKeyDown={handleKeyDown}
             placeholder="Search tools…"
             role="combobox"
@@ -249,7 +252,8 @@ export default function ToolSearchBar({
                 activeCategory === null
                   ? "border-zinc-200/60 bg-white text-zinc-600 hover:border-zinc-300 hover:bg-zinc-50 dark:border-zinc-700/60 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:border-zinc-600 dark:hover:bg-zinc-800/60"
                   : "border-zinc-200/60 bg-white text-zinc-800 hover:border-zinc-300 hover:bg-zinc-50 dark:border-zinc-700/60 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:border-zinc-600 dark:hover:bg-zinc-800/60",
-                categoryOpen && "border-zinc-300 bg-zinc-50 dark:border-zinc-600 dark:bg-zinc-800/60",
+                categoryOpen &&
+                  "border-zinc-300 bg-zinc-50 dark:border-zinc-600 dark:bg-zinc-800/60",
               )}
               type="button"
             >
@@ -259,10 +263,12 @@ export default function ToolSearchBar({
                 <Wrench className="h-3.5 w-3.5" />
               )}
               <span>{activeCategoryData?.label ?? "All tools"}</span>
-              <ChevronDown className={cn(
-                "h-3.5 w-3.5 text-zinc-400 transition-transform duration-200 dark:text-zinc-500",
-                categoryOpen && "rotate-180",
-              )} />
+              <ChevronDown
+                className={cn(
+                  "h-3.5 w-3.5 text-zinc-400 transition-transform duration-200 dark:text-zinc-500",
+                  categoryOpen && "rotate-180",
+                )}
+              />
             </button>
           </DropdownMenuTrigger>
           <DropdownMenuContent
@@ -293,12 +299,17 @@ export default function ToolSearchBar({
                     activeCategory === c.slug && "bg-zinc-100 dark:bg-zinc-800/60",
                   )}
                 >
-                  <span className={cn(
-                    "flex h-6 w-6 items-center justify-center rounded-full",
-                    CATEGORY_COLORS[c.slug]?.bg ?? "bg-zinc-100",
-                    CATEGORY_COLORS[c.slug]?.darkBg ?? "dark:bg-zinc-800",
-                  )}>
-                    <ToolIcon name={c.icon} className={cn("h-3.5 w-3.5", CATEGORY_COLORS[c.slug]?.icon)} />
+                  <span
+                    className={cn(
+                      "flex h-6 w-6 items-center justify-center rounded-full",
+                      CATEGORY_COLORS[c.slug]?.bg ?? "bg-zinc-100",
+                      CATEGORY_COLORS[c.slug]?.darkBg ?? "dark:bg-zinc-800",
+                    )}
+                  >
+                    <ToolIcon
+                      name={c.icon}
+                      className={cn("h-3.5 w-3.5", CATEGORY_COLORS[c.slug]?.icon)}
+                    />
                   </span>
                   <span className="font-medium text-zinc-900 dark:text-zinc-100">{c.label}</span>
                 </button>
@@ -365,12 +376,14 @@ export default function ToolSearchBar({
                     {activeIndex >= 0 ? " · Press Enter to view" : ""}
                   </p>
                 </div>
-              ) : filteredTools.length > 4 && (
-                <div className="border-t border-zinc-100 px-3.5 py-2 dark:border-zinc-800">
-                  <p className="text-[11px] text-zinc-400">
-                    +{filteredTools.length - 4} more — type to search
-                  </p>
-                </div>
+              ) : (
+                filteredTools.length > 4 && (
+                  <div className="border-t border-zinc-100 px-3.5 py-2 dark:border-zinc-800">
+                    <p className="text-[11px] text-zinc-400">
+                      +{filteredTools.length - 4} more — type to search
+                    </p>
+                  </div>
+                )
               )}
             </motion.div>
           )}

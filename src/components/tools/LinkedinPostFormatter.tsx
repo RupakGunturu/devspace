@@ -4,7 +4,9 @@ import { ToolButton } from "./ToolButton";
 import { CopyButton } from "./CopyButton";
 
 export function LinkedinPostFormatter() {
-  const [text, setText] = useState("Hey everyone!\n\nI just launched my new portfolio website built with React and Tailwind CSS.\n\nKey features:\n- Dark mode support\n- Responsive design\n- Fast performance\n\nCheck it out and let me know what you think!\n\n#webdev #react #portfolio");
+  const [text, setText] = useState(
+    "Hey everyone!\n\nI just launched my new portfolio website built with React and Tailwind CSS.\n\nKey features:\n- Dark mode support\n- Responsive design\n- Fast performance\n\nCheck it out and let me know what you think!\n\n#webdev #react #portfolio",
+  );
   const formatted = useMemo(() => {
     return text
       .split("\n")
@@ -18,8 +20,15 @@ export function LinkedinPostFormatter() {
   return (
     <ToolLayout id="linkedin-post-formatter">
       <div>
-        <label className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Your Post</label>
-        <textarea value={text} onChange={(e) => setText(e.target.value)} rows={12} className="w-full resize-y rounded-md border-2 border-line bg-input-bg p-3 font-mono text-sm text-input-text outline-none focus:border-accent" />
+        <label className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+          Your Post
+        </label>
+        <textarea
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          rows={12}
+          className="w-full resize-y rounded-md border-2 border-line bg-input-bg p-3 font-mono text-sm text-input-text outline-none focus:border-accent"
+        />
       </div>
       <div className="flex gap-4 text-xs font-mono text-muted">
         <span>{charCount} characters</span>
@@ -28,10 +37,14 @@ export function LinkedinPostFormatter() {
       </div>
       <div>
         <div className="flex items-center justify-between">
-          <label className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Formatted Output</label>
+          <label className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+            Formatted Output
+          </label>
           <CopyButton text={formatted} />
         </div>
-        <pre className="min-h-[120px] max-h-[400px] whitespace-pre-wrap rounded-md border-2 border-line bg-input-bg p-3 font-mono text-sm text-input-text">{formatted}</pre>
+        <pre className="min-h-[120px] max-h-[400px] whitespace-pre-wrap rounded-md border-2 border-line bg-input-bg p-3 font-mono text-sm text-input-text">
+          {formatted}
+        </pre>
       </div>
     </ToolLayout>
   );

@@ -9,7 +9,10 @@ function dateKey(d: Date): string {
 
 function parseInput(raw: string): Map<string, number> {
   const map = new Map<string, number>();
-  const lines = raw.split(/[,\n]+/).map((l) => l.trim()).filter(Boolean);
+  const lines = raw
+    .split(/[,\n]+/)
+    .map((l) => l.trim())
+    .filter(Boolean);
   for (const line of lines) {
     const match = line.match(/^(\d{4}-\d{2}-\d{2})\s*[=:]\s*(\d+)$/);
     if (match) {
@@ -29,7 +32,9 @@ function parseInput(raw: string): Map<string, number> {
 }
 
 function getMonthName(monthIndex: number): string {
-  return ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][monthIndex];
+  return ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][
+    monthIndex
+  ];
 }
 
 export function LeetcodeStreakVisualizer() {
@@ -39,7 +44,12 @@ export function LeetcodeStreakVisualizer() {
     for (let i = 0; i < 60; i++) {
       const d = new Date();
       d.setDate(d.getDate() - i);
-      const count = i < 5 ? Math.floor(Math.random() * 4) : Math.random() > 0.3 ? Math.floor(Math.random() * 5) + 1 : 0;
+      const count =
+        i < 5
+          ? Math.floor(Math.random() * 4)
+          : Math.random() > 0.3
+            ? Math.floor(Math.random() * 5) + 1
+            : 0;
       if (count > 0) lines.push(`${dateKey(d)}: ${count}`);
     }
     return lines.join("\n");
@@ -135,7 +145,7 @@ export function LeetcodeStreakVisualizer() {
       const opacity = 0.2 + intensity * 0.8;
       return color.replace(")", `, ${opacity})`).replace("rgb", "rgba");
     },
-    [color, maxCount]
+    [color, maxCount],
   );
 
   return (
@@ -150,8 +160,12 @@ export function LeetcodeStreakVisualizer() {
           rows={4}
           placeholder={"2026-07-20: 3\n2026-07-19: 1\n2026-07-18: 0"}
           className="w-full resize-y rounded-md border-2 border-line bg-input-bg p-3 font-mono text-sm text-input-text outline-none placeholder:text-muted"
-          onFocus={(e) => { e.currentTarget.style.borderColor = color; }}
-          onBlur={(e) => { e.currentTarget.style.borderColor = ""; }}
+          onFocus={(e) => {
+            e.currentTarget.style.borderColor = color;
+          }}
+          onBlur={(e) => {
+            e.currentTarget.style.borderColor = "";
+          }}
         />
       </div>
 
@@ -166,7 +180,9 @@ export function LeetcodeStreakVisualizer() {
             <span className="mb-1 block font-mono text-lg font-bold" style={{ color }}>
               {value}
             </span>
-            <span className="font-mono text-[10px] uppercase tracking-wider text-muted">{label}</span>
+            <span className="font-mono text-[10px] uppercase tracking-wider text-muted">
+              {label}
+            </span>
           </div>
         ))}
       </div>
@@ -217,14 +233,19 @@ export function LeetcodeStreakVisualizer() {
               const pct = stats.total > 0 ? (monthTotal / stats.total) * 100 : 0;
               return (
                 <div key={month} className="flex items-center gap-2">
-                  <span className="w-20 shrink-0 text-right font-mono text-xs text-muted">{month}</span>
+                  <span className="w-20 shrink-0 text-right font-mono text-xs text-muted">
+                    {month}
+                  </span>
                   <div className="h-4 flex-1 overflow-hidden rounded-full bg-paper-dim/30">
                     <div
                       className="h-full rounded-full transition-all duration-300"
                       style={{ width: `${pct}%`, backgroundColor: color, opacity: 0.7 }}
                     />
                   </div>
-                  <span className="w-10 shrink-0 text-right font-mono text-xs font-bold" style={{ color }}>
+                  <span
+                    className="w-10 shrink-0 text-right font-mono text-xs font-bold"
+                    style={{ color }}
+                  >
                     {monthTotal}
                   </span>
                 </div>

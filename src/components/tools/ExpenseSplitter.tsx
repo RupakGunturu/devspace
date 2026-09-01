@@ -46,11 +46,15 @@ export function ExpenseSplitter() {
 
   const removePerson = (id: number) => {
     setPeople((prev) => prev.filter((p) => p.id !== id));
-    setExpenses((prev) => prev.filter((e) => e.paidBy !== id).map((e) => ({ ...e, splitAmong: e.splitAmong.filter((s) => s !== id) })));
+    setExpenses((prev) =>
+      prev
+        .filter((e) => e.paidBy !== id)
+        .map((e) => ({ ...e, splitAmong: e.splitAmong.filter((s) => s !== id) })),
+    );
   };
 
   const toggleSplit = (id: number) => {
-    setSelectedSplit((prev) => prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]);
+    setSelectedSplit((prev) => (prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]));
   };
 
   const selectAll = () => setSelectedSplit(people.map((p) => p.id));
@@ -60,7 +64,13 @@ export function ExpenseSplitter() {
     if (!desc.trim() || isNaN(val) || val <= 0 || selectedSplit.length === 0) return;
     setExpenses((prev) => [
       ...prev,
-      { id: nextExpenseId++, description: desc.trim(), amount: val, paidBy, splitAmong: [...selectedSplit] },
+      {
+        id: nextExpenseId++,
+        description: desc.trim(),
+        amount: val,
+        paidBy,
+        splitAmong: [...selectedSplit],
+      },
     ]);
     setDesc("");
     setAmount("");
@@ -72,7 +82,9 @@ export function ExpenseSplitter() {
 
   const balances = useMemo(() => {
     const map: Record<number, number> = {};
-    people.forEach((p) => { map[p.id] = 0; });
+    people.forEach((p) => {
+      map[p.id] = 0;
+    });
     expenses.forEach((e) => {
       const share = e.amount / e.splitAmong.length;
       map[e.paidBy] = (map[e.paidBy] || 0) + e.amount;
@@ -94,7 +106,8 @@ export function ExpenseSplitter() {
     creditors.sort((a, b) => b.amount - a.amount);
 
     const result: Settlement[] = [];
-    let i = 0, j = 0;
+    let i = 0,
+      j = 0;
     while (i < debtors.length && j < creditors.length) {
       const d = debtors[i];
       const c = creditors[j];
@@ -113,13 +126,16 @@ export function ExpenseSplitter() {
   }, [balances, people]);
 
   const totalExpenses = expenses.reduce((s, e) => s + e.amount, 0);
-  const fmt = (v: number) => v.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const fmt = (v: number) =>
+    v.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const getName = (id: number) => people.find((p) => p.id === id)?.name || "?";
 
   return (
     <ToolLayout id="expense-splitter">
       <div>
-        <span className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Add People</span>
+        <span className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+          Add People
+        </span>
         <div className="flex gap-2">
           <input
             value={newName}
@@ -139,7 +155,12 @@ export function ExpenseSplitter() {
                 className="inline-flex items-center gap-1 rounded-full border-2 border-line bg-input-bg px-3 py-1 font-mono text-xs text-input-text"
               >
                 {p.name}
-                <button onClick={() => removePerson(p.id)} className="ml-1 text-muted transition-colors hover:text-coral">\u00d7</button>
+                <button
+                  onClick={() => removePerson(p.id)}
+                  className="ml-1 text-muted transition-colors hover:text-coral"
+                >
+                  \u00d7
+                </button>
               </span>
             ))}
           </div>
@@ -148,7 +169,9 @@ export function ExpenseSplitter() {
 
       {people.length >= 2 && (
         <div>
-          <span className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Add Expense</span>
+          <span className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+            Add Expense
+          </span>
           <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
             <input
               value={desc}
@@ -175,7 +198,11 @@ export function ExpenseSplitter() {
                   key={p.id}
                   onClick={() => setPaidBy(p.id)}
                   className="rounded-md border-2 px-3 py-1.5 font-mono text-xs transition-all"
-                  style={paidBy === p.id ? { borderColor: color, backgroundColor: color, color: "#fff" } : { borderColor: "var(--border)" }}
+                  style={
+                    paidBy === p.id
+                      ? { borderColor: color, backgroundColor: color, color: "#fff" }
+                      : { borderColor: "var(--border)" }
+                  }
                 >
                   {p.name}
                 </button>
@@ -185,7 +212,9 @@ export function ExpenseSplitter() {
           <div className="mt-2">
             <div className="mb-1 flex items-center justify-between">
               <span className="font-mono text-xs text-muted">Split among</span>
-              <button onClick={selectAll} className="font-mono text-xs underline" style={{ color }}>Select all</button>
+              <button onClick={selectAll} className="font-mono text-xs underline" style={{ color }}>
+                Select all
+              </button>
             </div>
             <div className="flex flex-wrap gap-1">
               {people.map((p) => (
@@ -193,7 +222,11 @@ export function ExpenseSplitter() {
                   key={p.id}
                   onClick={() => toggleSplit(p.id)}
                   className="rounded-md border-2 px-3 py-1.5 font-mono text-xs transition-all"
-                  style={selectedSplit.includes(p.id) ? { borderColor: color, backgroundColor: color, color: "#fff" } : { borderColor: "var(--border)" }}
+                  style={
+                    selectedSplit.includes(p.id)
+                      ? { borderColor: color, backgroundColor: color, color: "#fff" }
+                      : { borderColor: "var(--border)" }
+                  }
                 >
                   {p.name}
                 </button>
@@ -201,7 +234,10 @@ export function ExpenseSplitter() {
             </div>
           </div>
           <div className="mt-2">
-            <ToolButton onClick={addExpense} disabled={!desc.trim() || !amount || selectedSplit.length === 0}>
+            <ToolButton
+              onClick={addExpense}
+              disabled={!desc.trim() || !amount || selectedSplit.length === 0}
+            >
               Add Expense
             </ToolButton>
           </div>
@@ -210,7 +246,9 @@ export function ExpenseSplitter() {
 
       {expenses.length > 0 && (
         <div>
-          <span className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Expenses ({expenses.length})</span>
+          <span className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+            Expenses ({expenses.length})
+          </span>
           <div className="overflow-x-auto rounded-md border-2 border-line">
             <table className="w-full font-mono text-xs">
               <thead>
@@ -226,11 +264,20 @@ export function ExpenseSplitter() {
                 {expenses.map((e) => (
                   <tr key={e.id} className="border-b border-line last:border-b-0">
                     <td className="px-3 py-2 text-input-text">{e.description}</td>
-                    <td className="px-3 py-2 text-right font-bold" style={{ color }}>${fmt(e.amount)}</td>
+                    <td className="px-3 py-2 text-right font-bold" style={{ color }}>
+                      ${fmt(e.amount)}
+                    </td>
                     <td className="px-3 py-2 text-input-text">{getName(e.paidBy)}</td>
-                    <td className="px-3 py-2 text-input-text">{e.splitAmong.map(getName).join(", ")}</td>
+                    <td className="px-3 py-2 text-input-text">
+                      {e.splitAmong.map(getName).join(", ")}
+                    </td>
                     <td className="px-3 py-2 text-right">
-                      <button onClick={() => removeExpense(e.id)} className="text-muted transition-colors hover:text-coral">\u00d7</button>
+                      <button
+                        onClick={() => removeExpense(e.id)}
+                        className="text-muted transition-colors hover:text-coral"
+                      >
+                        \u00d7
+                      </button>
                     </td>
                   </tr>
                 ))}
@@ -238,7 +285,9 @@ export function ExpenseSplitter() {
               <tfoot>
                 <tr className="bg-input-bg font-bold">
                   <td className="px-3 py-2 text-muted">Total</td>
-                  <td className="px-3 py-2 text-right" style={{ color }}>${fmt(totalExpenses)}</td>
+                  <td className="px-3 py-2 text-right" style={{ color }}>
+                    ${fmt(totalExpenses)}
+                  </td>
                   <td colSpan={3}></td>
                 </tr>
               </tfoot>
@@ -249,7 +298,9 @@ export function ExpenseSplitter() {
 
       {settlements.length > 0 && (
         <div>
-          <span className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Settlement Plan (Minimal Transactions)</span>
+          <span className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+            Settlement Plan (Minimal Transactions)
+          </span>
           <div className="space-y-2">
             {settlements.map((s, i) => (
               <div
@@ -257,11 +308,19 @@ export function ExpenseSplitter() {
                 className="flex items-center gap-3 rounded-md border-2 border-line bg-input-bg px-4 py-3"
               >
                 <span className="font-mono text-sm font-bold text-input-text">{s.from}</span>
-                <svg className="h-4 w-4 shrink-0 text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <svg
+                  className="h-4 w-4 shrink-0 text-muted"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
                 <span className="font-mono text-sm font-bold text-input-text">{s.to}</span>
-                <span className="ml-auto font-mono text-sm font-bold" style={{ color }}>${fmt(s.amount)}</span>
+                <span className="ml-auto font-mono text-sm font-bold" style={{ color }}>
+                  ${fmt(s.amount)}
+                </span>
               </div>
             ))}
           </div>

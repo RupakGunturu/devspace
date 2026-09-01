@@ -23,8 +23,7 @@ export function TextureButton({
           "bg-white/10 hover:bg-white/20 text-white dark:bg-black/10 dark:hover:bg-black/20 dark:text-white",
         variant === "secondary" &&
           "bg-black/5 hover:bg-black/10 text-black dark:bg-white/5 dark:hover:bg-white/10 dark:text-white",
-        variant === "ghost" &&
-          "hover:bg-black/5 dark:hover:bg-white/5 text-black dark:text-white",
+        variant === "ghost" && "hover:bg-black/5 dark:hover:bg-white/5 text-black dark:text-white",
         className,
       )}
       {...props}

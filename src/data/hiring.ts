@@ -8,33 +8,34 @@ export const HIRING_CATEGORIES: Record<string, { label: string; color: string }>
   "career-resources": { label: "Career Resources", color: "#ec4899" },
 };
 
-export const HIRING_CATEGORY_COLORS: Record<string, { bg: string; darkBg: string; icon: string }> = {
-  "job-boards": {
-    bg: "bg-blue-100",
-    darkBg: "dark:bg-blue-900/30",
-    icon: "text-blue-600 dark:text-blue-400",
-  },
-  freelance: {
-    bg: "bg-violet-100",
-    darkBg: "dark:bg-violet-900/30",
-    icon: "text-violet-600 dark:text-violet-400",
-  },
-  remote: {
-    bg: "bg-emerald-100",
-    darkBg: "dark:bg-emerald-900/30",
-    icon: "text-emerald-600 dark:text-emerald-400",
-  },
-  internships: {
-    bg: "bg-orange-100",
-    darkBg: "dark:bg-orange-900/30",
-    icon: "text-orange-600 dark:text-orange-400",
-  },
-  "career-resources": {
-    bg: "bg-pink-100",
-    darkBg: "dark:bg-pink-900/30",
-    icon: "text-pink-600 dark:text-pink-400",
-  },
-};
+export const HIRING_CATEGORY_COLORS: Record<string, { bg: string; darkBg: string; icon: string }> =
+  {
+    "job-boards": {
+      bg: "bg-blue-100",
+      darkBg: "dark:bg-blue-900/30",
+      icon: "text-blue-600 dark:text-blue-400",
+    },
+    freelance: {
+      bg: "bg-violet-100",
+      darkBg: "dark:bg-violet-900/30",
+      icon: "text-violet-600 dark:text-violet-400",
+    },
+    remote: {
+      bg: "bg-emerald-100",
+      darkBg: "dark:bg-emerald-900/30",
+      icon: "text-emerald-600 dark:text-emerald-400",
+    },
+    internships: {
+      bg: "bg-orange-100",
+      darkBg: "dark:bg-orange-900/30",
+      icon: "text-orange-600 dark:text-orange-400",
+    },
+    "career-resources": {
+      bg: "bg-pink-100",
+      darkBg: "dark:bg-pink-900/30",
+      icon: "text-pink-600 dark:text-pink-400",
+    },
+  };
 
 export const HIRING_ITEMS: HiringItem[] = [
   {

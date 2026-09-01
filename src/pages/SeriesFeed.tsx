@@ -18,7 +18,9 @@ export default function SeriesPage() {
     return (
       <div className="mx-auto max-w-2xl px-6 py-24 text-center">
         <h1 className="font-display text-3xl font-bold">Series not found</h1>
-        <Link to="/" className="mt-6 inline-block font-mono text-sm text-yellow">← back to feed</Link>
+        <Link to="/" className="mt-6 inline-block font-mono text-sm text-yellow">
+          ← back to feed
+        </Link>
       </div>
     );
   }
@@ -45,20 +47,24 @@ export default function SeriesPage() {
       </div>
       <h2 className="mb-4 font-display text-lg font-bold text-muted">Also in this series →</h2>
       <div className="mb-8 flex flex-wrap gap-2">
-        {SERIES.filter((s) => s.slug !== series.slug).slice(0, 6).map((s) => (
-          <Link
-            key={s.slug}
-            to={`/feed/${s.slug}`}
-            className="inline-flex items-center gap-1.5 rounded-full border-2 border-line px-3 py-1 font-mono text-[11px] text-muted no-underline hover:border-yellow hover:text-yellow"
-          >
-            <ToolIcon name={s.icon} className="h-3 w-3" />
-            {s.label}
-          </Link>
-        ))}
+        {SERIES.filter((s) => s.slug !== series.slug)
+          .slice(0, 6)
+          .map((s) => (
+            <Link
+              key={s.slug}
+              to={`/feed/${s.slug}`}
+              className="inline-flex items-center gap-1.5 rounded-full border-2 border-line px-3 py-1 font-mono text-[11px] text-muted no-underline hover:border-yellow hover:text-yellow"
+            >
+              <ToolIcon name={s.icon} className="h-3 w-3" />
+              {s.label}
+            </Link>
+          ))}
       </div>
       <div>
         {posts.length === 0 ? (
-          <p className="py-12 text-center font-mono text-sm text-muted">Nothing in this series yet.</p>
+          <p className="py-12 text-center font-mono text-sm text-muted">
+            Nothing in this series yet.
+          </p>
         ) : (
           (posts as Post[]).map((p) => <FeedItem key={p.id} post={p} />)
         )}

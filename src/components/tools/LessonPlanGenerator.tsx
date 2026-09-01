@@ -4,7 +4,18 @@ import { ToolButton } from "./ToolButton";
 import { useToolAccent } from "@/components/ToolAccentContext";
 import { CopyButton } from "./CopyButton";
 
-const SUBJECTS = ["Mathematics", "Science", "English Language Arts", "History", "Computer Science", "Art", "Music", "Physical Education", "Foreign Language", "Other"] as const;
+const SUBJECTS = [
+  "Mathematics",
+  "Science",
+  "English Language Arts",
+  "History",
+  "Computer Science",
+  "Art",
+  "Music",
+  "Physical Education",
+  "Foreign Language",
+  "Other",
+] as const;
 const GRADES = ["K-2", "3-5", "6-8", "9-12", "College"] as const;
 
 interface Section {
@@ -13,14 +24,21 @@ interface Section {
   description: string;
 }
 
-function generateLessonPlan(subject: string, grade: string, duration: number, topic: string, objectives: string[]): Section[] {
+function generateLessonPlan(
+  subject: string,
+  grade: string,
+  duration: number,
+  topic: string,
+  objectives: string[],
+): Section[] {
   const warmup = Math.round(duration * 0.1);
   const instruction = Math.round(duration * 0.3);
   const activity = Math.round(duration * 0.35);
   const assessment = Math.round(duration * 0.15);
   const homework = duration - warmup - instruction - activity - assessment;
 
-  const objectiveText = objectives.length > 0 ? objectives.join("; ") : `Understand key concepts of ${topic}`;
+  const objectiveText =
+    objectives.length > 0 ? objectives.join("; ") : `Understand key concepts of ${topic}`;
 
   return [
     {
@@ -61,8 +79,12 @@ export function LessonPlanGenerator() {
   const { color } = useToolAccent();
 
   const objectiveList = useMemo(
-    () => objectives.split("\n").map((o) => o.trim()).filter(Boolean),
-    [objectives]
+    () =>
+      objectives
+        .split("\n")
+        .map((o) => o.trim())
+        .filter(Boolean),
+    [objectives],
   );
 
   const sections = useMemo(() => {
@@ -85,7 +107,9 @@ export function LessonPlanGenerator() {
       objectiveList.length > 0 ? `Objectives:\n${objectives}` : "",
       `\n${"=".repeat(50)}`,
       ...sections.map((s) => {
-        const timeStart = sections.slice(0, sections.indexOf(s)).reduce((sum, sec) => sum + sec.timePct, 0);
+        const timeStart = sections
+          .slice(0, sections.indexOf(s))
+          .reduce((sum, sec) => sum + sec.timePct, 0);
         return [
           `\n${s.name.toUpperCase()} (${s.timePct} min | ${timeStart}-${timeStart + s.timePct} min)`,
           s.description,
@@ -94,31 +118,45 @@ export function LessonPlanGenerator() {
       `\n${"=".repeat(50)}`,
       `\nMaterials: Whiteboard, projector, worksheets, assessment rubric`,
       `\nDifferentiation: Adapt activities for diverse learners, provide scaffolded materials`,
-    ].filter(Boolean).join("\n");
+    ]
+      .filter(Boolean)
+      .join("\n");
   }, [sections, subject, grade, duration, topic, objectives, objectiveList]);
 
   return (
     <ToolLayout id="lesson-plan-generator">
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
         <div>
-          <span className="mb-1 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Subject</span>
+          <span className="mb-1 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+            Subject
+          </span>
           <select
             value={subject}
             onChange={(e) => setSubject(e.target.value)}
             className="w-full rounded-md border-2 border-line bg-input-bg p-3 font-mono text-sm text-input-text outline-none"
           >
-            {SUBJECTS.map((s) => <option key={s} value={s}>{s}</option>)}
+            {SUBJECTS.map((s) => (
+              <option key={s} value={s}>
+                {s}
+              </option>
+            ))}
           </select>
         </div>
         <div>
-          <span className="mb-1 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Grade Level</span>
+          <span className="mb-1 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+            Grade Level
+          </span>
           <div className="flex gap-1">
             {GRADES.map((g) => (
               <button
                 key={g}
                 onClick={() => setGrade(g)}
                 className="flex-1 rounded-md border-2 px-2 py-2.5 font-mono text-xs transition-all"
-                style={grade === g ? { borderColor: color, backgroundColor: color, color: "#fff" } : { borderColor: "var(--border)" }}
+                style={
+                  grade === g
+                    ? { borderColor: color, backgroundColor: color, color: "#fff" }
+                    : { borderColor: "var(--border)" }
+                }
               >
                 {g}
               </button>
@@ -126,7 +164,9 @@ export function LessonPlanGenerator() {
           </div>
         </div>
         <div>
-          <span className="mb-1 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Duration (min)</span>
+          <span className="mb-1 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+            Duration (min)
+          </span>
           <input
             type="number"
             value={duration}
@@ -139,7 +179,9 @@ export function LessonPlanGenerator() {
       </div>
 
       <div>
-        <span className="mb-1 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Topic</span>
+        <span className="mb-1 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+          Topic
+        </span>
         <input
           value={topic}
           onChange={(e) => setTopic(e.target.value)}
@@ -158,7 +200,9 @@ export function LessonPlanGenerator() {
           value={objectives}
           onChange={(e) => setObjectives(e.target.value)}
           rows={3}
-          placeholder={"Define fractions and their parts\nCompare like fractions\nConvert improper fractions"}
+          placeholder={
+            "Define fractions and their parts\nCompare like fractions\nConvert improper fractions"
+          }
           className="w-full resize-y rounded-md border-2 border-line bg-input-bg p-4 font-mono text-sm text-input-text outline-none transition-colors placeholder:text-muted"
           style={{ borderColor: objectives ? color : undefined }}
         />
@@ -175,17 +219,27 @@ export function LessonPlanGenerator() {
           <div className="rounded-md border-2 p-4" style={{ borderColor: color }}>
             <div className="flex items-center justify-between">
               <div>
-                <div className="font-mono text-xs uppercase tracking-wider text-muted">Lesson Plan</div>
-                <div className="mt-1 font-display text-lg font-extrabold" style={{ color }}>{topic}</div>
+                <div className="font-mono text-xs uppercase tracking-wider text-muted">
+                  Lesson Plan
+                </div>
+                <div className="mt-1 font-display text-lg font-extrabold" style={{ color }}>
+                  {topic}
+                </div>
               </div>
               <div className="text-right">
-                <div className="font-mono text-xs text-muted">{subject} | {grade}</div>
-                <div className="font-mono text-sm font-bold" style={{ color }}>{duration} min</div>
+                <div className="font-mono text-xs text-muted">
+                  {subject} | {grade}
+                </div>
+                <div className="font-mono text-sm font-bold" style={{ color }}>
+                  {duration} min
+                </div>
               </div>
             </div>
             {objectiveList.length > 0 && (
               <div className="mt-3">
-                <div className="font-mono text-[10px] uppercase tracking-wider text-muted mb-1">Objectives</div>
+                <div className="font-mono text-[10px] uppercase tracking-wider text-muted mb-1">
+                  Objectives
+                </div>
                 {objectiveList.map((o, i) => (
                   <div key={i} className="flex items-start gap-2 font-mono text-xs text-input-text">
                     <span style={{ color }}>&#10003;</span>
@@ -249,7 +303,9 @@ export function LessonPlanGenerator() {
 
           <div className="rounded-md border-2 border-line bg-input-bg p-4">
             <div className="mb-1 flex items-center justify-between">
-              <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">Full Lesson Plan</span>
+              <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">
+                Full Lesson Plan
+              </span>
               <CopyButton text={fullText} />
             </div>
             <pre className="max-h-[300px] overflow-auto whitespace-pre-wrap break-all font-mono text-sm text-input-text">

@@ -31,11 +31,11 @@ export function SeatingChartGenerator() {
   };
 
   const assignGuest = (guestId: number, tableNum: number) => {
-    setGuests((prev) => prev.map((g) => g.id === guestId ? { ...g, table: tableNum } : g));
+    setGuests((prev) => prev.map((g) => (g.id === guestId ? { ...g, table: tableNum } : g)));
   };
 
   const unassignGuest = (guestId: number) => {
-    setGuests((prev) => prev.map((g) => g.id === guestId ? { ...g, table: null } : g));
+    setGuests((prev) => prev.map((g) => (g.id === guestId ? { ...g, table: null } : g)));
   };
 
   const autoAssign = () => {
@@ -73,37 +73,73 @@ export function SeatingChartGenerator() {
     <ToolLayout id="seating-chart-generator">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
-          <label className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Number of Tables</label>
-          <input type="number" min={1} value={numTables} onChange={(e) => setNumTables(Math.max(1, parseInt(e.target.value) || 1))} className="w-full rounded-md border-2 border-line bg-input-bg p-2.5 font-mono text-sm text-input-text outline-none" />
+          <label className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+            Number of Tables
+          </label>
+          <input
+            type="number"
+            min={1}
+            value={numTables}
+            onChange={(e) => setNumTables(Math.max(1, parseInt(e.target.value) || 1))}
+            className="w-full rounded-md border-2 border-line bg-input-bg p-2.5 font-mono text-sm text-input-text outline-none"
+          />
         </div>
         <div>
-          <label className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Seats per Table</label>
-          <input type="number" min={1} value={seatsPerTable} onChange={(e) => setSeatsPerTable(Math.max(1, parseInt(e.target.value) || 1))} className="w-full rounded-md border-2 border-line bg-input-bg p-2.5 font-mono text-sm text-input-text outline-none" />
+          <label className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+            Seats per Table
+          </label>
+          <input
+            type="number"
+            min={1}
+            value={seatsPerTable}
+            onChange={(e) => setSeatsPerTable(Math.max(1, parseInt(e.target.value) || 1))}
+            className="w-full rounded-md border-2 border-line bg-input-bg p-2.5 font-mono text-sm text-input-text outline-none"
+          />
         </div>
       </div>
 
       <div>
-        <label className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Add Guests</label>
+        <label className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+          Add Guests
+        </label>
         <div className="flex gap-2">
-          <input value={newName} onChange={(e) => setNewName(e.target.value)} onKeyDown={(e) => e.key === "Enter" && addGuest()} placeholder="Guest name..." className="flex-1 rounded-md border-2 border-line bg-input-bg p-2.5 font-mono text-sm text-input-text outline-none placeholder:text-muted" style={{ borderColor: newName ? color : undefined }} />
-          <ToolButton onClick={addGuest} disabled={!newName.trim()}>Add</ToolButton>
+          <input
+            value={newName}
+            onChange={(e) => setNewName(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && addGuest()}
+            placeholder="Guest name..."
+            className="flex-1 rounded-md border-2 border-line bg-input-bg p-2.5 font-mono text-sm text-input-text outline-none placeholder:text-muted"
+            style={{ borderColor: newName ? color : undefined }}
+          />
+          <ToolButton onClick={addGuest} disabled={!newName.trim()}>
+            Add
+          </ToolButton>
         </div>
       </div>
 
       {guests.length > 0 && (
         <div className="flex flex-wrap gap-2">
           <ToolButton onClick={autoAssign}>Auto-Assign</ToolButton>
-          <ToolButton variant="secondary" onClick={unassignAll}>Unassign All</ToolButton>
-          <ToolButton variant="secondary" onClick={reset}>Reset</ToolButton>
+          <ToolButton variant="secondary" onClick={unassignAll}>
+            Unassign All
+          </ToolButton>
+          <ToolButton variant="secondary" onClick={reset}>
+            Reset
+          </ToolButton>
         </div>
       )}
 
       {unassigned.length > 0 && (
         <div>
-          <span className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Unassigned ({unassigned.length})</span>
+          <span className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+            Unassigned ({unassigned.length})
+          </span>
           <div className="flex flex-wrap gap-1.5">
             {unassigned.map((g) => (
-              <span key={g.id} className="inline-flex items-center gap-1 rounded-full border-2 border-line bg-input-bg px-3 py-1 font-mono text-xs text-input-text">
+              <span
+                key={g.id}
+                className="inline-flex items-center gap-1 rounded-full border-2 border-line bg-input-bg px-3 py-1 font-mono text-xs text-input-text"
+              >
                 {g.name}
                 <select
                   value=""
@@ -114,10 +150,17 @@ export function SeatingChartGenerator() {
                 >
                   <option value="">assign</option>
                   {tables.map((t) => (
-                    <option key={t} value={t}>Table {t}</option>
+                    <option key={t} value={t}>
+                      Table {t}
+                    </option>
                   ))}
                 </select>
-                <button onClick={() => removeGuest(g.id)} className="text-muted transition-colors hover:text-coral">\u00d7</button>
+                <button
+                  onClick={() => removeGuest(g.id)}
+                  className="text-muted transition-colors hover:text-coral"
+                >
+                  \u00d7
+                </button>
               </span>
             ))}
           </div>
@@ -130,17 +173,31 @@ export function SeatingChartGenerator() {
           return (
             <div key={t} className="rounded-lg border-2 border-line bg-input-bg p-3">
               <div className="flex items-center justify-between mb-2">
-                <span className="font-mono text-xs font-bold" style={{ color }}>Table {t}</span>
-                <span className="font-mono text-[10px] text-muted">{tableGuests.length}/{seatsPerTable}</span>
+                <span className="font-mono text-xs font-bold" style={{ color }}>
+                  Table {t}
+                </span>
+                <span className="font-mono text-[10px] text-muted">
+                  {tableGuests.length}/{seatsPerTable}
+                </span>
               </div>
               {tableGuests.length === 0 ? (
-                <div className="rounded border border-dashed border-line p-3 text-center font-mono text-[10px] text-muted">Empty</div>
+                <div className="rounded border border-dashed border-line p-3 text-center font-mono text-[10px] text-muted">
+                  Empty
+                </div>
               ) : (
                 <div className="space-y-1">
                   {tableGuests.map((g) => (
-                    <div key={g.id} className="flex items-center justify-between rounded bg-paper-dim/30 px-2 py-1">
+                    <div
+                      key={g.id}
+                      className="flex items-center justify-between rounded bg-paper-dim/30 px-2 py-1"
+                    >
                       <span className="font-mono text-[10px] text-input-text">{g.name}</span>
-                      <button onClick={() => unassignGuest(g.id)} className="text-muted transition-colors hover:text-coral">\u00d7</button>
+                      <button
+                        onClick={() => unassignGuest(g.id)}
+                        className="text-muted transition-colors hover:text-coral"
+                      >
+                        \u00d7
+                      </button>
                     </div>
                   ))}
                 </div>

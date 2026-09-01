@@ -18,7 +18,7 @@ export default function BrowserStorageInspector() {
         ls.push(`  ${key}: ${val.length > 80 ? val.slice(0, 80) + "..." : val}`);
       }
     }
-    lines.push(`📦 LocalStorage (${ls.length} items)`, ...ls.length ? ls : ["  (empty)"]);
+    lines.push(`📦 LocalStorage (${ls.length} items)`, ...(ls.length ? ls : ["  (empty)"]));
     // SessionStorage
     const ss: string[] = [];
     for (let i = 0; i < sessionStorage.length; i++) {
@@ -28,10 +28,14 @@ export default function BrowserStorageInspector() {
         ss.push(`  ${key}: ${val.length > 80 ? val.slice(0, 80) + "..." : val}`);
       }
     }
-    lines.push(``, `📦 SessionStorage (${ss.length} items)`, ...ss.length ? ss : ["  (empty)"]);
+    lines.push(``, `📦 SessionStorage (${ss.length} items)`, ...(ss.length ? ss : ["  (empty)"]));
     // Cookies
     const cookies = document.cookie.split(";").filter(Boolean);
-    lines.push(``, `🍪 Cookies (${cookies.length})`, ...cookies.length ? cookies.map((c) => `  ${c.trim()}`) : ["  (none)"]);
+    lines.push(
+      ``,
+      `🍪 Cookies (${cookies.length})`,
+      ...(cookies.length ? cookies.map((c) => `  ${c.trim()}`) : ["  (none)"]),
+    );
     setOutput(lines.join("\n"));
   };
 
@@ -45,7 +49,9 @@ export default function BrowserStorageInspector() {
     <ToolLayout id="browser-storage-inspector">
       <div className="flex flex-col sm:flex-row gap-2">
         <ToolButton onClick={inspect}>Inspect Storage</ToolButton>
-        <ToolButton onClick={clearAll} variant="secondary">Clear All</ToolButton>
+        <ToolButton onClick={clearAll} variant="secondary">
+          Clear All
+        </ToolButton>
       </div>
       <ToolOutput value={output} label="Storage Contents" />
     </ToolLayout>

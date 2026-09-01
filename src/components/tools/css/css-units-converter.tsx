@@ -18,9 +18,16 @@ export default function CssUnitsConverter() {
 
   const convert = () => {
     const val = parseFloat(value);
-    if (isNaN(val)) { setOutput("Enter valid number"); return; }
+    if (isNaN(val)) {
+      setOutput("Enter valid number");
+      return;
+    }
     const base = conversions[unit] || {};
-    setOutput(Object.entries(base).map(([u, factor]) => `${u}: ${(val * factor).toFixed(4)}`).join("\n"));
+    setOutput(
+      Object.entries(base)
+        .map(([u, factor]) => `${u}: ${(val * factor).toFixed(4)}`)
+        .join("\n"),
+    );
   };
 
   return (
@@ -37,7 +44,13 @@ export default function CssUnitsConverter() {
         onChange={setUnit}
         className="mb-2"
       />
-      <ToolInput value={value} onChange={setValue} placeholder="16" label={`Value in ${unit}`} rows={1} />
+      <ToolInput
+        value={value}
+        onChange={setValue}
+        placeholder="16"
+        label={`Value in ${unit}`}
+        rows={1}
+      />
       <ToolButton onClick={convert}>Convert</ToolButton>
       <ToolOutput value={output} />
     </ToolLayout>

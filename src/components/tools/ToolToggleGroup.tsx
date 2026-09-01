@@ -12,7 +12,12 @@ interface ToolToggleGroupProps {
   className?: string;
 }
 
-export function ToolToggleGroup({ options, value, onChange, className = "" }: ToolToggleGroupProps) {
+export function ToolToggleGroup({
+  options,
+  value,
+  onChange,
+  className = "",
+}: ToolToggleGroupProps) {
   const { color, fg } = useToolAccent();
 
   return (

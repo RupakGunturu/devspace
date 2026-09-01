@@ -17,12 +17,20 @@ export default function ComponentPropsGenerator() {
       return `  ${name}: ${isString ? "string" : "any"};`;
     });
     const componentName = input.match(/(?:function|const)\s+(\w+)/)?.[1] || "Component";
-    setOutput(`interface ${componentName}Props {\n${props.length ? props.join("\n") : "  // No props detected"}\n}\n\nexport default function ${componentName}({ ${props.map((p) => p.split(":")[0].trim()).join(", ")} }: ${componentName}Props) {\n  // ...\n}`);
+    setOutput(
+      `interface ${componentName}Props {\n${props.length ? props.join("\n") : "  // No props detected"}\n}\n\nexport default function ${componentName}({ ${props.map((p) => p.split(":")[0].trim()).join(", ")} }: ${componentName}Props) {\n  // ...\n}`,
+    );
   };
 
   return (
     <ToolLayout id="component-props-generator">
-      <ToolInput value={input} onChange={setInput} placeholder='<Button variant="primary" onClick={handleClick} disabled={isLoading}>' label="JSX Component" rows={4} />
+      <ToolInput
+        value={input}
+        onChange={setInput}
+        placeholder='<Button variant="primary" onClick={handleClick} disabled={isLoading}>'
+        label="JSX Component"
+        rows={4}
+      />
       <ToolButton onClick={generate}>Generate Props</ToolButton>
       <ToolOutput value={output} />
     </ToolLayout>

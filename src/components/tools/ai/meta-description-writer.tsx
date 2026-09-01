@@ -16,7 +16,13 @@ export default function MetaDescriptionWriter() {
 
   return (
     <ToolLayout id="meta-description-writer">
-      <ToolInput value={input} onChange={setInput} placeholder="Paste page content..." label="Content" rows={6} />
+      <ToolInput
+        value={input}
+        onChange={setInput}
+        placeholder="Paste page content..."
+        label="Content"
+        rows={6}
+      />
       <ToolButton onClick={generate}>Generate Meta Description</ToolButton>
       <ToolOutput value={output} />
     </ToolLayout>

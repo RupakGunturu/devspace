@@ -9,7 +9,9 @@ export default function EmojiCombiner() {
   const [emoji2, setEmoji2] = useState("🔥");
   const [output, setOutput] = useState("");
 
-  const combine = () => { setOutput(`${emoji1}${emoji2}`); };
+  const combine = () => {
+    setOutput(`${emoji1}${emoji2}`);
+  };
 
   return (
     <ToolLayout id="emoji-combiner">
@@ -18,7 +20,11 @@ export default function EmojiCombiner() {
         <ToolInput value={emoji2} onChange={setEmoji2} placeholder="🔥" label="Emoji 2" rows={1} />
       </div>
       <ToolButton onClick={combine}>Combine</ToolButton>
-      {output && <div className="text-center p-6 bg-paper-dim/50 border border-border rounded-sm"><span className="text-6xl">{output}</span></div>}
+      {output && (
+        <div className="text-center p-6 bg-paper-dim/50 border border-border rounded-sm">
+          <span className="text-6xl">{output}</span>
+        </div>
+      )}
     </ToolLayout>
   );
 }

@@ -75,9 +75,7 @@ export default function HiddenGems() {
                   : "border-line text-muted hover:text-foreground",
               )}
               style={
-                activeCategory === key
-                  ? { borderColor: color, backgroundColor: color }
-                  : undefined
+                activeCategory === key ? { borderColor: color, backgroundColor: color } : undefined
               }
             >
               {label}
@@ -90,11 +88,7 @@ export default function HiddenGems() {
         {paginatedItems.map((gem, i) => {
           const colors = GEM_CATEGORY_COLORS[gem.category];
           return (
-            <CursorHover
-              label={gem.name}
-              color={GEM_CATEGORIES[gem.category]?.color}
-              key={gem.id}
-            >
+            <CursorHover label={gem.name} color={GEM_CATEGORIES[gem.category]?.color} key={gem.id}>
               <a href={gem.url} target="_blank" rel="noopener noreferrer" className="no-underline">
                 <StickerCard
                   icon={
@@ -105,18 +99,14 @@ export default function HiddenGems() {
                         colors?.darkBg ?? "dark:bg-zinc-800",
                       )}
                     >
-                      <span
-                        className={cn("text-sm font-bold", colors?.icon ?? "text-zinc-600")}
-                      >
+                      <span className={cn("text-sm font-bold", colors?.icon ?? "text-zinc-600")}>
                         {gem.name.charAt(0)}
                       </span>
                     </div>
                   }
                   title={gem.name}
                   index={i}
-                  actions={
-                    <ExternalLink className="h-4 w-4 shrink-0 text-muted" />
-                  }
+                  actions={<ExternalLink className="h-4 w-4 shrink-0 text-muted" />}
                 >
                   <span className="block">{gem.description}</span>
                   <span

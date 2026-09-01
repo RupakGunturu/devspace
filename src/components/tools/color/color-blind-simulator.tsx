@@ -29,10 +29,21 @@ export default function ColorBlindSimulator() {
       <ToolFileInput accept="image/*" onChange={handle} label="Choose image" />
       {original && (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div className="p-2 bg-paper-dim/50 border border-border rounded-sm text-center"><img src={original} alt="Original" className="max-h-32 mx-auto" /><span className="text-[10px] text-muted-foreground">Original</span></div>
+          <div className="p-2 bg-paper-dim/50 border border-border rounded-sm text-center">
+            <img src={original} alt="Original" className="max-h-32 mx-auto" />
+            <span className="text-[10px] text-muted-foreground">Original</span>
+          </div>
           {Object.entries(filters).map(([name]) => (
-            <div key={name} className="p-2 bg-paper-dim/50 border border-border rounded-sm text-center">
-              <img src={original} alt={name} className="max-h-32 mx-auto" style={{ filter: name.includes("Achromatopsia") ? "grayscale(100%)" : "none" }} />
+            <div
+              key={name}
+              className="p-2 bg-paper-dim/50 border border-border rounded-sm text-center"
+            >
+              <img
+                src={original}
+                alt={name}
+                className="max-h-32 mx-auto"
+                style={{ filter: name.includes("Achromatopsia") ? "grayscale(100%)" : "none" }}
+              />
               <span className="text-[10px] text-muted-foreground">{name}</span>
             </div>
           ))}

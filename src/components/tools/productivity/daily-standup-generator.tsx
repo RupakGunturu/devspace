@@ -21,9 +21,27 @@ export default function DailyStandupGenerator() {
 
   return (
     <ToolLayout id="daily-standup-generator">
-      <ToolInput value={yesterday} onChange={setYesterday} placeholder="What did you do yesterday?" label="Yesterday" rows={3} />
-      <ToolInput value={today} onChange={setToday} placeholder="What will you do today?" label="Today" rows={3} />
-      <ToolInput value={blockers} onChange={setBlockers} placeholder="Any blockers?" label="Blockers" rows={2} />
+      <ToolInput
+        value={yesterday}
+        onChange={setYesterday}
+        placeholder="What did you do yesterday?"
+        label="Yesterday"
+        rows={3}
+      />
+      <ToolInput
+        value={today}
+        onChange={setToday}
+        placeholder="What will you do today?"
+        label="Today"
+        rows={3}
+      />
+      <ToolInput
+        value={blockers}
+        onChange={setBlockers}
+        placeholder="Any blockers?"
+        label="Blockers"
+        rows={2}
+      />
       <ToolButton onClick={generate}>Generate</ToolButton>
       <ToolOutput value={output} />
     </ToolLayout>

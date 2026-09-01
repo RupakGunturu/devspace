@@ -263,7 +263,13 @@ const SECTION_TEMPLATES: Record<SectionType, (config: HandbookConfig) => string>
   },
 };
 
-const SECTION_OPTIONS: SectionType[] = ["PTO", "Remote Work", "Code of Conduct", "Benefits", "Dress Code"];
+const SECTION_OPTIONS: SectionType[] = [
+  "PTO",
+  "Remote Work",
+  "Code of Conduct",
+  "Benefits",
+  "Dress Code",
+];
 
 export function EmployeeHandbookGenerator() {
   const [config, setConfig] = useState<HandbookConfig>({
@@ -347,7 +353,9 @@ export function EmployeeHandbookGenerator() {
                 />
               </div>
               <div>
-                <span className="mb-1 block font-mono text-xs text-muted">Probation Period (days)</span>
+                <span className="mb-1 block font-mono text-xs text-muted">
+                  Probation Period (days)
+                </span>
                 <input
                   type="number"
                   value={config.probationPeriod}
@@ -371,7 +379,9 @@ export function EmployeeHandbookGenerator() {
           {config.sectionType === "Benefits" && (
             <>
               <div>
-                <span className="mb-1 block font-mono text-xs text-muted">Health Insurance Details</span>
+                <span className="mb-1 block font-mono text-xs text-muted">
+                  Health Insurance Details
+                </span>
                 <input
                   value={config.healthInsurance}
                   onChange={(e) => updateConfig("healthInsurance", e.target.value)}
@@ -392,7 +402,9 @@ export function EmployeeHandbookGenerator() {
           )}
           {config.sectionType === "Dress Code" && (
             <div className="sm:col-span-2">
-              <span className="mb-1 block font-mono text-xs text-muted">Dress Code Description</span>
+              <span className="mb-1 block font-mono text-xs text-muted">
+                Dress Code Description
+              </span>
               <input
                 value={config.dressDetails}
                 onChange={(e) => updateConfig("dressDetails", e.target.value)}
@@ -403,7 +415,8 @@ export function EmployeeHandbookGenerator() {
           )}
           {config.sectionType === "Code of Conduct" && (
             <div className="sm:col-span-2 font-mono text-xs text-muted">
-              The Code of Conduct is a standardized policy. Customize the company name to personalize it.
+              The Code of Conduct is a standardized policy. Customize the company name to
+              personalize it.
             </div>
           )}
         </div>

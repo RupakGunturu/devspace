@@ -27,8 +27,15 @@ export default function ImageToColorPalette() {
         const key = `${r},${g},${b}`;
         colorMap[key] = (colorMap[key] || 0) + 1;
       }
-      const sorted = Object.entries(colorMap).sort((a, b) => b[1] - a[1]).slice(0, 8);
-      setColors(sorted.map(([k]) => { const [r, g, b] = k.split(",").map(Number); return `#${r.toString(16).padStart(2, "0")}${g.toString(16).padStart(2, "0")}${b.toString(16).padStart(2, "0")}`; }));
+      const sorted = Object.entries(colorMap)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 8);
+      setColors(
+        sorted.map(([k]) => {
+          const [r, g, b] = k.split(",").map(Number);
+          return `#${r.toString(16).padStart(2, "0")}${g.toString(16).padStart(2, "0")}${b.toString(16).padStart(2, "0")}`;
+        }),
+      );
     };
     img.src = URL.createObjectURL(file);
   };
@@ -39,8 +46,21 @@ export default function ImageToColorPalette() {
       <ToolFileInput accept="image/*" onChange={handle} label="Choose image" />
       {colors.length > 0 && (
         <div className="space-y-2">
-          <div className="flex gap-1 h-12 rounded-sm overflow-hidden">{colors.map((c) => <div key={c} className="flex-1" style={{ backgroundColor: c }} />)}</div>
-          <div className="flex flex-wrap gap-2">{colors.map((c) => <span key={c} className="font-mono text-xs px-2 py-1 bg-paper-dim/50 border border-border rounded">{c}</span>)}</div>
+          <div className="flex gap-1 h-12 rounded-sm overflow-hidden">
+            {colors.map((c) => (
+              <div key={c} className="flex-1" style={{ backgroundColor: c }} />
+            ))}
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {colors.map((c) => (
+              <span
+                key={c}
+                className="font-mono text-xs px-2 py-1 bg-paper-dim/50 border border-border rounded"
+              >
+                {c}
+              </span>
+            ))}
+          </div>
         </div>
       )}
     </ToolLayout>

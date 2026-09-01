@@ -31,12 +31,7 @@ export function ToolIconDisplay({
         colors ? colors.darkBg : "dark:bg-zinc-800",
       )}
     >
-      <Icon
-        className={cn(
-          size === "sm" ? "h-3.5 w-3.5" : "h-5 w-5",
-          colors?.icon,
-        )}
-      />
+      <Icon className={cn(size === "sm" ? "h-3.5 w-3.5" : "h-5 w-5", colors?.icon)} />
     </div>
   );
 }

@@ -23,11 +23,16 @@ function generateSuggestions(name: string): string[] {
   suggestions.push(`my${clean}`);
   suggestions.push(`the${clean}`);
 
-  return [...new Set(suggestions)].filter((s) => s !== name.toLowerCase().replace(/[^a-z0-9]/g, "")).slice(0, 12);
+  return [...new Set(suggestions)]
+    .filter((s) => s !== name.toLowerCase().replace(/[^a-z0-9]/g, ""))
+    .slice(0, 12);
 }
 
 function checkTrademark(name: string) {
-  const clean = name.toLowerCase().replace(/[^a-z0-9\s]/g, "").trim();
+  const clean = name
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, "")
+    .trim();
   const noSpaces = clean.replace(/\s+/g, "");
 
   const domains = [
@@ -41,11 +46,25 @@ function checkTrademark(name: string) {
   const charCount = name.length;
   const isUrlFriendly = /^[a-z0-9]+(-[a-z0-9]+)*$/i.test(noSpaces);
   const hasSpaces = name.includes(" ");
-  const hasSpecialChars = /[^a-zA-Z0-9\s\-\.]/.test(name);
+  const hasSpecialChars = /[^a-zA-Z0-9\s\-.]/.test(name);
 
   const genericTerms = [
-    "tech", "digital", "solutions", "services", "group", "corp", "global", "enterprise",
-    "cloud", "data", "smart", "web", "net", "soft", "systems", "online",
+    "tech",
+    "digital",
+    "solutions",
+    "services",
+    "group",
+    "corp",
+    "global",
+    "enterprise",
+    "cloud",
+    "data",
+    "smart",
+    "web",
+    "net",
+    "soft",
+    "systems",
+    "online",
   ];
   const hasGenericTerm = genericTerms.some((t) => clean.includes(t));
 
@@ -53,7 +72,15 @@ function checkTrademark(name: string) {
 
   const suggestions = generateSuggestions(name);
 
-  return { domains, charCount, isUrlFriendly, hasSpaces, hasSpecialChars, trademarkRisk, suggestions };
+  return {
+    domains,
+    charCount,
+    isUrlFriendly,
+    hasSpaces,
+    hasSpecialChars,
+    trademarkRisk,
+    suggestions,
+  };
 }
 
 function isCommonTaken(domain: string): boolean {
@@ -75,7 +102,12 @@ export function TrademarkChecker() {
     if (name.trim()) setChecked(true);
   };
 
-  const riskColor = result?.trademarkRisk === "high" ? "#ef4444" : result?.trademarkRisk === "medium" ? "#f59e0b" : "#22c55e";
+  const riskColor =
+    result?.trademarkRisk === "high"
+      ? "#ef4444"
+      : result?.trademarkRisk === "medium"
+        ? "#f59e0b"
+        : "#22c55e";
 
   const fullText = useMemo(() => {
     if (!result) return "";
@@ -87,7 +119,10 @@ export function TrademarkChecker() {
       `Special Characters: ${result.hasSpecialChars ? "Yes" : "No"}`,
       `Trademark Risk: ${result.trademarkRisk.toUpperCase()}`,
       `\nDOMAIN AVAILABILITY:`,
-      ...result.domains.map((d) => `  ${name.toLowerCase().replace(/\s+/g, "")}${d.ext}: ${d.available ? "Likely Available" : "Likely Taken"}`),
+      ...result.domains.map(
+        (d) =>
+          `  ${name.toLowerCase().replace(/\s+/g, "")}${d.ext}: ${d.available ? "Likely Available" : "Likely Taken"}`,
+      ),
       `\nSUGGESTED ALTERNATIVES:`,
       ...result.suggestions.map((s) => `  ${s}`),
     ].join("\n");
@@ -101,7 +136,10 @@ export function TrademarkChecker() {
         </span>
         <input
           value={name}
-          onChange={(e) => { setName(e.target.value); setChecked(false); }}
+          onChange={(e) => {
+            setName(e.target.value);
+            setChecked(false);
+          }}
           onKeyDown={(e) => e.key === "Enter" && handleCheck()}
           placeholder="e.g. NexaTech Solutions"
           className="w-full rounded-md border-2 border-line bg-input-bg p-3 font-mono text-lg text-input-text outline-none transition-colors placeholder:text-muted"
@@ -124,16 +162,24 @@ export function TrademarkChecker() {
               { label: "Has Spaces", value: result.hasSpaces ? "Yes" : "No" },
               { label: "Special Chars", value: result.hasSpecialChars ? "Yes" : "No" },
             ].map(({ label, value }) => (
-              <div key={label} className="rounded-md border-2 border-line bg-input-bg p-3 text-center">
-                <div className="font-mono text-[10px] uppercase tracking-wider text-muted">{label}</div>
+              <div
+                key={label}
+                className="rounded-md border-2 border-line bg-input-bg p-3 text-center"
+              >
+                <div className="font-mono text-[10px] uppercase tracking-wider text-muted">
+                  {label}
+                </div>
                 <div
                   className="mt-1 font-mono text-sm font-bold"
                   style={{
-                    color: (label === "URL-Friendly" && value === "Yes") || (label.includes("Special") && value === "No")
-                      ? "#22c55e"
-                      : (label === "URL-Friendly" && value === "No") || (label.includes("Special") && value === "Yes")
-                        ? "#ef4444"
-                        : color,
+                    color:
+                      (label === "URL-Friendly" && value === "Yes") ||
+                      (label.includes("Special") && value === "No")
+                        ? "#22c55e"
+                        : (label === "URL-Friendly" && value === "No") ||
+                            (label.includes("Special") && value === "Yes")
+                          ? "#ef4444"
+                          : color,
                   }}
                 >
                   {value}
@@ -143,7 +189,9 @@ export function TrademarkChecker() {
           </div>
 
           <div className="rounded-md border-2 border-line bg-input-bg p-4">
-            <div className="mb-2 font-mono text-xs font-medium uppercase tracking-wider text-muted">Trademark Risk</div>
+            <div className="mb-2 font-mono text-xs font-medium uppercase tracking-wider text-muted">
+              Trademark Risk
+            </div>
             <div className="flex items-center gap-3">
               <div
                 className="font-display text-3xl font-extrabold uppercase"
@@ -155,7 +203,12 @@ export function TrademarkChecker() {
                 <div
                   className="h-full rounded-full transition-all duration-500"
                   style={{
-                    width: result.trademarkRisk === "high" ? "85%" : result.trademarkRisk === "medium" ? "50%" : "20%",
+                    width:
+                      result.trademarkRisk === "high"
+                        ? "85%"
+                        : result.trademarkRisk === "medium"
+                          ? "50%"
+                          : "20%",
                     backgroundColor: riskColor,
                   }}
                 />
@@ -171,7 +224,10 @@ export function TrademarkChecker() {
               {result.domains.map((d) => {
                 const domainName = name.toLowerCase().replace(/\s+/g, "") + d.ext;
                 return (
-                  <div key={d.ext} className="flex items-center justify-between rounded-md border border-line px-3 py-2">
+                  <div
+                    key={d.ext}
+                    className="flex items-center justify-between rounded-md border border-line px-3 py-2"
+                  >
                     <span className="font-mono text-sm text-input-text">{domainName}</span>
                     <span
                       className="rounded-full px-2 py-0.5 font-mono text-[10px] font-bold uppercase"
@@ -198,8 +254,14 @@ export function TrademarkChecker() {
                   key={i}
                   className="rounded-full border-2 border-line bg-transparent px-3 py-1 font-mono text-xs text-input-text transition-colors hover:border-current"
                   style={{ ["--hover-color" as string]: color }}
-                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = color; e.currentTarget.style.color = color; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = ""; e.currentTarget.style.color = ""; }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = color;
+                    e.currentTarget.style.color = color;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = "";
+                    e.currentTarget.style.color = "";
+                  }}
                 >
                   {s}
                 </span>
@@ -209,7 +271,9 @@ export function TrademarkChecker() {
 
           <div className="rounded-md border-2 border-line bg-input-bg p-4">
             <div className="mb-1 flex items-center justify-between">
-              <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">Full Report</span>
+              <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">
+                Full Report
+              </span>
               <CopyButton text={fullText} />
             </div>
             <pre className="max-h-[300px] overflow-auto whitespace-pre-wrap break-all font-mono text-sm text-input-text">

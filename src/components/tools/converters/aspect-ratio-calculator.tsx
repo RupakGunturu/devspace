@@ -12,11 +12,25 @@ export default function AspectRatioCalculator() {
   const calculate = () => {
     const w = parseInt(width);
     const h = parseInt(height);
-    if (isNaN(w) || isNaN(h)) { setOutput("Enter valid dimensions"); return; }
+    if (isNaN(w) || isNaN(h)) {
+      setOutput("Enter valid dimensions");
+      return;
+    }
     const ratio = w / h;
-    const common = [[16, 9], [4, 3], [3, 2], [1, 1], [21, 9], [16, 10]];
-    const closest = common.reduce((prev, curr) => Math.abs(curr[0] / curr[1] - ratio) < Math.abs(prev[0] / prev[1] - ratio) ? curr : prev);
-    setOutput(`Ratio: ${w}:${h} = ${ratio.toFixed(4)}\nClosest common: ${closest[0]}:${closest[1]}\n\nScaled:\n  ${closest[0]}:${closest[1]} → ${Math.round(h * closest[0] / closest[1])}×${h}\n  ${closest[0]}:${closest[1]} → ${w}×${Math.round(w * closest[1] / closest[0])}`);
+    const common = [
+      [16, 9],
+      [4, 3],
+      [3, 2],
+      [1, 1],
+      [21, 9],
+      [16, 10],
+    ];
+    const closest = common.reduce((prev, curr) =>
+      Math.abs(curr[0] / curr[1] - ratio) < Math.abs(prev[0] / prev[1] - ratio) ? curr : prev,
+    );
+    setOutput(
+      `Ratio: ${w}:${h} = ${ratio.toFixed(4)}\nClosest common: ${closest[0]}:${closest[1]}\n\nScaled:\n  ${closest[0]}:${closest[1]} → ${Math.round((h * closest[0]) / closest[1])}×${h}\n  ${closest[0]}:${closest[1]} → ${w}×${Math.round((w * closest[1]) / closest[0])}`,
+    );
   };
 
   return (

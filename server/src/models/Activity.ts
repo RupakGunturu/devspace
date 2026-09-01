@@ -67,7 +67,11 @@ const activitySchema = new Schema<IActivity>(
     ],
     favorites: [
       {
-        type: { type: String, enum: ["tool", "tip", "cheatsheet", "game", "stack-breakdown"], required: true },
+        type: {
+          type: String,
+          enum: ["tool", "tip", "cheatsheet", "game", "stack-breakdown"],
+          required: true,
+        },
         slug: { type: String, required: true },
         addedAt: { type: Date, default: Date.now },
       },

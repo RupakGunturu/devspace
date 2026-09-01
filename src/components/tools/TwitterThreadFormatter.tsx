@@ -36,7 +36,7 @@ export function TwitterThreadFormatter() {
 
   const allFormatted = useMemo(
     () => tweets.map((t, i) => `${i + 1}/${total} ${t}`).join("\n\n"),
-    [tweets, total]
+    [tweets, total],
   );
 
   return (
@@ -53,13 +53,15 @@ export function TwitterThreadFormatter() {
           spellCheck={false}
           className="w-full resize-y rounded-md border-2 bg-input-bg p-4 font-mono text-sm text-input-text outline-none transition-colors placeholder:text-muted"
           style={{ borderColor: input ? undefined : undefined }}
-          onFocus={(e) => { e.currentTarget.style.borderColor = color; }}
-          onBlur={(e) => { e.currentTarget.style.borderColor = ""; }}
+          onFocus={(e) => {
+            e.currentTarget.style.borderColor = color;
+          }}
+          onBlur={(e) => {
+            e.currentTarget.style.borderColor = "";
+          }}
         />
         <div className="mt-2 flex items-center justify-between">
-          <span className="font-mono text-xs text-muted">
-            {input.length} characters
-          </span>
+          <span className="font-mono text-xs text-muted">{input.length} characters</span>
           {total > 0 && (
             <span className="font-mono text-xs font-medium" style={{ color }}>
               {total} tweet{total !== 1 ? "s" : ""} needed
@@ -83,10 +85,7 @@ export function TwitterThreadFormatter() {
           </div>
           <div className="grid gap-3">
             {tweets.map((tweet, i) => (
-              <div
-                key={i}
-                className="rounded-lg border-2 border-line bg-input-bg p-4"
-              >
+              <div key={i} className="rounded-lg border-2 border-line bg-input-bg p-4">
                 <div className="mb-2 flex items-center justify-between">
                   <span
                     className="rounded-md px-2 py-0.5 font-mono text-xs font-bold"
@@ -108,9 +107,7 @@ export function TwitterThreadFormatter() {
                     {tweet.length}/{MAX_CHARS}
                   </span>
                 </div>
-                <p className="whitespace-pre-wrap font-sans text-sm text-foreground">
-                  {tweet}
-                </p>
+                <p className="whitespace-pre-wrap font-sans text-sm text-foreground">{tweet}</p>
                 <div className="mt-3 flex justify-end">
                   <CopyButton text={`${i + 1}/${total} ${tweet}`} />
                 </div>

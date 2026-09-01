@@ -13,14 +13,21 @@ export function EmiLoanCalculator() {
     const P = parseFloat(principal);
     const annualRate = parseFloat(rate);
     const n = parseInt(tenure);
-    if (isNaN(P) || isNaN(annualRate) || isNaN(n) || P <= 0 || annualRate <= 0 || n <= 0) return null;
+    if (isNaN(P) || isNaN(annualRate) || isNaN(n) || P <= 0 || annualRate <= 0 || n <= 0)
+      return null;
     const r = annualRate / 12 / 100;
     const factor = Math.pow(1 + r, n);
     const emi = (P * r * factor) / (factor - 1);
     const totalPayment = emi * n;
     const totalInterest = totalPayment - P;
 
-    const schedule: { month: number; emi: number; principal: number; interest: number; balance: number }[] = [];
+    const schedule: {
+      month: number;
+      emi: number;
+      principal: number;
+      interest: number;
+      balance: number;
+    }[] = [];
     let balance = P;
     for (let i = 1; i <= n && i <= 12; i++) {
       const interestPart = balance * r;
@@ -32,7 +39,8 @@ export function EmiLoanCalculator() {
     return { emi, totalPayment, totalInterest, schedule, totalMonths: n };
   }, [principal, rate, tenure]);
 
-  const fmt = (v: number) => v.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const fmt = (v: number) =>
+    v.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
   return (
     <ToolLayout id="emi-loan-calculator">
@@ -43,7 +51,9 @@ export function EmiLoanCalculator() {
           { label: "Loan Tenure (months)", value: tenure, set: setTenure, placeholder: "60" },
         ].map(({ label, value, set, placeholder }) => (
           <div key={label}>
-            <span className="mb-1 block font-mono text-xs font-medium uppercase tracking-wider text-muted">{label}</span>
+            <span className="mb-1 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+              {label}
+            </span>
             <input
               type="number"
               value={value}
@@ -63,9 +73,14 @@ export function EmiLoanCalculator() {
             { label: "Total Interest", value: `$${fmt(result.totalInterest)}` },
             { label: "Total Payment", value: `$${fmt(result.totalPayment)}` },
           ].map(({ label, value }) => (
-            <div key={label} className="rounded-md border-2 border-line bg-input-bg p-4 text-center">
+            <div
+              key={label}
+              className="rounded-md border-2 border-line bg-input-bg p-4 text-center"
+            >
               <div className="font-mono text-xs uppercase tracking-wider text-muted">{label}</div>
-              <div className="mt-1 font-display text-2xl font-extrabold" style={{ color }}>{value}</div>
+              <div className="mt-1 font-display text-2xl font-extrabold" style={{ color }}>
+                {value}
+              </div>
             </div>
           ))}
         </div>
@@ -79,7 +94,9 @@ export function EmiLoanCalculator() {
 
       {result && result.schedule.length > 0 && (
         <div>
-          <span className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Amortization Schedule</span>
+          <span className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+            Amortization Schedule
+          </span>
           <div className="overflow-x-auto rounded-md border-2 border-line">
             <table className="w-full font-mono text-xs">
               <thead>
@@ -105,9 +122,15 @@ export function EmiLoanCalculator() {
               <tfoot>
                 <tr className="bg-input-bg font-bold">
                   <td className="px-3 py-2 text-muted">Total</td>
-                  <td className="px-3 py-2 text-right" style={{ color }}>{fmt(result.totalPayment)}</td>
-                  <td className="px-3 py-2 text-right" style={{ color }}>{fmt(principal ? parseFloat(principal) : 0)}</td>
-                  <td className="px-3 py-2 text-right" style={{ color }}>{fmt(result.totalInterest)}</td>
+                  <td className="px-3 py-2 text-right" style={{ color }}>
+                    {fmt(result.totalPayment)}
+                  </td>
+                  <td className="px-3 py-2 text-right" style={{ color }}>
+                    {fmt(principal ? parseFloat(principal) : 0)}
+                  </td>
+                  <td className="px-3 py-2 text-right" style={{ color }}>
+                    {fmt(result.totalInterest)}
+                  </td>
                   <td className="px-3 py-2 text-right text-muted">-</td>
                 </tr>
               </tfoot>

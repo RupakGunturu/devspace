@@ -5,19 +5,19 @@ import { cheatSheets } from "../data/cheat-sheets";
 
 const CATEGORY_ACCENT: Record<string, string> = {
   "version-control": "#f97316",
-  "css": "#3b82f6",
+  css: "#3b82f6",
   "computer-science": "#a855f7",
-  "javascript": "#eab308",
-  "react": "#06b6d4",
-  "devops": "#10b981",
-  "typescript": "#6366f1",
-  "backend": "#f43f5e",
-  "python": "#22c55e",
-  "database": "#d97706",
-  "security": "#ef4444",
-  "performance": "#84cc16",
-  "productivity": "#ec4899",
-  "accessibility": "#14b8a6",
+  javascript: "#eab308",
+  react: "#06b6d4",
+  devops: "#10b981",
+  typescript: "#6366f1",
+  backend: "#f43f5e",
+  python: "#22c55e",
+  database: "#d97706",
+  security: "#ef4444",
+  performance: "#84cc16",
+  productivity: "#ec4899",
+  accessibility: "#14b8a6",
 };
 
 function sheetById(id: string) {
@@ -41,8 +41,18 @@ function CopyBtn({ text, accent }: { text: string; accent: string }) {
         backgroundColor: copied ? `${accent}15` : undefined,
         color: copied ? accent : "var(--muted-foreground)",
       }}
-      onMouseEnter={(e) => { if (!copied) { e.currentTarget.style.borderColor = accent; e.currentTarget.style.color = accent; } }}
-      onMouseLeave={(e) => { if (!copied) { e.currentTarget.style.borderColor = "var(--line)"; e.currentTarget.style.color = "var(--muted-foreground)"; } }}
+      onMouseEnter={(e) => {
+        if (!copied) {
+          e.currentTarget.style.borderColor = accent;
+          e.currentTarget.style.color = accent;
+        }
+      }}
+      onMouseLeave={(e) => {
+        if (!copied) {
+          e.currentTarget.style.borderColor = "var(--line)";
+          e.currentTarget.style.color = "var(--muted-foreground)";
+        }
+      }}
     >
       {copied ? <Check size={11} /> : <Copy size={11} />}
       {copied ? "copied" : "copy"}
@@ -135,12 +145,20 @@ export default function CheatSheetPage() {
                 href={`#section-${si}`}
                 onClick={(e) => {
                   e.preventDefault();
-                  document.getElementById(`section-${si}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
+                  document
+                    .getElementById(`section-${si}`)
+                    ?.scrollIntoView({ behavior: "smooth", block: "start" });
                 }}
                 className="flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-sm border-2 border-line px-3 py-1.5 font-mono text-xs text-muted no-underline transition-colors hover:text-foreground lg:w-full lg:whitespace-normal lg:border-0 lg:border-l-2 lg:rounded-none lg:px-3 lg:py-1"
                 style={{ ["--accent" as string]: accent }}
-                onMouseEnter={(e) => { e.currentTarget.style.borderColor = accent; e.currentTarget.style.color = accent; }}
-                onMouseLeave={(e) => { e.currentTarget.style.borderColor = ""; e.currentTarget.style.color = ""; }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = accent;
+                  e.currentTarget.style.color = accent;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "";
+                  e.currentTarget.style.color = "";
+                }}
               >
                 <ChevronRight size={12} className="hidden shrink-0 lg:block" />
                 {section.title}
@@ -197,9 +215,7 @@ export default function CheatSheetPage() {
                       </div>
                     )}
 
-                    <p className="text-xs leading-relaxed text-muted">
-                      {item.description}
-                    </p>
+                    <p className="text-xs leading-relaxed text-muted">{item.description}</p>
                   </div>
                 ))}
               </div>

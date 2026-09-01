@@ -1,11 +1,6 @@
 export default function Gemini({ className, ...props }: React.ComponentPropsWithoutRef<"svg">) {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      className={className}
-      {...props}
-    >
+    <svg viewBox="0 0 24 24" fill="none" className={className} {...props}>
       <defs>
         <linearGradient id="gemini-grad" x1="0" y1="0" x2="24" y2="24">
           <stop offset="0%" stopColor="#4285F4" />

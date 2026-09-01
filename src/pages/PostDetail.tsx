@@ -21,15 +21,18 @@ export default function PostPage() {
     return (
       <div className="mx-auto max-w-2xl px-6 py-24 text-center">
         <h1 className="font-display text-3xl font-bold">Post not found</h1>
-        <Link to="/" className="mt-6 inline-block font-mono text-sm text-yellow">← back to feed</Link>
+        <Link to="/" className="mt-6 inline-block font-mono text-sm text-yellow">
+          ← back to feed
+        </Link>
       </div>
     );
   }
 
   const rawHtml = marked.parse(post.body, { async: false }) as string;
-  const html = typeof window !== "undefined"
-    ? DOMPurify.sanitize(rawHtml, { ADD_TAGS: ["details", "summary"] })
-    : rawHtml;
+  const html =
+    typeof window !== "undefined"
+      ? DOMPurify.sanitize(rawHtml, { ADD_TAGS: ["details", "summary"] })
+      : rawHtml;
   const date = new Date(post.publishedAt).toLocaleDateString(undefined, {
     year: "numeric",
     month: "long",

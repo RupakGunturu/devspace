@@ -9,13 +9,24 @@ export default function VariableNamer() {
   const [output, setOutput] = useState("");
 
   const suggestions: Record<string, string[]> = {
-    "d": ["date", "data", "delta"], "s": ["string", "str", "score"], "cb": ["callback", " handleClick"],
-    "e": ["event", "error", "element"], "el": ["element", "el"], "idx": ["index", "i"],
-    "n": ["number", "count", "index"], "r": ["result", "response", "res"],
-    "t": ["time", "text", "target"], "v": ["value", "val"], "arr": ["array", "items", "list"],
-    "fn": ["function", "handler"], "obj": ["object", "item"], "str": ["string", "text"],
-    "num": ["number", "count", "total"], "flag": ["isEnabled", "hasAccess", "shouldRender"],
-    "temp": ["placeholder", "intermediate"], "tmp": ["temporary", "buffer"],
+    d: ["date", "data", "delta"],
+    s: ["string", "str", "score"],
+    cb: ["callback", " handleClick"],
+    e: ["event", "error", "element"],
+    el: ["element", "el"],
+    idx: ["index", "i"],
+    n: ["number", "count", "index"],
+    r: ["result", "response", "res"],
+    t: ["time", "text", "target"],
+    v: ["value", "val"],
+    arr: ["array", "items", "list"],
+    fn: ["function", "handler"],
+    obj: ["object", "item"],
+    str: ["string", "text"],
+    num: ["number", "count", "total"],
+    flag: ["isEnabled", "hasAccess", "shouldRender"],
+    temp: ["placeholder", "intermediate"],
+    tmp: ["temporary", "buffer"],
   };
 
   const process = () => {
@@ -33,7 +44,13 @@ export default function VariableNamer() {
 
   return (
     <ToolLayout id="variable-namer">
-      <ToolInput value={input} onChange={setInput} placeholder="const d = new Date();&#10;let s = 'hello';&#10;const cb = () => {};" label="Code" rows={8} />
+      <ToolInput
+        value={input}
+        onChange={setInput}
+        placeholder="const d = new Date();&#10;let s = 'hello';&#10;const cb = () => {};"
+        label="Code"
+        rows={8}
+      />
       <ToolButton onClick={process}>Suggest Names</ToolButton>
       <ToolOutput value={output} />
     </ToolLayout>

@@ -93,7 +93,9 @@ export function RubricBuilder() {
   return (
     <ToolLayout id="rubric-builder">
       <div>
-        <span className="mb-1 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Assignment Name</span>
+        <span className="mb-1 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+          Assignment Name
+        </span>
         <input
           value={assignment}
           onChange={(e) => setAssignment(e.target.value)}
@@ -105,10 +107,14 @@ export function RubricBuilder() {
 
       <div>
         <div className="mb-2 flex items-center justify-between">
-          <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">Criteria</span>
+          <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">
+            Criteria
+          </span>
           <span
             className="font-mono text-xs font-bold"
-            style={{ color: totalWeight === 100 ? "#22c55e" : totalWeight > 100 ? "#ef4444" : "#f59e0b" }}
+            style={{
+              color: totalWeight === 100 ? "#22c55e" : totalWeight > 100 ? "#ef4444" : "#f59e0b",
+            }}
           >
             {totalWeight}% / 100%
           </span>
@@ -120,7 +126,10 @@ export function RubricBuilder() {
               <span className="flex-1 rounded-md border-2 border-line bg-input-bg px-3 py-2 font-mono text-sm text-input-text">
                 {c.name}
               </span>
-              <span className="w-16 rounded-md border-2 border-line bg-input-bg px-3 py-2 text-center font-mono text-sm" style={{ color }}>
+              <span
+                className="w-16 rounded-md border-2 border-line bg-input-bg px-3 py-2 text-center font-mono text-sm"
+                style={{ color }}
+              >
                 {c.weight}%
               </span>
               <button
@@ -148,7 +157,9 @@ export function RubricBuilder() {
             placeholder="Weight %"
             className="w-20 rounded-md border-2 border-line bg-input-bg p-2.5 font-mono text-sm text-input-text outline-none"
           />
-          <ToolButton onClick={addCriterion} disabled={!newName.trim()}>Add</ToolButton>
+          <ToolButton onClick={addCriterion} disabled={!newName.trim()}>
+            Add
+          </ToolButton>
         </div>
       </div>
 
@@ -165,7 +176,11 @@ export function RubricBuilder() {
                 setLevelNames(n === 5 ? [...DEFAULT_LEVELS, "Incomplete"] : [...DEFAULT_LEVELS]);
               }}
               className="rounded-md border-2 px-4 py-2 font-mono text-sm transition-all"
-              style={levelCount === n ? { borderColor: color, backgroundColor: color, color: "#fff" } : { borderColor: "var(--border)" }}
+              style={
+                levelCount === n
+                  ? { borderColor: color, backgroundColor: color, color: "#fff" }
+                  : { borderColor: "var(--border)" }
+              }
             >
               {n} Levels
             </button>
@@ -193,8 +208,13 @@ export function RubricBuilder() {
       {generated && grid && (
         <div className="space-y-4">
           <div className="rounded-md border-2 p-4" style={{ borderColor: color }}>
-            <div className="font-mono text-xs uppercase tracking-wider text-muted">Rubric: {assignment}</div>
-            <div className="mt-1 font-mono text-xs text-muted">{criteria.length} criteria | {levelCount} levels | Max score: {criteria.length * levelCount}</div>
+            <div className="font-mono text-xs uppercase tracking-wider text-muted">
+              Rubric: {assignment}
+            </div>
+            <div className="mt-1 font-mono text-xs text-muted">
+              {criteria.length} criteria | {levelCount} levels | Max score:{" "}
+              {criteria.length * levelCount}
+            </div>
           </div>
 
           <div className="overflow-x-auto rounded-md border-2 border-line">
@@ -205,8 +225,11 @@ export function RubricBuilder() {
                   <th className="px-3 py-2 text-center text-muted">Weight</th>
                   {levelNames.map((name, i) => (
                     <th key={i} className="px-3 py-2 text-center text-muted">
-                      {name}<br />
-                      <span style={{ color }}>{levelCount - i} pt{levelCount - i !== 1 ? "s" : ""}</span>
+                      {name}
+                      <br />
+                      <span style={{ color }}>
+                        {levelCount - i} pt{levelCount - i !== 1 ? "s" : ""}
+                      </span>
                     </th>
                   ))}
                 </tr>
@@ -215,7 +238,9 @@ export function RubricBuilder() {
                 {grid.map((c) => (
                   <tr key={c.id} className="border-b border-line last:border-b-0">
                     <td className="px-3 py-3 font-bold text-input-text">{c.name}</td>
-                    <td className="px-3 py-3 text-center" style={{ color }}>{c.weight}%</td>
+                    <td className="px-3 py-3 text-center" style={{ color }}>
+                      {c.weight}%
+                    </td>
                     {c.levels.map((l, li) => (
                       <td key={li} className="px-3 py-3 text-center text-input-text">
                         {l.description}
@@ -229,7 +254,9 @@ export function RubricBuilder() {
 
           <div className="rounded-md border-2 border-line bg-input-bg p-4">
             <div className="mb-1 flex items-center justify-between">
-              <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">Full Rubric</span>
+              <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">
+                Full Rubric
+              </span>
               <CopyButton text={fullText} />
             </div>
             <pre className="max-h-[300px] overflow-auto whitespace-pre-wrap break-all font-mono text-sm text-input-text">

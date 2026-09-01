@@ -23,11 +23,7 @@ export function PaginationBar({ page, totalPages, onPageChange }: PaginationBarP
   } else {
     pages.push(1);
     if (page > 3) pages.push("...");
-    for (
-      let i = Math.max(2, page - 1);
-      i <= Math.min(totalPages - 1, page + 1);
-      i++
-    ) {
+    for (let i = Math.max(2, page - 1); i <= Math.min(totalPages - 1, page + 1); i++) {
       pages.push(i);
     }
     if (page < totalPages - 2) pages.push("...");
@@ -40,7 +36,10 @@ export function PaginationBar({ page, totalPages, onPageChange }: PaginationBarP
         <PaginationItem>
           <PaginationPrevious
             href="#"
-            onClick={(e) => { e.preventDefault(); onPageChange(page - 1); }}
+            onClick={(e) => {
+              e.preventDefault();
+              onPageChange(page - 1);
+            }}
             aria-disabled={page <= 1}
             className={page <= 1 ? "pointer-events-none opacity-50" : ""}
           />
@@ -55,7 +54,10 @@ export function PaginationBar({ page, totalPages, onPageChange }: PaginationBarP
               <PaginationLink
                 href="#"
                 isActive={p === page}
-                onClick={(e) => { e.preventDefault(); onPageChange(p); }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  onPageChange(p);
+                }}
               >
                 {p}
               </PaginationLink>
@@ -65,7 +67,10 @@ export function PaginationBar({ page, totalPages, onPageChange }: PaginationBarP
         <PaginationItem>
           <PaginationNext
             href="#"
-            onClick={(e) => { e.preventDefault(); onPageChange(page + 1); }}
+            onClick={(e) => {
+              e.preventDefault();
+              onPageChange(page + 1);
+            }}
             aria-disabled={page >= totalPages}
             className={page >= totalPages ? "pointer-events-none opacity-50" : ""}
           />

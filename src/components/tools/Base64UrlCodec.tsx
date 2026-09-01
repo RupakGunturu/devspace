@@ -10,9 +10,13 @@ function run(mode: Mode, input: string): string {
   try {
     switch (mode) {
       case "b64-enc":
-        return typeof window === "undefined" ? "" : window.btoa(unescape(encodeURIComponent(input)));
+        return typeof window === "undefined"
+          ? ""
+          : window.btoa(unescape(encodeURIComponent(input)));
       case "b64-dec":
-        return typeof window === "undefined" ? "" : decodeURIComponent(escape(window.atob(input.trim())));
+        return typeof window === "undefined"
+          ? ""
+          : decodeURIComponent(escape(window.atob(input.trim())));
       case "url-enc":
         return encodeURIComponent(input);
       case "url-dec":
@@ -39,7 +43,13 @@ export function Base64UrlCodec() {
         value={mode}
         onChange={(v) => setMode(v as Mode)}
       />
-      <ToolInput value={input} onChange={setInput} placeholder="Enter text..." label="Input" rows={5} />
+      <ToolInput
+        value={input}
+        onChange={setInput}
+        placeholder="Enter text..."
+        label="Input"
+        rows={5}
+      />
       <ToolOutput value={output} label="Output" />
     </ToolLayout>
   );

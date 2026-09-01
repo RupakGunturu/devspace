@@ -9,13 +9,21 @@ interface ToolInputProps {
   rows?: number;
 }
 
-export function ToolInput({ value, onChange, placeholder = "Enter input...", label = "Input", rows = 8 }: ToolInputProps) {
+export function ToolInput({
+  value,
+  onChange,
+  placeholder = "Enter input...",
+  label = "Input",
+  rows = 8,
+}: ToolInputProps) {
   const { color } = useToolAccent();
   const [focused, setFocused] = useState(false);
 
   return (
     <div className="w-full">
-      <label className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">{label}</label>
+      <label className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+        {label}
+      </label>
       <textarea
         value={value}
         onChange={(e) => onChange(e.target.value)}

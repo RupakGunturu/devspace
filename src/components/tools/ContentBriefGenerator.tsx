@@ -13,9 +13,15 @@ const CONTENT_TYPES = [
 
 const BLOG_OUTLINES: Record<string, { h2: string; h3s: string[] }[]> = {
   default: [
-    { h2: "What Is {topic}?", h3s: ["Definition and overview", "Why it matters", "Common misconceptions"] },
+    {
+      h2: "What Is {topic}?",
+      h3s: ["Definition and overview", "Why it matters", "Common misconceptions"],
+    },
     { h2: "Benefits of {topic}", h3s: ["Key advantage 1", "Key advantage 2", "Key advantage 3"] },
-    { h2: "How to Get Started with {topic}", h3s: ["Step-by-step guide", "Tools and resources", "Best practices"] },
+    {
+      h2: "How to Get Started with {topic}",
+      h3s: ["Step-by-step guide", "Tools and resources", "Best practices"],
+    },
     { h2: "Common Mistakes to Avoid", h3s: ["Mistake 1", "Mistake 2", "Mistake 3"] },
     { h2: "Frequently Asked Questions", h3s: [] },
     { h2: "Conclusion", h3s: ["Key takeaways", "Call to action"] },
@@ -77,7 +83,11 @@ export function ContentBriefGenerator() {
     const a = audience.trim();
 
     const wordCount =
-      contentType === "blog" ? "1,500 - 2,500" : contentType === "video" ? "800 - 1,200 (script)" : "280 - 500 (thread)";
+      contentType === "blog"
+        ? "1,500 - 2,500"
+        : contentType === "video"
+          ? "800 - 1,200 (script)"
+          : "280 - 500 (thread)";
 
     const title =
       contentType === "blog"
@@ -122,10 +132,14 @@ export function ContentBriefGenerator() {
     text += `OUTLINE:\n`;
     brief.outline.forEach((o) => {
       text += `\n## ${o.h2}\n`;
-      o.h3s.forEach((h) => { text += `### ${h}\n`; });
+      o.h3s.forEach((h) => {
+        text += `### ${h}\n`;
+      });
     });
     text += `\nKEY QUESTIONS TO ANSWER:\n`;
-    brief.questions.forEach((q) => { text += `- ${q}\n`; });
+    brief.questions.forEach((q) => {
+      text += `- ${q}\n`;
+    });
     navigator.clipboard.writeText(text);
   };
 
@@ -144,8 +158,12 @@ export function ContentBriefGenerator() {
           onChange={(e) => setTopic(e.target.value)}
           placeholder="e.g. React Server Components"
           className={inputCls}
-          onFocus={(e) => { e.currentTarget.style.borderColor = color; }}
-          onBlur={(e) => { e.currentTarget.style.borderColor = ""; }}
+          onFocus={(e) => {
+            e.currentTarget.style.borderColor = color;
+          }}
+          onBlur={(e) => {
+            e.currentTarget.style.borderColor = "";
+          }}
         />
       </div>
 
@@ -159,8 +177,12 @@ export function ContentBriefGenerator() {
           onChange={(e) => setAudience(e.target.value)}
           placeholder="e.g. frontend developers"
           className={inputCls}
-          onFocus={(e) => { e.currentTarget.style.borderColor = color; }}
-          onBlur={(e) => { e.currentTarget.style.borderColor = ""; }}
+          onFocus={(e) => {
+            e.currentTarget.style.borderColor = color;
+          }}
+          onBlur={(e) => {
+            e.currentTarget.style.borderColor = "";
+          }}
         />
       </div>
 
@@ -211,7 +233,9 @@ export function ContentBriefGenerator() {
           <span className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
             Target Word Count
           </span>
-          <p className="font-mono text-sm font-medium" style={{ color }}>{brief.wordCount}</p>
+          <p className="font-mono text-sm font-medium" style={{ color }}>
+            {brief.wordCount}
+          </p>
         </div>
       )}
 
@@ -224,7 +248,10 @@ export function ContentBriefGenerator() {
             {brief.outline.map((o, i) => (
               <div key={i}>
                 <div className="flex items-center gap-2">
-                  <span className="inline-block h-2 w-2 rounded-full" style={{ backgroundColor: color }} />
+                  <span
+                    className="inline-block h-2 w-2 rounded-full"
+                    style={{ backgroundColor: color }}
+                  />
                   <span className="font-mono text-sm font-medium text-foreground">{o.h2}</span>
                 </div>
                 {o.h3s.length > 0 && (
@@ -251,7 +278,9 @@ export function ContentBriefGenerator() {
           <div className="space-y-2">
             {brief.questions.map((q, i) => (
               <div key={i} className="flex items-start gap-2">
-                <span className="inline-block mt-0.5 font-mono text-xs font-bold" style={{ color }}>Q{i + 1}</span>
+                <span className="inline-block mt-0.5 font-mono text-xs font-bold" style={{ color }}>
+                  Q{i + 1}
+                </span>
                 <span className="font-mono text-sm text-foreground">{q}</span>
               </div>
             ))}

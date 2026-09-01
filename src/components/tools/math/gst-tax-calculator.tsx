@@ -14,14 +14,21 @@ export default function GstTaxCalculator() {
   const calculate = () => {
     const a = parseFloat(amount);
     const r = parseFloat(rate) / 100;
-    if (isNaN(a) || isNaN(r)) { setOutput("Enter valid numbers"); return; }
+    if (isNaN(a) || isNaN(r)) {
+      setOutput("Enter valid numbers");
+      return;
+    }
     if (mode === "exclusive") {
       const tax = a * r;
-      setOutput(`Base: $${a.toFixed(2)}\nGST (${(r * 100).toFixed(0)}%): $${tax.toFixed(2)}\nTotal: $${(a + tax).toFixed(2)}`);
+      setOutput(
+        `Base: $${a.toFixed(2)}\nGST (${(r * 100).toFixed(0)}%): $${tax.toFixed(2)}\nTotal: $${(a + tax).toFixed(2)}`,
+      );
     } else {
       const base = a / (1 + r);
       const tax = a - base;
-      setOutput(`Total (incl. GST): $${a.toFixed(2)}\nBase: $${base.toFixed(2)}\nGST (${(r * 100).toFixed(0)}%): $${tax.toFixed(2)}`);
+      setOutput(
+        `Total (incl. GST): $${a.toFixed(2)}\nBase: $${base.toFixed(2)}\nGST (${(r * 100).toFixed(0)}%): $${tax.toFixed(2)}`,
+      );
     }
   };
 
@@ -37,7 +44,13 @@ export default function GstTaxCalculator() {
         className="mb-2"
       />
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <ToolInput value={amount} onChange={setAmount} placeholder="100" label="Amount ($)" rows={1} />
+        <ToolInput
+          value={amount}
+          onChange={setAmount}
+          placeholder="100"
+          label="Amount ($)"
+          rows={1}
+        />
         <ToolInput value={rate} onChange={setRate} placeholder="18" label="GST Rate (%)" rows={1} />
       </div>
       <ToolButton onClick={calculate}>Calculate</ToolButton>

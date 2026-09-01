@@ -10,61 +10,101 @@ interface GitOperation {
 }
 
 const operations: GitOperation[] = [
-  { name: "commit", template: "git commit", flags: [
-    { flag: "-m", label: "Message (-m)" },
-    { flag: "-a", label: "All modified (-a)" },
-    { flag: "--amend", label: "Amend last commit" },
-    { flag: "--no-verify", label: "Skip hooks" },
-  ]},
-  { name: "merge", template: "git merge", flags: [
-    { flag: "--no-ff", label: "No fast-forward" },
-    { flag: "--squash", label: "Squash commits" },
-    { flag: "--abort", label: "Abort merge" },
-  ]},
-  { name: "rebase", template: "git rebase", flags: [
-    { flag: "-i", label: "Interactive (-i)" },
-    { flag: "--abort", label: "Abort rebase" },
-    { flag: "--continue", label: "Continue rebase" },
-    { flag: "--skip", label: "Skip commit" },
-  ]},
-  { name: "cherry-pick", template: "git cherry-pick", flags: [
-    { flag: "--no-commit", label: "No commit" },
-    { flag: "--abort", label: "Abort" },
-    { flag: "-x", label: "Add reference" },
-  ]},
-  { name: "stash", template: "git stash", flags: [
-    { flag: "push", label: "Push stash" },
-    { flag: "pop", label: "Pop stash" },
-    { flag: "apply", label: "Apply stash" },
-    { flag: "list", label: "List stashes" },
-    { flag: "drop", label: "Drop stash" },
-    { flag: "clear", label: "Clear all stashes" },
-  ]},
-  { name: "branch", template: "git branch", flags: [
-    { flag: "-d", label: "Delete (-d)" },
-    { flag: "-D", label: "Force delete (-D)" },
-    { flag: "-a", label: "List all (-a)" },
-    { flag: "-r", label: "Remote only (-r)" },
-  ]},
-  { name: "checkout", template: "git checkout", flags: [
-    { flag: "-b", label: "New branch (-b)" },
-    { flag: "--", label: "Path separator (--)" },
-  ]},
-  { name: "revert", template: "git revert", flags: [
-    { flag: "--no-commit", label: "No commit" },
-    { flag: "--abort", label: "Abort" },
-  ]},
-  { name: "reset", template: "git reset", flags: [
-    { flag: "--soft", label: "Soft reset" },
-    { flag: "--mixed", label: "Mixed reset" },
-    { flag: "--hard", label: "Hard reset" },
-  ]},
-  { name: "bisect", template: "git bisect", flags: [
-    { flag: "start", label: "Start bisect" },
-    { flag: "good", label: "Mark good" },
-    { flag: "bad", label: "Mark bad" },
-    { flag: "reset", label: "Reset bisect" },
-  ]},
+  {
+    name: "commit",
+    template: "git commit",
+    flags: [
+      { flag: "-m", label: "Message (-m)" },
+      { flag: "-a", label: "All modified (-a)" },
+      { flag: "--amend", label: "Amend last commit" },
+      { flag: "--no-verify", label: "Skip hooks" },
+    ],
+  },
+  {
+    name: "merge",
+    template: "git merge",
+    flags: [
+      { flag: "--no-ff", label: "No fast-forward" },
+      { flag: "--squash", label: "Squash commits" },
+      { flag: "--abort", label: "Abort merge" },
+    ],
+  },
+  {
+    name: "rebase",
+    template: "git rebase",
+    flags: [
+      { flag: "-i", label: "Interactive (-i)" },
+      { flag: "--abort", label: "Abort rebase" },
+      { flag: "--continue", label: "Continue rebase" },
+      { flag: "--skip", label: "Skip commit" },
+    ],
+  },
+  {
+    name: "cherry-pick",
+    template: "git cherry-pick",
+    flags: [
+      { flag: "--no-commit", label: "No commit" },
+      { flag: "--abort", label: "Abort" },
+      { flag: "-x", label: "Add reference" },
+    ],
+  },
+  {
+    name: "stash",
+    template: "git stash",
+    flags: [
+      { flag: "push", label: "Push stash" },
+      { flag: "pop", label: "Pop stash" },
+      { flag: "apply", label: "Apply stash" },
+      { flag: "list", label: "List stashes" },
+      { flag: "drop", label: "Drop stash" },
+      { flag: "clear", label: "Clear all stashes" },
+    ],
+  },
+  {
+    name: "branch",
+    template: "git branch",
+    flags: [
+      { flag: "-d", label: "Delete (-d)" },
+      { flag: "-D", label: "Force delete (-D)" },
+      { flag: "-a", label: "List all (-a)" },
+      { flag: "-r", label: "Remote only (-r)" },
+    ],
+  },
+  {
+    name: "checkout",
+    template: "git checkout",
+    flags: [
+      { flag: "-b", label: "New branch (-b)" },
+      { flag: "--", label: "Path separator (--)" },
+    ],
+  },
+  {
+    name: "revert",
+    template: "git revert",
+    flags: [
+      { flag: "--no-commit", label: "No commit" },
+      { flag: "--abort", label: "Abort" },
+    ],
+  },
+  {
+    name: "reset",
+    template: "git reset",
+    flags: [
+      { flag: "--soft", label: "Soft reset" },
+      { flag: "--mixed", label: "Mixed reset" },
+      { flag: "--hard", label: "Hard reset" },
+    ],
+  },
+  {
+    name: "bisect",
+    template: "git bisect",
+    flags: [
+      { flag: "start", label: "Start bisect" },
+      { flag: "good", label: "Mark good" },
+      { flag: "bad", label: "Mark bad" },
+      { flag: "reset", label: "Reset bisect" },
+    ],
+  },
 ];
 
 export function GitCommandBuilder() {
@@ -87,7 +127,18 @@ export function GitCommandBuilder() {
     const parts = [op.template];
     for (const f of op.flags) {
       if (activeFlags.has(f.flag)) {
-        if (f.flag === "push" || f.flag === "pop" || f.flag === "apply" || f.flag === "list" || f.flag === "drop" || f.flag === "clear" || f.flag === "start" || f.flag === "good" || f.flag === "bad" || f.flag === "reset") {
+        if (
+          f.flag === "push" ||
+          f.flag === "pop" ||
+          f.flag === "apply" ||
+          f.flag === "list" ||
+          f.flag === "drop" ||
+          f.flag === "clear" ||
+          f.flag === "start" ||
+          f.flag === "good" ||
+          f.flag === "bad" ||
+          f.flag === "reset"
+        ) {
           parts.push(f.flag);
         } else {
           parts.push(f.flag);
@@ -104,7 +155,11 @@ export function GitCommandBuilder() {
         {operations.map((o, i) => (
           <button
             key={o.name}
-            onClick={() => { setSelectedOp(i); setActiveFlags(new Set()); setArgs(""); }}
+            onClick={() => {
+              setSelectedOp(i);
+              setActiveFlags(new Set());
+              setArgs("");
+            }}
             className={`rounded-md border-2 px-3 py-1.5 font-mono text-xs transition-all ${
               i === selectedOp
                 ? "border-accent bg-accent text-accent-fg"
@@ -133,7 +188,9 @@ export function GitCommandBuilder() {
       </div>
 
       <div>
-        <label className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Arguments / Reference</label>
+        <label className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+          Arguments / Reference
+        </label>
         <input
           type="text"
           value={args}
@@ -145,10 +202,14 @@ export function GitCommandBuilder() {
 
       <div className="rounded-lg border-2 border-accent bg-accent/5 p-4">
         <div className="flex items-center justify-between">
-          <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">Command</span>
+          <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted">
+            Command
+          </span>
           <CopyButton text={command} />
         </div>
-        <pre className="mt-2 overflow-x-auto font-mono text-lg font-bold text-foreground">{command}</pre>
+        <pre className="mt-2 overflow-x-auto font-mono text-lg font-bold text-foreground">
+          {command}
+        </pre>
       </div>
 
       <div className="rounded-md border border-line bg-paper-dim p-4 text-xs text-muted">

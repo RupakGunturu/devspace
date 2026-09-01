@@ -34,7 +34,13 @@ const DEFAULT_SAVINGS: Category[] = [
 const BUCKETS = [
   { key: "needs" as const, label: "Needs", pct: 50, color: "#3b82f6", defaults: DEFAULT_NEEDS },
   { key: "wants" as const, label: "Wants", pct: 30, color: "#f59e0b", defaults: DEFAULT_WANTS },
-  { key: "savings" as const, label: "Savings", pct: 20, color: "#10b981", defaults: DEFAULT_SAVINGS },
+  {
+    key: "savings" as const,
+    label: "Savings",
+    pct: 20,
+    color: "#10b981",
+    defaults: DEFAULT_SAVINGS,
+  },
 ];
 
 export function BudgetSplitPlanner() {
@@ -53,9 +59,14 @@ export function BudgetSplitPlanner() {
     return { needs: n, wants: w, savings: sv, total: n + w + sv };
   }, [needs, wants, savings]);
 
-  const fmt = (v: number) => v.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const fmt = (v: number) =>
+    v.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-  const updateCat = (setter: React.Dispatch<React.SetStateAction<Category[]>>, idx: number, val: number) => {
+  const updateCat = (
+    setter: React.Dispatch<React.SetStateAction<Category[]>>,
+    idx: number,
+    val: number,
+  ) => {
     setter((prev) => prev.map((c, i) => (i === idx ? { ...c, amount: Math.max(0, val) } : c)));
   };
 
@@ -77,7 +88,9 @@ export function BudgetSplitPlanner() {
   return (
     <ToolLayout id="budget-split-planner">
       <div>
-        <span className="mb-1 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Monthly Income ($)</span>
+        <span className="mb-1 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+          Monthly Income ($)
+        </span>
         <input
           type="number"
           value={income}
@@ -90,14 +103,21 @@ export function BudgetSplitPlanner() {
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
         {BUCKETS.map((b) => {
-          const total = b.key === "needs" ? totals.needs : b.key === "wants" ? totals.wants : totals.savings;
+          const total =
+            b.key === "needs" ? totals.needs : b.key === "wants" ? totals.wants : totals.savings;
           return (
             <div key={b.key} className="rounded-md border-2 border-line bg-input-bg p-3">
               <div className="flex items-center justify-between">
-                <span className="font-mono text-sm font-bold" style={{ color: b.color }}>{b.label}</span>
-                <span className="font-mono text-xs text-muted">{b.pct}% = ${fmt(monthlyIncome * b.pct / 100)}</span>
+                <span className="font-mono text-sm font-bold" style={{ color: b.color }}>
+                  {b.label}
+                </span>
+                <span className="font-mono text-xs text-muted">
+                  {b.pct}% = ${fmt((monthlyIncome * b.pct) / 100)}
+                </span>
               </div>
-              <div className="mt-2 font-display text-xl font-extrabold" style={{ color: b.color }}>${fmt(total)}</div>
+              <div className="mt-2 font-display text-xl font-extrabold" style={{ color: b.color }}>
+                ${fmt(total)}
+              </div>
             </div>
           );
         })}
@@ -105,10 +125,17 @@ export function BudgetSplitPlanner() {
 
       {monthlyIncome > 0 && (
         <div>
-          <span className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Allocation Bars</span>
+          <span className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+            Allocation Bars
+          </span>
           <div className="space-y-2">
             {BUCKETS.map((b) => {
-              const total = b.key === "needs" ? totals.needs : b.key === "wants" ? totals.wants : totals.savings;
+              const total =
+                b.key === "needs"
+                  ? totals.needs
+                  : b.key === "wants"
+                    ? totals.wants
+                    : totals.savings;
               const pct = monthlyIncome > 0 ? (total / monthlyIncome) * 100 : 0;
               return (
                 <div key={b.key}>
@@ -144,13 +171,19 @@ export function BudgetSplitPlanner() {
       {sections.map((s) => (
         <div key={s.key}>
           <div className="mb-2 flex items-center justify-between">
-            <span className="font-mono text-xs font-medium uppercase tracking-wider" style={{ color: s.color }}>
+            <span
+              className="font-mono text-xs font-medium uppercase tracking-wider"
+              style={{ color: s.color }}
+            >
               {s.label} Breakdown
             </span>
           </div>
           <div className="space-y-2">
             {s.data.map((cat, idx) => (
-              <div key={idx} className="flex items-center gap-3 rounded-md border-2 border-line bg-input-bg px-3 py-2">
+              <div
+                key={idx}
+                className="flex items-center gap-3 rounded-md border-2 border-line bg-input-bg px-3 py-2"
+              >
                 <span className="min-w-[120px] font-mono text-xs text-input-text">{cat.name}</span>
                 <span className="font-mono text-xs text-muted">$</span>
                 <input

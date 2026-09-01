@@ -19,7 +19,13 @@ export default function TextSorter() {
 
   return (
     <ToolLayout id="text-sorter">
-      <ToolInput value={input} onChange={setInput} placeholder="Enter one item per line..." label="Input" rows={10} />
+      <ToolInput
+        value={input}
+        onChange={setInput}
+        placeholder="Enter one item per line..."
+        label="Input"
+        rows={10}
+      />
       <div className="flex flex-col sm:flex-row gap-2">
         <ToolToggleGroup
           options={[

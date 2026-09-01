@@ -75,9 +75,7 @@ export default function McpSkills() {
                   : "border-line text-muted hover:text-foreground",
               )}
               style={
-                activeCategory === key
-                  ? { borderColor: color, backgroundColor: color }
-                  : undefined
+                activeCategory === key ? { borderColor: color, backgroundColor: color } : undefined
               }
             >
               {label}
@@ -109,9 +107,7 @@ export default function McpSkills() {
                         colors?.darkBg ?? "dark:bg-zinc-800",
                       )}
                     >
-                      <span
-                        className={cn("text-sm font-bold", colors?.icon ?? "text-zinc-600")}
-                      >
+                      <span className={cn("text-sm font-bold", colors?.icon ?? "text-zinc-600")}>
                         {skill.name.charAt(0)}
                       </span>
                     </div>

@@ -5,12 +5,114 @@ import { CopyButton } from "./CopyButton";
 import { useToolAccent } from "@/components/ToolAccentContext";
 
 const EMOJI_CATEGORIES: Record<string, string[]> = {
-  "Love & Hearts": ["❤️", "😍", "🥰", "💕", "💖", "💗", "💘", "💝", "♥️", "🫶", "💑", "💏", "🤩", "😍", "😘", "💞"],
-  Nature: ["🌿", "🌸", "🌺", "🌻", "🌼", "🍀", "🍃", "🌱", "🌈", "⭐", "🌙", "☀️", "🌊", "🔥", "❄️", "💎"],
-  Food: ["🍕", "🍔", "🍟", "🌮", "🍣", "🍩", "🧁", "🍰", "☕", "🍷", "🥤", "🍳", "🥑", "🍓", "🫐", "🧇"],
-  Travel: ["✈️", "🌍", "🗺️", "🏖️", "⛰️", "🏕️", "🎒", "📸", "🏛️", "🗼", "🌅", "🌄", "🚂", "🚗", "🛳️", "🏝️"],
-  "Celebration": ["🎉", "🎊", "🥳", "🎈", "🎁", "🏆", "🥇", "🎯", "✨", "💫", "🎵", "🎶", "🪩", "🎆", "🎇", "🥂"],
-  Gestures: ["👍", "👏", "🙌", "💪", "✌️", "🤙", "👊", "🤝", "🙏", "👀", "💡", "🔔", "📌", "🏷️", "✅", "🚀"],
+  "Love & Hearts": [
+    "❤️",
+    "😍",
+    "🥰",
+    "💕",
+    "💖",
+    "💗",
+    "💘",
+    "💝",
+    "♥️",
+    "🫶",
+    "💑",
+    "💏",
+    "🤩",
+    "😍",
+    "😘",
+    "💞",
+  ],
+  Nature: [
+    "🌿",
+    "🌸",
+    "🌺",
+    "🌻",
+    "🌼",
+    "🍀",
+    "🍃",
+    "🌱",
+    "🌈",
+    "⭐",
+    "🌙",
+    "☀️",
+    "🌊",
+    "🔥",
+    "❄️",
+    "💎",
+  ],
+  Food: [
+    "🍕",
+    "🍔",
+    "🍟",
+    "🌮",
+    "🍣",
+    "🍩",
+    "🧁",
+    "🍰",
+    "☕",
+    "🍷",
+    "🥤",
+    "🍳",
+    "🥑",
+    "🍓",
+    "🫐",
+    "🧇",
+  ],
+  Travel: [
+    "✈️",
+    "🌍",
+    "🗺️",
+    "🏖️",
+    "⛰️",
+    "🏕️",
+    "🎒",
+    "📸",
+    "🏛️",
+    "🗼",
+    "🌅",
+    "🌄",
+    "🚂",
+    "🚗",
+    "🛳️",
+    "🏝️",
+  ],
+  Celebration: [
+    "🎉",
+    "🎊",
+    "🥳",
+    "🎈",
+    "🎁",
+    "🏆",
+    "🥇",
+    "🎯",
+    "✨",
+    "💫",
+    "🎵",
+    "🎶",
+    "🪩",
+    "🎆",
+    "🎇",
+    "🥂",
+  ],
+  Gestures: [
+    "👍",
+    "👏",
+    "🙌",
+    "💪",
+    "✌️",
+    "🤙",
+    "👊",
+    "🤝",
+    "🙏",
+    "👀",
+    "💡",
+    "🔔",
+    "📌",
+    "🏷️",
+    "✅",
+    "🚀",
+  ],
 };
 
 function formatCaption(text: string): string {
@@ -31,9 +133,7 @@ export function InstagramCaptionFormatter() {
     const parts: string[] = [];
     const emojiStr = selectedEmojis.length > 0 ? selectedEmojis.join(" ") + "\n" : "";
     const formattedCaption = formatCaption(caption);
-    const hashtagStr = hashtags.trim()
-      ? "\n\n" + hashtags.trim().split(/\s+/).join(" ")
-      : "";
+    const hashtagStr = hashtags.trim() ? "\n\n" + hashtags.trim().split(/\s+/).join(" ") : "";
     parts.push(emojiStr + formattedCaption + hashtagStr);
     return parts.join("");
   }, [caption, hashtags, selectedEmojis]);
@@ -43,7 +143,7 @@ export function InstagramCaptionFormatter() {
 
   const toggleEmoji = (emoji: string) => {
     setSelectedEmojis((prev) =>
-      prev.includes(emoji) ? prev.filter((e) => e !== emoji) : [...prev, emoji]
+      prev.includes(emoji) ? prev.filter((e) => e !== emoji) : [...prev, emoji],
     );
   };
 
@@ -64,16 +164,23 @@ export function InstagramCaptionFormatter() {
               rows={8}
               spellCheck={false}
               className="w-full resize-y rounded-md border-2 border-line bg-input-bg p-4 font-mono text-sm text-input-text outline-none transition-colors placeholder:text-muted"
-              onFocus={(e) => { e.currentTarget.style.borderColor = color; }}
-              onBlur={(e) => { e.currentTarget.style.borderColor = ""; }}
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = color;
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = "";
+              }}
             />
             <div className="mt-1 flex items-center justify-between">
               <span className="font-mono text-xs text-muted">
-                {caption.length} chars · {lineBreakCount} line break{lineBreakCount !== 1 ? "s" : ""}
+                {caption.length} chars · {lineBreakCount} line break
+                {lineBreakCount !== 1 ? "s" : ""}
               </span>
               <span
                 className="font-mono text-xs"
-                style={{ color: charCount > 2200 ? "#ef4444" : charCount > 2000 ? "#f59e0b" : undefined }}
+                style={{
+                  color: charCount > 2200 ? "#ef4444" : charCount > 2000 ? "#f59e0b" : undefined,
+                }}
               >
                 {charCount}/2,200
               </span>
@@ -90,8 +197,12 @@ export function InstagramCaptionFormatter() {
               onChange={(e) => setHashtags(e.target.value)}
               placeholder="#photography #travel #nature"
               className="w-full rounded-md border-2 border-line bg-input-bg p-3 font-mono text-sm text-input-text outline-none transition-colors placeholder:text-muted"
-              onFocus={(e) => { e.currentTarget.style.borderColor = color; }}
-              onBlur={(e) => { e.currentTarget.style.borderColor = ""; }}
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = color;
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = "";
+              }}
             />
           </div>
 

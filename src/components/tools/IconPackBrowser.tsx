@@ -121,14 +121,18 @@ export function IconPackBrowser() {
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search by name..."
           className="w-full rounded-md border-2 border-line bg-input-bg p-3 font-mono text-sm text-input-text outline-none transition-colors placeholder:text-muted"
-          onFocus={(e) => { e.currentTarget.style.borderColor = color; }}
-          onBlur={(e) => { e.currentTarget.style.borderColor = ""; }}
+          onFocus={(e) => {
+            e.currentTarget.style.borderColor = color;
+          }}
+          onBlur={(e) => {
+            e.currentTarget.style.borderColor = "";
+          }}
         />
       </div>
 
       {Object.entries(ICON_CATEGORIES).map(([cat, icons]) => {
         const filtered = icons.filter(
-          (ic) => !lowerSearch || ic.name.toLowerCase().includes(lowerSearch)
+          (ic) => !lowerSearch || ic.name.toLowerCase().includes(lowerSearch),
         );
         if (filtered.length === 0) return null;
         return (

@@ -10,7 +10,7 @@ export default function EslintRuleExplorer() {
 
   const rules: Record<string, string> = {
     "no-console": "Disallow console statements — remove before production",
-    "eqeqeq": "Require strict equality (=== instead of ==)",
+    eqeqeq: "Require strict equality (=== instead of ==)",
     "no-unused-vars": "Disallow unused variables",
     "no-var": "Disallow var — use const/let instead",
     "prefer-const": "Suggest using const for variables never reassigned",
@@ -32,13 +32,26 @@ export default function EslintRuleExplorer() {
   };
 
   const search_rules = () => {
-    const matches = Object.entries(rules).filter(([key, desc]) => key.includes(search.toLowerCase()) || desc.toLowerCase().includes(search.toLowerCase()));
-    setOutput(matches.length > 0 ? matches.map(([k, v]) => `${k}\n  → ${v}`).join("\n\n") : "No rules found. Try: console, var, unused, const, eval");
+    const matches = Object.entries(rules).filter(
+      ([key, desc]) =>
+        key.includes(search.toLowerCase()) || desc.toLowerCase().includes(search.toLowerCase()),
+    );
+    setOutput(
+      matches.length > 0
+        ? matches.map(([k, v]) => `${k}\n  → ${v}`).join("\n\n")
+        : "No rules found. Try: console, var, unused, const, eval",
+    );
   };
 
   return (
     <ToolLayout id="eslint-rule-explorer">
-      <ToolInput value={search} onChange={setSearch} placeholder="console" label="Search Rules" rows={1} />
+      <ToolInput
+        value={search}
+        onChange={setSearch}
+        placeholder="console"
+        label="Search Rules"
+        rows={1}
+      />
       <ToolButton onClick={search_rules}>Search</ToolButton>
       <ToolOutput value={output} />
     </ToolLayout>

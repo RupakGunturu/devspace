@@ -86,9 +86,15 @@ export function FaviconGenerator() {
         {sizes.map((size, i) => (
           <div key={size} className="flex flex-col items-center gap-2">
             <canvas
-              ref={(el) => { canvasRefs.current[i] = el; }}
+              ref={(el) => {
+                canvasRefs.current[i] = el;
+              }}
               className="rounded-md border-2 border-line"
-              style={{ width: Math.max(size, 48), height: Math.max(size, 48), imageRendering: "pixelated" }}
+              style={{
+                width: Math.max(size, 48),
+                height: Math.max(size, 48),
+                imageRendering: "pixelated",
+              }}
             />
             <span className="font-mono text-[10px] text-muted">
               {size}×{size}

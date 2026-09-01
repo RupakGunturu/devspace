@@ -11,7 +11,14 @@ export default function CodeMinifier() {
   const [output, setOutput] = useState("");
 
   const minify = () => {
-    if (language === "json") { try { setOutput(JSON.stringify(JSON.parse(input))); } catch { setOutput("Invalid JSON"); } return; }
+    if (language === "json") {
+      try {
+        setOutput(JSON.stringify(JSON.parse(input)));
+      } catch {
+        setOutput("Invalid JSON");
+      }
+      return;
+    }
     let result = input;
     result = result.replace(/\/\*[\s\S]*?\*\//g, "");
     result = result.replace(/\/\/.*$/gm, "");
@@ -34,7 +41,13 @@ export default function CodeMinifier() {
         onChange={setLanguage}
         className="mb-2"
       />
-      <ToolInput value={input} onChange={setInput} placeholder="Paste code..." label="Input" rows={10} />
+      <ToolInput
+        value={input}
+        onChange={setInput}
+        placeholder="Paste code..."
+        label="Input"
+        rows={10}
+      />
       <ToolButton onClick={minify}>Minify</ToolButton>
       <ToolOutput value={output} />
     </ToolLayout>

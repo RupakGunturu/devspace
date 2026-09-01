@@ -38,7 +38,9 @@ export const POSTS: Post[] = [
     title: "Shipped: the Regex Tester tool",
     series: "changelog",
     excerpt: "Live match highlighting, common pattern presets, and zero backend calls.",
-    body: b(`Added the Regex Tester this week — type a pattern, see matches highlighted live in your test string. Includes a preset dropdown for common patterns (email, URL, phone number) so you're not googling regex at 1am. Fully client-side, nothing leaves your browser.`),
+    body: b(
+      `Added the Regex Tester this week — type a pattern, see matches highlighted live in your test string. Includes a preset dropdown for common patterns (email, URL, phone number) so you're not googling regex at 1am. Fully client-side, nothing leaves your browser.`,
+    ),
     publishedAt: "2026-07-07",
   },
   {
@@ -46,8 +48,10 @@ export const POSTS: Post[] = [
     slug: "fixed-devwordle-guesses",
     title: "Fixed: DevWordle accepting invalid guesses",
     series: "changelog",
-    excerpt: "A dictionary bug let \"asdfg\" count as a valid guess. Rookie mistake, now fixed.",
-    body: b(`Someone (me) forgot to validate guesses against the word list before this week. If you were getting free wins by typing keyboard mash, sorry — that loophole's closed now.`),
+    excerpt: 'A dictionary bug let "asdfg" count as a valid guess. Rookie mistake, now fixed.',
+    body: b(
+      `Someone (me) forgot to validate guesses against the word list before this week. If you were getting free wins by typing keyboard mash, sorry — that loophole's closed now.`,
+    ),
     publishedAt: "2026-07-03",
   },
   {
@@ -56,7 +60,9 @@ export const POSTS: Post[] = [
     title: "New: dark-only theme locked in",
     series: "changelog",
     excerpt: "Skipped the light mode toggle on purpose — here's the reasoning.",
-    body: b(`Decided against a light mode for launch. The whole visual identity — paper cards, ink background — is built around that contrast. Adding light mode would mean designing a second brand. Maybe later, not now.`),
+    body: b(
+      `Decided against a light mode for launch. The whole visual identity — paper cards, ink background — is built around that contrast. Adding light mode would mean designing a second brand. Maybe later, not now.`,
+    ),
     publishedAt: "2026-06-28",
   },
 
@@ -67,7 +73,9 @@ export const POSTS: Post[] = [
     title: "3 cheatsheets I actually keep open while coding",
     series: "resource-drop",
     excerpt: "Git, regex, and HTTP status codes — bookmarked, not memorized.",
-    body: b(`Stopped pretending I have git rebase memorized. These three references live in a pinned tab: a git command cheatsheet, a regex quick reference, and an HTTP status code table. Nobody memorizes this stuff, they just know where to look.`),
+    body: b(
+      `Stopped pretending I have git rebase memorized. These three references live in a pinned tab: a git command cheatsheet, a regex quick reference, and an HTTP status code table. Nobody memorizes this stuff, they just know where to look.`,
+    ),
     publishedAt: "2026-07-05",
   },
   {
@@ -76,7 +84,9 @@ export const POSTS: Post[] = [
     title: "A free API list that doesn't require a credit card",
     series: "resource-drop",
     excerpt: "For practicing fetch requests without hitting a paywall on request #11.",
-    body: b(`Found a public API directory that filters by \"no auth required\" — perfect for practicing fetch/axios calls in a portfolio project without signing up for six different dashboards.`),
+    body: b(
+      `Found a public API directory that filters by "no auth required" — perfect for practicing fetch/axios calls in a portfolio project without signing up for six different dashboards.`,
+    ),
     publishedAt: "2026-06-30",
   },
   {
@@ -85,7 +95,9 @@ export const POSTS: Post[] = [
     title: "The VS Code extension pack I install on every new laptop",
     series: "resource-drop",
     excerpt: "Five extensions, zero bloat, installed in under two minutes.",
-    body: b(`After reinstalling my dev environment for the third time this year, here's the exact extension list I no longer question: an ESLint/Prettier combo, a git lens, a color highlighter, an icon theme, and a REST client. That's it.`),
+    body: b(
+      `After reinstalling my dev environment for the third time this year, here's the exact extension list I no longer question: an ESLint/Prettier combo, a git lens, a color highlighter, an icon theme, and a REST client. That's it.`,
+    ),
     publishedAt: "2026-06-22",
     externalUrl: "https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens",
   },
@@ -95,7 +107,9 @@ export const POSTS: Post[] = [
     title: "Bruno — the API client that lives in your repo",
     series: "resource-drop",
     excerpt: "Local-first, no cloud accounts, collections stored as plain text files.",
-    body: b(`Bruno is an open-source API client that stores collections as plain text files in your project directory. No cloud accounts, no hidden sync fees — just files you can version control and share with your team.`),
+    body: b(
+      `Bruno is an open-source API client that stores collections as plain text files in your project directory. No cloud accounts, no hidden sync fees — just files you can version control and share with your team.`,
+    ),
     publishedAt: "2026-07-10",
     externalUrl: "https://www.usebruno.com/",
   },
@@ -105,7 +119,9 @@ export const POSTS: Post[] = [
     title: "The Grug Brained Developer — a layman's guide to thinking smart",
     series: "resource-drop",
     excerpt: "An anti-complexity manifesto disguised as a comedy blog post.",
-    body: b(`A legendary essay that argues most software complexity comes from trying to be too clever. Grug think simple. Grug make thing work. Then grug make thing better if needed. Every developer should read this at least once.`),
+    body: b(
+      `A legendary essay that argues most software complexity comes from trying to be too clever. Grug think simple. Grug make thing work. Then grug make thing better if needed. Every developer should read this at least once.`,
+    ),
     publishedAt: "2026-07-10",
     externalUrl: "https://grugbrain.dev/",
   },
@@ -115,7 +131,9 @@ export const POSTS: Post[] = [
     title: "Fireship — 100 Seconds of Kubernetes",
     series: "resource-drop",
     excerpt: "Kubernetes explained in 100 seconds, Fireship style.",
-    body: b(`Fireship's signature high-energy, information-packed sprint through Kubernetes concepts. Containers, pods, clusters, and the control plane — all in under two minutes. Perfect for getting the big picture before diving deeper.`),
+    body: b(
+      `Fireship's signature high-energy, information-packed sprint through Kubernetes concepts. Containers, pods, clusters, and the control plane — all in under two minutes. Perfect for getting the big picture before diving deeper.`,
+    ),
     publishedAt: "2026-07-10",
     externalUrl: "https://www.youtube.com/watch?v=PziYflu8cB8",
   },
@@ -125,7 +143,9 @@ export const POSTS: Post[] = [
     title: "public-apis — the motherlode of free APIs",
     series: "resource-drop",
     excerpt: "A collective list of free APIs for your next side project.",
-    body: b(`A GitHub repo with hundreds of free APIs organized by category — weather, finance, games, data, and more. Most require no authentication, making it the best resource for prototyping and portfolio projects.`),
+    body: b(
+      `A GitHub repo with hundreds of free APIs organized by category — weather, finance, games, data, and more. Most require no authentication, making it the best resource for prototyping and portfolio projects.`,
+    ),
     publishedAt: "2026-07-10",
     externalUrl: "https://github.com/public-apis/public-apis",
   },
@@ -135,7 +155,9 @@ export const POSTS: Post[] = [
     title: "MDN Web Docs — the definitive web reference",
     series: "resource-drop",
     excerpt: "The one web docs site that actually keeps you reading instead of rage-clicking away.",
-    body: b(`MDN is the gold standard for web documentation. Clear explanations, browser compatibility tables, interactive examples, and no fluff. Bookmark it, use it, trust it — especially for CSS and JavaScript references.`),
+    body: b(
+      `MDN is the gold standard for web documentation. Clear explanations, browser compatibility tables, interactive examples, and no fluff. Bookmark it, use it, trust it — especially for CSS and JavaScript references.`,
+    ),
     publishedAt: "2026-07-10",
     externalUrl: "https://developer.mozilla.org/",
   },
@@ -145,7 +167,9 @@ export const POSTS: Post[] = [
     title: "TypeScript 6.0 — what's new in the latest major release",
     series: "resource-drop",
     excerpt: "New syntax, better inference, and a few breaking changes to plan for.",
-    body: b(`Microsoft announced TypeScript 6.0 with several long-awaited features including enhanced type narrowing, improved declaration files, and a cleaned-up standard library. The upgrade path is documented, but check the breaking changes before migrating.`),
+    body: b(
+      `Microsoft announced TypeScript 6.0 with several long-awaited features including enhanced type narrowing, improved declaration files, and a cleaned-up standard library. The upgrade path is documented, but check the breaking changes before migrating.`,
+    ),
     publishedAt: "2026-07-10",
     externalUrl: "https://devblogs.microsoft.com/typescript/announcing-typescript-6-0/",
   },
@@ -155,7 +179,9 @@ export const POSTS: Post[] = [
     title: "Supabase — open-source Firebase alternative",
     series: "resource-drop",
     excerpt: "Postgres, auth, realtime, and storage — all open source and self-hostable.",
-    body: b(`Supabase gives you a production-ready Postgres database with built-in authentication, real-time subscriptions, and file storage. The dashboard is clean, the SDKs are well-documented, and you can self-host if you need to.`),
+    body: b(
+      `Supabase gives you a production-ready Postgres database with built-in authentication, real-time subscriptions, and file storage. The dashboard is clean, the SDKs are well-documented, and you can self-host if you need to.`,
+    ),
     publishedAt: "2026-07-10",
     externalUrl: "https://supabase.com/",
   },
@@ -165,7 +191,9 @@ export const POSTS: Post[] = [
     title: "NeetCode Roadmap — a structured path to interview prep",
     series: "resource-drop",
     excerpt: "Stop grinding random LeetCode problems. Follow the roadmap instead.",
-    body: b(`NeetCode organizes coding interview prep into a logical progression — arrays and hashing first, then two pointers, sliding window, and stacking concepts in order of difficulty. Each topic has curated practice problems with video explanations.`),
+    body: b(
+      `NeetCode organizes coding interview prep into a logical progression — arrays and hashing first, then two pointers, sliding window, and stacking concepts in order of difficulty. Each topic has curated practice problems with video explanations.`,
+    ),
     publishedAt: "2026-07-10",
     externalUrl: "https://neetcode.io/roadmap",
   },
@@ -175,7 +203,9 @@ export const POSTS: Post[] = [
     title: "Mobbin — real-world app design inspiration",
     series: "resource-drop",
     excerpt: "Screenshots from real apps, organized by flow and pattern.",
-    body: b(`Mobbin is a massive library of screenshots from real mobile and web apps. Browse by pattern (onboarding, checkout, settings), search by company, or just explore for inspiration. A must-have for designers and UI-conscious developers.`),
+    body: b(
+      `Mobbin is a massive library of screenshots from real mobile and web apps. Browse by pattern (onboarding, checkout, settings), search by company, or just explore for inspiration. A must-have for designers and UI-conscious developers.`,
+    ),
     publishedAt: "2026-07-10",
     externalUrl: "https://mobbin.com/",
   },
@@ -185,7 +215,9 @@ export const POSTS: Post[] = [
     title: "Open-Meteo — free weather API, no key required",
     series: "resource-drop",
     excerpt: "Weather data without the signup form. Just make a request.",
-    body: b(`Open-Meteo is a free weather API that doesn't require an API key. No signups, no rate limit anxiety for small projects, just straightforward HTTP requests returning JSON. Supports current conditions, forecasts, and historical data.`),
+    body: b(
+      `Open-Meteo is a free weather API that doesn't require an API key. No signups, no rate limit anxiety for small projects, just straightforward HTTP requests returning JSON. Supports current conditions, forecasts, and historical data.`,
+    ),
     publishedAt: "2026-07-10",
     externalUrl: "https://open-meteo.com/",
   },
@@ -195,7 +227,9 @@ export const POSTS: Post[] = [
     title: "Error Lens — inline VS Code diagnostics",
     series: "resource-drop",
     excerpt: "Errors and warnings rendered right next to the offending line.",
-    body: b(`Error Lens makes diagnostics visible directly in your editor — no more hovering over squiggly lines to see what's wrong. Errors, warnings, and hints appear inline next to the affected code. One of those extensions you can't uninstall once you try it.`),
+    body: b(
+      `Error Lens makes diagnostics visible directly in your editor — no more hovering over squiggly lines to see what's wrong. Errors, warnings, and hints appear inline next to the affected code. One of those extensions you can't uninstall once you try it.`,
+    ),
     publishedAt: "2026-07-10",
     externalUrl: "https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens",
   },
@@ -205,7 +239,9 @@ export const POSTS: Post[] = [
     title: "roadmap.sh — developer roadmap guides",
     series: "resource-drop",
     excerpt: "Step-by-step roadmaps for every dev career path.",
-    body: b(`roadmap.sh provides visual roadmaps for frontend, backend, devops, and more. Each roadmap breaks down what to learn in order — no more asking Reddit what you should study next. Community-driven and regularly updated.`),
+    body: b(
+      `roadmap.sh provides visual roadmaps for frontend, backend, devops, and more. Each roadmap breaks down what to learn in order — no more asking Reddit what you should study next. Community-driven and regularly updated.`,
+    ),
     publishedAt: "2026-07-10",
     externalUrl: "https://roadmap.sh/",
   },
@@ -215,7 +251,9 @@ export const POSTS: Post[] = [
     title: "DevHints — curated cheatsheets",
     series: "resource-drop",
     excerpt: "The cheatsheet site that actually fits in one screen per topic.",
-    body: b(`DevHints is a collection of well-formatted, single-page cheatsheets for everything from Git commands to React patterns to curl flags. No scrolling through blog posts to find the syntax you forgot. Just the reference, clean and fast.`),
+    body: b(
+      `DevHints is a collection of well-formatted, single-page cheatsheets for everything from Git commands to React patterns to curl flags. No scrolling through blog posts to find the syntax you forgot. Just the reference, clean and fast.`,
+    ),
     publishedAt: "2026-07-10",
     externalUrl: "https://devhints.io/",
   },
@@ -224,8 +262,11 @@ export const POSTS: Post[] = [
     slug: "vscode-command-palette",
     title: "VS Code Command Palette — your keyboard's best friend",
     series: "resource-drop",
-    excerpt: "Ctrl+Shift+P opens every VS Code command instantly, and most devs use about 5% of them.",
-    body: b(`The VS Code Command Palette (Ctrl+Shift+P) is the fastest way to access any editor feature. From formatting documents to running tasks to changing settings, it's faster than navigating menus. The more commands you learn, the faster you move.`),
+    excerpt:
+      "Ctrl+Shift+P opens every VS Code command instantly, and most devs use about 5% of them.",
+    body: b(
+      `The VS Code Command Palette (Ctrl+Shift+P) is the fastest way to access any editor feature. From formatting documents to running tasks to changing settings, it's faster than navigating menus. The more commands you learn, the faster you move.`,
+    ),
     publishedAt: "2026-07-10",
     externalUrl: "https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette",
   },
@@ -235,7 +276,9 @@ export const POSTS: Post[] = [
     title: "Hoppscotch — lightweight API playground",
     series: "resource-drop",
     excerpt: "A Postman alternative that works entirely in the browser.",
-    body: b(`Hoppscotch is an open-source, browser-based API testing tool. Make GET, POST, PUT, DELETE requests, manage environments, and collaborate with your team — all without installing anything. PWA support means it works offline too.`),
+    body: b(
+      `Hoppscotch is an open-source, browser-based API testing tool. Make GET, POST, PUT, DELETE requests, manage environments, and collaborate with your team — all without installing anything. PWA support means it works offline too.`,
+    ),
     publishedAt: "2026-07-10",
     externalUrl: "https://hoppscotch.io/",
   },
@@ -245,7 +288,9 @@ export const POSTS: Post[] = [
     title: "Claude — AI assistant by Anthropic",
     series: "resource-drop",
     excerpt: "A helpful, honest, and harmless AI for coding, writing, and reasoning.",
-    body: b(`Claude is Anthropic's AI assistant designed to be helpful, honest, and safe. Excellent at code generation, debugging, explaining complex concepts, and writing. The 200K token context window means you can paste entire codebases for analysis.`),
+    body: b(
+      `Claude is Anthropic's AI assistant designed to be helpful, honest, and safe. Excellent at code generation, debugging, explaining complex concepts, and writing. The 200K token context window means you can paste entire codebases for analysis.`,
+    ),
     publishedAt: "2026-07-10",
     externalUrl: "https://claude.ai/",
   },
@@ -255,7 +300,9 @@ export const POSTS: Post[] = [
     title: "GitHub Copilot — AI pair programmer",
     series: "resource-drop",
     excerpt: "An AI that suggests entire lines and functions as you type.",
-    body: b(`GitHub Copilot integrates directly into VS Code, JetBrains, and other editors. It suggests completions based on your code context — boilerplate, tests, algorithms, even docstrings. The latest models are significantly better at multi-line suggestions.`),
+    body: b(
+      `GitHub Copilot integrates directly into VS Code, JetBrains, and other editors. It suggests completions based on your code context — boilerplate, tests, algorithms, even docstrings. The latest models are significantly better at multi-line suggestions.`,
+    ),
     publishedAt: "2026-07-10",
     externalUrl: "https://github.com/features/copilot",
   },
@@ -265,7 +312,9 @@ export const POSTS: Post[] = [
     title: "Docker Desktop — container runtime and management",
     series: "resource-drop",
     excerpt: "The easiest way to run containers on your local machine.",
-    body: b(`Docker Desktop provides a GUI for managing containers, images, and volumes on macOS, Windows, and Linux. One-click setup, Kubernetes integration built in, and a dashboard that makes container management visual instead of command-line-only.`),
+    body: b(
+      `Docker Desktop provides a GUI for managing containers, images, and volumes on macOS, Windows, and Linux. One-click setup, Kubernetes integration built in, and a dashboard that makes container management visual instead of command-line-only.`,
+    ),
     publishedAt: "2026-07-10",
     externalUrl: "https://www.docker.com/products/docker-desktop/",
   },
@@ -275,7 +324,9 @@ export const POSTS: Post[] = [
     title: "Vercel — serverless deployment platform",
     series: "resource-drop",
     excerpt: "Deploy frontend apps with zero configuration and instant rollbacks.",
-    body: b(`Vercel is the deployment platform for frontend frameworks. Connect your Git repo, and it auto-deploys on every push — preview deployments for PRs, automatic SSL, edge functions, and analytics. The free tier is generous enough for most side projects.`),
+    body: b(
+      `Vercel is the deployment platform for frontend frameworks. Connect your Git repo, and it auto-deploys on every push — preview deployments for PRs, automatic SSL, edge functions, and analytics. The free tier is generous enough for most side projects.`,
+    ),
     publishedAt: "2026-07-10",
     externalUrl: "https://vercel.com/",
   },
@@ -285,7 +336,9 @@ export const POSTS: Post[] = [
     title: "PostgreSQL — the world's most advanced open source database",
     series: "resource-drop",
     excerpt: "The database that does everything, and does it well.",
-    body: b(`PostgreSQL is a battle-tested relational database with JSON support, full-text search, custom indexing, and excellent concurrency. It handles everything from simple CRUD apps to complex analytical queries. The documentation is outstanding.`),
+    body: b(
+      `PostgreSQL is a battle-tested relational database with JSON support, full-text search, custom indexing, and excellent concurrency. It handles everything from simple CRUD apps to complex analytical queries. The documentation is outstanding.`,
+    ),
     publishedAt: "2026-07-10",
     externalUrl: "https://www.postgresql.org/",
   },
@@ -295,7 +348,9 @@ export const POSTS: Post[] = [
     title: "Playwright — reliable end-to-end browser testing",
     series: "resource-drop",
     excerpt: "Cross-browser testing that actually works on CI and locally.",
-    body: b(`Playwright lets you write browser tests that run in Chromium, Firefox, and WebKit from a single API. Auto-waiting eliminates flaky timeouts, the codegen tool records interactions as test code, and the trace viewer makes debugging a breeze.`),
+    body: b(
+      `Playwright lets you write browser tests that run in Chromium, Firefox, and WebKit from a single API. Auto-waiting eliminates flaky timeouts, the codegen tool records interactions as test code, and the trace viewer makes debugging a breeze.`,
+    ),
     publishedAt: "2026-07-10",
     externalUrl: "https://playwright.dev/",
   },
@@ -305,7 +360,9 @@ export const POSTS: Post[] = [
     title: "Clerk — authentication and user management",
     series: "resource-drop",
     excerpt: "Drop-in auth components for React, Next.js, and more.",
-    body: b(`Clerk provides pre-built authentication UI — sign-in, sign-up, user profiles, and organization management — that integrates with your existing stack in minutes. Supports MFA, social logins, and session management out of the box.`),
+    body: b(
+      `Clerk provides pre-built authentication UI — sign-in, sign-up, user profiles, and organization management — that integrates with your existing stack in minutes. Supports MFA, social logins, and session management out of the box.`,
+    ),
     publishedAt: "2026-07-10",
     externalUrl: "https://clerk.com/",
   },
@@ -315,7 +372,9 @@ export const POSTS: Post[] = [
     title: "Plausible — simple, privacy-first web analytics",
     series: "resource-drop",
     excerpt: "Google Analytics without the bloat or the cookie banners.",
-    body: b(`Plausible is a lightweight, open-source analytics tool that respects user privacy. No cookies, no personal data collection, no GDPR headaches. The dashboard shows exactly what matters — pageviews, referrers, countries, and devices — in a clean UI.`),
+    body: b(
+      `Plausible is a lightweight, open-source analytics tool that respects user privacy. No cookies, no personal data collection, no GDPR headaches. The dashboard shows exactly what matters — pageviews, referrers, countries, and devices — in a clean UI.`,
+    ),
     publishedAt: "2026-07-10",
     externalUrl: "https://plausible.io/",
   },
@@ -325,7 +384,9 @@ export const POSTS: Post[] = [
     title: "shadcn/ui — beautiful, reusable UI components",
     series: "resource-drop",
     excerpt: "Not a component library. Components you copy and own.",
-    body: b(`shadcn/ui is a collection of beautifully designed components built with Radix UI and Tailwind CSS. Unlike traditional component libraries, you copy the source code directly into your project — full control, no import dependencies, no version lock-in.`),
+    body: b(
+      `shadcn/ui is a collection of beautifully designed components built with Radix UI and Tailwind CSS. Unlike traditional component libraries, you copy the source code directly into your project — full control, no import dependencies, no version lock-in.`,
+    ),
     publishedAt: "2026-07-10",
     externalUrl: "https://ui.shadcn.com/",
   },
@@ -335,7 +396,9 @@ export const POSTS: Post[] = [
     title: "Next.js — the React framework for production",
     series: "resource-drop",
     excerpt: "Server components, routing, and optimizations out of the box.",
-    body: b(`Next.js gives you server-side rendering, static generation, API routes, and file-based routing — all built on React. The App Router with React Server Components changes how you think about data fetching. A must-know framework for modern React developers.`),
+    body: b(
+      `Next.js gives you server-side rendering, static generation, API routes, and file-based routing — all built on React. The App Router with React Server Components changes how you think about data fetching. A must-know framework for modern React developers.`,
+    ),
     publishedAt: "2026-07-10",
     externalUrl: "https://nextjs.org/",
   },
@@ -345,7 +408,9 @@ export const POSTS: Post[] = [
     title: "Rust — a language empowering everyone to build reliable software",
     series: "resource-drop",
     excerpt: "Systems programming with memory safety, no garbage collector required.",
-    body: b(`Rust guarantees memory safety without a garbage collector, making it ideal for systems programming, WebAssembly, and performance-critical applications. The compiler catches entire classes of bugs at build time, and the package manager (Cargo) is a delight.`),
+    body: b(
+      `Rust guarantees memory safety without a garbage collector, making it ideal for systems programming, WebAssembly, and performance-critical applications. The compiler catches entire classes of bugs at build time, and the package manager (Cargo) is a delight.`,
+    ),
     publishedAt: "2026-07-10",
     externalUrl: "https://www.rust-lang.org/",
   },
@@ -355,7 +420,9 @@ export const POSTS: Post[] = [
     title: "ngrok — secure tunnels to localhost",
     series: "resource-drop",
     excerpt: "Expose your local dev server to the internet with one command.",
-    body: b(`ngrok creates secure public URLs that tunnel to your local development server. Testing webhooks, sharing a local build with a client, or debugging mobile apps against a local API — ngrok makes it trivial. The free tier is enough for most use cases.`),
+    body: b(
+      `ngrok creates secure public URLs that tunnel to your local development server. Testing webhooks, sharing a local build with a client, or debugging mobile apps against a local API — ngrok makes it trivial. The free tier is enough for most use cases.`,
+    ),
     publishedAt: "2026-07-10",
     externalUrl: "https://ngrok.com/",
   },
@@ -365,7 +432,9 @@ export const POSTS: Post[] = [
     title: "CodeSandbox — online IDE for rapid prototyping",
     series: "resource-drop",
     excerpt: "Spin up a full dev environment in your browser in seconds.",
-    body: b(`CodeSandbox lets you create and share web applications entirely in the browser. No local setup, no dependency conflicts — just pick a template and start coding. Great for sharing reproducible bug reports, teaching, or prototyping on any machine.`),
+    body: b(
+      `CodeSandbox lets you create and share web applications entirely in the browser. No local setup, no dependency conflicts — just pick a template and start coding. Great for sharing reproducible bug reports, teaching, or prototyping on any machine.`,
+    ),
     publishedAt: "2026-07-10",
     externalUrl: "https://codesandbox.io/",
   },
@@ -375,7 +444,9 @@ export const POSTS: Post[] = [
     title: "Notion — all-in-one workspace for docs and collaboration",
     series: "resource-drop",
     excerpt: "Write, plan, and organize — Notion replaces a dozen separate tools.",
-    body: b(`Notion combines notes, databases, kanban boards, wikis, and calendars into one tool. Flexible enough to adapt to any workflow — personal knowledge base, team documentation, project management, even a lightweight CRM. The API makes it extensible too.`),
+    body: b(
+      `Notion combines notes, databases, kanban boards, wikis, and calendars into one tool. Flexible enough to adapt to any workflow — personal knowledge base, team documentation, project management, even a lightweight CRM. The API makes it extensible too.`,
+    ),
     publishedAt: "2026-07-10",
     externalUrl: "https://www.notion.so/",
   },
@@ -385,7 +456,9 @@ export const POSTS: Post[] = [
     title: "GitHub Actions — CI/CD and workflow automation",
     series: "resource-drop",
     excerpt: "Automate testing, deployment, and everything in between.",
-    body: b(`GitHub Actions lets you define custom workflows triggered by events — push, PR, schedule, or webhook. The marketplace has thousands of pre-built actions for testing, linting, deploying, and more. Free tier includes 2,000 minutes per month for private repos.`),
+    body: b(
+      `GitHub Actions lets you define custom workflows triggered by events — push, PR, schedule, or webhook. The marketplace has thousands of pre-built actions for testing, linting, deploying, and more. Free tier includes 2,000 minutes per month for private repos.`,
+    ),
     publishedAt: "2026-07-10",
     externalUrl: "https://github.com/features/actions",
   },
@@ -396,8 +469,11 @@ export const POSTS: Post[] = [
     slug: "instagram",
     title: "How Instagram scaled to 14M users with just 3 engineers",
     series: "stack-breakdown",
-    excerpt: "Django, PostgreSQL, Cassandra, and the art of keeping things boring at massive scale.",
-    body: b(`Instagram scaled to 14 million users with just three engineers by keeping things simple — Django on the backend, PostgreSQL for structured data, Cassandra for feeds, and Redis for caching. The full breakdown covers their thundering-herd problem, async task processing with Celery, and how they squeezed 10% more capacity by disabling parts of Python's garbage collector.`),
+    excerpt:
+      "Django, PostgreSQL, Cassandra, and the art of keeping things boring at massive scale.",
+    body: b(
+      `Instagram scaled to 14 million users with just three engineers by keeping things simple — Django on the backend, PostgreSQL for structured data, Cassandra for feeds, and Redis for caching. The full breakdown covers their thundering-herd problem, async task processing with Celery, and how they squeezed 10% more capacity by disabling parts of Python's garbage collector.`,
+    ),
     publishedAt: "2026-07-08",
   },
   {
@@ -405,8 +481,11 @@ export const POSTS: Post[] = [
     slug: "stripe",
     title: "How Stripe handles trust, correctness, and billions in transactions",
     series: "stack-breakdown",
-    excerpt: "The financial infrastructure of the internet — where every request touches real money.",
-    body: b(`Stripe's core engineering challenge is trust and correctness at scale: every request touches real money, so accuracy, security, and reliability matter more than almost anything else. The breakdown covers their Ruby and Java backend, React frontend, PostgreSQL, and the microservices architecture behind payments, Connect, Capital, and Issuing.`),
+    excerpt:
+      "The financial infrastructure of the internet — where every request touches real money.",
+    body: b(
+      `Stripe's core engineering challenge is trust and correctness at scale: every request touches real money, so accuracy, security, and reliability matter more than almost anything else. The breakdown covers their Ruby and Java backend, React frontend, PostgreSQL, and the microservices architecture behind payments, Connect, Capital, and Issuing.`,
+    ),
     publishedAt: "2026-07-05",
   },
   {
@@ -415,7 +494,9 @@ export const POSTS: Post[] = [
     title: "The microservices mesh behind every Uber ride",
     series: "stack-breakdown",
     excerpt: "Geospatial indexing, dynamic pricing, and matching supply and demand in real time.",
-    body: b(`Uber's engineering is fundamentally a physical-world, real-time problem: matching supply and demand, tracking live location, calculating dynamic pricing, and processing payments — all within seconds. The breakdown covers their Go and Node.js microservices, Kafka event streaming, Redis geospatial indexing, and the ringpop protocol for service discovery.`),
+    body: b(
+      `Uber's engineering is fundamentally a physical-world, real-time problem: matching supply and demand, tracking live location, calculating dynamic pricing, and processing payments — all within seconds. The breakdown covers their Go and Node.js microservices, Kafka event streaming, Redis geospatial indexing, and the ringpop protocol for service discovery.`,
+    ),
     publishedAt: "2026-07-02",
   },
   {
@@ -424,7 +505,9 @@ export const POSTS: Post[] = [
     title: "Where a single product page triggers 150+ microservice calls",
     series: "stack-breakdown",
     excerpt: "The world's largest e-commerce platform — and where AWS itself was born.",
-    body: b(`Amazon.com is the world's largest e-commerce platform, serving hundreds of millions of customers. A single product page load can trigger requests to over 150 different backend services. The breakdown covers their Java-based microservices, DynamoDB, Aurora, CloudFront CDN, and how they pioneered the microservices pattern before the term even existed.`),
+    body: b(
+      `Amazon.com is the world's largest e-commerce platform, serving hundreds of millions of customers. A single product page load can trigger requests to over 150 different backend services. The breakdown covers their Java-based microservices, DynamoDB, Aurora, CloudFront CDN, and how they pioneered the microservices pattern before the term even existed.`,
+    ),
     publishedAt: "2026-06-28",
   },
   {
@@ -433,7 +516,9 @@ export const POSTS: Post[] = [
     title: "Streaming audio to 365M listeners with event-driven microservices",
     series: "stack-breakdown",
     excerpt: "Discover Weekly, Wrapped, and the recommendation engine behind them all.",
-    body: b(`Spotify streams songs, podcasts, and audiobooks to more than 365 million active users monthly. The breakdown covers their Java and Python microservices, Google Bigtable for storage, Kafka for event streaming, and the machine learning pipeline that powers Discover Weekly and Wrapped recommendations.`),
+    body: b(
+      `Spotify streams songs, podcasts, and audiobooks to more than 365 million active users monthly. The breakdown covers their Java and Python microservices, Google Bigtable for storage, Kafka for event streaming, and the machine learning pipeline that powers Discover Weekly and Wrapped recommendations.`,
+    ),
     publishedAt: "2026-06-25",
   },
   {
@@ -441,8 +526,11 @@ export const POSTS: Post[] = [
     slug: "netflix",
     title: "From a monolith outage to the most famous microservices architecture",
     series: "stack-breakdown",
-    excerpt: "How a 3-day DVD outage in 2008 led Netflix to rebuild everything — and change the industry.",
-    body: b(`In August 2008, a database corruption caused a three-day outage that stopped Netflix from shipping DVDs. That incident kicked off a multi-year rebuild into one of the most influential microservices architectures in the industry. The breakdown covers their Java backend, Cassandra, MySQL, S3, and how they handle streaming to 180+ million subscribers across 200+ countries.`),
+    excerpt:
+      "How a 3-day DVD outage in 2008 led Netflix to rebuild everything — and change the industry.",
+    body: b(
+      `In August 2008, a database corruption caused a three-day outage that stopped Netflix from shipping DVDs. That incident kicked off a multi-year rebuild into one of the most influential microservices architectures in the industry. The breakdown covers their Java backend, Cassandra, MySQL, S3, and how they handle streaming to 180+ million subscribers across 200+ countries.`,
+    ),
     publishedAt: "2026-06-20",
   },
   {
@@ -451,7 +539,9 @@ export const POSTS: Post[] = [
     title: "42 billion messages a day with just 50 engineers",
     series: "stack-breakdown",
     excerpt: "Erlang's actor model, end-to-end encryption, and radical simplicity at scale.",
-    body: b(`At the time Facebook acquired it for $19 billion in 2014, WhatsApp was handling 42 billion messages a day with just 50 engineers. The breakdown covers their Erlang/Ejabberd backend, XMPP protocol, MySQL storage, and how they achieved massive scale with radical simplicity — no photos, no games, just messages.`),
+    body: b(
+      `At the time Facebook acquired it for $19 billion in 2014, WhatsApp was handling 42 billion messages a day with just 50 engineers. The breakdown covers their Erlang/Ejabberd backend, XMPP protocol, MySQL storage, and how they achieved massive scale with radical simplicity — no photos, no games, just messages.`,
+    ),
     publishedAt: "2026-06-15",
   },
   {
@@ -459,8 +549,11 @@ export const POSTS: Post[] = [
     slug: "zomato",
     title: "Three products in one — discovery, ordering, and live delivery tracking",
     series: "stack-breakdown",
-    excerpt: "Restaurant discovery, food ordering, and real-time delivery at millions of orders per day.",
-    body: b(`Zomato is really three products in one: a search/discovery engine for restaurants, a transactional system for ordering and payments, and a recommendation engine. The breakdown covers their Go backend, React frontend, Kafka event streaming, Elasticsearch for search, and the real-time delivery tracking system.`),
+    excerpt:
+      "Restaurant discovery, food ordering, and real-time delivery at millions of orders per day.",
+    body: b(
+      `Zomato is really three products in one: a search/discovery engine for restaurants, a transactional system for ordering and payments, and a recommendation engine. The breakdown covers their Go backend, React frontend, Kafka event streaming, Elasticsearch for search, and the real-time delivery tracking system.`,
+    ),
     publishedAt: "2026-06-10",
   },
   {
@@ -469,7 +562,9 @@ export const POSTS: Post[] = [
     title: "400+ microservices and 130+ in the order-fulfillment path",
     series: "stack-breakdown",
     excerpt: "India's largest hyperlocal delivery platform — real-time logistics at massive scale.",
-    body: b(`Swiggy operates over 400+ microservices in production, with more than 130 of them directly participating in the order-fulfillment path. The breakdown covers their Go and Java services, Kafka, Cassandra, Kubernetes orchestration, and the live logistics-optimization problem of matching thousands of concurrent orders to delivery partners.`),
+    body: b(
+      `Swiggy operates over 400+ microservices in production, with more than 130 of them directly participating in the order-fulfillment path. The breakdown covers their Go and Java services, Kafka, Cassandra, Kubernetes orchestration, and the live logistics-optimization problem of matching thousands of concurrent orders to delivery partners.`,
+    ),
     publishedAt: "2026-06-05",
   },
   {
@@ -477,8 +572,11 @@ export const POSTS: Post[] = [
     slug: "discord",
     title: "Trillions of messages with Elixir, Rust, and the actor model",
     series: "stack-breakdown",
-    excerpt: "200M monthly users, 5 engineers on messaging, and the Cassandra-to-ScyllaDB migration.",
-    body: b(`Discord serves over 200 million monthly active users with trillions of stored messages. The breakdown covers their Elixir/BEAM actor model for real-time messaging, Rust for performance-critical services, the famous Cassandra-to-ScyllaDB migration, and how just five engineers operate 20+ services handling millions of concurrent users.`),
+    excerpt:
+      "200M monthly users, 5 engineers on messaging, and the Cassandra-to-ScyllaDB migration.",
+    body: b(
+      `Discord serves over 200 million monthly active users with trillions of stored messages. The breakdown covers their Elixir/BEAM actor model for real-time messaging, Rust for performance-critical services, the famous Cassandra-to-ScyllaDB migration, and how just five engineers operate 20+ services handling millions of concurrent users.`,
+    ),
     publishedAt: "2026-06-01",
   },
 
@@ -489,7 +587,9 @@ export const POSTS: Post[] = [
     title: "The off-by-one error that broke pagination in prod",
     series: "bug-of-the-week",
     excerpt: "`page * limit` vs `(page - 1) * limit` — one character, one skipped row.",
-    body: b(`Pagination was silently skipping the first item on every page after page 1. The culprit: an offset calculation using \`page * limit\` instead of \`(page - 1) * limit\`. One character difference, and it only showed up once real data had more than one page.`),
+    body: b(
+      `Pagination was silently skipping the first item on every page after page 1. The culprit: an offset calculation using \`page * limit\` instead of \`(page - 1) * limit\`. One character difference, and it only showed up once real data had more than one page.`,
+    ),
     publishedAt: "2026-07-04",
   },
   {
@@ -497,8 +597,11 @@ export const POSTS: Post[] = [
     slug: "useeffect-infinite-loop",
     title: "A useEffect with a missing dependency caused an infinite loop",
     series: "bug-of-the-week",
-    excerpt: "React's dependency array isn't a suggestion — here's what happens when you ignore it.",
-    body: b(`A \`useEffect\` was updating state that it also depended on, but the dependency array was empty. Worked fine locally with slow re-renders masking it, then melted the browser tab in production. The fix was one line; finding it took two hours.`),
+    excerpt:
+      "React's dependency array isn't a suggestion — here's what happens when you ignore it.",
+    body: b(
+      `A \`useEffect\` was updating state that it also depended on, but the dependency array was empty. Worked fine locally with slow re-renders masking it, then melted the browser tab in production. The fix was one line; finding it took two hours.`,
+    ),
     publishedAt: "2026-06-25",
   },
   {
@@ -506,8 +609,10 @@ export const POSTS: Post[] = [
     slug: "z-index-stacking-context",
     title: "CSS z-index war: why a modal kept appearing behind the nav",
     series: "bug-of-the-week",
-    excerpt: "Stacking contexts are not just \"higher number wins.\"",
-    body: b(`A modal with \`z-index: 9999\` was still rendering behind the header. Turns out a parent element had \`transform: translateZ(0)\` on it, which creates a new stacking context — so the modal's z-index was only being compared within that context, not globally. z-index math is relative, not absolute.`),
+    excerpt: 'Stacking contexts are not just "higher number wins."',
+    body: b(
+      `A modal with \`z-index: 9999\` was still rendering behind the header. Turns out a parent element had \`transform: translateZ(0)\` on it, which creates a new stacking context — so the modal's z-index was only being compared within that context, not globally. z-index math is relative, not absolute.`,
+    ),
     publishedAt: "2026-06-11",
   },
 
@@ -518,7 +623,9 @@ export const POSTS: Post[] = [
     title: "Vite vs Create React App — there's no debate left",
     series: "framework-wars",
     excerpt: "CRA is effectively unmaintained. Here's what that means for a new project today.",
-    body: b(`If you're starting a React project in 2026, Vite isn't just faster — it's the actively maintained option. CRA's dev server cold-start times alone are enough to switch, but the real issue is the ecosystem has moved on and tutorials assuming CRA are increasingly stale.`),
+    body: b(
+      `If you're starting a React project in 2026, Vite isn't just faster — it's the actively maintained option. CRA's dev server cold-start times alone are enough to switch, but the real issue is the ecosystem has moved on and tutorials assuming CRA are increasingly stale.`,
+    ),
     publishedAt: "2026-07-02",
   },
   {
@@ -527,7 +634,9 @@ export const POSTS: Post[] = [
     title: "Tailwind vs plain CSS — the real cost isn't what people argue about",
     series: "framework-wars",
     excerpt: "It's not \"utility classes are ugly,\" it's onboarding speed for a team.",
-    body: b(`The Tailwind debate usually gets stuck on aesthetics. The actual trade-off is onboarding: a new dev can style a component without learning your naming conventions or hunting through separate CSS files. That's worth more than \"cleaner HTML\" arguments in either direction.`),
+    body: b(
+      `The Tailwind debate usually gets stuck on aesthetics. The actual trade-off is onboarding: a new dev can style a component without learning your naming conventions or hunting through separate CSS files. That's worth more than "cleaner HTML" arguments in either direction.`,
+    ),
     publishedAt: "2026-06-16",
   },
   {
@@ -536,7 +645,9 @@ export const POSTS: Post[] = [
     title: "REST vs GraphQL for a student project — just use REST",
     series: "framework-wars",
     excerpt: "GraphQL solves a scaling problem you probably don't have yet.",
-    body: b(`GraphQL's pitch is avoiding over-fetching and under-fetching across many clients. A solo project with one frontend doesn't have that problem. REST is faster to reason about, easier to debug in the browser, and every tutorial assumes it. Save GraphQL for when you actually feel the pain it solves.`),
+    body: b(
+      `GraphQL's pitch is avoiding over-fetching and under-fetching across many clients. A solo project with one frontend doesn't have that problem. REST is faster to reason about, easier to debug in the browser, and every tutorial assumes it. Save GraphQL for when you actually feel the pain it solves.`,
+    ),
     publishedAt: "2026-05-28",
   },
 
@@ -547,7 +658,9 @@ export const POSTS: Post[] = [
     title: "A 200-star CLI parser that handles edge cases most libraries miss",
     series: "github-gems",
     excerpt: "Small repo, exceptional test coverage, worth reading the source top to bottom.",
-    body: b(`Found a command-line argument parser with under 300 stars but near-100% test coverage and genuinely readable source. Worth cloning just to see how they structured error messages for malformed flags — most larger libraries handle this worse.`),
+    body: b(
+      `Found a command-line argument parser with under 300 stars but near-100% test coverage and genuinely readable source. Worth cloning just to see how they structured error messages for malformed flags — most larger libraries handle this worse.`,
+    ),
     publishedAt: "2026-06-28",
   },
   {
@@ -555,8 +668,11 @@ export const POSTS: Post[] = [
     slug: "single-file-state-manager",
     title: "A single-file React state manager under 200 lines",
     series: "github-gems",
-    excerpt: "No dependencies, fully typed, and a great read for understanding how state libraries work internally.",
-    body: b(`This repo implements a Redux-like store in under 200 lines of TypeScript with zero dependencies. Reading it end to end taught me more about how state management actually works than any tutorial — it's small enough to hold the whole thing in your head.`),
+    excerpt:
+      "No dependencies, fully typed, and a great read for understanding how state libraries work internally.",
+    body: b(
+      `This repo implements a Redux-like store in under 200 lines of TypeScript with zero dependencies. Reading it end to end taught me more about how state management actually works than any tutorial — it's small enough to hold the whole thing in your head.`,
+    ),
     publishedAt: "2026-06-14",
   },
   {
@@ -564,8 +680,11 @@ export const POSTS: Post[] = [
     slug: "readme-generator",
     title: "A README generator that writes better docs than most humans",
     series: "github-gems",
-    excerpt: "Analyzes your repo structure and package.json to draft a real README, not a template.",
-    body: b(`Instead of a generic README template, this tool actually parses your \`package.json\`, scripts, and folder structure to draft sections that match your project. Not perfect out of the box, but a much better starting point than a blank file.`),
+    excerpt:
+      "Analyzes your repo structure and package.json to draft a real README, not a template.",
+    body: b(
+      `Instead of a generic README template, this tool actually parses your \`package.json\`, scripts, and folder structure to draft sections that match your project. Not perfect out of the box, but a much better starting point than a blank file.`,
+    ),
     publishedAt: "2026-05-30",
   },
 
@@ -573,28 +692,34 @@ export const POSTS: Post[] = [
   {
     id: "p19",
     slug: "idempotent-explained",
-    title: "What \"idempotent\" actually means",
+    title: 'What "idempotent" actually means',
     series: "dev-vocabulary",
     excerpt: "Running it once or five times gives you the same result. That's it.",
-    body: b(`An idempotent operation produces the same result no matter how many times you run it. \`PUT /user/5 {name: \"Alex\"}\` is idempotent — run it once or ten times, the user's name ends up \"Alex\" either way. \`POST /orders\` isn't — run it twice, you get two orders.`),
+    body: b(
+      `An idempotent operation produces the same result no matter how many times you run it. \`PUT /user/5 {name: "Alex"}\` is idempotent — run it once or ten times, the user's name ends up "Alex" either way. \`POST /orders\` isn't — run it twice, you get two orders.`,
+    ),
     publishedAt: "2026-07-03",
   },
   {
     id: "p20",
     slug: "race-condition",
-    title: "What a \"race condition\" is, without the textbook definition",
+    title: 'What a "race condition" is, without the textbook definition',
     series: "dev-vocabulary",
     excerpt: "Two things happening at once, and the outcome depends on which one finishes first.",
-    body: b(`A race condition happens when two operations depend on shared data and the result changes based on timing — which one finishes first. Classic example: two requests both read a bank balance of $100, both subtract $50, both write back $50 — instead of the balance correctly ending at $0.`),
+    body: b(
+      `A race condition happens when two operations depend on shared data and the result changes based on timing — which one finishes first. Classic example: two requests both read a bank balance of $100, both subtract $50, both write back $50 — instead of the balance correctly ending at $0.`,
+    ),
     publishedAt: "2026-06-22",
   },
   {
     id: "p21",
     slug: "memoization",
-    title: "\"Memoization\" isn't as scary as the word sounds",
+    title: '"Memoization" isn\'t as scary as the word sounds',
     series: "dev-vocabulary",
     excerpt: "Caching a function's result so you don't recompute it for the same input.",
-    body: b(`Memoization just means: if a function was already called with these exact arguments, return the saved answer instead of recalculating. React's \`useMemo\` does exactly this — skips expensive recalculation if the inputs haven't changed since last render.`),
+    body: b(
+      `Memoization just means: if a function was already called with these exact arguments, return the saved answer instead of recalculating. React's \`useMemo\` does exactly this — skips expensive recalculation if the inputs haven't changed since last render.`,
+    ),
     publishedAt: "2026-06-05",
   },
 
@@ -602,10 +727,12 @@ export const POSTS: Post[] = [
   {
     id: "p22",
     slug: "cannot-read-properties",
-    title: "\"Cannot read properties of undefined\" — decoded",
+    title: '"Cannot read properties of undefined" — decoded',
     series: "behind-the-error",
     excerpt: "You're trying to access something on a value that doesn't exist yet.",
-    body: b(`This error means you tried to do \`something.property\` where \`something\` was \`undefined\`. Usually it's data that hasn't loaded yet (an API response you're reading before the fetch resolves) or a typo in an object key. Check what's actually in that variable right before the failing line.`),
+    body: b(
+      `This error means you tried to do \`something.property\` where \`something\` was \`undefined\`. Usually it's data that hasn't loaded yet (an API response you're reading before the fetch resolves) or a typo in an object key. Check what's actually in that variable right before the failing line.`,
+    ),
     publishedAt: "2026-06-29",
   },
   {
@@ -614,16 +741,20 @@ export const POSTS: Post[] = [
     title: "\"CORS policy: No 'Access-Control-Allow-Origin'\" — what's really happening",
     series: "behind-the-error",
     excerpt: "It's not your code that's broken — it's the server's permission list.",
-    body: b(`This error fires when your frontend (on one origin) requests data from a backend (on another origin) that hasn't explicitly allowed it. The fix lives on the server, not the client — you add your frontend's URL to the server's allowed origins. No amount of frontend code will fix a CORS error alone.`),
+    body: b(
+      `This error fires when your frontend (on one origin) requests data from a backend (on another origin) that hasn't explicitly allowed it. The fix lives on the server, not the client — you add your frontend's URL to the server's allowed origins. No amount of frontend code will fix a CORS error alone.`,
+    ),
     publishedAt: "2026-06-12",
   },
   {
     id: "p24",
     slug: "maximum-call-stack",
-    title: "\"Maximum call stack size exceeded\" — your function is calling itself forever",
+    title: '"Maximum call stack size exceeded" — your function is calling itself forever',
     series: "behind-the-error",
     excerpt: "Usually a recursive function missing its base case.",
-    body: b(`This means a function kept calling itself (directly or indirectly) until it ran out of stack space. Almost always a recursive function without a proper base case, or a base case that's never actually reached because of a logic error in how the input shrinks each call.`),
+    body: b(
+      `This means a function kept calling itself (directly or indirectly) until it ran out of stack space. Almost always a recursive function without a proper base case, or a base case that's never actually reached because of a logic error in how the input shrinks each call.`,
+    ),
     publishedAt: "2026-05-25",
   },
 
@@ -634,7 +765,9 @@ export const POSTS: Post[] = [
     title: "Big O notation, in one paragraph",
     series: "concept-in-60-seconds",
     excerpt: "It describes how your code slows down as input grows — not exact speed.",
-    body: b(`Big O describes how an algorithm's runtime grows as input size grows, not its exact speed. O(n) means double the input, roughly double the time. O(n²) means double the input, quadruple the time. It's about the shape of the slowdown, not the actual seconds on the clock.`),
+    body: b(
+      `Big O describes how an algorithm's runtime grows as input size grows, not its exact speed. O(n) means double the input, roughly double the time. O(n²) means double the input, quadruple the time. It's about the shape of the slowdown, not the actual seconds on the clock.`,
+    ),
     publishedAt: "2026-07-06",
   },
   {
@@ -643,16 +776,20 @@ export const POSTS: Post[] = [
     title: "What a closure is, in one paragraph",
     series: "concept-in-60-seconds",
     excerpt: "A function that remembers the variables around it, even after that scope is gone.",
-    body: b(`A closure is a function that keeps access to variables from where it was created, even after that outer function has finished running. It's how a counter function can remember its count between calls without a global variable.`),
+    body: b(
+      `A closure is a function that keeps access to variables from where it was created, even after that outer function has finished running. It's how a counter function can remember its count between calls without a global variable.`,
+    ),
     publishedAt: "2026-06-24",
   },
   {
     id: "p27",
     slug: "hoisting-in-a-paragraph",
-    title: "What \"hoisting\" means in JavaScript, in one paragraph",
+    title: 'What "hoisting" means in JavaScript, in one paragraph',
     series: "concept-in-60-seconds",
     excerpt: "Declarations get moved to the top of their scope before your code actually runs.",
-    body: b(`JavaScript processes variable and function declarations before executing code line by line — so a \`function\` declaration can be called before it appears in the file. \`var\` declarations get hoisted too, but only the declaration, not the value — which is why accessing a \`var\` before its line gives \`undefined\`, not an error.`),
+    body: b(
+      `JavaScript processes variable and function declarations before executing code line by line — so a \`function\` declaration can be called before it appears in the file. \`var\` declarations get hoisted too, but only the declaration, not the value — which is why accessing a \`var\` before its line gives \`undefined\`, not an error.`,
+    ),
     publishedAt: "2026-06-03",
   },
 
@@ -663,7 +800,9 @@ export const POSTS: Post[] = [
     title: "Reverse a linked list — iterative and recursive",
     series: "challenge-of-the-week",
     excerpt: "Classic interview question. Post your solution in both styles.",
-    body: b(`This week: reverse a singly linked list. Solve it iteratively first (three-pointer technique), then try it recursively. Drop your solution and Big O analysis — bonus points if you can do the iterative version in-place with O(1) space.`),
+    body: b(
+      `This week: reverse a singly linked list. Solve it iteratively first (three-pointer technique), then try it recursively. Drop your solution and Big O analysis — bonus points if you can do the iterative version in-place with O(1) space.`,
+    ),
     publishedAt: "2026-07-01",
   },
   {
@@ -672,7 +811,9 @@ export const POSTS: Post[] = [
     title: "Build a debounce function from scratch",
     series: "challenge-of-the-week",
     excerpt: "No libraries. Just setTimeout and clearTimeout.",
-    body: b(`Implement a debounce function without using Lodash or any library — just \`setTimeout\` and \`clearTimeout\`. Test it on a search input. This one shows up in frontend interviews more than people expect.`),
+    body: b(
+      `Implement a debounce function without using Lodash or any library — just \`setTimeout\` and \`clearTimeout\`. Test it on a search input. This one shows up in frontend interviews more than people expect.`,
+    ),
     publishedAt: "2026-06-15",
   },
   {
@@ -681,7 +822,9 @@ export const POSTS: Post[] = [
     title: "Find the missing number in an array of 1 to N",
     series: "challenge-of-the-week",
     excerpt: "Three ways to solve it — sorting, hashing, and math. Which is fastest?",
-    body: b(`Given an array containing numbers 1 to N with one missing, find it. Solve it three ways: sort and scan, use a hash set, and use the sum formula. Compare their time and space complexity — the \"best\" answer depends on what you're optimizing for.`),
+    body: b(
+      `Given an array containing numbers 1 to N with one missing, find it. Solve it three ways: sort and scan, use a hash set, and use the sum formula. Compare their time and space complexity — the "best" answer depends on what you're optimizing for.`,
+    ),
     publishedAt: "2026-05-22",
   },
 
@@ -692,7 +835,9 @@ export const POSTS: Post[] = [
     title: "Looking for a frontend partner for a hackathon project",
     series: "collab-corner",
     excerpt: "Backend's covered — need someone comfortable with React and fast UI iteration.",
-    body: b(`Have a backend mostly built for a weekend hackathon idea (event check-in app), need a frontend partner comfortable with React who can move fast on UI. Drop a comment if you're free this weekend.`),
+    body: b(
+      `Have a backend mostly built for a weekend hackathon idea (event check-in app), need a frontend partner comfortable with React who can move fast on UI. Drop a comment if you're free this weekend.`,
+    ),
     publishedAt: "2026-06-26",
   },
   {
@@ -701,7 +846,9 @@ export const POSTS: Post[] = [
     title: "Shoutout: a reader's open-source contribution got merged",
     series: "collab-corner",
     excerpt: "First PR to a real project — a small docs fix that mattered.",
-    body: b(`One of you submitted your first open-source PR this week — a documentation fix to a moderately popular npm package — and it got merged within a day. Small contribution, real milestone. That's exactly how the first one is supposed to go.`),
+    body: b(
+      `One of you submitted your first open-source PR this week — a documentation fix to a moderately popular npm package — and it got merged within a day. Small contribution, real milestone. That's exactly how the first one is supposed to go.`,
+    ),
     publishedAt: "2026-05-29",
   },
   {
@@ -710,7 +857,9 @@ export const POSTS: Post[] = [
     title: "Study group forming for system design basics",
     series: "collab-corner",
     excerpt: "Weekly call, working through load balancing, caching, and database scaling together.",
-    body: b(`A few readers are starting a weekly study group to work through system design fundamentals — load balancers, caching strategies, database scaling. Casual, no pressure, just people learning out loud together. Reach out if you want in.`),
+    body: b(
+      `A few readers are starting a weekly study group to work through system design fundamentals — load balancers, caching strategies, database scaling. Casual, no pressure, just people learning out loud together. Reach out if you want in.`,
+    ),
     publishedAt: "2026-05-08",
   },
 
@@ -721,7 +870,9 @@ export const POSTS: Post[] = [
     title: "A 47-line if/else chain that could've been a switch statement",
     series: "code-roast",
     excerpt: "Every branch checking the same variable. We've all written this once.",
-    body: b(`Found a 47-line chain of \`if/else if\` all checking the same \`status\` variable, that could've been a single switch statement or, honestly, an object lookup. Not shaming — everyone's written this exact thing before learning better patterns exist.`),
+    body: b(
+      `Found a 47-line chain of \`if/else if\` all checking the same \`status\` variable, that could've been a single switch statement or, honestly, an object lookup. Not shaming — everyone's written this exact thing before learning better patterns exist.`,
+    ),
     publishedAt: "2026-06-19",
   },
   {
@@ -730,7 +881,9 @@ export const POSTS: Post[] = [
     title: "Variable names so vague the code needs a translator",
     series: "code-roast",
     excerpt: "`data2`, `temp3`, `thing`, `stuff2` — a greatest hits collection.",
-    body: b(`A function with variables named \`data\`, \`data2\`, \`temp\`, \`temp2\`, and — the crown jewel — \`thing\`. Not mocking the person, just appreciating how universally relatable \"I'll name it properly later\" is.`),
+    body: b(
+      `A function with variables named \`data\`, \`data2\`, \`temp\`, \`temp2\`, and — the crown jewel — \`thing\`. Not mocking the person, just appreciating how universally relatable "I'll name it properly later" is.`,
+    ),
     publishedAt: "2026-06-01",
   },
   {
@@ -739,7 +892,9 @@ export const POSTS: Post[] = [
     title: "15 nested ternaries in a single return statement",
     series: "code-roast",
     excerpt: "Technically valid JavaScript. Emotionally, a war crime.",
-    body: b(`Found a return statement with 15 nested ternary operators determining a single CSS class name. It runs. It works. Reading it requires a flowchart. A gentle reminder that \"it works\" and \"someone else can maintain this\" are different bars to clear.`),
+    body: b(
+      `Found a return statement with 15 nested ternary operators determining a single CSS class name. It runs. It works. Reading it requires a flowchart. A gentle reminder that "it works" and "someone else can maintain this" are different bars to clear.`,
+    ),
     publishedAt: "2026-05-14",
   },
 
@@ -749,8 +904,11 @@ export const POSTS: Post[] = [
     slug: "null-vs-undefined",
     title: "Why does JavaScript have both `null` and `undefined`?",
     series: "the-rabbit-hole",
-    excerpt: "A history lesson that starts in 1995 and ends with a design regret its creator has talked about publicly.",
-    body: b(`\`undefined\` means a variable was declared but never assigned. \`null\` means a value was explicitly set to \"nothing.\" JavaScript's creator has said in interviews that having both was a mistake he'd fix given the chance — most languages just pick one. This is why \`typeof null === \"object\"\` is a famous, permanent bug that can never be fixed without breaking the web.`),
+    excerpt:
+      "A history lesson that starts in 1995 and ends with a design regret its creator has talked about publicly.",
+    body: b(
+      `\`undefined\` means a variable was declared but never assigned. \`null\` means a value was explicitly set to "nothing." JavaScript's creator has said in interviews that having both was a mistake he'd fix given the chance — most languages just pick one. This is why \`typeof null === "object"\` is a famous, permanent bug that can never be fixed without breaking the web.`,
+    ),
     publishedAt: "2026-06-20",
   },
   {
@@ -759,7 +917,9 @@ export const POSTS: Post[] = [
     title: "How does autocomplete actually predict your next word?",
     series: "the-rabbit-hole",
     excerpt: "From simple n-gram models to the transformer architecture your phone quietly runs.",
-    body: b(`Early autocomplete used n-gram models — literally counting which words commonly followed other words in a dataset. Modern keyboard autocomplete increasingly uses small transformer models, similar in concept (not size) to the architecture behind large language models, running directly on your device.`),
+    body: b(
+      `Early autocomplete used n-gram models — literally counting which words commonly followed other words in a dataset. Modern keyboard autocomplete increasingly uses small transformer models, similar in concept (not size) to the architecture behind large language models, running directly on your device.`,
+    ),
     publishedAt: "2026-05-26",
   },
   {
@@ -767,8 +927,11 @@ export const POSTS: Post[] = [
     slug: "computer-clock-accuracy",
     title: "Why is your computer's clock never perfectly accurate?",
     series: "the-rabbit-hole",
-    excerpt: "A rabbit hole into NTP, drift, and why \"just check the time\" is harder than it sounds.",
-    body: b(`Computer clocks drift — quartz crystal oscillators aren't perfectly consistent, and small errors accumulate. That's why your system periodically syncs with NTP (Network Time Protocol) servers. This also explains why distributed systems can't just \"check the time\" to order events — clocks across machines are never perfectly in sync.`),
+    excerpt:
+      'A rabbit hole into NTP, drift, and why "just check the time" is harder than it sounds.',
+    body: b(
+      `Computer clocks drift — quartz crystal oscillators aren't perfectly consistent, and small errors accumulate. That's why your system periodically syncs with NTP (Network Time Protocol) servers. This also explains why distributed systems can't just "check the time" to order events — clocks across machines are never perfectly in sync.`,
+    ),
     publishedAt: "2026-05-02",
   },
 
@@ -779,7 +942,9 @@ export const POSTS: Post[] = [
     title: "Remembering Google Domains",
     series: "killed-by-google",
     excerpt: "A genuinely good domain registrar, shut down anyway.",
-    body: b(`Google Domains had one of the cleanest registrar UIs around and was migrated to Squarespace in 2023. The lesson for developers: even a well-built, well-liked product isn't safe if it doesn't fit a company's core strategy. Worth remembering before building critical infrastructure on any single vendor.`),
+    body: b(
+      `Google Domains had one of the cleanest registrar UIs around and was migrated to Squarespace in 2023. The lesson for developers: even a well-built, well-liked product isn't safe if it doesn't fit a company's core strategy. Worth remembering before building critical infrastructure on any single vendor.`,
+    ),
     publishedAt: "2026-06-21",
   },
   {
@@ -788,7 +953,9 @@ export const POSTS: Post[] = [
     title: "Google Reader's shutdown, and why RSS never fully recovered",
     series: "killed-by-google",
     excerpt: "Killed in 2013, and the open web arguably still hasn't found a real replacement.",
-    body: b(`Google Reader was the default way millions of people followed blogs via RSS. Its 2013 shutdown fragmented RSS reader users across smaller apps, and many sites simply stopped prioritizing RSS feeds afterward. A reminder that one company's product decision can quietly reshape an entire open standard's adoption.`),
+    body: b(
+      `Google Reader was the default way millions of people followed blogs via RSS. Its 2013 shutdown fragmented RSS reader users across smaller apps, and many sites simply stopped prioritizing RSS feeds afterward. A reminder that one company's product decision can quietly reshape an entire open standard's adoption.`,
+    ),
     publishedAt: "2026-05-18",
   },
   {
@@ -797,7 +964,9 @@ export const POSTS: Post[] = [
     title: "Google Stadia — what killed a cloud gaming platform with real technical merit",
     series: "killed-by-google",
     excerpt: "The tech worked. The business model and library didn't.",
-    body: b(`Stadia's underlying streaming technology was genuinely well-reviewed — the failure was strategic, not technical: a thin game library, unclear pricing, and requiring people to abandon existing libraries on Steam or consoles. A case study in how solid engineering doesn't guarantee product-market fit.`),
+    body: b(
+      `Stadia's underlying streaming technology was genuinely well-reviewed — the failure was strategic, not technical: a thin game library, unclear pricing, and requiring people to abandon existing libraries on Steam or consoles. A case study in how solid engineering doesn't guarantee product-market fit.`,
+    ),
     publishedAt: "2026-04-28",
   },
 
@@ -808,7 +977,9 @@ export const POSTS: Post[] = [
     title: "Untangling a 2,000-line component that did everything",
     series: "tech-debt-diaries",
     excerpt: "Fetching, form state, validation, and rendering — all in one file.",
-    body: b(`Inherited a single React component handling API calls, form state, validation, and rendering for an entire dashboard — over 2,000 lines. Split it into a custom hook for data fetching, a separate validation module, and five smaller presentational components. Took three days; every future change to this feature is now measured in minutes, not hours.`),
+    body: b(
+      `Inherited a single React component handling API calls, form state, validation, and rendering for an entire dashboard — over 2,000 lines. Split it into a custom hook for data fetching, a separate validation module, and five smaller presentational components. Took three days; every future change to this feature is now measured in minutes, not hours.`,
+    ),
     publishedAt: "2026-06-16",
   },
   {
@@ -816,8 +987,10 @@ export const POSTS: Post[] = [
     slug: "forty-nullable-columns",
     title: "The database table with 40 nullable columns",
     series: "tech-debt-diaries",
-    excerpt: "Years of \"just add a column for this one feature\" finally caught up.",
-    body: b(`Found a \`users\` table with 40 columns, most nullable, representing features that were added and later abandoned. Nobody knew which columns were still read anywhere in the codebase. The fix started with grepping the entire repo for each column name before touching the schema — tedious, but the only safe way to know what's actually dead.`),
+    excerpt: 'Years of "just add a column for this one feature" finally caught up.',
+    body: b(
+      `Found a \`users\` table with 40 columns, most nullable, representing features that were added and later abandoned. Nobody knew which columns were still read anywhere in the codebase. The fix started with grepping the entire repo for each column name before touching the schema — tedious, but the only safe way to know what's actually dead.`,
+    ),
     publishedAt: "2026-05-28",
   },
   {
@@ -826,7 +999,9 @@ export const POSTS: Post[] = [
     title: "Migrating off a deprecated auth library, one route at a time",
     series: "tech-debt-diaries",
     excerpt: "Couldn't do a big-bang rewrite — had to run two systems in parallel for a month.",
-    body: b(`A deprecated auth package needed replacing, but rewriting everything at once risked breaking login for every user. Instead, both auth systems ran side by side behind a feature flag, migrating routes one at a time and monitoring error rates before flipping the next one. Slower, but nobody got locked out.`),
+    body: b(
+      `A deprecated auth package needed replacing, but rewriting everything at once risked breaking login for every user. Instead, both auth systems ran side by side behind a feature flag, migrating routes one at a time and monitoring error rates before flipping the next one. Slower, but nobody got locked out.`,
+    ),
     publishedAt: "2026-04-22",
   },
 
@@ -836,8 +1011,10 @@ export const POSTS: Post[] = [
     slug: "typescript-strict-default",
     title: "TypeScript strict mode should be on by default",
     series: "hot-take",
-    excerpt: "Every \"it slows me down\" argument falls apart at 10k lines of code.",
-    body: b(`Turning off strict mode to move faster early on just means paying the type-safety cost later, at a worse exchange rate, once the codebase is bigger and the bugs are harder to trace back. Strict mode from day one feels slower for the first week and faster for every week after.`),
+    excerpt: 'Every "it slows me down" argument falls apart at 10k lines of code.',
+    body: b(
+      `Turning off strict mode to move faster early on just means paying the type-safety cost later, at a worse exchange rate, once the codebase is bigger and the bugs are harder to trace back. Strict mode from day one feels slower for the first week and faster for every week after.`,
+    ),
     publishedAt: "2026-07-07",
   },
   {
@@ -846,7 +1023,9 @@ export const POSTS: Post[] = [
     title: "Tutorials should teach debugging before they teach syntax",
     series: "hot-take",
     excerpt: "Nobody's first real skill should be copying code that already works.",
-    body: b(`Most tutorials hand you working code and explain syntax. But the actual daily skill of being a developer is reading broken code and figuring out why. Teaching debugging — reading stack traces, using breakpoints, forming hypotheses — earlier would produce more confident beginners than another \"build a todo app\" walkthrough.`),
+    body: b(
+      `Most tutorials hand you working code and explain syntax. But the actual daily skill of being a developer is reading broken code and figuring out why. Teaching debugging — reading stack traces, using breakpoints, forming hypotheses — earlier would produce more confident beginners than another "build a todo app" walkthrough.`,
+    ),
     publishedAt: "2026-06-12",
   },
   {
@@ -855,7 +1034,9 @@ export const POSTS: Post[] = [
     title: "LeetCode streaks are a worse signal than one real project",
     series: "hot-take",
     excerpt: "300 days of easy problems teaches pattern matching, not building.",
-    body: b(`A long LeetCode streak proves consistency, which matters — but a single deployed project with real users, real bugs, and real deployment headaches teaches things algorithm grinding never will: how systems fail, how requirements change, how to finish something. Both have value; only one gets talked about like it's the whole job.`),
+    body: b(
+      `A long LeetCode streak proves consistency, which matters — but a single deployed project with real users, real bugs, and real deployment headaches teaches things algorithm grinding never will: how systems fail, how requirements change, how to finish something. Both have value; only one gets talked about like it's the whole job.`,
+    ),
     publishedAt: "2026-05-17",
   },
   {
@@ -863,7 +1044,8 @@ export const POSTS: Post[] = [
     slug: "growth-loops",
     title: "Growth Loops — the engine behind products that grow themselves",
     series: "hot-take",
-    excerpt: "Why the best products don't need a bigger marketing budget — they need a closed loop.",
+    excerpt:
+      "Why the best products don't need a bigger marketing budget — they need a closed loop.",
     body: growthLoopsMd,
     publishedAt: "2026-07-20",
     image: "/growth-loops.png",
@@ -873,7 +1055,8 @@ export const POSTS: Post[] = [
     slug: "product-market-fit",
     title: "Product-Market Fit — the moment your product clicks with the market",
     series: "hot-take",
-    excerpt: "When your product satisfies a strong market demand — people aren't just trying it, they're sticking with it.",
+    excerpt:
+      "When your product satisfies a strong market demand — people aren't just trying it, they're sticking with it.",
     body: pmfMd,
     publishedAt: "2026-07-15",
   },
@@ -882,7 +1065,8 @@ export const POSTS: Post[] = [
     slug: "mvp",
     title: "MVP — Minimum Viable Product",
     series: "hot-take",
-    excerpt: "The smallest version of your product that lets you test your core hypothesis with real users.",
+    excerpt:
+      "The smallest version of your product that lets you test your core hypothesis with real users.",
     body: mvpMd,
     publishedAt: "2026-07-10",
   },
@@ -891,7 +1075,8 @@ export const POSTS: Post[] = [
     slug: "cac-ltv",
     title: "CAC & LTV — the economics of acquiring and retaining customers",
     series: "hot-take",
-    excerpt: "Customer Acquisition Cost vs Lifetime Value — the ratio that determines if your business model works.",
+    excerpt:
+      "Customer Acquisition Cost vs Lifetime Value — the ratio that determines if your business model works.",
     body: cacLtvMd,
     publishedAt: "2026-07-05",
   },
@@ -900,7 +1085,8 @@ export const POSTS: Post[] = [
     slug: "flywheel",
     title: "Flywheel — the self-reinforcing business model",
     series: "hot-take",
-    excerpt: "Unlike a funnel that loses energy, a flywheel stores energy and spins faster the more it runs.",
+    excerpt:
+      "Unlike a funnel that loses energy, a flywheel stores energy and spins faster the more it runs.",
     body: flywheelMd,
     publishedAt: "2026-06-30",
   },
@@ -909,7 +1095,8 @@ export const POSTS: Post[] = [
     slug: "pivot",
     title: "Pivot — knowing when to change direction",
     series: "hot-take",
-    excerpt: "A fundamental change in business direction — not tweaking a feature, but shifting the core strategy.",
+    excerpt:
+      "A fundamental change in business direction — not tweaking a feature, but shifting the core strategy.",
     body: pivotMd,
     publishedAt: "2026-06-25",
   },
@@ -949,7 +1136,8 @@ export const POSTS: Post[] = [
     slug: "churn",
     title: "Churn — the silent killer of growth",
     series: "hot-take",
-    excerpt: "The rate at which customers stop using your product. You can acquire all the users you want, but if they leave faster than they arrive, you're filling a leaky bucket.",
+    excerpt:
+      "The rate at which customers stop using your product. You can acquire all the users you want, but if they leave faster than they arrive, you're filling a leaky bucket.",
     body: churnMd,
     publishedAt: "2026-06-05",
   },
@@ -958,7 +1146,8 @@ export const POSTS: Post[] = [
     slug: "tam-sam-som",
     title: "TAM / SAM / SOM — understanding your market size",
     series: "hot-take",
-    excerpt: "The three layers of market sizing that help you understand how big your opportunity really is.",
+    excerpt:
+      "The three layers of market sizing that help you understand how big your opportunity really is.",
     body: tamSamSomMd,
     publishedAt: "2026-05-30",
   },
@@ -967,7 +1156,8 @@ export const POSTS: Post[] = [
     slug: "unit-economics",
     title: "Unit Economics — does each customer make you money?",
     series: "hot-take",
-    excerpt: "Measures the revenue and cost associated with a single unit of your business. If your unit economics don't work, your business doesn't work.",
+    excerpt:
+      "Measures the revenue and cost associated with a single unit of your business. If your unit economics don't work, your business doesn't work.",
     body: unitEconomicsMd,
     publishedAt: "2026-05-25",
   },
@@ -976,7 +1166,8 @@ export const POSTS: Post[] = [
     slug: "ab-testing",
     title: "A/B Testing — replacing opinions with evidence",
     series: "hot-take",
-    excerpt: "Comparing two versions of something to see which one performs better — with real users, real data, and no guessing.",
+    excerpt:
+      "Comparing two versions of something to see which one performs better — with real users, real data, and no guessing.",
     body: abTestingMd,
     publishedAt: "2026-05-20",
   },
@@ -985,7 +1176,8 @@ export const POSTS: Post[] = [
     slug: "retention",
     title: "Retention — the most important metric in any business",
     series: "hot-take",
-    excerpt: "The ability to keep users engaged over time. Without retention, nothing else matters.",
+    excerpt:
+      "The ability to keep users engaged over time. Without retention, nothing else matters.",
     body: retentionMd,
     publishedAt: "2026-05-15",
   },
@@ -994,7 +1186,8 @@ export const POSTS: Post[] = [
     slug: "virality",
     title: "Virality — engineering the conditions for organic sharing",
     series: "hot-take",
-    excerpt: "When your product spreads through users — each user brings in more users, creating exponential growth.",
+    excerpt:
+      "When your product spreads through users — each user brings in more users, creating exponential growth.",
     body: viralityMd,
     publishedAt: "2026-05-10",
   },
@@ -1003,7 +1196,8 @@ export const POSTS: Post[] = [
     slug: "pirate-metrics",
     title: "Pirate Metrics (AAARRR) — the six-stage growth funnel",
     series: "hot-take",
-    excerpt: "Awareness, Acquisition, Activation, Revenue, Retention, Referral — the full journey from stranger to promoter.",
+    excerpt:
+      "Awareness, Acquisition, Activation, Revenue, Retention, Referral — the full journey from stranger to promoter.",
     body: pirateMetricsMd,
     publishedAt: "2026-08-21",
     image: "/pirate-metrics.png",
@@ -1013,7 +1207,8 @@ export const POSTS: Post[] = [
     slug: "rule-of-40",
     title: "The Rule of 40 — the one-number health check for software companies",
     series: "hot-take",
-    excerpt: "Revenue growth rate plus profit margin should be at least 40% — how you get there changes at every stage of the lifecycle.",
+    excerpt:
+      "Revenue growth rate plus profit margin should be at least 40% — how you get there changes at every stage of the lifecycle.",
     body: ruleOf40Md,
     publishedAt: "2026-08-21",
     image: "/rule-of-40.png",
@@ -1026,7 +1221,9 @@ export const POSTS: Post[] = [
     title: "Bun as your package manager — ship it",
     series: "ship-it-or-skip-it",
     excerpt: "The install speed alone is worth the switch for most projects.",
-    body: b(`Bun's install speed is a genuine, immediately noticeable upgrade over npm for most projects, and its compatibility with the existing Node ecosystem has matured enough that it's a low-risk swap for package management specifically, even if you're not ready to run your whole app on the Bun runtime yet.`),
+    body: b(
+      `Bun's install speed is a genuine, immediately noticeable upgrade over npm for most projects, and its compatibility with the existing Node ecosystem has matured enough that it's a low-risk swap for package management specifically, even if you're not ready to run your whole app on the Bun runtime yet.`,
+    ),
     publishedAt: "2026-07-04",
   },
   {
@@ -1034,8 +1231,10 @@ export const POSTS: Post[] = [
     slug: "rewrite-new-framework",
     title: "Rewriting your app in a new framework because it's trending — skip it",
     series: "ship-it-or-skip-it",
-    excerpt: "\"New\" isn't a business requirement. Ship the feature instead.",
-    body: b(`A framework being new and exciting isn't a reason to rewrite a working app. Migration cost is real time not spent shipping features, and most \"the old framework is holding us back\" claims don't survive being written down as a specific, measurable problem.`),
+    excerpt: '"New" isn\'t a business requirement. Ship the feature instead.',
+    body: b(
+      `A framework being new and exciting isn't a reason to rewrite a working app. Migration cost is real time not spent shipping features, and most "the old framework is holding us back" claims don't survive being written down as a specific, measurable problem.`,
+    ),
     publishedAt: "2026-06-23",
   },
   {
@@ -1044,7 +1243,9 @@ export const POSTS: Post[] = [
     title: "Adding a state management library before you've felt the pain — skip it",
     series: "ship-it-or-skip-it",
     excerpt: "Prop drilling three levels deep isn't a crisis yet.",
-    body: b(`Reaching for Redux or Zustand before your app's state complexity actually demands it adds a dependency, a mental model, and boilerplate for a problem you might not have. React's built-in state and context handle more than people assume — reach for a library once you've actually felt the specific pain it solves.`),
+    body: b(
+      `Reaching for Redux or Zustand before your app's state complexity actually demands it adds a dependency, a mental model, and boilerplate for a problem you might not have. React's built-in state and context handle more than people assume — reach for a library once you've actually felt the specific pain it solves.`,
+    ),
     publishedAt: "2026-06-01",
   },
 
@@ -1052,34 +1253,43 @@ export const POSTS: Post[] = [
   {
     id: "p52",
     slug: "failed-four-interviews",
-    title: "\"I failed four technical interviews before I understood why\"",
+    title: '"I failed four technical interviews before I understood why"',
     series: "the-interview-they-dont-show-you",
-    excerpt: "A conversation about what actually changed between the fourth rejection and the offer.",
-    body: b(`Talked to a recent grad about four failed technical interviews in a row. The turning point wasn't more LeetCode — it was learning to narrate their thinking out loud instead of solving silently, since interviewers are evaluating the process, not just the final answer.`),
+    excerpt:
+      "A conversation about what actually changed between the fourth rejection and the offer.",
+    body: b(
+      `Talked to a recent grad about four failed technical interviews in a row. The turning point wasn't more LeetCode — it was learning to narrate their thinking out loud instead of solving silently, since interviewers are evaluating the process, not just the final answer.`,
+    ),
     publishedAt: "2026-06-27",
   },
   {
     id: "p53",
     slug: "first-job-wordpress",
-    title: "\"My first job wasn't at a startup, it was fixing WordPress sites for $15/hour\"",
+    title: '"My first job wasn\'t at a startup, it was fixing WordPress sites for $15/hour"',
     series: "the-interview-they-dont-show-you",
     excerpt: "An honest conversation about the unglamorous first rung of a dev career.",
-    body: b(`Not every first dev job is a shiny startup role. A conversation about starting out fixing WordPress plugin conflicts freelance, and how that unglamorous, low-paying work still taught real client communication and debugging skills that a polished bootcamp project never could.`),
+    body: b(
+      `Not every first dev job is a shiny startup role. A conversation about starting out fixing WordPress plugin conflicts freelance, and how that unglamorous, low-paying work still taught real client communication and debugging skills that a polished bootcamp project never could.`,
+    ),
     publishedAt: "2026-05-24",
   },
   {
     id: "p54",
     slug: "panicked-about-docker",
-    title: "\"I got the job and then panicked because I didn't know Docker\"",
+    title: '"I got the job and then panicked because I didn\'t know Docker"',
     series: "the-interview-they-dont-show-you",
     excerpt: "What it's actually like to learn a required skill after being hired, not before.",
-    body: b(`A candid talk about getting hired despite gaps in the required stack, then spending the first two weeks quietly learning Docker fundamentals at night. A reminder that job postings list an idealized candidate, and most people who get hired are still learning parts of the stack on the job.`),
+    body: b(
+      `A candid talk about getting hired despite gaps in the required stack, then spending the first two weeks quietly learning Docker fundamentals at night. A reminder that job postings list an idealized candidate, and most people who get hired are still learning parts of the stack on the job.`,
+    ),
     publishedAt: "2026-04-30",
   },
 ];
 
 export const postBySlug = (slug: string) => POSTS.find((p) => p.slug === slug);
 export const postsBySeries = (seriesSlug: string) =>
-  POSTS.filter((p) => p.series === seriesSlug).sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
+  POSTS.filter((p) => p.series === seriesSlug).sort((a, b) =>
+    b.publishedAt.localeCompare(a.publishedAt),
+  );
 export const allPostsSorted = () =>
   [...POSTS].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));

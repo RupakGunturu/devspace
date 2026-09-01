@@ -55,9 +55,7 @@ export function LineSidebar({ items, activeIndex, onItemClick, className = "" }:
           className={`line-sidebar-item ${i === activeIndex ? "active" : ""}`}
           onClick={() => onItemClick?.(i, item.slug)}
         >
-          <span className="line-sidebar-index">
-            {String(i + 1).padStart(2, "0")}
-          </span>
+          <span className="line-sidebar-index">{String(i + 1).padStart(2, "0")}</span>
           <span className="line-sidebar-label inline-flex items-center gap-1.5">
             <ToolIcon name={item.icon} className="h-3.5 w-3.5" />
             {item.label}

@@ -5,7 +5,9 @@ import { ToolOutput } from "../ToolOutput";
 import { ToolButton } from "../ToolButton";
 
 export default function SvgToJsx() {
-  const [input, setInput] = useState('<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>');
+  const [input, setInput] = useState(
+    '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>',
+  );
   const [output, setOutput] = useState("");
 
   const convert = () => {
@@ -25,7 +27,13 @@ export default function SvgToJsx() {
 
   return (
     <ToolLayout id="svg-to-jsx">
-      <ToolInput value={input} onChange={setInput} placeholder="Paste SVG code..." label="SVG" rows={8} />
+      <ToolInput
+        value={input}
+        onChange={setInput}
+        placeholder="Paste SVG code..."
+        label="SVG"
+        rows={8}
+      />
       <ToolButton onClick={convert}>Convert to JSX</ToolButton>
       <ToolOutput value={output} />
     </ToolLayout>

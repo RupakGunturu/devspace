@@ -25,12 +25,20 @@ interface Question {
 
 function generateMCQ(topic: string, index: number): Question {
   const concepts = [
-    "the primary purpose", "the key characteristic", "the main advantage",
-    "the fundamental concept", "the core principle", "the essential component",
+    "the primary purpose",
+    "the key characteristic",
+    "the main advantage",
+    "the fundamental concept",
+    "the core principle",
+    "the essential component",
   ];
   const distractors = [
-    "An unrelated side effect", "A secondary byproduct", "A minor detail",
-    "An outdated approach", "A conflicting principle", "An optional feature",
+    "An unrelated side effect",
+    "A secondary byproduct",
+    "A minor detail",
+    "An outdated approach",
+    "A conflicting principle",
+    "An optional feature",
   ];
   const shuffled = shuffleArray(distractors);
   const correct = `${concepts[index % concepts.length]} of ${topic}`;
@@ -103,11 +111,7 @@ export function QuizGenerator() {
 
   const fullText = useMemo(() => {
     if (questions.length === 0) return "";
-    const lines = [
-      `QUIZ: ${topic}`,
-      `Type: ${type} | Questions: ${count}`,
-      `\n${"=".repeat(50)}`,
-    ];
+    const lines = [`QUIZ: ${topic}`, `Type: ${type} | Questions: ${count}`, `\n${"=".repeat(50)}`];
     questions.forEach((q) => {
       lines.push(`\n${q.id}. ${q.question}`);
       q.options?.forEach((opt, i) => {
@@ -131,7 +135,9 @@ export function QuizGenerator() {
     <ToolLayout id="quiz-generator">
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         <div>
-          <span className="mb-1 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Topic</span>
+          <span className="mb-1 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+            Topic
+          </span>
           <input
             value={topic}
             onChange={(e) => setTopic(e.target.value)}
@@ -142,14 +148,20 @@ export function QuizGenerator() {
           />
         </div>
         <div>
-          <span className="mb-1 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Question Type</span>
+          <span className="mb-1 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+            Question Type
+          </span>
           <div className="flex gap-2">
             {QUESTION_TYPES.map((t) => (
               <button
                 key={t}
                 onClick={() => setType(t)}
                 className="flex-1 rounded-md border-2 px-3 py-2.5 font-mono text-xs transition-all"
-                style={type === t ? { borderColor: color, backgroundColor: color, color: "#fff" } : { borderColor: "var(--border)" }}
+                style={
+                  type === t
+                    ? { borderColor: color, backgroundColor: color, color: "#fff" }
+                    : { borderColor: "var(--border)" }
+                }
               >
                 {t}
               </button>
@@ -159,14 +171,20 @@ export function QuizGenerator() {
       </div>
 
       <div>
-        <span className="mb-1 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Number of Questions</span>
+        <span className="mb-1 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+          Number of Questions
+        </span>
         <div className="flex gap-2">
           {QUESTION_COUNTS.map((n) => (
             <button
               key={n}
               onClick={() => setCount(n)}
               className="rounded-md border-2 px-6 py-2 font-mono text-sm transition-all"
-              style={count === n ? { borderColor: color, backgroundColor: color, color: "#fff" } : { borderColor: "var(--border)" }}
+              style={
+                count === n
+                  ? { borderColor: color, backgroundColor: color, color: "#fff" }
+                  : { borderColor: "var(--border)" }
+              }
             >
               {n}
             </button>
@@ -193,7 +211,9 @@ export function QuizGenerator() {
           {questions.map((q) => (
             <div key={q.id} className="rounded-md border-2 border-line bg-input-bg p-4">
               <div className="mb-2 flex items-start gap-2">
-                <span className="font-mono text-sm font-bold" style={{ color }}>{q.id}.</span>
+                <span className="font-mono text-sm font-bold" style={{ color }}>
+                  {q.id}.
+                </span>
                 <span className="font-mono text-sm text-input-text">{q.question}</span>
               </div>
               {q.options && (
@@ -204,7 +224,11 @@ export function QuizGenerator() {
                       <div
                         key={i}
                         className="flex items-center gap-2 rounded-md px-3 py-1.5 font-mono text-xs"
-                        style={isCorrect ? { backgroundColor: "#22c55e15", color: "#22c55e" } : { color: "var(--muted)" }}
+                        style={
+                          isCorrect
+                            ? { backgroundColor: "#22c55e15", color: "#22c55e" }
+                            : { color: "var(--muted)" }
+                        }
                       >
                         <span className="font-bold">{String.fromCharCode(65 + i)})</span>
                         {opt}
@@ -215,7 +239,10 @@ export function QuizGenerator() {
                 </div>
               )}
               {showAnswers && !q.options && (
-                <div className="ml-6 rounded-md bg-input-bg px-3 py-2 font-mono text-xs" style={{ color: "#22c55e" }}>
+                <div
+                  className="ml-6 rounded-md bg-input-bg px-3 py-2 font-mono text-xs"
+                  style={{ color: "#22c55e" }}
+                >
                   Answer: {q.answer}
                 </div>
               )}

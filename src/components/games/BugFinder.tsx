@@ -64,11 +64,7 @@ const SNIPPETS: Snippet[] = [
     hint: "capitalized Name",
   },
   {
-    lines: [
-      "const nums = [10, 5, 2, 30];",
-      "nums.sort();",
-      "console.log(nums[0]);",
-    ],
+    lines: ["const nums = [10, 5, 2, 30];", "nums.sort();", "console.log(nums[0]);"],
     bug: 1,
     hint: "sort() is lexicographic by default",
   },
@@ -83,12 +79,7 @@ const SNIPPETS: Snippet[] = [
     hint: "reads count before click happens",
   },
   {
-    lines: [
-      "function divide(a, b) {",
-      "  return a / b;",
-      "}",
-      "divide(10);",
-    ],
+    lines: ["function divide(a, b) {", "  return a / b;", "}", "divide(10);"],
     bug: 3,
     hint: "b is undefined → NaN",
   },
@@ -134,7 +125,8 @@ export function BugFinder() {
 
   const next = () => {
     let ni = Math.floor(Math.random() * SNIPPETS.length);
-    if (SNIPPETS.length > 1) while (ni === snippetIdx) ni = Math.floor(Math.random() * SNIPPETS.length);
+    if (SNIPPETS.length > 1)
+      while (ni === snippetIdx) ni = Math.floor(Math.random() * SNIPPETS.length);
     setSnippetIdx(ni);
     setTimeLeft(30);
     setStatus("playing");
@@ -154,8 +146,7 @@ export function BugFinder() {
       </div>
       <div className="overflow-hidden rounded-md border-2 border-ink bg-ink overflow-x-auto">
         {snippet.lines.map((line, i) => {
-          const highlight =
-            status !== "playing" && i === snippet.bug ? "bg-coral text-ink" : "";
+          const highlight = status !== "playing" && i === snippet.bug ? "bg-coral text-ink" : "";
           return (
             <button
               key={i}

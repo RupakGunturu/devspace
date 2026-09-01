@@ -55,15 +55,20 @@ function lcsMatrix(a: string[], b: string[]): number[][] {
   const dp: number[][] = Array.from({ length: m + 1 }, () => new Array(n + 1).fill(0));
   for (let i = 1; i <= m; i++) {
     for (let j = 1; j <= n; j++) {
-      dp[i][j] = a[i - 1] === b[j - 1] ? dp[i - 1][j - 1] + 1 : Math.max(dp[i - 1][j], dp[i][j - 1]);
+      dp[i][j] =
+        a[i - 1] === b[j - 1] ? dp[i - 1][j - 1] + 1 : Math.max(dp[i - 1][j], dp[i][j - 1]);
     }
   }
   return dp;
 }
 
 export function DiffChecker() {
-  const [left, setLeft] = useState("function greet(name) {\n  return `Hello, ${name}!`;\n}\n\nconsole.log(greet('World'));");
-  const [right, setRight] = useState("function greet(name, greeting = 'Hello') {\n  return `${greeting}, ${name}!`;\n}\n\nconsole.log(greet('World', 'Hi'));");
+  const [left, setLeft] = useState(
+    "function greet(name) {\n  return `Hello, ${name}!`;\n}\n\nconsole.log(greet('World'));",
+  );
+  const [right, setRight] = useState(
+    "function greet(name, greeting = 'Hello') {\n  return `${greeting}, ${name}!`;\n}\n\nconsole.log(greet('World', 'Hi'));",
+  );
 
   const diff = useMemo(() => computeDiff(left, right), [left, right]);
 
@@ -78,7 +83,9 @@ export function DiffChecker() {
     <ToolLayout id="diff-checker">
       <div className="grid gap-4 lg:grid-cols-2">
         <div>
-          <label className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Original</label>
+          <label className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+            Original
+          </label>
           <textarea
             value={left}
             onChange={(e) => setLeft(e.target.value)}
@@ -88,7 +95,9 @@ export function DiffChecker() {
           />
         </div>
         <div>
-          <label className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">Modified</label>
+          <label className="mb-2 block font-mono text-xs font-medium uppercase tracking-wider text-muted">
+            Modified
+          </label>
           <textarea
             value={right}
             onChange={(e) => setRight(e.target.value)}
@@ -115,8 +124,8 @@ export function DiffChecker() {
                   line.type === "added"
                     ? "bg-green-500/10 text-green-600 dark:bg-green-500/5 dark:text-green-400"
                     : line.type === "removed"
-                    ? "bg-red-500/10 text-red-600 dark:bg-red-500/5 dark:text-red-400"
-                    : ""
+                      ? "bg-red-500/10 text-red-600 dark:bg-red-500/5 dark:text-red-400"
+                      : ""
                 }
               >
                 <td className="w-10 select-none border-r border-line px-2 py-0.5 text-right text-muted">

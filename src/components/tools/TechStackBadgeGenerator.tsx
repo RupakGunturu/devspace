@@ -42,16 +42,16 @@ export function TechStackBadgeGenerator() {
   const [selected, setSelected] = useState<string[]>([]);
 
   const toggle = (item: string) => {
-    setSelected((prev) =>
-      prev.includes(item) ? prev.filter((s) => s !== item) : [...prev, item]
-    );
+    setSelected((prev) => (prev.includes(item) ? prev.filter((s) => s !== item) : [...prev, item]));
   };
 
-  const markdown = selected.map((s) => {
-    const color = BADGE_COLORS[s] || "#999";
-    const fg = isLight(color) ? "#000" : "#fff";
-    return `![${s}](https://img.shields.io/badge/-${encodeURIComponent(s)}-${color.replace("#", "")}?style=for-the-badge&logo=&logoColor=${fg.replace("#", "")})`;
-  }).join("\n");
+  const markdown = selected
+    .map((s) => {
+      const color = BADGE_COLORS[s] || "#999";
+      const fg = isLight(color) ? "#000" : "#fff";
+      return `![${s}](https://img.shields.io/badge/-${encodeURIComponent(s)}-${color.replace("#", "")}?style=for-the-badge&logo=&logoColor=${fg.replace("#", "")})`;
+    })
+    .join("\n");
 
   function isLight(hex: string) {
     const r = parseInt(hex.slice(1, 3), 16);

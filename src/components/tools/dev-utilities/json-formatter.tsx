@@ -32,11 +32,19 @@ export default function JsonFormatter() {
 
   return (
     <ToolLayout id="json-formatter">
-      <ToolInput value={input} onChange={setInput} placeholder='Paste JSON here... e.g. {"name":"John","age":30}' label="JSON Input" rows={10} />
+      <ToolInput
+        value={input}
+        onChange={setInput}
+        placeholder='Paste JSON here... e.g. {"name":"John","age":30}'
+        label="JSON Input"
+        rows={10}
+      />
       <div className="flex gap-2 flex-wrap">
         <ToolButton onClick={() => format(2)}>Format (2 spaces)</ToolButton>
         <ToolButton onClick={() => format(4)}>Format (4 spaces)</ToolButton>
-        <ToolButton onClick={minify} variant="secondary">Minify</ToolButton>
+        <ToolButton onClick={minify} variant="secondary">
+          Minify
+        </ToolButton>
       </div>
       {error && <p className="text-sm text-coral font-mono">Error: {error}</p>}
       <ToolOutput value={output} label="Formatted Output" />

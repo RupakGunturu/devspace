@@ -20,11 +20,12 @@ function timeAgo(iso: string) {
 
 export function FeedItem({ post }: { post: Post }) {
   const series = seriesBySlug(post.series);
-  const to = post.series === "stack-breakdown"
-    ? `/stack-breakdown/${post.slug}`
-    : post.series === "hot-take"
-      ? `/hot-take/${post.slug}`
-      : `/post/${post.slug}`;
+  const to =
+    post.series === "stack-breakdown"
+      ? `/stack-breakdown/${post.slug}`
+      : post.series === "hot-take"
+        ? `/hot-take/${post.slug}`
+        : `/post/${post.slug}`;
   const stackItem = post.series === "stack-breakdown" ? stackBreakdownBySlug(post.slug) : null;
   return (
     <Link

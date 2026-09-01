@@ -18,7 +18,7 @@ export function SalaryNegotiationScript() {
         .split("\n")
         .map((a) => a.trim())
         .filter(Boolean),
-    [achievements]
+    [achievements],
   );
 
   const script = useMemo(() => {
@@ -149,16 +149,16 @@ export function SalaryNegotiationScript() {
         <textarea
           value={achievements}
           onChange={(e) => setAchievements(e.target.value)}
-          placeholder={"Led migration that reduced costs by 40%\nDelivered feature that increased revenue by $500K\nMentored 3 junior developers to mid-level"}
+          placeholder={
+            "Led migration that reduced costs by 40%\nDelivered feature that increased revenue by $500K\nMentored 3 junior developers to mid-level"
+          }
           rows={4}
           className="w-full resize-y rounded-md border-2 border-line bg-input-bg p-3 font-mono text-sm text-input-text outline-none transition-colors placeholder:text-muted"
           style={{ borderColor: achievements ? color : undefined }}
         />
       </div>
 
-      <ToolButton onClick={handleGenerate}>
-        Generate Negotiation Script
-      </ToolButton>
+      <ToolButton onClick={handleGenerate}>Generate Negotiation Script</ToolButton>
 
       {generated && (
         <div className="rounded-md border-2 border-line bg-input-bg p-4">

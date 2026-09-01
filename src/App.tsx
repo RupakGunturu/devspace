@@ -6,6 +6,8 @@ import ScrollToTop from "./components/ScrollToTop";
 import { CommandMenu } from "./components/CommandMenu";
 import GoogleOAuthPrompt from "./components/GoogleOAuthPrompt";
 import { ProtectedRoute } from "./components/ProtectedRoute";
+import { RequireAdmin } from "./components/admin/RequireAdmin";
+import { AdminLayout } from "./components/admin/AdminLayout";
 import { PageSkeleton } from "./components/skeletons/PageSkeleton";
 
 const Home = lazy(() => import("./pages/Home"));
@@ -36,6 +38,15 @@ const Hiring = lazy(() => import("./pages/Hiring"));
 const McpSkills = lazy(() => import("./pages/McpSkills"));
 const HiddenGems = lazy(() => import("./pages/HiddenGems"));
 
+const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
+const ContentEditor = lazy(() => import("./pages/admin/ContentEditor"));
+const GamesManager = lazy(() => import("./pages/admin/GamesManager"));
+const GameEditor = lazy(() => import("./pages/admin/GameEditor"));
+const ToolsManager = lazy(() => import("./pages/admin/ToolsManager"));
+const ToolEditor = lazy(() => import("./pages/admin/ToolEditor"));
+const ImageManager = lazy(() => import("./pages/admin/ImageManager"));
+const DeploymentLog = lazy(() => import("./pages/admin/DeploymentLog"));
+
 const AUTH_ROUTES = new Set([
   "/login",
   "/signup",
@@ -47,13 +58,14 @@ const AUTH_ROUTES = new Set([
 function Layout({ children }: { children: React.ReactNode }) {
   const { pathname } = useLocation();
   const isAuth = AUTH_ROUTES.has(pathname);
+  const isAdmin = pathname.startsWith("/admin");
 
   return (
     <div className="flex min-h-screen flex-col">
       <ScrollToTop />
       <CommandMenu />
-      {!isAuth && <GoogleOAuthPrompt />}
-      {!isAuth && <Header />}
+      {!isAuth && !isAdmin && <GoogleOAuthPrompt />}
+      {!isAuth && !isAdmin && <Header />}
       {isAuth && (
         <Link
           to="/"
@@ -64,7 +76,7 @@ function Layout({ children }: { children: React.ReactNode }) {
         </Link>
       )}
       <main className="flex-1">{children}</main>
-      {!isAuth && <Footer />}
+      {!isAuth && !isAdmin && <Footer />}
     </div>
   );
 }
@@ -115,6 +127,26 @@ export default function App() {
           <Route path="/hiring" element={<Hiring />} />
           <Route path="/mcp-skills" element={<McpSkills />} />
           <Route path="/hidden-gems" element={<HiddenGems />} />
+          <Route
+            path="/admin"
+            element={
+              <RequireAdmin>
+                <AdminLayout />
+              </RequireAdmin>
+            }
+          >
+            <Route index element={<AdminDashboard />} />
+            <Route path="content/new" element={<ContentEditor />} />
+            <Route path="content/:id/edit" element={<ContentEditor />} />
+            <Route path="games" element={<GamesManager />} />
+            <Route path="games/new" element={<GameEditor />} />
+            <Route path="games/:id/edit" element={<GameEditor />} />
+            <Route path="tools" element={<ToolsManager />} />
+            <Route path="tools/new" element={<ToolEditor />} />
+            <Route path="tools/:id/edit" element={<ToolEditor />} />
+            <Route path="images" element={<ImageManager />} />
+            <Route path="deployments" element={<DeploymentLog />} />
+          </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

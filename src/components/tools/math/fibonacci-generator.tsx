@@ -17,8 +17,15 @@ export default function FibonacciGenerator() {
     <ToolLayout id="fibonacci-generator">
       <div className="flex items-center gap-4">
         <div>
-          <label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">Count</label>
-          <input type="number" value={count} onChange={(e) => setCount(Math.min(100, Math.max(1, Number(e.target.value))))} className="w-24 p-2.5 bg-paper-dim/50 border border-border rounded-sm text-sm font-mono text-foreground" />
+          <label className="block text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1">
+            Count
+          </label>
+          <input
+            type="number"
+            value={count}
+            onChange={(e) => setCount(Math.min(100, Math.max(1, Number(e.target.value))))}
+            className="w-24 p-2.5 bg-paper-dim/50 border border-border rounded-sm text-sm font-mono text-foreground"
+          />
         </div>
         <ToolButton onClick={generate}>Generate</ToolButton>
       </div>

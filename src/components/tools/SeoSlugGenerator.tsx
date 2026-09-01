@@ -28,7 +28,11 @@ export function SeoSlugGenerator() {
     }
 
     if (prefix.trim()) {
-      const p = prefix.trim().toLowerCase().replace(/[^a-z0-9]/g, "").replace(/\s+/g, "-");
+      const p = prefix
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9]/g, "")
+        .replace(/\s+/g, "-");
       if (p) s = `${p}/${s}`;
     }
 
@@ -47,9 +51,7 @@ export function SeoSlugGenerator() {
 
   const toggleCls = (active: boolean) =>
     `rounded-md border-2 px-4 py-2.5 font-mono text-xs font-medium transition-all ${
-      active
-        ? ""
-        : "border-line bg-transparent text-muted hover:text-foreground"
+      active ? "" : "border-line bg-transparent text-muted hover:text-foreground"
     }`;
 
   return (
@@ -64,8 +66,12 @@ export function SeoSlugGenerator() {
           onChange={(e) => setTitle(e.target.value)}
           placeholder="e.g. How to Build a React App in 2024"
           className={inputCls}
-          onFocus={(e) => { e.currentTarget.style.borderColor = color; }}
-          onBlur={(e) => { e.currentTarget.style.borderColor = ""; }}
+          onFocus={(e) => {
+            e.currentTarget.style.borderColor = color;
+          }}
+          onBlur={(e) => {
+            e.currentTarget.style.borderColor = "";
+          }}
         />
       </div>
 
@@ -79,8 +85,12 @@ export function SeoSlugGenerator() {
           onChange={(e) => setPrefix(e.target.value)}
           placeholder="e.g. blog, guides, docs"
           className={inputCls}
-          onFocus={(e) => { e.currentTarget.style.borderColor = color; }}
-          onBlur={(e) => { e.currentTarget.style.borderColor = ""; }}
+          onFocus={(e) => {
+            e.currentTarget.style.borderColor = color;
+          }}
+          onBlur={(e) => {
+            e.currentTarget.style.borderColor = "";
+          }}
         />
       </div>
 
@@ -120,9 +130,7 @@ export function SeoSlugGenerator() {
           <p className="break-all font-mono text-sm font-medium" style={{ color }}>
             /{slug}
           </p>
-          <div className="mt-1 font-mono text-[10px] text-muted">
-            {slug.length} characters
-          </div>
+          <div className="mt-1 font-mono text-[10px] text-muted">{slug.length} characters</div>
         </div>
       )}
 

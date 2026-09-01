@@ -50,7 +50,7 @@ export function GithubContributionCustomizer() {
 
   const gridText = useMemo(
     () => grid.map((week) => week.map((l) => "●".repeat(l + 1)).join(" ")).join("\n"),
-    [grid]
+    [grid],
   );
 
   return (

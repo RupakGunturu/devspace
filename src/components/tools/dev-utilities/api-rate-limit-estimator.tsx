@@ -12,7 +12,10 @@ export default function ApiRateLimitEstimator() {
   const estimate = () => {
     const r = parseInt(requests);
     const w = parseInt(window);
-    if (isNaN(r) || isNaN(w) || r <= 0 || w <= 0) { setOutput("Invalid values"); return; }
+    if (isNaN(r) || isNaN(w) || r <= 0 || w <= 0) {
+      setOutput("Invalid values");
+      return;
+    }
     const rps = (r / w).toFixed(2);
     const rpm = r;
     const rph = r * (3600 / w);
@@ -38,8 +41,20 @@ export default function ApiRateLimitEstimator() {
   return (
     <ToolLayout id="api-rate-limit-estimator">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <ToolInput value={requests} onChange={setRequests} placeholder="1000" label="Max Requests" rows={1} />
-        <ToolInput value={window} onChange={setWindow} placeholder="60" label="Time Window (seconds)" rows={1} />
+        <ToolInput
+          value={requests}
+          onChange={setRequests}
+          placeholder="1000"
+          label="Max Requests"
+          rows={1}
+        />
+        <ToolInput
+          value={window}
+          onChange={setWindow}
+          placeholder="60"
+          label="Time Window (seconds)"
+          rows={1}
+        />
       </div>
       <ToolButton onClick={estimate}>Estimate</ToolButton>
       <ToolOutput value={output} label="Rate Limit Analysis" />

@@ -1,16 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  Home,
-  Layers,
-  Wrench,
-  FileText,
-  Gamepad2,
-  Lightbulb,
-  Info,
-  Sun,
-  Moon,
-} from "lucide-react";
+import { Home, Layers, Wrench, FileText, Gamepad2, Lightbulb, Info, Sun, Moon } from "lucide-react";
 import {
   CommandDialog,
   CommandEmpty,
@@ -61,10 +51,7 @@ export function CommandMenu() {
         <CommandEmpty>No results found.</CommandEmpty>
         <CommandGroup heading="Navigation">
           {navItems.map((item) => (
-            <CommandItem
-              key={item.path}
-              onSelect={() => runCommand(() => navigate(item.path))}
-            >
+            <CommandItem key={item.path} onSelect={() => runCommand(() => navigate(item.path))}>
               <item.icon className="mr-2 h-4 w-4" />
               <span>{item.label}</span>
               <CommandShortcut>{item.path}</CommandShortcut>
@@ -73,11 +60,7 @@ export function CommandMenu() {
         </CommandGroup>
         <CommandGroup heading="Actions">
           <CommandItem
-            onSelect={() =>
-              runCommand(() =>
-                setTheme(theme === "dark" ? "light" : "dark")
-              )
-            }
+            onSelect={() => runCommand(() => setTheme(theme === "dark" ? "light" : "dark"))}
           >
             {theme === "dark" ? (
               <Sun className="mr-2 h-4 w-4" />
