@@ -40,6 +40,7 @@ const authLimiter =
 const allowedOrigins = [
   config.clientUrl,
   "http://localhost:1000",
+  "http://localhost:1001",
   "http://localhost:5173",
   "https://devspace-gold.vercel.app",
 ].filter(Boolean);
