@@ -4,7 +4,6 @@ import { Header, Footer } from "./components/site";
 import { Home as HomeIcon } from "lucide-react";
 import ScrollToTop from "./components/ScrollToTop";
 import { CommandMenu } from "./components/CommandMenu";
-import GoogleOAuthPrompt from "./components/GoogleOAuthPrompt";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { RequireAdmin } from "./components/admin/RequireAdmin";
 import { AdminLayout } from "./components/admin/AdminLayout";
@@ -64,7 +63,6 @@ function Layout({ children }: { children: React.ReactNode }) {
     <div className="flex min-h-screen flex-col">
       <ScrollToTop />
       <CommandMenu />
-      {!isAuth && !isAdmin && <GoogleOAuthPrompt />}
       {!isAuth && !isAdmin && <Header />}
       {isAuth && (
         <Link
