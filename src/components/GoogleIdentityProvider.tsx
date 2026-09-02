@@ -2,19 +2,26 @@ import { createContext, useContext, useEffect, useRef, useState, type ReactNode 
 import { useAuth } from "./AuthProvider";
 import { decodeJwtPayload, getGoogleClientId, type GoogleIdentity } from "@/lib/googleIdentity";
 
+const GSI_FAILED_KEY = "ds_gsi_failed";
+
 interface GoogleIdentityContextValue {
   detected: GoogleIdentity | null;
   clearDetected: () => void;
+  gsiFailed: boolean;
 }
 
 const GoogleIdentityContext = createContext<GoogleIdentityContextValue>({
   detected: null,
   clearDetected: () => {},
+  gsiFailed: false,
 });
 
 export function GoogleIdentityProvider({ children }: { children: ReactNode }) {
   const { user } = useAuth();
   const [detected, setDetected] = useState<GoogleIdentity | null>(null);
+  const [gsiFailed, setGsiFailed] = useState(
+    () => sessionStorage.getItem(GSI_FAILED_KEY) === "true",
+  );
   const started = useRef(false);
 
   useEffect(() => {
@@ -22,6 +29,8 @@ export function GoogleIdentityProvider({ children }: { children: ReactNode }) {
       setDetected(null);
       return;
     }
+
+    if (gsiFailed) return;
 
     const clientId = getGoogleClientId();
     if (!clientId) return;
@@ -56,7 +65,12 @@ export function GoogleIdentityProvider({ children }: { children: ReactNode }) {
         prompt_parent: container.id,
       });
 
-      window.google.accounts.id.prompt();
+      window.google.accounts.id.prompt((notification) => {
+        if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+          setGsiFailed(true);
+          sessionStorage.setItem(GSI_FAILED_KEY, "true");
+        }
+      });
     };
 
     if (window.google?.accounts?.id) {
@@ -74,10 +88,12 @@ export function GoogleIdentityProvider({ children }: { children: ReactNode }) {
         clearTimeout(timeout);
       };
     }
-  }, [user]);
+  }, [user, gsiFailed]);
 
   return (
-    <GoogleIdentityContext.Provider value={{ detected, clearDetected: () => setDetected(null) }}>
+    <GoogleIdentityContext.Provider
+      value={{ detected, clearDetected: () => setDetected(null), gsiFailed }}
+    >
       {children}
     </GoogleIdentityContext.Provider>
   );

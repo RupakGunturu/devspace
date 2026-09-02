@@ -10,7 +10,7 @@ import { mergeLocalActivityToBackend } from "@/lib/mergeActivity";
 
 export default function Login() {
   const { user, login, logout, refreshUser } = useAuth();
-  const { detected, clearDetected } = useGoogleIdentity();
+  const { detected, clearDetected, gsiFailed } = useGoogleIdentity();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const redirectTo = searchParams.get("redirect") || "/";
@@ -210,9 +210,15 @@ export default function Login() {
         <p className="mb-6 text-sm text-muted">Sign in to sync your progress across devices.</p>
 
         <GoogleLoginPopup className="mb-2 w-full" redirectTo={redirectTo} />
-        <p className="mb-4 text-center text-[11px] leading-relaxed text-muted">
-          Your name, email, and avatar will be imported from your Google account.
-        </p>
+        {gsiFailed ? (
+          <p className="mb-4 text-center text-[11px] leading-relaxed text-muted">
+            Quick Google sign-in is unavailable — use the button above or sign in with email below.
+          </p>
+        ) : (
+          <p className="mb-4 text-center text-[11px] leading-relaxed text-muted">
+            Your name, email, and avatar will be imported from your Google account.
+          </p>
+        )}
 
         <div className="relative my-4">
           <div className="absolute inset-0 flex items-center">
