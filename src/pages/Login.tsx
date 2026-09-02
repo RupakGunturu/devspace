@@ -34,8 +34,9 @@ export default function Login() {
       toast.success(`Welcome${account.name ? `, ${account.name}` : ""}!`);
       navigate(redirectTo);
     } catch {
-      toast.danger("Google sign-in failed");
+      sessionStorage.setItem("ds_redirect", redirectTo);
       clearDetected();
+      window.location.assign(authApi.getGoogleUrl());
     } finally {
       setLoading(false);
     }

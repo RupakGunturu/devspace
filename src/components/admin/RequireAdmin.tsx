@@ -1,10 +1,11 @@
 import { useAuth } from "@/components/AuthProvider";
 import { useAdmin } from "@/hooks/useAdmin";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 
 export function RequireAdmin({ children }: { children: React.ReactNode }) {
   const { loading: authLoading } = useAuth();
   const { isAdmin, loading: adminLoading } = useAdmin();
+  const location = useLocation();
 
   if (authLoading || adminLoading) {
     return (
@@ -14,6 +15,9 @@ export function RequireAdmin({ children }: { children: React.ReactNode }) {
     );
   }
 
-  if (!isAdmin) return <Navigate to="/login" replace />;
+  if (!isAdmin) {
+    const redirect = encodeURIComponent(location.pathname + location.search);
+    return <Navigate to={`/login?redirect=${redirect}`} replace />;
+  }
   return <>{children}</>;
 }
