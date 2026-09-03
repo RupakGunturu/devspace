@@ -13,14 +13,34 @@ const DATA = {
   posts: { file: "/src/data/posts.ts", export: "POSTS", normalize: normalizePost },
   series: { file: "/src/data/series.ts", export: "SERIES", normalize: normalizeSeries },
   tips: { file: "/src/data/tips.ts", export: "tips", normalize: normalizeTip },
-  cheatSheets: { file: "/src/data/cheat-sheets.ts", export: "cheatSheets", normalize: normalizeCheatSheet },
+  cheatSheets: {
+    file: "/src/data/cheat-sheets.ts",
+    export: "cheatSheets",
+    normalize: normalizeCheatSheet,
+  },
   games: { file: "/src/data/games.ts", export: "GAMES", normalize: normalizeGame },
   tools: { file: "/src/data/tools.ts", export: "TOOLS", normalize: normalizeTool },
-  hiddenGems: { file: "/src/data/hidden-gems.ts", export: "HIDDEN_GEMS", normalize: normalizeHiddenGem },
+  hiddenGems: {
+    file: "/src/data/hidden-gems.ts",
+    export: "HIDDEN_GEMS",
+    normalize: normalizeHiddenGem,
+  },
   hiring: { file: "/src/data/hiring.ts", export: "HIRING_ITEMS", normalize: normalizeHiring },
-  mcpSkills: { file: "/src/data/mcp-skills.ts", export: "MCP_SKILLS", normalize: normalizeMcpSkill },
-  learningResources: { file: "/src/data/learning-resources.ts", export: "learningResources", normalize: normalizeLearningResource },
-  stackBreakdowns: { file: "/src/data/stack-breakdowns.ts", export: "STACK_BREAKDOWNS", normalize: normalizeStackBreakdown },
+  mcpSkills: {
+    file: "/src/data/mcp-skills.ts",
+    export: "MCP_SKILLS",
+    normalize: normalizeMcpSkill,
+  },
+  learningResources: {
+    file: "/src/data/learning-resources.ts",
+    export: "learningResources",
+    normalize: normalizeLearningResource,
+  },
+  stackBreakdowns: {
+    file: "/src/data/stack-breakdowns.ts",
+    export: "STACK_BREAKDOWNS",
+    normalize: normalizeStackBreakdown,
+  },
 };
 
 function slugify(s) {

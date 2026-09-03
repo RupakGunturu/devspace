@@ -41,9 +41,7 @@ afterAll(async () => {
 
 describe("Content seed + public API", () => {
   it("seeds all content types", async () => {
-    const counts = await ContentItem.aggregate([
-      { $group: { _id: "$type", n: { $sum: 1 } } },
-    ]);
+    const counts = await ContentItem.aggregate([{ $group: { _id: "$type", n: { $sum: 1 } } }]);
     const map = Object.fromEntries(counts.map((c) => [c._id, c.n]));
     expect(map.post).toBe(108);
     expect(map.tool).toBe(381);
@@ -93,9 +91,9 @@ describe("Content seed + public API", () => {
     );
 
     const res = await request(app).get("/api/content").query({ type: "game" });
-    const probe = res.body.items.find(
-      (i: { slug: string }) => i.slug === "registry-probe",
-    ) as { codeAvailable: boolean };
+    const probe = res.body.items.find((i: { slug: string }) => i.slug === "registry-probe") as {
+      codeAvailable: boolean;
+    };
     expect(probe).toBeDefined();
     expect(probe.codeAvailable).toBe(true);
 

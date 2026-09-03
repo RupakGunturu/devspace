@@ -10,7 +10,12 @@ const router = Router();
 // GET /api/content?type=&shuffle=&limit=&q=
 router.get("/", async (req, res) => {
   try {
-    const { type, shuffle, limit = "500", q } = req.query as {
+    const {
+      type,
+      shuffle,
+      limit = "500",
+      q,
+    } = req.query as {
       type?: string;
       shuffle?: string;
       limit?: string;

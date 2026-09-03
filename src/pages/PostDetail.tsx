@@ -8,7 +8,7 @@ import { ToolIcon } from "../components/tools/ToolIcon";
 export default function PostPage() {
   const { slug } = useParams<{ slug: string }>();
   const post = usePostBySlug(slug!);
-  const series = post ? useSeriesBySlug(post.series) : undefined;
+  const series = useSeriesBySlug(post?.series ?? "");
 
   const visitUrl = post?.externalUrl;
 
