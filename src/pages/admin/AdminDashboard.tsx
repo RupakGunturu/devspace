@@ -22,13 +22,8 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import { EmptyState } from "@/components/admin/EmptyState";
 import { motion } from "motion/react";
-import {
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-  type ChartConfig,
-} from "@/components/ui/chart";
-import { Bar, BarChart, XAxis, YAxis, CartesianGrid, Cell, ResponsiveContainer } from "recharts";
+import { ChartContainer, ChartTooltipContent, type ChartConfig } from "@/components/ui/chart";
+import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
 
 type Stats = {
   total: number;
@@ -198,33 +193,71 @@ export default function AdminDashboard() {
           {loading ? (
             <Skeleton className="h-72 w-full flex-1 bg-line" />
           ) : (
-            <ChartContainer config={chartConfig} className="h-72 w-full flex-1">
-              <BarChart data={chartData} margin={{ top: 8, right: 12, bottom: 8, left: 0 }}>
-                <CartesianGrid vertical={false} stroke="var(--line)" strokeDasharray="3 3" />
-                <XAxis
-                  dataKey="label"
-                  tickLine={false}
-                  axisLine={false}
-                  interval={0}
-                  tick={{ fontSize: 10 }}
-                />
-                <YAxis
-                  tickLine={false}
-                  axisLine={false}
-                  allowDecimals={false}
-                  tick={{ fontSize: 11 }}
-                />
-                <ChartTooltip
-                  cursor={{ fill: "var(--paper-dim)", opacity: 0.4 }}
-                  content={<ChartTooltipContent />}
-                />
-                <Bar dataKey="count" radius={[4, 4, 0, 0]} maxBarSize={48}>
-                  {chartData.map((d) => (
-                    <Cell key={d.type} fill={d.color} />
+            <div className="flex flex-1 flex-col items-center gap-4 lg:flex-row lg:gap-6">
+              <ChartContainer config={chartConfig} className="h-72 w-full max-w-xs flex-1">
+                <ResponsiveContainer width="100%" height="100%">
+                  <PieChart>
+                    <Pie
+                      data={chartData}
+                      dataKey="count"
+                      nameKey="label"
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={62}
+                      outerRadius={92}
+                      paddingAngle={2}
+                      stroke="var(--card)"
+                      strokeWidth={2}
+                    >
+                      {chartData.map((d) => (
+                        <Cell key={d.type} fill={d.color} />
+                      ))}
+                    </Pie>
+                    <Tooltip content={<ChartTooltipContent />} />
+                    {stats && (
+                      <text
+                        x="50%"
+                        y="47%"
+                        textAnchor="middle"
+                        className="fill-foreground"
+                        style={{ fontFamily: "inherit" }}
+                      >
+                        <tspan
+                          x="50%"
+                          dy="0"
+                          fill="var(--foreground)"
+                          style={{ fontSize: 28, fontWeight: 700 }}
+                        >
+                          {stats.total}
+                        </tspan>
+                        <tspan
+                          x="50%"
+                          dy="20"
+                          fill="var(--muted)"
+                          style={{ fontSize: 11, textTransform: "uppercase", letterSpacing: 1 }}
+                        >
+                          total
+                        </tspan>
+                      </text>
+                    )}
+                  </PieChart>
+                </ResponsiveContainer>
+              </ChartContainer>
+              <ul className="grid w-full grid-cols-1 gap-1.5 sm:grid-cols-2">
+                {chartData
+                  .filter((d) => d.count > 0)
+                  .map((d) => (
+                    <li key={d.type} className="flex items-center gap-2 text-sm">
+                      <span
+                        className="h-2.5 w-2.5 shrink-0 rounded-sm"
+                        style={{ backgroundColor: d.color }}
+                      />
+                      <span className="min-w-0 flex-1 truncate text-muted">{d.label}</span>
+                      <span className="font-mono text-sm font-bold text-foreground">{d.count}</span>
+                    </li>
                   ))}
-                </Bar>
-              </BarChart>
-            </ChartContainer>
+              </ul>
+            </div>
           )}
         </div>
       </div>

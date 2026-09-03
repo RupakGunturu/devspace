@@ -67,6 +67,67 @@ export async function getContent(req: AuthRequest, res: Response) {
   res.json({ item });
 }
 
+/** Normalize a name/slug for case-insensitive matching (e.g. BugFinder.tsx -> bugfinder) */
+function normalizeCodeName(s: string): string {
+  return s
+    .replace(/\.[^.]+$/, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, "");
+}
+
+/**
+ * Fetch a content item's real source from the GitHub repo.
+ * Games/tools live in src/components/{games|tools}/<Component>.tsx; we locate
+ * the file by matching the item's slug against the repo directory listing, then
+ * read its committed content. Falls back to the stored codeFiles if the repo
+ * read fails or no matching file exists.
+ */
+export async function getContentSource(req: AuthRequest, res: Response) {
+  const item = await ContentItem.findById(req.params.id).lean();
+  if (!item) {
+    res.status(404).json({ error: "Content not found" });
+    return;
+  }
+
+  const dir = CONTENT_DIRS[item.type as string];
+  if (!dir) {
+    res.json({ path: null, content: null, exists: false, source: "db" });
+    return;
+  }
+
+  const slugNorm = normalizeCodeName(String(item.slug ?? ""));
+
+  try {
+    const entries = await githubService.listDir(dir);
+    const match = entries.find((e) => e.type === "file" && normalizeCodeName(e.name) === slugNorm);
+    if (match) {
+      const path = `${dir}/${match.name}`;
+      const { content } = await githubService.getFile(path);
+      res.json({ path, content, exists: true, source: "repo" });
+      return;
+    }
+
+    const files = Array.isArray((item as { codeFiles?: unknown }).codeFiles)
+      ? ((item as { codeFiles: { path: string; content: string }[] }).codeFiles ?? [])
+      : [];
+    if (files.length > 0) {
+      res.json({ path: files[0].path, content: files[0].content, exists: true, source: "db" });
+      return;
+    }
+
+    res.json({ path: null, content: null, exists: false, source: "none" });
+  } catch {
+    const files = Array.isArray((item as { codeFiles?: unknown }).codeFiles)
+      ? ((item as { codeFiles: { path: string; content: string }[] }).codeFiles ?? [])
+      : [];
+    if (files.length > 0) {
+      res.json({ path: files[0].path, content: files[0].content, exists: true, source: "db" });
+      return;
+    }
+    res.json({ path: null, content: null, exists: false, source: "none" });
+  }
+}
+
 export async function createContent(req: AuthRequest, res: Response) {
   const {
     type,

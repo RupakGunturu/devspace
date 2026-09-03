@@ -3,29 +3,13 @@ import { useEffect, useState } from "react";
 import { useGameBySlug } from "../lib/contentStore";
 import { userActivity } from "../lib/userActivity";
 import { useAuth } from "../components/AuthProvider";
-import { BugFinder } from "../components/games/BugFinder";
-import { DevWordle } from "../components/games/DevWordle";
-import { DevTrivia } from "../components/games/DevTrivia";
-import { TechMemory } from "../components/games/TechMemory";
-import { StackMatcher } from "../components/games/StackMatcher";
-import { HttpRoulette } from "../components/games/HttpRoulette";
-import { BinaryRace } from "../components/games/BinaryRace";
+import { GAMES_REGISTRY } from "../components/games/registry";
 import { toast } from "@/components/ui/toaster";
-
-const REGISTRY: Record<string, React.ComponentType> = {
-  "bug-finder": BugFinder,
-  devwordle: DevWordle,
-  "dev-trivia": DevTrivia,
-  "tech-memory": TechMemory,
-  "stack-matcher": StackMatcher,
-  "http-roulette": HttpRoulette,
-  "binary-race": BinaryRace,
-};
 
 export default function GamePage() {
   const { slug } = useParams<{ slug: string }>();
   const game = useGameBySlug(slug!);
-  const Component = game && game.codeAvailable !== false ? REGISTRY[game.slug] : undefined;
+  const Component = game && game.codeAvailable !== false ? GAMES_REGISTRY[game.slug] : undefined;
   const { user } = useAuth();
   const navigate = useNavigate();
   const [isFav, setIsFav] = useState(false);

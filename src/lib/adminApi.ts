@@ -86,6 +86,11 @@ export const adminApi = {
 
   getContent: (id: string) => request<{ item: ContentItem }>(`/api/admin/content/${id}`),
 
+  getContentSource: (id: string) =>
+    request<{ path: string | null; content: string | null; exists: boolean; source: string }>(
+      `/api/admin/content/${id}/source`,
+    ),
+
   createContent: (data: Partial<ContentItem>) =>
     request<{ item: ContentItem }>("/api/admin/content", {
       method: "POST",

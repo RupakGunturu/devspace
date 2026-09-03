@@ -97,6 +97,14 @@ export const githubService = {
     return { content: decode(data.content), sha: data.sha };
   },
 
+  /** List the files in a directory on a branch (top-level only) */
+  async listDir(path: string, branch = "main"): Promise<{ name: string; type: string }[]> {
+    const data = await gh<{ name: string; type: string }[]>(
+      `/repos/${repoPath()}/contents/${path}?ref=${encodeURIComponent(branch)}`,
+    );
+    return Array.isArray(data) ? data : [];
+  },
+
   /** Create a single file on a branch */
   async createFile(branch: string, path: string, content: string, message: string) {
     return gh(`/repos/${repoPath()}/contents/${path}`, {

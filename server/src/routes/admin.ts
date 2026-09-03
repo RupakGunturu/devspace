@@ -6,6 +6,7 @@ import fs from "fs";
 import {
   listContent,
   getContent,
+  getContentSource,
   createContent,
   updateContent,
   deleteContent,
@@ -44,6 +45,7 @@ const admin = [authenticate, authorize("admin")];
 // Content CRUD
 router.get("/content", ...admin, listContent);
 router.get("/content/:id", ...admin, getContent);
+router.get("/content/:id/source", ...admin, getContentSource);
 router.post("/content", ...admin, createContent);
 router.put("/content/:id", ...admin, updateContent);
 router.delete("/content/:id", ...admin, deleteContent);

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { adminApi, type ContentType, type CodeFile } from "@/lib/adminApi";
 import { CodeEditor } from "@/components/admin/CodeEditor";
 import { MarkdownEditor } from "@/components/admin/MarkdownEditor";
@@ -7,6 +7,8 @@ import { ConfirmDialog } from "@/components/admin/ConfirmDialog";
 import { toast } from "@/components/ui/toaster";
 import { Skeleton } from "@/components/ui/skeleton";
 import { motion } from "motion/react";
+import { GAMES_REGISTRY } from "@/components/games/registry";
+import { Copy, Check, ExternalLink, Play } from "lucide-react";
 
 const TYPE_LABELS: Record<ContentType, string> = {
   post: "Post",
@@ -55,6 +57,20 @@ function toComponentName(s: string): string {
     .join("");
 }
 
+function GamePreview({ slug }: { slug: string }) {
+  const Component = GAMES_REGISTRY[slug];
+  if (!Component) {
+    return (
+      <p className="py-8 text-center font-mono text-[12px] text-muted">
+        Live preview isn't available for this custom content yet.
+        <br />
+        Open it on the public site to play.
+      </p>
+    );
+  }
+  return <Component />;
+}
+
 function EditorSkeleton() {
   return (
     <div className="space-y-5">
@@ -82,6 +98,7 @@ export default function ContentEditor() {
   const [loading, setLoading] = useState(isEdit);
   const [type, setType] = useState<ContentType>(forcedType ?? "post");
   const [title, setTitle] = useState("");
+  const [slug, setSlug] = useState("");
   const [description, setDescription] = useState("");
   const [body, setBody] = useState("");
   const [image, setImage] = useState("");
@@ -94,6 +111,13 @@ export default function ContentEditor() {
   const [status, setStatus] = useState<"draft" | "published">("draft");
   const [codeFiles, setCodeFiles] = useState<CodeFile[]>([]);
   const [isCode, setIsCode] = useState(forcedType === "game" || forcedType === "tool");
+
+  const [codeMode, setCodeMode] = useState<"edit" | "source" | "preview">("edit");
+  const [sourceContent, setSourceContent] = useState<string>("");
+  const [sourcePath, setSourcePath] = useState<string>("");
+  const [sourceLoading, setSourceLoading] = useState(false);
+  const [sourceError, setSourceError] = useState("");
+  const [copied, setCopied] = useState(false);
 
   const [category, setCategory] = useState("");
   const [icon, setIcon] = useState("");
@@ -117,6 +141,7 @@ export default function ContentEditor() {
       .then(({ item }) => {
         setType(item.type);
         setTitle(item.title);
+        setSlug(item.slug);
         setDescription(item.description);
         setBody(item.body);
         setImage(item.image ?? "");
@@ -135,6 +160,31 @@ export default function ContentEditor() {
         setCadence(item.cadence ?? "");
         setResourceCost(item.resourceCost ?? "");
         setIsListing(item.isListing ?? false);
+
+        if (item.type === "game" || item.type === "tool") {
+          setSourceLoading(true);
+          adminApi
+            .getContentSource(id!)
+            .then((src) => {
+              setSourceContent(src.content ?? "");
+              setSourcePath(src.path ?? "");
+              if (src.source === "repo" && !src.exists)
+                setSourceError("No matching source found in the repo.");
+              if (src.exists && src.content) {
+                const fallbackPath = `${CONTENT_DIRS[item.type] ?? ""}/${
+                  toComponentName(item.title) || "NewComponent"
+                }.tsx`;
+                const path = src.path ?? fallbackPath;
+                setCodeFiles((prev) =>
+                  prev.length === 0
+                    ? [{ path, content: src.content as string, isMain: true }]
+                    : prev,
+                );
+              }
+            })
+            .catch((e) => setSourceError(e.message))
+            .finally(() => setSourceLoading(false));
+        }
       })
       .catch((e) => {
         setError(e.message);
@@ -154,6 +204,23 @@ export default function ContentEditor() {
     if (!path) return;
     setBody((b) => `${b}${b ? "\n\n" : ""}![image](${path})\n`);
     setImgPath("");
+  };
+
+  const handleCopySource = async () => {
+    const text =
+      sourceContent ||
+      codeFiles
+        .map((f) => (f.path ? `// ${f.path}\n${f.content}` : f.content))
+        .filter(Boolean)
+        .join("\n\n");
+    if (!text) return;
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch {
+      toast.danger("Couldn't copy to clipboard");
+    }
   };
 
   const dir = CONTENT_DIRS[type];
@@ -585,63 +652,142 @@ export default function ContentEditor() {
             </button>
           </div>
 
-          {codeFiles.length === 0 && !isEdit && (
-            <button
-              type="button"
-              onClick={() => setCodeFiles([{ path: filePath, content: "", isMain: true }])}
-              className="rounded-md border border-dashed border-line p-4 text-sm text-muted hover:border-yellow hover:text-yellow"
-            >
-              + Add main component file
-            </button>
-          )}
+          <div className="flex flex-wrap items-center gap-1">
+            {(["edit", "source", "preview"] as const).map((m) => (
+              <button
+                key={m}
+                type="button"
+                onClick={() => setCodeMode(m)}
+                className={`rounded-sm px-3 py-1 font-mono text-[11px] uppercase tracking-wide transition-colors ${
+                  codeMode === m
+                    ? "bg-yellow font-bold text-ink"
+                    : "text-muted hover:bg-paper-dim hover:text-foreground"
+                }`}
+              >
+                {m}
+              </button>
+            ))}
+            {(codeMode === "source" || codeMode === "preview") && (
+              <button
+                type="button"
+                onClick={handleCopySource}
+                className="ml-auto flex items-center gap-1 rounded-sm bg-paper-dim px-2 py-1 font-mono text-[11px] text-foreground hover:text-yellow"
+              >
+                {copied ? (
+                  <Check className="h-3.5 w-3.5 text-emerald-500" />
+                ) : (
+                  <Copy className="h-3.5 w-3.5" />
+                )}
+                {copied ? "Copied" : "Copy code"}
+              </button>
+            )}
+          </div>
 
-          {codeFiles.map((f, i) => (
-            <div key={i} className="space-y-2">
-              <div className="flex items-center gap-2">
-                <input
-                  value={
-                    f.path === "" && i === 0 && !codeFiles.some((x) => x.path) ? filePath : f.path
-                  }
-                  onChange={(e) => {
-                    const next = [...codeFiles];
-                    next[i] = { ...next[i], path: e.target.value };
-                    setCodeFiles(next);
-                  }}
-                  placeholder={filePath || "src/components/.../File.tsx"}
-                  className="flex-1 rounded-md border border-line bg-input-bg px-3 py-1.5 font-mono text-[12px] text-input-text outline-none focus:ring-2 focus:ring-yellow"
-                />
-                <label className="flex items-center gap-1 font-mono text-[11px] text-muted">
-                  <input
-                    type="checkbox"
-                    checked={f.isMain}
-                    onChange={(e) => {
-                      const next = codeFiles.map((x, xi) =>
-                        xi === i ? { ...x, isMain: e.target.checked } : x,
-                      );
-                      setCodeFiles(next);
-                    }}
-                  />
-                  main
-                </label>
+          {codeMode === "edit" && (
+            <>
+              {codeFiles.length === 0 && !isEdit && (
                 <button
                   type="button"
-                  onClick={() => setCodeFiles(codeFiles.filter((_, xi) => xi !== i))}
-                  className="text-muted hover:text-coral"
+                  onClick={() => setCodeFiles([{ path: filePath, content: "", isMain: true }])}
+                  className="rounded-md border border-dashed border-line p-4 text-sm text-muted hover:border-yellow hover:text-yellow"
                 >
-                  ×
+                  + Add main component file
                 </button>
-              </div>
-              <CodeEditor
-                value={f.content}
-                onChange={(v) => {
-                  const next = [...codeFiles];
-                  next[i] = { ...next[i], content: v };
-                  setCodeFiles(next);
-                }}
-                placeholder={`// ${new Intl.NumberFormat("en", { notation: "compact" }).format(0)}...`}
-              />
+              )}
+
+              {codeFiles.map((f, i) => (
+                <div key={i} className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <input
+                      value={
+                        f.path === "" && i === 0 && !codeFiles.some((x) => x.path)
+                          ? filePath
+                          : f.path
+                      }
+                      onChange={(e) => {
+                        const next = [...codeFiles];
+                        next[i] = { ...next[i], path: e.target.value };
+                        setCodeFiles(next);
+                      }}
+                      placeholder={filePath || "src/components/.../File.tsx"}
+                      className="flex-1 rounded-md border border-line bg-input-bg px-3 py-1.5 font-mono text-[12px] text-input-text outline-none focus:ring-2 focus:ring-yellow"
+                    />
+                    <label className="flex items-center gap-1 font-mono text-[11px] text-muted">
+                      <input
+                        type="checkbox"
+                        checked={f.isMain}
+                        onChange={(e) => {
+                          const next = codeFiles.map((x, xi) =>
+                            xi === i ? { ...x, isMain: e.target.checked } : x,
+                          );
+                          setCodeFiles(next);
+                        }}
+                      />
+                      main
+                    </label>
+                    <button
+                      type="button"
+                      onClick={() => setCodeFiles(codeFiles.filter((_, xi) => xi !== i))}
+                      className="text-muted hover:text-coral"
+                    >
+                      ×
+                    </button>
+                  </div>
+                  <CodeEditor
+                    value={f.content}
+                    onChange={(v) => {
+                      const next = [...codeFiles];
+                      next[i] = { ...next[i], content: v };
+                      setCodeFiles(next);
+                    }}
+                    placeholder={`// ${new Intl.NumberFormat("en", { notation: "compact" }).format(0)}...`}
+                  />
+                </div>
+              ))}
+            </>
+          )}
+
+          {codeMode === "source" && (
+            <div className="space-y-2">
+              {sourceLoading ? (
+                <Skeleton className="h-72 w-full bg-line" />
+              ) : sourceError ? (
+                <p className="rounded-sm bg-coral/10 p-2 font-mono text-[12px] text-coral">
+                  Couldn't load source: {sourceError}
+                </p>
+              ) : (
+                <>
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-[11px] text-muted">
+                      {sourcePath || filePath || "No file"} · read-only
+                    </span>
+                    <span className="font-mono text-[10px] text-muted">
+                      {sourceContent.length.toLocaleString()} chars
+                    </span>
+                  </div>
+                  <CodeEditor value={sourceContent} onChange={() => {}} readOnly height="380px" />
+                </>
+              )}
             </div>
-          ))}
+          )}
+
+          {codeMode === "preview" && (
+            <div className="space-y-2">
+              <div className="flex items-center gap-2 font-mono text-[11px] text-muted">
+                <Play className="h-3.5 w-3.5" />
+                Live preview
+                <Link
+                  to={`/games/${slug}`}
+                  className="ml-auto flex items-center gap-1 text-yellow hover:underline"
+                >
+                  Open on site <ExternalLink className="h-3 w-3" />
+                </Link>
+              </div>
+              <div className="rounded-md border border-line bg-card p-4">
+                <GamePreview slug={slug} />
+              </div>
+            </div>
+          )}
         </div>
       ) : (
         <div>
