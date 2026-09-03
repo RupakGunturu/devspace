@@ -1005,12 +1005,12 @@ export const POSTS: Post[] = [
     publishedAt: "2026-04-22",
   },
 
-  // ── Hot Take ───────────────────────────────────────────────
+  // ── Startup Terms ─────────────────────────────────────────
   {
     id: "p46",
     slug: "typescript-strict-default",
     title: "TypeScript strict mode should be on by default",
-    series: "hot-take",
+    series: "startup-terms",
     excerpt: 'Every "it slows me down" argument falls apart at 10k lines of code.',
     body: b(
       `Turning off strict mode to move faster early on just means paying the type-safety cost later, at a worse exchange rate, once the codebase is bigger and the bugs are harder to trace back. Strict mode from day one feels slower for the first week and faster for every week after.`,
@@ -1021,7 +1021,7 @@ export const POSTS: Post[] = [
     id: "p47",
     slug: "teach-debugging-first",
     title: "Tutorials should teach debugging before they teach syntax",
-    series: "hot-take",
+    series: "startup-terms",
     excerpt: "Nobody's first real skill should be copying code that already works.",
     body: b(
       `Most tutorials hand you working code and explain syntax. But the actual daily skill of being a developer is reading broken code and figuring out why. Teaching debugging — reading stack traces, using breakpoints, forming hypotheses — earlier would produce more confident beginners than another "build a todo app" walkthrough.`,
@@ -1032,7 +1032,7 @@ export const POSTS: Post[] = [
     id: "p48",
     slug: "leetcode-vs-real-project",
     title: "LeetCode streaks are a worse signal than one real project",
-    series: "hot-take",
+    series: "startup-terms",
     excerpt: "300 days of easy problems teaches pattern matching, not building.",
     body: b(
       `A long LeetCode streak proves consistency, which matters — but a single deployed project with real users, real bugs, and real deployment headaches teaches things algorithm grinding never will: how systems fail, how requirements change, how to finish something. Both have value; only one gets talked about like it's the whole job.`,
@@ -1043,7 +1043,7 @@ export const POSTS: Post[] = [
     id: "p100",
     slug: "growth-loops",
     title: "Growth Loops — the engine behind products that grow themselves",
-    series: "hot-take",
+    series: "startup-terms",
     excerpt:
       "Why the best products don't need a bigger marketing budget — they need a closed loop.",
     body: growthLoopsMd,
@@ -1054,7 +1054,7 @@ export const POSTS: Post[] = [
     id: "p101",
     slug: "product-market-fit",
     title: "Product-Market Fit — the moment your product clicks with the market",
-    series: "hot-take",
+    series: "startup-terms",
     excerpt:
       "When your product satisfies a strong market demand — people aren't just trying it, they're sticking with it.",
     body: pmfMd,
@@ -1064,7 +1064,7 @@ export const POSTS: Post[] = [
     id: "p102",
     slug: "mvp",
     title: "MVP — Minimum Viable Product",
-    series: "hot-take",
+    series: "startup-terms",
     excerpt:
       "The smallest version of your product that lets you test your core hypothesis with real users.",
     body: mvpMd,
@@ -1074,7 +1074,7 @@ export const POSTS: Post[] = [
     id: "p103",
     slug: "cac-ltv",
     title: "CAC & LTV — the economics of acquiring and retaining customers",
-    series: "hot-take",
+    series: "startup-terms",
     excerpt:
       "Customer Acquisition Cost vs Lifetime Value — the ratio that determines if your business model works.",
     body: cacLtvMd,
@@ -1084,7 +1084,7 @@ export const POSTS: Post[] = [
     id: "p104",
     slug: "flywheel",
     title: "Flywheel — the self-reinforcing business model",
-    series: "hot-take",
+    series: "startup-terms",
     excerpt:
       "Unlike a funnel that loses energy, a flywheel stores energy and spins faster the more it runs.",
     body: flywheelMd,
@@ -1094,7 +1094,7 @@ export const POSTS: Post[] = [
     id: "p105",
     slug: "pivot",
     title: "Pivot — knowing when to change direction",
-    series: "hot-take",
+    series: "startup-terms",
     excerpt:
       "A fundamental change in business direction — not tweaking a feature, but shifting the core strategy.",
     body: pivotMd,
@@ -1104,7 +1104,7 @@ export const POSTS: Post[] = [
     id: "p106",
     slug: "bootstrapping",
     title: "Bootstrapping — building without outside money",
-    series: "hot-take",
+    series: "startup-terms",
     excerpt:
       "Funding a business purely from personal savings, early revenue, and friends & family — 100% ownership in exchange for slower, disciplined growth.",
     body: bootstrappingMd,
@@ -1115,7 +1115,7 @@ export const POSTS: Post[] = [
     id: "p107",
     slug: "runway-burn-rate",
     title: "Runway & Burn Rate — how long your cash lasts",
-    series: "hot-take",
+    series: "startup-terms",
     excerpt:
       "Burn rate is how fast you spend; runway is how many months you survive. $600K in the bank at $50K/month burn buys exactly 12 months.",
     body: runwayBurnRateMd,
@@ -1126,7 +1126,7 @@ export const POSTS: Post[] = [
     id: "p108",
     slug: "network-effects",
     title: "Network Effects — when more users means a better product",
-    series: "hot-take",
+    series: "startup-terms",
     excerpt: "The most powerful growth mechanism in tech — and the hardest to build.",
     body: networkEffectsMd,
     publishedAt: "2026-06-10",
@@ -1135,7 +1135,7 @@ export const POSTS: Post[] = [
     id: "p109",
     slug: "churn",
     title: "Churn — the silent killer of growth",
-    series: "hot-take",
+    series: "startup-terms",
     excerpt:
       "The rate at which customers stop using your product. You can acquire all the users you want, but if they leave faster than they arrive, you're filling a leaky bucket.",
     body: churnMd,
@@ -1145,7 +1145,7 @@ export const POSTS: Post[] = [
     id: "p110",
     slug: "tam-sam-som",
     title: "TAM / SAM / SOM — understanding your market size",
-    series: "hot-take",
+    series: "startup-terms",
     excerpt:
       "The three layers of market sizing that help you understand how big your opportunity really is.",
     body: tamSamSomMd,
@@ -1155,7 +1155,7 @@ export const POSTS: Post[] = [
     id: "p111",
     slug: "unit-economics",
     title: "Unit Economics — does each customer make you money?",
-    series: "hot-take",
+    series: "startup-terms",
     excerpt:
       "Measures the revenue and cost associated with a single unit of your business. If your unit economics don't work, your business doesn't work.",
     body: unitEconomicsMd,
@@ -1165,7 +1165,7 @@ export const POSTS: Post[] = [
     id: "p112",
     slug: "ab-testing",
     title: "A/B Testing — replacing opinions with evidence",
-    series: "hot-take",
+    series: "startup-terms",
     excerpt:
       "Comparing two versions of something to see which one performs better — with real users, real data, and no guessing.",
     body: abTestingMd,
@@ -1175,7 +1175,7 @@ export const POSTS: Post[] = [
     id: "p113",
     slug: "retention",
     title: "Retention — the most important metric in any business",
-    series: "hot-take",
+    series: "startup-terms",
     excerpt:
       "The ability to keep users engaged over time. Without retention, nothing else matters.",
     body: retentionMd,
@@ -1185,7 +1185,7 @@ export const POSTS: Post[] = [
     id: "p114",
     slug: "virality",
     title: "Virality — engineering the conditions for organic sharing",
-    series: "hot-take",
+    series: "startup-terms",
     excerpt:
       "When your product spreads through users — each user brings in more users, creating exponential growth.",
     body: viralityMd,
@@ -1195,7 +1195,7 @@ export const POSTS: Post[] = [
     id: "p115",
     slug: "pirate-metrics",
     title: "Pirate Metrics (AAARRR) — the six-stage growth funnel",
-    series: "hot-take",
+    series: "startup-terms",
     excerpt:
       "Awareness, Acquisition, Activation, Revenue, Retention, Referral — the full journey from stranger to promoter.",
     body: pirateMetricsMd,
@@ -1206,7 +1206,7 @@ export const POSTS: Post[] = [
     id: "p116",
     slug: "rule-of-40",
     title: "The Rule of 40 — the one-number health check for software companies",
-    series: "hot-take",
+    series: "startup-terms",
     excerpt:
       "Revenue growth rate plus profit margin should be at least 40% — how you get there changes at every stage of the lifecycle.",
     body: ruleOf40Md,

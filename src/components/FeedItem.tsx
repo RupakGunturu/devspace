@@ -23,8 +23,8 @@ export function FeedItem({ post }: { post: Post }) {
   const to =
     post.series === "stack-breakdown"
       ? `/stack-breakdown/${post.slug}`
-      : post.series === "hot-take"
-        ? `/hot-take/${post.slug}`
+      : post.series === "startup-terms"
+        ? `/startup-terms/${post.slug}`
         : `/post/${post.slug}`;
   return (
     <Link

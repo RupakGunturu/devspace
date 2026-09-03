@@ -140,8 +140,8 @@ export default function FeedSearchBar({
             navigate(
               p.series === "stack-breakdown"
                 ? `/stack-breakdown/${p.slug}`
-                : p.series === "hot-take"
-                  ? `/hot-take/${p.slug}`
+                : p.series === "startup-terms"
+                  ? `/startup-terms/${p.slug}`
                   : `/post/${p.slug}`,
             );
             setIsFocused(false);
@@ -162,8 +162,8 @@ export default function FeedSearchBar({
       navigate(
         post.series === "stack-breakdown"
           ? `/stack-breakdown/${post.slug}`
-          : post.series === "hot-take"
-            ? `/hot-take/${post.slug}`
+          : post.series === "startup-terms"
+            ? `/startup-terms/${post.slug}`
             : `/post/${post.slug}`,
       );
       setIsFocused(false);

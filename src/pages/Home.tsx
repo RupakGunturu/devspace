@@ -220,7 +220,7 @@ export default function Home() {
             doing, and real talk about the code we actually write.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <NeuFollowButton label="Level Up" hoverLabel="Let's go" to="/feed/hot-take" />
+            <NeuFollowButton label="Level Up" hoverLabel="Let's go" to="/feed/startup-terms" />
             <Link
               to="/games"
               className="flex h-12 items-center rounded-sm border-2 border-line px-6 font-mono text-sm font-bold text-foreground no-underline transition-all hover:border-foreground"
@@ -243,7 +243,7 @@ export default function Home() {
             "The Rabbit Hole",
             "Tech Debt Diaries",
             "The Interview They Don't Show You",
-            "Hot Take",
+            "Startup Terms",
             "GitHub Gems",
             "Killed By Google",
             "Code Roast",

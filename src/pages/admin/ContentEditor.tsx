@@ -24,7 +24,7 @@ const TYPE_LABELS: Record<ContentType, string> = {
 };
 
 const SERIES_OPTIONS = [
-  "hot-take",
+  "startup-terms",
   "react-101",
   "stack-deep-dive",
   "toolbox",

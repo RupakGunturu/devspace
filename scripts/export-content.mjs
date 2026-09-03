@@ -54,7 +54,7 @@ function normalizePost(row, i) {
   return {
     id: row.id || `post-${i}`,
     slug: row.slug || slugify(row.title),
-    type: "post",
+    type: row.series === "startup-terms" ? "startup-term" : "post",
     series: row.series || "uncategorized",
     title: row.title,
     excerpt: row.excerpt,

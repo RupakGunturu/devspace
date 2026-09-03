@@ -91,7 +91,7 @@ export default function App() {
           <Route path="/games" element={<Games />} />
           <Route path="/games/:slug" element={<GameDetail />} />
           <Route path="/post/:slug" element={<PostDetail />} />
-          <Route path="/hot-take/:slug" element={<PostDetail />} />
+          <Route path="/startup-terms/:slug" element={<PostDetail />} />
           <Route path="/stack-breakdown" element={<StackBreakdown />} />
           <Route path="/stack-breakdown/:slug" element={<StackBreakdownDetail />} />
           <Route path="/feed/:series" element={<SeriesFeed />} />

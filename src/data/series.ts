@@ -124,12 +124,12 @@ export const SERIES: Series[] = [
       "Real stories of refactoring legacy code — the mess, the fix, and what caused the mess in the first place.",
   },
   {
-    slug: "hot-take",
-    label: "Hot Take",
+    slug: "startup-terms",
+    label: "Startup Terms",
     icon: "Zap",
     cadence: "Weekly",
     description:
-      "An opinion piece, deliberately spicy — meant to start a discussion, not settle one.",
+      "A plain-English glossary of the startup terms every founder and engineer should know.",
   },
   {
     slug: "ship-it-or-skip-it",

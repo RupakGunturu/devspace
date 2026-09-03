@@ -88,6 +88,7 @@ export async function createContent(req: AuthRequest, res: Response) {
     cadence,
     resourceCost,
     isListing,
+    codeFiles = [],
   } = req.body;
 
   if (!type || !title) {
@@ -125,6 +126,7 @@ export async function createContent(req: AuthRequest, res: Response) {
     cadence,
     resourceCost,
     isListing,
+    codeFiles,
   });
 
   res.status(201).json({ item });
@@ -147,6 +149,7 @@ export async function updateContent(req: AuthRequest, res: Response) {
     "status",
     "series",
     "codeAvailable",
+    "codeFiles",
     "category",
     "icon",
     "tagline",
@@ -272,6 +275,30 @@ export async function submitCode(req: AuthRequest, res: Response) {
         message: commitMessage,
       })),
       commitMessage,
+    );
+
+    const codeFiles = files.map((f: { path: string; content: string; isMain?: boolean }) => ({
+      path: f.path,
+      content: f.content,
+      isMain: Boolean(f.isMain),
+    }));
+    await ContentItem.findOneAndUpdate(
+      { type, slug },
+      {
+        $set: {
+          type,
+          slug,
+          title,
+          description,
+          tags,
+          codeFiles,
+          status: "published",
+          codeAvailable: true,
+          codeDeployedAt: new Date(),
+        },
+        $setOnInsert: { version: 1 },
+      },
+      { upsert: true, new: true },
     );
 
     deployment.overallStatus = "verifying";

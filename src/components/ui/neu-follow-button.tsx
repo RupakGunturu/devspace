@@ -13,7 +13,7 @@ interface NeuFollowButtonProps {
 export function NeuFollowButton({
   label = "Level Up",
   hoverLabel = "Let's go",
-  to = "/feed/hot-take",
+  to = "/feed/startup-terms",
   className,
 }: NeuFollowButtonProps) {
   return (

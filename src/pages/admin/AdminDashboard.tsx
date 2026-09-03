@@ -148,39 +148,47 @@ export default function AdminDashboard() {
         <p className="rounded-sm bg-coral/10 p-2 font-mono text-[12px] text-coral">{error}</p>
       )}
 
-      {/* KPI cards */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {loading
-          ? Array.from({ length: 4 }).map((_, i) => (
-              <div key={i} className="rounded-lg border border-line bg-card p-4 shadow-sm">
-                <Skeleton className="mb-2 h-6 w-6 bg-line" />
-                <Skeleton className="mb-1 h-7 w-16 bg-line" />
-                <Skeleton className="h-4 w-24 bg-line" />
-              </div>
-            ))
-          : cards.map((card, i) => (
-              <motion.div
-                key={card.label}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.2, delay: i * 0.05 }}
-                className={`rounded-lg border border-line border-t-4 bg-card p-4 shadow-sm transition-shadow hover:shadow-md ${card.accent}`}
-              >
-                <div className="mb-2 flex items-center justify-between">
-                  <card.icon className="h-5 w-5 text-muted" style={{ color: "var(--muted)" }} />
-                  <span className="font-mono text-[10px] text-muted uppercase tracking-wide">
-                    {card.label}
-                  </span>
-                </div>
-                <p className="font-display text-3xl font-extrabold text-foreground">{card.value}</p>
-              </motion.div>
-            ))}
-      </div>
-
-      {/* Chart + sections */}
+      {/* Overview (left) + Content by type chart (right, responsive) */}
       <div className="grid gap-6 lg:grid-cols-5">
-        {/* Content by type chart */}
-        <div className="rounded-lg border border-line bg-card p-4 lg:col-span-3">
+        {/* Overview / KPI cards (left column) */}
+        <div className="rounded-lg border border-line bg-card p-4 lg:col-span-2">
+          <h2 className="mb-3 font-display text-base font-bold text-foreground">Overview</h2>
+          <div className="grid grid-cols-1 gap-3">
+            {loading
+              ? Array.from({ length: 4 }).map((_, i) => (
+                  <div key={i} className="rounded-lg border border-line bg-card p-4 shadow-sm">
+                    <Skeleton className="mb-2 h-6 w-6 bg-line" />
+                    <Skeleton className="mb-1 h-7 w-16 bg-line" />
+                    <Skeleton className="h-4 w-24 bg-line" />
+                  </div>
+                ))
+              : cards.map((card, i) => (
+                  <motion.div
+                    key={card.label}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.2, delay: i * 0.05 }}
+                    className={`rounded-lg border border-line border-t-4 bg-card p-4 shadow-sm transition-shadow hover:shadow-md ${card.accent}`}
+                  >
+                    <div className="mb-2 flex items-center justify-between">
+                      <card.icon
+                        className="h-5 w-5 text-muted"
+                        style={{ color: "var(--muted)" }}
+                      />
+                      <span className="font-mono text-[10px] text-muted uppercase tracking-wide">
+                        {card.label}
+                      </span>
+                    </div>
+                    <p className="font-display text-3xl font-extrabold text-foreground">
+                      {card.value}
+                    </p>
+                  </motion.div>
+                ))}
+          </div>
+        </div>
+
+        {/* Content by type chart (right column, responsive) */}
+        <div className="flex flex-col rounded-lg border border-line bg-card p-4 lg:col-span-3">
           <div className="mb-3 flex items-center justify-between">
             <h2 className="font-display text-base font-bold text-foreground">Content by type</h2>
             <span className="font-mono text-[11px] text-muted">
@@ -188,13 +196,13 @@ export default function AdminDashboard() {
             </span>
           </div>
           {loading ? (
-            <Skeleton className="h-64 w-full bg-line" />
+            <Skeleton className="h-72 w-full flex-1 bg-line" />
           ) : (
-            <ChartContainer config={chartConfig} className="h-64 w-full">
-              <BarChart data={chartData} margin={{ top: 8, right: 8, bottom: 8, left: -18 }}>
+            <ChartContainer config={chartConfig} className="h-72 w-full flex-1">
+              <BarChart data={chartData} margin={{ top: 8, right: 12, bottom: 8, left: 0 }}>
                 <CartesianGrid vertical={false} stroke="var(--line)" strokeDasharray="3 3" />
                 <XAxis
-                  dataKey="type"
+                  dataKey="label"
                   tickLine={false}
                   axisLine={false}
                   interval={0}
@@ -210,7 +218,7 @@ export default function AdminDashboard() {
                   cursor={{ fill: "var(--paper-dim)", opacity: 0.4 }}
                   content={<ChartTooltipContent />}
                 />
-                <Bar dataKey="count" radius={[4, 4, 0, 0]}>
+                <Bar dataKey="count" radius={[4, 4, 0, 0]} maxBarSize={48}>
                   {chartData.map((d) => (
                     <Cell key={d.type} fill={d.color} />
                   ))}
@@ -219,45 +227,43 @@ export default function AdminDashboard() {
             </ChartContainer>
           )}
         </div>
+      </div>
 
-        {/* Sections with counts */}
-        <div className="rounded-lg border border-line bg-card p-4 lg:col-span-2">
-          <h2 className="mb-3 font-display text-base font-bold text-foreground">Sections</h2>
-          {loading ? (
-            <div className="space-y-2">
-              {Array.from({ length: 6 }).map((_, i) => (
-                <Skeleton key={i} className="h-8 w-full bg-line" />
-              ))}
-            </div>
-          ) : (
-            <ul className="space-y-1.5">
-              {TYPE_META.map((m, i) => {
-                const Icon = m.icon;
-                const count = types[m.type] ?? 0;
-                return (
-                  <li
-                    key={m.type}
-                    className="flex items-center gap-3 rounded-md px-2 py-1.5 transition-colors hover:bg-paper-dim"
+      {/* Sections with counts */}
+      <div className="rounded-lg border border-line bg-card p-4">
+        <h2 className="mb-3 font-display text-base font-bold text-foreground">Sections</h2>
+        {loading ? (
+          <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <Skeleton key={i} className="h-8 w-full bg-line" />
+            ))}
+          </div>
+        ) : (
+          <ul className="grid gap-1.5 sm:grid-cols-2 lg:grid-cols-3">
+            {TYPE_META.map((m, i) => {
+              const Icon = m.icon;
+              const count = types[m.type] ?? 0;
+              return (
+                <li
+                  key={m.type}
+                  className="flex items-center gap-3 rounded-md px-2 py-1.5 transition-colors hover:bg-paper-dim"
+                >
+                  <span
+                    className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md"
+                    style={{ backgroundColor: `${BAR_COLORS[i % BAR_COLORS.length]}22` }}
                   >
-                    <span
-                      className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md"
-                      style={{ backgroundColor: `${BAR_COLORS[i % BAR_COLORS.length]}22` }}
-                    >
-                      <Icon
-                        className="h-3.5 w-3.5"
-                        style={{ color: BAR_COLORS[i % BAR_COLORS.length] }}
-                      />
-                    </span>
-                    <span className="min-w-0 flex-1 truncate text-sm text-foreground">
-                      {m.label}
-                    </span>
-                    <span className="font-mono text-sm font-bold text-yellow">{count}</span>
-                  </li>
-                );
-              })}
-            </ul>
-          )}
-        </div>
+                    <Icon
+                      className="h-3.5 w-3.5"
+                      style={{ color: BAR_COLORS[i % BAR_COLORS.length] }}
+                    />
+                  </span>
+                  <span className="min-w-0 flex-1 truncate text-sm text-foreground">{m.label}</span>
+                  <span className="font-mono text-sm font-bold text-yellow">{count}</span>
+                </li>
+              );
+            })}
+          </ul>
+        )}
       </div>
 
       {/* Recent deployments */}

@@ -43,7 +43,8 @@ describe("Content seed + public API", () => {
   it("seeds all content types", async () => {
     const counts = await ContentItem.aggregate([{ $group: { _id: "$type", n: { $sum: 1 } } }]);
     const map = Object.fromEntries(counts.map((c) => [c._id, c.n]));
-    expect(map.post).toBe(108);
+    expect(map.post).toBe(88);
+    expect(map["startup-term"]).toBe(20);
     expect(map.tool).toBe(381);
     expect(map.tip).toBe(229);
     expect(map.game).toBe(7);

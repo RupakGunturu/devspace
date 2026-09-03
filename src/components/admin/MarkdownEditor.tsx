@@ -40,7 +40,7 @@ export function MarkdownEditor({ value, onChange, height = "320px" }: MarkdownEd
       </div>
 
       {preview ? (
-        <div className="prose prose-sm max-w-none p-4" style={{ minHeight: height }}>
+        <div className="prose-devspace p-4 text-foreground" style={{ minHeight: height }}>
           <div dangerouslySetInnerHTML={{ __html: html }} />
         </div>
       ) : (
