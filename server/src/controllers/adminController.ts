@@ -79,6 +79,15 @@ export async function createContent(req: AuthRequest, res: Response) {
     tags = [],
     status = "draft",
     slug: slugParam,
+    category,
+    icon,
+    tagline,
+    url,
+    faviconDomain,
+    productName,
+    cadence,
+    resourceCost,
+    isListing,
   } = req.body;
 
   if (!type || !title) {
@@ -107,6 +116,15 @@ export async function createContent(req: AuthRequest, res: Response) {
     version: 1,
     lastEditedBy: req.user!._id.toString(),
     publishedAt: status === "published" ? new Date() : undefined,
+    category,
+    icon,
+    tagline,
+    url,
+    faviconDomain,
+    productName,
+    cadence,
+    resourceCost,
+    isListing,
   });
 
   res.status(201).json({ item });
@@ -129,6 +147,15 @@ export async function updateContent(req: AuthRequest, res: Response) {
     "status",
     "series",
     "codeAvailable",
+    "category",
+    "icon",
+    "tagline",
+    "url",
+    "faviconDomain",
+    "productName",
+    "cadence",
+    "resourceCost",
+    "isListing",
   ];
   for (const key of allowed) {
     if (req.body[key] !== undefined) {

@@ -10,7 +10,9 @@ export type ContentType =
   | "cheat-sheet"
   | "hidden-gem"
   | "hiring"
-  | "mcp-skill";
+  | "mcp-skill"
+  | "series"
+  | "learning-resource";
 
 export interface CodeFile {
   path: string;
@@ -36,6 +38,15 @@ export interface ContentItem {
   publishedAt?: string;
   createdAt: string;
   updatedAt: string;
+  category?: string;
+  icon?: string;
+  tagline?: string;
+  url?: string;
+  faviconDomain?: string;
+  productName?: string;
+  cadence?: string;
+  resourceCost?: string;
+  isListing?: boolean;
 }
 
 export interface DeploymentPhase {

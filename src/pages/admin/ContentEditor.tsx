@@ -4,6 +4,9 @@ import { adminApi, type ContentType, type CodeFile } from "@/lib/adminApi";
 import { CodeEditor } from "@/components/admin/CodeEditor";
 import { MarkdownEditor } from "@/components/admin/MarkdownEditor";
 import { ConfirmDialog } from "@/components/admin/ConfirmDialog";
+import { toast } from "@/components/ui/toaster";
+import { Skeleton } from "@/components/ui/skeleton";
+import { motion } from "motion/react";
 
 const TYPE_LABELS: Record<ContentType, string> = {
   post: "Post",
@@ -16,6 +19,8 @@ const TYPE_LABELS: Record<ContentType, string> = {
   "hidden-gem": "Hidden Gem",
   hiring: "Hiring",
   "mcp-skill": "MCP Skill",
+  series: "Series",
+  "learning-resource": "Learning Resource",
 };
 
 const SERIES_OPTIONS = [
@@ -38,6 +43,8 @@ const CONTENT_DIRS: Partial<Record<ContentType, string>> = {
   "hidden-gem": "src/data/hidden-gems",
   hiring: "src/data/hiring",
   "mcp-skill": "src/data/mcp-skills",
+  "learning-resource": "src/data/learning-resources",
+  series: "src/data/series",
 };
 
 function toComponentName(s: string): string {
@@ -48,6 +55,23 @@ function toComponentName(s: string): string {
     .join("");
 }
 
+function EditorSkeleton() {
+  return (
+    <div className="space-y-5">
+      <Skeleton className="h-8 w-48 bg-line" />
+      <Skeleton className="h-4 w-72 bg-line" />
+      <div className="grid gap-4 sm:grid-cols-2">
+        <Skeleton className="h-20 bg-line" />
+        <Skeleton className="h-20 bg-line" />
+      </div>
+      <Skeleton className="h-12 bg-line" />
+      <Skeleton className="h-12 bg-line" />
+      <Skeleton className="h-20 bg-line" />
+      <Skeleton className="h-48 bg-line" />
+    </div>
+  );
+}
+
 export default function ContentEditor() {
   const { id } = useParams();
   const isEdit = Boolean(id);
@@ -55,6 +79,7 @@ export default function ContentEditor() {
   const [searchParams] = useSearchParams();
   const forcedType = searchParams.get("type") as ContentType | null;
 
+  const [loading, setLoading] = useState(isEdit);
   const [type, setType] = useState<ContentType>(forcedType ?? "post");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -68,13 +93,23 @@ export default function ContentEditor() {
   const [codeFiles, setCodeFiles] = useState<CodeFile[]>([]);
   const [isCode, setIsCode] = useState(forcedType === "game" || forcedType === "tool");
 
+  const [category, setCategory] = useState("");
+  const [icon, setIcon] = useState("");
+  const [tagline, setTagline] = useState("");
+  const [url, setUrl] = useState("");
+  const [faviconDomain, setFaviconDomain] = useState("");
+  const [productName, setProductName] = useState("");
+  const [cadence, setCadence] = useState("");
+  const [resourceCost, setResourceCost] = useState("");
+  const [isListing, setIsListing] = useState(false);
+
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [deploying, setDeploying] = useState(false);
   const [error, setError] = useState("");
-  const [message, setMessage] = useState("");
 
   useEffect(() => {
     if (!isEdit) return;
+    setLoading(true);
     adminApi
       .getContent(id!)
       .then(({ item }) => {
@@ -84,12 +119,25 @@ export default function ContentEditor() {
         setBody(item.body);
         setImage(item.image ?? "");
         setSeries(item.series ?? "");
-        setTags(item.tags);
+        setTags(item.tags ?? []);
         setIsCode(item.type === "game" || item.type === "tool");
         setCodeFiles(item.codeFiles ?? []);
         setStatus(item.status);
+        setCategory(item.category ?? "");
+        setIcon(item.icon ?? "");
+        setTagline(item.tagline ?? "");
+        setUrl(item.url ?? "");
+        setFaviconDomain(item.faviconDomain ?? "");
+        setProductName(item.productName ?? "");
+        setCadence(item.cadence ?? "");
+        setResourceCost(item.resourceCost ?? "");
+        setIsListing(item.isListing ?? false);
       })
-      .catch((e) => setError(e.message));
+      .catch((e) => {
+        setError(e.message);
+        toast.danger("Failed to load content");
+      })
+      .finally(() => setLoading(false));
   }, [id, isEdit]);
 
   const addTag = () => {
@@ -110,7 +158,6 @@ export default function ContentEditor() {
 
   const handleSave = async (deployCode: boolean) => {
     setError("");
-    setMessage("");
     setDeploying(true);
     try {
       if (isCode && deployCode) {
@@ -120,10 +167,9 @@ export default function ContentEditor() {
           description,
           tags,
           files: codeFiles,
-          existingSlug: isEdit ? undefined : undefined,
         };
         const res = await adminApi.submitCode(payload);
-        setMessage(`Deployment started (${res.sessionId}). Track it in Deploy Log.`);
+        toast.success(`Deployment started (${res.sessionId.slice(0, 8)}…)`);
         navigate("/admin/deployments");
       } else {
         if (isEdit) {
@@ -135,8 +181,17 @@ export default function ContentEditor() {
             tags,
             status,
             image,
+            category,
+            icon,
+            tagline,
+            url,
+            faviconDomain,
+            productName,
+            cadence,
+            resourceCost,
+            isListing,
           });
-          setMessage("Content updated.");
+          toast.success("Content updated.");
         } else {
           const res = await adminApi.createContent({
             type,
@@ -148,20 +203,39 @@ export default function ContentEditor() {
             status,
             image,
             codeFiles: isCode ? codeFiles : undefined,
+            category,
+            icon,
+            tagline,
+            url,
+            faviconDomain,
+            productName,
+            cadence,
+            resourceCost,
+            isListing,
           });
-          setMessage("Content created.");
+          toast.success("Content created.");
           navigate(`/admin/content/${res.item._id}/edit`);
         }
       }
     } catch (e) {
       setError((e as Error).message);
+      toast.danger((e as Error).message);
     } finally {
       setDeploying(false);
     }
   };
 
+  if (loading) {
+    return <EditorSkeleton />;
+  }
+
   return (
-    <div className="space-y-5">
+    <motion.div
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.25 }}
+      className="space-y-5"
+    >
       <div>
         <h1 className="font-display text-2xl font-extrabold text-foreground">
           {isEdit ? "Edit content" : "New content"}
@@ -175,9 +249,6 @@ export default function ContentEditor() {
 
       {error && (
         <p className="rounded-sm bg-coral/10 p-2 font-mono text-[12px] text-coral">{error}</p>
-      )}
-      {message && (
-        <p className="rounded-sm bg-yellow/20 p-2 font-mono text-[12px] text-ink">{message}</p>
       )}
 
       <div className="grid gap-4 sm:grid-cols-2">
@@ -302,6 +373,125 @@ export default function ContentEditor() {
           />
         </div>
       </div>
+
+      {/* Type-specific fields */}
+      <div className="grid gap-4 sm:grid-cols-2">
+        <label className="block">
+          <span className="mb-1 block font-mono text-[12px] text-muted">Icon</span>
+          <input
+            value={icon}
+            onChange={(e) => setIcon(e.target.value)}
+            placeholder="Emoji or icon name"
+            className="w-full rounded-md border border-line bg-input-bg px-3 py-2 text-sm text-input-text outline-none focus:ring-2 focus:ring-yellow"
+          />
+        </label>
+
+        <label className="block">
+          <span className="mb-1 block font-mono text-[12px] text-muted">Tagline</span>
+          <input
+            value={tagline}
+            onChange={(e) => setTagline(e.target.value)}
+            placeholder="Short one-liner"
+            className="w-full rounded-md border border-line bg-input-bg px-3 py-2 text-sm text-input-text outline-none focus:ring-2 focus:ring-yellow"
+          />
+        </label>
+      </div>
+
+      {(type === "tip" ||
+        type === "cheat-sheet" ||
+        type === "tool" ||
+        type === "hidden-gem" ||
+        type === "hiring" ||
+        type === "mcp-skill" ||
+        type === "learning-resource") && (
+        <label className="block">
+          <span className="mb-1 block font-mono text-[12px] text-muted">Category</span>
+          <input
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            placeholder="e.g. Learning, Productivity, Web"
+            className="w-full rounded-md border border-line bg-input-bg px-3 py-2 text-sm text-input-text outline-none focus:ring-2 focus:ring-yellow"
+          />
+        </label>
+      )}
+
+      {(type === "hidden-gem" ||
+        type === "hiring" ||
+        type === "mcp-skill" ||
+        type === "learning-resource") && (
+        <label className="block">
+          <span className="mb-1 block font-mono text-[12px] text-muted">URL</span>
+          <input
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+            placeholder="https://…"
+            className="w-full rounded-md border border-line bg-input-bg px-3 py-2 text-sm text-input-text outline-none focus:ring-2 focus:ring-yellow"
+          />
+        </label>
+      )}
+
+      {type === "stack-breakdown" && (
+        <div className="grid gap-4 sm:grid-cols-2">
+          <label className="block">
+            <span className="mb-1 block font-mono text-[12px] text-muted">Product Name</span>
+            <input
+              value={productName}
+              onChange={(e) => setProductName(e.target.value)}
+              placeholder="e.g. Netflix, Discord"
+              className="w-full rounded-md border border-line bg-input-bg px-3 py-2 text-sm text-input-text outline-none focus:ring-2 focus:ring-yellow"
+            />
+          </label>
+          <label className="block">
+            <span className="mb-1 block font-mono text-[12px] text-muted">Favicon Domain</span>
+            <input
+              value={faviconDomain}
+              onChange={(e) => setFaviconDomain(e.target.value)}
+              placeholder="e.g. netflix.com"
+              className="w-full rounded-md border border-line bg-input-bg px-3 py-2 text-sm text-input-text outline-none focus:ring-2 focus:ring-yellow"
+            />
+          </label>
+        </div>
+      )}
+
+      {type === "series" && (
+        <label className="block">
+          <span className="mb-1 block font-mono text-[12px] text-muted">Cadence</span>
+          <input
+            value={cadence}
+            onChange={(e) => setCadence(e.target.value)}
+            placeholder="e.g. weekly, daily"
+            className="w-full rounded-md border border-line bg-input-bg px-3 py-2 text-sm text-input-text outline-none focus:ring-2 focus:ring-yellow"
+          />
+        </label>
+      )}
+
+      {type === "learning-resource" && (
+        <label className="block">
+          <span className="mb-1 block font-mono text-[12px] text-muted">Cost</span>
+          <select
+            value={resourceCost}
+            onChange={(e) => setResourceCost(e.target.value)}
+            className="w-full rounded-md border border-line bg-input-bg px-3 py-2 text-sm text-input-text outline-none focus:ring-2 focus:ring-yellow"
+          >
+            <option value="">Select…</option>
+            <option value="free">Free</option>
+            <option value="freemium">Freemium</option>
+            <option value="paid">Paid</option>
+          </select>
+        </label>
+      )}
+
+      {type === "hiring" && (
+        <label className="flex items-center gap-2">
+          <input
+            type="checkbox"
+            checked={isListing}
+            onChange={(e) => setIsListing(e.target.checked)}
+            className="h-4 w-4 rounded border-line accent-yellow"
+          />
+          <span className="font-mono text-[12px] text-muted">This is a job listing</span>
+        </label>
+      )}
 
       {/* Body / Code */}
       {isCode ? (
@@ -454,6 +644,6 @@ export default function ContentEditor() {
         }
         onConfirm={() => handleSave(true)}
       />
-    </div>
+    </motion.div>
   );
 }
