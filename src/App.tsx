@@ -1,6 +1,7 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useState } from "react";
 import { Routes, Route, useLocation, Link } from "react-router-dom";
 import { Header, Footer } from "./components/site";
+import { SiteSidebar } from "./components/SiteSidebar";
 import { Home as HomeIcon } from "lucide-react";
 import ScrollToTop from "./components/ScrollToTop";
 import { CommandMenu } from "./components/CommandMenu";
@@ -59,13 +60,17 @@ function Layout({ children }: { children: React.ReactNode }) {
   const { pathname } = useLocation();
   const isAuth = AUTH_ROUTES.has(pathname);
   const isAdmin = pathname.startsWith("/admin");
+  const showNav = !isAuth && !isAdmin;
+  const [navOpen, setNavOpen] = useState(false);
 
   return (
     <div className="flex min-h-screen flex-col">
       <ScrollToTop />
       <CommandMenu />
-      {!isAuth && !isAdmin && <Header />}
-      {isAuth && (
+      {showNav && <SiteSidebar open={navOpen} onClose={() => setNavOpen(false)} />}
+      {showNav ? (
+        <Header onMenuClick={() => setNavOpen((v) => !v)} />
+      ) : isAuth ? (
         <Link
           to="/"
           aria-label="Back to home"
@@ -73,9 +78,9 @@ function Layout({ children }: { children: React.ReactNode }) {
         >
           <HomeIcon className="h-5 w-5" />
         </Link>
-      )}
-      <main className="flex-1">{children}</main>
-      {!isAuth && !isAdmin && <Footer />}
+      ) : null}
+      <main className={`flex-1 ${showNav ? "lg:pl-16" : ""}`}>{children}</main>
+      {showNav && <Footer />}
     </div>
   );
 }

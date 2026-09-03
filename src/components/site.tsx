@@ -1,145 +1,66 @@
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import { useRef, type ReactNode } from "react";
+import { Link } from "react-router-dom";
+import type { ReactNode } from "react";
 import { useTheme } from "./ThemeProvider";
 import { useAuth } from "./AuthProvider";
 import { AnimatedThemeToggler } from "./ui/animated-theme-toggler";
-import { StaggeredMenu } from "./ui/staggered-menu/StaggeredMenu";
-import type { StaggeredMenuHandle } from "./ui/staggered-menu/StaggeredMenu";
 import ProfileDropdown from "./ui/profile-dropdown";
 import { Footer as LargeFooter } from "./ui/large-name-footer";
 
-export function Header() {
+export function Header({ onMenuClick }: { onMenuClick?: () => void }) {
   const { theme, setTheme } = useTheme();
   const { user, logout } = useAuth();
-  const menuRef = useRef<StaggeredMenuHandle>(null);
-
-  const mobileItems = user
-    ? [
-        { label: "Feed", link: "/" },
-        { label: "Stack Breakdown", link: "/stack-breakdown" },
-        { label: "Tools", link: "/tools" },
-        { label: "Sheets", link: "/cheat-sheets" },
-        { label: "Games", link: "/games" },
-        { label: "Tips", link: "/tips" },
-        { label: "Hiring", link: "/hiring" },
-        { label: "MCP Skills", link: "/mcp-skills" },
-        { label: "Hidden Gems", link: "/hidden-gems" },
-        { label: "Bookmarks", link: "/bookmarks" },
-        { label: "Profile", link: "/profile" },
-        { label: "About", link: "/about" },
-      ]
-    : [
-        { label: "Feed", link: "/" },
-        { label: "Stack Breakdown", link: "/stack-breakdown" },
-        { label: "Tools", link: "/tools" },
-        { label: "Sheets", link: "/cheat-sheets" },
-        { label: "Games", link: "/games" },
-        { label: "Tips", link: "/tips" },
-        { label: "Hiring", link: "/hiring" },
-        { label: "MCP Skills", link: "/mcp-skills" },
-        { label: "Hidden Gems", link: "/hidden-gems" },
-        { label: "About", link: "/about" },
-        { label: "Sign In", link: "/login" },
-      ];
 
   return (
-    <>
-      <header className="sticky top-0 z-20 flex items-center justify-between border-b-2 border-line bg-ink/90 px-4 py-4 backdrop-blur sm:px-8">
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => menuRef.current?.toggle()}
-            className="sm:hidden rounded-sm p-1.5 text-yellow transition-colors hover:text-yellow/80"
-            aria-label="Open menu"
-            type="button"
+    <header className="sticky top-0 z-20 flex items-center justify-between gap-3 border-b-2 border-line bg-ink/90 px-3 py-3 backdrop-blur sm:px-6">
+      <div className="flex items-center gap-2">
+        <button
+          onClick={onMenuClick}
+          className="rounded-sm p-1.5 text-yellow transition-colors hover:text-yellow/80 lg:hidden"
+          aria-label="Open menu"
+          type="button"
+        >
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 18 18"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
           >
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 18 18"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-            >
-              <line x1="2" y1="4" x2="16" y2="4" />
-              <line x1="2" y1="9" x2="16" y2="9" />
-              <line x1="2" y1="14" x2="16" y2="14" />
-            </svg>
-          </button>
-          <Link
-            to="/"
-            className="flex items-center gap-2 font-display text-xl font-extrabold text-text no-underline"
-          >
-            <img src="/favicon.png" alt="" aria-hidden="true" className="h-5 w-5 object-contain" />
-            <span>
-              dev<span className="text-yellow">/</span>space
-            </span>
-          </Link>
-        </div>
-        <nav className="hidden min-w-0 gap-6 overflow-x-auto sm:flex">
-          <NavItem to="/">Feed</NavItem>
-          <NavItem to="/stack-breakdown">Stacks</NavItem>
-          <NavItem to="/tools">Tools</NavItem>
-          <NavItem to="/cheat-sheets">Sheets</NavItem>
-          <NavItem to="/games">Games</NavItem>
-          <NavItem to="/tips">Tips</NavItem>
-          <NavItem to="/hiring">Hiring</NavItem>
-          <NavItem to="/mcp-skills">MCP</NavItem>
-          <NavItem to="/hidden-gems">Gems</NavItem>
-          {user && <NavItem to="/bookmarks">Bookmarks</NavItem>}
-          <NavItem to="/about">About</NavItem>
-        </nav>
-        <div className="flex items-center gap-3">
-          <AnimatedThemeToggler
-            className="text-text"
-            theme={theme === "system" ? undefined : theme}
-            onThemeChange={(t) => setTheme(t)}
-          />
-          {user ? (
-            <ProfileDropdown user={user} onLogout={logout} />
-          ) : (
-            <Link
-              to="/login"
-              className="rounded-sm bg-yellow px-3 py-1.5 font-mono text-[11px] font-bold text-ink no-underline transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_6px_16px_rgba(244,217,34,0.4)]"
-            >
-              Sign In
-            </Link>
-          )}
-        </div>
-      </header>
-      <div className="block sm:hidden">
-        <StaggeredMenu
-          ref={menuRef}
-          hamburger
-          isFixed
-          position="right"
-          colors={["var(--paper-dim)", "var(--paper)"]}
-          items={mobileItems}
-          accentColor="#f4d922"
-          menuButtonColor="#f4d922"
-          openMenuButtonColor="#f4d922"
-          changeMenuColorOnOpen={false}
-          displayItemNumbering
-          displaySocials={false}
-        />
+            <line x1="2" y1="4" x2="16" y2="4" />
+            <line x1="2" y1="9" x2="16" y2="9" />
+            <line x1="2" y1="14" x2="16" y2="14" />
+          </svg>
+        </button>
+        <Link
+          to="/"
+          className="flex items-center gap-2 font-display text-xl font-extrabold text-text no-underline"
+        >
+          <img src="/favicon.png" alt="" aria-hidden="true" className="h-5 w-5 object-contain" />
+          <span>
+            dev<span className="text-yellow">/</span>space
+          </span>
+        </Link>
       </div>
-    </>
-  );
-}
-
-function NavItem({ to, children }: { to: string; children: ReactNode }) {
-  return (
-    <NavLink
-      to={to}
-      end={to === "/"}
-      className={({ isActive }) =>
-        `font-mono text-[13px] no-underline transition-colors ${
-          isActive ? "text-yellow" : "text-muted hover:text-yellow"
-        }`
-      }
-    >
-      {children}
-    </NavLink>
+      <div className="flex items-center gap-3">
+        <AnimatedThemeToggler
+          className="text-text"
+          theme={theme === "system" ? undefined : theme}
+          onThemeChange={(t) => setTheme(t)}
+        />
+        {user ? (
+          <ProfileDropdown user={user} onLogout={logout} />
+        ) : (
+          <Link
+            to="/login"
+            className="rounded-sm bg-yellow px-3 py-1.5 font-mono text-[11px] font-bold text-ink no-underline transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_6px_16px_rgba(244,217,34,0.4)]"
+          >
+            Sign In
+          </Link>
+        )}
+      </div>
+    </header>
   );
 }
 

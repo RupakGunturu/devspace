@@ -3,6 +3,8 @@ import { useMemo, useState, useEffect } from "react";
 import { FeedItem } from "../components/FeedItem";
 import { usePosts } from "../lib/contentStore";
 import FeedSearchBar from "../components/FeedSearchBar";
+import { usePagination } from "../hooks/use-pagination";
+import { PaginationBar } from "../components/PaginationBar";
 
 export default function FeedArchive() {
   useEffect(() => {
@@ -28,6 +30,13 @@ export default function FeedArchive() {
     return result;
   }, [allPosts, activeSeries, searchQuery]);
 
+  const { page, totalPages, paginatedItems, goTo } = usePagination(posts, 8);
+
+  useEffect(() => {
+    goTo(1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchQuery, activeSeries]);
+
   return (
     <section className="mx-auto max-w-4xl px-6 py-12 sm:px-8 sm:py-16">
       <Link to="/" className="font-mono text-xs text-muted no-underline hover:text-yellow">
@@ -43,17 +52,21 @@ export default function FeedArchive() {
         onSeriesChange={setActiveSeries}
       />
       <div>
-        {posts.length === 0 ? (
+        {paginatedItems.length === 0 ? (
           <p className="py-12 text-center font-mono text-sm text-muted">
             Nothing matches your search. Try a different series or query.
           </p>
         ) : (
-          posts.map((p, i) => (
+          paginatedItems.map((p, i) => (
             <div key={p.id} className="stagger-item" style={{ animationDelay: `${i * 0.04}s` }}>
               <FeedItem post={p} />
             </div>
           ))
         )}
+      </div>
+
+      <div className="mt-8">
+        <PaginationBar page={page} totalPages={totalPages} onPageChange={goTo} />
       </div>
 
       <style>{`

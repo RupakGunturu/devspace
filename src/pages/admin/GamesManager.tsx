@@ -1,41 +1,75 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { adminApi, type ContentItem } from "@/lib/adminApi";
+import { toast } from "@/components/ui/toaster";
 import { Plus, Pencil, Trash2, Gamepad2 } from "lucide-react";
 import { ConfirmDialog } from "@/components/admin/ConfirmDialog";
+import { EmptyState } from "@/components/admin/EmptyState";
+import { AdminCardSkeleton } from "@/components/admin/AdminCardSkeleton";
+import { AdminSearchBar } from "@/components/admin/AdminSearchBar";
+import { PaginationBar } from "@/components/PaginationBar";
+import { motion } from "motion/react";
+
+const PAGE_SIZES = [10, 20, 30];
 
 export default function GamesManager() {
   const [items, setItems] = useState<ContentItem[]>([]);
+  const [total, setTotal] = useState(0);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [query, setQuery] = useState("");
   const [deleteTarget, setDeleteTarget] = useState<ContentItem | null>(null);
+  const [page, setPage] = useState(1);
+  const [perPage, setPerPage] = useState(10);
 
-  const load = () => {
+  const load = useCallback(() => {
+    setLoading(true);
+    const params: Record<string, string> = {
+      type: "game",
+      limit: String(perPage),
+      page: String(page),
+    };
+    if (query) params.q = query;
     adminApi
-      .listContent({ type: "game", limit: "100" })
-      .then((d) => setItems(d.items))
-      .catch((e) => setError(e.message));
-  };
+      .listContent(params)
+      .then((d) => {
+        setItems(d.items);
+        setTotal(d.total);
+      })
+      .catch((e) => setError(e.message))
+      .finally(() => setLoading(false));
+  }, [page, perPage, query]);
 
-  useEffect(load, []);
+  useEffect(() => {
+    load();
+  }, [load]);
 
   const handleDelete = async () => {
     if (!deleteTarget) return;
     try {
       await adminApi.deleteContent(deleteTarget._id);
       setDeleteTarget(null);
+      toast.success(`Deleted "${deleteTarget.title}"`);
       load();
     } catch (e) {
-      setError((e as Error).message);
+      toast.danger((e as Error).message);
     }
   };
 
+  const totalPages = Math.max(1, Math.ceil(total / perPage));
+
   return (
-    <div className="space-y-5">
+    <motion.div
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.25 }}
+      className="space-y-5"
+    >
       <div className="flex items-center justify-between">
         <div>
           <h1 className="font-display text-2xl font-extrabold text-foreground">Games</h1>
           <p className="text-sm text-muted">
-            {items.length} games. Add code (with verification) or edit existing ones.
+            {total} games. Add code (with verification) or edit existing ones.
           </p>
         </div>
         <Link
@@ -46,50 +80,105 @@ export default function GamesManager() {
         </Link>
       </div>
 
+      <div className="flex flex-wrap items-center gap-2">
+        <AdminSearchBar
+          placeholder="Search games…"
+          value={query}
+          onChange={setQuery}
+          className="relative flex-1 min-w-[200px]"
+        />
+        <select
+          value={perPage}
+          onChange={(e) => {
+            setPerPage(Number(e.target.value));
+            setPage(1);
+          }}
+          className="rounded-md border border-line bg-input-bg px-3 py-2 text-sm text-input-text outline-none focus:ring-2 focus:ring-yellow"
+        >
+          {PAGE_SIZES.map((n) => (
+            <option key={n} value={n}>
+              {n} / page
+            </option>
+          ))}
+        </select>
+      </div>
+
       {error && (
         <p className="rounded-sm bg-coral/10 p-2 font-mono text-[12px] text-coral">{error}</p>
       )}
 
-      {items.length === 0 ? (
-        <div className="flex flex-col items-center justify-center rounded-lg border border-dashed border-line p-10 text-center">
-          <Gamepad2 className="mb-2 h-8 w-8 text-muted" />
-          <p className="text-muted">No games yet. Create your first one.</p>
-        </div>
+      {loading ? (
+        <AdminCardSkeleton count={perPage} />
+      ) : items.length === 0 ? (
+        <EmptyState
+          icon={<Gamepad2 className="h-8 w-8" />}
+          title={query ? "No matching games." : "No games yet."}
+          description={
+            query
+              ? "Try a different search term."
+              : "Create your first game with code verification."
+          }
+          action={
+            !query ? (
+              <Link
+                to="/admin/games/new"
+                className="inline-flex items-center gap-1 rounded-md bg-yellow px-3 py-2 font-mono text-[12px] font-bold text-ink hover:opacity-90"
+              >
+                <Plus className="h-4 w-4" /> New Game
+              </Link>
+            ) : undefined
+          }
+        />
       ) : (
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {items.map((g) => (
-            <div
-              key={g._id}
-              className="rounded-lg border border-line bg-card p-4 transition-shadow hover:shadow-md"
-            >
-              <div className="mb-1 flex items-start justify-between">
-                <h3 className="font-display font-bold text-foreground">{g.title}</h3>
-                <span
-                  className={`rounded-full px-2 py-0.5 font-mono text-[10px] font-bold ${
-                    g.status === "published" ? "bg-yellow text-ink" : "bg-paper-dim text-muted"
-                  }`}
-                >
-                  v{g.version}
-                </span>
-              </div>
-              <p className="mb-3 line-clamp-2 text-sm text-muted">{g.description}</p>
-              <div className="flex items-center gap-2">
-                <Link
-                  to={`/admin/content/${g._id}/edit`}
-                  className="flex items-center gap-1 rounded-sm bg-paper-dim px-2 py-1 font-mono text-[11px] text-foreground hover:text-yellow"
-                >
-                  <Pencil className="h-3 w-3" /> Edit / Rewrite
-                </Link>
-                <button
-                  onClick={() => setDeleteTarget(g)}
-                  className="flex items-center gap-1 rounded-sm bg-paper-dim px-2 py-1 font-mono text-[11px] text-foreground hover:text-coral"
-                >
-                  <Trash2 className="h-3 w-3" /> Delete
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
+        <>
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {items.map((g, i) => (
+              <motion.div
+                key={g._id}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.2, delay: i * 0.03 }}
+                className="rounded-lg border border-line bg-card p-4 transition-shadow hover:shadow-md"
+              >
+                <div className="mb-1 flex items-start justify-between">
+                  <h3 className="font-display font-bold text-foreground">{g.title}</h3>
+                  <span className="shrink-0 flex items-center gap-1.5">
+                    <span
+                      title={g.status}
+                      className={`h-2 w-2 rounded-full ${
+                        g.status === "published" ? "bg-emerald-500" : "bg-muted"
+                      }`}
+                    />
+                    <span className="rounded-full bg-paper-dim px-2 py-0.5 font-mono text-[10px] font-bold text-muted">
+                      v{g.version}
+                    </span>
+                  </span>
+                </div>
+                <p className="mb-3 line-clamp-2 text-sm text-muted">{g.description}</p>
+                <div className="flex items-center gap-2">
+                  <Link
+                    to={`/admin/content/${g._id}/edit`}
+                    className="flex items-center gap-1 rounded-sm bg-paper-dim px-2 py-1 font-mono text-[11px] text-foreground hover:text-yellow"
+                  >
+                    <Pencil className="h-3 w-3" /> Edit / Rewrite
+                  </Link>
+                  <button
+                    onClick={() => setDeleteTarget(g)}
+                    className="flex items-center gap-1 rounded-sm bg-paper-dim px-2 py-1 font-mono text-[11px] text-foreground hover:text-coral"
+                  >
+                    <Trash2 className="h-3 w-3" /> Delete
+                  </button>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+          <div className="flex items-center justify-between">
+            <p className="font-mono text-[11px] text-muted">
+              Showing {(page - 1) * perPage + 1}–{Math.min(page * perPage, total)} of {total}
+            </p>
+            <PaginationBar page={page} totalPages={totalPages} onPageChange={setPage} />
+          </div>
+        </>
       )}
 
       <ConfirmDialog
@@ -103,6 +192,6 @@ export default function GamesManager() {
         ]}
         onConfirm={handleDelete}
       />
-    </div>
+    </motion.div>
   );
 }

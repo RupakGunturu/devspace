@@ -85,6 +85,8 @@ export default function ContentEditor() {
   const [description, setDescription] = useState("");
   const [body, setBody] = useState("");
   const [image, setImage] = useState("");
+  const [images, setImages] = useState<string[]>([]);
+  const [galleryInput, setGalleryInput] = useState("");
   const [series, setSeries] = useState("");
   const [tags, setTags] = useState<string[]>([]);
   const [tagInput, setTagInput] = useState("");
@@ -118,6 +120,7 @@ export default function ContentEditor() {
         setDescription(item.description);
         setBody(item.body);
         setImage(item.image ?? "");
+        setImages(item.images ?? []);
         setSeries(item.series ?? "");
         setTags(item.tags ?? []);
         setIsCode(item.type === "game" || item.type === "tool");
@@ -181,6 +184,7 @@ export default function ContentEditor() {
             tags,
             status,
             image,
+            images,
             category,
             icon,
             tagline,
@@ -202,6 +206,7 @@ export default function ContentEditor() {
             tags,
             status,
             image,
+            images,
             codeFiles: isCode ? codeFiles : undefined,
             category,
             icon,
@@ -339,6 +344,72 @@ export default function ContentEditor() {
           />
         )}
       </label>
+
+      {/* Image gallery */}
+      <div className="rounded-lg border border-line bg-card p-3">
+        <span className="mb-2 flex items-center justify-between font-mono text-[12px] text-muted">
+          <span>Image gallery</span>
+          <span className="text-[10px] text-muted">
+            {images.length} image{images.length === 1 ? "" : "s"}
+          </span>
+        </span>
+        <div className="mb-2 flex items-center gap-2">
+          <input
+            value={galleryInput}
+            onChange={(e) => setGalleryInput(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                const v = galleryInput.trim();
+                if (v) setImages((prev) => [...prev, v]);
+                setGalleryInput("");
+              }
+            }}
+            placeholder="Add image URL + Enter"
+            className="flex-1 rounded-md border border-line bg-input-bg px-2 py-1.5 text-sm text-input-text outline-none focus:ring-2 focus:ring-yellow"
+          />
+          <button
+            type="button"
+            onClick={() => {
+              const v = galleryInput.trim();
+              if (v) setImages((prev) => [...prev, v]);
+              setGalleryInput("");
+            }}
+            disabled={!galleryInput.trim()}
+            className="rounded-sm bg-paper-dim px-2 py-1 font-mono text-[11px] text-foreground hover:text-yellow disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            Add
+          </button>
+        </div>
+        {images.length > 0 ? (
+          <div className="grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-5">
+            {images.map((src, i) => (
+              <div
+                key={i}
+                className="group relative aspect-square overflow-hidden rounded-md border border-line bg-paper-dim"
+              >
+                <img
+                  src={src}
+                  alt={`gallery ${i + 1}`}
+                  onError={(e) => (e.currentTarget.style.display = "none")}
+                  className="h-full w-full object-cover"
+                />
+                <button
+                  type="button"
+                  onClick={() => setImages((prev) => prev.filter((_, x) => x !== i))}
+                  className="absolute right-0.5 top-0.5 rounded-sm bg-ink/80 px-1.5 font-mono text-[10px] text-coral opacity-0 transition-opacity group-hover:opacity-100"
+                >
+                  ×
+                </button>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="py-2 text-center font-mono text-[11px] text-muted">
+            No gallery images yet. Add URLs above.
+          </p>
+        )}
+      </div>
 
       {/* Tags */}
       <div>

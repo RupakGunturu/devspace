@@ -1,9 +1,12 @@
 import express, { Request, Response, NextFunction } from "express";
 import cors from "cors";
 import helmet from "helmet";
+import morgan from "morgan";
 import rateLimit from "express-rate-limit";
 import passport from "passport";
+import swaggerUi from "swagger-ui-express";
 import { config } from "./config/env";
+import { swaggerSpec } from "./config/swagger";
 import authRoutes from "./routes/auth";
 import activityRoutes from "./routes/activity";
 import adminRoutes from "./routes/admin";
@@ -62,6 +65,12 @@ app.use(
 app.use(express.json({ limit: "1mb" }));
 app.use(passport.initialize());
 
+// Request logging
+app.use(morgan(process.env.NODE_ENV === "production" ? "combined" : "dev"));
+
+// Swagger API docs
+app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec, { explorer: true }));
+
 // Routes — auth gets stricter rate limit
 app.use("/api/auth", authLimiter, authRoutes);
 app.use("/api/activity", activityRoutes);
@@ -84,8 +93,9 @@ app.get("/api/health", (_req, res) => {
   res.json({ status: "ok" });
 });
 
-// Global error handler — never leak internals
+// Global error handler — never leak internals, but log for debugging
 app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
+  console.error("[ERROR]", err.message);
   res.status(500).json({ error: "Internal server error" });
 });
 

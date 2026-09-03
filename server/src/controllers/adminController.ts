@@ -421,13 +421,19 @@ export async function listDeployments(req: AuthRequest, res: Response) {
 }
 
 export async function getAdminStats(_req: AuthRequest, res: Response) {
-  const [total, published, drafts, deployments, recent] = await Promise.all([
+  const [total, published, drafts, deployments, recent, byType] = await Promise.all([
     ContentItem.countDocuments(),
     ContentItem.countDocuments({ status: "published" }),
     ContentItem.countDocuments({ status: "draft" }),
     Deployment.countDocuments(),
     Deployment.find().sort({ createdAt: -1 }).limit(5).lean(),
+    ContentItem.aggregate<{ _id: string; count: number }>([
+      { $group: { _id: "$type", count: { $sum: 1 } } },
+    ]),
   ]);
 
-  res.json({ stats: { total, published, drafts, deployments }, recent });
+  const types: Record<string, number> = {};
+  for (const t of byType) types[t._id] = t.count;
+
+  res.json({ stats: { total, published, drafts, deployments, types }, recent });
 }

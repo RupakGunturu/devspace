@@ -173,10 +173,10 @@ export default function Home() {
     return filtered.slice(0, 5);
   }, [activeSeries, allPosts]);
 
-  const featuredTools = TOOLS.filter((t) => t.popular).slice(0, 3);
+  const featuredTools = useMemo(() => TOOLS.filter((t) => t.popular).slice(0, 3), [TOOLS]);
   const featuredGames = useMemo(() => shufflePick(GAMES, 3), [GAMES]);
-  const featuredTips = tips.slice(0, 3);
-  const featuredSheets = cheatSheets.slice(0, 3);
+  const featuredTips = useMemo(() => tips.slice(0, 3), [tips]);
+  const featuredSheets = useMemo(() => cheatSheets.slice(0, 3), [cheatSheets]);
 
   return (
     <>

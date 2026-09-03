@@ -4,6 +4,8 @@ import type { Post } from "../data/posts";
 import { useSeriesBySlug, usePosts, useSeriesList } from "../lib/contentStore";
 import { FeedItem } from "../components/FeedItem";
 import { ToolIcon } from "../components/tools/ToolIcon";
+import { usePagination } from "../hooks/use-pagination";
+import { PaginationBar } from "../components/PaginationBar";
 
 export default function SeriesPage() {
   const { series: seriesSlug } = useParams<{ series: string }>();
@@ -15,6 +17,8 @@ export default function SeriesPage() {
         .filter((p) => p.series === series.slug)
         .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
     : [];
+
+  const { page, totalPages, paginatedItems, goTo } = usePagination(posts, 8);
 
   useEffect(() => {
     document.title = series ? `${series.label} — DevSpace` : "Series not found — DevSpace";
@@ -68,13 +72,17 @@ export default function SeriesPage() {
           ))}
       </div>
       <div>
-        {posts.length === 0 ? (
+        {paginatedItems.length === 0 ? (
           <p className="py-12 text-center font-mono text-sm text-muted">
             Nothing in this series yet.
           </p>
         ) : (
-          (posts as Post[]).map((p) => <FeedItem key={p.id} post={p} />)
+          (paginatedItems as Post[]).map((p) => <FeedItem key={p.id} post={p} />)
         )}
+      </div>
+
+      <div className="mt-8">
+        <PaginationBar page={page} totalPages={totalPages} onPageChange={goTo} />
       </div>
     </section>
   );

@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { useStackBreakdowns } from "../lib/contentStore";
 import { CursorHover } from "../components/core/cursor-hover";
 import BookmarkButton from "../components/BookmarkButton";
+import { usePagination } from "../hooks/use-pagination";
+import { PaginationBar } from "../components/PaginationBar";
 
 const PRODUCT_COLORS: Record<string, string> = {
   instagram: "#E1306C",
@@ -41,6 +43,13 @@ export default function StackBreakdownPage() {
   const hiddenCount = allTags.length - VISIBLE_COUNT;
 
   const filtered = activeTag ? breakdowns.filter((b) => b.tags.includes(activeTag)) : breakdowns;
+
+  const { page, totalPages, paginatedItems, goTo } = usePagination(filtered, 9);
+
+  useEffect(() => {
+    goTo(1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeTag]);
 
   return (
     <section className="mx-auto max-w-6xl px-6 py-12 sm:px-8 sm:py-16">
@@ -122,7 +131,7 @@ export default function StackBreakdownPage() {
 
       {/* Product grid */}
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {filtered.map((b, i) => {
+        {paginatedItems.map((b, i) => {
           const rot = ROTATIONS[i % ROTATIONS.length];
           return (
             <CursorHover label={b.productName} color={PRODUCT_COLORS[b.slug]} key={b.slug}>
@@ -171,13 +180,17 @@ export default function StackBreakdownPage() {
         })}
       </div>
 
-      {filtered.length === 0 && (
+      {paginatedItems.length === 0 && (
         <div className="py-16 text-center">
           <p className="font-mono text-sm text-muted">
             No breakdowns match that filter. Try a different tag.
           </p>
         </div>
       )}
+
+      <div className="mt-8">
+        <PaginationBar page={page} totalPages={totalPages} onPageChange={goTo} />
+      </div>
     </section>
   );
 }

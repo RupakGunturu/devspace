@@ -25,26 +25,35 @@ export function LineSidebar({ items, activeIndex, onItemClick, className = "" }:
     const itemEls = container.querySelectorAll<HTMLElement>(".line-sidebar-item");
     if (itemEls.length === 0) return;
 
+    let raf = 0;
     const onPointerMove = (e: PointerEvent) => {
-      let minDist = Infinity;
-      let minIdx = -1;
-      itemEls.forEach((el, i) => {
-        const rect = el.getBoundingClientRect();
-        const mid = rect.top + rect.height / 2;
-        const dist = Math.abs(e.clientY - mid);
-        if (dist < minDist) {
-          minDist = dist;
-          minIdx = i;
-        }
-      });
-      itemEls.forEach((el, i) => {
-        const d = i === minIdx ? 1 : Math.max(0, 1 - Math.abs(i - minIdx) * 0.25);
-        el.style.setProperty("--effect", String(d));
+      const clientY = e.clientY;
+      const pending = raf;
+      if (pending) cancelAnimationFrame(pending);
+      raf = requestAnimationFrame(() => {
+        let minDist = Infinity;
+        let minIdx = -1;
+        itemEls.forEach((el, i) => {
+          const rect = el.getBoundingClientRect();
+          const mid = rect.top + rect.height / 2;
+          const dist = Math.abs(clientY - mid);
+          if (dist < minDist) {
+            minDist = dist;
+            minIdx = i;
+          }
+        });
+        itemEls.forEach((el, i) => {
+          const d = i === minIdx ? 1 : Math.max(0, 1 - Math.abs(i - minIdx) * 0.25);
+          el.style.setProperty("--effect", String(d));
+        });
       });
     };
 
     container.addEventListener("pointermove", onPointerMove);
-    return () => container.removeEventListener("pointermove", onPointerMove);
+    return () => {
+      if (raf) cancelAnimationFrame(raf);
+      container.removeEventListener("pointermove", onPointerMove);
+    };
   }, [items.length]);
 
   return (

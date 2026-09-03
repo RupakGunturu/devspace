@@ -1,4 +1,4 @@
-import { NavLink, Outlet, useNavigate, Link } from "react-router-dom";
+import { NavLink, Outlet, useNavigate, Link, useLocation } from "react-router-dom";
 import { useAuth } from "@/components/AuthProvider";
 import {
   LayoutDashboard,
@@ -18,35 +18,63 @@ import {
   LogOut,
   Menu,
   X,
+  Rocket,
+  GraduationCap,
 } from "lucide-react";
 import { useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
 
-const NAV_ITEMS = [
-  { to: "/admin", label: "Dashboard", icon: LayoutDashboard, end: true },
-  { to: "/admin/content/new", label: "New Content", icon: FileText, end: false },
-  { to: "/admin/content?type=post", label: "Posts", icon: FileText, end: false },
-  { to: "/admin/content?type=series", label: "Series", icon: FileClock, end: false },
-  { to: "/admin/content?type=tip", label: "Tips", icon: Lightbulb, end: false },
-  { to: "/admin/content?type=cheat-sheet", label: "Cheat Sheets", icon: LayoutList, end: false },
+interface NavItem {
+  to: string;
+  label: string;
+  icon: React.ElementType;
+  end?: boolean;
+}
+
+interface NavSection {
+  title: string;
+  items: NavItem[];
+}
+
+const NAV_SECTIONS: NavSection[] = [
   {
-    to: "/admin/content?type=stack-breakdown",
-    label: "Stack Breakdowns",
-    icon: Layers,
-    end: false,
+    title: "Overview",
+    items: [{ to: "/admin", label: "Dashboard", icon: LayoutDashboard, end: true }],
   },
-  { to: "/admin/content?type=hidden-gem", label: "Hidden Gems", icon: Sparkles, end: false },
-  { to: "/admin/content?type=hiring", label: "Hiring", icon: Briefcase, end: false },
-  { to: "/admin/content?type=mcp-skill", label: "MCP Skills", icon: Bot, end: false },
-  { to: "/admin/content?type=startup-term", label: "Startup Terms", icon: FileText, end: false },
-  { to: "/admin/games", label: "Games", icon: Gamepad2, end: false },
-  { to: "/admin/tools", label: "Tools", icon: Wrench, end: false },
-  { to: "/admin/images", label: "Images", icon: ImageIcon, end: false },
-  { to: "/admin/deployments", label: "Deploy Log", icon: History, end: false },
+  {
+    title: "Content",
+    items: [
+      { to: "/admin/content/new", label: "New Content", icon: FileText },
+      { to: "/admin/content?type=post", label: "Posts", icon: FileText },
+      { to: "/admin/content?type=series", label: "Series", icon: FileClock },
+      { to: "/admin/content?type=tip", label: "Tips", icon: Lightbulb },
+      { to: "/admin/content?type=cheat-sheet", label: "Cheat Sheets", icon: LayoutList },
+      { to: "/admin/content?type=stack-breakdown", label: "Stack Breakdowns", icon: Layers },
+      { to: "/admin/content?type=hidden-gem", label: "Hidden Gems", icon: Sparkles },
+      { to: "/admin/content?type=startup-term", label: "Startup Terms", icon: Rocket },
+      { to: "/admin/content?type=hiring", label: "Hiring", icon: Briefcase },
+      { to: "/admin/content?type=mcp-skill", label: "MCP Skills", icon: Bot },
+      { to: "/admin/content?type=learning-resource", label: "Learning", icon: GraduationCap },
+    ],
+  },
+  {
+    title: "Media",
+    items: [
+      { to: "/admin/games", label: "Games", icon: Gamepad2 },
+      { to: "/admin/tools", label: "Tools", icon: Wrench },
+      { to: "/admin/images", label: "Images", icon: ImageIcon },
+    ],
+  },
+  {
+    title: "System",
+    items: [{ to: "/admin/deployments", label: "Deploy Log", icon: History }],
+  },
 ];
 
 export function AdminLayout() {
   const { logout, user } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleLogout = () => {
@@ -91,7 +119,7 @@ export function AdminLayout() {
       </header>
 
       <div className="mx-auto flex w-full max-w-7xl flex-1 gap-6 px-4 py-6 sm:px-6">
-        {/* Mobile backdrop — closes the drawer when tapping outside */}
+        {/* Mobile backdrop */}
         {mobileOpen && (
           <div
             onClick={() => setMobileOpen(false)}
@@ -100,43 +128,75 @@ export function AdminLayout() {
           />
         )}
 
-        {/* Sidebar — drawer on mobile, fixed column on lg */}
+        {/* Sidebar */}
         <aside
           className={`${
             mobileOpen ? "flex" : "hidden"
-          } flex-col rounded-lg border border-line bg-card p-2 lg:flex lg:w-56 lg:shrink-0 ${
+          } flex-col rounded-lg border border-line bg-card lg:flex lg:w-56 lg:shrink-0 ${
             mobileOpen ? "absolute top-14 bottom-6 left-4 z-20 w-56 shadow-xl" : ""
           }`}
         >
           <nav
-            className={`min-w-0 gap-1 ${
+            className={`min-w-0 gap-1 p-2 ${
               mobileOpen ? "flex max-h-full flex-col overflow-y-auto" : "flex"
             } overflow-x-auto lg:flex lg:flex-col lg:overflow-visible`}
           >
-            {NAV_ITEMS.map((item) => (
-              <NavLink
-                key={item.to}
-                to={item.to}
-                end={item.end}
-                onClick={() => setMobileOpen(false)}
-                className={({ isActive }) =>
-                  `flex items-center gap-2 whitespace-nowrap rounded-sm px-3 py-2 font-mono text-[12px] transition-colors ${
-                    isActive
-                      ? "bg-yellow font-bold text-ink"
-                      : "text-muted hover:bg-paper-dim hover:text-yellow"
-                  }`
-                }
-              >
-                <item.icon className="h-4 w-4" />
-                {item.label}
-              </NavLink>
+            {NAV_SECTIONS.map((section) => (
+              <div key={section.title} className="mb-2">
+                <div className="mb-1 px-3 pt-2 font-mono text-[10px] font-bold uppercase tracking-wider text-muted/60">
+                  {section.title}
+                </div>
+                <div className="space-y-0.5">
+                  {section.items.map((item) => (
+                    <NavLink
+                      key={item.to}
+                      to={item.to}
+                      end={item.end}
+                      onClick={() => setMobileOpen(false)}
+                      className={({ isActive }) =>
+                        `group relative flex items-center gap-2 whitespace-nowrap rounded-sm px-3 py-2 font-mono text-[12px] transition-all duration-150 ${
+                          isActive
+                            ? "bg-yellow/15 font-bold text-yellow"
+                            : "text-muted hover:bg-paper-dim hover:text-foreground"
+                        }`
+                      }
+                    >
+                      {({ isActive }) => (
+                        <>
+                          {isActive && (
+                            <motion.div
+                              layoutId="admin-nav-active"
+                              className="absolute top-0 left-0 h-full w-[3px] rounded-r-full bg-yellow"
+                              transition={{ type: "spring", stiffness: 500, damping: 35 }}
+                            />
+                          )}
+                          <item.icon
+                            className={`h-4 w-4 transition-colors ${isActive ? "text-yellow" : "text-muted group-hover:text-foreground"}`}
+                          />
+                          {item.label}
+                        </>
+                      )}
+                    </NavLink>
+                  ))}
+                </div>
+              </div>
             ))}
           </nav>
         </aside>
 
         {/* Main content */}
         <main className="min-w-0 flex-1">
-          <Outlet />
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={location.pathname}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -4 }}
+              transition={{ duration: 0.2 }}
+            >
+              <Outlet />
+            </motion.div>
+          </AnimatePresence>
         </main>
       </div>
     </div>

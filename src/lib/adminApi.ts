@@ -134,7 +134,13 @@ export const adminApi = {
 
   getStats: () =>
     request<{
-      stats: { total: number; published: number; drafts: number; deployments: number };
+      stats: {
+        total: number;
+        published: number;
+        drafts: number;
+        deployments: number;
+        types: Record<ContentType, number>;
+      };
       recent: Deployment[];
     }>("/api/admin/stats"),
 

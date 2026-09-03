@@ -3,6 +3,8 @@ import { Bug, LetterText, Brain, Layers, Building2, Globe, Binary } from "lucide
 import { SectionHead, StickerCard } from "../components/site";
 import { useGames } from "../lib/contentStore";
 import { CursorHover } from "../components/core/cursor-hover";
+import { usePagination } from "../hooks/use-pagination";
+import { PaginationBar } from "../components/PaginationBar";
 
 const GAME_ICONS: Record<
   string,
@@ -29,6 +31,7 @@ const GAME_COLORS: Record<string, string> = {
 
 export default function GamesIndex() {
   const GAMES = useGames();
+  const { page, totalPages, paginatedItems, goTo } = usePagination(GAMES, 9);
   useEffect(() => {
     document.title = "Games — DevSpace";
   }, []);
@@ -40,7 +43,7 @@ export default function GamesIndex() {
         Five minutes, no signup, no leaderboard drama. Just you and the game.
       </p>
       <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
-        {GAMES.map((g, i) => {
+        {paginatedItems.map((g, i) => {
           const Icon = GAME_ICONS[g.slug];
           return (
             <CursorHover label={g.name} color={GAME_COLORS[g.slug]} key={g.slug}>
@@ -67,6 +70,7 @@ export default function GamesIndex() {
           );
         })}
       </div>
+      <PaginationBar page={page} totalPages={totalPages} onPageChange={goTo} />
     </section>
   );
 }
