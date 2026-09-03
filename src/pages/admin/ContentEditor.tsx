@@ -306,9 +306,9 @@ export default function ContentEditor() {
       {/* Body / Code */}
       {isCode ? (
         <div className="space-y-3">
-          <div className="flex items-center justify-between">
-            <span className="font-mono text-[12px] text-muted">
-              Component path: <span className="text-yellow">{filePath}</span>
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <span className="min-w-0 font-mono text-[12px] text-muted">
+              Component path: <span className="break-all text-yellow">{filePath}</span>
             </span>
             <button
               type="button"

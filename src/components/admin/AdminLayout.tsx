@@ -91,15 +91,28 @@ export function AdminLayout() {
       </header>
 
       <div className="mx-auto flex w-full max-w-7xl flex-1 gap-6 px-4 py-6 sm:px-6">
-        {/* Sidebar — horizontal scrollable on mobile, fixed column on lg */}
+        {/* Mobile backdrop — closes the drawer when tapping outside */}
+        {mobileOpen && (
+          <div
+            onClick={() => setMobileOpen(false)}
+            className="fixed inset-0 z-10 bg-black/50 lg:hidden"
+            aria-hidden="true"
+          />
+        )}
+
+        {/* Sidebar — drawer on mobile, fixed column on lg */}
         <aside
           className={`${
             mobileOpen ? "flex" : "hidden"
           } flex-col rounded-lg border border-line bg-card p-2 lg:flex lg:w-56 lg:shrink-0 ${
-            mobileOpen ? "absolute z-20 mt-14 w-56 shadow-xl" : ""
+            mobileOpen ? "absolute top-14 bottom-6 left-4 z-20 w-56 shadow-xl" : ""
           }`}
         >
-          <nav className="flex gap-1 overflow-x-auto lg:flex-col">
+          <nav
+            className={`min-w-0 gap-1 ${
+              mobileOpen ? "flex max-h-full flex-col overflow-y-auto" : "flex"
+            } overflow-x-auto lg:flex lg:flex-col lg:overflow-visible`}
+          >
             {NAV_ITEMS.map((item) => (
               <NavLink
                 key={item.to}
