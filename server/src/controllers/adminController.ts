@@ -119,7 +119,17 @@ export async function updateContent(req: AuthRequest, res: Response) {
     return;
   }
 
-  const allowed = ["title", "description", "body", "image", "images", "tags", "status", "series"];
+  const allowed = [
+    "title",
+    "description",
+    "body",
+    "image",
+    "images",
+    "tags",
+    "status",
+    "series",
+    "codeAvailable",
+  ];
   for (const key of allowed) {
     if (req.body[key] !== undefined) {
       (item as unknown as Record<string, unknown>)[key] = req.body[key];
@@ -286,6 +296,14 @@ export async function getDeployStatus(req: AuthRequest, res: Response) {
           deployment.overallStatus = "deployed";
           deployment.commitUrl = merged.prUrl;
           await githubService.deleteBranch(deployment.branchName);
+          try {
+            await ContentItem.updateOne(
+              { type: deployment.contentType, slug: deployment.contentSlug },
+              { $set: { codeAvailable: true, codeDeployedAt: new Date() } },
+            );
+          } catch {
+            // registry sync is best-effort; never fail the deploy status
+          }
         }
       } catch {
         // merge error — still committed/verifying

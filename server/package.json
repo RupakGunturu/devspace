@@ -9,7 +9,10 @@
     "test": "vitest",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "seed:admin": "tsx src/scripts/seedAdmin.ts"
+    "seed:admin": "tsx src/scripts/seedAdmin.ts",
+    "seed:content": "tsx src/scripts/seedContent.ts",
+    "seed:content:wipe": "tsx src/scripts/seedContent.ts wipe",
+    "export:content": "node ../scripts/export-content.mjs"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

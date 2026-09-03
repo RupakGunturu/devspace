@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { SectionHead } from "../components/site";
-import { tips, TIP_CATEGORIES } from "../data/tips";
+import { TIP_CATEGORIES } from "../data/tips";
+import { useTips } from "../lib/contentStore";
 import { ToolIcon } from "../components/tools/ToolIcon";
 import TipSearchBar from "../components/TipSearchBar";
 import { cn } from "@/lib/utils";
@@ -130,7 +131,11 @@ export const CATEGORY_COLORS: Record<string, { bg: string; darkBg: string; icon:
   },
 };
 
-function TipCard({ tip }: { tip: (typeof tips)[0] }) {
+function TipCard({
+  tip,
+}: {
+  tip: { id: string; category: string; title: string; icon: string; content: string };
+}) {
   const [isExpanded, setIsExpanded] = useState(false);
   const colors = CATEGORY_COLORS[tip.category];
 
@@ -206,6 +211,8 @@ export default function TipsIndex() {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
+  const tips = useTips();
+
   const filteredTips = useMemo(() => {
     let result = tips;
     if (activeCategory) {
@@ -218,7 +225,7 @@ export default function TipsIndex() {
       );
     }
     return result;
-  }, [activeCategory, searchQuery]);
+  }, [tips, activeCategory, searchQuery]);
 
   const { page, totalPages, paginatedItems, goTo } = usePagination(filteredTips);
 

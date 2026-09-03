@@ -1,7 +1,8 @@
 import { useMemo, useState, useEffect } from "react";
 import { ExternalLink } from "lucide-react";
 import { SectionHead, StickerCard } from "../components/site";
-import { HIRING_ITEMS, HIRING_CATEGORIES, HIRING_CATEGORY_COLORS } from "../data/hiring";
+import { HIRING_CATEGORIES, HIRING_CATEGORY_COLORS } from "../data/hiring";
+import { useHiring } from "../lib/contentStore";
 import { cn } from "@/lib/utils";
 import { CursorHover } from "../components/core/cursor-hover";
 import { usePagination } from "../hooks/use-pagination";
@@ -14,6 +15,8 @@ export default function Hiring() {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
+
+  const HIRING_ITEMS = useHiring();
 
   const filteredItems = useMemo(() => {
     let result = HIRING_ITEMS;
@@ -30,7 +33,7 @@ export default function Hiring() {
       );
     }
     return result;
-  }, [activeCategory, searchQuery]);
+  }, [HIRING_ITEMS, activeCategory, searchQuery]);
 
   const { page, totalPages, paginatedItems, goTo } = usePagination(filteredItems);
 

@@ -12,8 +12,8 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { SectionHead, StickerCard } from "../components/site";
-import { cheatSheets } from "../data/cheat-sheets";
-import { learningResources, LEARNING_CATEGORIES } from "../data/learning-resources";
+import { LEARNING_CATEGORIES } from "../data/learning-resources";
+import { useCheatSheets, useLearningResources } from "../lib/contentStore";
 import { ToolIcon } from "../components/tools/ToolIcon";
 import { cn } from "@/lib/utils";
 import { CursorHover } from "../components/core/cursor-hover";
@@ -157,6 +157,9 @@ export default function CheatSheetsIndex() {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [showExternal, setShowExternal] = useState(false);
+
+  const cheatSheets = useCheatSheets();
+  const learningResources = useLearningResources();
 
   const filteredSheets = cheatSheets.filter((s) => {
     if (!searchQuery.trim()) return true;

@@ -2,11 +2,9 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/components/AuthProvider";
 import { userActivity } from "@/lib/userActivity";
-import { TOOLS, CATEGORY_COLORS } from "@/data/tools";
+import { CATEGORY_COLORS } from "@/data/tools";
 import { ToolIcon } from "@/components/tools/ToolIcon";
-import { tips } from "@/data/tips";
-import { cheatSheets } from "@/data/cheat-sheets";
-import { allStackBreakdowns } from "@/data/stack-breakdowns";
+import { useTools, useTips, useCheatSheets, useStackBreakdowns } from "@/lib/contentStore";
 import { StickerCard, SectionHead } from "@/components/site";
 import { CursorHover } from "@/components/core/cursor-hover";
 import BookmarkButton from "@/components/BookmarkButton";
@@ -72,6 +70,10 @@ const SB_COLORS: Record<string, string> = {
 
 export default function Bookmarks() {
   const { user } = useAuth();
+  const tools = useTools();
+  const savedTipsList = useTips();
+  const sheets = useCheatSheets();
+  const stackBreakdowns = useStackBreakdowns();
   const [favorites, setFavorites] = useState<Favorite[]>([]);
   const [savedTips, setSavedTips] = useState<SavedTip[]>([]);
   const [activeTab, setActiveTab] = useState<string>("all");
@@ -216,7 +218,7 @@ export default function Bookmarks() {
         <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
           {filtered.map((fav) => {
             if (fav.type === "tool") {
-              const tool = TOOLS.find((t) => t.slug === fav.slug);
+              const tool = tools.find((t) => t.slug === fav.slug);
               if (!tool) return null;
               return (
                 <CursorHover label={tool.name} color={TOOL_COLORS[tool.category]} key={fav.slug}>
@@ -252,7 +254,7 @@ export default function Bookmarks() {
             }
 
             if (fav.type === "tip") {
-              const tip = tips.find((t) => t.id === fav.slug);
+              const tip = savedTipsList.find((t) => t.id === fav.slug);
               if (!tip) return null;
               return (
                 <CursorHover label={tip.title} color="#eab308" key={fav.slug}>
@@ -267,7 +269,7 @@ export default function Bookmarks() {
             }
 
             if (fav.type === "cheatsheet") {
-              const sheet = cheatSheets.find((s) => s.id === fav.slug);
+              const sheet = sheets.find((s) => s.id === fav.slug);
               if (!sheet) return null;
               return (
                 <CursorHover
@@ -307,8 +309,7 @@ export default function Bookmarks() {
             }
 
             if (fav.type === "stack-breakdown") {
-              const breakdowns = allStackBreakdowns();
-              const sb = breakdowns.find((b) => b.slug === fav.slug);
+              const sb = stackBreakdowns.find((b) => b.slug === fav.slug);
               if (!sb) return null;
               return (
                 <CursorHover label={sb.productName} color={SB_COLORS[sb.slug]} key={fav.slug}>

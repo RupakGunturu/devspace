@@ -1,6 +1,6 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { gameBySlug } from "../data/games";
+import { useGameBySlug } from "../lib/contentStore";
 import { userActivity } from "../lib/userActivity";
 import { useAuth } from "../components/AuthProvider";
 import { BugFinder } from "../components/games/BugFinder";
@@ -24,8 +24,8 @@ const REGISTRY: Record<string, React.ComponentType> = {
 
 export default function GamePage() {
   const { slug } = useParams<{ slug: string }>();
-  const game = gameBySlug(slug!);
-  const Component = game ? REGISTRY[game.slug] : undefined;
+  const game = useGameBySlug(slug!);
+  const Component = game && game.codeAvailable !== false ? REGISTRY[game.slug] : undefined;
   const { user } = useAuth();
   const navigate = useNavigate();
   const [isFav, setIsFav] = useState(false);

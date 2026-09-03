@@ -59,9 +59,11 @@ export default function ContentEditor() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [body, setBody] = useState("");
+  const [image, setImage] = useState("");
   const [series, setSeries] = useState("");
   const [tags, setTags] = useState<string[]>([]);
   const [tagInput, setTagInput] = useState("");
+  const [imgPath, setImgPath] = useState("");
   const [status, setStatus] = useState<"draft" | "published">("draft");
   const [codeFiles, setCodeFiles] = useState<CodeFile[]>([]);
   const [isCode, setIsCode] = useState(forcedType === "game" || forcedType === "tool");
@@ -80,6 +82,7 @@ export default function ContentEditor() {
         setTitle(item.title);
         setDescription(item.description);
         setBody(item.body);
+        setImage(item.image ?? "");
         setSeries(item.series ?? "");
         setTags(item.tags);
         setIsCode(item.type === "game" || item.type === "tool");
@@ -93,6 +96,13 @@ export default function ContentEditor() {
     const t = tagInput.trim().toLowerCase();
     if (t && !tags.includes(t)) setTags([...tags, t]);
     setTagInput("");
+  };
+
+  const handleInsertImage = () => {
+    const path = imgPath.trim();
+    if (!path) return;
+    setBody((b) => `${b}${b ? "\n\n" : ""}![image](${path})\n`);
+    setImgPath("");
   };
 
   const dir = CONTENT_DIRS[type];
@@ -117,7 +127,15 @@ export default function ContentEditor() {
         navigate("/admin/deployments");
       } else {
         if (isEdit) {
-          await adminApi.updateContent(id!, { title, description, body, series, tags, status });
+          await adminApi.updateContent(id!, {
+            title,
+            description,
+            body,
+            series,
+            tags,
+            status,
+            image,
+          });
           setMessage("Content updated.");
         } else {
           const res = await adminApi.createContent({
@@ -128,6 +146,7 @@ export default function ContentEditor() {
             series: series || undefined,
             tags,
             status,
+            image,
             codeFiles: isCode ? codeFiles : undefined,
           });
           setMessage("Content created.");
@@ -230,6 +249,24 @@ export default function ContentEditor() {
           rows={2}
           className="w-full rounded-md border border-line bg-input-bg px-3 py-2 text-sm text-input-text outline-none focus:ring-2 focus:ring-yellow"
         />
+      </label>
+
+      <label className="block">
+        <span className="mb-1 block font-mono text-[12px] text-muted">Hero image URL</span>
+        <input
+          value={image}
+          onChange={(e) => setImage(e.target.value)}
+          placeholder="/content/images/hero.png or https://…"
+          className="w-full rounded-md border border-line bg-input-bg px-3 py-2 text-sm text-input-text outline-none focus:ring-2 focus:ring-yellow"
+        />
+        {image && (
+          <img
+            src={image}
+            alt="Hero preview"
+            onError={(e) => (e.currentTarget.style.display = "none")}
+            className="mt-2 max-h-40 rounded-md border border-line object-cover"
+          />
+        )}
       </label>
 
       {/* Tags */}
@@ -348,6 +385,28 @@ export default function ContentEditor() {
       ) : (
         <div>
           <span className="mb-1 block font-mono text-[12px] text-muted">Body (Markdown)</span>
+          <div className="mb-2 flex items-center gap-2">
+            <input
+              value={imgPath}
+              onChange={(e) => setImgPath(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  handleInsertImage();
+                }
+              }}
+              placeholder="/content/images/… or https://…"
+              className="flex-1 rounded-md border border-line bg-input-bg px-3 py-1.5 text-sm text-input-text outline-none focus:ring-2 focus:ring-yellow"
+            />
+            <button
+              type="button"
+              onClick={handleInsertImage}
+              disabled={!imgPath.trim()}
+              className="rounded-sm bg-paper-dim px-2 py-1 font-mono text-[11px] text-foreground hover:text-yellow disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              Insert image
+            </button>
+          </div>
           <MarkdownEditor value={body} onChange={setBody} />
         </div>
       )}

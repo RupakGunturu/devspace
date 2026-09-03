@@ -1,7 +1,8 @@
 import { useMemo, useState, useEffect } from "react";
 import { ExternalLink } from "lucide-react";
 import { SectionHead, StickerCard } from "../components/site";
-import { MCP_SKILLS, MCP_SKILL_CATEGORIES, MCP_SKILL_COLORS } from "../data/mcp-skills";
+import { MCP_SKILL_CATEGORIES, MCP_SKILL_COLORS } from "../data/mcp-skills";
+import { useMcpSkills } from "../lib/contentStore";
 import { cn } from "@/lib/utils";
 import { CursorHover } from "../components/core/cursor-hover";
 import { usePagination } from "../hooks/use-pagination";
@@ -14,6 +15,8 @@ export default function McpSkills() {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
+
+  const MCP_SKILLS = useMcpSkills();
 
   const filteredSkills = useMemo(() => {
     let result = MCP_SKILLS;
@@ -30,7 +33,7 @@ export default function McpSkills() {
       );
     }
     return result;
-  }, [activeCategory, searchQuery]);
+  }, [MCP_SKILLS, activeCategory, searchQuery]);
 
   const { page, totalPages, paginatedItems, goTo } = usePagination(filteredSkills);
 

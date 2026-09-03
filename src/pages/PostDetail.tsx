@@ -2,14 +2,13 @@ import { Link, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { marked } from "marked";
 import DOMPurify from "dompurify";
-import { postBySlug } from "../data/posts";
-import { seriesBySlug } from "../data/series";
+import { usePostBySlug, useSeriesBySlug } from "../lib/contentStore";
 import { ToolIcon } from "../components/tools/ToolIcon";
 
 export default function PostPage() {
   const { slug } = useParams<{ slug: string }>();
-  const post = postBySlug(slug!);
-  const series = post ? seriesBySlug(post.series) : undefined;
+  const post = usePostBySlug(slug!);
+  const series = post ? useSeriesBySlug(post.series) : undefined;
 
   const visitUrl = post?.externalUrl;
 

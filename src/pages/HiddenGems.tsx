@@ -1,7 +1,8 @@
 import { useMemo, useState, useEffect } from "react";
 import { ExternalLink } from "lucide-react";
 import { SectionHead, StickerCard } from "../components/site";
-import { HIDDEN_GEMS, GEM_CATEGORIES, GEM_CATEGORY_COLORS } from "../data/hidden-gems";
+import { GEM_CATEGORIES, GEM_CATEGORY_COLORS } from "../data/hidden-gems";
+import { useHiddenGems } from "../lib/contentStore";
 import { cn } from "@/lib/utils";
 import { CursorHover } from "../components/core/cursor-hover";
 import { usePagination } from "../hooks/use-pagination";
@@ -14,6 +15,8 @@ export default function HiddenGems() {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
+
+  const HIDDEN_GEMS = useHiddenGems();
 
   const filteredGems = useMemo(() => {
     let result = HIDDEN_GEMS;
@@ -30,7 +33,7 @@ export default function HiddenGems() {
       );
     }
     return result;
-  }, [activeCategory, searchQuery]);
+  }, [HIDDEN_GEMS, activeCategory, searchQuery]);
 
   const { page, totalPages, paginatedItems, goTo } = usePagination(filteredGems);
 

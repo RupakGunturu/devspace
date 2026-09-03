@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import type { Post } from "../data/posts";
-import { seriesBySlug } from "../data/series";
-import { stackBreakdownBySlug } from "../data/stack-breakdowns";
+import { useSeriesBySlug, useStackBreakdownBySlug } from "../lib/contentStore";
 import { ToolIcon } from "./tools/ToolIcon";
 
 function timeAgo(iso: string) {
@@ -19,14 +18,14 @@ function timeAgo(iso: string) {
 }
 
 export function FeedItem({ post }: { post: Post }) {
-  const series = seriesBySlug(post.series);
+  const series = useSeriesBySlug(post.series);
+  const stackItem = useStackBreakdownBySlug(post.slug);
   const to =
     post.series === "stack-breakdown"
       ? `/stack-breakdown/${post.slug}`
       : post.series === "hot-take"
         ? `/hot-take/${post.slug}`
         : `/post/${post.slug}`;
-  const stackItem = post.series === "stack-breakdown" ? stackBreakdownBySlug(post.slug) : null;
   return (
     <Link
       to={to}

@@ -2,7 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import { useEffect, useMemo, useState, useRef, useCallback } from "react";
 import { marked, Renderer } from "marked";
 import DOMPurify from "dompurify";
-import { stackBreakdownBySlug } from "../data/stack-breakdowns";
+import { useStackBreakdownBySlug } from "../lib/contentStore";
 
 type TocItem = { id: string; text: string; level: number };
 
@@ -49,7 +49,7 @@ const SECTION_ICONS: Record<string, string> = {
 
 export default function StackBreakdownDetailPage() {
   const { slug } = useParams<{ slug: string }>();
-  const item = stackBreakdownBySlug(slug!);
+  const item = useStackBreakdownBySlug(slug!);
   const [activeId, setActiveId] = useState<string>("");
   const [tocOpen, setTocOpen] = useState(false);
   const observerRef = useRef<IntersectionObserver | null>(null);

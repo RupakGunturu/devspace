@@ -1,6 +1,7 @@
 import { useMemo, useState, useEffect } from "react";
 import { SectionHead, StickerCard } from "../components/site";
-import { TOOLS, CATEGORY_COLORS } from "../data/tools";
+import { CATEGORY_COLORS } from "../data/tools";
+import { useTools } from "../lib/contentStore";
 import { ToolIcon } from "../components/tools/ToolIcon";
 import ToolSearchBar from "../components/ToolSearchBar";
 import { cn } from "@/lib/utils";
@@ -55,6 +56,7 @@ export default function ToolsIndex() {
   }, []);
 
   const { user } = useAuth();
+  const TOOLS = useTools();
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 

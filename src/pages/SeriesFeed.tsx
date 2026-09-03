@@ -1,14 +1,20 @@
 import { Link, useParams } from "react-router-dom";
 import { useEffect } from "react";
-import { SERIES, seriesBySlug } from "../data/series";
-import { postsBySeries, type Post } from "../data/posts";
+import type { Post } from "../data/posts";
+import { useSeriesBySlug, usePosts, useSeriesList } from "../lib/contentStore";
 import { FeedItem } from "../components/FeedItem";
 import { ToolIcon } from "../components/tools/ToolIcon";
 
 export default function SeriesPage() {
   const { series: seriesSlug } = useParams<{ series: string }>();
-  const series = seriesBySlug(seriesSlug!);
-  const posts = series ? postsBySeries(series.slug) : [];
+  const allPosts = usePosts();
+  const allSeries = useSeriesList();
+  const series = useSeriesBySlug(seriesSlug!);
+  const posts = series
+    ? allPosts
+        .filter((p) => p.series === series.slug)
+        .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
+    : [];
 
   useEffect(() => {
     document.title = series ? `${series.label} — DevSpace` : "Series not found — DevSpace";
@@ -47,7 +53,8 @@ export default function SeriesPage() {
       </div>
       <h2 className="mb-4 font-display text-lg font-bold text-muted">Also in this series →</h2>
       <div className="mb-8 flex flex-wrap gap-2">
-        {SERIES.filter((s) => s.slug !== series.slug)
+        {allSeries
+          .filter((s) => s.slug !== series.slug)
           .slice(0, 6)
           .map((s) => (
             <Link

@@ -20,19 +20,21 @@ import {
   DrawerDescription,
 } from "@/components/ui/drawer";
 import { FeedItem } from "../components/FeedItem";
-import { TOOLS } from "../data/tools";
-import { GAMES } from "../data/games";
-import { tips } from "../data/tips";
+import {
+  useGames,
+  useTools,
+  useTips,
+  useCheatSheets,
+  useSeriesList,
+  usePosts,
+} from "../lib/contentStore";
 import { CATEGORY_COLORS as TIP_CATEGORY_COLORS } from "./Tips";
-import { SERIES } from "../data/series";
-import { allPostsSorted } from "../data/posts";
 import Shuffle from "../components/ui/shuffle/Shuffle";
 import { Accordion05 } from "../components/ui/accordion-05";
 import { NeuFollowButton } from "../components/ui/neu-follow-button";
 import { LineSidebar } from "../components/ui/line-sidebar/LineSidebar";
 import { ToolIcon } from "../components/tools/ToolIcon";
 import { CATEGORY_COLORS } from "../data/tools";
-import { cheatSheets } from "../data/cheat-sheets";
 import { cn } from "@/lib/utils";
 import BookmarkButton from "../components/BookmarkButton";
 
@@ -151,16 +153,28 @@ export default function Home() {
 
   const [activeSeries, setActiveSeries] = useState<string | null>(null);
 
-  const visibleSeries = useMemo(() => SERIES.filter((s) => !HIDDEN_SERIES.includes(s.slug)), []);
+  const allSeries = useSeriesList();
+  const allPosts = usePosts();
+  const TOOLS = useTools();
+  const GAMES = useGames();
+  const tips = useTips();
+  const cheatSheets = useCheatSheets();
+
+  const visibleSeries = useMemo(
+    () => allSeries.filter((s) => !HIDDEN_SERIES.includes(s.slug)),
+    [allSeries],
+  );
 
   const posts = useMemo(() => {
-    const all = allPostsSorted();
+    const all = [...allPosts].sort(
+      (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
+    );
     const filtered = activeSeries ? all.filter((p) => p.series === activeSeries) : all;
     return filtered.slice(0, 5);
-  }, [activeSeries]);
+  }, [activeSeries, allPosts]);
 
   const featuredTools = TOOLS.filter((t) => t.popular).slice(0, 3);
-  const featuredGames = useMemo(() => shufflePick(GAMES, 3), []);
+  const featuredGames = useMemo(() => shufflePick(GAMES, 3), [GAMES]);
   const featuredTips = tips.slice(0, 3);
   const featuredSheets = cheatSheets.slice(0, 3);
 
@@ -448,12 +462,12 @@ function SeriesFilterDropdown({
   active,
   onChange,
 }: {
-  series: typeof SERIES;
+  series: ReturnType<typeof useSeriesList>;
   active: string | null;
   onChange: (v: string | null) => void;
 }) {
   const [open, setOpen] = useState(false);
-  const activeData = active ? SERIES.find((s) => s.slug === active) : null;
+  const activeData = active ? series.find((s) => s.slug === active) : null;
   const select = (v: string | null) => {
     onChange(v);
     setOpen(false);

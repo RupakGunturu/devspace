@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/components/AuthProvider";
 import { activityApi, type ActivityData, type Favorite } from "@/lib/api";
-import { gameBySlug } from "@/data/games";
+import { useGames } from "@/lib/contentStore";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "@/components/ui/toaster";
 
@@ -23,7 +23,7 @@ function getFavoriteHref(f: Favorite): string {
   }
 }
 
-function getFavoriteLabel(f: Favorite): string {
+function getFavoriteLabel(f: Favorite, gamesByName: Map<string, { name?: string }>): string {
   switch (f.type) {
     case "tool":
       return f.slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
@@ -33,7 +33,7 @@ function getFavoriteLabel(f: Favorite): string {
       return f.slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
     case "game":
       return (
-        gameBySlug(f.slug)?.name ??
+        gamesByName.get(f.slug)?.name ??
         f.slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
       );
     case "stack-breakdown":
@@ -65,6 +65,8 @@ export default function Profile() {
   const navigate = useNavigate();
   const [activity, setActivity] = useState<ActivityData | null>(null);
   const [loading, setLoading] = useState(true);
+  const games = useGames();
+  const gamesByName = new Map(games.map((g) => [g.slug, g]));
 
   useEffect(() => {
     if (authLoading) return;
@@ -184,7 +186,7 @@ export default function Profile() {
               <h2 className="mb-4 font-display text-lg font-bold">Game Stats</h2>
               <div className="grid gap-3 sm:grid-cols-2">
                 {Object.entries(gameStats).map(([slug, stats]) => {
-                  const game = gameBySlug(slug);
+                  const game = gamesByName.get(slug);
                   return (
                     <Link
                       key={slug}
@@ -226,7 +228,7 @@ export default function Profile() {
               <div className="grid gap-2 sm:grid-cols-2">
                 {activity.favorites.map((f) => {
                   const href = getFavoriteHref(f);
-                  const label = getFavoriteLabel(f);
+                  const label = getFavoriteLabel(f, gamesByName);
                   const icon = getFavoriteIcon(f.type);
                   return (
                     <Link

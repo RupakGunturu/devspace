@@ -1,6 +1,7 @@
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { Suspense, useEffect } from "react";
-import { toolBySlug, CATEGORY_COLORS } from "../data/tools";
+import { useToolBySlug } from "../lib/contentStore";
+import { CATEGORY_COLORS } from "../data/tools";
 import { getToolComponent } from "../components/tools/registry";
 import { ToolIcon } from "../components/tools/ToolIcon";
 import { userActivity } from "../lib/userActivity";
@@ -13,8 +14,8 @@ export default function ToolPage() {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const { user, loading: authLoading } = useAuth();
-  const tool = toolBySlug(slug!);
-  const Component = tool ? getToolComponent(tool.slug) : null;
+  const tool = useToolBySlug(slug!);
+  const Component = tool && tool.codeAvailable !== false ? getToolComponent(tool.slug) : null;
   const colors = tool ? CATEGORY_COLORS[tool.category] : undefined;
 
   useEffect(() => {

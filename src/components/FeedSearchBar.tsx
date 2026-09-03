@@ -11,8 +11,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import useDebounce from "@/hooks/use-debounce";
-import { allPostsSorted, type Post } from "@/data/posts";
-import { SERIES, seriesBySlug } from "@/data/series";
+import type { Post } from "@/data/posts";
+import { usePosts, useSeriesList } from "@/lib/contentStore";
 import { ToolIcon } from "@/components/tools/ToolIcon";
 import { cn } from "@/lib/utils";
 
@@ -70,7 +70,19 @@ export default function FeedSearchBar({
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [seriesOpen, setSeriesOpen] = useState(false);
   const debouncedQuery = useDebounce(searchQuery, 150);
-  const allPosts = useMemo(() => allPostsSorted(), []);
+  const postsData = usePosts();
+  const allSeries = useSeriesList();
+  const allPosts = useMemo(
+    () =>
+      [...postsData].sort(
+        (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
+      ),
+    [postsData],
+  );
+  const seriesMap = useMemo(
+    () => Object.fromEntries(allSeries.map((s) => [s.slug, s])),
+    [allSeries],
+  );
 
   const filteredPosts = useMemo(() => {
     let result = allPosts;
@@ -159,7 +171,7 @@ export default function FeedSearchBar({
     [navigate],
   );
 
-  const activeSeriesData = activeSeries ? SERIES.find((s) => s.slug === activeSeries) : null;
+  const activeSeriesData = activeSeries ? allSeries.find((s) => s.slug === activeSeries) : null;
 
   return (
     <div className="mb-6 w-full max-w-xl">
@@ -257,22 +269,24 @@ export default function FeedSearchBar({
                 <span className="font-medium text-zinc-900 dark:text-zinc-100">All series</span>
               </button>
             </DropdownMenuItem>
-            {SERIES.filter((s) => s.slug !== "changelog").map((s) => (
-              <DropdownMenuItem asChild key={s.slug}>
-                <button
-                  onClick={() => onSeriesChange(s.slug)}
-                  className={cn(
-                    "flex w-full cursor-pointer items-center gap-2 rounded-lg border border-transparent p-2 text-sm transition-all hover:bg-zinc-100 dark:hover:bg-zinc-800/60",
-                    activeSeries === s.slug && "bg-zinc-100 dark:bg-zinc-800/60",
-                  )}
-                >
-                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-zinc-100 text-xs dark:bg-zinc-800">
-                    <ToolIcon name={s.icon} className="h-3.5 w-3.5" />
-                  </span>
-                  <span className="font-medium text-zinc-900 dark:text-zinc-100">{s.label}</span>
-                </button>
-              </DropdownMenuItem>
-            ))}
+            {allSeries
+              .filter((s) => s.slug !== "changelog")
+              .map((s) => (
+                <DropdownMenuItem asChild key={s.slug}>
+                  <button
+                    onClick={() => onSeriesChange(s.slug)}
+                    className={cn(
+                      "flex w-full cursor-pointer items-center gap-2 rounded-lg border border-transparent p-2 text-sm transition-all hover:bg-zinc-100 dark:hover:bg-zinc-800/60",
+                      activeSeries === s.slug && "bg-zinc-100 dark:bg-zinc-800/60",
+                    )}
+                  >
+                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-zinc-100 text-xs dark:bg-zinc-800">
+                      <ToolIcon name={s.icon} className="h-3.5 w-3.5" />
+                    </span>
+                    <span className="font-medium text-zinc-900 dark:text-zinc-100">{s.label}</span>
+                  </button>
+                </DropdownMenuItem>
+              ))}
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
@@ -292,7 +306,7 @@ export default function FeedSearchBar({
             >
               <motion.ul role="none">
                 {displayPosts.map((post, i) => {
-                  const series = seriesBySlug(post.series);
+                  const series = seriesMap[post.series];
                   return (
                     <motion.li
                       aria-selected={activeIndex === i}

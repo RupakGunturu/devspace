@@ -7,6 +7,7 @@ import { config } from "./config/env";
 import authRoutes from "./routes/auth";
 import activityRoutes from "./routes/activity";
 import adminRoutes from "./routes/admin";
+import contentRoutes from "./routes/content";
 
 const app = express();
 
@@ -64,6 +65,9 @@ app.use(passport.initialize());
 // Routes — auth gets stricter rate limit
 app.use("/api/auth", authLimiter, authRoutes);
 app.use("/api/activity", activityRoutes);
+
+// Public content API — read-only, no auth
+app.use("/api/content", contentRoutes);
 
 // Admin routes — protected by authenticate + authorize("admin") at route level.
 // A looser rate limit so admin CRUD/deploy operations are not throttled out.

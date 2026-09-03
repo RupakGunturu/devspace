@@ -1,15 +1,17 @@
-import { SERIES } from "../data/series";
+import { useSeriesList } from "../lib/contentStore";
 
 export function SeriesFilter({
   active,
   onChange,
-  series = SERIES.map((s) => s.slug),
+  series,
 }: {
   active: string | null;
   onChange: (slug: string | null) => void;
   series?: string[];
 }) {
-  const list = SERIES.filter((s) => series.includes(s.slug));
+  const allSeries = useSeriesList();
+  const selected = series ?? allSeries.map((s) => s.slug);
+  const list = allSeries.filter((s) => selected.includes(s.slug));
   const Pill = ({
     label,
     isActive,

@@ -10,7 +10,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import useDebounce from "@/hooks/use-debounce";
-import { tips, TIP_CATEGORIES, TIP_CATEGORY_ICONS } from "@/data/tips";
+import { TIP_CATEGORIES, TIP_CATEGORY_ICONS } from "@/data/tips";
+import { useTips } from "@/lib/contentStore";
 import { ToolIcon } from "@/components/tools/ToolIcon";
 import { cn } from "@/lib/utils";
 import type { Tip } from "@/types/tips";
@@ -172,6 +173,7 @@ export default function TipSearchBar({
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [categoryOpen, setCategoryOpen] = useState(false);
   const debouncedQuery = useDebounce(searchQuery, 150);
+  const tips = useTips();
 
   const filteredTips = useMemo(() => {
     let result = tips;
@@ -185,7 +187,7 @@ export default function TipSearchBar({
       );
     }
     return result;
-  }, [activeCategory, debouncedQuery]);
+  }, [activeCategory, debouncedQuery, tips]);
 
   const displayTips = useMemo(() => {
     if (debouncedQuery.trim()) return filteredTips;

@@ -10,7 +10,9 @@ export type ContentType =
   | "cheat-sheet"
   | "hidden-gem"
   | "hiring"
-  | "mcp-skill";
+  | "mcp-skill"
+  | "series"
+  | "learning-resource";
 
 export interface CodeFileInput {
   path: string; // e.g. "src/components/games/MyGame.tsx"
@@ -35,11 +37,29 @@ export interface IContentItem extends Document {
   publishedAt?: Date;
   createdAt: Date;
   updatedAt: Date;
+  icon?: string;
+  tagline?: string;
+  category?: string;
+  faviconDomain?: string;
+  externalUrl?: string;
+  url?: string;
+  color?: string;
+  colors?: Record<string, string>;
+  difficulty?: "easy" | "medium" | "hard";
+  resourceCost?: "free" | "freemium" | "paid";
+  isListing?: boolean;
+  cadence?: string;
+  content?: Record<string, unknown>[];
+  learningResources?: Record<string, unknown>[];
+  name?: string;
+  productName?: string;
+  codeAvailable?: boolean;
+  codeDeployedAt?: Date;
 }
 
 const contentSchema = new Schema<IContentItem>(
   {
-    slug: { type: String, required: true, unique: true, trim: true },
+    slug: { type: String, required: true, trim: true },
     type: {
       type: String,
       enum: [
@@ -53,6 +73,8 @@ const contentSchema = new Schema<IContentItem>(
         "hidden-gem",
         "hiring",
         "mcp-skill",
+        "series",
+        "learning-resource",
       ],
       required: true,
       index: true,
@@ -67,6 +89,24 @@ const contentSchema = new Schema<IContentItem>(
     status: { type: String, enum: ["draft", "published"], default: "draft", index: true },
     version: { type: Number, default: 1 },
     lastEditedBy: { type: String },
+    icon: { type: String },
+    tagline: { type: String },
+    category: { type: String, index: true },
+    faviconDomain: { type: String },
+    externalUrl: { type: String },
+    url: { type: String },
+    color: { type: String },
+    colors: { type: Schema.Types.Mixed },
+    difficulty: { type: String, enum: ["easy", "medium", "hard"] },
+    resourceCost: { type: String, enum: ["free", "freemium", "paid"] },
+    isListing: { type: Boolean },
+    cadence: { type: String },
+    content: { type: [Schema.Types.Mixed], default: [] },
+    learningResources: { type: [Schema.Types.Mixed], default: [] },
+    name: { type: String },
+    productName: { type: String },
+    codeAvailable: { type: Boolean },
+    codeDeployedAt: { type: Date },
     codeFiles: [
       {
         path: { type: String, required: true },
@@ -80,6 +120,6 @@ const contentSchema = new Schema<IContentItem>(
 );
 
 contentSchema.index({ type: 1, status: 1 });
-contentSchema.index({ slug: 1, type: 1 });
+contentSchema.index({ slug: 1, type: 1 }, { unique: true });
 
 export const ContentItem = mongoose.model<IContentItem>("ContentItem", contentSchema);

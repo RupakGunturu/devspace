@@ -11,7 +11,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import useDebounce from "@/hooks/use-debounce";
-import { TOOLS, CATEGORY_COLORS } from "@/data/tools";
+import { CATEGORY_COLORS } from "@/data/tools";
+import { useTools } from "@/lib/contentStore";
 import type { Tool } from "@/types";
 import { ToolIcon, ToolIconDisplay } from "@/components/tools/ToolIcon";
 import { cn } from "@/lib/utils";
@@ -109,6 +110,7 @@ export default function ToolSearchBar({
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [categoryOpen, setCategoryOpen] = useState(false);
   const debouncedQuery = useDebounce(searchQuery, 150);
+  const TOOLS = useTools();
 
   const filteredTools = useMemo(() => {
     let result = TOOLS;
@@ -125,7 +127,7 @@ export default function ToolSearchBar({
       );
     }
     return result;
-  }, [activeCategory, debouncedQuery]);
+  }, [activeCategory, debouncedQuery, TOOLS]);
 
   const displayTools = useMemo(() => {
     if (debouncedQuery.trim()) return filteredTools;

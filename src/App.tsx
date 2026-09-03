@@ -39,6 +39,7 @@ const HiddenGems = lazy(() => import("./pages/HiddenGems"));
 
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
 const ContentEditor = lazy(() => import("./pages/admin/ContentEditor"));
+const ContentManager = lazy(() => import("./pages/admin/ContentManager"));
 const GamesManager = lazy(() => import("./pages/admin/GamesManager"));
 const GameEditor = lazy(() => import("./pages/admin/GameEditor"));
 const ToolsManager = lazy(() => import("./pages/admin/ToolsManager"));
@@ -134,6 +135,7 @@ export default function App() {
             }
           >
             <Route index element={<AdminDashboard />} />
+            <Route path="content" element={<ContentManager />} />
             <Route path="content/new" element={<ContentEditor />} />
             <Route path="content/:id/edit" element={<ContentEditor />} />
             <Route path="games" element={<GamesManager />} />

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Bug, LetterText, Brain, Layers, Building2, Globe, Binary } from "lucide-react";
 import { SectionHead, StickerCard } from "../components/site";
-import { GAMES } from "../data/games";
+import { useGames } from "../lib/contentStore";
 import { CursorHover } from "../components/core/cursor-hover";
 
 const GAME_ICONS: Record<
@@ -28,6 +28,7 @@ const GAME_COLORS: Record<string, string> = {
 };
 
 export default function GamesIndex() {
+  const GAMES = useGames();
   useEffect(() => {
     document.title = "Games — DevSpace";
   }, []);

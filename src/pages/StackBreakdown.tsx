@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { allStackBreakdowns } from "../data/stack-breakdowns";
+import { useStackBreakdowns } from "../lib/contentStore";
 import { CursorHover } from "../components/core/cursor-hover";
 import BookmarkButton from "../components/BookmarkButton";
 
@@ -27,7 +27,7 @@ const ROTATIONS = [
 ];
 
 export default function StackBreakdownPage() {
-  const breakdowns = allStackBreakdowns();
+  const breakdowns = useStackBreakdowns();
   const [activeTag, setActiveTag] = useState<string | null>(null);
   const [showAll, setShowAll] = useState(false);
   const VISIBLE_COUNT = 5;

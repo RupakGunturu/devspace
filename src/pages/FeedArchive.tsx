@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useMemo, useState, useEffect } from "react";
 import { FeedItem } from "../components/FeedItem";
-import { allPostsSorted } from "../data/posts";
+import { usePosts } from "../lib/contentStore";
 import FeedSearchBar from "../components/FeedSearchBar";
 
 export default function FeedArchive() {
@@ -12,8 +12,10 @@ export default function FeedArchive() {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeSeries, setActiveSeries] = useState<string | null>(null);
 
+  const allPosts = usePosts();
+
   const posts = useMemo(() => {
-    let result = allPostsSorted();
+    let result = [...allPosts].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
     if (activeSeries) {
       result = result.filter((p) => p.series === activeSeries);
     }
@@ -24,7 +26,7 @@ export default function FeedArchive() {
       );
     }
     return result;
-  }, [activeSeries, searchQuery]);
+  }, [allPosts, activeSeries, searchQuery]);
 
   return (
     <section className="mx-auto max-w-4xl px-6 py-12 sm:px-8 sm:py-16">

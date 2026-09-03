@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Check, Copy, ChevronRight, Hash, Layers } from "lucide-react";
-import { cheatSheets } from "../data/cheat-sheets";
+import { useCheatSheetBySlug } from "../lib/contentStore";
 
 const CATEGORY_ACCENT: Record<string, string> = {
   "version-control": "#f97316",
@@ -19,10 +19,6 @@ const CATEGORY_ACCENT: Record<string, string> = {
   productivity: "#ec4899",
   accessibility: "#14b8a6",
 };
-
-function sheetById(id: string) {
-  return cheatSheets.find((s) => s.id === id);
-}
 
 function CopyBtn({ text, accent }: { text: string; accent: string }) {
   const [copied, setCopied] = useState(false);
@@ -62,7 +58,7 @@ function CopyBtn({ text, accent }: { text: string; accent: string }) {
 
 export default function CheatSheetPage() {
   const { id } = useParams<{ id: string }>();
-  const sheet = sheetById(id!);
+  const sheet = useCheatSheetBySlug(id!);
 
   useEffect(() => {
     document.title = sheet ? `${sheet.title} — DevSpace` : "Not found — DevSpace";
